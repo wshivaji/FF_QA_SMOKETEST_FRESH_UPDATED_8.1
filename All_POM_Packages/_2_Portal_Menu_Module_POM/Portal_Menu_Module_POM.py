@@ -126,8 +126,8 @@ class Portal_Menu_Module_pom(web_driver, web_logger):
                 self.status.append(True)
             else:
                 self.status.append(False)
-            close_panel_btn_list = self.d.find_elements(By.XPATH,
-                                                        Portal_Menu_Module_read_ini().get_close_panel_button_by_xpath())
+            # close_panel_btn_list = self.d.find_elements(By.XPATH,
+            #                                            Portal_Menu_Module_read_ini().get_close_panel_button_by_xpath())
             close_panel_btn = self.wait_for_element_to_appear(close_panel_btn_list,
                                                               Portal_Menu_Module_read_ini().get_close_panel_button_by_xpath())
             close_panel_btn.click()
