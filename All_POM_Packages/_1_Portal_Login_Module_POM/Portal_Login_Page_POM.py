@@ -2,7 +2,6 @@ import time
 from selenium import webdriver
 import pyautogui
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.color import Color
 from All_Config_Packages._1_Portal_Login_Module_Config_Files.Portal_Login_Page_Read_INI import Portal_login_page_read_ini
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
