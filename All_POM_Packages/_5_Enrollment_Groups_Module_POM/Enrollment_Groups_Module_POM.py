@@ -1,6 +1,6 @@
 from All_Config_Packages._5_Enrollment_Groups_Config_Files.Enrollment_Groups_Read_INI import Read_Enrollment_Groups_Components
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.select import Select
+from All_POM_Packages._6_Notification_Groups_Module.notification_groups_module_POM import Notification_Groups_Module_pom
 from All_Config_Packages._2_Portal_Menu_Module_Config_Files.Portal_Menu_Module_Read_INI import Portal_Menu_Module_read_ini
 from All_Config_Packages._6_Notification_Groups_Module_Config_Files.Notification_Groups_Read_INI import Read_Notification_Groups_Components
 from pathlib import Path
@@ -217,15 +217,88 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
             for i in range(len(enrollment_group_list)):
                 if enrollment_group_list[i].text == enrollment_group_names_list[0]:
                     face_threshold = self.d.find_element(By.XPATH, Read_Enrollment_Groups_Components().face_threshold_for_eg_by_xpath())
-                    if Read_Enrollment_Groups_Components().face_threshold() in face_threshold.text:
-                        self.logger.info(f"Face Threshold for {enrollment_group_names_list[0]} is: {Read_Enrollment_Groups_Components().face_threshold()}")
+                    if Read_Enrollment_Groups_Components().default_face_threshold() in face_threshold.text:
+                        self.logger.info(f"Face Threshold for {enrollment_group_names_list[0]} is: {Read_Enrollment_Groups_Components().default_face_threshold()}")
                         status.append(True)
                     else:
                         status.append(False)
                     time.sleep(web_driver.one_second)
                     mask_threshold = self.d.find_element(By.XPATH, Read_Enrollment_Groups_Components().masked_face_threshold_for_eg_by_xpath())
-                    if Read_Enrollment_Groups_Components().masked_face_threshold() in mask_threshold.text:
-                        pass
+                    if Read_Enrollment_Groups_Components().default_masked_face_threshold() in mask_threshold.text:
+                        self.logger.info(
+                            f"Masked Face Threshold for {enrollment_group_names_list[0]} is: {Read_Enrollment_Groups_Components().default_masked_face_threshold()}")
+                        status.append(True)
+                    else:
+                        status.append(False)
+                time.sleep(web_driver.one_second)
+                if enrollment_group_list[i].text == enrollment_group_names_list[1]:
+                    face_threshold = self.d.find_element(By.XPATH, Read_Enrollment_Groups_Components().face_threshold_for_eg_by_xpath())
+                    if Read_Enrollment_Groups_Components().default_face_threshold() in face_threshold.text:
+                        self.logger.info(f"Face Threshold for {enrollment_group_names_list[1]} is: {Read_Enrollment_Groups_Components().default_face_threshold()}")
+                        status.append(True)
+                    else:
+                        status.append(False)
+                    time.sleep(web_driver.one_second)
+                    mask_threshold = self.d.find_element(By.XPATH, Read_Enrollment_Groups_Components().masked_face_threshold_for_eg_by_xpath())
+                    if Read_Enrollment_Groups_Components().default_masked_face_threshold() in mask_threshold.text:
+                        self.logger.info(
+                            f"Masked Face Threshold for {enrollment_group_names_list[1]} is: {Read_Enrollment_Groups_Components().default_masked_face_threshold()}")
+                        status.append(True)
+                    else:
+                        status.append(False)
+                time.sleep(web_driver.one_second)
+                if enrollment_group_list[i].text == enrollment_group_names_list[2]:
+                    face_threshold = self.d.find_element(By.XPATH, Read_Enrollment_Groups_Components().face_threshold_for_eg_by_xpath())
+                    if Read_Enrollment_Groups_Components().default_face_threshold() in face_threshold.text:
+                        self.logger.info(f"Face Threshold for {enrollment_group_names_list[2]} is: {Read_Enrollment_Groups_Components().default_face_threshold()}")
+                        status.append(True)
+                    else:
+                        status.append(False)
+                    time.sleep(web_driver.one_second)
+                    mask_threshold = self.d.find_element(By.XPATH, Read_Enrollment_Groups_Components().masked_face_threshold_for_eg_by_xpath())
+                    if Read_Enrollment_Groups_Components().default_masked_face_threshold() in mask_threshold.text:
+                        self.logger.info(
+                            f"Masked Face Threshold for {enrollment_group_names_list[2]} is: {Read_Enrollment_Groups_Components().default_masked_face_threshold()}")
+                        status.append(True)
+                    else:
+                        status.append(False)
+                time.sleep(web_driver.one_second)
+                if enrollment_group_list[i].text == enrollment_group_names_list[3]:
+                    face_threshold = self.d.find_element(By.XPATH, Read_Enrollment_Groups_Components().face_threshold_for_eg_by_xpath())
+                    if Read_Enrollment_Groups_Components().default_face_threshold() in face_threshold.text:
+                        self.logger.info(f"Face Threshold for {enrollment_group_names_list[3]} is: {Read_Enrollment_Groups_Components().default_face_threshold()}")
+                        status.append(True)
+                    else:
+                        status.append(False)
+                    time.sleep(web_driver.one_second)
+                    mask_threshold = self.d.find_element(By.XPATH, Read_Enrollment_Groups_Components().masked_face_threshold_for_eg_by_xpath())
+                    if Read_Enrollment_Groups_Components().default_masked_face_threshold() in mask_threshold.text:
+                        self.logger.info(
+                            f"Masked Face Threshold for {enrollment_group_names_list[3]} is: {Read_Enrollment_Groups_Components().default_masked_face_threshold()}")
+                        status.append(True)
+                    else:
+                        status.append(False)
+                time.sleep(web_driver.one_second)
+                if enrollment_group_list[i].text == enrollment_group_names_list[4]:
+                    face_threshold = self.d.find_element(By.XPATH, Read_Enrollment_Groups_Components().face_threshold_for_eg_by_xpath())
+                    if Read_Enrollment_Groups_Components().default_face_threshold() in face_threshold.text:
+                        self.logger.info(f"Face Threshold for {enrollment_group_names_list[4]} is: {Read_Enrollment_Groups_Components().default_face_threshold()}")
+                        status.append(True)
+                    else:
+                        status.append(False)
+                    time.sleep(web_driver.one_second)
+                    mask_threshold = self.d.find_element(By.XPATH, Read_Enrollment_Groups_Components().masked_face_threshold_for_eg_by_xpath())
+                    if Read_Enrollment_Groups_Components().default_masked_face_threshold() in mask_threshold.text:
+                        self.logger.info(
+                            f"Masked Face Threshold for {enrollment_group_names_list[4]} is: {Read_Enrollment_Groups_Components().default_masked_face_threshold()}")
+                        status.append(True)
+                    else:
+                        status.append(False)
+                time.sleep(web_driver.one_second)
+
+            close_panel = self.d.find_element(By.XPATH,
+                                              Portal_Menu_Module_read_ini().get_close_panel_button_by_xpath())
+            close_panel.click()
             self.logger.info(f"status: {status}")
             if False in status:
                 self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_EG_03_failed.png")
@@ -238,6 +311,195 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
             self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_EG_03_exception.png")
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_EG_03_exception.png")
             self.logger.error(f"TC_EG_03 got exception as: {ex.args}")
+            return False
+
+    def verify_user_able_to_link_a_notification_group_from_enrollments_groups_panel(self):
+        try:
+            self.logger.info("********** Test_EG_04 Begin  **********")
+            status = []
+            login().login_to_cloud_if_not_done(self.d)
+            time.sleep(web_driver.one_second)
+
+            enrollment_groups_btn = self.d.find_element(By.XPATH, Read_Enrollment_Groups_Components().
+                                                        enrollment_groups_button_by_xpath())
+            time.sleep(web_driver.one_second)
+            enrollment_groups_btn.click()
+            action_btn = web_driver.explicit_wait(self, 5, "XPATH", Read_Enrollment_Groups_Components().action_dropdown_button_by_xpath(), self.d)
+            time.sleep(web_driver.one_second)
+            action_btn.click()
+            time.sleep(web_driver.one_second)
+            create_enrollment = self.d.find_element(By.XPATH,
+                                                    Read_Enrollment_Groups_Components().create_enrollment_group_button_by_xpath())
+            create_enrollment.click()
+            time.sleep(web_driver.one_second)
+
+            name_field = self.d.find_element(By.XPATH, Read_Enrollment_Groups_Components().name_field_by_xpath())
+            name_field.send_keys(Read_Enrollment_Groups_Components().link_eg1_to_ng1())
+
+            description_field = self.d.find_element(By.XPATH, Read_Enrollment_Groups_Components().description_field_by_xpath())
+            description_field.send_keys(Read_Enrollment_Groups_Components().description_field_data())
+
+            save_button = self.d.find_element(By.XPATH, Read_Enrollment_Groups_Components().save_button_by_xpath())
+            time.sleep(web_driver.one_second)
+            save_button.click()
+
+            time.sleep(web_driver.two_second)
+            success_message = self.d.find_element(By.XPATH,
+                                                  Read_Enrollment_Groups_Components().success_message_by_xpath()).text
+            self.logger.info(f"actual message: {success_message}")
+            ex_success_msg = Read_Enrollment_Groups_Components().success_message_validation_text()
+            self.logger.info(f"expected message: {ex_success_msg}")
+            if ex_success_msg == success_message:
+                status.append(True)
+            else:
+                status.append(False)
+            # *************************************************************************
+            time.sleep(web_driver.one_second)
+            notification_group_btn = self.d.find_element(By.XPATH,
+                                                         Read_Enrollment_Groups_Components().notification_group_in_enrollment_group())
+            notification_group_btn.click()
+            time.sleep(web_driver.one_second)
+            action_dropdown = self.d.find_element(By.XPATH, Read_Enrollment_Groups_Components().get_action_dropdown_on_notification_groups_panel_by_xpath())
+            action_dropdown.click()
+            time.sleep(web_driver.one_second)
+            create_notification = self.d.find_element(By.XPATH, Read_Notification_Groups_Components()
+                                                      .create_notification_group_btn_by_xpath())
+            create_notification.click()
+            # name_field = self.d.find_element(By.XPATH, Read_Notification_Groups_Components().name_field_by_xpath())
+            name_field = web_driver.explicit_wait(self, 10, "XPATH",
+                                                  Read_Enrollment_Groups_Components().name_placeholder_on_ng_panel_by_xpath(), self.d)
+            name_field.send_keys(Read_Enrollment_Groups_Components().link_ng1_to_eg1())
+
+            description_field = self.d.find_element(By.XPATH, Read_Enrollment_Groups_Components().
+                                                    description_placeholder_on_ng_panel_by_xpath())
+            description_field.send_keys(Read_Notification_Groups_Components().get_notification_group_description())
+
+            save_button = self.d.find_element(By.XPATH, Read_Notification_Groups_Components().second_save_button_by_xpath())
+            time.sleep(web_driver.one_second)
+            save_button.click()
+            time.sleep(web_driver.two_second)
+
+            filter_button_on_alert = self.d.find_element(By.XPATH,
+                                                         Read_Enrollment_Groups_Components().get_filter_btn_on_notification_groups_panel_by_xpath())
+            filter_button_on_alert.click()
+            time.sleep(web_driver.two_second)
+            unlinked_notification_groups = self.d.find_element(By.XPATH,
+                                                               Read_Enrollment_Groups_Components().unlinked_notification_groups())
+            unlinked_notification_groups.click()
+            time.sleep(web_driver.one_second)
+            alert_groups = self.d.find_elements(By.XPATH,
+                                                Read_Notification_Groups_Components().alert_group_list_by_xpath())
+            checkbox = self.d.find_elements(By.XPATH,
+                                            Read_Notification_Groups_Components().alert_checkbox_by_xpath())
+
+            for i in range(len(alert_groups)-1):
+                if alert_groups[i].text == Read_Enrollment_Groups_Components().link_ng1_to_eg1():
+                    checkbox[i].click()
+                    time.sleep(web_driver.one_second)
+                    self.d.find_element(By.XPATH,
+                                        Read_Enrollment_Groups_Components().get_action_dropdown_on_notification_groups_panel_by_xpath()).click()
+                    time.sleep(web_driver.one_second)
+                    add_to_enrollment_group = self.d.find_element(By.XPATH,
+                                                                  Read_Enrollment_Groups_Components().get_add_to_enrollment_groups_option_by_xpath())
+                    add_to_enrollment_group.click()
+                    time.sleep(web_driver.one_second)
+                    alert_groups = self.d.find_elements(By.XPATH,
+                                                        Read_Notification_Groups_Components().alert_group_list_by_xpath())
+                    # users_btn = self.d.find_elements(By.XPATH,
+                    #                                  Read_Enrollment_Groups_Components().get_users_btn_on_notification_groups_panel_by_xpath())
+                    for j in range(len(alert_groups)):
+                        if alert_groups[j].text == Read_Enrollment_Groups_Components().link_ng1_to_eg1():
+                            self.logger.info(
+                                f"{Read_Enrollment_Groups_Components().link_ng1_to_eg1()} alert group linked successfully with enrollment group..")
+                            status.append(True)
+                    close_panel = self.d.find_elements(By.XPATH,
+                                                       Portal_Menu_Module_read_ini().get_close_panel_button_by_xpath())
+                    for panels in close_panel:
+                        panels.click()
+                        time.sleep(web_driver.one_second)
+                    break
+
+            self.logger.info(f"status: {status}")
+            if False in status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_EG_04_failed.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_EG_04_failed.png")
+                return False
+            else:
+                return True
+            # logout().logout_from_core()
+        except Exception as ex:
+            self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_EG_04_exception.png")
+            self.d.save_screenshot(f"{self.screenshots_path}\\TC_EG_04_exception.png")
+            self.logger.error(f"TC_EG_04 got exception as: {ex.args}")
+            return False
+
+    def verify_user_able_to_unlink_a_notification_group_from_enrollments_groups_panel(self):
+        try:
+            self.logger.info("********** Test_EG_05 Begin  **********")
+            status = []
+            login().login_to_cloud_if_not_done(self.d)
+            time.sleep(web_driver.one_second)
+
+            enrollment_groups_btn = self.d.find_element(By.XPATH, Read_Enrollment_Groups_Components().
+                                                        enrollment_groups_button_by_xpath())
+            self.logger.info(f"enrollment groups btn visible: {enrollment_groups_btn.is_displayed()}")
+            time.sleep(web_driver.one_second)
+            enrollment_groups_btn.click()
+
+            enrollment_groups = web_driver.explicit_wait(self, 5, "XPATH", Read_Enrollment_Groups_Components().enrollment_group_list_by_xpath(), self.d)
+            enrollment_groups = self.d.find_elements(By.XPATH, Read_Enrollment_Groups_Components().enrollment_group_list_by_xpath())
+            notification_icon = self.d.find_elements(By.XPATH, Read_Enrollment_Groups_Components().notification_icon_btns_on_eg_panel())
+            self.logger.info(f"enrollment groups length: {len(enrollment_groups)}")
+            for i in range(len(enrollment_groups)):
+                if enrollment_groups[i].text == Read_Enrollment_Groups_Components().link_eg1_to_ng1():
+                    self.logger.info(f"enrollment group: {enrollment_groups[i].text}")
+                    notification_icon[i].click()
+                    time.sleep(web_driver.one_second)
+                    checkbox = self.d.find_elements(By.XPATH, Read_Enrollment_Groups_Components().linked_ng_checkbox_by_xpath())
+                    self.logger.info(f"checkbox length: {len(checkbox)}")
+                    notification_groups = self.d.find_elements(By.XPATH, Read_Enrollment_Groups_Components().linked_notification_groups_list_by_xpath())
+                    self.logger.info(f"notification groups length: {len(notification_groups)}")
+                    for j in range(len(notification_groups)):
+                        if notification_groups[j].text == Read_Enrollment_Groups_Components().link_ng1_to_eg1():
+                            self.logger.info(f"notification group text: {notification_groups[j].text}")
+                            checkbox[j].click()
+                            time.sleep(web_driver.one_second)
+                            status.append(True)
+                            action_dropdown = self.d.find_element(By.XPATH, Read_Enrollment_Groups_Components().get_action_dropdown_on_notification_groups_panel_by_xpath())
+                            self.logger.info(f"action dropdown visible: {action_dropdown.is_displayed()}")
+
+                            action_dropdown.click()
+                            time.sleep(web_driver.one_second)
+                            remove_from_eg = self.d.find_element(By.XPATH, Read_Enrollment_Groups_Components().remove_from_eg_on_ng_panel_by_xpath())
+                            self.logger.info(f"option visible: {remove_from_eg.text}")
+                            remove_from_eg.click()
+                            status.append(True)
+                            time.sleep(web_driver.one_second)
+
+                            close_panel = self.d.find_elements(By.XPATH,
+                                                               Portal_Menu_Module_read_ini().get_close_panel_button_by_xpath())
+                            self.logger.info(f"panel count: {len(close_panel)}")
+                            for panels in close_panel:
+                                self.logger.info("closing panel...")
+                                panels.click()
+                                time.sleep(web_driver.one_second)
+
+                            break
+                    break
+            self.logger.info(f"status: {status}")
+
+            if False in status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_EG_05_failed.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_EG_05_failed.png")
+                return False
+            else:
+                return True
+            # logout().logout_from_core()
+
+        except Exception as ex:
+            self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_EG_05_exception.png")
+            self.d.save_screenshot(f"{self.screenshots_path}\\TC_EG_05_exception.png")
+            self.logger.error(f"TC_EG_05 got exception as: {ex.args}")
             return False
 
     # def verify_user_able_to_click_on_enrollment_groups_in_cloud_menu(self):

@@ -30,8 +30,50 @@ class Read_Enrollment_Groups_Components:
 
     def get_total_number_of_egs(self):
         try:
-            total_number_of_egs = self.config.get("LOCATORS", "total_number_of_egs")
+            total_number_of_egs = self.common_test_data_config.get("Enrollment_Groups_Data", "total_number_of_egs")
             return total_number_of_egs
+        except Exception as ex:
+            print(ex)
+
+    def link_eg1_to_ng1(self):
+        try:
+            link_eg1_to_ng1 = self.common_test_data_config.get("system_level_test_Data", "link_eg1_to_ng1")
+            return link_eg1_to_ng1
+        except Exception as ex:
+            print(ex)
+
+    def link_ng1_to_eg1(self):
+        try:
+            link_ng1_to_eg1 = self.common_test_data_config.get("system_level_test_Data", "link_ng1_to_eg1")
+            return link_ng1_to_eg1
+        except Exception as ex:
+            print(ex)
+
+    def link_eg2_to_ng2(self):
+        try:
+            link_eg2_to_ng2 = self.common_test_data_config.get("system_level_test_Data", "link_eg2_to_ng2")
+            return link_eg2_to_ng2
+        except Exception as ex:
+            print(ex)
+
+    def link_ng2_to_eg2(self):
+        try:
+            link_ng2_to_eg2 = self.common_test_data_config.get("system_level_test_Data", "link_ng2_to_eg2")
+            return link_ng2_to_eg2
+        except Exception as ex:
+            print(ex)
+
+    def name_placeholder_on_ng_panel_by_xpath(self):
+        try:
+            name_placeholder_on_ng_panel_by_xpath = self.config.get("LOCATORS", "name_placeholder_on_ng_panel_by_xpath")
+            return name_placeholder_on_ng_panel_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def description_placeholder_on_ng_panel_by_xpath(self):
+        try:
+            description_placeholder_on_ng_panel_by_xpath = self.config.get("LOCATORS", "description_placeholder_on_ng_panel_by_xpath")
+            return description_placeholder_on_ng_panel_by_xpath
         except Exception as ex:
             print(ex)
 
@@ -49,6 +91,33 @@ class Read_Enrollment_Groups_Components:
         except Exception as ex:
             print(ex)
 
+    def notification_icon_btns_on_eg_panel(self):
+        try:
+            notification_icon_btns_on_eg_panel = self.config.get("LOCATORS", "notification_icon_btns_on_eg_panel")
+            return notification_icon_btns_on_eg_panel
+        except Exception as ex:
+            print(ex)
+
+    def linked_notification_groups_list_by_xpath(self):
+        try:
+            linked_notification_groups_list_by_xpath = self.config.get("LOCATORS", "linked_notification_groups_list_by_xpath")
+            return linked_notification_groups_list_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def linked_ng_checkbox_by_xpath(self):
+        try:
+            linked_ng_checkbox_by_xpath = self.config.get("LOCATORS", "linked_ng_checkbox_by_xpath")
+            return linked_ng_checkbox_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def remove_from_eg_on_ng_panel_by_xpath(self):
+        try:
+            remove_from_eg_on_ng_panel_by_xpath = self.config.get("LOCATORS", "remove_from_eg_on_ng_panel_by_xpath")
+            return remove_from_eg_on_ng_panel_by_xpath
+        except Exception as ex:
+            print(ex)
     def enrollment_groups_button_by_xpath(self):
         try:
             enrollment_groups_button_by_xpath = self.config.get("LOCATORS", "enrollment_groups_button_by_xpath")
@@ -428,9 +497,9 @@ class Read_Enrollment_Groups_Components:
         except Exception as ex:
             print(ex)
 
-    def face_threshold(self):
+    def default_face_threshold(self):
         try:
-            ele = self.config.get('LOCATORS', 'face_threshold')
+            ele = self.common_test_data_config.get('Enrollment_Groups_Data', 'default_face_threshold')
             return ele
         except Exception as ex:
             print(ex)
@@ -442,9 +511,9 @@ class Read_Enrollment_Groups_Components:
         except Exception as ex:
             print(ex)
 
-    def masked_face_threshold(self):
+    def default_masked_face_threshold(self):
         try:
-            ele = self.config.get('LOCATORS', 'masked_face_threshold')
+            ele = self.common_test_data_config.get('Enrollment_Groups_Data', 'default_masked_face_threshold')
             return ele
         except Exception as ex:
             print(ex)

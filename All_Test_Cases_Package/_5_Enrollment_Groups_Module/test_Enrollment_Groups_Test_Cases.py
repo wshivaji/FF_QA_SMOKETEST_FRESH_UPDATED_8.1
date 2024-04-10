@@ -35,6 +35,18 @@ class Test_Enrollment_Groups_Module(web_driver, web_logger):
         else:
             assert False
 
+    def test_TC_EG_04(self):
+        if Enrollments_Groups_Module_pom().verify_user_able_to_link_a_notification_group_from_enrollments_groups_panel():
+            assert True
+        else:
+            assert False
+
+    def test_TC_EG_05(self):
+        if Enrollments_Groups_Module_pom().verify_user_able_to_unlink_a_notification_group_from_enrollments_groups_panel():
+            assert True
+        else:
+            assert False
+
     # @pytest.mark.p1
     # def test_TC_EG_002(self):
     #     self.logger.info("Enrollment Groups module = test_TC_EG_002 execution started..")

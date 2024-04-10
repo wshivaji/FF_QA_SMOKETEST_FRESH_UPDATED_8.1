@@ -32,7 +32,7 @@ class Read_Notification_Groups_Components:
 
     def get_total_number_of_ngs(self):
         try:
-            total_number_of_ngs = self.config.get("LOCATORS", "total_number_of_ngs")
+            total_number_of_ngs = self.common_test_data_config.get("Notification_Groups_Data", "total_number_of_ngs")
             return total_number_of_ngs
         except Exception as ex:
             print(ex)
