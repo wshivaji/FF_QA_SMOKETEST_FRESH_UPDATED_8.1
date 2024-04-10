@@ -505,11 +505,11 @@ class Portal_Menu_Module_read_ini:
         except Exception as ex:
             print(ex.args)
 
-    def get_expected_fidusvision_text(self):
+    def get_expected_overview_dashboard_text(self):
         try:
-            expected_fidusvision_text = self.common_test_data_config.get("Portal_Menu_Module_Data", "expected_fidusvision_text")
-            print("expected_fidusvision_text: ", expected_fidusvision_text)
-            return expected_fidusvision_text
+            expected_overview_dashboard_text = self.common_test_data_config.get("Portal_Menu_Module_Data", "expected_overview_dashboard_text")
+            print("expected_overview_dashboard_text: ", expected_overview_dashboard_text)
+            return expected_overview_dashboard_text
         except Exception as ex:
             print(ex.args)
 
