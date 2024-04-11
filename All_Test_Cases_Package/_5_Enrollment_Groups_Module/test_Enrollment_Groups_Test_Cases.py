@@ -35,11 +35,11 @@ class Test_Enrollment_Groups_Module(web_driver, web_logger):
         else:
             assert False
 
-    # def test_TC_NG_04(self):
-    #     if Enrollments_Groups_Module_pom().Verify_user_able_to_create_a_new_Enrollment_Group_by_filling_all_the_fields_and_verify_present_3_buttons_below_are_activated():
-    #         assert True
-    #     else:
-    #         assert False
+    def test_TC_NG_04(self):
+        if Enrollments_Groups_Module_pom().Verify_user_able_to_create_a_new_Enrollment_Group_by_filling_all_the_fields_and_verify_present_3_buttons_below_are_activated():
+            assert True
+        else:
+            assert False
     #
     # @pytest.mark.p1
     # def test_TC_NG_05(self):

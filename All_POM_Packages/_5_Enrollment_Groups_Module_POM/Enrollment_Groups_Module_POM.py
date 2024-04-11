@@ -354,6 +354,11 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
             status.append(notification_groups_text.is_enabled())
             self.logger.info(f"notification groups btn is activated: {notification_groups_text.is_enabled()}")
 
+            events_text = self.explicit_wait(10, "XPATH", Read_Enrollment_Groups_Components()
+                                             .events_button_by_xpath(), self.d)
+            status.append(events_text.is_enabled())
+            self.logger.info(f"Events btn is activated: {events_text.is_enabled()}")
+
             close_panel = self.d.find_element(By.XPATH,
                                               Portal_Menu_Module_read_ini().get_close_panel_button_by_xpath())
             close_panel.click()
