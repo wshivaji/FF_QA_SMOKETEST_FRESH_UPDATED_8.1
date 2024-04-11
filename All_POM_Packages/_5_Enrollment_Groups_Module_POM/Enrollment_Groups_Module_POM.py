@@ -505,16 +505,19 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
                                                         enrollment_groups_button_by_xpath())
             time.sleep(web_driver.one_second)
             enrollment_groups_btn.click()
+            self.logger.info("Enrollment groups button is clicked....")
             action_btn = web_driver.explicit_wait(self, 5, "XPATH", Read_Enrollment_Groups_Components().action_dropdown_button_by_xpath(), self.d)
             time.sleep(web_driver.one_second)
             action_btn.click()
             time.sleep(web_driver.one_second)
+            self.logger.info("Action button clicked.....")
             create_enrollment = self.d.find_element(By.XPATH,
                                                     Read_Enrollment_Groups_Components().create_enrollment_group_button_by_xpath())
             create_enrollment.click()
             time.sleep(web_driver.one_second)
+            self.logger.info("Clicked on Create Enrollment group button.....")
 
-            name_field = self.d.find_element(By.XPATH, Read_Enrollment_Groups_Components().name_field_by_xpath())
+            name_field = self.explicit_wait(10, "XPATH", Read_Enrollment_Groups_Components().name_field_by_xpath(), self.d)
             name_field.send_keys(Read_Enrollment_Groups_Components().link_eg1_to_ng1())
 
             description_field = self.d.find_element(By.XPATH, Read_Enrollment_Groups_Components().description_field_by_xpath())
@@ -540,12 +543,14 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
                                                          Read_Enrollment_Groups_Components().notification_group_in_enrollment_group())
             notification_group_btn.click()
             time.sleep(web_driver.one_second)
+            self.logger.info("Notification groups button is clicked....")
             action_dropdown = self.d.find_element(By.XPATH, Read_Enrollment_Groups_Components().get_action_dropdown_on_notification_groups_panel_by_xpath())
             action_dropdown.click()
             time.sleep(web_driver.one_second)
             create_notification = self.d.find_element(By.XPATH, Read_Notification_Groups_Components()
                                                       .create_notification_group_btn_by_xpath())
             create_notification.click()
+            self.logger.info("Create Notification groups button is clicked....")
             # name_field = self.d.find_element(By.XPATH, Read_Notification_Groups_Components().name_field_by_xpath())
             name_field = web_driver.explicit_wait(self, 10, "XPATH",
                                                   Read_Enrollment_Groups_Components().name_placeholder_on_ng_panel_by_xpath(), self.d)
@@ -558,6 +563,8 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
             save_button = self.d.find_element(By.XPATH, Read_Notification_Groups_Components().second_save_button_by_xpath())
             time.sleep(web_driver.one_second)
             save_button.click()
+            self.logger.info("clicked on Save button..")
+
             time.sleep(web_driver.two_second)
 
             filter_button_on_alert = self.d.find_element(By.XPATH,
@@ -567,6 +574,8 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
             unlinked_notification_groups = self.d.find_element(By.XPATH,
                                                                Read_Enrollment_Groups_Components().unlinked_notification_groups())
             unlinked_notification_groups.click()
+            self.logger.info("Clicked on Unlinked notification groups button....")
+
             time.sleep(web_driver.one_second)
             alert_groups = self.d.find_elements(By.XPATH,
                                                 Read_Notification_Groups_Components().alert_group_list_by_xpath())
@@ -583,6 +592,8 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
                     add_to_enrollment_group = self.d.find_element(By.XPATH,
                                                                   Read_Enrollment_Groups_Components().get_add_to_enrollment_groups_option_by_xpath())
                     add_to_enrollment_group.click()
+                    self.logger.info("Clicked on Add to Enrollment Group button....")
+
                     time.sleep(web_driver.one_second)
                     alert_groups = self.d.find_elements(By.XPATH,
                                                         Read_Notification_Groups_Components().alert_group_list_by_xpath())

@@ -505,6 +505,20 @@ class Read_Notification_Groups_Components:
         except Exception as ex:
             print("new_name_field_data : ", ex)
 
+    def link_eg2_to_ng2(self):
+        try:
+            link_eg2_to_ng2 = self.common_test_data_config.get("system_level_test_Data", "link_eg2_to_ng2")
+            return link_eg2_to_ng2
+        except Exception as ex:
+            print(ex)
+
+    def link_ng2_to_eg2(self):
+        try:
+            link_ng2_to_eg2 = self.common_test_data_config.get("system_level_test_Data", "link_ng2_to_eg2")
+            return link_ng2_to_eg2
+        except Exception as ex:
+            print(ex)
+
     def alert_details_btn_by_xpath(self):
         try:
             alert_details_btn_by_xpath = self.config.get("LOCATORS", "alert_details_btn_by_xpath")
@@ -1020,6 +1034,29 @@ class Read_Notification_Groups_Components:
             user_filter_drp_dwn_button_by_xpath = self.config.get("LOCATORS",
                                                                   "user_filter_drp_dwn_button_by_xpath")
             return user_filter_drp_dwn_button_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def enrollment_groups_list_by_xpath(self):
+        try:
+            enrollment_groups_list_by_xpath = self.config.get("LOCATORS",
+                                                                  "enrollment_groups_list_by_xpath")
+            return enrollment_groups_list_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def unlinked_case_groups_list_by_xpath(self):
+        try:
+            unlinked_case_groups_list_by_xpath = self.config.get("LOCATORS",
+                                                                  "unlinked_case_groups_list_by_xpath")
+            return unlinked_case_groups_list_by_xpath
+        except Exception as ex:
+            print(ex)
+    def enrollment_groups_checkboxes_by_xpath(self):
+        try:
+            enrollment_groups_checkboxes_by_xpath = self.config.get("LOCATORS",
+                                                                  "enrollment_groups_checkboxes_by_xpath")
+            return enrollment_groups_checkboxes_by_xpath
         except Exception as ex:
             print(ex)
 

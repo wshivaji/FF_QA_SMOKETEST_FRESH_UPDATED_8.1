@@ -91,20 +91,6 @@ class Read_Enrollment_Groups_Components:
         except Exception as ex:
             print(ex)
 
-    def link_eg2_to_ng2(self):
-        try:
-            link_eg2_to_ng2 = self.common_test_data_config.get("system_level_test_Data", "link_eg2_to_ng2")
-            return link_eg2_to_ng2
-        except Exception as ex:
-            print(ex)
-
-    def link_ng2_to_eg2(self):
-        try:
-            link_ng2_to_eg2 = self.common_test_data_config.get("system_level_test_Data", "link_ng2_to_eg2")
-            return link_ng2_to_eg2
-        except Exception as ex:
-            print(ex)
-
     def name_placeholder_on_ng_panel_by_xpath(self):
         try:
             name_placeholder_on_ng_panel_by_xpath = self.config.get("LOCATORS", "name_placeholder_on_ng_panel_by_xpath")

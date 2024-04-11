@@ -316,6 +316,7 @@ class Notification_Groups_Module_pom(web_driver, web_logger):
 
     def verify_user_able_to_edit_notification_group(self):
         try:
+            self.logger.info("********** Test_NG_TC04 Begin  **********")
             status = []
             login().login_to_cloud_if_not_done(self.d)
             time.sleep(web_driver.one_second)
@@ -389,6 +390,139 @@ class Notification_Groups_Module_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_NG_04_exception.png")
             self.logger.error(f"test_TC_NG_04 got exception as: {ex.args}")
             return False
+
+    def verify_user_able_to_link_an_enrollments_groups_to_notification_groups(self):
+        try:
+            self.logger.info("********** Test_NG_TC05 Begin  **********")
+            status = []
+            login().login_to_cloud_if_not_done(self.d)
+            time.sleep(web_driver.one_second)
+            self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components().
+                               notification_groups_button_by_xpath(),
+                               self.d)
+            notification_groups_btn = self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components()
+                                                         .notification_groups_button_by_xpath(), self.d)
+            self.d.execute_script("arguments[0].click();", notification_groups_btn)
+            self.logger.info("notification groups btn is clicked")
+            time.sleep(web_driver.one_second)
+
+            action_btn = web_driver.explicit_wait(self, 5, "XPATH",
+                                                  Read_Notification_Groups_Components().action_dropdown_button_by_xpath(),
+                                                  self.d)
+            time.sleep(web_driver.one_second)
+            action_btn.click()
+            time.sleep(web_driver.one_second)
+            self.logger.info("Action button clicked.....")
+            create_notification = self.d.find_element(By.XPATH,
+                                                    Read_Notification_Groups_Components().create_notification_group_btn_by_xpath())
+            create_notification.click()
+            time.sleep(web_driver.one_second)
+            self.logger.info("Clicked on Create Notification group button.....")
+
+            name_field = self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components().name_field_by_xpath(), self.d)
+            name_field.send_keys(Read_Notification_Groups_Components().link_ng2_to_eg2())
+
+            description_field = self.d.find_element(By.XPATH,
+                                                    Read_Notification_Groups_Components().description_field_by_xpath())
+            description_field.send_keys(Read_Notification_Groups_Components().description_field_data())
+
+            save_button = self.d.find_element(By.XPATH, Read_Notification_Groups_Components().save_button_by_xpath())
+            time.sleep(web_driver.one_second)
+            save_button.click()
+            self.logger.info(" Clicked on Save button..")
+            time.sleep(web_driver.two_second)
+            status.append(Read_Notification_Groups_Components().success_message_validation_text())
+            # *************************************************************************
+            time.sleep(web_driver.one_second)
+            enrollment_group_btn = self.d.find_element(By.XPATH,
+                                                         Read_Notification_Groups_Components().enrollment_group_btn_by_xpath())
+            enrollment_group_btn.click()
+            time.sleep(web_driver.one_second)
+            self.logger.info("Enrollment groups button is clicked....")
+            action_dropdown = self.d.find_element(By.XPATH,
+                                                  Read_Notification_Groups_Components().third_action_dropdown_button_by_xpath())
+            action_dropdown.click()
+            time.sleep(web_driver.one_second)
+            self.logger.info("Clicked on Action dropdown on Enrollment Groups panel")
+            create_enrollment_group = self.d.find_element(By.XPATH, Read_Notification_Groups_Components()
+                                                      .create_enrollment_group_by_xpath())
+            create_enrollment_group.click()
+            self.logger.info("Create Enrollment groups button is clicked....")
+            # name_field = self.d.find_element(By.XPATH, Read_Notification_Groups_Components().name_field_by_xpath())
+            name_field = web_driver.explicit_wait(self, 10, "XPATH",
+                                                  Read_Notification_Groups_Components().name_field_by_xpath_enrolment(),
+                                                  self.d)
+            name_field.send_keys(Read_Notification_Groups_Components().link_eg2_to_ng2())
+
+            save_button = self.d.find_element(By.XPATH, Read_Notification_Groups_Components().second_save_button_by_xpath())
+            time.sleep(web_driver.one_second)
+            save_button.click()
+            self.logger.info("clicked on Save button..")
+
+            time.sleep(web_driver.two_second)
+
+            filter_button_on_case_group = self.d.find_element(By.XPATH,
+                                                         Read_Notification_Groups_Components().users_filter_button_by_xpath())
+            filter_button_on_case_group.click()
+            time.sleep(web_driver.two_second)
+            unlinked_enrollment_groups = self.d.find_element(By.XPATH,
+                                                               Read_Notification_Groups_Components().unlinked_enrollment_group_by_xpath())
+            unlinked_enrollment_groups.click()
+            self.logger.info("Clicked on Unlinked enrollment groups button....")
+
+            time.sleep(web_driver.one_second)
+            case_groups = self.d.find_elements(By.XPATH,
+                                                Read_Notification_Groups_Components().unlinked_case_groups_list_by_xpath())
+            checkbox = self.d.find_elements(By.XPATH,
+                                            Read_Notification_Groups_Components().enrollment_groups_checkboxes_by_xpath())
+            time.sleep(web_driver.one_second)
+            for i in range(len(case_groups) - 1):
+                self.logger.info(f"case_groups: {case_groups[i].text}")
+                time.sleep(web_driver.one_second)
+                if case_groups[i].text == Read_Notification_Groups_Components().link_eg2_to_ng2():
+
+                    checkbox[i].click()
+
+                    self.d.find_element(By.XPATH,
+                                        Read_Notification_Groups_Components().third_action_dropdown_button_by_xpath()).click()
+                    time.sleep(web_driver.one_second)
+                    add_to_enrollment_group = self.d.find_element(By.XPATH,
+                                                                  Read_Notification_Groups_Components().add_alert_to_groups())
+                    add_to_enrollment_group.click()
+                    self.logger.info("Clicked on Add to Notification Group button....")
+
+                    time.sleep(web_driver.one_second)
+                    case_groups = self.d.find_elements(By.XPATH,
+                                                       Read_Notification_Groups_Components().enrollment_groups_list_by_xpath())
+                    # users_btn = self.d.find_elements(By.XPATH,
+                    #                                  Read_Enrollment_Groups_Components().get_users_btn_on_notification_groups_panel_by_xpath())
+                    for j in range(len(case_groups)):
+                        if case_groups[j].text == Read_Notification_Groups_Components().link_eg2_to_ng2():
+                            self.logger.info(
+                                f"{Read_Notification_Groups_Components().link_eg2_to_ng2()} case group linked successfully with notification group..")
+                            status.append(True)
+                    close_panel = self.d.find_elements(By.XPATH,
+                                                       Portal_Menu_Module_read_ini().get_close_panel_button_by_xpath())
+                    for panels in close_panel:
+                        panels.click()
+                        time.sleep(web_driver.one_second)
+                    break
+
+            self.logger.info(f"status: {status}")
+            if False in status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_NG_05_failed.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_NG_05_failed.png")
+                return False
+            else:
+                return True
+            # logout().logout_from_core()
+
+        except Exception as ex:
+            self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_NG_05_exception.png")
+            self.d.save_screenshot(f"{self.screenshots_path}\\TC_NG_05_exception.png")
+            self.logger.error(f"TC_NG_05 got exception as: {ex.args}")
+            return False
+
 
     # def Verify_Notification_Groups_submenu_is_visible_and_enabled_in_cloud_menu(self):
     #     try:
