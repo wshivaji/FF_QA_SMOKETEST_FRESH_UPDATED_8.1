@@ -297,7 +297,7 @@ class Notification_Groups_Module_pom(web_driver, web_logger):
             close_panel = self.d.find_elements(By.XPATH,
                                               Portal_Menu_Module_read_ini().get_close_panel_button_by_xpath())
             for c in close_panel:
-                close_panel[c].click()
+                c.click()
 
             self.logger.info(f"status: {status}")
 

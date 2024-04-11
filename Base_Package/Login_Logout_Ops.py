@@ -9,13 +9,11 @@ from All_Config_Packages._1_Portal_Login_Module_Config_Files.Portal_Login_Page_R
     Portal_login_page_read_ini
 
 
-
 class login(web_driver, web_logger):
     # d = web_driver.d()
     # logger = web_logger.logger_obj()
 
     def __init__(self):
-
         self.file_path = f"{Path(__file__).parent.parent}\\All_Test_Data\\0_Login_Logout_Data\\Data_From_INI\\login_logout.ini"
         self.common_test_data_ini_file_path = f"{Path(__file__).parent.parent}\\All_Test_Data\\Common_Test_Data\\common_test_data.ini"
         self.common_test_data_config = configparser.RawConfigParser()

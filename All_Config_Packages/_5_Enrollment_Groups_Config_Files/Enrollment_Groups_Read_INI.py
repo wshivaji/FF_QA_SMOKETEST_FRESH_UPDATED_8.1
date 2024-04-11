@@ -21,6 +21,48 @@ class Read_Enrollment_Groups_Components:
         except Exception as ex:
             print(ex)
 
+    def eg_extends_menu_btns_by_xpath(self):
+        try:
+            eg_extends_menu_btns_by_xpath = self.config.get("LOCATORS", "eg_extends_menu_btns_by_xpath")
+            return eg_extends_menu_btns_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def eg_details_btns_by_xpath(self):
+        try:
+            eg_details_btns_by_xpath = self.config.get("LOCATORS", "eg_details_btns_by_xpath")
+            return eg_details_btns_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def new_name_field_data(self):
+        try:
+            new_name_field_data = self.common_test_data_config.get("Enrollment_Groups_Data", "new_name")
+            return new_name_field_data
+        except Exception as ex:
+            print(ex)
+
+    def description_field_new_data(self):
+        try:
+            description_field_new_data = self.common_test_data_config.get("Enrollment_Groups_Data", "new_description")
+            return description_field_new_data
+        except Exception as ex:
+            print(ex)
+
+    def serious_offender_high(self):
+        try:
+            serious_offender_high = self.common_test_data_config.get("Enrollment_Groups_Data", "serious_offender_high")
+            return serious_offender_high
+        except Exception as ex:
+            print(ex)
+
+    def serious_offender_low(self):
+        try:
+            serious_offender_low = self.common_test_data_config.get("Enrollment_Groups_Data", "serious_offender_low")
+            return serious_offender_low
+        except Exception as ex:
+            print(ex)
+
     def get_number_of_egs_by_xpath(self):
         try:
             number_of_egs_by_xpath = self.config.get("LOCATORS", "number_of_egs_by_xpath")
