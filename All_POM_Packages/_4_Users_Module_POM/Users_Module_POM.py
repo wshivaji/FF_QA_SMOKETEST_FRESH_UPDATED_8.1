@@ -212,7 +212,7 @@ class Users_Module_pom(web_driver, web_logger):
             logout().logout_from_core(self.d)
             self.d.refresh()
 
-    def verify_user_able_to_create_a_new_user_by_filling_only_mandatory_fields(self):
+    def Create_5_users_standard_operator_responder_approver_executive_and_it_admin_with_all_required_field(self):
         try:
             login().login_to_cloud_if_not_done(self.d)
             time.sleep(web_driver.one_second)
@@ -220,17 +220,17 @@ class Users_Module_pom(web_driver, web_logger):
             users_list = []
             dictionary_length = len(users_dict["users"])
             print("length of dictionary is", dictionary_length)
-            i=0
+            i = 0
             for i in range(dictionary_length):
                 print(users_dict["users"][i])
                 self.click_user_on_cloud_menu()
                 self.click_on_action_create_user_option()
                 time.sleep(web_driver.one_second)
-                #username = Read_Users_Components().user_name_input_data() + str(generate_random_number())
+                # username = Read_Users_Components().user_name_input_data() + str(generate_random_number())
                 self.enter_user_name(users_dict["users"][i]["username"])
                 self.enter_first_name(users_dict["users"][i]["firstname"])
                 self.enter_last_name(users_dict["users"][i]["lastname"])
-                self.d.find_element(By.XPATH,"//select[@name='userRoleId']").click()
+                self.d.find_element(By.XPATH, "//select[@name='userRoleId']").click()
                 self.select_user_role(users_dict["users"][i]["userrole"])
                 self.enter_password(users_dict["users"][i]["password"])
                 self.select_region(users_dict["users"][i]["user_orgahierarchy"])
@@ -238,17 +238,19 @@ class Users_Module_pom(web_driver, web_logger):
                 self.select_time_zone(Read_Users_Components().time_zone_input_data())
                 time.sleep(web_driver.one_second)
                 self.click_on_save_btn()
-                time.sleep(web_driver.one_second)
-                # i+=1
+                time.sleep(web_driver.two_second)
                 self.close_all_panel_one_by_one()
+                #i+=1
                 # if self.check_if_user_is_created(users_dict["users"][i]["username"]):
-                #
+                #    # self.close_all_panel_one_by_one()
                 #    self.logger.info("user created successfully")
+                #    # self.close_all_panel_one_by_one()
                 #    return True
                 #
                 # else:
                 #     self.d.save_screenshot(f"{self.screenshots_path}test_TC_US_110_failed.png")
                 #     return False
+
         except Exception as ex:
             self.d.save_screenshot(f"{self.screenshots_path}test_TC_US_1_exception.png")
             self.log.info(f"test_TC_US_1_exception: {ex}")
@@ -3165,15 +3167,79 @@ class Users_Module_pom(web_driver, web_logger):
 
             search_box_by_xpath = self.d.find_element(By.XPATH,Read_Users_Components().search_box_by_xpath())
             search_box_by_xpath.send_keys(Read_Users_Components().get_core_username())
+            time.sleep(web_driver.two_second)
 
             details_icon = self.d.find_element(By.XPATH,Read_Users_Components().get_core_details_button())
             details_icon.click()
         except Exception as ex:
             print(ex)
+    def Verify_total_users_are_n_including_default_user(self):
+        try:
+            login().login_to_cloud_if_not_done(self.d)
+            time.sleep(web_driver.one_second)
+            self.click_user_on_cloud_menu()
+            time.sleep(web_driver.two_second)
+
+            total_number_of_users_displayed = self.d.find_element(By.XPATH,Read_Users_Components().get_Total_number_of_user_displayed())
+            print(total_number_of_users_displayed.text)
+            time.sleep(web_driver.one_second)
+            if total_number_of_users_displayed.is_displayed():
+                self.close_all_panel_one_by_one()
+                return True
+
+            else:
+                return False
+        except Exception as ex:
+            print(ex.args)
+    def Create_5_users_with_all_required_field(self):
+        global i
+        try:
+            login().login_to_cloud_if_not_done(self.d)
+            time.sleep(web_driver.one_second)
+            self.click_user_on_cloud_menu()
+            time.sleep(web_driver.two_second)
+            x=[]
+            list_of_user = self.d.find_elements(By.XPATH,Read_Users_Components().get_list_of_users())
+            time.sleep(web_driver.one_second)
+            for i in list_of_user:
+                # print(i.text)
+                x = i.text
+                print(x)
+
+
+            for i in list_of_user:
+                time.sleep(web_driver.one_second)
+                search_box_by_xpath = self.d.find_element(By.XPATH, Read_Users_Components().search_box_by_xpath())
+                search_box_by_xpath.clear()
+                search_box_by_xpath.send_keys(i.text)
+                time.sleep(web_driver.two_second)
+            i =i+1
+        except Exception as ex:
+
+            print(ex.args)
 
 
 
-Users_Module_pom().verify_details_of_core_user()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Users_Module_pom().verify_details_of_core_user()
 
 
 

@@ -35,7 +35,7 @@ class Test_Users_Module(web_driver, web_logger):
     @pytest.mark.p1
     def test_TC_US_1(self):
         self.logger.info("Users module = test_TC_US_110 execution started..")
-        if Users_Module_pom().verify_user_able_to_create_a_new_user_by_filling_only_mandatory_fields():
+        if Users_Module_pom().Create_5_users_standard_operator_responder_approver_executive_and_it_admin_with_all_required_field():
             assert True
         else:
             assert False
@@ -166,3 +166,21 @@ class Test_Users_Module(web_driver, web_logger):
             assert True
         else:
             assert False
+
+    @pytest.mark.p1
+    def test_TC_US_13(self):
+        self.logger.info("user module = test_Tc_US_13_execution stsrted....")
+        if Users_Module_pom().Verify_total_users_are_n_including_default_user():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p1
+    def test_TC_US_14(self):
+        self.logger.info("user module = test_Tc_US_13_execution stsrted....")
+        if Users_Module_pom().Create_5_users_with_all_required_field():
+            assert True
+        else:
+            assert False
+
+
