@@ -1,0 +1,54 @@
+{
+  "users": [
+    {
+      "username": "operator14",
+      "firstname": "standard",
+      "lastname": "operator",
+      "userrole": "3. operator",
+      "password": "Right_1r1s",
+      "user_orgahierarchy": "sceedge13",
+      "Email":"divya.goli@facefirst.com"
+    },
+    {
+      "username": "responder2",
+      "firstname": "reponder",
+      "lastname": "user",
+      "userrole": "4. responder",
+      "password": "Right_1r1s",
+      "user_orgahierarchy": "sceedge13",
+      "Email":"divya.goli@facefirst.com"
+    },
+    {
+      "username": "approver2",
+      "firstname": "user",
+      "lastname": "approver",
+      "userrole": "2. approver/supervisor",
+      "password": "Right_1r1s",
+      "user_orgahierarchy": "Kroger CA - KCA",
+      "Email":"divya.goli@facefirst.com"
+    },
+    {
+      "username": "executive2",
+      "firstname": "user",
+      "lastname": "executive",
+      "userrole": "1. executive",
+      "password": "Right_1r1s",
+      "user_orgahierarchy": "Kroger USA - KUSA",
+      "Email":"divya.goli@facefirst.com"
+    },
+    {
+      "username": "it admin2",
+      "firstname": "user",
+      "lastname": "it admin",
+      "userrole": "it system admin",
+      "password": "Right_1r1s",
+      "user_orgahierarchy": "Kroger International - KCORP",
+      "Email":"divya.goli@facefirst.com"
+    }
+  ]
+}
+
+
+
+
+

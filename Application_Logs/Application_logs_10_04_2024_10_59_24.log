@@ -1,0 +1,13 @@
+10/04/2024 10:59:26 AM : root         : INFO     :  ******** Users_Module (Order - 4) Begin ********
+10/04/2024 10:59:26 AM : root         : INFO     : Users module = test_TC_US_110 execution started..
+10/04/2024 10:59:33 AM : root         : INFO     : current url: https://scecore7-vm.qa.facefirst.dev/
+10/04/2024 10:59:33 AM : root         : INFO     : url is not open
+10/04/2024 10:59:33 AM : root         : INFO     : opening localhost portal login
+10/04/2024 10:59:33 AM : root         : INFO     : logging in to core
+10/04/2024 10:59:33 AM : root         : INFO     : entered explicit wait for 10
+10/04/2024 10:59:33 AM : root         : INFO     : exiting explicit wait..
+10/04/2024 10:59:35 AM : root         : INFO     : entered explicit wait for 10
+10/04/2024 10:59:36 AM : root         : INFO     : exiting explicit wait..
+10/04/2024 10:59:38 AM : root         : INFO     : login success..
+10/04/2024 10:59:41 AM : root         : INFO     : readiing users  from json: ('File C:\\Users\\FFAzureAdmin\\Desktop\\rr_automation\\All_Test_Data\\4_Users_Module\\Data_From_JSON\\users_creation.json does not exist',)
+10/04/2024 10:59:41 AM : root         : INFO     : test_TC_US_110_exception: 'NoneType' object is not subscriptable

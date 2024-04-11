@@ -1,0 +1,14 @@
+10/04/2024 10:55:52 AM : root         : INFO     :  ******** Users_Module (Order - 4) Begin ********
+10/04/2024 10:55:52 AM : root         : INFO     : Users module = test_TC_US_111 execution started..
+10/04/2024 10:55:59 AM : root         : INFO     : current url: https://scecore6-vm.qa.facefirst.dev/
+10/04/2024 10:55:59 AM : root         : INFO     : url is not open
+10/04/2024 10:56:00 AM : root         : INFO     : opening localhost portal login
+10/04/2024 10:56:00 AM : root         : INFO     : logging in to core
+10/04/2024 10:56:00 AM : root         : INFO     : entered explicit wait for 10
+10/04/2024 10:56:00 AM : root         : INFO     : exiting explicit wait..
+10/04/2024 10:56:02 AM : root         : INFO     : entered explicit wait for 10
+10/04/2024 10:56:03 AM : root         : INFO     : exiting explicit wait..
+10/04/2024 10:56:05 AM : root         : INFO     : login success..
+10/04/2024 10:56:08 AM : root         : INFO     : entered explicit wait for 8
+10/04/2024 10:56:08 AM : root         : INFO     : element not found: None
+10/04/2024 10:56:08 AM : root         : INFO     : test_TC_US_111_exception: 'NoneType' object has no attribute 'click'
