@@ -1,0 +1,14 @@
+11/04/2024 11:42:01 AM : root         : INFO     :  ******** Users_Module (Order - 4) Begin ********
+11/04/2024 11:42:01 AM : root         : INFO     : user module = test_Tc_US_13_execution stsrted....
+11/04/2024 11:42:08 AM : root         : INFO     : current url: https://scecore7-vm.qa.facefirst.dev/
+11/04/2024 11:42:08 AM : root         : INFO     : url is not open
+11/04/2024 11:42:08 AM : root         : INFO     : opening localhost portal login
+11/04/2024 11:42:08 AM : root         : INFO     : logging in to core
+11/04/2024 11:42:08 AM : root         : INFO     : entered explicit wait for 10
+11/04/2024 11:42:08 AM : root         : INFO     : exiting explicit wait..
+11/04/2024 11:42:11 AM : root         : INFO     : entered explicit wait for 10
+11/04/2024 11:42:11 AM : root         : INFO     : exiting explicit wait..
+11/04/2024 11:42:13 AM : root         : INFO     : login success..
+11/04/2024 11:42:16 AM : root         : INFO     : entered explicit wait for 8
+11/04/2024 11:42:16 AM : root         : INFO     : exiting explicit wait..
+11/04/2024 11:42:16 AM : root         : INFO     : click on users on the cloud menu
