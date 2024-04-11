@@ -1902,3 +1902,54 @@ class Read_Users_Components:
             return details_button
         except Exception as ex:
             print(ex)
+
+    def get_Total_number_of_user_displayed(self):
+        try:
+            total_number_of_user = self.config.get("Portal_Login_Page", "total_users_displayed")
+            return total_number_of_user
+        except Exception as ex:
+            print(ex)
+
+    def get_operator_user(self):
+        try:
+            operator = self.config.get("Portal_Login_Page","standard_operator_user")
+            return operator
+        except Exception as ex:
+            print(ex.args)
+
+    def get_responder_user(self):
+        try:
+            responder = self.config.get("Portal_Login_Page","operator_responder")
+            return responder
+        except Exception as ex:
+            print(ex)
+
+    def get_approver_user(self):
+        try:
+            approver = self.config.get("Portal_Login_Page","approver_user")
+            return approver
+        except Exception as ex:
+            print(ex.args)
+
+    def get_executive_user(self):
+        try:
+            executive = self.config.get("Portal_Login_Page","executive")
+            return  executive
+        except Exception as ex:
+            print(ex)
+
+    def get_it_admin(self):
+        try:
+            it_admin = self.config.get("Portal_Login_Page","it_admin")
+            return it_admin
+        except Exception as ex:
+            print(ex.args)
+
+
+    def get_list_of_users(self):
+        try:
+            users_list = self.config.get("Portal_Login_Page","list_of_users")
+            return  users_list
+        except Exception as ex:
+            print(ex.args)
+
