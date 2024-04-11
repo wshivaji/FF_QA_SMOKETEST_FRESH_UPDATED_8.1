@@ -13,7 +13,6 @@ class Test_Enrollment_Groups_Module(web_driver, web_logger):
 
     @pytest.mark.p1
     def test_TC_EG_01(self):
-        self.logger.info("Enrollment Groups module = test_TC_EG_01 execution started..")
         if Enrollments_Groups_Module_pom().Create_5_Enrollment_groups_fill_the_details_and_link_the_particular_NG_to_particular_EG_based_on_naming_convention():
             assert True
         else:
@@ -21,7 +20,6 @@ class Test_Enrollment_Groups_Module(web_driver, web_logger):
 
     @pytest.mark.p1
     def test_TC_EG_02(self):
-        self.logger.info("Enrollment Groups module = test_TC_EG_02 execution started..")
         if Enrollments_Groups_Module_pom().Verify_total_count_of_EGs_is_6_including_default_EG():
             assert True
         else:
@@ -29,24 +27,23 @@ class Test_Enrollment_Groups_Module(web_driver, web_logger):
 
     @pytest.mark.p1
     def test_TC_EG_03(self):
-        self.logger.info("Enrollment Groups module = test_TC_EG_03 execution started..")
         if Enrollments_Groups_Module_pom().Verify_for_above_all_5_EG_face_and_mask_threshold_value_should_be_point_83_and_suppress_duplicate_events_value_should_be_0_minute():
             assert True
         else:
             assert False
 
-    def test_TC_NG_04(self):
+    def test_TC_EG_04(self):
         if Enrollments_Groups_Module_pom().Verify_user_able_to_create_a_new_Enrollment_Group_by_filling_all_the_fields_and_verify_present_3_buttons_below_are_activated():
             assert True
         else:
             assert False
-    #
-    # @pytest.mark.p1
-    # def test_TC_NG_05(self):
-    #     if Enrollments_Groups_Module_pom().verify_user_able_to_edit_enrollment_group():
-    #         assert True
-    #     else:
-    #         assert False
+
+    @pytest.mark.p1
+    def test_TC_EG_05(self):
+        if Enrollments_Groups_Module_pom().verify_user_able_to_edit_enrollment_group():
+            assert True
+        else:
+            assert False
 
     def test_TC_EG_06(self):
         if Enrollments_Groups_Module_pom().verify_user_able_to_link_a_notification_group_from_enrollments_groups_panel():
