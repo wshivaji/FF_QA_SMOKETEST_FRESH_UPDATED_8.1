@@ -35,13 +35,26 @@ class Test_Enrollment_Groups_Module(web_driver, web_logger):
         else:
             assert False
 
-    def test_TC_EG_04(self):
+    # def test_TC_NG_04(self):
+    #     if Enrollments_Groups_Module_pom().Verify_user_able_to_create_a_new_Enrollment_Group_by_filling_all_the_fields_and_verify_present_3_buttons_below_are_activated():
+    #         assert True
+    #     else:
+    #         assert False
+    #
+    # @pytest.mark.p1
+    # def test_TC_NG_05(self):
+    #     if Enrollments_Groups_Module_pom().verify_user_able_to_edit_enrollment_group():
+    #         assert True
+    #     else:
+    #         assert False
+
+    def test_TC_EG_06(self):
         if Enrollments_Groups_Module_pom().verify_user_able_to_link_a_notification_group_from_enrollments_groups_panel():
             assert True
         else:
             assert False
 
-    def test_TC_EG_05(self):
+    def test_TC_EG_07(self):
         if Enrollments_Groups_Module_pom().verify_user_able_to_unlink_a_notification_group_from_enrollments_groups_panel():
             assert True
         else:
