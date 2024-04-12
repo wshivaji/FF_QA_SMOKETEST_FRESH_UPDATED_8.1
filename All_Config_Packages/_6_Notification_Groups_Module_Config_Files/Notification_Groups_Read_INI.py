@@ -1052,6 +1052,31 @@ class Read_Notification_Groups_Components:
             return unlinked_case_groups_list_by_xpath
         except Exception as ex:
             print(ex)
+
+    def notification_groups_list_by_xpath(self):
+        try:
+            notification_groups_list_by_xpath = self.config.get("LOCATORS",
+                                                                  "notification_groups_list_by_xpath")
+            return notification_groups_list_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def enrollment_groups_icon_button_by_xpath(self):
+        try:
+            enrollment_groups_icon_button_by_xpath = self.config.get("LOCATORS",
+                                                                  "enrollment_groups_icon_button_by_xpath")
+            return enrollment_groups_icon_button_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def remove_alert_from_selected_groups_by_xpath(self):
+        try:
+            remove_alert_from_selected_groups_by_xpath = self.config.get("LOCATORS",
+                                                                  "remove_alert_from_selected_groups_by_xpath")
+            return remove_alert_from_selected_groups_by_xpath
+        except Exception as ex:
+            print(ex)
+
     def enrollment_groups_checkboxes_by_xpath(self):
         try:
             enrollment_groups_checkboxes_by_xpath = self.config.get("LOCATORS",

@@ -523,6 +523,87 @@ class Notification_Groups_Module_pom(web_driver, web_logger):
             self.logger.error(f"TC_NG_05 got exception as: {ex.args}")
             return False
 
+    def verify_user_able_to_unlink_an_enrollments_groups_from_notification_groups(self):
+        try:
+            self.logger.info("********** Test_NG_TC06 Begin  **********")
+            status = []
+            login().login_to_cloud_if_not_done(self.d)
+            time.sleep(web_driver.one_second)
+            self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components().
+                               notification_groups_button_by_xpath(),
+                               self.d)
+            notification_groups_btn = self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components()
+                                                         .notification_groups_button_by_xpath(), self.d)
+            self.d.execute_script("arguments[0].click();", notification_groups_btn)
+            self.logger.info("notification groups btn is clicked")
+            time.sleep(web_driver.one_second)
+
+            alert_groups = web_driver.explicit_wait(self, 5, "XPATH",
+                                                         Read_Notification_Groups_Components().notification_groups_list_by_xpath(),
+                                                         self.d)
+            enrollment_group_icon = self.d.find_elements(By.XPATH,
+                                                     Read_Notification_Groups_Components().enrollment_groups_icon_button_by_xpath())
+            alert_groups = self.d.find_elements(By.XPATH,
+                                                     Read_Notification_Groups_Components().notification_groups_list_by_xpath())
+
+            self.logger.info(f"alert groups length: {len(alert_groups)}")
+            for i in range(len(alert_groups)):
+                if alert_groups[i].text == Read_Notification_Groups_Components().link_ng2_to_eg2():
+                    self.logger.info(f"alert group: {i}{alert_groups[i].text}")
+                    enrollment_group_icon[i].click()
+                    time.sleep(web_driver.one_second)
+                    checkbox = self.d.find_elements(By.XPATH,
+                                                    Read_Notification_Groups_Components().enrollment_groups_checkboxes_by_xpath())
+                    self.logger.info(f"checkbox length: {len(checkbox)}")
+                    enrollment_groups = self.d.find_elements(By.XPATH,
+                                                               Read_Notification_Groups_Components().unlinked_case_groups_list_by_xpath())
+                    self.logger.info(f"enrollment groups length: {len(enrollment_groups)}")
+                    for j in range(len(enrollment_groups)-1):
+                        if enrollment_groups[j].text == Read_Notification_Groups_Components().link_eg2_to_ng2():
+                            self.logger.info(f"enrollment group text: {enrollment_groups[j].text}")
+                            checkbox[j].click()
+                            time.sleep(web_driver.one_second)
+                            status.append(True)
+                            action_dropdown = self.d.find_element(By.XPATH,
+                                                                  Read_Notification_Groups_Components().new_second_action_dropdown_button_by_xpath())
+                            self.logger.info(f"action dropdown visible: {action_dropdown.is_displayed()}")
+
+                            action_dropdown.click()
+                            time.sleep(web_driver.one_second)
+                            remove_from_ng = self.d.find_element(By.XPATH,
+                                                                 Read_Notification_Groups_Components().remove_alert_from_selected_groups_by_xpath())
+                            self.logger.info(f"option visible: {remove_from_ng.text}")
+                            remove_from_ng.click()
+                            status.append(True)
+                            time.sleep(web_driver.one_second)
+
+                            close_panel = self.d.find_elements(By.XPATH,
+                                                               Portal_Menu_Module_read_ini().get_close_panel_button_by_xpath())
+                            self.logger.info(f"panel count: {len(close_panel)}")
+                            for panels in close_panel:
+                                self.logger.info("closing panel...")
+                                panels.click()
+                                time.sleep(web_driver.one_second)
+
+                            break
+                    break
+            self.logger.info(f"status: {status}")
+
+            if False in status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_NG_06_failed.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_NG_06_failed.png")
+                return False
+            else:
+                return True
+            # logout().logout_from_core()
+
+        except Exception as ex:
+            self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_NG_06_exception.png")
+            self.d.save_screenshot(f"{self.screenshots_path}\\TC_NG_0_exception.png")
+            self.logger.error(f"TC_NG_06got exception as: {ex.args}")
+            return False
+
+
 
     # def Verify_Notification_Groups_submenu_is_visible_and_enabled_in_cloud_menu(self):
     #     try:
