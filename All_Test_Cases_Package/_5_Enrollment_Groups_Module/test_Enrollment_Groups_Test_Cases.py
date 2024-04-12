@@ -63,8 +63,35 @@ class Test_Enrollment_Groups_Module(web_driver, web_logger):
         else:
             assert False
 
+    def test_TC_EG_09(self):
+        if Enrollments_Groups_Module_pom().verify_user_able_to_see_possible_match_events_associated_to_enrollements_group_and_possible_match_events_associated_to_details_of_enrollment_group_for_both_event_count_should_be_match():
+            assert True
+        else:
+            assert False
 
+    def test_TC_EG_010(self):
+        if Enrollments_Groups_Module_pom().verify_user_able_to_link_the_enrollments_from_enrollments_groups_panel():
+            assert True
+        else:
+            assert False
 
+    def test_TC_EG_011(self):
+        if Enrollments_Groups_Module_pom().verify_user_able_to_unlink_the_enrollments_from_enrollments_groups_panel():
+            assert True
+        else:
+            assert False
+
+    def test_TC_EG_012(self):
+        if Enrollments_Groups_Module_pom().verify_user_able_to_delete_newly_created_enrollment_group():
+            assert True
+        else:
+            assert False
+
+    def test_TC_EG_013(self):
+        if Enrollments_Groups_Module_pom().Verify_details_of_default_enrollment_group():
+            assert True
+        else:
+            assert False
 
     # @pytest.mark.p2
     # def test_TC_EG_018(self):
@@ -109,13 +136,7 @@ class Test_Enrollment_Groups_Module(web_driver, web_logger):
     #     else:
     #         assert False
     #
-    # @pytest.mark.p2
-    # def test_TC_EG_034(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_034 execution started..")
-    #     if Enrollments_Groups_Module_pom().verify_enrollment_group_details_action_dropdown_button_is_visible_and_clickable():
-    #         assert True
-    #     else:
-    #         assert False
+
     #
     # @pytest.mark.p1
     # def test_TC_EG_035(self):
@@ -150,14 +171,7 @@ class Test_Enrollment_Groups_Module(web_driver, web_logger):
     #     else:
     #         assert False
     #
-    # @pytest.mark.p3
-    # def test_TC_EG_072(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_072 execution started..")
-    #     if Enrollments_Groups_Module_pom().filling_name_serious_offender_data_success_message():
-    #         assert True
-    #     else:
-    #         assert False
-    #
+
     # @pytest.mark.p3
     # def test_TC_EG_073(self):
     #     self.logger.info("Enrollment Groups module = test_TC_EG_073 execution started..")
@@ -165,223 +179,9 @@ class Test_Enrollment_Groups_Module(web_driver, web_logger):
     #         assert True
     #     else:
     #         assert False
+
     #
-    # @pytest.mark.p3
-    # def test_TC_EG_074(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_074 execution started..")
-    #     if Enrollments_Groups_Module_pom().filling_name_masked_face_threshold_data_success_message():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_EG_075(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_075 execution started..")
-    #     if Enrollments_Groups_Module_pom().filling_name_masked_face_threshold_suppress_duplicate_events_success_message():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_EG_076(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_076 execution started..")
-    #     if Enrollments_Groups_Module_pom().filling_name_masked_face_threshold_serious_offender_success_message():
-    #
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_EG_077(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_077 execution started..")
-    #     if Enrollments_Groups_Module_pom().filling_name_masked_face_threshold_serious_offender_suppress_duplicate_events_success_message():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_EG_078(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_078 execution started..")
-    #     if Enrollments_Groups_Module_pom().filling_name_serious_offender_data_success_message():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_EG_079(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_079 execution started..")
-    #     if Enrollments_Groups_Module_pom().filling_name_face_threshold_data_success_message():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_EG_080(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_080 execution started..")
-    #     if Enrollments_Groups_Module_pom().filling_name_face_threshold_serious_offender_data_success_message():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_EG_081(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_081 execution started..")
-    #     if Enrollments_Groups_Module_pom().filling_name_face_threshold_serious_offender_suppress_duplicate_events_data_success_message():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_EG_082(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_082 execution started..")
-    #     if Enrollments_Groups_Module_pom().filling_name_face_threshold_masked_face_threshold_data_success_message():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_EG_083(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_083 execution started..")
-    #     if Enrollments_Groups_Module_pom().filling_name_face_threshold_masked_face_threshold_suppress_duplicate_events_data_success_message():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_EG_084(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_084 execution started..")
-    #     if Enrollments_Groups_Module_pom().filling_name_face_threshold_masked_face_threshold_serious_offender_data_success_message():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_EG_085(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_085 execution started..")
-    #     if Enrollments_Groups_Module_pom().fill_name_face_masked_face_threshold_serious_offender_suppress_duplicate_events_data_success_msg():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_EG_086(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_086 execution started..")
-    #     if Enrollments_Groups_Module_pom().filling_name_description_data_success_message():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_EG_087(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_087 execution started..")
-    #     if Enrollments_Groups_Module_pom().filling_name_description_suppress_duplicate_events_data_success_message():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_EG_088(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_088 execution started..")
-    #     if Enrollments_Groups_Module_pom().filling_name_description_serious_offender_data_success_message():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_EG_089(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_089 execution started..")
-    #     if Enrollments_Groups_Module_pom().filling_name_description_serious_offender_suppress_duplicate_events_data_success_message():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_EG_090(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_090 execution started..")
-    #     if Enrollments_Groups_Module_pom().filling_name_description_masked_face_threshold_data_success_message():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_EG_091(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_091 execution started..")
-    #     if Enrollments_Groups_Module_pom().filling_name_description_masked_face_threshold_suppress_duplicate_events_data_success_message():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_EG_092(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_092 execution started..")
-    #     if Enrollments_Groups_Module_pom().fill_name_description_masked_face_threshold_serious_offender_events_data_success_msg():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_EG_093(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_093 execution started..")
-    #     if Enrollments_Groups_Module_pom().name_description_masked_face_threshold_serious_offender_suppress_duplicate_events_data_success_msg():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_EG_094(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_094 execution started..")
-    #     if Enrollments_Groups_Module_pom() .filling_name_description_face_threshold_data_success_message():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_EG_095(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_095 execution started..")
-    #     if Enrollments_Groups_Module_pom().filling_name_description_face_threshold_suppress_duplicate_events_data_success_message():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_EG_096(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_096 execution started..")
-    #     if Enrollments_Groups_Module_pom().filling_name_description_face_threshold_serious_offender_events_data_success_message():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_EG_097(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_097 execution started..")
-    #     if Enrollments_Groups_Module_pom().name_description_face_threshold_serious_offender_events_suppress_duplicate_events_data_success_msg():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_EG_098(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_098 execution started..")
-    #     if Enrollments_Groups_Module_pom().filling_name_description_face_threshold_masked_face_threshold_data_success_message():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_EG_099(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_099 execution started..")
-    #     if Enrollments_Groups_Module_pom().name_description_face_threshold_masked_face_threshold_suppress_duplicate_events_data_success_msg():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_EG_0100(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_0100 execution started..")
-    #     if Enrollments_Groups_Module_pom().name_description_face_masked_face_threshold_serious_offender_data_success():
-    #         assert True
-    #     else:
-    #         assert False
+
     #
     # @pytest.mark.p1
     # def test_TC_EG_0101(self):
