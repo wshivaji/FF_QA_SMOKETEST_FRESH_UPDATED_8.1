@@ -1,0 +1,572 @@
+12/04/2024 05:59:48 AM : root         : INFO     :  ******** Users_Module (Order - 4) Begin ********
+12/04/2024 05:59:48 AM : root         : INFO     : Users module = test_TC_US_110 execution started..
+12/04/2024 05:59:55 AM : root         : INFO     : current url: https://scecore7-vm.qa.facefirst.dev/
+12/04/2024 05:59:55 AM : root         : INFO     : url is not open
+12/04/2024 05:59:56 AM : root         : INFO     : opening localhost portal login
+12/04/2024 05:59:56 AM : root         : INFO     : logging in to core
+12/04/2024 05:59:56 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 05:59:56 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 05:59:58 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 05:59:58 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:00:00 AM : root         : INFO     : login success..
+12/04/2024 06:00:03 AM : root         : INFO     : entered explicit wait for 8
+12/04/2024 06:00:03 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:00:03 AM : root         : INFO     : click on users on the cloud menu
+12/04/2024 06:00:04 AM : root         : INFO     : entered explicit wait for 5
+12/04/2024 06:00:04 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:00:04 AM : root         : INFO     : click on action dropdown
+12/04/2024 06:00:05 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:00:05 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:00:05 AM : root         : INFO     : click on create user option
+12/04/2024 06:00:06 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:00:06 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:00:07 AM : root         : INFO     : Enter Username : operator26
+12/04/2024 06:00:07 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:00:07 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:00:07 AM : root         : INFO     : Enter first name : standard
+12/04/2024 06:00:07 AM : root         : INFO     : Enter Last name : operator
+12/04/2024 06:00:07 AM : root         : INFO     : Select user role : 3. OPERATOR
+12/04/2024 06:00:07 AM : root         : INFO     : Enter new password : Right_1r1s
+12/04/2024 06:00:07 AM : root         : INFO     : Enter confirm password : Right_1r1s
+12/04/2024 06:00:07 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:00:07 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:00:10 AM : root         : INFO     : Kroger International - KCORP
+12/04/2024 06:00:10 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:10 AM : root         : INFO     : Kroger Mexico - KMX
+12/04/2024 06:00:10 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:10 AM : root         : INFO     : Kroger MX East - MXEAST
+12/04/2024 06:00:10 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:10 AM : root         : INFO     : Kroger MX North - MXNORTH
+12/04/2024 06:00:10 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:10 AM : root         : INFO     : Kroger MX South - MXSOUTH
+12/04/2024 06:00:10 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:10 AM : root         : INFO     : Kroger MX West - MXWEST
+12/04/2024 06:00:10 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:10 AM : root         : INFO     : Kroger USA - KUSA
+12/04/2024 06:00:10 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:10 AM : root         : INFO     : Kroger US East - USEAST
+12/04/2024 06:00:10 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:10 AM : root         : INFO     : Kroger NJ - KNJ
+12/04/2024 06:00:10 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:10 AM : root         : INFO     : Kroger NY - KNY
+12/04/2024 06:00:10 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:10 AM : root         : INFO     : Kroger Brooklyn - KBK
+12/04/2024 06:00:10 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:10 AM : root         : INFO     : Kroger Manhattan - KMH
+12/04/2024 06:00:10 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:10 AM : root         : INFO     : Kroger Queens - KQS
+12/04/2024 06:00:10 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:10 AM : root         : INFO     : Kroger PA - KPA
+12/04/2024 06:00:10 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:10 AM : root         : INFO     : Kroger US MidWest - USMIDWEST
+12/04/2024 06:00:10 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:10 AM : root         : INFO     : Kroger IL - KIL
+12/04/2024 06:00:10 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:10 AM : root         : INFO     : Kroger MN - KMN
+12/04/2024 06:00:10 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:10 AM : root         : INFO     : Kroger WI - KWI
+12/04/2024 06:00:10 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:10 AM : root         : INFO     : Kroger US West - USWEST
+12/04/2024 06:00:10 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:10 AM : root         : INFO     : Kroger AZ - KAZ
+12/04/2024 06:00:10 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:10 AM : root         : INFO     : Kroger CA - KCA
+12/04/2024 06:00:10 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:10 AM : root         : INFO     : Kroger Los Angeles - KLA
+12/04/2024 06:00:10 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:10 AM : root         : INFO     : sceedge13-vm
+12/04/2024 06:00:10 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:10 AM : root         : INFO     : select region : sceedge13
+12/04/2024 06:00:10 AM : root         : INFO     : Enter Email : divya.goli@facefirst.com
+12/04/2024 06:00:10 AM : root         : INFO     : Select time zone : Asia/Kolkata
+12/04/2024 06:00:11 AM : root         : INFO     : entered explicit wait for 5
+12/04/2024 06:00:11 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:00:11 AM : root         : INFO     : click on save button
+12/04/2024 06:00:13 AM : root         : INFO     : entered explicit wait for 5
+12/04/2024 06:00:13 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:00:13 AM : root         : INFO     : Success Msg is visible : True
+12/04/2024 06:00:13 AM : root         : INFO     : Ex success Msg : Success! A user has been created.
+12/04/2024 06:00:13 AM : root         : INFO     : Ac success Msg : Success! A user has been created.
+12/04/2024 06:00:17 AM : root         : INFO     : Ex Username : operator26
+12/04/2024 06:00:17 AM : root         : INFO     : Ac Username : operator26
+12/04/2024 06:00:17 AM : root         : INFO     : Ex Status : [True, True, True]
+12/04/2024 06:00:17 AM : root         : INFO     : Ac Status : [True, True, True]
+12/04/2024 06:00:18 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:00:18 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:00:18 AM : root         : INFO     : click on alert schedule icon
+12/04/2024 06:00:19 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:00:19 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:00:19 AM : root         : INFO     : click on alert schedule action dropdown
+12/04/2024 06:00:21 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:00:21 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:00:21 AM : root         : INFO     : click on edit option
+12/04/2024 06:00:22 AM : root         : INFO     : send_sms_yes is visible : True
+12/04/2024 06:00:22 AM : root         : INFO     : send_sms_yes is clickable : True
+12/04/2024 06:00:22 AM : root         : INFO     : send_mms_yes is visible : True
+12/04/2024 06:00:22 AM : root         : INFO     : send_mms_yes is clickable : True
+12/04/2024 06:00:22 AM : root         : INFO     : send_email_yes is visible : True
+12/04/2024 06:00:22 AM : root         : INFO     : send_email_yes is clickable : True
+12/04/2024 06:00:22 AM : root         : INFO     : send_in_app_notification_yes is visible : True
+12/04/2024 06:00:23 AM : root         : INFO     : send_in_app_notification_yes is clickable : True
+12/04/2024 06:00:23 AM : root         : INFO     : enable_alerts_yes is visible : True
+12/04/2024 06:00:23 AM : root         : INFO     : enable_alerts_yes is clickable : True
+12/04/2024 06:00:23 AM : root         : INFO     : Status : [True, True, True, True, True, True, True, True, True, True]
+12/04/2024 06:00:24 AM : root         : INFO     : user created successfully
+12/04/2024 06:00:29 AM : root         : INFO     : close_all_panel_one_by_one_failed: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//button[text()='Close Panel And Discard Changes']"}
+  (Session info: chrome=123.0.6312.122); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+	GetHandleVerifier [0x00007FF784447032+63090]
+	(No symbol) [0x00007FF7843B2C82]
+	(No symbol) [0x00007FF78424EC65]
+	(No symbol) [0x00007FF78429499D]
+	(No symbol) [0x00007FF784294ADC]
+	(No symbol) [0x00007FF7842D5B37]
+	(No symbol) [0x00007FF7842B701F]
+	(No symbol) [0x00007FF7842D3412]
+	(No symbol) [0x00007FF7842B6D83]
+	(No symbol) [0x00007FF7842883A8]
+	(No symbol) [0x00007FF784289441]
+	GetHandleVerifier [0x00007FF7848425AD+4238317]
+	GetHandleVerifier [0x00007FF78487F70D+4488525]
+	GetHandleVerifier [0x00007FF7848779EF+4456495]
+	GetHandleVerifier [0x00007FF784520576+953270]
+	(No symbol) [0x00007FF7843BE54F]
+	(No symbol) [0x00007FF7843B9224]
+	(No symbol) [0x00007FF7843B935B]
+	(No symbol) [0x00007FF7843A9B94]
+	BaseThreadInitThunk [0x00007FFFBA4753E0+16]
+	RtlUserThreadStart [0x00007FFFBBBC485B+43]
+
+12/04/2024 06:00:29 AM : root         : INFO     : entered explicit wait for 8
+12/04/2024 06:00:29 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:00:29 AM : root         : INFO     : click on users on the cloud menu
+12/04/2024 06:00:30 AM : root         : INFO     : entered explicit wait for 5
+12/04/2024 06:00:30 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:00:30 AM : root         : INFO     : click on action dropdown
+12/04/2024 06:00:31 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:00:31 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:00:31 AM : root         : INFO     : click on create user option
+12/04/2024 06:00:32 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:00:32 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:00:33 AM : root         : INFO     : Enter Username : responder11
+12/04/2024 06:00:33 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:00:33 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:00:33 AM : root         : INFO     : Enter first name : reponder
+12/04/2024 06:00:33 AM : root         : INFO     : Enter Last name : user
+12/04/2024 06:00:33 AM : root         : INFO     : Select user role : 4. RESPONDER
+12/04/2024 06:00:33 AM : root         : INFO     : Enter new password : Right_1r1s
+12/04/2024 06:00:34 AM : root         : INFO     : Enter confirm password : Right_1r1s
+12/04/2024 06:00:34 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:00:34 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:00:36 AM : root         : INFO     : Kroger International - KCORP
+12/04/2024 06:00:36 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:36 AM : root         : INFO     : Kroger Mexico - KMX
+12/04/2024 06:00:36 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:36 AM : root         : INFO     : Kroger MX East - MXEAST
+12/04/2024 06:00:36 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:36 AM : root         : INFO     : Kroger MX North - MXNORTH
+12/04/2024 06:00:36 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:36 AM : root         : INFO     : Kroger MX South - MXSOUTH
+12/04/2024 06:00:36 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:36 AM : root         : INFO     : Kroger MX West - MXWEST
+12/04/2024 06:00:36 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:36 AM : root         : INFO     : Kroger USA - KUSA
+12/04/2024 06:00:36 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:36 AM : root         : INFO     : Kroger US East - USEAST
+12/04/2024 06:00:36 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:36 AM : root         : INFO     : Kroger NJ - KNJ
+12/04/2024 06:00:36 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:36 AM : root         : INFO     : Kroger NY - KNY
+12/04/2024 06:00:36 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:36 AM : root         : INFO     : Kroger Brooklyn - KBK
+12/04/2024 06:00:36 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:36 AM : root         : INFO     : Kroger Manhattan - KMH
+12/04/2024 06:00:36 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:36 AM : root         : INFO     : Kroger Queens - KQS
+12/04/2024 06:00:36 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:36 AM : root         : INFO     : Kroger PA - KPA
+12/04/2024 06:00:36 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:36 AM : root         : INFO     : Kroger US MidWest - USMIDWEST
+12/04/2024 06:00:36 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:36 AM : root         : INFO     : Kroger IL - KIL
+12/04/2024 06:00:36 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:36 AM : root         : INFO     : Kroger MN - KMN
+12/04/2024 06:00:36 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:36 AM : root         : INFO     : Kroger WI - KWI
+12/04/2024 06:00:36 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:36 AM : root         : INFO     : Kroger US West - USWEST
+12/04/2024 06:00:36 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:36 AM : root         : INFO     : Kroger AZ - KAZ
+12/04/2024 06:00:36 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:36 AM : root         : INFO     : Kroger CA - KCA
+12/04/2024 06:00:36 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:36 AM : root         : INFO     : Kroger Los Angeles - KLA
+12/04/2024 06:00:36 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:36 AM : root         : INFO     : sceedge13-vm
+12/04/2024 06:00:36 AM : root         : INFO     : sceedge13
+12/04/2024 06:00:36 AM : root         : INFO     : select region : sceedge13
+12/04/2024 06:00:36 AM : root         : INFO     : Enter Email : divya.goli@facefirst.com
+12/04/2024 06:00:36 AM : root         : INFO     : Select time zone : Asia/Kolkata
+12/04/2024 06:00:37 AM : root         : INFO     : entered explicit wait for 5
+12/04/2024 06:00:37 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:00:37 AM : root         : INFO     : click on save button
+12/04/2024 06:00:40 AM : root         : INFO     : entered explicit wait for 5
+12/04/2024 06:00:40 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:00:40 AM : root         : INFO     : Success Msg is visible : True
+12/04/2024 06:00:40 AM : root         : INFO     : Ex success Msg : Success! A user has been created.
+12/04/2024 06:00:40 AM : root         : INFO     : Ac success Msg : Success! A user has been created.
+12/04/2024 06:00:43 AM : root         : INFO     : Ex Username : responder11
+12/04/2024 06:00:43 AM : root         : INFO     : Ac Username : responder11
+12/04/2024 06:00:43 AM : root         : INFO     : Ex Status : [True, True, True]
+12/04/2024 06:00:43 AM : root         : INFO     : Ac Status : [True, True, True]
+12/04/2024 06:00:44 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:00:44 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:00:44 AM : root         : INFO     : click on alert schedule icon
+12/04/2024 06:00:45 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:00:45 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:00:45 AM : root         : INFO     : click on alert schedule action dropdown
+12/04/2024 06:00:47 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:00:47 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:00:47 AM : root         : INFO     : click on edit option
+12/04/2024 06:00:49 AM : root         : INFO     : send_sms_yes is visible : True
+12/04/2024 06:00:49 AM : root         : INFO     : send_sms_yes is clickable : True
+12/04/2024 06:00:49 AM : root         : INFO     : send_mms_yes is visible : True
+12/04/2024 06:00:49 AM : root         : INFO     : send_mms_yes is clickable : True
+12/04/2024 06:00:49 AM : root         : INFO     : send_email_yes is visible : True
+12/04/2024 06:00:49 AM : root         : INFO     : send_email_yes is clickable : True
+12/04/2024 06:00:49 AM : root         : INFO     : send_in_app_notification_yes is visible : True
+12/04/2024 06:00:49 AM : root         : INFO     : send_in_app_notification_yes is clickable : True
+12/04/2024 06:00:49 AM : root         : INFO     : enable_alerts_yes is visible : True
+12/04/2024 06:00:49 AM : root         : INFO     : enable_alerts_yes is clickable : True
+12/04/2024 06:00:49 AM : root         : INFO     : Status : [True, True, True, True, True, True, True, True, True, True]
+12/04/2024 06:00:50 AM : root         : INFO     : user created successfully
+12/04/2024 06:00:55 AM : root         : INFO     : close_all_panel_one_by_one_failed: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//button[text()='Close Panel And Discard Changes']"}
+  (Session info: chrome=123.0.6312.122); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+	GetHandleVerifier [0x00007FF784447032+63090]
+	(No symbol) [0x00007FF7843B2C82]
+	(No symbol) [0x00007FF78424EC65]
+	(No symbol) [0x00007FF78429499D]
+	(No symbol) [0x00007FF784294ADC]
+	(No symbol) [0x00007FF7842D5B37]
+	(No symbol) [0x00007FF7842B701F]
+	(No symbol) [0x00007FF7842D3412]
+	(No symbol) [0x00007FF7842B6D83]
+	(No symbol) [0x00007FF7842883A8]
+	(No symbol) [0x00007FF784289441]
+	GetHandleVerifier [0x00007FF7848425AD+4238317]
+	GetHandleVerifier [0x00007FF78487F70D+4488525]
+	GetHandleVerifier [0x00007FF7848779EF+4456495]
+	GetHandleVerifier [0x00007FF784520576+953270]
+	(No symbol) [0x00007FF7843BE54F]
+	(No symbol) [0x00007FF7843B9224]
+	(No symbol) [0x00007FF7843B935B]
+	(No symbol) [0x00007FF7843A9B94]
+	BaseThreadInitThunk [0x00007FFFBA4753E0+16]
+	RtlUserThreadStart [0x00007FFFBBBC485B+43]
+
+12/04/2024 06:00:55 AM : root         : INFO     : entered explicit wait for 8
+12/04/2024 06:00:55 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:00:55 AM : root         : INFO     : click on users on the cloud menu
+12/04/2024 06:00:56 AM : root         : INFO     : entered explicit wait for 5
+12/04/2024 06:00:56 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:00:56 AM : root         : INFO     : click on action dropdown
+12/04/2024 06:00:57 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:00:58 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:00:58 AM : root         : INFO     : click on create user option
+12/04/2024 06:00:59 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:00:59 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:00:59 AM : root         : INFO     : Enter Username : approver11
+12/04/2024 06:00:59 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:00:59 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:00:59 AM : root         : INFO     : Enter first name : user
+12/04/2024 06:00:59 AM : root         : INFO     : Enter Last name : approver
+12/04/2024 06:00:59 AM : root         : INFO     : Select user role : 2. APPROVER/SUPERVISOR
+12/04/2024 06:01:00 AM : root         : INFO     : Enter new password : Right_1r1s
+12/04/2024 06:01:00 AM : root         : INFO     : Enter confirm password : Right_1r1s
+12/04/2024 06:01:00 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:01:00 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger International - KCORP
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger CA - KCA
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger Mexico - KMX
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger CA - KCA
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger MX East - MXEAST
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger CA - KCA
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger MX North - MXNORTH
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger CA - KCA
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger MX South - MXSOUTH
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger CA - KCA
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger MX West - MXWEST
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger CA - KCA
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger USA - KUSA
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger CA - KCA
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger US East - USEAST
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger CA - KCA
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger NJ - KNJ
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger CA - KCA
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger NY - KNY
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger CA - KCA
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger Brooklyn - KBK
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger CA - KCA
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger Manhattan - KMH
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger CA - KCA
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger Queens - KQS
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger CA - KCA
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger PA - KPA
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger CA - KCA
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger US MidWest - USMIDWEST
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger CA - KCA
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger IL - KIL
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger CA - KCA
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger MN - KMN
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger CA - KCA
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger WI - KWI
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger CA - KCA
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger US West - USWEST
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger CA - KCA
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger AZ - KAZ
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger CA - KCA
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger CA - KCA
+12/04/2024 06:01:02 AM : root         : INFO     : Kroger CA - KCA
+12/04/2024 06:01:02 AM : root         : INFO     : select region : Kroger CA - KCA
+12/04/2024 06:01:02 AM : root         : INFO     : Enter Email : divya.goli@facefirst.com
+12/04/2024 06:01:02 AM : root         : INFO     : Select time zone : Asia/Kolkata
+12/04/2024 06:01:03 AM : root         : INFO     : entered explicit wait for 5
+12/04/2024 06:01:04 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:01:04 AM : root         : INFO     : click on save button
+12/04/2024 06:01:06 AM : root         : INFO     : entered explicit wait for 5
+12/04/2024 06:01:06 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:01:06 AM : root         : INFO     : Success Msg is visible : True
+12/04/2024 06:01:06 AM : root         : INFO     : Ex success Msg : Success! A user has been created.
+12/04/2024 06:01:06 AM : root         : INFO     : Ac success Msg : Success! A user has been created.
+12/04/2024 06:01:09 AM : root         : INFO     : Ex Username : approver11
+12/04/2024 06:01:09 AM : root         : INFO     : Ac Username : approver11
+12/04/2024 06:01:09 AM : root         : INFO     : Ex Status : [True, True, True]
+12/04/2024 06:01:09 AM : root         : INFO     : Ac Status : [True, True, True]
+12/04/2024 06:01:10 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:01:10 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:01:10 AM : root         : INFO     : click on alert schedule icon
+12/04/2024 06:01:11 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:01:11 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:01:11 AM : root         : INFO     : click on alert schedule action dropdown
+12/04/2024 06:01:13 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:01:13 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:01:13 AM : root         : INFO     : click on edit option
+12/04/2024 06:01:15 AM : root         : INFO     : send_sms_yes is visible : True
+12/04/2024 06:01:15 AM : root         : INFO     : send_sms_yes is clickable : True
+12/04/2024 06:01:15 AM : root         : INFO     : send_mms_yes is visible : True
+12/04/2024 06:01:15 AM : root         : INFO     : send_mms_yes is clickable : True
+12/04/2024 06:01:15 AM : root         : INFO     : send_email_yes is visible : True
+12/04/2024 06:01:15 AM : root         : INFO     : send_email_yes is clickable : True
+12/04/2024 06:01:15 AM : root         : INFO     : send_in_app_notification_yes is visible : True
+12/04/2024 06:01:15 AM : root         : INFO     : send_in_app_notification_yes is clickable : True
+12/04/2024 06:01:15 AM : root         : INFO     : enable_alerts_yes is visible : True
+12/04/2024 06:01:15 AM : root         : INFO     : enable_alerts_yes is clickable : True
+12/04/2024 06:01:15 AM : root         : INFO     : Status : [True, True, True, True, True, True, True, True, True, True]
+12/04/2024 06:01:16 AM : root         : INFO     : user created successfully
+12/04/2024 06:01:21 AM : root         : INFO     : close_all_panel_one_by_one_failed: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//button[text()='Close Panel And Discard Changes']"}
+  (Session info: chrome=123.0.6312.122); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+	GetHandleVerifier [0x00007FF784447032+63090]
+	(No symbol) [0x00007FF7843B2C82]
+	(No symbol) [0x00007FF78424EC65]
+	(No symbol) [0x00007FF78429499D]
+	(No symbol) [0x00007FF784294ADC]
+	(No symbol) [0x00007FF7842D5B37]
+	(No symbol) [0x00007FF7842B701F]
+	(No symbol) [0x00007FF7842D3412]
+	(No symbol) [0x00007FF7842B6D83]
+	(No symbol) [0x00007FF7842883A8]
+	(No symbol) [0x00007FF784289441]
+	GetHandleVerifier [0x00007FF7848425AD+4238317]
+	GetHandleVerifier [0x00007FF78487F70D+4488525]
+	GetHandleVerifier [0x00007FF7848779EF+4456495]
+	GetHandleVerifier [0x00007FF784520576+953270]
+	(No symbol) [0x00007FF7843BE54F]
+	(No symbol) [0x00007FF7843B9224]
+	(No symbol) [0x00007FF7843B935B]
+	(No symbol) [0x00007FF7843A9B94]
+	BaseThreadInitThunk [0x00007FFFBA4753E0+16]
+	RtlUserThreadStart [0x00007FFFBBBC485B+43]
+
+12/04/2024 06:01:21 AM : root         : INFO     : entered explicit wait for 8
+12/04/2024 06:01:21 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:01:21 AM : root         : INFO     : click on users on the cloud menu
+12/04/2024 06:01:22 AM : root         : INFO     : entered explicit wait for 5
+12/04/2024 06:01:22 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:01:22 AM : root         : INFO     : click on action dropdown
+12/04/2024 06:01:23 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:01:23 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:01:24 AM : root         : INFO     : click on create user option
+12/04/2024 06:01:25 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:01:25 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:01:25 AM : root         : INFO     : Enter Username : executive11
+12/04/2024 06:01:25 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:01:25 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:01:25 AM : root         : INFO     : Enter first name : user
+12/04/2024 06:01:25 AM : root         : INFO     : Enter Last name : executive
+12/04/2024 06:01:25 AM : root         : INFO     : Select user role : 1. EXECUTIVE
+12/04/2024 06:01:26 AM : root         : INFO     : Enter new password : Right_1r1s
+12/04/2024 06:01:26 AM : root         : INFO     : Enter confirm password : Right_1r1s
+12/04/2024 06:01:26 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:01:26 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:01:28 AM : root         : INFO     : Kroger International - KCORP
+12/04/2024 06:01:28 AM : root         : INFO     : Kroger USA - KUSA
+12/04/2024 06:01:28 AM : root         : INFO     : Kroger Mexico - KMX
+12/04/2024 06:01:28 AM : root         : INFO     : Kroger USA - KUSA
+12/04/2024 06:01:28 AM : root         : INFO     : Kroger MX East - MXEAST
+12/04/2024 06:01:28 AM : root         : INFO     : Kroger USA - KUSA
+12/04/2024 06:01:28 AM : root         : INFO     : Kroger MX North - MXNORTH
+12/04/2024 06:01:28 AM : root         : INFO     : Kroger USA - KUSA
+12/04/2024 06:01:28 AM : root         : INFO     : Kroger MX South - MXSOUTH
+12/04/2024 06:01:28 AM : root         : INFO     : Kroger USA - KUSA
+12/04/2024 06:01:28 AM : root         : INFO     : Kroger MX West - MXWEST
+12/04/2024 06:01:28 AM : root         : INFO     : Kroger USA - KUSA
+12/04/2024 06:01:28 AM : root         : INFO     : Kroger USA - KUSA
+12/04/2024 06:01:28 AM : root         : INFO     : Kroger USA - KUSA
+12/04/2024 06:01:28 AM : root         : INFO     : select region : Kroger USA - KUSA
+12/04/2024 06:01:28 AM : root         : INFO     : Enter Email : divya.goli@facefirst.com
+12/04/2024 06:01:28 AM : root         : INFO     : Select time zone : Asia/Kolkata
+12/04/2024 06:01:29 AM : root         : INFO     : entered explicit wait for 5
+12/04/2024 06:01:29 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:01:29 AM : root         : INFO     : click on save button
+12/04/2024 06:01:31 AM : root         : INFO     : entered explicit wait for 5
+12/04/2024 06:01:31 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:01:31 AM : root         : INFO     : Success Msg is visible : True
+12/04/2024 06:01:32 AM : root         : INFO     : Ex success Msg : Success! A user has been created.
+12/04/2024 06:01:32 AM : root         : INFO     : Ac success Msg : Success! A user has been created.
+12/04/2024 06:01:35 AM : root         : INFO     : Ex Username : executive11
+12/04/2024 06:01:35 AM : root         : INFO     : Ac Username : executive11
+12/04/2024 06:01:35 AM : root         : INFO     : Ex Status : [True, True, True]
+12/04/2024 06:01:35 AM : root         : INFO     : Ac Status : [True, True, True]
+12/04/2024 06:01:36 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:01:36 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:01:36 AM : root         : INFO     : click on alert schedule icon
+12/04/2024 06:01:37 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:01:37 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:01:37 AM : root         : INFO     : click on alert schedule action dropdown
+12/04/2024 06:01:39 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:01:39 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:01:39 AM : root         : INFO     : click on edit option
+12/04/2024 06:01:40 AM : root         : INFO     : send_sms_yes is visible : True
+12/04/2024 06:01:40 AM : root         : INFO     : send_sms_yes is clickable : True
+12/04/2024 06:01:40 AM : root         : INFO     : send_mms_yes is visible : True
+12/04/2024 06:01:41 AM : root         : INFO     : send_mms_yes is clickable : True
+12/04/2024 06:01:41 AM : root         : INFO     : send_email_yes is visible : True
+12/04/2024 06:01:41 AM : root         : INFO     : send_email_yes is clickable : True
+12/04/2024 06:01:41 AM : root         : INFO     : send_in_app_notification_yes is visible : True
+12/04/2024 06:01:41 AM : root         : INFO     : send_in_app_notification_yes is clickable : True
+12/04/2024 06:01:41 AM : root         : INFO     : enable_alerts_yes is visible : True
+12/04/2024 06:01:41 AM : root         : INFO     : enable_alerts_yes is clickable : True
+12/04/2024 06:01:41 AM : root         : INFO     : Status : [True, True, True, True, True, True, True, True, True, True]
+12/04/2024 06:01:42 AM : root         : INFO     : user created successfully
+12/04/2024 06:01:47 AM : root         : INFO     : close_all_panel_one_by_one_failed: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//button[text()='Close Panel And Discard Changes']"}
+  (Session info: chrome=123.0.6312.122); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+	GetHandleVerifier [0x00007FF784447032+63090]
+	(No symbol) [0x00007FF7843B2C82]
+	(No symbol) [0x00007FF78424EC65]
+	(No symbol) [0x00007FF78429499D]
+	(No symbol) [0x00007FF784294ADC]
+	(No symbol) [0x00007FF7842D5B37]
+	(No symbol) [0x00007FF7842B701F]
+	(No symbol) [0x00007FF7842D3412]
+	(No symbol) [0x00007FF7842B6D83]
+	(No symbol) [0x00007FF7842883A8]
+	(No symbol) [0x00007FF784289441]
+	GetHandleVerifier [0x00007FF7848425AD+4238317]
+	GetHandleVerifier [0x00007FF78487F70D+4488525]
+	GetHandleVerifier [0x00007FF7848779EF+4456495]
+	GetHandleVerifier [0x00007FF784520576+953270]
+	(No symbol) [0x00007FF7843BE54F]
+	(No symbol) [0x00007FF7843B9224]
+	(No symbol) [0x00007FF7843B935B]
+	(No symbol) [0x00007FF7843A9B94]
+	BaseThreadInitThunk [0x00007FFFBA4753E0+16]
+	RtlUserThreadStart [0x00007FFFBBBC485B+43]
+
+12/04/2024 06:01:47 AM : root         : INFO     : entered explicit wait for 8
+12/04/2024 06:01:47 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:01:47 AM : root         : INFO     : click on users on the cloud menu
+12/04/2024 06:01:48 AM : root         : INFO     : entered explicit wait for 5
+12/04/2024 06:01:48 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:01:48 AM : root         : INFO     : click on action dropdown
+12/04/2024 06:01:49 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:01:49 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:01:49 AM : root         : INFO     : click on create user option
+12/04/2024 06:01:50 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:01:50 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:01:51 AM : root         : INFO     : Enter Username : it admin11
+12/04/2024 06:01:51 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:01:51 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:01:51 AM : root         : INFO     : Enter first name : user
+12/04/2024 06:01:51 AM : root         : INFO     : Enter Last name : it admin
+12/04/2024 06:01:51 AM : root         : INFO     : Select user role : IT SYSTEM ADMIN
+12/04/2024 06:01:51 AM : root         : INFO     : Enter new password : Right_1r1s
+12/04/2024 06:01:51 AM : root         : INFO     : Enter confirm password : Right_1r1s
+12/04/2024 06:01:51 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:01:51 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:01:53 AM : root         : INFO     : Kroger International - KCORP
+12/04/2024 06:01:53 AM : root         : INFO     : Kroger International - KCORP
+12/04/2024 06:01:54 AM : root         : INFO     : select region : Kroger International - KCORP
+12/04/2024 06:01:54 AM : root         : INFO     : Enter Email : divya.goli@facefirst.com
+12/04/2024 06:01:54 AM : root         : INFO     : Select time zone : Asia/Kolkata
+12/04/2024 06:01:55 AM : root         : INFO     : entered explicit wait for 5
+12/04/2024 06:01:55 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:01:55 AM : root         : INFO     : click on save button
+12/04/2024 06:01:57 AM : root         : INFO     : entered explicit wait for 5
+12/04/2024 06:01:57 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:01:57 AM : root         : INFO     : Success Msg is visible : True
+12/04/2024 06:01:57 AM : root         : INFO     : Ex success Msg : Success! A user has been created.
+12/04/2024 06:01:57 AM : root         : INFO     : Ac success Msg : Success! A user has been created.
+12/04/2024 06:02:00 AM : root         : INFO     : Ex Username : it admin11
+12/04/2024 06:02:00 AM : root         : INFO     : Ac Username : it admin11
+12/04/2024 06:02:00 AM : root         : INFO     : Ex Status : [True, True, True]
+12/04/2024 06:02:00 AM : root         : INFO     : Ac Status : [True, True, True]
+12/04/2024 06:02:01 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:02:01 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:02:01 AM : root         : INFO     : click on alert schedule icon
+12/04/2024 06:02:02 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:02:02 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:02:02 AM : root         : INFO     : click on alert schedule action dropdown
+12/04/2024 06:02:04 AM : root         : INFO     : entered explicit wait for 10
+12/04/2024 06:02:04 AM : root         : INFO     : exiting explicit wait..
+12/04/2024 06:02:05 AM : root         : INFO     : click on edit option
+12/04/2024 06:02:06 AM : root         : INFO     : send_sms_yes is visible : True
+12/04/2024 06:02:06 AM : root         : INFO     : send_sms_yes is clickable : True
+12/04/2024 06:02:06 AM : root         : INFO     : send_mms_yes is visible : True
+12/04/2024 06:02:06 AM : root         : INFO     : send_mms_yes is clickable : True
+12/04/2024 06:02:06 AM : root         : INFO     : send_email_yes is visible : True
+12/04/2024 06:02:06 AM : root         : INFO     : send_email_yes is clickable : True
+12/04/2024 06:02:06 AM : root         : INFO     : send_in_app_notification_yes is visible : True
+12/04/2024 06:02:06 AM : root         : INFO     : send_in_app_notification_yes is clickable : True
+12/04/2024 06:02:06 AM : root         : INFO     : enable_alerts_yes is visible : True
+12/04/2024 06:02:06 AM : root         : INFO     : enable_alerts_yes is clickable : True
+12/04/2024 06:02:06 AM : root         : INFO     : Status : [True, True, True, True, True, True, True, True, True, True]
+12/04/2024 06:02:07 AM : root         : INFO     : user created successfully
+12/04/2024 06:02:13 AM : root         : INFO     : close_all_panel_one_by_one_failed: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//button[text()='Close Panel And Discard Changes']"}
+  (Session info: chrome=123.0.6312.122); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+	GetHandleVerifier [0x00007FF784447032+63090]
+	(No symbol) [0x00007FF7843B2C82]
+	(No symbol) [0x00007FF78424EC65]
+	(No symbol) [0x00007FF78429499D]
+	(No symbol) [0x00007FF784294ADC]
+	(No symbol) [0x00007FF7842D5B37]
+	(No symbol) [0x00007FF7842B701F]
+	(No symbol) [0x00007FF7842D3412]
+	(No symbol) [0x00007FF7842B6D83]
+	(No symbol) [0x00007FF7842883A8]
+	(No symbol) [0x00007FF784289441]
+	GetHandleVerifier [0x00007FF7848425AD+4238317]
+	GetHandleVerifier [0x00007FF78487F70D+4488525]
+	GetHandleVerifier [0x00007FF7848779EF+4456495]
+	GetHandleVerifier [0x00007FF784520576+953270]
+	(No symbol) [0x00007FF7843BE54F]
+	(No symbol) [0x00007FF7843B9224]
+	(No symbol) [0x00007FF7843B935B]
+	(No symbol) [0x00007FF7843A9B94]
+	BaseThreadInitThunk [0x00007FFFBA4753E0+16]
+	RtlUserThreadStart [0x00007FFFBBBC485B+43]
+
+12/04/2024 06:02:13 AM : root         : INFO     : user list contains [True, True, True, True, True]

@@ -106,7 +106,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             upload_photo.click()
             self.logger.info(f"clicked on upload image icon")
             time.sleep(2)
-            file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset1\\ab\\00076.png"
+            file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\img\\unenrolled_visitor_search_img_1.png"
             pyautogui.write(file_path)
             pyautogui.press('enter')
             time.sleep(2)
@@ -288,23 +288,21 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.logger.error(ex)
 
     def login_before(self):
-
         try:
-            login().login_to_cloud_if_not_done(self.d)
+            # login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
 
-            # self.d.get(Read_Portal_Menu_Components().get_url())
-            # time.sleep(web_driver.one_second)
-            # username = self.d.find_element(By.XPATH, Read_Portal_Menu_Components().get_usernameField())
-            # username.send_keys(Read_Portal_Menu_Components().get_username())
-            # password = self.d.find_element(By.XPATH, Read_Portal_Menu_Components().get_passwordField())
-            # password.send_keys(Read_Portal_Menu_Components().get_password())
-            # time.sleep(web_driver.one_second)
-            # login_btn = self.d.find_element(By.ID, Read_Portal_Menu_Components().get_loginButton())
-            # self.d.execute_script("arguments[0].click();", login_btn)
-            # time.sleep(web_driver.two_second)
-            # self.logger.info("login")
-
+            self.d.get(Read_Identify_and_Enroll_Components().get_portal_url())
+            time.sleep(web_driver.one_second)
+            username = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().get_portal_login_username_textbox_by_xpath())
+            username.send_keys(Read_Identify_and_Enroll_Components().get_username_to_login())
+            password = self.d.find_element(By.XPATH,Read_Identify_and_Enroll_Components().get_portal_login_password_textbox_by_xpath())
+            password.send_keys(Read_Identify_and_Enroll_Components().get_password_to_login())
+            time.sleep(web_driver.one_second)
+            login_btn = self.d.find_element(By.ID, Read_Identify_and_Enroll_Components().get_cloud_login_button_on_portal_by_xpath())
+            self.d.execute_script("arguments[0].click();", login_btn)
+            time.sleep(web_driver.two_second)
+            self.logger.info("login")
         except Exception as ex:
             msg = str(ex)
             if msg.__contains__('not clickable at point'):
@@ -14095,3 +14093,11 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.d.execute_script("arguments[0].click();", enroll)
             self.logger.info("Re-enroll for already enrolled ")
             self.logger.info("clicked on enroll button")
+
+
+
+
+
+
+
+

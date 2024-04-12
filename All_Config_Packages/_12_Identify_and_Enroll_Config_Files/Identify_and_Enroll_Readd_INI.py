@@ -2455,4 +2455,54 @@ class Read_Identify_and_Enroll_Components:
         return enrolled_visitor_image_path_4
 
 
-Read_Identify_and_Enroll_Components().date_incident_time()
+# Read_Identify_and_Enroll_Components().date_incident_time()
+
+
+    def get_portal_login_username_textbox_by_xpath(self):
+
+        try:
+            portal_login_username_texbox = self.config.get("portal_Login",
+                                                           "portal_login_username_textbox_by_xpath")
+            print("portal username textbox: ", portal_login_username_texbox)
+            return portal_login_username_texbox
+        except Exception as ex:
+            print(ex.args)
+
+    def get_portal_login_password_textbox_by_xpath(self):
+        try:
+            portal_login_password_textbox = self.config.get("portal_Login",
+                                                            "portal_login_password_textbox_by_xpath")
+            print("portal password textbox: ", portal_login_password_textbox)
+            return portal_login_password_textbox
+        except Exception as ex:
+            print(ex.args)
+
+    def get_cloud_login_button_on_portal_by_xpath(self):
+        try:
+            cloud_login_button_on_portal = self.config.get("portal_Login", "cloud_login_button_on_portal_by_xpath")
+            print("cloud login button on portal: ", cloud_login_button_on_portal)
+            return cloud_login_button_on_portal
+        except Exception as ex:
+            print(ex.args)
+
+    def get_portal_url(self):
+        try:
+            portal_url = self.config.get("Login_Data", "cloud_login_url")
+            print("portal page url: ", portal_url)
+            return portal_url
+        except Exception as ex:
+            print(ex)
+
+
+    def get_username_to_login(self):
+        try:
+            user = self.config.get("Login_Data", "username")
+            return user
+        except Exception as ex:
+            print(ex.args)
+    def get_password_to_login(self):
+        try:
+            password = self.config.get("Login_Data","password")
+            return password
+        except Exception as ex:
+            print(ex.args)

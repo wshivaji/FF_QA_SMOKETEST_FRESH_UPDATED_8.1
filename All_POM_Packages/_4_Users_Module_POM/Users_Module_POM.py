@@ -235,22 +235,35 @@ class Users_Module_pom(web_driver, web_logger):
                 self.enter_password(users_dict["users"][i]["password"])
                 self.select_region(users_dict["users"][i]["user_orgahierarchy"])
                 self.enter_email(users_dict["users"][i]["Email"])
+                self.enter_alert_email(users_dict["users"][i]["alert_Email"])
                 self.select_time_zone(Read_Users_Components().time_zone_input_data())
                 time.sleep(web_driver.one_second)
                 self.click_on_save_btn()
                 time.sleep(web_driver.two_second)
-                self.close_all_panel_one_by_one()
-                #i+=1
-                # if self.check_if_user_is_created(users_dict["users"][i]["username"]):
-                #    # self.close_all_panel_one_by_one()
-                #    self.logger.info("user created successfully")
-                #    # self.close_all_panel_one_by_one()
-                #    return True
-                #
-                # else:
-                #     self.d.save_screenshot(f"{self.screenshots_path}test_TC_US_110_failed.png")
-                #     return False
 
+                #i+=1
+                if self.check_if_user_is_created(users_dict["users"][i]["username"]):
+                        time.sleep(web_driver.one_second)
+                        self.click_on_alert_schedule_icon()
+                        time.sleep(web_driver.one_second)
+                        self.click_on_alert_schedule_action_option_edit()
+                        time.sleep(web_driver.one_second)
+                        if True in self.verify_settings_yes_or_no_button():
+                             time.sleep(web_driver.one_second)
+                             alert_save_button = self.d.find_element(By.XPATH,Read_Users_Components().alert_schedule_save_btn_by_xpath())
+                             alert_save_button.click()
+                             self.logger.info("user created successfully")
+                             # self.close_all_panel_one_by_one()
+                             users_list.append(True)
+                else:
+                    self.d.save_screenshot(f"{self.screenshots_path}test_TC_US_110_failed.png")
+                    users_list.append(False)
+                self.close_all_panel_one_by_one()
+            self.logger.info(f"user list contains {users_list}")
+            if False in users_list:
+                return False
+            else:
+                return True
         except Exception as ex:
             self.d.save_screenshot(f"{self.screenshots_path}test_TC_US_1_exception.png")
             self.log.info(f"test_TC_US_1_exception: {ex}")
@@ -2723,68 +2736,74 @@ class Users_Module_pom(web_driver, web_logger):
         """
         status = []
         send_sms_yes = self.d.find_element(By.XPATH, Read_Users_Components().send_sms_yes_btn_by_xpath())
-        send_sms_no = self.d.find_element(By.XPATH, Read_Users_Components().send_sms_no_btn_by_xpath())
+        send_sms_yes.click()
+        # send_sms_no = self.d.find_element(By.XPATH, Read_Users_Components().send_sms_no_btn_by_xpath())
 
         send_mms_yes = self.d.find_element(By.XPATH, Read_Users_Components().send_mms_yes_btn_by_xpath())
-        send_mms_no = self.d.find_element(By.XPATH, Read_Users_Components().send_mms_no_btn_by_xpath())
+        send_mms_yes.click()
+        # send_mms_no = self.d.find_element(By.XPATH, Read_Users_Components().send_mms_no_btn_by_xpath())
 
         send_email_yes = self.d.find_element(By.XPATH, Read_Users_Components().send_email_yes_btn_by_xpath())
-        send_email_no = self.d.find_element(By.XPATH, Read_Users_Components().send_email_no_btn_by_xpath())
+        send_email_yes.click()
+        # send_email_no = self.d.find_element(By.XPATH, Read_Users_Components().send_email_no_btn_by_xpath())
 
         send_in_app_notification_yes = self.d\
             .find_element(By.XPATH, Read_Users_Components().send_in_app_notification_yes_btn_by_xpath())
-        send_in_app_notification_no = self.d\
-            .find_element(By.XPATH, Read_Users_Components().send_in_app_notification_no_btn_by_xpath())
+        send_in_app_notification_yes.click()
+        # send_in_app_notification_no = self.d\
+        #     .find_element(By.XPATH, Read_Users_Components().send_in_app_notification_no_btn_by_xpath())
 
         enable_alerts_yes = self.d.find_element(By.XPATH, Read_Users_Components().enable_alerts_yes_btn_by_xpath())
-        enable_alerts_no = self.d.find_element(By.XPATH, Read_Users_Components().enable_alerts_no_btn_by_xpath())
+        # enable_alerts_no = self.d.find_element(By.XPATH, Read_Users_Components().enable_alerts_no_btn_by_xpath())
 
         status.append(send_sms_yes.is_displayed())
         self.logger.info(f"send_sms_yes is visible : {send_sms_yes.is_displayed()}")
         status.append(send_sms_yes.is_enabled())
         self.logger.info(f"send_sms_yes is clickable : {send_sms_yes.is_enabled()}")
-        status.append(send_sms_no.is_displayed())
-        self.logger.info(f"send_sms_no is visible : {send_sms_no.is_displayed()}")
-        status.append(send_sms_no.is_enabled())
-        self.logger.info(f"send_sms_no is clickable : {send_sms_no.is_enabled()}")
+        # status.append(send_sms_no.is_displayed())
+        # self.logger.info(f"send_sms_no is visible : {send_sms_no.is_displayed()}")
+        # status.append(send_sms_no.is_enabled())
+        # self.logger.info(f"send_sms_no is clickable : {send_sms_no.is_enabled()}")
 
         status.append(send_mms_yes.is_displayed())
         status.append(send_mms_yes.is_enabled())
-        status.append(send_mms_no.is_displayed())
-        status.append(send_mms_no.is_enabled())
+        # status.append(send_mms_no.is_displayed())
+        # status.append(send_mms_no.is_enabled())
         self.logger.info(f"send_mms_yes is visible : {send_mms_yes.is_displayed()}")
         self.logger.info(f"send_mms_yes is clickable : {send_mms_yes.is_enabled()}")
-        self.logger.info(f"send_mms_no is visible : {send_mms_no.is_displayed()}")
-        self.logger.info(f"send_mms_no is clickable : {send_mms_no.is_enabled()}")
+        # self.logger.info(f"send_mms_no is visible : {send_mms_no.is_displayed()}")
+        # self.logger.info(f"send_mms_no is clickable : {send_mms_no.is_enabled()}")
 
         status.append(send_email_yes.is_displayed())
         status.append(send_email_yes.is_enabled())
-        status.append(send_email_no.is_displayed())
-        status.append(send_email_no.is_enabled())
+        # status.append(send_email_no.is_displayed())
+        # status.append(send_email_no.is_enabled())
         self.logger.info(f"send_email_yes is visible : {send_email_yes.is_displayed()}")
         self.logger.info(f"send_email_yes is clickable : {send_email_yes.is_enabled()}")
-        self.logger.info(f"send_email_no is visible : {send_email_no.is_displayed()}")
-        self.logger.info(f"send_email_no is clickable : {send_email_no.is_enabled()}")
+        # self.logger.info(f"send_email_no is visible : {send_email_no.is_displayed()}")
+        # self.logger.info(f"send_email_no is clickable : {send_email_no.is_enabled()}")
 
         status.append(send_in_app_notification_yes.is_displayed())
         status.append(send_in_app_notification_yes.is_enabled())
-        status.append(send_in_app_notification_no.is_displayed())
-        status.append(send_in_app_notification_no.is_enabled())
+        # status.append(send_in_app_notification_no.is_displayed())
+        # status.append(send_in_app_notification_no.is_enabled())
         self.logger.info(f"send_in_app_notification_yes is visible : {send_in_app_notification_yes.is_displayed()}")
         self.logger.info(f"send_in_app_notification_yes is clickable : {send_in_app_notification_yes.is_enabled()}")
-        self.logger.info(f"send_in_app_notification_no is visible : {send_in_app_notification_no.is_displayed()}")
-        self.logger.info(f"send_in_app_notification_no is clickable : {send_in_app_notification_no.is_enabled()}")
+        # self.logger.info(f"send_in_app_notification_no is visible : {send_in_app_notification_no.is_displayed()}")
+        # self.logger.info(f"send_in_app_notification_no is clickable : {send_in_app_notification_no.is_enabled()}")
 
         status.append(enable_alerts_yes.is_displayed())
         status.append(enable_alerts_yes.is_enabled())
-        status.append(enable_alerts_no.is_displayed())
-        status.append(enable_alerts_no.is_enabled())
+        # status.append(enable_alerts_no.is_displayed())
+        # status.append(enable_alerts_no.is_enabled())
         self.logger.info(f"enable_alerts_yes is visible : {enable_alerts_yes.is_displayed()}")
         self.logger.info(f"enable_alerts_yes is clickable : {enable_alerts_yes.is_enabled()}")
-        self.logger.info(f"enable_alerts_no is visible : {enable_alerts_no.is_displayed()}")
-        self.logger.info(f"enable_alerts_no is clickable : {enable_alerts_no.is_enabled()}")
+        # self.logger.info(f"enable_alerts_no is visible : {enable_alerts_no.is_displayed()}")
+        # self.logger.info(f"enable_alerts_no is clickable : {enable_alerts_no.is_enabled()}")
         self.logger.info(f"Status : {status}")
         return status
+
+
         
     def verify_day_checkbox(self):
         """
