@@ -541,6 +541,14 @@ class Read_Notification_Groups_Components:
         except Exception as ex:
             print("new_second_action_dropdown_button_by_xpath : ", ex)
 
+    def enrollment_groups_action_dropdown_by_xpath(self):
+        try:
+            enrollment_groups_action_dropdown_by_xpath = self.config \
+                .get("LOCATORS", "enrollment_groups_action_dropdown_by_xpath")
+            return enrollment_groups_action_dropdown_by_xpath
+        except Exception as ex:
+            print("enrollment_groups_action_dropdown_by_xpath : ", ex)
+
     def create_users_by_xpath(self):
         try:
             create_users_by_xpath = self.config \

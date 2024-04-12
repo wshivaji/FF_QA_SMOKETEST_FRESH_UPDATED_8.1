@@ -431,7 +431,7 @@ class Notification_Groups_Module_pom(web_driver, web_logger):
             save_button.click()
             self.logger.info(" Clicked on Save button..")
             time.sleep(web_driver.two_second)
-            status.append(Read_Notification_Groups_Components().success_message_validation_text())
+            status.append(self.validate_successful_message())
             # *************************************************************************
             time.sleep(web_driver.one_second)
             enrollment_group_btn = self.d.find_element(By.XPATH,
@@ -475,12 +475,21 @@ class Notification_Groups_Module_pom(web_driver, web_logger):
                                                 Read_Notification_Groups_Components().unlinked_case_groups_list_by_xpath())
             checkbox = self.d.find_elements(By.XPATH,
                                             Read_Notification_Groups_Components().enrollment_groups_checkboxes_by_xpath())
-            time.sleep(web_driver.one_second)
-            for i in range(len(case_groups) - 1):
-                self.logger.info(f"case_groups: {case_groups[i].text}")
-                time.sleep(web_driver.one_second)
-                if case_groups[i].text == Read_Notification_Groups_Components().link_eg2_to_ng2():
 
+            time.sleep(web_driver.one_second)
+            for i in range(len(case_groups)):
+                self.logger.info(f"case_groups: {case_groups[i].text}")
+
+                if case_groups[i].is_displayed():
+                    status.append(True)
+                else:
+                    status.append(False)
+                time.sleep(web_driver.one_second)
+
+                if case_groups[i].text == Read_Notification_Groups_Components().link_eg2_to_ng2():
+                    status.append(True)
+                    self.logger.info(f"{Read_Notification_Groups_Components().link_eg2_to_ng2()} = {case_groups[i].text}")
+                    time.sleep(web_driver.one_second)
                     checkbox[i].click()
 
                     self.d.find_element(By.XPATH,
@@ -501,6 +510,7 @@ class Notification_Groups_Module_pom(web_driver, web_logger):
                             self.logger.info(
                                 f"{Read_Notification_Groups_Components().link_eg2_to_ng2()} case group linked successfully with notification group..")
                             status.append(True)
+
                     close_panel = self.d.find_elements(By.XPATH,
                                                        Portal_Menu_Module_read_ini().get_close_panel_button_by_xpath())
                     for panels in close_panel:
@@ -558,14 +568,17 @@ class Notification_Groups_Module_pom(web_driver, web_logger):
                     enrollment_groups = self.d.find_elements(By.XPATH,
                                                                Read_Notification_Groups_Components().unlinked_case_groups_list_by_xpath())
                     self.logger.info(f"enrollment groups length: {len(enrollment_groups)}")
-                    for j in range(len(enrollment_groups)-1):
+                    for j in range(len(enrollment_groups)):
                         if enrollment_groups[j].text == Read_Notification_Groups_Components().link_eg2_to_ng2():
+
                             self.logger.info(f"enrollment group text: {enrollment_groups[j].text}")
+
                             checkbox[j].click()
-                            time.sleep(web_driver.one_second)
+                            self.logger.info("Checkbox is selected...")
                             status.append(True)
+                            time.sleep(web_driver.one_second)
                             action_dropdown = self.d.find_element(By.XPATH,
-                                                                  Read_Notification_Groups_Components().new_second_action_dropdown_button_by_xpath())
+                                                                  Read_Notification_Groups_Components().enrollment_groups_action_dropdown_by_xpath())
                             self.logger.info(f"action dropdown visible: {action_dropdown.is_displayed()}")
 
                             action_dropdown.click()
@@ -573,8 +586,13 @@ class Notification_Groups_Module_pom(web_driver, web_logger):
                             remove_from_ng = self.d.find_element(By.XPATH,
                                                                  Read_Notification_Groups_Components().remove_alert_from_selected_groups_by_xpath())
                             self.logger.info(f"option visible: {remove_from_ng.text}")
+                            if remove_from_ng.is_displayed():
+                                status.append(True)
+                            else:
+                                status.append(False)
+
                             remove_from_ng.click()
-                            status.append(True)
+
                             time.sleep(web_driver.one_second)
 
                             close_panel = self.d.find_elements(By.XPATH,

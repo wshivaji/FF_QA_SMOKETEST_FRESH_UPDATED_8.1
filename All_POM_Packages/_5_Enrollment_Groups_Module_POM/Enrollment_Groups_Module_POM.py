@@ -408,6 +408,7 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
 
     def verify_user_able_to_edit_enrollment_group(self):
         try:
+            self.logger.info("********** Test_EG_05 Begin  **********")
             status = []
             login().login_to_cloud_if_not_done(self.d)
             time.sleep(web_driver.one_second)
@@ -496,7 +497,7 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
 
     def verify_user_able_to_link_a_notification_group_from_enrollments_groups_panel(self):
         try:
-            self.logger.info("********** Test_EG_04 Begin  **********")
+            self.logger.info("********** Test_EG_06 Begin  **********")
             status = []
             login().login_to_cloud_if_not_done(self.d)
             time.sleep(web_driver.one_second)
@@ -613,21 +614,21 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
 
             self.logger.info(f"status: {status}")
             if False in status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_EG_04_failed.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_EG_04_failed.png")
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_EG_06_failed.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_EG_06_failed.png")
                 return False
             else:
                 return True
             # logout().logout_from_core()
         except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_EG_04_exception.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_EG_04_exception.png")
-            self.logger.error(f"TC_EG_04 got exception as: {ex.args}")
+            self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_EG_06_exception.png")
+            self.d.save_screenshot(f"{self.screenshots_path}\\TC_EG_06_exception.png")
+            self.logger.error(f"TC_EG_06 got exception as: {ex.args}")
             return False
 
     def verify_user_able_to_unlink_a_notification_group_from_enrollments_groups_panel(self):
         try:
-            self.logger.info("********** Test_EG_05 Begin  **********")
+            self.logger.info("********** Test_EG_07 Begin  **********")
             status = []
             login().login_to_cloud_if_not_done(self.d)
             time.sleep(web_driver.one_second)
@@ -681,21 +682,54 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
             self.logger.info(f"status: {status}")
 
             if False in status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_EG_05_failed.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_EG_05_failed.png")
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_EG_07_failed.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_EG_07_failed.png")
                 return False
             else:
                 return True
             # logout().logout_from_core()
 
         except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_EG_05_exception.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_EG_05_exception.png")
-            self.logger.error(f"TC_EG_05 got exception as: {ex.args}")
+            self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_EG_07_exception.png")
+            self.d.save_screenshot(f"{self.screenshots_path}\\TC_EG_07_exception.png")
+            self.logger.error(f"TC_EG_07 got exception as: {ex.args}")
             return False
 
+    def verify_user_able_to_see_enrollments_from_associated_group(self):
+        try:
+            self.logger.info("********** Test_EG_08 Begin  **********")
+            status = []
+            login().login_to_cloud_if_not_done(self.d)
+            time.sleep(web_driver.one_second)
 
-    #
+            enrollment_groups_btn = self.d.find_element(By.XPATH, Read_Enrollment_Groups_Components().
+                                                        enrollment_groups_button_by_xpath())
+            self.logger.info(f"enrollment groups btn visible: {enrollment_groups_btn.is_displayed()}")
+            time.sleep(web_driver.one_second)
+            enrollment_groups_btn.click()
+
+            enrollment_groups = web_driver.explicit_wait(self, 5, "XPATH",
+                                                         Read_Enrollment_Groups_Components().enrollment_group_list_by_xpath(),
+                                                         self.d)
+            enrollment_groups = self.d.find_elements(By.XPATH,
+                                                     Read_Enrollment_Groups_Components().enrollment_group_list_by_xpath())
+
+
+            self.logger.info(f"status: {status}")
+
+            if False in status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_EG_08_failed.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_EG_08_failed.png")
+                return False
+            else:
+                return True
+            # logout().logout_from_core()
+
+        except Exception as ex:
+            self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_EG_08_exception.png")
+            self.d.save_screenshot(f"{self.screenshots_path}\\TC_EG_08_exception.png")
+            self.logger.error(f"TC_EG_08 got exception as: {ex.args}")
+        #
     # def verify_enrollment_group_cancel_button_is_visible_and_clickable(self):
     #     try:
     #         self.logger.info("******************* test_TC_EG_010 ******************")

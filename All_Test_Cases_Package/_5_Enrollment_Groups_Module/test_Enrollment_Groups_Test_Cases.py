@@ -57,134 +57,15 @@ class Test_Enrollment_Groups_Module(web_driver, web_logger):
         else:
             assert False
 
-    # @pytest.mark.p1
-    # def test_TC_EG_002(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_002 execution started..")
-    #     if Enrollments_Groups_Module_pom().verify_user_click_on_enrollment_groups_enrollment_groups_panel_is_displayed():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p2
-    # def test_TC_EG_003(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_003 execution started..")
-    #     if Enrollments_Groups_Module_pom().verify_enrollment_groups_title_is_visible_on_enrollment_group_panel():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p2
-    # def test_TC_EG_004(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_004 execution started..")
-    #     if Enrollments_Groups_Module_pom().verify_action_button_is_visible_and_clickable():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p1
-    # def test_TC_EG_005(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_005 execution started..")
-    #     if Enrollments_Groups_Module_pom().verify_action_button_has_dropdown_list():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p2
-    # def test_TC_EG_006(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_006 execution started..")
-    #     if Enrollments_Groups_Module_pom().verify_action_dropdown_consist_create_enrollment_group_button_is_visible_and_clickable():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p2
-    # def test_TC_EG_007(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_007 execution started..")
-    #     if Enrollments_Groups_Module_pom().verify_action_dropdown_consist_refresh_button_is_visible_and_clickable():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p2
-    # def test_TC_EG_008(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_008 execution started..")
-    #     if Enrollments_Groups_Module_pom().verify_user_click_on_create_enrollment_group_enrollment_group_details_panel_should_be_visible():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p1
-    # def test_TC_EG_009(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_009 execution started..")
-    #     if Enrollments_Groups_Module_pom().verify_user_click_on_create_enrollment_group_pop_up_panel_sub_title_is_enrollment_group_details():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p4
-    # def test_TC_EG_010(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_010 execution started..")
-    #     if Enrollments_Groups_Module_pom() .verify_enrollment_group_cancel_button_is_visible_and_clickable():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p4
-    # def test_TC_EG_011(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_011 execution started..")
-    #     if Enrollments_Groups_Module_pom().verify_enrollment_group_save_button_is_visible_and_clickable():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p4
-    # def test_TC_EG_012(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_012 execution started..")
-    #     if Enrollments_Groups_Module_pom().verify_name_text_box_field_is_visible_and_user_able_to_enter_name():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p4
-    # def test_TC_EG_013(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_013 execution started..")
-    #     if Enrollments_Groups_Module_pom() .verify_description_text_box_field_is_visible_and_user_able_to_enter_description():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p4
-    # def test_TC_EG_014(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_014 execution started..")
-    #     if Enrollments_Groups_Module_pom().verify_face_threshold_text_box_field_is_visible_and_user_able_to_enter_face_threshold():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p4
-    # def test_TC_EG_015(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_015 execution started..")
-    #     if Enrollments_Groups_Module_pom().verify_face_threshold_text_box_field_is_visible_and_user_able_to_enter_face_threshold():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p4
-    # def test_TC_EG_016(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_016 execution started..")
-    #     if Enrollments_Groups_Module_pom().verify_masked_face_threshold_text_box_field_is_visible_user_able_to_enter_masked_face_threshold():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p2
-    # def test_TC_EG_017(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_017 execution started..")
-    #     if Enrollments_Groups_Module_pom().verify_serious_offender_dropdown_is_visible_user_able_to_select_from_the_dropdown():
-    #         assert True
-    #     else:
-    #         assert False
-    #
+    def test_TC_EG_08(self):
+        if Enrollments_Groups_Module_pom().verify_user_able_to_see_enrollments_from_associated_group():
+            assert True
+        else:
+            assert False
+
+
+
+
     # @pytest.mark.p2
     # def test_TC_EG_018(self):
     #     self.logger.info("Enrollment Groups module = test_TC_EG_018 execution started..")
@@ -192,22 +73,7 @@ class Test_Enrollment_Groups_Module(web_driver, web_logger):
     #         assert True
     #     else:
     #         assert False
-    #
-    # # @pytest.mark.p2
-    # # def test_TC_EG_019(self):
-    # #     # self.logger.info("Enrollment Groups module = test_TC_EG_019 execution started.")
-    # #     if Enrollments_Groups_Module_pom().verify_validation_error_message():
-    # #         assert True
-    # #     else:
-    # #         #         assert False
-    #
-    # @pytest.mark.p2
-    # def test_TC_EG_020(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_020 execution started..")
-    #     if Enrollments_Groups_Module_pom().verify_creating_enrollment_group_below_enrollments_notification_groups_events_should_be_disable_mode():
-    #         assert True
-    #     else:
-    #         assert False
+
     #
     # @pytest.mark.p1
     # def test_TC_EG_021(self):
@@ -217,80 +83,7 @@ class Test_Enrollment_Groups_Module(web_driver, web_logger):
     #     else:
     #         assert False
     #
-    # @pytest.mark.p3
-    # def test_TC_EG_022(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_022 execution started..")
-    #     if Enrollments_Groups_Module_pom().verify_select_all_check_box_is_visible():
-    #
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p2
-    # def test_TC_EG_023(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_023 execution started..")
-    #     if Enrollments_Groups_Module_pom().verify_user_clicks_on_select_all_check_box_all_the_below_check_boxes_should_get_selected():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p2
-    # def test_TC_EG_024(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_024 execution started..")
-    #     if Enrollments_Groups_Module_pom().verify_user_clicks_on_select_all_uncheck_box_all_the_below_check_boxes_should_get_unselected():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p1
-    # def test_TC_EG_025(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_025 execution started..")
-    #     if Enrollments_Groups_Module_pom().verify_success_validation_message():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p1
-    # def test_TC_EG_026(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_026 execution started..")
-    #     if Enrollments_Groups_Module_pom().verify_user_fill_the_name_text_box_with_data_click_save_button_then_below_fields_should_be_activated():
-    #         assert True
-    #     else:
-    #
-    #         assert False
-    #
-    # @pytest.mark.p1
-    # def test_TC_EG_027(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_027 execution started..")
-    #     if Enrollments_Groups_Module_pom().verify_user_unsaving_enrollment_group_details_panel_below_buttons_should_be_disable_mode():
-    #         assert True
-    #     else:
-    #
-    #         assert False
-    #
-    # @pytest.mark.p2
-    # def test_TC_EG_028(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_028 execution started..")
-    #     if Enrollments_Groups_Module_pom().verify_enrollments_button_is_activated_and_clickable():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p2
-    # def test_TC_EG_029(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_029 execution started..")
-    #     if Enrollments_Groups_Module_pom().verify_notification_groups_button_is_activated_and_clickable():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p2
-    # def test_TC_EG_030(self):
-    #     self.logger.info("Enrollment Groups module = test_TC_EG_030 execution started..")
-    #     if Enrollments_Groups_Module_pom().verify_events_button_is_activated_and_clickable():
-    #         assert True
-    #     else:
-    #         assert False
+
     #
     # @pytest.mark.p2
     # def test_TC_EG_031(self):
