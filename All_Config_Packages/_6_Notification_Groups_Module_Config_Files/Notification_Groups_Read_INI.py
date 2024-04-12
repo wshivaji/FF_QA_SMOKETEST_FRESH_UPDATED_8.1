@@ -362,6 +362,38 @@ class Read_Notification_Groups_Components:
         except Exception as ex:
             print("error_message_by_xpath : ", ex)
 
+    def probable_match_event_icon_btn_by_xpath(self):
+        try:
+            probable_match_event_icon_btn_by_xpath = self.config \
+                .get("LOCATORS", "probable_match_event_icon_btn_by_xpath")
+            return probable_match_event_icon_btn_by_xpath
+        except Exception as ex:
+            print("probable_match_event_icon_btn_by_xpath : ", ex)
+
+    def linked_users_count_on_users_icon_by_xpath(self):
+        try:
+            linked_users_count_on_users_icon_by_xpath = self.config \
+                .get("LOCATORS", "linked_users_count_on_users_icon_by_xpath")
+            return linked_users_count_on_users_icon_by_xpath
+        except Exception as ex:
+            print("linked_users_count_on_users_icon_by_xpath : ", ex)
+
+    def unlinked_users_option_by_xpath(self):
+        try:
+            unlinked_users_option_by_xpath = self.config \
+                .get("LOCATORS", "unlinked_users_option_by_xpath")
+            return unlinked_users_option_by_xpath
+        except Exception as ex:
+            print("unlinked_users_option_by_xpath : ", ex)
+
+    def users_checkboxes_by_xpath(self):
+        try:
+            users_checkboxes_by_xpath = self.config \
+                .get("LOCATORS", "users_checkboxes_by_xpath")
+            return users_checkboxes_by_xpath
+        except Exception as ex:
+            print("users_checkboxes_by_xpath : ", ex)
+
     def error_message_validation_text(self):
         try:
             error_message_validation_text = self.common_test_data_config \
