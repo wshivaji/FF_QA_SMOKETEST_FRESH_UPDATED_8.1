@@ -1088,7 +1088,7 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
             for panels in close_panel:
                 panels.click()
                 time.sleep(web_driver.one_second)
-
+            self.logger.info(f"status: {status}")
             if False in status:
                 self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_EG_012_failed.png")
                 return False

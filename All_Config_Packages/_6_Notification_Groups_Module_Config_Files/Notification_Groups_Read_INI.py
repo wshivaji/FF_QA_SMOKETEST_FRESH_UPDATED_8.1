@@ -490,6 +490,14 @@ class Read_Notification_Groups_Components:
         except Exception as ex:
             print("check_box_list_by_xpath : ", ex)
 
+    def remove_user_from_group_option_by_xpath(self):
+        try:
+            remove_user_from_group_option_by_xpath = self.config \
+                .get("LOCATORS", "remove_user_from_group_option_by_xpath")
+            return remove_user_from_group_option_by_xpath
+        except Exception as ex:
+            print("remove_user_from_group_option_by_xpath : ", ex)
+
     def notification_groups_details_action_dropdown_button_by_xpath(self):
         try:
             notification_groups_details_action_dropdown_button_by_xpath = self.config \
@@ -1066,6 +1074,13 @@ class Read_Notification_Groups_Components:
         try:
             users_filter_button_by_xpath = self.config.get("LOCATORS", "users_filter_button_by_xpath")
             return users_filter_button_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def users_list_by_xpath(self):
+        try:
+            users_list_by_xpath = self.config.get("LOCATORS", "users_list_by_xpath")
+            return users_list_by_xpath
         except Exception as ex:
             print(ex)
 

@@ -62,8 +62,19 @@ class Test_Notification_Groups_Module(web_driver, web_logger):
         else:
             assert False
 
+    def test_TC_NG_09(self):
+        if Notification_Groups_Module_pom().verify_user_able_to_unlink_a_user_to_notification_group():
+            assert True
+        else:
+            assert False
 
-    #
+    def test_TC_NG_10(self):
+        if Notification_Groups_Module_pom().Verify_user_able_to_delete_the_newly_created_notification_group():
+            assert True
+        else:
+            assert False
+
+
     #
     # @pytest.mark.p3
     # def test_TC_NG_027(self):
