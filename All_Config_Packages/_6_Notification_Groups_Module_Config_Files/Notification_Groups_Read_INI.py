@@ -18,7 +18,7 @@ class Read_Notification_Groups_Components:
 
     def get_notification_group_name(self):
         try:
-            notification_group_name = self.common_test_data_config.get("system_level_test_Data", "dummy_notification_group_name")
+            notification_group_name = self.common_test_data_config.get("system_level_test_Data", "notification_group_name")
             return notification_group_name
         except Exception as ex:
             print(ex)
@@ -27,6 +27,13 @@ class Read_Notification_Groups_Components:
         try:
             number_of_ngs_by_xpath = self.config.get("LOCATORS", "number_of_ngs_by_xpath")
             return number_of_ngs_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def get_default_alert_group_name_on_details_by_xpath(self):
+        try:
+            default_alert_group_name_on_details_by_xpath = self.config.get("LOCATORS", "default_alert_group_name_on_details_by_xpath")
+            return default_alert_group_name_on_details_by_xpath
         except Exception as ex:
             print(ex)
 
@@ -80,6 +87,14 @@ class Read_Notification_Groups_Components:
         except Exception as ex:
             print(ex.args)
 
+    def default_notification_group_details(self):
+        try:
+            default_notification_group_details = self.config.get("LOCATORS", "default_notification_group_details")
+            print(f"default_notification_group_details: {default_notification_group_details}")
+            return default_notification_group_details
+        except Exception as ex:
+            print(ex.args)
+
     def get_enrollment_group_name(self):
         try:
             enrollment_group_name = self.common_test_data_config.get("system_level_test_Data", "enrollment_group_name")
@@ -96,7 +111,7 @@ class Read_Notification_Groups_Components:
 
     def get_dummy_notification_group_name(self):
         try:
-            notification_group_name = self.common_test_data_config.get("system_level_test_Data", "dummy_notification_group_name")
+            notification_group_name = self.common_test_data_config.get("system_level_test_Data", "notification_group_name")
             return notification_group_name
         except Exception as ex:
             print(ex)

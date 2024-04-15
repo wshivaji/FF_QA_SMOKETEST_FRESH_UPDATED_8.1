@@ -16,7 +16,7 @@ class Read_Enrollment_Groups_Components:
 
     def get_enrollment_group_name(self):
         try:
-            enrollment_group_name = self.common_test_data_config.get("system_level_test_Data", "dummy_enrollment_group_name")
+            enrollment_group_name = self.common_test_data_config.get("system_level_test_Data", "enrollment_group_name")
             return enrollment_group_name
         except Exception as ex:
             print(ex)

@@ -74,6 +74,12 @@ class Test_Notification_Groups_Module(web_driver, web_logger):
         else:
             assert False
 
+    def test_TC_NG_11(self):
+        if Notification_Groups_Module_pom().Verify_details_of_default_notification_group():
+            assert True
+        else:
+            assert False
+
 
     #
     # @pytest.mark.p3
