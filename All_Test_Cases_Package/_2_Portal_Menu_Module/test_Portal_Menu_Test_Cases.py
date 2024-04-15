@@ -48,32 +48,3 @@ class Test_Portal_Menu_Test_Cases(web_driver, web_logger):
             assert True
         else:
             assert False
-
-    # @pytest.mark.p1
-    # def test_TC_PM_3(self):
-    #     if Portal_Menu_Module_pom().Verify_Identify_and_Enroll_menu_visible_and_clickable():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p1
-    # def test_TC_PM_4(self):
-    #     if Portal_Menu_Module_pom().Verify_Detect_Faces_menu_visible_and_clickable():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p1
-    # def test_TC_PM_5(self):
-    #     if Portal_Menu_Module_pom().Verify_Enrollments_menu_visible_and_clickable():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p1
-    # def test_TC_PM_6(self):
-    #     if Portal_Menu_Module_pom().Verify_Enrollment_Groups_menu_visible_and_clickable():
-    #         assert True
-    #     else:
-    #         assert False
-
