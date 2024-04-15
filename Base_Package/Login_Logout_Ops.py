@@ -354,6 +354,79 @@ class login(web_driver, web_logger):
             self.d.save_screenshot(f"{web_driver.screenshots_path}\\login_exception.png")
             print(f"{ex.args}")
 
+    def login_to_facecirst_portal_if_not_done(self, d):
+        try:
+            self.d = d
+            time.sleep(web_driver.one_second)
+            # print(f"current url: {self.d.current_url}")
+            # print(f"expected url: {Portal_login_page_read_ini().get_portal_url()}")
+            logout_btn = cloud_menu_btn = None
+            try:
+                # self.d.refresh()
+                logout_btn = web_driver.explicit_wait(self, 3, "XPATH",
+                                                      self.config.get("logout_locators", "logout_btn_by_xpath"), self.d)
+                cloud_menu_btn = web_driver.explicit_wait(self, 5, "XPATH", self.config.get("logout_locators",
+                                                                                            "cloud_or_local_menu_by_xpath"),
+                                                          self.d)
+            except Exception as ex:
+                print(ex.args)
+            if cloud_menu_btn:
+                print(f"logout btn visible: {cloud_menu_btn.is_displayed()}")
+            else:
+                if self.d.current_url == Portal_login_page_read_ini().get_portal_url():
+                    print(f"page url: {self.d.current_url}")
+                else:
+                    self.d.get(Portal_login_page_read_ini().get_portal_url())
+                    self.d.maximize_window()
+                    time.sleep(web_driver.two_second)
+                    # self.d.find_element(By.XPATH, Portal_login_page_read_ini().get_advance_btn_by_xpath()).click()
+                    # self.logger.info("clicked on advance")
+                    # time.sleep(web_driver.one_second)
+                    # self.logger.info(f"proceed link xpath: {Portal_login_page_read_ini().get_proceed_link_by_xpath()}")
+                    # self.d.find_element(By.XPATH, Portal_login_page_read_ini().get_proceed_link_by_xpath()).click()
+                    # self.logger.info("clicked on proceed link")
+                    # time.sleep(web_driver.one_second)
+                    time.sleep(web_driver.one_second)
+                    for i in range(4):
+                        pyautogui.hotkey('ctrl', '-')
+                        time.sleep(0.5)
+                    username_textbox = web_driver.explicit_wait(self, 10, "XPATH",
+                                                                self.config.get("login_page_locators",
+                                                                                "username_textbox_by_xpath"),
+                                                                self.d)
+                    password_textbox = self.d.find_element(By.XPATH,
+                                                           self.config.get("login_page_locators",
+                                                                           "password_textbox_by_xpath"))
+                    login_btn = self.d.find_element(By.XPATH,
+                                                    self.config.get("login_page_locators", "login_link_by_xpath"))
+                    self.implicit_wait(web_driver.one_second, self.d)
+                    if username_textbox.text == "":
+                        username_textbox.send_keys(self.config.get("user_info", "username"))
+                    self.implicit_wait(web_driver.one_second, self.d)
+                    if password_textbox.text == "":
+                        password_textbox.send_keys(self.config.get("user_info", "password"))
+                    self.implicit_wait(web_driver.one_second, self.d)
+                    login_btn.click()
+                    self.implicit_wait(web_driver.one_second, self.d)
+                    # logout_btn = self.d.find_element(By.XPATH, self.config.get("logout_locators", "logout_btn_by_xpath"))
+                    logout_btn = web_driver.explicit_wait(self, 10, "XPATH",
+                                                          self.config.get("logout_locators", "logout_btn_by_xpath"),
+                                                          self.d)
+                    time.sleep(web_driver.one_second)
+                    if logout_btn.is_displayed():
+                        self.logger.info("login success..")
+                    else:
+                        self.logger.info("login unsuccessful.. please check code.")
+                        self.d.save_screenshot(f"{web_driver.screenshots_path}\\login_failed.png")
+                    time.sleep(web_driver.two_second)
+
+            return self.d
+        except Exception as ex:
+            self.logger.info(f"exception: {ex.args}")
+            self.logger.info(f"exception message: {ex}")
+            self.d.save_screenshot(f"{web_driver.screenshots_path}\\login_exception.png")
+            print(f"{ex.args}")
+
 class logout(web_driver, web_logger):
     def __init__(self):
         self.file_path = f"{Path(__file__).parent.parent}\\All_Test_Data\\0_Login_Logout_Data\\Data_From_INI\\login_logout.ini"

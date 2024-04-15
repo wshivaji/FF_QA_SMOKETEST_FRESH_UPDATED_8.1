@@ -1,0 +1,61 @@
+15/04/2024 12:14:06 PM : root         : INFO     :  ******** Insight Dashboard (Order - 21) Begin ********
+15/04/2024 12:14:06 PM : root         : INFO     : ************* test_TC_Insight_Dashboard_01 started  **************
+15/04/2024 12:14:07 PM : root         : INFO     : entered explicit wait for 3
+15/04/2024 12:14:10 PM : root         : INFO     : element not found: (//div/p[@ng-bind="'Logout' | i18n"]/parent::div/parent::div/div)[2]
+15/04/2024 12:14:10 PM : root         : INFO     : entered explicit wait for 5
+15/04/2024 12:14:15 PM : root         : INFO     : element not found: //div[@id="start-logo-container"]
+15/04/2024 12:14:24 PM : root         : INFO     : entered explicit wait for 10
+15/04/2024 12:14:24 PM : root         : INFO     : exiting explicit wait..
+15/04/2024 12:14:25 PM : root         : INFO     : entered explicit wait for 10
+15/04/2024 12:14:25 PM : root         : INFO     : exiting explicit wait..
+15/04/2024 12:14:26 PM : root         : INFO     : login success..
+15/04/2024 12:14:31 PM : root         : INFO     : entered explicit wait for 5
+15/04/2024 12:14:31 PM : root         : INFO     : exiting explicit wait..
+15/04/2024 12:14:34 PM : root         : INFO     : entered explicit wait for 10
+15/04/2024 12:14:34 PM : root         : INFO     : exiting explicit wait..
+15/04/2024 12:14:34 PM : root         : INFO     : overview dashboard visible: True
+15/04/2024 12:14:34 PM : root         : INFO     : entered explicit wait for 5
+15/04/2024 12:14:36 PM : root         : INFO     : exiting explicit wait..
+15/04/2024 12:14:36 PM : root         : INFO     : total loss prevented text visible: True
+15/04/2024 12:14:36 PM : root         : INFO     : entered explicit wait for 5
+15/04/2024 12:14:36 PM : root         : INFO     : exiting explicit wait..
+15/04/2024 12:14:36 PM : root         : INFO     : total loss prevented amount visible: True
+15/04/2024 12:14:36 PM : root         : INFO     : entered explicit wait for 5
+15/04/2024 12:14:36 PM : root         : INFO     : exiting explicit wait..
+15/04/2024 12:14:36 PM : root         : INFO     : total_new_enrollments text visible: True
+15/04/2024 12:14:36 PM : root         : INFO     : entered explicit wait for 5
+15/04/2024 12:14:36 PM : root         : INFO     : exiting explicit wait..
+15/04/2024 12:14:36 PM : root         : INFO     : total_new_enrollments count visible: True
+15/04/2024 12:14:36 PM : root         : INFO     : entered explicit wait for 5
+15/04/2024 12:14:36 PM : root         : INFO     : exiting explicit wait..
+15/04/2024 12:14:36 PM : root         : INFO     : total_facefirst_enrollments text visible: True
+15/04/2024 12:14:36 PM : root         : INFO     : entered explicit wait for 5
+15/04/2024 12:14:36 PM : root         : INFO     : exiting explicit wait..
+15/04/2024 12:14:36 PM : root         : INFO     : total_facefirst_enrollments count visible: True
+15/04/2024 12:14:36 PM : root         : INFO     : entered explicit wait for 5
+15/04/2024 12:14:36 PM : root         : INFO     : exiting explicit wait..
+15/04/2024 12:14:36 PM : root         : INFO     : total_match_events text visible: True
+15/04/2024 12:14:36 PM : root         : INFO     : entered explicit wait for 5
+15/04/2024 12:14:36 PM : root         : INFO     : exiting explicit wait..
+15/04/2024 12:14:36 PM : root         : INFO     : total_match_events count visible: True
+15/04/2024 12:14:36 PM : root         : INFO     : entered explicit wait for 5
+15/04/2024 12:14:36 PM : root         : INFO     : exiting explicit wait..
+15/04/2024 12:14:36 PM : root         : INFO     : visitor_searches text visible: True
+15/04/2024 12:14:36 PM : root         : INFO     : entered explicit wait for 5
+15/04/2024 12:14:36 PM : root         : INFO     : exiting explicit wait..
+15/04/2024 12:14:36 PM : root         : INFO     : visitor_searches count visible: True
+15/04/2024 12:14:36 PM : root         : INFO     : entered explicit wait for 5
+15/04/2024 12:14:36 PM : root         : INFO     : exiting explicit wait..
+15/04/2024 12:14:36 PM : root         : INFO     : investigation_time text visible: True
+15/04/2024 12:14:36 PM : root         : INFO     : entered explicit wait for 5
+15/04/2024 12:14:36 PM : root         : INFO     : exiting explicit wait..
+15/04/2024 12:14:36 PM : root         : INFO     : investigation_time count visible: True
+15/04/2024 12:14:36 PM : root         : INFO     : entered explicit wait for 5
+15/04/2024 12:14:36 PM : root         : INFO     : exiting explicit wait..
+15/04/2024 12:14:36 PM : root         : INFO     : repeat_people_of_interest text visible: True
+15/04/2024 12:14:36 PM : root         : INFO     : entered explicit wait for 5
+15/04/2024 12:14:36 PM : root         : INFO     : exiting explicit wait..
+15/04/2024 12:14:36 PM : root         : INFO     : repeat_people_of_interest count visible: True
+15/04/2024 12:14:36 PM : root         : INFO     : status: [True, True, True, True, True, True, True, True]
+15/04/2024 12:14:36 PM : root         : INFO     : ************* test_TC_Insight_Dashboard_01 end  **************
+15/04/2024 12:14:36 PM : root         : INFO     : overview dashboard is visible.
