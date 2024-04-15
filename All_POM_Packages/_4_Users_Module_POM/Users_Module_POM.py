@@ -235,7 +235,7 @@ class Users_Module_pom(web_driver, web_logger):
                 self.enter_password(users_dict["users"][i]["password"])
                 self.select_region(users_dict["users"][i]["user_orgahierarchy"])
                 self.enter_email(users_dict["users"][i]["Email"])
-                self.enter_alert_email(users_dict["users"][i]["alert_Email"])
+                self.enter_alert_email(users_dict["users"][i]["Email"])
                 self.select_time_zone(Read_Users_Components().time_zone_input_data())
                 time.sleep(web_driver.one_second)
                 self.click_on_save_btn()

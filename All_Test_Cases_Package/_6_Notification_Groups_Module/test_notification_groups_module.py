@@ -50,229 +50,36 @@ class Test_Notification_Groups_Module(web_driver, web_logger):
         else:
             assert False
 
-    # @pytest.mark.p2
-    # def test_TC_NG_001(self):
-    #     self.logger.info("Notification Groups module = test_TC_NG_001 execution started..")
-    #     if Notification_Groups_Module_pom().Verify_Notification_Groups_submenu_is_visible_and_enabled_in_cloud_menu():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p1
-    # def test_TC_NG_002(self):
-    #     self.logger.info("Notification Groups module = test_TC_NG_002 execution started..")
-    #     if Notification_Groups_Module_pom(). \
-    #             Verify_user_click_on_Notification_Groups_menu_Notification_Groups_panel_is_displayed():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_NG_003(self):
-    #     self.logger.info("Notification Groups module = test_TC_NG_003 execution started..")
-    #     if Notification_Groups_Module_pom()\
-    #             .Verify_Notification_Groups_title_is_visible_on_Notification_Groups_panel():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p2
-    # def test_TC_NG_004(self):
-    #     self.logger.info("Notification Groups module = test_TC_NG_004 execution started..")
-    #     if Notification_Groups_Module_pom().Verify_Action_button_is_visible_and_clickable():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p2
-    # def test_TC_NG_005(self):
-    #     self.logger.info("Notification Groups module = test_TC_NG_005 execution started..")
-    #     if Notification_Groups_Module_pom().Verify_Action_button_has_dropdown_list():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p2
-    # def test_TC_NG_006(self):
-    #     self.logger.info("Notification Groups module = test_TC_NG_006 execution started..")
-    #     if Notification_Groups_Module_pom() \
-    #             .Verify_Action_dropdown_consist_Create_Notification_Group_button_is_visible_and_clickable():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # # delete notification group test is skipped for now
-    # @pytest.mark.skip
-    # def test_TC_NG_007(self):
-    #     self.logger.info("Notification Groups module = test_TC_NG_007 execution started..")
-    #     if Notification_Groups_Module_pom().Verify_Action_dropdown_consist_Delete_Selected_Notification_Groups_From_System_button_is_visible_and_clickable():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p2
-    # def test_TC_NG_008(self):
-    #     self.logger.info("Notification Groups module = test_TC_NG_008 execution started..")
-    #     if Notification_Groups_Module_pom() \
-    #             .Verify_Action_dropdown_consist_Refresh_button_is_visible_and_clickable():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p2
-    # def test_TC_NG_009(self):
-    #     self.logger.info("Notification Groups module = test_TC_NG_009 execution started..")
-    #     if Notification_Groups_Module_pom() \
-    #             .Verify_user_click_on_Create_Notification_Group_Notification_Group_Details_panel_should_be_visible():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p2
-    # def test_TC_NG_010(self):
-    #     self.logger.info("Notification Groups module = test_TC_NG_010 execution started..")
-    #     if Notification_Groups_Module_pom() \
-    #             .Verify_user_click_on_Create_Notification_Group_pop_up_panel_title_is_Notification_Group_Details():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p2
-    # def test_TC_NG_011(self):
-    #     self.logger.info("Notification Groups module = test_TC_NG_011 execution started..")
-    #     if Notification_Groups_Module_pom() \
-    #             .Verify_Notification_Group_Cancel_button_is_visible_and_clickable():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p2
-    # def test_TC_NG_012(self):
-    #     self.logger.info("Notification Groups module = test_TC_NG_012 execution started..")
-    #     if Notification_Groups_Module_pom() \
-    #             .Verify_Notification_Group_Save_button_is_visible_and_clickable():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_NG_013(self):
-    #     self.logger.info("Notification Groups module = test_TC_NG_013 execution started..")
-    #     if Notification_Groups_Module_pom() \
-    #             .Verify_Notification_Group_NOTIFICATION_GROUP_DETAILS_sub_title_is_visible():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_NG_014(self):
-    #     self.logger.info("Notification Groups module = test_TC_NG_014 execution started..")
-    #     if Notification_Groups_Module_pom() \
-    #             .Verify_Name_text_and_Name_textbox_field_is_visible_and_clickable():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_NG_015(self):
-    #     self.logger.info("Notification Groups module = test_TC_NG_015 execution started..")
-    #     if Notification_Groups_Module_pom() \
-    #             .Verify_Description_text_and_Description_text_box_field_is_visible_and_clickable():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p3
-    # def test_TC_NG_016(self):
-    #     self.logger.info("Notification Groups module = test_TC_NG_016 execution started..")
-    #     if Notification_Groups_Module_pom()\
-    #             .Verify_validation_message_Missing_required_parameter_is_populated_when_user_click_on_save_button_with_the_blank():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p1
-    # def test_TC_NG_017(self):
-    #     self.logger.info("Notification Groups module = test_TC_NG_017 execution started..")
-    #     if Notification_Groups_Module_pom()\
-    #             .Verify_user_fills_the_Name_text_box_with_data_and_click_on_Save_button_then_validation_message_Success_the_alert_below_has_been_created_should_populate():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p2
-    # def test_TC_NG_018(self):
-    #     self.logger.info("Notification Groups module = test_TC_NG_018 execution started..")
-    #     if Notification_Groups_Module_pom() \
-    #             .Verify_user_fill_the_name_text_box_with_data_and_click_Save_button_then_below_fields_Users_Enrollment_Groups_Events_should_be_activated():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p2
-    # def test_TC_NG_019(self):
-    #     self.logger.info("Notification Groups module = test_TC_NG_019 execution started..")
-    #     if Notification_Groups_Module_pom() \
-    #             .Verify_Notification_Group_Details_panel_while_creating_Notification_Group_below_Users_Enrollment_Groups_Events_should_be_in_disable_mode():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # # delete notification group skipped for now
-    # @pytest.mark.skip
-    # def test_TC_NG_020(self):
-    #     self.logger.info("Notification Groups module = test_TC_NG_020 execution started..")
-    #     if Notification_Groups_Module_pom() \
-    #             .Verify_user_click_on_Delete_Groups_From_System_option_without_selecting_the_check_box_it_should_display_a_popup_message():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p2
-    # def test_TC_NG_021(self):
-    #     self.logger.info("Notification Groups module = test_TC_NG_021 execution started..")
-    #     if Notification_Groups_Module_pom() \
-    #             .Verify_user_click_on_Refresh_button_Notification_Group_page_should_get_refreshed():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p2
-    # def test_TC_NG_022(self):
-    #     self.logger.info("Notification Groups module = test_TC_NG_022 execution started..")
-    #     if Notification_Groups_Module_pom() \
-    #             .Verify_SELECT_ALL_check_box_is_visible_and_clickable():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p4
-    # def test_TC_NG_023(self):
-    #     self.logger.info("Notification Groups module = test_TC_NG_023 execution started..")
-    #     if Notification_Groups_Module_pom() \
-    #             .Verify_user_clicks_on_SELECT_ALL_check_box_all_the_below_check_boxes_should_get_selected():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p4
-    # def test_TC_NG_024(self):
-    #     self.logger.info("Notification Groups module = test_TC_NG_024 execution started..")
-    #     if Notification_Groups_Module_pom() \
-    #             .Verify_user_clicks_on_SELECT_ALL_uncheck_box_all_the_below_check_boxes_should_get_unselected():
-    #         assert True
-    #     else:
-    #         assert False
-    #
-    # @pytest.mark.p1
-    # def test_TC_NG_025(self):
-    #     self.logger.info("Notification Groups module = test_TC_NG_025 execution started..")
-    #     if Notification_Groups_Module_pom() \
-    #             .Verify_user_fills_the_Name_text_box_with_any_data_and_click_on_Save_button_then_validation_message_Success_the_alert_below_has_been_created_should_populate():
-    #         assert True
-    #     else:
-    #         assert False
-    #
+    def test_TC_NG_07(self):
+        if Notification_Groups_Module_pom().verify_user_able_to_see_events_associated_to_Notification_group_and_events_associated_to_details_of_Notification_group_for_both_event_count_should_be_match():
+            assert True
+        else:
+            assert False
+
+    def test_TC_NG_08(self):
+        if Notification_Groups_Module_pom().verify_user_able_to_link_a_user_to_notification_group():
+            assert True
+        else:
+            assert False
+
+    def test_TC_NG_09(self):
+        if Notification_Groups_Module_pom().verify_user_able_to_unlink_a_user_to_notification_group():
+            assert True
+        else:
+            assert False
+
+    def test_TC_NG_10(self):
+        if Notification_Groups_Module_pom().Verify_user_able_to_delete_the_newly_created_notification_group():
+            assert True
+        else:
+            assert False
+
+    def test_TC_NG_11(self):
+        if Notification_Groups_Module_pom().Verify_details_of_default_notification_group():
+            assert True
+        else:
+            assert False
+
 
     #
     # @pytest.mark.p3

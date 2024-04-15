@@ -16,7 +16,7 @@ class Read_Enrollment_Groups_Components:
 
     def get_enrollment_group_name(self):
         try:
-            enrollment_group_name = self.common_test_data_config.get("system_level_test_Data", "dummy_enrollment_group_name")
+            enrollment_group_name = self.common_test_data_config.get("system_level_test_Data", "enrollment_group_name")
             return enrollment_group_name
         except Exception as ex:
             print(ex)
@@ -95,6 +95,13 @@ class Read_Enrollment_Groups_Components:
         try:
             name_placeholder_on_ng_panel_by_xpath = self.config.get("LOCATORS", "name_placeholder_on_ng_panel_by_xpath")
             return name_placeholder_on_ng_panel_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def enrollment_icon_btn_to_view_linked_enrollments_by_xpath(self):
+        try:
+            enrollment_icon_btn_to_view_linked_enrollments_by_xpath = self.config.get("LOCATORS", "enrollment_icon_btn_to_view_linked_enrollments_by_xpath")
+            return enrollment_icon_btn_to_view_linked_enrollments_by_xpath
         except Exception as ex:
             print(ex)
 
@@ -441,6 +448,38 @@ class Read_Enrollment_Groups_Components:
         except Exception as ex:
             print("enrollment_in_text_title_by_xpath : ", ex)
 
+    def linked_enrollments_count_on_icon_by_xpath(self):
+        try:
+            linked_enrollments_count_on_icon_by_xpath = self.config \
+                .get("LOCATORS", "linked_enrollments_count_on_icon_by_xpath")
+            return linked_enrollments_count_on_icon_by_xpath
+        except Exception as ex:
+            print("enrollment_in_text_title_by_xpath : ", ex)
+
+    def list_of_linked_enrollments_by_xpath(self):
+        try:
+            list_of_linked_enrollments_by_xpath = self.config \
+                .get("LOCATORS", "list_of_linked_enrollments_by_xpath")
+            return list_of_linked_enrollments_by_xpath
+        except Exception as ex:
+            print("list_of_linked_enrollments_by_xpath : ", ex)
+
+    def probable_match_events_icon_by_xpath(self):
+        try:
+            probable_match_events_icon_by_xpath = self.config \
+                .get("LOCATORS", "probable_match_events_icon_by_xpath")
+            return probable_match_events_icon_by_xpath
+        except Exception as ex:
+            print("probable_match_events_icon_by_xpath : ", ex)
+
+    def events_list_by_xpath(self):
+        try:
+            events_list_by_xpath = self.config \
+                .get("LOCATORS", "events_list_by_xpath")
+            return events_list_by_xpath
+        except Exception as ex:
+            print("events_list_by_xpath : ", ex)
+
     def enrollment_in_text_title_validation_text(self):
         try:
             enrollment_in_text_title_validation_text = self.common_test_data_config \
@@ -603,9 +642,9 @@ class Read_Enrollment_Groups_Components:
         except Exception as ex:
             print(ex)
 
-    def add_users_to_groups(self):
+    def add_enrollments_to_groups(self):
         try:
-            ele = self.config.get('LOCATORS', 'add_users_to_groups')
+            ele = self.config.get('LOCATORS', 'add_enrollments_to_groups')
             return ele
         except Exception as ex:
             print(ex)
@@ -620,6 +659,27 @@ class Read_Enrollment_Groups_Components:
     def added_enrollment_to_enrollment_groups_text(self):
         try:
             ele = self.common_test_data_config.get('Enrollment_Groups_Data', 'added_enrollment_to_enrollment_groups_text')
+            return ele
+        except Exception as ex:
+            print(ex)
+
+    def remove_enrollments_from_group_by(self):
+        try:
+            ele = self.config.get('LOCATORS', 'remove_enrollments_from_group_by')
+            return ele
+        except Exception as ex:
+            print(ex)
+
+    def default_enrollment_group_details_by_xpath(self):
+        try:
+            ele = self.config.get('LOCATORS', 'default_enrollment_group_details_by_xpath')
+            return ele
+        except Exception as ex:
+            print(ex)
+
+    def default_enrollment_group_details(self):
+        try:
+            ele = self.common_test_data_config.get('Enrollment_Groups_Data', 'default_enrollment_group_details')
             return ele
         except Exception as ex:
             print(ex)

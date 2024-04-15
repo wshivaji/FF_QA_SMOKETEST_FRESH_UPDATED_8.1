@@ -30,8 +30,6 @@ class Test_Users_Module(web_driver, web_logger):
     #     else:
     #         assert False
 
-
-
     @pytest.mark.p1
     def test_TC_US_1(self):
         self.logger.info("Users module = test_TC_US_110 execution started..")

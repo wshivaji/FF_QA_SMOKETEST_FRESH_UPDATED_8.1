@@ -305,3 +305,5 @@ class Portal_login_page_read_ini:
             return expected_password_not_match
         except Exception as ex:
             print(ex.args)
+
+Portal_login_page_read_ini().get_portal_url()

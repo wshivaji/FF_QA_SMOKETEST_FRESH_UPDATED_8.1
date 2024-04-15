@@ -18,7 +18,7 @@ class Read_Notification_Groups_Components:
 
     def get_notification_group_name(self):
         try:
-            notification_group_name = self.common_test_data_config.get("system_level_test_Data", "dummy_notification_group_name")
+            notification_group_name = self.common_test_data_config.get("system_level_test_Data", "notification_group_name")
             return notification_group_name
         except Exception as ex:
             print(ex)
@@ -27,6 +27,13 @@ class Read_Notification_Groups_Components:
         try:
             number_of_ngs_by_xpath = self.config.get("LOCATORS", "number_of_ngs_by_xpath")
             return number_of_ngs_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def get_default_alert_group_name_on_details_by_xpath(self):
+        try:
+            default_alert_group_name_on_details_by_xpath = self.config.get("LOCATORS", "default_alert_group_name_on_details_by_xpath")
+            return default_alert_group_name_on_details_by_xpath
         except Exception as ex:
             print(ex)
 
@@ -80,6 +87,14 @@ class Read_Notification_Groups_Components:
         except Exception as ex:
             print(ex.args)
 
+    def default_notification_group_details(self):
+        try:
+            default_notification_group_details = self.config.get("LOCATORS", "default_notification_group_details")
+            print(f"default_notification_group_details: {default_notification_group_details}")
+            return default_notification_group_details
+        except Exception as ex:
+            print(ex.args)
+
     def get_enrollment_group_name(self):
         try:
             enrollment_group_name = self.common_test_data_config.get("system_level_test_Data", "enrollment_group_name")
@@ -96,7 +111,7 @@ class Read_Notification_Groups_Components:
 
     def get_dummy_notification_group_name(self):
         try:
-            notification_group_name = self.common_test_data_config.get("system_level_test_Data", "dummy_notification_group_name")
+            notification_group_name = self.common_test_data_config.get("system_level_test_Data", "notification_group_name")
             return notification_group_name
         except Exception as ex:
             print(ex)
@@ -362,6 +377,38 @@ class Read_Notification_Groups_Components:
         except Exception as ex:
             print("error_message_by_xpath : ", ex)
 
+    def probable_match_event_icon_btn_by_xpath(self):
+        try:
+            probable_match_event_icon_btn_by_xpath = self.config \
+                .get("LOCATORS", "probable_match_event_icon_btn_by_xpath")
+            return probable_match_event_icon_btn_by_xpath
+        except Exception as ex:
+            print("probable_match_event_icon_btn_by_xpath : ", ex)
+
+    def linked_users_count_on_users_icon_by_xpath(self):
+        try:
+            linked_users_count_on_users_icon_by_xpath = self.config \
+                .get("LOCATORS", "linked_users_count_on_users_icon_by_xpath")
+            return linked_users_count_on_users_icon_by_xpath
+        except Exception as ex:
+            print("linked_users_count_on_users_icon_by_xpath : ", ex)
+
+    def unlinked_users_option_by_xpath(self):
+        try:
+            unlinked_users_option_by_xpath = self.config \
+                .get("LOCATORS", "unlinked_users_option_by_xpath")
+            return unlinked_users_option_by_xpath
+        except Exception as ex:
+            print("unlinked_users_option_by_xpath : ", ex)
+
+    def users_checkboxes_by_xpath(self):
+        try:
+            users_checkboxes_by_xpath = self.config \
+                .get("LOCATORS", "users_checkboxes_by_xpath")
+            return users_checkboxes_by_xpath
+        except Exception as ex:
+            print("users_checkboxes_by_xpath : ", ex)
+
     def error_message_validation_text(self):
         try:
             error_message_validation_text = self.common_test_data_config \
@@ -458,6 +505,14 @@ class Read_Notification_Groups_Components:
         except Exception as ex:
             print("check_box_list_by_xpath : ", ex)
 
+    def remove_user_from_group_option_by_xpath(self):
+        try:
+            remove_user_from_group_option_by_xpath = self.config \
+                .get("LOCATORS", "remove_user_from_group_option_by_xpath")
+            return remove_user_from_group_option_by_xpath
+        except Exception as ex:
+            print("remove_user_from_group_option_by_xpath : ", ex)
+
     def notification_groups_details_action_dropdown_button_by_xpath(self):
         try:
             notification_groups_details_action_dropdown_button_by_xpath = self.config \
@@ -540,6 +595,14 @@ class Read_Notification_Groups_Components:
             return second_action_dropdown_button_by_xpath
         except Exception as ex:
             print("new_second_action_dropdown_button_by_xpath : ", ex)
+
+    def enrollment_groups_action_dropdown_by_xpath(self):
+        try:
+            enrollment_groups_action_dropdown_by_xpath = self.config \
+                .get("LOCATORS", "enrollment_groups_action_dropdown_by_xpath")
+            return enrollment_groups_action_dropdown_by_xpath
+        except Exception as ex:
+            print("enrollment_groups_action_dropdown_by_xpath : ", ex)
 
     def create_users_by_xpath(self):
         try:
@@ -1026,6 +1089,13 @@ class Read_Notification_Groups_Components:
         try:
             users_filter_button_by_xpath = self.config.get("LOCATORS", "users_filter_button_by_xpath")
             return users_filter_button_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def users_list_by_xpath(self):
+        try:
+            users_list_by_xpath = self.config.get("LOCATORS", "users_list_by_xpath")
+            return users_list_by_xpath
         except Exception as ex:
             print(ex)
 

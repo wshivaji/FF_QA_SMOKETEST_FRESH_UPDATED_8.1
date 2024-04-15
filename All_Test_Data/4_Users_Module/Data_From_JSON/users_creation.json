@@ -1,54 +1,49 @@
 {
   "users": [
     {
-      "username": "operator27",
+      "username": "operator",
       "firstname": "standard",
       "lastname": "operator",
       "userrole": "3. operator",
       "password": "Right_1r1s",
-      "user_orgahierarchy": "sceedge13",
-      "Email":"divya.goli@facefirst.com",
-      "alert_Email":"divya.goli@facefirst.com"
+      "user_orgahierarchy": "sceedge6",
+      "Email":"renuka.shinde@facefirst.com"
     },
     {
-      "username": "responder12",
+      "username": "responder",
       "firstname": "reponder",
       "lastname": "user",
       "userrole": "4. responder",
       "password": "Right_1r1s",
-      "user_orgahierarchy": "sceedge13",
-      "Email":"divya.goli@facefirst.com",
-      "alert_Email":"divya.goli@facefirst.com"
+      "user_orgahierarchy": "sceedge6",
+      "Email":"renuka.shinde@facefirst.com"
     },
     {
-      "username": "approver12",
+      "username": "approver",
       "firstname": "user",
       "lastname": "approver",
       "userrole": "2. approver/supervisor",
       "password": "Right_1r1s",
       "user_orgahierarchy": "Kroger CA - KCA",
-      "Email":"divya.goli@facefirst.com",
-      "alert_Email":"divya.goli@facefirst.com"
+      "Email":"renuka.shinde@facefirst.com"
     },
     {
-      "username": "executive12",
+      "username": "executive",
       "firstname": "user",
       "lastname": "executive",
       "userrole": "1. executive",
       "password": "Right_1r1s",
       "user_orgahierarchy": "Kroger USA - KUSA",
-      "Email":"divya.goli@facefirst.com",
-      "alert_Email":"divya.goli@facefirst.com"
+      "Email":"renuka.shinde@facefirst.com"
     },
     {
-      "username": "it admin12",
+      "username": "it admin",
       "firstname": "user",
       "lastname": "it admin",
       "userrole": "it system admin",
       "password": "Right_1r1s",
       "user_orgahierarchy": "Kroger International - KCORP",
-      "Email":"divya.goli@facefirst.com",
-      "alert_Email":"divya.goli@facefirst.com"
+      "Email":"renuka.shinde@facefirst.com"
     }
   ]
 }
