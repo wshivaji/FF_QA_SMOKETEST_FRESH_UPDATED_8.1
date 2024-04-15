@@ -1456,10 +1456,10 @@ class Read_Identify_and_Enroll_Components:
         except Exception as ex:
             print("enrollment_menu_button_xpath : ", ex)
 
-    def select_all_enrollment_btn_xpath(self):
+    def select_one_checkbox(self):
         try:
-            ele = self.config.get("LOCATORS", "select_all_enrollment_btn_xpath")
-            return ele
+            checkbox = self.config.get("LOCATORS","select_one_checkbox")
+            return checkbox
         except Exception as ex:
             print("select_all_enrollment_btn_xpath : ", ex)
 
@@ -2506,3 +2506,88 @@ class Read_Identify_and_Enroll_Components:
             return password
         except Exception as ex:
             print(ex.args)
+
+
+    def get_enrollment_link(self):
+        try:
+            enrollment_link = self.config.get("portal_Login","Enrollment_Link")
+            return enrollment_link
+        except Exception as ex:
+            print(ex)
+
+
+    def get_load_more_button_by_xpath(self):
+        try:
+            load_more = self.config.get("LOCATORS","load_more_button")
+            return load_more
+        except Exception as ex:
+            print(ex.args)
+
+    def get_checkboxes_by_xpath(self):
+        try:
+            checkboxes = self.config.get("LOCATORS","Enrollment_cheeck_boxes" )
+            return  checkboxes
+        except Exception as ex:
+            print(ex.args)
+
+    def get_filter_dropdown(self):
+        try:
+            filter = self.config.get("LOCATORS","Filter_button_on_Enrollment_panel")
+            return filter
+        except Exception as ex:
+            print(ex.args)
+
+    def pending_for_review_option(self):
+        try:
+            pending_for_review = self.config.get("LOCATORS","pending_for_review_option")
+            return pending_for_review
+        except Exception as ex:
+            print(ex.args)
+    def Action_button_by_Xpath(self):
+        try:
+            Action = self.config.get("LOCATORS","action_dropdown_button_by_xpath")
+            return  Action
+        except Exception as ex:
+            print(ex.args)
+
+    def approve_enrollment_link(self):
+        try:
+            approve_enrollment_link = self.config.get("LOCATORS","approve_enrollment_link")
+            return approve_enrollment_link
+        except Exception as ex:
+            print(ex.args)
+
+    def after_approving_message_to_user(self):
+        try:
+            message = self.config.get("LOCATORS","after_approving_enrollment_message")
+            return message
+        except Exception as ex:
+            print(ex.args)
+
+    def image_Xpath(self):
+        try:
+           image = self.config.get("LOCATORS","image_Xpath")
+           return image
+        except Exception as ex:
+            print(ex.args)
+
+    def get_expiration_date_xpath(self):
+        try:
+            expiration = self.config.get("LOCATORS", "expiration_date_xpath")
+            return expiration
+        except Exception as ex:
+            print(ex)
+
+    def get_expiration_date_data(self):
+        try:
+            expiration_data = self.config.get("DATA", "expiration_data_range")
+            return expiration_data
+        except Exception as ex:
+            print(ex)
+
+
+
+
+
+
+
