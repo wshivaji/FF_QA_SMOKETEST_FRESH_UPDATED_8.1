@@ -3,6 +3,8 @@ import time
 from pathlib import Path
 from selenium.webdriver.support.select import Select
 
+from All_Config_Packages._1_Portal_Login_Module_Config_Files.Portal_Login_Page_Read_INI import \
+    Portal_login_page_read_ini
 from All_POM_Packages._2_Portal_Menu_Module_POM.Portal_Menu_Module_POM import Portal_Menu_Module_pom
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
@@ -936,17 +938,46 @@ class Notification_Groups_Module_pom(web_driver, web_logger):
                     time.sleep(web_driver.one_second)
                     details_icon[i].click()
 
-                    time.sleep(web_driver.one_second)
-                    default_notification_group_name = self.d.find_element(By.XPATH, Read_Notification_Groups_Components().get_default_alert_group_name_on_details_by_xpath())
+                    default_notification_group_name = self.explicit_wait(10, "XPATH",
+                                                                         Read_Notification_Groups_Components().
+                                                                         get_default_alert_group_name_on_details_by_xpath(), self.d)
 
                     if default_notification_group_name.text == default_notification_group_details[0]:
                         self.logger.info(f"{default_notification_group_name.text} is visible...")
                         status.append(True)
                     else:
                         status.append(False)
-                    break
 
-            self.click_on_logout_button()
+                    user_btn = self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components().
+                                                  user_button_by_xpath(), self.d)
+                    user_btn.click()
+                    users_list = self.explicit_wait(10, "XPATH",
+                                                    Read_Notification_Groups_Components().users_list_by_xpath(), self.d)
+                    users_list = self.d.find_elements(By.XPATH, Read_Notification_Groups_Components().
+                                                      users_list_by_xpath())
+                    if (len(users_list) == 1) and (users_list[0].text == Portal_login_page_read_ini().
+                            get_valid_login_username()):
+                        self.logger.info(f"Default User linked with default alert group is: {users_list[0].text}")
+                        status.append(True)
+                    else:
+                        status.append(False)
+
+                    enrollment_groups_btn = self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components().
+                                                  enrollment_group_btn_by_xpath(), self.d)
+                    enrollment_groups_btn.click()
+                    case_groups_list = self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components().
+                                                          enrollment_groups_list_by_xpath(), self.d)
+                    case_groups_list = self.d.find_elements(By.XPATH, Read_Notification_Groups_Components().
+                                                            enrollment_groups_list_by_xpath())
+                    default_case_group = Read_Enrollment_Groups_Components().default_enrollment_group_details()
+                    default_case_group = default_case_group.split(',')
+                    if (len(case_groups_list) == 1) and (case_groups_list[0].text == default_case_group[0]):
+                        self.logger.info(f"Default Enrollment Group linked with default alert group is: {case_groups_list[0].text}")
+                        status.append(True)
+                    else:
+                        status.append(False)
+
+            self.close_all_panels()
 
             self.logger.info(f"Status is : {status}")
             if False in status:
@@ -960,241 +991,8 @@ class Notification_Groups_Module_pom(web_driver, web_logger):
             self.logger.info(f"test_TC_NG_012 got exception as: {ex}")
             return False
 
-    # def Verify_user_click_on_Users_then_Users_panel_should_open(self):
-    #     try:
-    #         status = []
-    #         login().login_to_cloud_if_not_done(self.d)
-    #         time.sleep(web_driver.one_second)
-    #         self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components().
-    #                                                       notification_groups_button_by_xpath(),
-    #                            self.d)
-    #         notification_groups_btn = self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components()
-    #                                                      .notification_groups_button_by_xpath(), self.d)
-    #         time.sleep(web_driver.one_second)
-    #         self.d.execute_script("arguments[0].click();", notification_groups_btn)
-    #         self.logger.info("notification groups btn is clicked")
-    #         self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components().
-    #                                          action_dropdown_button_by_xpath(),
-    #                            self.d)
-    #         action_btn = self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components()
-    #                                         .action_dropdown_button_by_xpath(), self.d)
-    #         action_btn.click()
-    #         self.logger.info("action dropdown is clicked")
-    #         time.sleep(web_driver.two_second)
-    #         self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components()
-    #                                                 .create_notification_group_btn_by_xpath(),
-    #                            self.d)
-    #         create_enrollment = self.d.find_element(By.XPATH, Read_Notification_Groups_Components()
-    #                                                 .create_notification_group_btn_by_xpath())
-    #         create_enrollment.click()
-    #         self.logger.info("create notification option is clicked")
-    #         time.sleep(web_driver.one_second)
-    #         self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components().name_field_by_xpath(),
-    #                            self.d)
-    #         name_field = self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components().name_field_by_xpath(), self.d)
-    #
-    #         name_field.send_keys(Read_Notification_Groups_Components().name_field_data())
-    #
-    #         description_field = self.d.find_element(By.XPATH, Read_Notification_Groups_Components()
-    #                                                 .description_field_by_xpath())
-    #         description_field.send_keys(Read_Notification_Groups_Components().description_field_data())
-    #
-    #         save_button = self.d.find_element(By.XPATH, Read_Notification_Groups_Components().save_button_by_xpath())
-    #         save_button.click()
-    #         self.logger.info("Notification details is filled and save btn is clicked")
-    #         time.sleep(web_driver.two_second)
-    #         users_text = self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components()
-    #                                          .user_button_by_xpath(), self.d)
-    #
-    #         self.d.execute_script("arguments[0].click();", users_text)
-    #         self.logger.info("user btn is clicked in notification details panel")
-    #         time.sleep(web_driver.one_second)
-    #         users_text = self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components()
-    #                                         .notification_groups_title_by_xpath(), self.d)
-    #
-    #         status.append(users_text.is_displayed())
-    #         self.logger.info(f"users panel is visible : {users_text.is_displayed()}")
-    #         self.logger.info(f"status: {status}")
-    #         if False in status:
-    #             self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_NG_029_failed.png")
-    #             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_NG_029_failed.png")
-    #             return False
-    #         else:
-    #             return True
-    #         # logout().logout_from_core()
-    #     except Exception as ex:
-    #         self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_NG_029_exception.png")
-    #         self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_NG_029_exception.png")
-    #         self.logger.error(f"test_TC_NG_029 got exception as: {ex.args}")
-    #         return False
-    #     finally:
-    #         self.close_all_panel_one_by_one()
-    #
-    # def Verify_user_click_on_Enrollment_Groups_then_Enrollment_Groups_panel_should_open(self):
-    #     try:
-    #         status = []
-    #         login().login_to_cloud_if_not_done(self.d)
-    #         time.sleep(web_driver.one_second)
-    #         self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components().
-    #                                                       notification_groups_button_by_xpath(),
-    #                            self.d)
-    #         notification_groups_btn = self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components()
-    #                                                      .notification_groups_button_by_xpath(), self.d)
-    #         self.d.execute_script("arguments[0].click();", notification_groups_btn)
-    #         self.logger.info("notification groups btn is clicked")
-    #         time.sleep(web_driver.one_second)
-    #         self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components().
-    #                                          action_dropdown_button_by_xpath(),
-    #                            self.d)
-    #         action_btn = self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components()
-    #                                         .action_dropdown_button_by_xpath(), self.d)
-    #         action_btn.click()
-    #         self.logger.info("Action dropdown is clicked")
-    #         time.sleep(web_driver.two_second)
-    #         self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components()
-    #                                                 .create_notification_group_btn_by_xpath(),
-    #                            self.d)
-    #         create_enrollment = self.d.find_element(By.XPATH, Read_Notification_Groups_Components()
-    #                                                 .create_notification_group_btn_by_xpath())
-    #         create_enrollment.click()
-    #         self.logger.info("create notification option is clicked")
-    #         time.sleep(web_driver.one_second)
-    #         self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components().name_field_by_xpath(),
-    #                            self.d)
-    #         name_field = self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components().name_field_by_xpath(), self.d)
-    #
-    #         name_field.send_keys(Read_Notification_Groups_Components().name_field_data())
-    #
-    #         description_field = self.d.find_element(By.XPATH, Read_Notification_Groups_Components()
-    #                                                 .description_field_by_xpath())
-    #         description_field.send_keys(Read_Notification_Groups_Components().description_field_data())
-    #         time.sleep(web_driver.one_second)
-    #         save_button = self.d.find_element(By.XPATH, Read_Notification_Groups_Components().save_button_by_xpath())
-    #         save_button.click()
-    #         self.logger.info("notification details is filled and save btn is clicked")
-    #         time.sleep(web_driver.two_second)
-    #         enrollment_groups_text = self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components()
-    #                                                      .enrollment_group_btn_by_xpath(),
-    #                            self.d)
-    #
-    #         self.d.execute_script("arguments[0].click();", enrollment_groups_text)
-    #         self.logger.info("Enrollment Group btn clicked on notification details panel")
-    #         time.sleep(web_driver.one_second)
-    #         enrollment_in_text = self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components().notification_groups_title_by_xpath(),
-    #                            self.d)
-    #
-    #         status.append(enrollment_in_text.is_displayed())
-    #         self.logger.info(f"Enrollment panel is displayed : {enrollment_in_text.is_displayed()}")
-    #         self.logger.info(f"status: {status}")
-    #         if False in status:
-    #             self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_NG_030_failed.png")
-    #             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_NG_030_failed.png")
-    #             return False
-    #         else:
-    #             return True
-    #         # logout().logout_from_core()
-    #     except Exception as ex:
-    #         self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_NG_030_exception.png")
-    #         self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_NG_030_exception.png")
-    #         self.logger.error(f"test_TC_NG_030 got exception as: {ex.args}")
-    #         return False
-    #     finally:
-    #         self.close_all_panel_one_by_one()
-    #
-    # def Verify_user_click_on_Events_then_Events_panel_should_open(self):
-    #     try:
-    #         status = []
-    #         login().login_to_cloud_if_not_done(self.d)
-    #         time.sleep(web_driver.one_second)
-    #         self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components().
-    #                                                       notification_groups_button_by_xpath(),
-    #                            self.d)
-    #         notification_groups_btn = self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components()
-    #                                                      .notification_groups_button_by_xpath(), self.d)
-    #         self.d.execute_script("arguments[0].click();", notification_groups_btn)
-    #         self.logger.info("notification groups btn is clicked")
-    #         time.sleep(web_driver.one_second)
-    #         self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components().
-    #                                          action_dropdown_button_by_xpath(),
-    #                            self.d)
-    #         action_btn = self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components()
-    #                                         .action_dropdown_button_by_xpath(), self.d)
-    #         action_btn.click()
-    #         self.logger.info("action dropdown is clicked")
-    #         time.sleep(web_driver.two_second)
-    #         self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components()
-    #                                                   .create_notification_group_btn_by_xpath(),
-    #                            self.d)
-    #         create_notification = self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components()
-    #                                         .create_notification_group_btn_by_xpath(), self.d)
-    #         create_notification.click()
-    #         self.logger.info("create notification option is clicked")
-    #         time.sleep(web_driver.one_second)
-    #         self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components().name_field_by_xpath(),
-    #                            self.d)
-    #         name_field = self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components().name_field_by_xpath(), self.d)
-    #
-    #         name_field.send_keys(Read_Notification_Groups_Components().name_field_data())
-    #
-    #         description_field = self.d.find_element(By.XPATH, Read_Notification_Groups_Components()
-    #                                                 .description_field_by_xpath())
-    #         description_field.send_keys(Read_Notification_Groups_Components().description_field_data())
-    #         time.sleep(web_driver.one_second)
-    #         save_button = self.d.find_element(By.XPATH, Read_Notification_Groups_Components().save_button_by_xpath())
-    #         save_button.click()
-    #         self.logger.info("notification details is filled and save btn is clicked")
-    #         time.sleep(web_driver.two_second)
-    #         events_text = self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components()
-    #                                           .event_button_by_xpath(),
-    #                            self.d)
-    #
-    #         self.d.execute_script("arguments[0].click();", events_text)
-    #         self.logger.info("events btn is clicked on notification groups details panel")
-    #         time.sleep(web_driver.one_second)
-    #         events_text = self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components()
-    #                                          .notification_groups_title_by_xpath(), self.d)
-    #
-    #         status.append(events_text.is_displayed())
-    #         self.logger.info(f"Events panel is displayed: {events_text.is_displayed()}")
-    #         self.logger.info(f"status: {status}")
-    #         if False in status:
-    #             self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_NG_031_failed.png")
-    #             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_NG_031_failed.png")
-    #             return False
-    #         else:
-    #             return True
-    #         # logout().logout_from_core()
-    #     except Exception as ex:
-    #         self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_NG_031_exception.png")
-    #         self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_NG_031_exception.png")
-    #         self.logger.error(f"test_TC_NG_031 got exception as: {ex.args}")
-    #         return False
-    #     finally:
-    #         self.close_all_panel_one_by_one()
-
-
-    #***************************** Resuable Methods ************************************#
-
-    def click_on_logout_button(self):
-        try:
-            time.sleep(web_driver.one_second)
-            logout_button = self.d.find_element(By.XPATH, Portal_Menu_Module_read_ini().get_logout_button_on_portal_by_xpath())
-            while not logout_button.is_displayed():
-                time.sleep(web_driver.one_second)
-            time.sleep(web_driver.one_second)
-            try:
-                self.d.execute_script("arguments[0].click();", logout_button)
-            except Exception as ex:
-                logout_button.click()
-            time.sleep(web_driver.one_second)
-            self.d.delete_cookie()
-        except Exception as ex:
-            msg = str(ex)
-            if msg.__contains__('not clickable at point'):
-                print("Exception crated: ", ex, " #returning false# ")
-                self.d.save_screenshot(
-                    f"{Path(__file__).parent.parent}\\Screenshots\\Button_not_clickable_logout_pg_03.png")
-                return False
+    # ***************************** Reusable Methods ************************************ #
+    
     def validate_successful_message(self):
         """
         checks if the error message "Success! A user has been created." is displayed.

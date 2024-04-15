@@ -25,6 +25,76 @@ class Portal_login_page_read_ini:
         except Exception as ex:
             print(ex)
 
+    def get_dm_url(self):
+        try:
+            dm_login_url = self.common_test_data_config.get("Login_Logout_Data", "dm_login_url")
+            print("DM page url: ", dm_login_url)
+            return dm_login_url
+        except Exception as ex:
+            print(ex)
+
+    def get_dm_username_txtbx_by_xpath(self):
+        try:
+            dm_username_txtbx_by_xpath = self.common_test_data_config.get("Login_Logout_Data", "dm_username_txtbx_by_xpath")
+            print("DM page username txt box: ", dm_username_txtbx_by_xpath)
+            return dm_username_txtbx_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def get_dm_password_txtbx_by_xpath(self):
+        try:
+            dm_password_txtbx_by_xpath = self.common_test_data_config.get("Login_Logout_Data",
+                                                                          "dm_password_txtbx_by_xpath")
+            print("DM page password txt box: ", dm_password_txtbx_by_xpath)
+            return dm_password_txtbx_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def get_login_btn_on_dm_by_xpath(self):
+        try:
+            login_btn_on_dm_by_xpath = self.common_test_data_config.get("Login_Logout_Data",
+                                                                          "login_btn_on_dm_by_xpath")
+            print("login_btn_on_dm_by_xpath: ", login_btn_on_dm_by_xpath)
+            return login_btn_on_dm_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def get_edge_system_by_xpath(self):
+        try:
+            edge_system_by_xpath = self.common_test_data_config.get("Login_Logout_Data",
+                                                                          "edge_system_by_xpath")
+            print("edge_system_by_xpath: ", edge_system_by_xpath)
+            return edge_system_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def get_edit_link_by_xpath(self):
+        try:
+            edit_link_by_xpath = self.common_test_data_config.get("Login_Logout_Data",
+                                                                          "edit_link_by_xpath")
+            print("edit_link_by_xpath: ", edit_link_by_xpath)
+            return edit_link_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def get_root_region_name_on_dm_by_xpath(self):
+        try:
+            root_region_name_on_dm_by_xpath = self.common_test_data_config.get("Login_Logout_Data",
+                                                                          "root_region_name_on_dm_by_xpath")
+            print("root_region_name_on_dm_by_xpath: ", root_region_name_on_dm_by_xpath)
+            return root_region_name_on_dm_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def get_close_btn_on_welcome_dialog_by_xpath(self):
+        try:
+            close_btn_on_welcome_dialog_by_xpath = self.common_test_data_config.get("Login_Logout_Data",
+                                                                          "close_btn_on_welcome_dialog_by_xpath")
+            print("close_btn_on_welcome_dialog_by_xpath: ", close_btn_on_welcome_dialog_by_xpath)
+            return close_btn_on_welcome_dialog_by_xpath
+        except Exception as ex:
+            print(ex)
+
     def get_portal_title(self):
         try:
             portal_title = self.common_test_data_config.get("Login_Logout_Data", "portal_title")
@@ -84,7 +154,7 @@ class Portal_login_page_read_ini:
 
     def get_portal_login_username(self):
         try:
-            portal_login_username = self.common_test_data_config.get("Login_Logout_Data", "username")
+            portal_login_username = self.common_test_data_config.get("Login_Logout_Data", "username_for_blocking")
             print("username: ", portal_login_username)
             return portal_login_username
         except Exception as ex:

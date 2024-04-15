@@ -1,0 +1,27 @@
+15/04/2024 02:07:15 PM : root         : INFO     :  ******** Visitor_Search (Order - 7) Begin ********
+15/04/2024 02:07:15 PM : root         : INFO     : ********** Test_VS_03 Begin  **********
+15/04/2024 02:07:21 PM : root         : INFO     : current url: https://scecore6-vm.qa.facefirst.dev/
+15/04/2024 02:07:21 PM : root         : INFO     : url is not open
+15/04/2024 02:07:21 PM : root         : INFO     : opening localhost portal login
+15/04/2024 02:07:21 PM : root         : INFO     : logging in to core
+15/04/2024 02:07:21 PM : root         : INFO     : entered explicit wait for 10
+15/04/2024 02:07:21 PM : root         : INFO     : exiting explicit wait..
+15/04/2024 02:07:24 PM : root         : INFO     : entered explicit wait for 10
+15/04/2024 02:07:24 PM : root         : INFO     : exiting explicit wait..
+15/04/2024 02:07:26 PM : root         : INFO     : login success..
+15/04/2024 02:07:28 PM : root         : INFO     : going to visitor search...
+15/04/2024 02:07:28 PM : root         : INFO     : entered explicit wait for 10
+15/04/2024 02:07:28 PM : root         : INFO     : exiting explicit wait..
+15/04/2024 02:07:30 PM : root         : INFO     : waiting for search panel to appear...
+15/04/2024 02:07:31 PM : root         : INFO     : entered explicit wait for 10
+15/04/2024 02:07:31 PM : root         : INFO     : exiting explicit wait..
+15/04/2024 02:07:32 PM : root         : INFO     : Root region name on VS: KROGER INTERNATIONAL - KCORP
+15/04/2024 02:07:35 PM : root         : INFO     : current url: https://scecore6-vm.qa.facefirst.dev:5000/login
+15/04/2024 02:07:35 PM : root         : INFO     : url is not open
+15/04/2024 02:07:35 PM : root         : INFO     : opening dm login
+15/04/2024 02:07:35 PM : root         : INFO     : logging in to DM
+15/04/2024 02:07:35 PM : root         : INFO     : entered explicit wait for 10
+15/04/2024 02:07:35 PM : root         : INFO     : exiting explicit wait..
+15/04/2024 02:07:44 PM : root         : INFO     : Root region name on DM: KROGER INTERNATIONAL - KCORP
+15/04/2024 02:07:46 PM : root         : INFO     : Root region names on VS and DM are same...
+15/04/2024 02:07:46 PM : root         : INFO     : status: [True]
