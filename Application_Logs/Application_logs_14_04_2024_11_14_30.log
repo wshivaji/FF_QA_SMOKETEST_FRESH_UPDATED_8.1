@@ -1,0 +1,50 @@
+14/04/2024 11:14:33 AM : root         : INFO     :  ******** Portal_Menu (Order - 2) Begin ********
+14/04/2024 11:14:33 AM : root         : INFO     : ********** TC_PM_6 started ********
+14/04/2024 11:14:38 AM : root         : INFO     : current url: https://scecore6-vm.qa.facefirst.dev/
+14/04/2024 11:14:38 AM : root         : INFO     : url is not open
+14/04/2024 11:14:38 AM : root         : INFO     : opening localhost portal login
+14/04/2024 11:14:38 AM : root         : INFO     : logging in to core
+14/04/2024 11:14:38 AM : root         : INFO     : entered explicit wait for 10
+14/04/2024 11:14:38 AM : root         : INFO     : exiting explicit wait..
+14/04/2024 11:14:41 AM : root         : INFO     : entered explicit wait for 10
+14/04/2024 11:14:41 AM : root         : INFO     : exiting explicit wait..
+14/04/2024 11:14:43 AM : root         : INFO     : login success..
+14/04/2024 11:14:46 AM : root         : INFO     : username expected: it admin
+14/04/2024 11:14:46 AM : root         : INFO     : entered explicit wait for 8
+14/04/2024 11:14:46 AM : root         : INFO     : exiting explicit wait..
+14/04/2024 11:14:46 AM : root         : INFO     : click on users on the cloud menu
+14/04/2024 11:14:49 AM : root         : INFO     : ****** it admin user is present *******
+14/04/2024 11:14:50 AM : root         : INFO     : core User logged out from cloud menu..
+14/04/2024 11:14:52 AM : root         : INFO     : page url: https://scecore6-vm.qa.facefirst.dev/
+14/04/2024 11:14:52 AM : root         : INFO     : current url: https://scecore6-vm.qa.facefirst.dev/
+14/04/2024 11:14:52 AM : root         : INFO     : url is not open
+14/04/2024 11:14:52 AM : root         : INFO     : opening localhost portal login
+14/04/2024 11:14:52 AM : root         : INFO     : logging in to core
+14/04/2024 11:14:52 AM : root         : INFO     : entered explicit wait for 10
+14/04/2024 11:14:52 AM : root         : INFO     : exiting explicit wait..
+14/04/2024 11:14:54 AM : root         : INFO     : entered explicit wait for 10
+14/04/2024 11:14:55 AM : root         : INFO     : exiting explicit wait..
+14/04/2024 11:14:57 AM : root         : INFO     : ******* Login with it admin user success *********
+14/04/2024 11:15:00 AM : root         : INFO     : cloud menu list length: 21
+14/04/2024 11:15:00 AM : root         : INFO     : length of app: 19
+14/04/2024 11:15:00 AM : root         : INFO     : Probable Match Events menu is displayed..
+14/04/2024 11:15:01 AM : root         : INFO     : Tags menu is displayed..
+14/04/2024 11:15:01 AM : root         : INFO     : Identify & Enroll menu is displayed..
+14/04/2024 11:15:02 AM : root         : INFO     : Detect Faces menu is displayed..
+14/04/2024 11:15:02 AM : root         : INFO     : Enrollments menu is displayed..
+14/04/2024 11:15:03 AM : root         : INFO     : Enrollment Groups menu is displayed..
+14/04/2024 11:15:03 AM : root         : INFO     : Notification Groups menu is displayed..
+14/04/2024 11:15:04 AM : root         : INFO     : Visitor Search menu is displayed..
+14/04/2024 11:15:04 AM : root         : INFO     : Visitor Search Jobs menu is displayed..
+14/04/2024 11:15:05 AM : root         : INFO     : Notes menu is displayed..
+14/04/2024 11:15:05 AM : root         : INFO     : Locations menu is displayed..
+14/04/2024 11:15:06 AM : root         : INFO     : Users menu is displayed..
+14/04/2024 11:15:06 AM : root         : INFO     : User Roles menu is displayed..
+14/04/2024 11:15:07 AM : root         : INFO     : Zones menu is displayed..
+14/04/2024 11:15:07 AM : root         : INFO     : Account menu is displayed..
+14/04/2024 11:15:08 AM : root         : INFO     : Reporting menu is displayed..
+14/04/2024 11:15:08 AM : root         : INFO     : Insights Dashboard menu is displayed..
+14/04/2024 11:15:09 AM : root         : INFO     : Notifier menu is displayed..
+14/04/2024 11:15:09 AM : root         : INFO     : Audit Log Reports menu is displayed..
+14/04/2024 11:15:09 AM : root         : INFO     : ***** For it admin user Expected menus are visible..
+14/04/2024 11:15:09 AM : root         : INFO     : status: [True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True]
