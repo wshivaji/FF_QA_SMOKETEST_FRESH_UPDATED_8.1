@@ -8,6 +8,8 @@ from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
+from All_Config_Packages._12_Identify_and_Enroll_Config_Files.Identify_and_Enroll_Readd_INI import \
+    Read_Identify_and_Enroll_Components
 from All_Config_Packages._4_Users_Module_Config_Files.Users_Read_INI import Read_Users_Components
 # from All_Test_Cases_Package.conftest import web_driver
 from Base_Package.Web_Driver import web_driver
@@ -98,9 +100,9 @@ def is_ascending(lst):
 class Audit_log_report_pom(web_driver, web_logger):
     d = web_driver.d()
     logger = web_logger().logger_obj()
-
+    status = []
     now = (datetime.datetime.now())
-    DATE_IE = now.strftime('%m-%d-%Y')
+    DATE_IE = now.strftime('%d-%m-%Y')
     TIME_IE = now.strftime('%H:%M')
     AM_PM_IE = now.strftime('%p')
 
@@ -166,7 +168,7 @@ class Audit_log_report_pom(web_driver, web_logger):
     def Verify_user_is_able_to_generate_report_for_Approver_enrollments_and_download_excel_file(self):
         try:
             self.logger.info("******************************** TC_ALR_01 Started ***********************************")
-            status = []
+            self.status.clear()
             login().login_to_facecirst_portal_if_not_done(self.d)
             self.click_on_alr_and_option_alr_panel()
             self.switch_control_to_alr_panel()
@@ -181,24 +183,30 @@ class Audit_log_report_pom(web_driver, web_logger):
             self.select_user_from_users_dropdown_list(user)
             self.click_on_outside_panel()
             self.click_on_submit_report()
-            status.append(self.verify_report_title_is_visible())
-            status.append(self.click_on_download_btn())
-            self.close_current_tab()
-            self.logger.info(f"status: {status}")
+            self.status.append(self.verify_report_title_is_visible())
+            self.status.append(self.click_on_download_btn())
+
+            self.logger.info(f"self.status: {self.status}")
             self.logger.info("******************************** TC_ALR_01 End ***********************************")
-            if None in status:
+            if None in self.status:
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_01_failed.png")
+                self.close_current_tab()
                 return False
-            elif False in status:
+            elif False in self.status:
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_01_failed.png")
+                self.close_current_tab()
                 return False
             else:
                 return True
         except Exception as ex:
+            self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_01_exception.png")
             self.logger.info(f"Verify_user_is_able_to_generate_report_for_Approver_enrollments_and_download_excel_file ex: {ex.args}")
+            return False
 
     def Verify_user_is_able_to_generate_report_for_user_enrollments_and_download_excel_file(self):
         try:
             self.logger.info("******************************** TC_ALR_02 Started ***********************************")
-            status = []
+            self.status.clear()
             login().login_to_facecirst_portal_if_not_done(self.d)
             self.click_on_alr_and_option_alr_panel()
             self.switch_control_to_alr_panel()
@@ -213,24 +221,30 @@ class Audit_log_report_pom(web_driver, web_logger):
             self.select_user_from_users_dropdown_list(user)
             self.click_on_outside_panel()
             self.click_on_submit_report()
-            status.append(self.verify_report_title_is_visible())
-            status.append(self.click_on_download_btn())
-            self.close_current_tab()
-            self.logger.info(f"status: {status}")
+            self.status.append(self.verify_report_title_is_visible())
+            self.status.append(self.click_on_download_btn())
+
+            self.logger.info(f"status: {self.status}")
             self.logger.info("******************************** TC_ALR_02 End ***********************************")
-            if None in status:
+            if None in self.status:
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_02_failed.png")
+                self.close_current_tab()
                 return False
-            elif False in status:
+            elif False in self.status:
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_02_failed.png")
+                self.close_current_tab()
                 return False
             else:
                 return True
         except Exception as ex:
+            self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_02_exception.png")
             self.logger.info(f"Verify_user_is_able_to_generate_report_for_user_enrollments_and_download_excel_file ex: {ex.args}")
+            return False
 
     def Verify_user_is_able_to_generate_report_for_log_in_log_out_and_download_excel_file(self):
         try:
             self.logger.info("******************************** TC_ALR_03 Started ***********************************")
-            status = []
+            self.status.clear()
             login().login_to_facecirst_portal_if_not_done(self.d)
             self.click_on_alr_and_option_alr_panel()
             self.switch_control_to_alr_panel()
@@ -245,24 +259,30 @@ class Audit_log_report_pom(web_driver, web_logger):
             self.select_user_from_users_dropdown_list(user)
             self.click_on_outside_panel()
             self.click_on_submit_report()
-            status.append(self.verify_report_title_is_visible())
-            status.append(self.click_on_download_btn())
+            self.status.append(self.verify_report_title_is_visible())
+            self.status.append(self.click_on_download_btn())
             self.close_current_tab()
-            self.logger.info(f"status: {status}")
+            self.logger.info(f"status: {self.status}")
             self.logger.info("******************************** TC_ALR_03 End ***********************************")
-            if None in status:
+            if None in self.status:
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_03_failed.png")
+                self.close_current_tab()
                 return False
-            elif False in status:
+            elif False in self.status:
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_03_failed.png")
+                self.close_current_tab()
                 return False
             else:
                 return True
         except Exception as ex:
+            self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_03_exception.png")
             self.logger.info(f"Verify_user_is_able_to_generate_report_for_log_in_log_out_and_download_excel_file ex: {ex.args}")
+            return False
 
     def Verify_user_is_able_to_generate_report_for_Threshold_changes_and_download_excel_file(self):
         try:
             self.logger.info("******************************** TC_ALR_04 Started ***********************************")
-            status = []
+            self.status.clear()
             login().login_to_facecirst_portal_if_not_done(self.d)
             self.click_on_alr_and_option_alr_panel()
             self.switch_control_to_alr_panel()
@@ -277,21 +297,135 @@ class Audit_log_report_pom(web_driver, web_logger):
             self.select_user_from_users_dropdown_list(user)
             self.click_on_outside_panel()
             self.click_on_submit_report()
-            status.append(self.verify_report_title_is_visible())
-            status.append(self.click_on_download_btn())
-            self.close_current_tab()
-            self.logger.info(f"status: {status}")
+            self.status.append(self.verify_report_title_is_visible())
+            self.status.append(self.click_on_download_btn())
+
+            self.logger.info(f"status: {self.status}")
             self.logger.info("******************************** TC_ALR_04 End ***********************************")
-            if None in status:
+            if None in self.status:
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_04_failed.png")
+                self.close_current_tab()
                 return False
-            elif False in status:
+            elif False in self.status:
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_04_failed.png")
+                self.close_current_tab()
                 return False
             else:
                 return True
         except Exception as ex:
+            self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_04_failed.png")
             self.logger.info(f"Verify_user_is_able_to_generate_report_for_Threshold_changes_and_download_excel_file ex: {ex.args}")
+            return False
+
+    def Verify_user_with_all_permissions_enrolled_mask_subject_should_be_in_Disable_status_for_user_enrollments(self):
+        try:
+            self.logger.info("******************************** TC_ALR_05 Started ***********************************")
+            self.status.clear()
+            login().login_to_facecirst_portal_if_not_done(self.d)
+            self.enroll_masked_subject_with_user_having_all_permissions()
+            self.close_all_panel_one_by_one()
+            self.open_user_enrollments_report_for_all_users()
+            self.verify_disabled_status_of_last_enrollment()
+
+            self.logger.info(f"status: {self.status}")
+            self.logger.info("******************************** TC_ALR_05 End ***********************************")
+            if None in self.status:
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_05_failed.png")
+                self.close_current_tab()
+                return False
+            elif False in self.status:
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_05_failed.png")
+                self.close_current_tab()
+                return False
+            else:
+                return True
+        except Exception as ex:
+            self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_05_exception.png")
+            self.logger.info(f"Verify_user_with_all_permissions_enrolled_mask_subject_should_be_in_Disable_status_for_user_enrollments ex: {ex.args}")
+            return False
+
+    def Verify_core_should_be_able_to_enable_above_mask_subject_and_verify_Enabled_status_and_action_by_core_for_user_enrollments(self):
+        try:
+            self.logger.info("******************************** TC_ALR_06 Started ***********************************")
+            self.status.clear()
+            login().login_to_facecirst_portal_if_not_done(self.d)
+            # self.enroll_normal_subject_with_user_having_all_permissions()
+            self.enable_masked_enrolled_subject_with_core_credentials()
+            self.select_checkbox_on_enrollment_panel()
+            self.click_on_action_dropdown_on_enrollments_panel()
+            self.click_on_enable_selected_enrollment_option()
+            self.close_all_panel_one_by_one()
+            self.open_user_enrollments_report_for_all_users()
+            self.verify_enabled_status_of_last_enrollment()
+            self.logger.info(f"status: {self.status}")
+            self.logger.info("******************************** TC_ALR_06 End ***********************************")
+            if None in self.status:
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_06_failed.png")
+                self.close_current_tab()
+                return False
+            elif False in self.status:
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_06_failed.png")
+                self.close_current_tab()
+                return False
+            else:
+                self.close_current_tab()
+                return True
+        except Exception as ex:
+            self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_06_exception.png")
+            self.logger.info(f"Verify_core_should_be_able_to_enable_above_mask_subject_and_verify_Enabled_status_and_action_by_core_for_user_enrollments ex: {ex.args}")
+            return False
+
+    def Verify_for_above_enable_mask_subject_status_is_Enabled_in_Approver_Enrollments_too(self):
+        try:
+            self.logger.info("******************************** TC_ALR_07 Started ***********************************")
+            self.status.clear()
+            login().login_to_facecirst_portal_if_not_done(self.d)
+            # self.enroll_normal_subject_with_user_having_all_permissions()
+            self.enable_masked_enrolled_subject_with_core_credentials()
+            self.select_checkbox_on_enrollment_panel()
+            self.click_on_action_dropdown_on_enrollments_panel()
+            self.click_on_enable_selected_enrollment_option()
+            self.close_all_panel_one_by_one()
+            self.open_approver_enrollments_report_for_all_users()
+            self.verify_enabled_status_of_last_enrollment_on_approver_enrollments_report()
+            self.logger.info(f"status: {self.status}")
+            self.logger.info("******************************** TC_ALR_07 End ***********************************")
+            if None in self.status:
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_07_failed.png")
+                self.close_current_tab()
+                return False
+            elif False in self.status:
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_07_failed.png")
+                self.close_current_tab()
+                return False
+            else:
+                self.close_current_tab()
+                return True
+        except Exception as ex:
+            self.logger.info(f"Verify_for_above_enable_mask_subject_status_is_Enabled_in_Approver_Enrollments_too ex: {ex.args}")
+
+    def Verify_user_with_2FA_enrolled_subject_should_be_able_to_see_Pending_status_for_user_enrollments(self):
+        try:
+            self.logger.info("******************************** TC_ALR_08 Started ***********************************")
+            self.status.clear()
+            login().login_to_facecirst_portal_if_not_done(self.d)
+        except Exception as ex:
+            self.logger.info(f"Verify_user_with_2FA_enrolled_subject_should_be_able_to_see_Pending_status_for_user_enrollments ex: {ex.args}")
 
     # ********************************** User Methods *******************************************
+
+    def upload_image_not_enrolled(self, img_path):
+
+        """
+        This function is usd to upload the image and click on the search button
+        :return:
+        """
+        file_path = img_path
+        time.sleep(2)
+        self.logger.info(f"image uploaded: {file_path}")
+        # upload_image = self.explicit_wait(10, "NAME", "image", self.d)
+        upload_image = self.d.find_element(By.NAME, "image")
+        upload_image.send_keys(file_path)
 
     def click_on_alr_and_option_alr_panel(self):
         try:
@@ -444,3 +578,345 @@ class Audit_log_report_pom(web_driver, web_logger):
             self.d.switch_to.window(parent)
         except Exception as ex:
             self.logger.info(f"close current tab: {ex.args}")
+
+    def enroll_masked_subject_with_user_having_all_permissions(self):
+        try:
+            self.open_identify_and_enroll_panel()
+            file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset2\\disabled.png"
+            self.upload_image_not_enrolled(file_path)
+            self.click_on_identify_enroll_btn_on_IE_panel()
+            self.add_details_for_enrollment()
+            self.verify_enrollment_success_message_after_enrollments()
+        except Exception as ex:
+            self.logger.info(f"enroll_masked_subject_with_user_having_all_permissions ex: {ex.args}")
+
+    def open_identify_and_enroll_panel(self):
+        try:
+            identify_enroll_menu_item = self.explicit_wait(5, "XPATH", Audit_Log_Report_Components().identify_and_enroll_link_by_xpath(), self.d)
+            if identify_enroll_menu_item.is_displayed():
+                self.logger.info(f"identify enroll menu btn visible: {identify_enroll_menu_item.is_displayed()}")
+                identify_enroll_menu_item.click()
+            else:
+                self.logger.info(f"identify enroll menu btn visible: {identify_enroll_menu_item.is_displayed()}")
+        except Exception as ex:
+            self.logger.info(f"open_identify_and_enroll_panel ex: {ex.args}")
+
+    def click_on_identify_enroll_btn_on_IE_panel(self):
+        try:
+            identify_enroll_btn = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
+                                                     .identify_enroll_panel_identify_enroll_btn_by_xpath(), self.d)
+            if identify_enroll_btn.is_displayed():
+                self.logger.info("Identify & Enroll button is visible...")
+                self.d.execute_script("arguments[0].click();", identify_enroll_btn)
+            else:
+                self.logger.info("Identify & Enroll button is not visible...")
+        except Exception as ex:
+            self.logger.info(f"click_on_identify_enroll_btn_on_IE_panel ex: {ex.args}")
+
+    def add_details_for_enrollment(self):
+        """
+        This function is used to add details for the enrollment
+        :return:
+        """
+
+        wait_icon = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components()
+                                        .identifying_photo_wait_by_xpath())
+        count = 0
+        while wait_icon.is_displayed() or count == 120:
+            time.sleep(web_driver.two_second)
+            count += 1
+            self.logger.info(f"waiting for wait icon, count: {count}")
+
+        time.sleep(web_driver.two_second)
+        enrollment_basis = self.d.find_element(By.XPATH,
+                                               Read_Identify_and_Enroll_Components().enrollment_basis_by_xpath())
+        select = Select(enrollment_basis)
+        select.select_by_index(1)
+
+        time.sleep(web_driver.two_second)
+        enrollment_group = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components()
+                                               .enrollment_group_by_xpath())
+        select = Select(enrollment_group)
+        select.select_by_index(2)
+        time.sleep(web_driver.one_second)
+        region_btn = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().region_btn_by_xpath())
+        time.sleep(web_driver.one_second)
+        region_btn.click()
+        time.sleep(web_driver.one_second)
+        region_names = self.d.find_elements(By.XPATH, Read_Identify_and_Enroll_Components().edge_name_list())
+        edge_name = Read_Identify_and_Enroll_Components().edge_name()
+        for i in range(len(region_names)):
+            if edge_name in region_names[i].text:
+                region_names[i].click()
+                break
+        save_btn = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().save_btn_by_xpath())
+        save_btn.click()
+        time.sleep(web_driver.two_second)
+
+        enrollment_group = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components()
+                                               .enrollment_group_by_xpath())
+        select = Select(enrollment_group)
+        select.select_by_index(1)
+
+        location_store = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components()
+                                             .location_store_inpt_bx_by_xpath())
+        location_store.send_keys(Read_Identify_and_Enroll_Components().location_store_data())
+
+        case_subject = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components()
+                                           .case_subject_inpt_bx_by_xpath())
+        case_subject.send_keys(Read_Identify_and_Enroll_Components().case_subject_data())
+
+        reported_loss = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components()
+                                            .reported_loss_inpt_bx_by_xpath())
+        reported_loss.send_keys(Read_Identify_and_Enroll_Components().reported_loss_data())
+
+        date_incident = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components()
+                                            .date_incident_inpt_bx_by_xpath())
+        time.sleep(web_driver.two_second)
+        self.dateTimeAMPM(date_incident)
+        time.sleep(web_driver.two_second)
+        action_input = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components()
+                                           .action_inpt_bx_by_xpath())
+        action_input.send_keys(Read_Identify_and_Enroll_Components().action_input_data())
+
+        save_btn = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components()
+                                       .add_details_save_btn_by_xpath())
+        save_btn.click()
+        self.logger.info("Enrollment details filled and save btn is clicked")
+        wait_icon = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components()
+                                        .enrollment_success_loader())
+        count = 0
+        while wait_icon.is_displayed() or count == 120:
+            time.sleep(web_driver.two_second)
+            count += 1
+            self.logger.info(f"waiting for wait icon, count: {count}")
+
+    def close_all_panel_one_by_one(self):
+        try:
+            # close_panel_list = self.d.find_elements(By.XPATH, Read_Identify_and_Enroll_Components().close_all_panel_one_by_one())
+            time.sleep(web_driver.one_second)
+            cloud_menu = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().cloud_menu_by_xpath())
+            cloud_menu.click()
+            web_driver.implicit_wait(self, web_driver.one_second, self.d)
+            close_all_panels_menu = self.d.find_elements(By.XPATH,
+                                                         Read_Identify_and_Enroll_Components().close_all_panels_btn_by_xpath())
+            time.sleep(web_driver.one_second)
+            if len(close_all_panels_menu) > 0:
+                close_all_panels_menu[0].click()
+                time.sleep(web_driver.one_second)
+                try:
+                    self.d.switch_to.alert.accept()
+                except Exception as ex:
+                    self.logger.info(f"exception: {ex.args}")
+                    self.logger.info("Alert handled")
+            else:
+                pass
+            time.sleep(web_driver.one_second)
+
+        except Exception as ex:
+            self.logger.error(f"Exception crated: {ex.args}")
+            self.d.save_screenshot(f"{Path(__file__).parent.parent}\\Screenshots\\test_TC_IE_20_exception.png")
+            return False
+
+    def verify_enrollment_success_message_after_enrollments(self):
+        try:
+            self.logger.info(f"verifying success message")
+            success_msg = self.explicit_wait(10, "XPATH",
+                                             Read_Identify_and_Enroll_Components().enrollment_success_msg_xpath(),
+                                             self.d)
+            if success_msg.text.lower() == Read_Identify_and_Enroll_Components().enrollment_success_msg_validation(). \
+                    lower():
+                self.logger.info(f"Success msg is visible : {True}")
+                self.status.append(True)
+            else:
+                self.logger.info(f"Success msg is visible : {False}")
+                self.status.append(False)
+        except Exception as ex:
+            self.logger.info(f"verify_enrollment_success_message_after_enrollments ex: {ex.args}")
+
+    def open_user_enrollments_report_for_all_users(self):
+        try:
+            self.logger.info(f"opening user enrollments report with all users")
+            self.click_on_alr_and_option_alr_panel()
+            self.switch_control_to_alr_panel()
+            self.click_on_report_type_dropdown_on_alr_panel()
+            report_type = "User Enrollments"
+            self.select_type_of_report_you_want_to_generate(report_type)
+            self.click_on_custom_date_range()
+            date_range = "Last 7 days"
+            self.select_custom_date_range(date_range)
+            self.click_on_users_select_dropdown()
+            user = "All Users"
+            self.select_user_from_users_dropdown_list(user)
+            self.click_on_outside_panel()
+            self.click_on_submit_report()
+            self.status.append(self.verify_report_title_is_visible())
+            self.logger.info("user enrollments report opened.")
+        except Exception as ex:
+            self.logger.info(f"open_user_enrollments_report_for_all_users ex: {ex.args}")
+
+    def verify_disabled_status_of_last_enrollment(self):
+        try:
+            last_page_btn = self.explicit_wait(5, "XPATH", Audit_Log_Report_Components().last_page_btn_by_xpath(), self.d)
+            self.logger.info(f"last page btn is visible: {last_page_btn.is_displayed()}")
+            if last_page_btn.is_enabled():
+                last_page_btn.click()
+            if last_page_btn.is_enabled():
+                last_page_btn.click()
+            else:
+                enrollment_Status = self.d.find_elements(By.XPATH, Audit_Log_Report_Components().user_enrollment_status_list())
+                for status in enrollment_Status:
+                    self.logger.info(f"status: {status.text}")
+                if enrollment_Status[-1].text == "Disabled":
+                    self.status.append(True)
+                else:
+                    self.status.append(False)
+
+        except Exception as ex:
+            self.logger.info(f"verify_disabled_status_of_last_enrollment ex: {ex.args}")
+
+    def enroll_normal_subject_with_user_having_all_permissions(self):
+        try:
+            self.open_identify_and_enroll_panel()
+            file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset2\\img1.png"
+            self.upload_image_not_enrolled(file_path)
+            self.click_on_identify_enroll_btn_on_IE_panel()
+            self.add_details_for_enrollment()
+            self.verify_enrollment_success_message_after_enrollments()
+        except Exception as ex:
+            self.logger.info(f"enroll_masked_subject_with_user_having_all_permissions ex: {ex.args}")
+
+    def verify_enabled_status_of_last_enrollment(self):
+        try:
+            last_page_btn = self.explicit_wait(5, "XPATH", Audit_Log_Report_Components().last_page_btn_by_xpath(), self.d)
+            self.logger.info(f"last page btn is visible: {last_page_btn.is_displayed()}")
+            if last_page_btn.is_enabled():
+                last_page_btn.click()
+            if last_page_btn.is_enabled():
+                last_page_btn.click()
+            else:
+                enrollment_Status = self.d.find_elements(By.XPATH, Audit_Log_Report_Components().user_enrollment_status_list())
+                for status in enrollment_Status:
+                    self.logger.info(f"status: {status.text}")
+                if enrollment_Status[-1].text == "Enabled":
+                    self.status.append(True)
+                else:
+                    self.status.append(False)
+
+        except Exception as ex:
+            self.logger.info(f"verify_disabled_status_of_last_enrollment ex: {ex.args}")
+
+    def enable_masked_enrolled_subject_with_core_credentials(self):
+        try:
+            self.open_enrollments_panel()
+            self.select_disabled_option_inside_filter_dropdown()
+        except Exception as ex:
+            self.logger.info(f"enable_masked_enrolled_subject_with_core_credentials ex: {ex.args}")
+
+    def open_enrollments_panel(self):
+        try:
+            enrollments_panel_menu_item = self.explicit_wait(5, "XPATH", Audit_Log_Report_Components().enrollments_portal_menu(), self.d)
+            self.logger.info(f"enrollments menu item is visible: {enrollments_panel_menu_item.is_displayed()}")
+            if enrollments_panel_menu_item.is_displayed():
+                enrollments_panel_menu_item.click()
+
+            else:
+                self.logger.info("enrollments menu btn is not visible")
+
+        except Exception as ex:
+            self.logger.info(f"open_enrollments_panel ex: {ex.args}")
+
+    def select_disabled_option_inside_filter_dropdown(self):
+        try:
+            filter_dropdown = self.explicit_wait(5, "XPATH", Audit_Log_Report_Components().filter_dropdown_on_enrollments_panel_by_xpath(), self.d)
+            self.logger.info(f"filter dropdown visible: {filter_dropdown.is_displayed()}")
+            if filter_dropdown.is_displayed():
+                filter_dropdown.click()
+            else:
+                self.logger.info(f"filter dropdown is not visible.")
+
+            disable_option = self.explicit_wait(5, "XPATH", Audit_Log_Report_Components().disable_option_under_filter_dropdown_by_xpath(), self.d)
+            self.logger.info(f"disable option visible: {disable_option.is_displayed()}")
+            if disable_option.is_displayed():
+                disable_option.click()
+            else:
+                self.logger.info("disable option is not visible.")
+
+        except Exception as ex:
+            self.logger.info(f"select_disabled_option_inside_filter_dropdown ex: {ex.args}")
+
+    def select_checkbox_on_enrollment_panel(self):
+        try:
+            select_checkbox = self.explicit_wait(5, "XPATH", Audit_Log_Report_Components().select_checkbox_on_enrollments_panel_by_xpath(), self.d)
+            self.logger.info(f"select checkbox visible: {select_checkbox.is_displayed()}")
+            if select_checkbox.is_displayed():
+                select_checkbox.click()
+            else:
+                self.logger.info("select checkbox is not visible.")
+        except Exception as ex:
+            self.logger.info(f"select_checkbox_on_enrollment_panel ex: {ex.args}")
+
+    def click_on_action_dropdown_on_enrollments_panel(self):
+        try:
+            action_dropdown = self.explicit_wait(5, "XPATH", Audit_Log_Report_Components().enrollment_groups_action_drop_down(), self.d)
+            self.logger.info(f"action dropdown visible: {action_dropdown.is_displayed()}")
+            if action_dropdown.is_displayed():
+                action_dropdown.click()
+            else:
+                self.logger.info("action dropdown is not visible")
+        except Exception as ex:
+            self.logger.info(f"click_on_action_dropdown_on_enrollments_panel ex: {ex.args}")
+
+    def click_on_enable_selected_enrollment_option(self):
+        try:
+            enable_selected_enrollment_option = self.explicit_wait(5, "XPATH", Audit_Log_Report_Components().enable_selected_enrollment_option_on_enrollments_panel_by_xpath(), self.d)
+            self.logger.info(f"enable selected enrollment option visible: {enable_selected_enrollment_option.is_displayed()}")
+            if enable_selected_enrollment_option.is_displayed():
+                enable_selected_enrollment_option.click()
+            else:
+                self.logger.info("enable selected enrollments panel is visible.")
+
+        except Exception as ex:
+            self.logger.info(f"click_on_enable_selected_enrollment_option ex: {ex.args}")
+
+    def open_approver_enrollments_report_for_all_users(self):
+        try:
+            self.logger.info(f"opening user enrollments report with all users")
+            self.click_on_alr_and_option_alr_panel()
+            self.switch_control_to_alr_panel()
+            self.click_on_report_type_dropdown_on_alr_panel()
+            report_type = "Approver Enrollments"
+            self.select_type_of_report_you_want_to_generate(report_type)
+            self.click_on_custom_date_range()
+            date_range = "Last 7 days"
+            self.select_custom_date_range(date_range)
+            self.click_on_users_select_dropdown()
+            user = "All Users"
+            self.select_user_from_users_dropdown_list(user)
+            self.click_on_outside_panel()
+            self.click_on_submit_report()
+            self.status.append(self.verify_report_title_is_visible())
+            self.logger.info("user enrollments report opened.")
+        except Exception as ex:
+            self.logger.info(f"open_approver_enrollments_report_for_all_users ex: {ex.args}")
+
+    def verify_enabled_status_of_last_enrollment_on_approver_enrollments_report(self):
+        try:
+            last_page_btn = self.explicit_wait(5, "XPATH", Audit_Log_Report_Components().last_page_btn_by_xpath(),
+                                               self.d)
+            self.logger.info(f"last page btn is visible: {last_page_btn.is_displayed()}")
+            if last_page_btn.is_enabled():
+                last_page_btn.click()
+            if last_page_btn.is_enabled():
+                last_page_btn.click()
+            else:
+                enrollment_Status = self.d.find_elements(By.XPATH,
+                                                         Audit_Log_Report_Components().enrollment_status_list_in_report())
+                for status in enrollment_Status:
+                    self.logger.info(f"status: {status.text}")
+                if enrollment_Status[-1].text == "Enabled":
+                    self.status.append(True)
+                else:
+                    self.status.append(False)
+        except Exception as ex:
+            self.logger.info(f"verify_enabled_status_of_last_enrollment_on_approver_enrollments_report ex: {ex.args}")

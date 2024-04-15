@@ -318,6 +318,13 @@ class Audit_Log_Report_Components:
         except Exception as ex:
             print(ex)
 
+    def last_page_btn_by_xpath(self):
+        try:
+            ele = self.config.get('LOCATORS', 'last_page_btn_by_xpath')
+            return ele
+        except Exception as ex:
+            print(ex)
+
     def user_enrollment_col_list(self):
         try:
             ele = self.config.get('LOCATORS', 'user_enrollments_report_display_col')
@@ -524,6 +531,27 @@ class Audit_Log_Report_Components:
     def user_enrollment_status_list(self):
         try:
             ele = self.config.get('LOCATORS', 'user_enrollment_status_list')
+            return ele
+        except Exception as ex:
+            print(ex)
+
+    def filter_dropdown_on_enrollments_panel_by_xpath(self):
+        try:
+            ele = self.config.get('LOCATORS', 'filter_dropdown_on_enrollments_panel_by_xpath')
+            return ele
+        except Exception as ex:
+            print(ex)
+
+    def disable_option_under_filter_dropdown_by_xpath(self):
+        try:
+            ele = self.config.get('LOCATORS', 'disable_option_under_filter_dropdown_by_xpath')
+            return ele
+        except Exception as ex:
+            print(ex)
+
+    def select_checkbox_on_enrollments_panel_by_xpath(self):
+        try:
+            ele = self.config.get('LOCATORS', 'select_checkbox_on_enrollments_panel_by_xpath')
             return ele
         except Exception as ex:
             print(ex)
@@ -978,6 +1006,13 @@ class Audit_Log_Report_Components:
             return ele
         except Exception as ex:
             print("enrollment_groups_action_drop_down : ", ex)
+
+    def enable_selected_enrollment_option_on_enrollments_panel_by_xpath(self):
+        try:
+            ele = self.config.get("LOCATORS", "enable_selected_enrollment_option_on_enrollments_panel_by_xpath")
+            return ele
+        except Exception as ex:
+            print("enable_selected_enrollment_option_on_enrollments_panel_by_xpath : ", ex)
 
     def create_enrollment_group_option(self):
         try:
