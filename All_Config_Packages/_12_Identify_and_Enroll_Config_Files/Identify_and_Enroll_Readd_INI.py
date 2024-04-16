@@ -2415,6 +2415,13 @@ class Read_Identify_and_Enroll_Components:
         except Exception as ex:
             print(ex.args)
 
+    def submit_review_btn_by_xpath(self):
+        try:
+            submit_review_btn_by_xpath = self.config.get("LOCATORS", "submit_review_btn_by_xpath")
+            return submit_review_btn_by_xpath
+        except Exception as ex:
+            print(ex.args)
+
     def edge_name(self):
         try:
             edge_name = self.common_test_data_config.get("Identify_and_Enroll_Data", "edge_name")

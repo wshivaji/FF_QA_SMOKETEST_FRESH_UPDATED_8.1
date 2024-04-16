@@ -3,8 +3,8 @@
   [
       {
         "Enrollment_basis": "Documented Probable Cause",
-        "Enrollment_group": "ab (Serious Offender - Medium)",
-        "region_hierarchy": "sceedge13",
+        "Enrollment_group": "aabe (Serious Offender - High)",
+        "region_hierarchy": "sceedge6",
         "Location_store": "Bangalore",
         "case_subject": "ab",
         "reported_loss": "300",
