@@ -329,7 +329,8 @@ class Audit_log_report_pom(web_driver, web_logger):
             login().login_to_cloud_if_not_done(self.d)
             self.enroll_masked_subject_with_user_having_all_permissions()
             self.close_all_panel_one_by_one()
-            self.open_user_enrollments_report_for_all_users()
+            # self.open_user_enrollments_report_for_all_users()
+            self.open_user_enrollments_report_for_core_user()
             self.verify_disabled_status_of_last_enrollment()
 
             self.logger.info(f"status: {self.status}")
@@ -361,7 +362,8 @@ class Audit_log_report_pom(web_driver, web_logger):
             self.click_on_action_dropdown_on_enrollments_panel()
             self.click_on_enable_selected_enrollment_option()
             self.close_all_panel_one_by_one()
-            self.open_user_enrollments_report_for_all_users()
+            # self.open_user_enrollments_report_for_all_users()
+            self.open_user_enrollments_report_for_core_user()
             self.verify_enabled_status_of_last_enrollment()
             self.logger.info(f"status: {self.status}")
             self.logger.info("******************************** TC_ALR_06 End ***********************************")
@@ -1098,6 +1100,27 @@ class Audit_log_report_pom(web_driver, web_logger):
                 self.status.append(False)
         except Exception as ex:
             self.logger.info(f"verify_enrollment_success_message_after_enrollments ex: {ex.args}")
+
+    def open_user_enrollments_report_for_core_user(self):
+        try:
+            self.logger.info(f"opening user enrollments report with all users")
+            self.click_on_alr_and_option_alr_panel()
+            self.switch_control_to_alr_panel()
+            self.click_on_report_type_dropdown_on_alr_panel()
+            report_type = "User Enrollments"
+            self.select_type_of_report_you_want_to_generate(report_type)
+            self.click_on_custom_date_range()
+            date_range = "Last 7 days"
+            self.select_custom_date_range(date_range)
+            self.click_on_users_select_dropdown()
+            user = "core"
+            self.select_user_from_users_dropdown_list(user)
+            self.click_on_outside_panel()
+            self.click_on_submit_report()
+            self.status.append(self.verify_report_title_is_visible())
+            self.logger.info("user enrollments report opened.")
+        except Exception as ex:
+            self.logger.info(f"open_user_enrollments_report_for_core_user ex: {ex.args}")
 
     def open_user_enrollments_report_for_all_users(self):
         try:
