@@ -18,6 +18,7 @@ from Base_Package.Login_Logout_Ops import login, logout
 from selenium.webdriver.common.by import By
 from All_Config_Packages._12_Identify_and_Enroll_Config_Files.Identify_and_Enroll_Readd_INI import \
     Read_Identify_and_Enroll_Components
+from All_POM_Packages._4_Users_Module_POM.Users_Module_POM import Users_Module_pom
 from pathlib import Path
 
 
@@ -45,6 +46,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
         time.sleep(web_driver.one_second)
 
     def expirirationdateTimeAMPM(self, date_incident):
+        self.logger.info(f" tommorow date : {self.expirationDATE_IE}")
         date_incident.send_keys(self.expirationDATE_IE)
         time.sleep(web_driver.one_second)
         date_incident.send_keys(self.TIME_IE)
@@ -104,6 +106,14 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             print(f"enrollment group selected: {enrollment_group_selected.text}")
         except Exception as ex:
             print("select enrollment group exception: ", ex.args)
+
+    def login_with_persona_user(self):
+        try:
+            x = Read_Identify_and_Enroll_Components().get_user_name_input_data()
+            username = x.split(',')
+            self.logger.info(f"username expected: {username[0]}")
+        except Exception as ex:
+            print(ex)
 
     def Create_New_Enrollment_using_Identify_and_Enroll(self):
         try:
@@ -14163,8 +14173,9 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             for image in ab_folder_list_of_images:
 
                 login().login_to_cloud_if_not_done_with_user_credentials(self.d,
-                                                                         Read_Identify_and_Enroll_Components().get_username_to_login(),
+                                                                         Read_Identify_and_Enroll_Components().get_operator_to_login(),
                                                                          Read_Identify_and_Enroll_Components().get_password_to_login())
+
 
                 self.status.clear()
 
@@ -14305,8 +14316,8 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                 action_input.send_keys(Enrollment_details_dict_1["Action"])
 
                 save_btn = self.d.find_element(By.XPATH,
-                                               Read_Identify_and_Enroll_Components().add_details_save_btn_by_xpath())
-                if save_btn.is_displayed():
+                                               Read_Identify_and_Enroll_Components().add_details_save_btn_by_xpath1())
+                if save_btn.is_displayed()  :
                     self.logger.info(f"save btn displayed: {save_btn.is_displayed()}")
                     self.status.append(True)
                 else:
@@ -14347,7 +14358,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
         try:
             self.logger.info("Identify_enroll_Tc_02_started")
             self.status.clear()
-            login().login_to_cloud_if_not_done_with_user_credentials(self.d,Read_Identify_and_Enroll_Components().get_username_to_login(),Read_Identify_and_Enroll_Components().get_password_to_login())
+            login().login_to_cloud_if_not_done_with_user_credentials(self.d,Read_Identify_and_Enroll_Components().get_approver_to_login(),Read_Identify_and_Enroll_Components().get_password_to_login())
             time.sleep(web_driver.one_second)
 
             Enrollment_link = self.d.find_element(By.XPATH,Read_Identify_and_Enroll_Components().get_enrollment_link())
@@ -14409,7 +14420,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
         try:
             self.logger.info("************* test_TC_IE_03 started  **************")
             # # # # self.verify_portal_login()
-            login().login_to_cloud_if_not_done_with_user_credentials(self.d,Read_Identify_and_Enroll_Components().get_username_to_login(),Read_Identify_and_Enroll_Components().get_password_to_login())
+            login().login_to_cloud_if_not_done_with_user_credentials(self.d,Read_Identify_and_Enroll_Components().get_approver_to_login(),Read_Identify_and_Enroll_Components().get_password_to_login())
             self.status.clear()
 
             time.sleep(web_driver.two_second)
@@ -14567,7 +14578,8 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
         try:
 
             self.logger.info("************* test_TC_IE_04 started  **************")
-            login().login_to_cloud_if_not_done_with_user_credentials(self.d,Read_Identify_and_Enroll_Components().get_username_to_login(),Read_Identify_and_Enroll_Components().get_password_to_login())
+            login().login_to_cloud_if_not_done_with_user_credentials(self.d,Read_Identify_and_Enroll_Components().get_approver_to_login(),Read_Identify_and_Enroll_Components().get_password_to_login())
+
             self.status.clear()
 
             time.sleep(web_driver.two_second)
@@ -14577,12 +14589,12 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.logger.info(f"clicked on Identify and enroll link")
             time.sleep(web_driver.one_second)
 
-            upload_photo = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
+            upload_photo = self.explicit_wait(7, "XPATH", Read_Identify_and_Enroll_Components()
                                               .upload_image_by_xpath(), self.d)
             upload_photo.click()
             self.logger.info(f"clicked on upload image icon")
             time.sleep(2)
-            file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset2\\img5.png"
+            file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset2\\img4.png."
             pyautogui.write(file_path)
             pyautogui.press('enter')
             time.sleep(2)
@@ -14612,14 +14624,12 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             time.sleep(web_driver.two_second)
 
             expiration_date = self.d.find_element(By.XPATH,Read_Identify_and_Enroll_Components().get_expiration_date_xpath())
-            # expiration_date.clear()
-            # time.sleep(web_driver.two_second)
-            # expiration_date.send_keys(Read_Identify_and_Enroll_Components().get_expiration_date_data())
-            expiration_date.click()
-            self.expirationDATE_IE(expiration_date)
-            time.sleep(web_driver.three_second)
-            action = ActionChains(self.d)
-            action.send_keys(Keys.ENTER)
+            time.sleep(web_driver.one_second)
+            expiration_date.send_keys(Keys.CONTROL,'a')
+            time.sleep(web_driver.one_second)
+            expiration_date.send_keys(Keys.BACKSPACE)
+            time.sleep(web_driver.one_second)
+            self.expirirationdateTimeAMPM(expiration_date)
 
 
 
@@ -14629,12 +14639,12 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             select = Select(enrollment_basis)
             select.select_by_index(1)
             time.sleep(web_driver.two_second)
-            # self.Select_Enrollment_Group(2)
+
             enrollment_group = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().enrollment_group_by_xpath())
             select = Select(enrollment_group)
             select.select_by_index(2)
 
-            time.sleep(web_driver.one_second)
+            time.sleep(web_driver.two_second)
             region_btn = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().region_btn_by_xpath())
             time.sleep(web_driver.one_second)
             region_btn.click()
@@ -14654,6 +14664,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.logger.info(f"save btn : {save_btn.text}")
             time.sleep(web_driver.two_second)
 
+
             location_store = self.d.find_element(By.XPATH,
                                                  Read_Identify_and_Enroll_Components().location_store_inpt_bx_by_xpath())
             location_store.send_keys(Read_Identify_and_Enroll_Components().location_store_data())
@@ -14665,9 +14676,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             date_incident = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components()
                                                 .date_incident_inpt_bx_by_xpath())
             time.sleep(web_driver.two_second)
-            date_incident.click()
-
-
             self.dateTimeAMPM(date_incident)
 
 
@@ -14714,21 +14722,22 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             # ***************************************Enrollment Process end here**********************
             # self.delete_enrollment()
             self.close_all_panel_one_by_one()
-            # self.click_on_logout_button()
+            self.click_on_logout_button()
             self.logger.info(f"status: {self.status}")
             if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_IE_04.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_IE_04_failed.png")
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_IE_00.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_IE_00_failed.png")
                 return False
             else:
                 return True
         except Exception as ex:
 
             self.logger.error(f"test_TC_IE_00 got an exception as: {ex}")
-            self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_IE_04_Exception.png")
+            self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_IE_00_Exception.png")
             return False
 
-    def Enter_user_able_delete_again_enrolling_same(self):
+
+def Enter_user_able_delete_again_enrolling_same(self):
         try:
             self.logger.info("************* test_TC_IE_06 started  **************")
             # self.verify_portal_login()
@@ -14857,6 +14866,8 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
              self.d.save_screenshot(
                  f"{self.screenshots_path}\\test_TC_IE_100_Exception.png")
              return False
+
+
 
 
 

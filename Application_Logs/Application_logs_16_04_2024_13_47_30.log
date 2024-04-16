@@ -1,0 +1,39 @@
+16/04/2024 01:47:33 PM : root         : INFO     : username expected: operator
+16/04/2024 01:47:33 PM : root         : INFO     :  ******** Enrollment (Order - 12) Begin ********
+16/04/2024 01:47:33 PM : root         : INFO     : Enrollment_module_tc=12 started
+16/04/2024 01:47:38 PM : root         : INFO     : current url: https://scecore7-vm.qa.facefirst.dev/
+16/04/2024 01:47:38 PM : root         : INFO     : url is not open
+16/04/2024 01:47:38 PM : root         : INFO     : opening localhost portal login
+16/04/2024 01:47:38 PM : root         : INFO     : logging in to core
+16/04/2024 01:47:38 PM : root         : INFO     : entered explicit wait for 10
+16/04/2024 01:47:38 PM : root         : INFO     : exiting explicit wait..
+16/04/2024 01:47:40 PM : root         : INFO     : entered explicit wait for 10
+16/04/2024 01:47:41 PM : root         : INFO     : exiting explicit wait..
+16/04/2024 01:47:43 PM : root         : INFO     : login success..
+16/04/2024 01:47:48 PM : root         : INFO     : clicking on enrollments link
+16/04/2024 01:47:50 PM : root         : INFO     : clicking on enrollment group button
+16/04/2024 01:47:52 PM : root         : ERROR    : test_TC_En_11 got an exception as: Message: no such element: Unable to locate element: {"method":"xpath","selector":"(//div[@data-original-title="Enrollment Groups:2"]/div)[1]"}
+  (Session info: chrome=123.0.6312.122); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+	GetHandleVerifier [0x00007FF784447032+63090]
+	(No symbol) [0x00007FF7843B2C82]
+	(No symbol) [0x00007FF78424EC65]
+	(No symbol) [0x00007FF78429499D]
+	(No symbol) [0x00007FF784294ADC]
+	(No symbol) [0x00007FF7842D5B37]
+	(No symbol) [0x00007FF7842B701F]
+	(No symbol) [0x00007FF7842D3412]
+	(No symbol) [0x00007FF7842B6D83]
+	(No symbol) [0x00007FF7842883A8]
+	(No symbol) [0x00007FF784289441]
+	GetHandleVerifier [0x00007FF7848425AD+4238317]
+	GetHandleVerifier [0x00007FF78487F70D+4488525]
+	GetHandleVerifier [0x00007FF7848779EF+4456495]
+	GetHandleVerifier [0x00007FF784520576+953270]
+	(No symbol) [0x00007FF7843BE54F]
+	(No symbol) [0x00007FF7843B9224]
+	(No symbol) [0x00007FF7843B935B]
+	(No symbol) [0x00007FF7843A9B94]
+	BaseThreadInitThunk [0x00007FFFBA4753E0+16]
+	RtlUserThreadStart [0x00007FFFBBBC485B+43]
+

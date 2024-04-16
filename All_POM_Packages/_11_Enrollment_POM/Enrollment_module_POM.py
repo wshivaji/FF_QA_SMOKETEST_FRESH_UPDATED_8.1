@@ -1,6 +1,7 @@
 import datetime
 import time
 from pathlib import Path
+import re
 
 import pyautogui
 from selenium.webdriver.common.by import By
@@ -218,7 +219,7 @@ class enrollments_POM(web_driver, web_logger):
 
     def Verify_user_is_able_to_add_single_face_for_enabled_mask_enrollment(self):
         try:
-            self.logger.info("Enrollment_Module_tc_23 started")
+            self.logger.info("Enrollment_Module_tc_03 started")
             login().login_to_cloud_if_not_done(self.d)
             time.sleep(web_driver.one_second)
             Enrollment_link = self.d.find_element(By.XPATH,read_enrollment_components().Enrollment_link())
@@ -363,6 +364,565 @@ class enrollments_POM(web_driver, web_logger):
         except Exception as ex:
             print(ex)
 
+    def Verify_core_user_is_able_to_approve_pending_subjects(self):
+        try:
+            self.logger.info("enrollment module tc=06 started")
+            login().login_to_cloud_if_not_done(self.d)
+            time.sleep(web_driver.one_second)
+            Enrollment_link = self.d.find_element(By.XPATH, read_enrollment_components().Enrollment_link())
+            Enrollment_link.click()
+            time.sleep(web_driver.two_second)
+
+            filter_dropdown = self.d.find_element(By.XPATH,read_enrollment_components().filter_dropdown_by_xpath())
+            filter_dropdown.click()
+            time.sleep(web_driver.one_second)
+
+            pending_for_review_option = self.d.find_element(By.XPATH,read_enrollment_components().pending_for_review_option())
+            pending_for_review_option.click()
+            time.sleep(web_driver.two_second)
+
+            pending_enrollment_id = self.d.find_element(By.XPATH, read_enrollment_components().accepted_enrollment_id())
+            time.sleep(web_driver.one_second)
+            class_attrubute = pending_enrollment_id.get_attribute("class")
+            class_attrubute_list = class_attrubute.split(' - ')
+            print(class_attrubute)
+            self.logger.info(f"person id is : {class_attrubute_list}")
+            number = re.search(r'\d+[a-fA-F\d]+', class_attrubute).group()
+            print(number)
+
+            select_check_box_of_pending_Enrollment = self.d.find_element(By.XPATH,read_enrollment_components().select_checkbox_of_pending_for_review())
+            select_check_box_of_pending_Enrollment.click()
+            time.sleep(web_driver.two_second)
+
+            Action_button = self.d.find_element(By.XPATH,read_enrollment_components().Action_button_on_enrollment_panel())
+            Action_button.click()
+            time.sleep(web_driver.two_second)
+
+            approve_enrollment_option_in_Action = self.d.find_element(By.XPATH,read_enrollment_components().Approve_enrollment_option_xpath())
+            approve_enrollment_option_in_Action.click()
+            time.sleep(web_driver.two_second)
+
+            filter_dropdown1 = self.d.find_element(By.XPATH,read_enrollment_components().filter_dropdown_by_xpath())
+            filter_dropdown1.click()
+            time.sleep(web_driver.one_second)
+
+            enabled_enrollments_option_in_filter = self.d.find_element(By.XPATH, read_enrollment_components().enabled_option_xpath())
+            enabled_enrollments_option_in_filter.click()
+            time.sleep(web_driver.one_second)
+
+            read_approve_en_id = read_enrollment_components().get_approver_id()
+            self.logger.info(read_approve_en_id)
+
+
+            if read_approve_en_id == number:
+                self.logger.info("pending review enrollment enabled suceessfully")
+                self.status.append(True)
+            else:
+                self.logger.info("pending review enrollment  enabled is not successfull")
+                self.status.append(False)
+            if False in self.status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_En_03`.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_03_failed.png")
+                return False
+            else:
+                return True
+        except Exception as ex:
+            self.logger.error(f"test_TC_En_03 got an exception as: {ex}")
+            self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_03_Exception.png")
+            return False
+
+    def Verify_core_user_is_able_to_reject_pending_subjects(self):
+        try:
+            self.logger.info("Enrollment module tc=07 started")
+            login().login_to_cloud_if_not_done(self.d)
+            time.sleep(web_driver.one_second)
+
+            Enrollment_link = self.d.find_element(By.XPATH, read_enrollment_components().Enrollment_link())
+            Enrollment_link.click()
+            time.sleep(web_driver.two_second)
+            self.logger.info("clicking on enrollments link")
+
+            filter_dropdown = self.d.find_element(By.XPATH, read_enrollment_components().filter_dropdown_by_xpath())
+            filter_dropdown.click()
+            time.sleep(web_driver.one_second)
+            self.logger.info("clicking on filter dropdown")
+
+            pending_for_review_option = self.d.find_element(By.XPATH,
+                                                            read_enrollment_components().pending_for_review_option())
+            pending_for_review_option.click()
+            time.sleep(web_driver.two_second)
+            self.logger.info("clicking on pending for review option")
+
+            select_check_box_of_pending_Enrollment = self.d.find_element(By.XPATH,
+                                                                         read_enrollment_components().select_checkbox_of_pending_for_review())
+            select_check_box_of_pending_Enrollment.click()
+            time.sleep(web_driver.two_second)
+            self.logger.info("selecting checkbox")
+
+            Action_button = self.d.find_element(By.XPATH, read_enrollment_components().Action_button_on_enrollment_panel())
+            Action_button.click()
+            time.sleep(web_driver.two_second)
+            self.logger.info("clicking on Action dropdown")
+
+            reject_enrollment_option_in_Action = self.d.find_element(By.XPATH,read_enrollment_components().reject_enrollment_option())
+            reject_enrollment_option_in_Action.click()
+            time.sleep(web_driver.one_second)
+            self.logger.info("clicking on reject enrollment option in action dropdown")
+
+            yes_reject_button = self.d.find_element(By.XPATH,
+                                                    read_enrollment_components().get_rejected_buttton_in_dialouge_tooltip())
+            time.sleep(web_driver.two_second)
+            # yes_reject_button.click()
+            self.d.execute_script("arguments[0].click();", yes_reject_button)
+            time.sleep(web_driver.one_second)
+
+            filter_dropdown1 = self.d.find_element(By.XPATH,read_enrollment_components().filter_dropdown_by_xpath())
+            filter_dropdown1.click()
+            time.sleep(web_driver.one_second)
+            self.logger.info("clicking on filter dropdown")
+
+            rejected_option_in_filter = self.d.find_element(By.XPATH,read_enrollment_components().rejected_enrollment_option_in_filter())
+            rejected_option_in_filter.click()
+            time.sleep(web_driver.one_second)
+            self.logger.info("")
+
+            rejected_enrollment_text = self.d.find_element(By.XPATH,read_enrollment_components().rejected_enrollment_text())
+            if rejected_enrollment_text.is_displayed():
+                self.logger.info("rejected text is visible")
+                self.status.append(True)
+            else:
+                self.logger.info("rejected text is not dispalyed")
+                self.status.append(False)
+            if False in self.status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_En_03`.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_03_failed.png")
+                return False
+            else:
+                return True
+        except Exception as ex:
+            self.logger.error(f"test_TC_En_07 got an exception as: {ex}")
+            self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_07_Exception.png")
+            return False
+
+    def Verify_core_user_is_able_to_delete_pending_subjects(self):
+        try:
+            self.logger.info("Enrollment tc_08 started ")
+            login().login_to_cloud_if_not_done(self.d)
+            Enrollment_link = self.d.find_element(By.XPATH, read_enrollment_components().Enrollment_link())
+            Enrollment_link.click()
+            time.sleep(web_driver.two_second)
+            self.logger.info("clicking on enrollments link")
+
+            filter_dropdown = self.d.find_element(By.XPATH, read_enrollment_components().filter_dropdown_by_xpath())
+            filter_dropdown.click()
+            time.sleep(web_driver.one_second)
+            self.logger.info("clicking on filter dropdown")
+
+            pending_for_review_option = self.d.find_element(By.XPATH,
+                                                            read_enrollment_components().pending_for_review_option())
+            pending_for_review_option.click()
+            time.sleep(web_driver.two_second)
+            self.logger.info("clicking on pending for review option")
+
+            select_check_box_of_pending_Enrollment = self.d.find_element(By.XPATH,
+                                                                         read_enrollment_components().select_checkbox_of_pending_for_review())
+            select_check_box_of_pending_Enrollment.click()
+            time.sleep(web_driver.two_second)
+            self.logger.info("selecting checkbox")
+
+            Action_button = self.d.find_element(By.XPATH, read_enrollment_components().Action_button_on_enrollment_panel())
+            Action_button.click()
+            time.sleep(web_driver.two_second)
+            self.logger.info("clicking on Action dropdown")
+
+            delete_enrollment_xpath = self.d.find_element(By.XPATH,read_enrollment_components().delete_option_in_action_dropdown())
+            delete_enrollment_xpath.click()
+            time.sleep(web_driver.one_second)
+            self.logger.info("deleting enrollment successfully")
+
+            yes_delete_button = self.d.find_element(By.XPATH,read_enrollment_components().yes_delete_button_xpath())
+            yes_delete_button.click()
+            time.sleep(web_driver.one_second)
+            self.logger.info("clicking on yes delete button")
+
+            delete_enrollment_success_msg = self.d.find_element(By.XPATH,read_enrollment_components().delete_enrollment_successfully_message())
+            if delete_enrollment_success_msg.is_displayed():
+                self.logger.info("Enrollment deleted successfully")
+                self.status.append(True)
+            else:
+                self.status.append(False)
+                self.status.append("Enrollment is not deleted")
+            if False in self.status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_En_03`.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_03_failed.png")
+                return False
+            else:
+                return True
+        except Exception as ex:
+            self.logger.error(f"test_TC_En_07 got an exception as: {ex}")
+            self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_07_Exception.png")
+            return False
+
+    def Verify_user_is_able_to_enable_the_reject_subject_user_with_all_permissions(self):
+        try:
+            self.logger.info("enrollment module tc=09 started")
+            # login().login_to_cloud_if_not_done_with_user_credentials(self.d,Read_Identify_and_Enroll_Components().get_user_to_login(),Read_Identify_and_Enroll_Components().get_password_to_login())
+            time.sleep(web_driver.one_second)
+            self.Verify_core_user_is_able_to_reject_pending_subjects()
+            time.sleep(web_driver.one_second)
+            logout().logout_from_core(self.d)
+            time.sleep(web_driver.one_second)
+            login().login_to_cloud_if_not_done_with_user_credentials(self.d,Read_Identify_and_Enroll_Components().get_user_to_login(),Read_Identify_and_Enroll_Components().get_password_to_login())
+            time.sleep(web_driver.one_second)
+            filter_dropdown1 = self.d.find_element(By.XPATH, read_enrollment_components().filter_dropdown_by_xpath())
+            filter_dropdown1.click()
+            time.sleep(web_driver.one_second)
+            self.logger.info("clicking on filter dropdown")
+
+            rejected_option_in_filter = self.d.find_element(By.XPATH,
+                                                            read_enrollment_components().rejected_enrollment_option_in_filter())
+            rejected_option_in_filter.click()
+            time.sleep(web_driver.one_second)
+            self.logger.info("clicking on rejected option")
+            time.sleep(web_driver.one_second)
+
+            select_check_box_of_pending_Enrollment = self.d.find_element(By.XPATH,
+                                                                         read_enrollment_components().select_checkbox_of_pending_for_review())
+            select_check_box_of_pending_Enrollment.click()
+            time.sleep(web_driver.two_second)
+
+            Action_button = self.d.find_element(By.XPATH, read_enrollment_components().Action_button_on_enrollment_panel())
+            Action_button.click()
+            time.sleep(web_driver.two_second)
+
+            approve_enrollment_option_in_Action = self.d.find_element(By.XPATH,
+                                                                      read_enrollment_components().Approve_enrollment_option_xpath())
+            approve_enrollment_option_in_Action.click()
+            time.sleep(web_driver.two_second)
+
+        except Exception as ex:
+            print(ex.args)
+
+    def Verify_if_user_is_enrolled_the_person_with_expiry_date_validate_expired_date_is_visible_on_Enrollment_module_panel(self):
+        try:
+            self.logger.info("Enrollment module tc=11 started")
+            login().login_to_cloud_if_not_done_with_user_credentials(self.d,Read_Identify_and_Enroll_Components().get_approver_to_login(),Read_Identify_and_Enroll_Components().get_password_to_login())
+            time.sleep(web_driver.one_second)
+            self.logger.info("login with approver user")
+
+            Identify_And_Enroll_POM().Verify_user_is_able_to_enroll_the_person_by_uploading_the_image_and_adding_the_required_details_for_the_same_along_with_expiry_date_and_time_range()
+            time.sleep(web_driver.two_second)
+            self.logger.info("enrolling a person with expiration date")
+
+            logout().logout_from_core(self.d)
+            time.sleep(web_driver.one_second)
+
+            login().login_to_cloud_if_not_done(self.d)
+            time.sleep(web_driver.two_second)
+
+            Enrollment_link = self.d.find_element(By.XPATH, read_enrollment_components().Enrollment_link())
+            Enrollment_link.click()
+            time.sleep(web_driver.two_second)
+            self.logger.info("clicking on enrollments link")
+
+            Expired_date_on_enrollment = self.d.find_element(By.XPATH,read_enrollment_components().expired_date_on_enrollment())
+            time.sleep(web_driver.one_second)
+
+            if Expired_date_on_enrollment.is_displayed():
+                self.logger.info("expired date is visible on enrollment")
+                self.status.append(True)
+
+            else:
+                self.logger.info("expired date is not visible")
+                self.status.append(False)
+            Identify_And_Enroll_POM().delete_enrollment()
+            if False in self.status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_En_11`.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_11_failed.png")
+                return False
+            else:
+                return True
+        except Exception as ex:
+            self.logger.error(f"test_TC_En_11 got an exception as: {ex}")
+            self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_11_Exception.png")
+            return False
+
+    def Enrollments_search_with_filter_dropdown_option_result_should_be_dropdown_options(self):
+        try:
+            self.logger.info("Enrollment module tc=12 started")
+            pass
+        except Exception as ex:
+            print(ex.args)
+
+    def verify_user_enroller_of_an_enrollment_able_to_link_a_enrollment_group_and_add_the_person_to_the_group(self):
+        try:
+            self.logger.info("Enrollment_module_tc=13 started")
+            login().login_to_cloud_if_not_done(self.d)
+
+            time.sleep(web_driver.one_second)
+
+            self.click_on_Enrollment_link()
+            time.sleep(web_driver.one_second)
+
+            self.clicking_on_one_enrollment_group_button()
+            time.sleep(web_driver.one_second)
+
+            before_linking_eg_count = self.d.find_element(By.XPATH,read_enrollment_components().get_enrollment_group_count())
+            print(before_linking_eg_count.text)
+            linked_eg_count = before_linking_eg_count.text
+            self.logger.info(f"before linking enrolllment group count is : {linked_eg_count}")
+
+            self.click_filter_dropdopwn_on_enrollment_group()
+            time.sleep(web_driver.one_second)
+
+            unlinked_eg_option = self.d.find_element(By.XPATH,read_enrollment_components().unlinked_eg_option_xpath())
+            unlinked_eg_option.click()
+            time.sleep(web_driver.one_second)
+            eg_list = []
+            Enrollments_groups_list = self.d.find_elements(By.XPATH,read_enrollment_components().list_of_egs())
+            for group in Enrollments_groups_list:
+                eg_list.append(group.text)
+            self.logger.info(f"list of eg are :{eg_list}")
+
+            read_eg_name = read_enrollment_components().read_eg_data()
+            self.logger.info(f" eg name is :{read_eg_name}")
+
+
+            checkbox_xpath_1 = read_enrollment_components().checkbox_xpath_1()
+            checkbox_xpath_2 = read_enrollment_components().checkbox_xpath_2()
+            check_box_xpath = f"{checkbox_xpath_1}{read_eg_name}{checkbox_xpath_2}"
+            self.logger.info(f"custom xpath : {check_box_xpath}")
+            if read_eg_name in eg_list:
+                checkbox = self.d.find_element(By.XPATH, check_box_xpath)
+                checkbox.click()
+            else:
+                self.logger.info("check box is not clicked")
+
+            time.sleep(web_driver.two_second)
+            self.Action_dropdown_on_eg()
+
+            add_group_to_enrollment_option = self.d.find_element(By.XPATH,read_enrollment_components().add_group_to_enrollment_option())
+            add_group_to_enrollment_option.click()
+            self.logger.info("add group to enrollment option is clicked inside action dropdown")
+            time.sleep(web_driver.one_second)
+
+            self.close_single_panel()
+
+            after_linking_eg_count = self.d.find_element(By.XPATH,read_enrollment_components().after_linking_eg_count())
+            self.logger.info(f"after linking enrollment group count is :{after_linking_eg_count.text}")
+            after_linking_eg_count1 = after_linking_eg_count.text
+
+            if after_linking_eg_count1 != int(linked_eg_count)+1:
+
+                self.logger.info("Enrollment group is linked")
+                self.status.append(True)
+            else:
+                self.logger.info("Enrollment group is not linked")
+                self.status.append(False)
+
+            if False in self.status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_En_11`.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_11_failed.png")
+                return False
+            else:
+                return True
+        except Exception as ex:
+                self.logger.error(f"test_TC_En_11 got an exception as: {ex}")
+                self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_11_Exception.png")
+                return False
+
+    def verify_user_enroller_of_an_enrollment_able_to_unlink_same_enrollment_group_and_remove_the_person_from_selected_group(self):
+        try:
+
+            self.logger.info("Enrollment_module_tc=12 started")
+            login().login_to_cloud_if_not_done(self.d)
+
+            time.sleep(web_driver.one_second)
+
+            self.click_on_Enrollment_link()
+            time.sleep(web_driver.one_second)
+
+            self.clicking_on_one_enrollment_group_button()
+            time.sleep(web_driver.one_second)
+
+            before_unlinking_eg_count = self.d.find_element(By.XPATH,
+                                                          read_enrollment_components().after_linking_eg_count())
+            print(before_unlinking_eg_count.text)
+            before_unlinked_eg_count = before_unlinking_eg_count.text
+            self.logger.info(f"before unlinking enrolllment group count is : {before_unlinked_eg_count}")
+
+            self.click_filter_dropdopwn_on_enrollment_group()
+            time.sleep(web_driver.one_second)
+
+            eg_list = []
+            Enrollments_groups_list = self.d.find_elements(By.XPATH, read_enrollment_components().list_of_egs())
+            for group in Enrollments_groups_list:
+                eg_list.append(group.text)
+            self.logger.info(f"list of eg are :{eg_list}")
+
+            read_eg_name = read_enrollment_components().read_eg_data()
+            self.logger.info(f" eg name is :{read_eg_name}")
+
+            checkbox_xpath_1 = read_enrollment_components().checkbox_xpath_1()
+            checkbox_xpath_2 = read_enrollment_components().checkbox_xpath_2()
+            check_box_xpath = f"{checkbox_xpath_1}{read_eg_name}{checkbox_xpath_2}"
+            self.logger.info(f"custom xpath : {check_box_xpath}")
+            if read_eg_name in eg_list:
+                checkbox = self.d.find_element(By.XPATH, check_box_xpath)
+                checkbox.click()
+            else:
+                self.logger.info("check box is not clicked")
+
+            time.sleep(web_driver.two_second)
+            self.Action_dropdown_on_eg()
+
+            remove_group_to_enrollment_option = self.d.find_element(By.XPATH,
+                                                                 read_enrollment_components().remove_enrollment_group_to_enrollment())
+            remove_group_to_enrollment_option.click()
+            self.logger.info("add group to enrollment option is clicked inside action dropdown")
+            time.sleep(web_driver.one_second)
+
+            self.close_single_panel()
+
+            after_unlinking_eg_count = self.d.find_element(By.XPATH,
+                                                         read_enrollment_components().get_enrollment_group_count())
+            self.logger.info(f"after linking enrollment group count is :{after_unlinking_eg_count.text}")
+            after_unlinking_eg_count1 = after_unlinking_eg_count.text
+
+            if  before_unlinking_eg_count != after_unlinking_eg_count1:
+
+                self.logger.info("Enrollment group is linked")
+                self.status.append(True)
+            else:
+                self.logger.info("Enrollment group is not linked")
+                self.status.append(False)
+
+            if False in self.status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_En_12`.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_12_failed.png")
+                return False
+            else:
+                return True
+        except Exception as ex:
+            self.logger.error(f"test_TC_En_11 got an exception as: {ex}")
+            self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_12_Exception.png")
+            return False
+    def verify_user_able_to_add_more_faces_to_an_enrollment(self):
+        try:
+            self.logger.info("Enrollment module tc=13 started")
+            login().login_to_cloud_if_not_done(self.d)
+            time.sleep(web_driver.one_second)
+
+            self.click_on_Enrollment_link()
+            time.sleep(web_driver.one_second)
+
+            before_adding_faces_count = self.d.find_element(By.XPATH,read_enrollment_components().before_adding_faces_count())
+            before_adding_face_count1 = before_adding_faces_count.text
+            self.logger.info(f"before adding faces count is : {before_adding_face_count1}")
+
+            self.selecting_one_faces_button()
+            time.sleep(web_driver.one_second)
+
+            upload_photo = self.explicit_wait(7, "XPATH", read_enrollment_components()
+                                              .image_box_xpath(), self.d)
+            upload_photo.click()
+            self.logger.info(f"clicked on upload image icon")
+            time.sleep(2)
+            file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset2\\img4.png."
+            pyautogui.write(file_path)
+            pyautogui.press('enter')
+            time.sleep(2)
+            pyautogui.press('enter')
+            self.logger.info(f"Image upload success")
+            time.sleep(web_driver.two_second)
+
+            skip_cropping_button = self.d.find_element(By.XPATH,read_enrollment_components().skip_cropping_button())
+            skip_cropping_button.click()
+            time.sleep(web_driver.one_second)
+            self.logger.info("clicking on skip cropping button")
+
+
+            select_photo_button = self.d.find_element(By.XPATH,read_enrollment_components().select_photo_button())
+            select_photo_button.click()
+            time.sleep(4)
+            self.logger.info("clicking on select photo button")
+
+            success_msg = self.d.find_element(By.XPATH,read_enrollment_components().success_photo_added_message())
+            self.logger.info(f"success message is {success_msg.text}")
+
+            if success_msg.is_displayed():
+                self.logger.info("sucess photo has been added message is displayed")
+                self.status.append(True)
+
+            else:
+                self.logger.info("success message is not displayed")
+                self.status.append(False)
+
+            if False in self.status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_En_13`.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_13_failed.png")
+                return False
+            else:
+                return True
+        except Exception as ex:
+                self.logger.error(f"test_TC_En_13 got an exception as: {ex}")
+                self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_13_Exception.png")
+                return False
+
+    def verify_user_enroller_of_an_enrollment_able_to_see_events_for_a_enrolled_person_on_enrrollments_panel(self):
+        try:
+            self.logger.info("enrollment_module tc 014 started")
+            self.status.clear()
+            login().login_to_cloud_if_not_done(self.d)
+            time.sleep(web_driver.one_second)
+
+            self.click_on_Enrollment_link()
+            time.sleep(web_driver.one_second)
+
+            self.clicking_on_one_of_the_tribar_button()
+            time.sleep(web_driver.one_second)
+
+            self.clicking_on_one_events_buttons()
+            time.sleep(web_driver.one_second)
+
+            list_of_events = self.d.find_elements(By.XPATH,read_enrollment_components().list_of_events())
+            time.sleep(web_driver.one_second)
+
+            no_events_msg = self.d.find_element(By.XPATH,read_enrollment_components().no_events_msg())
+
+
+            for event in list_of_events:
+                if event.is_displayed():
+                    self.logger.info("events are dispalyed")
+                    self.status.append(True)
+                elif no_events_msg.is_displayed():
+                    self.logger.info("There are no events in the system is visible")
+                    self.status.append(True)
+                else:
+                    self.status.append(False)
+
+            if False in self.status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_En_14`.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_14_failed.png")
+                return False
+            else:
+                return True
+        except Exception as ex:
+            self.logger.error(f"test_TC_En_13 got an exception as: {ex}")
+            self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_14_Exception.png")
+            return False
+
+    def verify_user_enroller_of_an_enrollment_able_to_edit_the_enrollment(self):
+        try:
+            self.logger.info("enrollment module tc 016 started")
+            time.sleep(web_driver.one_second)
+            self.status.clear()
+
+            self.click_on_Enrollment_link()
+            time.sleep(web_driver.one_second)
+
+            self.clicking_on_one_of_the_tribar_button()
+            time.sleep(web_driver.one_second)
 
 
 
@@ -380,6 +940,98 @@ class enrollments_POM(web_driver, web_logger):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ###################################3 Userful_methods##############################################
+    def click_on_Enrollment_link(self):
+        Enrollment_link = self.d.find_element(By.XPATH, read_enrollment_components().Enrollment_link())
+        Enrollment_link.click()
+        time.sleep(web_driver.two_second)
+        self.logger.info("clicking on enrollments link")
+
+    def selecting_first_enrollment_checkbox(self):
+        selecting_first_checkbox = self.d.find_element(By.XPATH,
+                                                                     read_enrollment_components().select_checkbox_of_pending_for_review())
+        time.sleep(web_driver.two_second)
+        selecting_first_checkbox.click()
+        self.logger.info("clicking on first checkbox of an enrollment")
+
+    def clicking_on_one_enrollment_group_button(self):
+        Enrollment_group_button = self.d.find_element(By.XPATH,read_enrollment_components().clicking_on_one_enrollment_group_button())
+        time.sleep(web_driver.one_second)
+        Enrollment_group_button.click()
+        self.logger.info("clicking on enrollment group button")
+
+    def click_filter_dropdopwn_on_enrollment_group(self):
+        enrollment_group_filter_dropdown = self.d.find_element(By.XPATH,read_enrollment_components().filter_dropdown_on_enrollment_group())
+        enrollment_group_filter_dropdown.click()
+        self.logger.info("clicking on enrollment group filter dropdown")
+
+    def Action_dropdown_on_eg(self):
+        action_dropdown = self.d.find_element(By.XPATH,read_enrollment_components().action_dropdown_on_eg())
+        time.sleep(web_driver.one_second)
+        action_dropdown.click()
+        self.logger.info("clicking on action dropdown")
+
+    def selecting_one_faces_button(self):
+        faces_button = self.d.find_element(By.XPATH,read_enrollment_components().faces_button_by_xpath())
+        time.sleep(web_driver.one_second)
+        faces_button.click()
+        self.logger.info("clicking on faces button")
+
+
+    def  clicking_on_one_of_the_tribar_button(self):
+        tribar_button = self.d.find_element(By.XPATH,read_enrollment_components().select_tribar_button_on_enrollment_panel())
+        time.sleep(web_driver.one_second)
+        tribar_button.click()
+        self.logger.info("clicking on tribar button")
+
+    def clicking_on_one_events_buttons(self):
+        events_button = self.d.find_element(By.XPATH,read_enrollment_components().probable_match_events_button())
+        time.sleep(web_driver.one_second)
+        events_button.click()
+        self.logger.info("clicking on events button")
+
+    def click_one_of_details_button_of_enrollment(self):
+
+            details_button = self.d.find_element(By.XPATH,read_enrollment_components().details_button())
+            details_button.click()
+            time.sleep(web_driver.one_second)
+            self.logger.info("clicking on details button ")
+
+    def clicking_on_action_dropdown_on_en_details(self):
+        action = self.d.find_element(By.XPATH,read_enrollment_components().a)
+
+
+
+
+
+    def close_single_panel(self):
+        try:
+            close_single_panel = self.d.find_element(By.XPATH,read_enrollment_components().close_single_panel())
+            close_single_panel.click()
+            self.logger.info(f"panel closed successfully")
+        except Exception as ex:
+            print(ex.args)
 
 
 
@@ -404,6 +1056,8 @@ class enrollments_POM(web_driver, web_logger):
 
     def close_all_panel_one_by_one(self):
         pass
+
+
 
 
 

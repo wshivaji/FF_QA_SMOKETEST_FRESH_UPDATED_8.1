@@ -208,7 +208,7 @@ class Users_Module_pom(web_driver, web_logger):
             return False
         finally:
             self.delete_randomly_created_users()
-            # self.close_all_panel_one_by_one()
+            self.close_all_panel_one_by_one()
             logout().logout_from_core(self.d)
             self.d.refresh()
 
