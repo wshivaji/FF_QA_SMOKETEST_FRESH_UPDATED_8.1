@@ -70,3 +70,30 @@ class Test_Audit_Log_Report_Test_Cases(web_driver, web_logger):
         else:
             assert False
 
+    @pytest.mark.p1
+    def test_TC_ALR_009(self):
+        if Audit_log_report_pom().Verify_user_with_2FA_enrolled_subject_approved_by_core_admin_should_be_able_to_see_Accepted_status_and_action_by_core_for_user_enrollments():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p1
+    def test_TC_ALR_010(self):
+        if Audit_log_report_pom().Verify_user_with_2FA_enrolled_subject_approved_by_core_admin_should_be_able_to_see_Accepted_status_for_approver_enrollments():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p1
+    def test_TC_ALR_011(self):
+        if Audit_log_report_pom().Verify_Threshold_changes_report_with_user_modified_enrolment_group_details_should_be_displayed_on_the_report_with_ip_address():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p1
+    def test_TC_ALR_012(self):
+        if Audit_log_report_pom().Verify_Login_Logout_report_with_one_of_the_user_login_and_user_logout_with_minimum_delay_of_1_min():
+            assert True
+        else:
+            assert False

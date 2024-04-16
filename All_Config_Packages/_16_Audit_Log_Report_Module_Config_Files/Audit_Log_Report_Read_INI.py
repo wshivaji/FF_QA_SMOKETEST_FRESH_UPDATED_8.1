@@ -549,6 +549,13 @@ class Audit_Log_Report_Components:
         except Exception as ex:
             print(ex)
 
+    def pending_review_option_under_filter_dropdown_by_xpath(self):
+        try:
+            ele = self.config.get('LOCATORS', 'pending_review_option_under_filter_dropdown_by_xpath')
+            return ele
+        except Exception as ex:
+            print(ex)
+
     def select_checkbox_on_enrollments_panel_by_xpath(self):
         try:
             ele = self.config.get('LOCATORS', 'select_checkbox_on_enrollments_panel_by_xpath')
@@ -958,6 +965,21 @@ class Audit_Log_Report_Components:
         except Exception as ex:
             print("login_logout_time_column_list : ", ex)
 
+    def time_login_column_list(self):
+        try:
+            ele = self.config.get("LOCATORS", "time_login_column_list")
+            return ele
+        except Exception as ex:
+            print("time_login_column_list : ", ex)
+
+    def time_logout_column_list(self):
+        try:
+            ele = self.config.get("LOCATORS", "time_logout_column_list")
+            return ele
+        except Exception as ex:
+            print("time_logout_column_list : ", ex)
+
+
     def login_logout_total_count_list(self):
         try:
             ele = self.config.get("LOCATORS", "login_logout_total_count_list")
@@ -1007,12 +1029,33 @@ class Audit_Log_Report_Components:
         except Exception as ex:
             print("enrollment_groups_action_drop_down : ", ex)
 
+    def enrollment_group_details_panel_action_dropdown_by_xpath(self):
+        try:
+            ele = self.config.get("LOCATORS", "enrollment_group_details_panel_action_dropdown_by_xpath")
+            return ele
+        except Exception as ex:
+            print("enrollment_group_details_panel_action_dropdown_by_xpath : ", ex)
+
+    def edit_option_under_action_on_enrollment_group_details_panel_by_xpath(self):
+        try:
+            ele = self.config.get("LOCATORS", "edit_option_under_action_on_enrollment_group_details_panel_by_xpath")
+            return ele
+        except Exception as ex:
+            print("edit_option_under_action_on_enrollment_group_details_panel_by_xpath : ", ex)
+
     def enable_selected_enrollment_option_on_enrollments_panel_by_xpath(self):
         try:
             ele = self.config.get("LOCATORS", "enable_selected_enrollment_option_on_enrollments_panel_by_xpath")
             return ele
         except Exception as ex:
             print("enable_selected_enrollment_option_on_enrollments_panel_by_xpath : ", ex)
+
+    def approve_selected_enrollment_option_on_enrollments_panel_by_xpath(self):
+        try:
+            ele = self.config.get("LOCATORS", "approve_selected_enrollment_option_on_enrollments_panel_by_xpath")
+            return ele
+        except Exception as ex:
+            print("approve_selected_enrollment_option_on_enrollments_panel_by_xpath : ", ex)
 
     def create_enrollment_group_option(self):
         try:
@@ -1021,12 +1064,33 @@ class Audit_Log_Report_Components:
         except Exception as ex:
             print("create_enrollment_group_option : ", ex)
 
+    def checkbox_on_enrollment_groups_panel_by_xpath(self):
+        try:
+            ele = self.config.get("LOCATORS", "checkbox_on_enrollment_groups_panel_by_xpath")
+            return ele
+        except Exception as ex:
+            print("checkbox_on_enrollment_groups_panel_by_xpath : ", ex)
+
     def enrollment_groups_details_name_input_bx(self):
         try:
             ele = self.config.get("LOCATORS", "enrollment_groups_details_name_input_bx")
             return ele
         except Exception as ex:
             print("enrollment_groups_details_name_input_bx : ", ex)
+
+    def extent_menu_btn_on_enrollment_groups_by_xpath(self):
+        try:
+            ele = self.config.get("LOCATORS", "extent_menu_btn_on_enrollment_groups_by_xpath")
+            return ele
+        except Exception as ex:
+            print("extent_menu_btn_on_enrollment_groups_by_xpath : ", ex)
+
+    def details_btn_on_enrollment_groups_panel_by_xpath(self):
+        try:
+            ele = self.config.get("LOCATORS", "details_btn_on_enrollment_groups_panel_by_xpath")
+            return ele
+        except Exception as ex:
+            print("details_btn_on_enrollment_groups_panel_by_xpath : ", ex)
 
     def extend_menu(self, name):
         try:
@@ -1048,6 +1112,21 @@ class Audit_Log_Report_Components:
             return ele
         except Exception as ex:
             print("face_threshold_input_bx : ", ex)
+
+    def face_threshold_text_on_enrollment_group_details_panel_by_xpath(self):
+        try:
+            ele = self.config.get("LOCATORS", "face_threshold_text_on_enrollment_group_details_panel_by_xpath")
+            return ele
+        except Exception as ex:
+            print("face_threshold_text_on_enrollment_group_details_panel_by_xpath : ", ex)
+
+    def masked_face_threshold_text_on_enrollment_group_details_panel_by_xpath(self):
+        try:
+            ele = self.config.get("LOCATORS", "masked_face_threshold_text_on_enrollment_group_details_panel_by_xpath")
+            return ele
+        except Exception as ex:
+            print("masked_face_threshold_text_on_enrollment_group_details_panel_by_xpath : ", ex)
+
 
     def save_btn_by_xpath(self):
         try:
