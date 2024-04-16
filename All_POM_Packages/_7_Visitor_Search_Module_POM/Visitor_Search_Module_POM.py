@@ -2,9 +2,6 @@ import pandas as pd
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import re
-
-from All_POM_Packages._8_Visitor_Seach_Jobs_Module_POM.Visitor_Search_Jobs_Module_POM import \
-    Visitor_Search_Jobs_Module_pom
 from Base_Package.Login_Logout_Ops import login, logout
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
@@ -735,11 +732,10 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
 
         if strategy == "from":
             self.logger.info("From start date")
-            # start_date_txt_bx = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().start_date_by_xpath())
-            # start_date_txt_bx.click()
-            # time.sleep(web_driver.one_second)
-            # web_driver.implicit_wait(self, web_driver.one_second, self.d)
-            Visitor_Search_Jobs_Module_pom().get_start_date()
+            start_date_txt_bx = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().start_date_by_xpath())
+            start_date_txt_bx.click()
+            time.sleep(web_driver.one_second)
+            web_driver.implicit_wait(self, web_driver.one_second, self.d)
 
         else:
             # click on the to calendar pop up
@@ -855,284 +851,86 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
                                                   .current_minute_element_by_xpath())
             cur_min = int(current_min_ele.text)
 
-    def verify_date_range(self, start_year, end_year):
-        month_to_num = {
-            "JAN": 1,
-            "FEB": 2,
-            "MAR": 3,
-            "APR": 4,
-            "MAY": 5,
-            "JUN": 6,
-            "JUL": 7,
-            "AUG": 8,
-            "SEP": 9,
-            "OCT": 10,
-            "NOV": 11,
-            "DEC": 12
-        }
-        date_list = self.d.find_elements(By.XPATH, Read_Visitor_Search_Components().match_date_list_by_xpath())
-        ac_date = int()
-        ac_month = int()
-        ac_year = int()
-        for x in date_list:
-            dt = x.text
-            b = dt.split(" ")
-            ac_year = int(b[2])
-        ele2 = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().no_matches_found())
-        if (start_year <= ac_year <= end_year) or (ele2.is_displayed()):
-            return True
-        else:
-            return False
-
-    def close_all_panel_one_by_one(self):
+    def get_start_date(self):
         try:
-            close_panel_list = self.d.find_elements(By.XPATH,
-                                                    Read_Visitor_Search_Components().close_all_panel_one_by_one())
-            for i in close_panel_list:
-                i.click()
-            return True
-        except Exception as ex:
-            msg = str(ex)
-            if msg.__contains__('not clickable at point'):
-                print("Exception crated: ", ex, " #returning false# ")
-                self.d.save_screenshot(
-                    f"{Path(__file__).parent.parent}\\Screenshots\\close_all_panel_failed_pg_03.png")
-                return False
+            # self.get_date_range_from_json()
+            time.sleep(web_driver.one_second)
 
-    def click_on_logout_button(self):
-        try:
-
-            # logout_button = self.d.find_elements(By.XPATH, Read_Visitor_Search_Components().logout_btn_by_xpath())
-
-            # logout_button = self.wait_for_element_to_appear(logout_button, Read_Visitor_Search_Components().logout_btn_by_xpath())
-            logout_button = web_driver.explicit_wait(self, 20, "XPATH",
-                                                     Read_Visitor_Search_Components().logout_btn_by_xpath(), self.d)
-            # if not logout_button.is_displayed():
-            #     while not logout_button.is_displayed():
-            #         time.sleep(web_driver.one_second)
-            try:
-                self.d.execute_script("arguments[0].click();", logout_button)
-            except Exception as ex:
-                logout_button.click()
-                self.logger.info(f"exception: {ex}")
-
-            self.d.delete_cookie()
-        except Exception as ex:
-            msg = str(ex)
-            if msg.__contains__('not clickable at point'):
-                print("Exception crated: ", ex, " #returning false# ")
-                self.d.save_screenshot(
-                    f"{Path(__file__).parent.parent}\\Screenshots\\Button_not_clickable_logout_pg_03.png")
-                return False
-
-    def check_if_match_is_found(self):
-        # ele = self.d.find_elements(By.XPATH, Read_Visitor_Search_Components().no_match_found_by_xpath())
-
-        # ele = self.wait_for_element_to_appear(ele, Read_Visitor_Search_Components().no_match_found_by_xpath())
-        ele = web_driver.explicit_wait(self, 20, "XPATH", Read_Visitor_Search_Components().no_match_found_by_xpath(),
-                                       self.d)
-        if ele.is_displayed():
-            return False
-        else:
-            return True
-
-    def verify_Must_specify_start_and_end_date_for_meta_data_only_search_TC_VS_001(self):
-        error_msg1 = None
-        time.sleep(web_driver.one_second)
-        self.logger.info("waiting for message to appear...")
-        # ele_list = self.d.find_elements(By.XPATH,
-        #                                 Read_Visitor_Search_Components().start_end_date_validation_msg_verify_xpath())
-        # ele = self.wait_for_element_to_appear(ele_list, Read_Visitor_Search_Components().start_end_date_validation_msg_verify_xpath())
-        ele = web_driver.explicit_wait(self, 20, "XPATH",
-                                       Read_Visitor_Search_Components().start_end_date_validation_msg_verify_xpath(),
-                                       self.d)
-        actual_validation_text = ele.text.lower()
-        print("actual_validation_text>>>.", actual_validation_text)
-        self.logger.info(f"actual validation text: {actual_validation_text}")
-        expected_validation_text = Read_Visitor_Search_Components().meta_data_without_date_validation_msg().strip().lower()
-        print("expected_validation_text >>>", expected_validation_text)
-        self.logger.info(f"Excepted Validation text: {expected_validation_text}")
-        time.sleep(web_driver.one_second)
-        try:
-            WebDriverWait(self.d, 5).until(EC.alert_is_present())
-            alert = self.d.switch_to.alert
-            error_msg1 = alert.text
-            alert.accept()
-            self.logger.info("Alert accepted !!")
-        except Exception as ex:
-            self.logger.info(f"alert ex:")
-        time.sleep(web_driver.one_second)
-        self.logger.info(f"message is visible: {ele.is_displayed()}")
-        self.logger.info(f"alert msg: {error_msg1}")
-        expected_alert_msg = Read_Visitor_Search_Components().connection_error()
-        self.logger.info(f"expected alert msg: {expected_alert_msg}")
-        images_displayed = self.verify_image_from_match_list()
-        self.logger.info(f"images displayed: {images_displayed}")
-        web_driver.implicit_wait(self, web_driver.one_second, self.d)
-        if (ele.is_displayed() and (actual_validation_text == expected_validation_text)) or (
-                error_msg1 == expected_alert_msg) or images_displayed:
-            self.logger.info(f"returning: {True}")
-            return True
-        else:
-            self.logger.info(f"returning: {False}")
-            return False
-
-    def verify_Must_specify_start_and_end_date_for_meta_data_only_search_TC_VS_002(self):
-        error_msg1 = None
-        time.sleep(web_driver.one_second)
-        web_driver.implicit_wait(self, web_driver.one_second, self.d)
-        status = []
-        self.logger.info("waiting for message to appear...")
-        # ele = self.d.find_elements(By.XPATH, Read_Visitor_Search_Components().start_end_date_validation_msg_verify_xpath())
-
-        # ele = self.wait_for_element_to_appear(ele, Read_Visitor_Search_Components().start_end_date_validation_msg_verify_xpath())
-        ele = web_driver.explicit_wait(self, 10, "XPATH", Read_Visitor_Search_Components().start_end_date_validation_msg_verify_xpath(), self.d)
-        actual_validation_text = ele.text
-        self.logger.info(f"actual validation text: {actual_validation_text}")
-        expected_validation_text = Read_Visitor_Search_Components().meta_data_without_date_validation_msg_tc_vs_002().strip()
-        self.logger.info(f"Excepted Validation text: {expected_validation_text}")
-        time.sleep(web_driver.one_second)
-        try:
-            WebDriverWait(self.d, 5).until(EC.alert_is_present())
-            alert = self.d.switch_to.alert
-            error_msg1 = alert.text
-            alert.accept()
-            self.logger.info("Alert accepted !!")
-        except Exception as ex:
-            self.logger.info(f"alert ex: {ex.args}")
-        time.sleep(web_driver.one_second)
-        self.logger.info(f"message is visible: {ele.is_displayed()}")
-        self.logger.info(f"alert msg: {error_msg1}")
-        expected_alert_msg = Read_Visitor_Search_Components().connection_error()
-
-        self.logger.info(f"expected alert msg: {expected_alert_msg}")
-
-        if ele.is_displayed():
-            self.logger.info(f"appending: {True}")
-            status.append(True)
-        else:
-            self.logger.info(f"appending: {False}")
-            status.append(False)
-
-        self.logger.info(f"status: {status}")
-        if False in status:
-            return False
-        else:
-            return True
-
-    def verify_Meta_data_only_search_should_target_a_single_store(self):
-        error_msg1 = None
-        time.sleep(web_driver.one_second)
-        web_driver.implicit_wait(self, web_driver.one_second, self.d)
-        self.logger.info("waiting for message to appear...")
-        ele = web_driver.explicit_wait(self, 20, "XPATH",
-                                       Read_Visitor_Search_Components().start_end_date_validation_msg_verify_xpath(),
-                                       self.d)
-        actual_validation_text = ele.text.lower()
-        self.logger.info(f"actual validation text: {actual_validation_text}")
-        expected_validation_text = Read_Visitor_Search_Components().meta_data_without_date_validation_msg().strip().lower()
-        self.logger.info(f"Excepted Validation text: {expected_validation_text}")
-        self.logger.info(f"message is visible: {ele.is_displayed()}")
-        self.logger.info(f"alert msg: {error_msg1}")
-        expected_alert_msg = Read_Visitor_Search_Components().connection_error()
-        self.logger.info(f"expected alert msg: {expected_alert_msg}")
-        if (ele.is_displayed() and (actual_validation_text == expected_validation_text)) or (
-                error_msg1 == expected_alert_msg):
-            self.logger.info(f"returning: {True}")
-            return True
-        else:
-            self.logger.info(f"returning: {False}")
-            return False
-
-    def verify_Must_specify_start_and_end_date_for_meta_data_only_search_TC_VS_003(self):
-        error_msg1 = None
-        time.sleep(web_driver.one_second)
-        web_driver.implicit_wait(self, web_driver.one_second, self.d)
-        self.logger.info("waiting for message to appear...")
-        # ele = self.d.find_elements(By.XPATH, Read_Visitor_Search_Components().start_end_date_validation_msg_verify_xpath())
-        # ele = self.wait_for_element_to_appear(ele, Read_Visitor_Search_Components().start_end_date_validation_msg_verify_xpath())
-        ele = web_driver.explicit_wait(self, 20, "XPATH",
-                                       Read_Visitor_Search_Components().start_end_date_validation_msg_verify_xpath(),
-                                       self.d)
-        actual_validation_text = ele.text.lower()
-        self.logger.info(f"actual validation text: {actual_validation_text}")
-        expected_validation_text = Read_Visitor_Search_Components().meta_data_without_date_validation_msg_tc_vs_003().strip().lower()
-        self.logger.info(f"Excepted Validation text: {expected_validation_text}")
-        time.sleep(web_driver.one_second)
-        try:
-            WebDriverWait(self.d, 5).until(EC.alert_is_present())
-            alert = self.d.switch_to.alert
-            error_msg1 = alert.text
-            alert.accept()
-            self.logger.info("Alert accepted !!")
-        except Exception as ex:
-            self.logger.info(f"alert ex: {ex.args}")
-        time.sleep(web_driver.two_second)
-        self.logger.info(f"message is visible: {ele.is_displayed()}")
-        self.logger.info(f"alert msg: {error_msg1}")
-        expected_alert_msg = Read_Visitor_Search_Components().connection_error()
-        self.logger.info(f"expected alert msg: {expected_alert_msg}")
-        if (ele.is_displayed() and (actual_validation_text == expected_validation_text)) or (
-                error_msg1 == expected_alert_msg) :
-            self.logger.info(f"returning: {True}")
-            return True
-        else:
-            self.logger.info(f"returning: {False}")
-            return False
-
-    def verify_limited_to_30_min_interval_validation(self):
-        ele = self.d.find_elements(By.XPATH, Read_Visitor_Search_Components().limited_to_30_min_interval_validation())
-        # ele = self.wait_for_element_to_appear(ele, Read_Visitor_Search_Components().limited_to_30_min_interval_validation())
-        ele = web_driver.explicit_wait(self, 20, "XPATH",
-                                       Read_Visitor_Search_Components().limited_to_30_min_interval_validation(), self.d)
-        actutal_validation_text = ele.text.lower()
-        expected_validation_text = Read_Visitor_Search_Components().limited_to_30_meta_data_search_validation().strip().lower()
-        print(actutal_validation_text)
-        print(expected_validation_text)
-        if ele.is_displayed() and actutal_validation_text == expected_validation_text:
-            return True
-        else:
-            return False
-
-    def nats_checkbox(self):
-        """
-        This function is used to enable and disable NATS
-        :param end_age:
-        :return:
-        """
-        time.sleep(web_driver.one_second)
-        NATS_checkbox = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().nats_checkbox_xpath())
-        NATS_checkbox.click()
-        time.sleep(web_driver.one_second)
-        self.logger.info("Clicked on NATS checkbox..")
-
-    def verify_max_matches_not_display(self):
-        """
-        This function is used validate the max matches element
-        :return:
-        """
-
-        try:
-            max_matches = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().max_of_matches_by_xpath())
-            if not max_matches.is_displayed():
-                return True
+            start_date_calender_box = web_driver.explicit_wait(self, 10, "XPATH", Read_Visitor_Search_Components().get_start_date_calender_box_by_xpath(), self.d)
+            start_date_checkbox = web_driver.explicit_wait(self, 10, "XPATH", Read_Visitor_Search_Components().start_date_checkbox_by_xpath(), self.d)
+            time.sleep(web_driver.one_second)
+            start_date_checkbox.click()
+            start_date_calender_box.click()
+            action = ActionChains(self.d)
+            time.sleep(web_driver.one_second)
+            default_start_date = start_date_calender_box.get_attribute('value')
+            default_start_date = list(default_start_date.split(' '))
+            d_start_date = default_start_date[0]
+            d_start_date = list(d_start_date.split('/'))
+            s_month = d_start_date[0]
+            s_date = d_start_date[1]
+            start_date = Read_Visitor_Search_Components().vsj_start_date()
+            input_start_date = list(start_date.split('/'))
+            input_s_date = input_start_date[0]
+            input_s_month = input_start_date[1]
+            input_s_year = input_start_date[2]
+            status = True
+            if s_month < input_s_month:
+                while status:
+                    action.key_down(Keys.ARROW_RIGHT).key_up(Keys.ARROW_RIGHT).perform()
+                    current_date_and_time = start_date_calender_box.get_attribute('value')
+                    current_date_and_time = list(current_date_and_time.split(' '))
+                    current_date = current_date_and_time[0]
+                    current_date = list(current_date.split('/'))
+                    c_date = current_date[1]
+                    c_month = current_date[0]
+                    # c_year = current_date[2]
+                    if c_month == input_s_month and c_date == input_s_date:
+                        action.key_down(Keys.ENTER).key_up(Keys.ENTER).perform()
+                        self.logger.info(F"Start date selected as:- {input_s_date}/{input_s_month}/{input_s_year}")
+                        status = False
+            elif s_month > input_s_month:
+                while status:
+                    action.key_down(Keys.ARROW_LEFT).key_up(Keys.ARROW_LEFT).perform()
+                    current_date_and_time = start_date_calender_box.get_attribute('value')
+                    current_date_and_time = list(current_date_and_time.split(' '))
+                    current_date = current_date_and_time[0]
+                    current_date = list(current_date.split('/'))
+                    c_date = current_date[1]
+                    c_month = current_date[0]
+                    if c_month == input_s_month and c_date == input_s_date:
+                        action.key_down(Keys.ENTER).key_up(Keys.ENTER).perform()
+                        self.logger.info(F"Start date selected as:- {input_s_date}/{input_s_month}/{input_s_year}")
+                        status = False
             else:
-                return False
+                if s_date > input_s_date:
+                    while status:
+                        action.key_down(Keys.ARROW_LEFT).key_up(Keys.ARROW_LEFT).perform()
+                        current_date_and_time = start_date_calender_box.get_attribute('value')
+                        current_date_and_time = list(current_date_and_time.split(' '))
+                        current_date = current_date_and_time[0]
+                        current_date = list(current_date.split('/'))
+                        c_date = current_date[1]
+                        c_month = current_date[0]
+                        if c_month == input_s_month and c_date == input_s_date:
+                            action.key_down(Keys.ENTER).key_up(Keys.ENTER).perform()
+                            self.logger.info(F"Start date selected as:- {input_s_date}/{input_s_month}/{input_s_year}")
+                            status = False
+                elif s_date < input_s_date:
+                    while status:
+                        action.key_down(Keys.ARROW_RIGHT).key_up(Keys.ARROW_RIGHT).perform()
+                        current_date_and_time = start_date_calender_box.get_attribute('value')
+                        current_date_and_time = list(current_date_and_time.split(' '))
+                        current_date = current_date_and_time[0]
+                        current_date = list(current_date.split('/'))
+                        c_date = current_date[1]
+                        c_month = current_date[0]
+                        if c_month == input_s_month and c_date == input_s_date:
+                            action.key_down(Keys.ENTER).key_up(Keys.ENTER).perform()
+                            self.logger.info(F"Start date selected as:- {input_s_date}/{input_s_month}/{input_s_year}")
+                            status = False
+                else:
+                    action.key_down(Keys.ENTER).key_up(Keys.ENTER).perform()
         except Exception as ex:
-            return True
-
-    def verify_threshold_not_display(self):
-        """
-        This function is used validate the threshold element
-        :return:
-        """
-        try:
-            threshold = web_driver.explicit_wait(self, 20, "XPATH",
-                                                 Read_Visitor_Search_Components().threshold_slider_by_xpath(), self.d)
-            if not threshold.is_displayed():
-                return True
-            else:
-                return False
-        except Exception as ex:
-            return True
-
+            self.logger.error("start date method exception")
+            self.logger.error(ex)

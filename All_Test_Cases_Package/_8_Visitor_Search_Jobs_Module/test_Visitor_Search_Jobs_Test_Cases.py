@@ -11,7 +11,6 @@ class Test_Visitor_Search_Jobs_Test_Cases(web_driver, web_logger):
     logger.info(" ******** Visitor_Search_Jobs (Order - 8) Begin ********")
     print("******** Visitor_Search_Jobs (Order - 8) Begin ********")
 
-
     def test_VSJ_01(self):
         self.logger.info("Visitor search jobs module = test_VSJ_01 execution started..")
         if Visitor_Search_Jobs_Module_pom().verify_the_visitor_search_job_contains_user_performs_visitor_search_with_date_and_org_selection():
