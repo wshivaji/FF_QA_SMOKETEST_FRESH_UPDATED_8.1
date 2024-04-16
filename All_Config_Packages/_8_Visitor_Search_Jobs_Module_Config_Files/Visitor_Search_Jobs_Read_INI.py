@@ -1,19 +1,249 @@
-import configparser
 from pathlib import Path
+import configparser
 
 
-class Read_Visitor_Search_Components:
+class Read_Visitor_Search_jobs_Components:
     def __init__(self):
         self.config = configparser.RawConfigParser()
-        self.common_test_data_config = configparser.RawConfigParser()
         try:
-            portal_menu_ini_file_path = f'{Path(__file__).parent.parent.parent}\\All_Test_Data\\7_Visitor_Search_Module\\Data_From_INI\\Visitor_Search.ini'
-            # Base_Class.logger.info("File location: ", deployment_manager_ini_file_path)
-            self.config.read(portal_menu_ini_file_path)
+            vsj_ini_file_path = f'{Path(__file__).parent.parent.parent}\\All_Test_Data\\8_Visitor_Search_Jobs_Module\\Data_From_INI\\Visitor_Search_Jobs.ini'
+            self.config.read(vsj_ini_file_path)
             common_test_data_ini_file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_Data\\common_test_data.ini"
+            self.common_test_data_config = configparser.RawConfigParser()
             self.common_test_data_config.read(common_test_data_ini_file_path)
         except Exception as ex:
             print("config file got an exception", ex)
+
+    def cloud_menu_by_xpath(self):
+        try:
+            ele = self.config.get("LOCATORS", "cloud_menu_by_xpath")
+            return ele
+        except Exception as ex:
+            print("cloud_menu_by_xpath : ", ex)
+
+    def visitor_search_jobs_panel_by_xpath(self):
+        try:
+            ele = self.config.get("LOCATORS", "visitor_search_jobs_panel_by_xpath")
+            return ele
+        except Exception as ex:
+            print("visitor_search_jobs_panel_by_xpath : ", ex)
+
+    def vsj_start_hour(self):
+        try:
+            ele = self.common_test_data_config.get("common_data", "vsj_start_hour")
+            return ele
+        except Exception as ex:
+            print("vsj_start_hour : ", ex)
+
+    def vsj_start_minuet(self):
+        try:
+            ele = self.common_test_data_config.get("common_data", "vsj_start_minuet")
+            return ele
+        except Exception as ex:
+            print("vsj_start_minuet : ", ex)
+
+    def vsj_start_am_pm_period(self):
+        try:
+            ele = self.common_test_data_config.get("common_data", "vsj_start_am_pm_period")
+            return ele
+        except Exception as ex:
+            print("vsj_start_am_pm_period : ", ex)
+
+    def vsj_end_hour(self):
+        try:
+            ele = self.common_test_data_config.get("common_data", "vsj_end_hour")
+            return ele
+        except Exception as ex:
+            print("vsj_end_hour : ", ex)
+
+    def vsj_end_minuet(self):
+        try:
+            ele = self.common_test_data_config.get("common_data", "vsj_end_minuet")
+            return ele
+        except Exception as ex:
+            print("vsj_end_minuet : ", ex)
+
+    def vsj_end_am_pm_period(self):
+        try:
+            ele = self.common_test_data_config.get("common_data", "vsj_end_am_pm_period")
+            return ele
+        except Exception as ex:
+            print("vsj_end_am_pm_period : ", ex)
+
+    def vsj_start_date(self):
+        try:
+            ele = self.common_test_data_config.get("common_data", "vsj_start_date")
+            return ele
+        except Exception as ex:
+            print("vsj_end_am_pm_period : ", ex)
+    def visitor_search_jobs_panel_search_button(self):
+        try:
+            ele = self.config.get("LOCATORS", "visitor_search_jobs_panel_search_button")
+            return ele
+        except Exception as ex:
+            print("visitor_search_jobs_panel_search_button : ", ex)
+
+    def visitor_search_jobs_panel_action_button(self):
+        try:
+            ele = self.config.get("LOCATORS", "visitor_search_jobs_panel_action_button")
+            return ele
+        except Exception as ex:
+            print("visitor_search_jobs_panel_action_button : ", ex)
+
+    def visitor_search_jobs_panel_search_constraints(self):
+        try:
+            ele = self.config.get("LOCATORS", "visitor_search_jobs_panel_search_constraints")
+            return ele
+        except Exception as ex:
+            print("visitor_search_jobs_panel_search_constraints : ", ex)
+
+    def visitor_search_jobs_panel_visitors_search_complete(self):
+        try:
+            ele = self.config.get("LOCATORS", "visitor_search_jobs_panel_visitors_search_complete")
+            return ele
+        except Exception as ex:
+            print("visitor_search_jobs_panel_visitors_search_complete : ", ex)
+
+    def visitor_search_jobs_panel_view_results(self):
+        try:
+            ele = self.config.get("LOCATORS", "visitor_search_jobs_panel_view_results")
+            return ele
+        except Exception as ex:
+            print("visitor_search_jobs_panel_view_results : ", ex)
+
+    def possible_results_found_by_xpath(self):
+        try:
+            ele = self.config.get("LOCATORS", "possible_results_found_by_xpath")
+            return ele
+        except Exception as ex:
+            print("possible_results_found_by_xpath : ", ex)
+
+    def VSJ_checkbox_by_xpath(self):
+        try:
+            ele = self.config.get("LOCATORS", "VSJ_checkbox_by_xpath")
+            return ele
+        except Exception as ex:
+            print("VSJ_checkbox_by_xpath : ", ex)
+
+    def visitor_search_jobs_panel_cancel_jobs(self):
+        try:
+            ele = self.config.get("LOCATORS", "visitor_search_jobs_panel_cancel_jobs")
+            return ele
+        except Exception as ex:
+            print("visitor_search_jobs_panel_cancel_jobs : ", ex)
+
+    def visitor_search_jobs_panel_delete_jobs(self):
+        try:
+            ele = self.config.get("LOCATORS", "visitor_search_jobs_panel_delete_jobs")
+            return ele
+        except Exception as ex:
+            print("visitor_search_jobs_panel_delete_jobs : ", ex)
+
+    def yes_btn_for_include_jobs_for_all_users_by_xpath(self):
+        try:
+            ele = self.config.get("LOCATORS", "yes_btn_for_include_jobs_for_all_users_by_xpath")
+            return ele
+        except Exception as ex:
+            print("yes_btn_for_include_jobs_for_all_users_by_xpath : ", ex)
+
+    def search_button_on_search_dialog_by_xpath(self):
+        try:
+            ele = self.config.get("LOCATORS", "search_button_on_search_dialog_by_xpath")
+            return ele
+        except Exception as ex:
+            print("search_button_on_search_dialog_by_xpath : ", ex)
+
+    def yes_delete_selected_search_job_by_xpath(self):
+        try:
+            ele = self.config.get("LOCATORS", "yes_delete_selected_search_job_by_xpath")
+            return ele
+        except Exception as ex:
+            print("yes_delete_selected_search_job_by_xpath : ", ex)
+
+    def visitor_search_jobs_panel_refresh(self):
+        try:
+            ele = self.config.get("LOCATORS", "visitor_search_jobs_panel_refresh")
+            return ele
+        except Exception as ex:
+            print("visitor_search_jobs_panel_refresh : ", ex)
+
+    def visitor_search_jobs_panel_show_panel_refresh_rate(self):
+        try:
+            ele = self.config.get("LOCATORS", "visitor_search_jobs_panel_show_panel_refresh_rate")
+            return ele
+        except Exception as ex:
+            print("visitor_search_jobs_panel_show_panel_refresh_rate : ", ex)
+
+    def visitor_search_result_panel_by_xpath(self):
+        try:
+            ele = self.config.get("LOCATORS", "visitor_search_result_panel_by_xpath")
+            return ele
+        except Exception as ex:
+            print("visitor_search_result_panel_by_xpath : ", ex)
+
+    def visitor_search_result_panel_view_button(self):
+        try:
+            ele = self.config.get("LOCATORS", "visitor_search_result_panel_view_button")
+            return ele
+        except Exception as ex:
+            print("visitor_search_result_panel_view_button : ", ex)
+
+    def visitor_search_result_panel_action_button(self):
+        try:
+            ele = self.config.get("LOCATORS", "visitor_search_result_panel_action_button")
+            return ele
+        except Exception as ex:
+            print("visitor_search_result_panel_action_button : ", ex)
+
+    def visitor_search_result_panel_search_constraints(self):
+        try:
+            ele = self.config.get("LOCATORS", "visitor_search_result_panel_search_constraints")
+            return ele
+        except Exception as ex:
+            print("visitor_search_result_panel_search_constraints : ", ex)
+
+    def visitor_search_result_panel_matches_found(self):
+        try:
+            ele = self.config.get("LOCATORS", "visitor_search_result_panel_matches_found")
+            return ele
+        except Exception as ex:
+            print("visitor_search_result_panel_matches_found : ", ex)
+
+    def visitor_search_completed_banner(self):
+        try:
+            ele = self.config.get("LOCATORS", "visitor_search_completed_banner")
+            return ele
+        except Exception as ex:
+            print("visitor_search_completed_banner : ", ex)
+
+
+    def visitor_search_result_panel_scores(self):
+        try:
+            ele = self.config.get("LOCATORS", "visitor_search_result_panel_scores")
+            return ele
+        except Exception as ex:
+            print("visitor_search_result_panel_scores : ", ex)
+
+    def nats_checkbox_xpath(self):
+        try:
+            ele = self.config.get("LOCATORS", "nats_checkbox_xpath")
+            return ele
+        except Exception as ex:
+            print("nats_checkbox_xpath : ", ex)
+
+    def close_panel_one_by_one_list(self):
+        try:
+            ele = self.config.get("LOCATORS", "close_panel_one_by_one_list")
+            return ele
+        except Exception as ex:
+            print("close_panel_one_by_one_list : ", ex)
+
+    def vsj_panel_title(self):
+        try:
+            ele = self.common_test_data_config.get("Visitor_Search_Jobs_Data", "vsj_panel_title")
+            return ele
+        except Exception as ex:
+            print("vsj_panel_title : ", ex)
 
     def configure_search_by_xpath(self):
         try:
@@ -66,7 +296,7 @@ class Read_Visitor_Search_Components:
 
     def search_button_panel_photo_validation_by_xpath(self):
         try:
-            search_button_panel_photo_validation_by_xpath = self.config.\
+            search_button_panel_photo_validation_by_xpath = self.config. \
                 get("LOCATORS", "search_button_panel_photo_validation_by_xpath")
             return search_button_panel_photo_validation_by_xpath
         except Exception as ex:
@@ -74,7 +304,7 @@ class Read_Visitor_Search_Components:
 
     def optional_constraints_to_narrow_search_text_validation_by_xpath(self):
         try:
-            optional_constraints_to_narrow_search_text_validation_by_xpath = self.config.\
+            optional_constraints_to_narrow_search_text_validation_by_xpath = self.config. \
                 get("LOCATORS", "optional_constraints_to_narrow_search_text_validation_by_xpath")
             return optional_constraints_to_narrow_search_text_validation_by_xpath
         except Exception as ex:
@@ -107,90 +337,6 @@ class Read_Visitor_Search_Components:
             return end_date_checkbox_by_xpath
         except Exception as ex:
             print("end_date_checkbox_by_xpath : ", ex)
-
-    def meta_data_start_date(self):
-        try:
-            ele = self.common_test_data_config.get("Visitor_Search_Data", "meta_data_start_date")
-            return ele
-        except Exception as ex:
-            print("meta_data_start_date : ", ex)
-
-    def meta_data_start_month(self):
-        try:
-            ele = self.common_test_data_config.get("Visitor_Search_Data", "meta_data_start_month")
-            return ele
-        except Exception as ex:
-            print("meta_data_start_month : ", ex)
-
-    def meta_data_start_year(self):
-        try:
-            ele = self.common_test_data_config.get("Visitor_Search_Data", "meta_data_start_year")
-            return ele
-        except Exception as ex:
-            print("meta_data_start_year : ", ex)
-
-    def meta_data_start_hour(self):
-        try:
-            ele = self.common_test_data_config.get("Visitor_Search_Data", "meta_data_start_hour")
-            return ele
-        except Exception as ex:
-            print("meta_data_start_hour : ", ex)
-
-    def meta_data_start_minuet(self):
-        try:
-            ele = self.common_test_data_config.get("Visitor_Search_Data", "meta_data_start_minuet")
-            return ele
-        except Exception as ex:
-            print("meta_data_start_minuet : ", ex)
-
-    def meta_data_start_am_pm_period(self):
-        try:
-            ele = self.common_test_data_config.get("Visitor_Search_Data", "meta_data_start_am_pm_period")
-            return ele
-        except Exception as ex:
-            print("meta_data_start_am_pm_period : ", ex)
-
-    def meta_data_end_date(self):
-        try:
-            ele = self.common_test_data_config.get("Visitor_Search_Data", "meta_data_end_date")
-            return ele
-        except Exception as ex:
-            print("meta_data_end_date : ", ex)
-
-    def meta_data_end_month(self):
-        try:
-            ele = self.common_test_data_config.get("Visitor_Search_Data", "meta_data_end_month")
-            return ele
-        except Exception as ex:
-            print("meta_data_end_month : ", ex)
-
-    def meta_data_end_year(self):
-        try:
-            ele = self.common_test_data_config.get("Visitor_Search_Data", "meta_data_end_year")
-            return ele
-        except Exception as ex:
-            print("meta_data_end_year : ", ex)
-
-    def meta_data_end_hour(self):
-        try:
-            ele = self.common_test_data_config.get("Visitor_Search_Data", "meta_data_end_hour")
-            return ele
-        except Exception as ex:
-            print("meta_data_end_hour : ", ex)
-
-    def meta_data_end_minuet(self):
-        try:
-            ele = self.common_test_data_config.get("Visitor_Search_Data", "meta_data_end_minuet")
-            return ele
-        except Exception as ex:
-            print("meta_data_end_minuet : ", ex)
-
-    def meta_data_end_am_pm_period(self):
-        try:
-            ele = self.common_test_data_config.get("Visitor_Search_Data", "meta_data_end_am_pm_period")
-            return ele
-        except Exception as ex:
-            print("meta_data_end_am_pm_period : ", ex)
 
     def age_range_text_validation_by_xpath(self):
         try:
@@ -296,13 +442,6 @@ class Read_Visitor_Search_Components:
             return submit_search_button_panel_by_xpath
         except Exception as ex:
             print("submit_search_button_panel_by_xpath : ", ex)
-
-    def visitor_search_result_panel_by_xpath(self):
-        try:
-            visitor_search_result_panel_by_xpath = self.config.get("LOCATORS", "visitor_search_result_panel_by_xpath")
-            return visitor_search_result_panel_by_xpath
-        except Exception as ex:
-            print("visitor_search_result_panel_by_xpath : ", ex)
 
     def visitor_search_result_by_xpath(self):
         try:
@@ -453,6 +592,12 @@ class Read_Visitor_Search_Components:
         except Exception as ex:
             print("zone_data_input : ", ex)
 
+    def visitor_search_jobs_status_banner_by_xpath(self):
+        try:
+            visitor_search_jobs_status_banner_by_xpath = self.config.get("LOCATORS", "visitor_search_jobs_status_banner_by_xpath")
+            return visitor_search_jobs_status_banner_by_xpath
+        except Exception as ex:
+            print("visitor_search_jobs_status_banner_by_xpath : ", ex)
     def close_all_visitor_search_panel_by_xpath(self):
         try:
             close_all_visitor_search_panel_by_xpath = self.config.get("LOCATORS",
@@ -549,7 +694,6 @@ class Read_Visitor_Search_Components:
     def get_start_date(self):
         try:
             get_start_date = self.common_test_data_config.get("common_data", "start_date")
-            print("get_start_date : ", get_start_date)
             return get_start_date
         except Exception as ex:
             print("get_start_date : ", ex)
@@ -557,7 +701,6 @@ class Read_Visitor_Search_Components:
     def get_start_month(self):
         try:
             get_start_month = self.common_test_data_config.get("common_data", "start_month")
-            print("get_start_month : ", get_start_month)
             return get_start_month
         except Exception as ex:
             print("get_start_month : ", ex)
@@ -565,7 +708,6 @@ class Read_Visitor_Search_Components:
     def get_start_year(self):
         try:
             get_start_year = self.common_test_data_config.get("common_data", "start_year")
-            print("get_start_year : ", get_start_year)
             return get_start_year
         except Exception as ex:
             print("get_start_year : ", ex)
@@ -573,7 +715,6 @@ class Read_Visitor_Search_Components:
     def get_start_hour(self):
         try:
             get_start_hour = self.common_test_data_config.get("common_data", "start_hour")
-            print("get_start_hour : ", get_start_hour)
             return get_start_hour
         except Exception as ex:
             print("get_start_hour : ", ex)
@@ -581,7 +722,6 @@ class Read_Visitor_Search_Components:
     def get_start_minuet(self):
         try:
             get_start_minuet = self.common_test_data_config.get("common_data", "start_minuet")
-
             return get_start_minuet
         except Exception as ex:
             print("get_start_minuet : ", ex)
@@ -652,13 +792,6 @@ class Read_Visitor_Search_Components:
     def image_match_list_by_xpath(self):
         try:
             image_match_list_by_xpath = self.config.get("LOCATORS", "image_match_list_by_xpath")
-            return image_match_list_by_xpath
-        except Exception as ex:
-            print("image_match_list_by_xpath : ", ex)
-
-    def image_match_by_xpath(self):
-        try:
-            image_match_list_by_xpath = self.config.get("LOCATORS", "image_match_by_xpath")
             return image_match_list_by_xpath
         except Exception as ex:
             print("image_match_list_by_xpath : ", ex)
@@ -740,33 +873,6 @@ class Read_Visitor_Search_Components:
         except Exception as ex:
             print("root_selection_xpath : ", ex)
 
-    def root_region_name_by_xpath(self):
-        try:
-            root_region_name_by_xpath = self.config.get("LOCATORS", "root_region_name_by_xpath")
-            return root_region_name_by_xpath
-        except Exception as ex:
-            print("root_region_name_by_xpath : ", ex)
-
-    def event_image_by_xpath(self):
-        try:
-            event_image_by_xpath = self.config.get("LOCATORS", "event_image_by_xpath")
-            return event_image_by_xpath
-        except Exception as ex:
-            print("event_image_by_xpath : ", ex)
-
-    def draggable_event_photo_by_xpath(self):
-        try:
-            draggable_event_photo_by_xpath = self.config.get("LOCATORS", "draggable_event_photo_by_xpath")
-            return draggable_event_photo_by_xpath
-        except Exception as ex:
-            print("draggable_event_photo_by_xpath : ", ex)
-    def visitor_search_complete_banner_by_xpath(self):
-        try:
-            visitor_search_complete_banner_by_xpath = self.config.get("LOCATORS", "visitor_search_complete_banner_by_xpath")
-            return visitor_search_complete_banner_by_xpath
-        except Exception as ex:
-            print("visitor_search_complete_banner_by_xpath : ", ex)
-
     def zone_save_button_xpath(self):
         try:
             zone_save_button_xpath = self.config.get("LOCATORS", "zone_save_button_xpath")
@@ -790,24 +896,14 @@ class Read_Visitor_Search_Components:
 
     def meta_data_without_date_validation_msg(self):
         try:
-            ele = self.common_test_data_config.get("Visitor_Search_Data", "meta_data_without_date_validation_msg")
+            ele = self.common_test_data_config.get("Visitor_Search_Jobs_Data", "meta_data_without_date_validation_msg")
             return ele
         except Exception as ex:
             print("meta_data_without_date_validation_msg : ", ex)
 
-    def meta_data_without_date_validation_msg_tc_vs_002(self):
-        try:
-            ele1 = self.common_test_data_config.get("Visitor_Search_Data", "meta_data_without_date_validation_msg_tc_vs_002")
-            return ele1
-        except Exception as ex:
-            print("meta_data_without_date_validation_msg_tc_vs_002 : ", ex)
-
-    def meta_data_without_date_validation_msg_tc_vs_003(self):
-        try:
-            ele1 = self.common_test_data_config.get("Visitor_Search_Data", "meta_data_without_date_validation_msg_tc_vs_003")
-            return ele1
-        except Exception as ex:
-            print("meta_data_without_date_validation_msg_tc_vs_003 : ", ex)
+    def matches_found_text(self):
+        ele = self.common_test_data_config.get("Visitor_Search_Jobs_Data", "matches_found_text")
+        return ele
 
     def zone_text_list_xpath(self):
         try:
@@ -825,7 +921,7 @@ class Read_Visitor_Search_Components:
 
     def limited_to_30_meta_data_search_validation(self):
         try:
-            ele = self.common_test_data_config.get("Visitor_Search_Data", "limited_to_30_meta_data_search_validation")
+            ele = self.common_test_data_config.get("Visitor_Search_Jobs_Data", "limited_to_30_meta_data_search_validation")
             return ele
         except Exception as ex:
             print("limited_to_30_meta_data_search_validation : ", ex)
@@ -914,13 +1010,6 @@ class Read_Visitor_Search_Components:
         except Exception as ex:
             print("meta_data_end_am_pm_period : ", ex)
 
-    def nats_checkbox_xpath(self):
-        try:
-            ele = self.config.get("LOCATORS", "nats_checkbox_xpath")
-            return ele
-        except Exception as ex:
-            print("nats_checkbox_xpath : ", ex)
-
     def no_matches_found(self):
         try:
             ele = self.config.get("LOCATORS", "no_matches_found")
@@ -935,17 +1024,54 @@ class Read_Visitor_Search_Components:
         except Exception as ex:
             print("connection_error : ", ex)
 
-    def start_date_mmddyyyy(self):
-        start_date_mmddyyyy = self.common_test_data_config.get("common_data", "start_date_mmddyyyy")
-        return start_date_mmddyyyy
+    def visitors_search_jobs_panel_max_matches_by_xpath(self):
+        try:
+            ele = self.config.get("LOCATORS", "visitors_search_jobs_panel_max_matches_by_xpath")
+            return ele
+        except Exception as ex:
+            print("visitors_search_jobs_panel_max_matches_by_xpath : ", ex)
 
-    def start_time_hhmm(self):
-        start_time_hhmm = self.common_test_data_config.get("common_data", "start_time_hhmm")
-        return start_time_hhmm
+    def visitor_search_result_panel_location_by_xpath(self):
+        try:
+            ele = self.config.get("LOCATORS", "visitor_search_result_panel_location_by_xpath")
+            return ele
+        except Exception as ex:
+            print("visitor_search_result_panel_location_by_xpath : ", ex)
 
-    def start_am_pm(self):
-        start_am_pm = self.common_test_data_config.get("common_data", "start_am_pm")
-        return start_am_pm
+    def visitor_search_result_panel_identify_within_enrollments(self):
+        try:
+            ele = self.config.get("LOCATORS", "visitor_search_result_panel_identify_within_enrollments")
+            return ele
+        except Exception as ex:
+            print("visitor_search_result_panel_identify_within_enrollments : ", ex)
+
+    def visitor_search_result_panel_extend_menu_by_xpath(self):
+        try:
+            ele = self.config.get("LOCATORS", "visitor_search_result_panel_extend_menu_by_xpath")
+            return ele
+        except Exception as ex:
+            print("visitor_search_result_panel_extend_menu_by_xpath : ", ex)
+
+    def visitor_search_result_panel_track_faces_by_xpath(self):
+        try:
+            ele = self.config.get("LOCATORS", "visitor_search_result_panel_track_faces_by_xpath")
+            return ele
+        except Exception as ex:
+            print("visitor_search_result_panel_track_faces_by_xpath : ", ex)
+
+    def visitor_search_result_panel_identify_within_visitors_xpath(self):
+        try:
+            ele = self.config.get("LOCATORS", "visitor_search_result_panel_identify_within_visitors_xpath")
+            return ele
+        except Exception as ex:
+            print("visitor_search_result_panel_identify_within_visitors_xpath : ", ex)
+
+    def completed_job_view_result_button(self):
+        try:
+            ele = self.config.get("LOCATORS", "completed_job_view_result_button")
+            return ele
+        except Exception as ex:
+            print("completed_job_view_result_button : ", ex)
 
     def get_loginButton(self):
         try:
@@ -958,6 +1084,13 @@ class Read_Visitor_Search_Components:
     def portal_menu_visitors_search_btn_by_xpath(self):
         try:
             visitors_search_btn_by_xpath = self.config.get("LOCATORS", "visitors_search_btn_by_xpath")
+            return visitors_search_btn_by_xpath
+        except Exception as ex:
+            print("portal_menu_visitors_search_btn_by_xpath : ", ex)
+
+    def visitors_search_job_btn_by_xpath(self):
+        try:
+            visitors_search_btn_by_xpath = self.config.get("LOCATORS", "visitors_search_job_btn_by_xpath")
             return visitors_search_btn_by_xpath
         except Exception as ex:
             print("portal_menu_visitors_search_btn_by_xpath : ", ex)
@@ -976,31 +1109,25 @@ class Read_Visitor_Search_Components:
         except Exception as ex:
             print("auto_refresh_off_by_xpath : ", ex)
 
-    def vs_start_date_check_bx(self):
+    def visitor_search_jobs_panel_heading_by_xpath(self):
         try:
-            vs_start_date_check_bx = self.config.get("LOCATORS", "vs_start_date_check_bx")
-            return vs_start_date_check_bx
+            visitor_search_jobs_panel_heading_by_xpath = self.config.get("LOCATORS", "visitor_search_jobs_panel_heading_by_xpath")
+            return visitor_search_jobs_panel_heading_by_xpath
         except Exception as ex:
-            print("vs_start_date_check_bx : ", ex)
+            print("portal_menu_visitors_search_btn_by_xpath : ", ex)
 
-    def vs_end_date_check_bx(self):
+    def start_date_calender_box_by_xpath(self):
         try:
-            vs_end_date_check_bx = self.config.get("LOCATORS", "vs_end_date_check_bx")
-            return vs_end_date_check_bx
+            start_date_calender_box_by_xpath = self.config.get("LOCATORS", "start_date_calender_box_by_xpath")
+            return start_date_calender_box_by_xpath
         except Exception as ex:
-            print("vs_end_date_check_bx : ", ex)
+            print("start_date_calender_box_by_xpath : ", ex)
 
-    def get_start_date_calender_box_by_xpath(self):
+    def end_date_calender_box_by_xpath(self):
         try:
-            get_start_date_calender_box_by_xpath = self.config.get("LOCATORS", "start_date_calender_box_by_xpath")
-            return get_start_date_calender_box_by_xpath
+            end_date_calender_box_by_xpath = self.config.get("LOCATORS", "end_date_calender_box_by_xpath")
+            return end_date_calender_box_by_xpath
         except Exception as ex:
-            print("get_start_date_calender_box_by_xpath : ", ex)
+            print("end_date_calender_box_by_xpath : ", ex)
 
-    def get_end_date_calender_box_by_xpath(self):
-        try:
-            get_end_date_calender_box_by_xpath = self.config.get("LOCATORS", "end_date_calender_box_by_xpath")
-            return get_end_date_calender_box_by_xpath
-        except Exception as ex:
-            print("get_end_date_calender_box_by_xpath : ", ex)
 
