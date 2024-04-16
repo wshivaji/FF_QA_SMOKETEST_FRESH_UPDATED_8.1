@@ -41,3 +41,32 @@ class Test_Audit_Log_Report_Test_Cases(web_driver, web_logger):
             assert True
         else:
             assert False
+
+    @pytest.mark.p1
+    def test_TC_ALR_005(self):
+        if Audit_log_report_pom().Verify_user_with_all_permissions_enrolled_mask_subject_should_be_in_Disable_status_for_user_enrollments():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p1
+    def test_TC_ALR_006(self):
+        if Audit_log_report_pom().Verify_core_should_be_able_to_enable_above_mask_subject_and_verify_Enabled_status_and_action_by_core_for_user_enrollments():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p1
+    def test_TC_ALR_007(self):
+        if Audit_log_report_pom().Verify_for_above_enable_mask_subject_status_is_Enabled_in_Approver_Enrollments_too():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p1
+    def test_TC_ALR_008(self):
+        if Audit_log_report_pom().Verify_user_with_2FA_enrolled_subject_should_be_able_to_see_Pending_status_for_user_enrollments():
+            assert True
+        else:
+            assert False
+
