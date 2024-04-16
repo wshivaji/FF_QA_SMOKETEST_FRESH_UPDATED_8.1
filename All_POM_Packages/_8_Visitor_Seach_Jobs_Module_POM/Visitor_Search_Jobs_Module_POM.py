@@ -337,19 +337,20 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
             date = int(Read_Visitor_Search_Components().get_start_date())
             month = str(Read_Visitor_Search_Components().get_start_month())
             year = int(Read_Visitor_Search_Components().get_start_year())
-            hour = str(Read_Visitor_Search_jobs_Components().vsj_start_hour())
-            minute = Read_Visitor_Search_jobs_Components().vsj_start_minuet()
-            period = str(Read_Visitor_Search_jobs_Components().vsj_start_am_pm_period())
+            hour = str(Read_Visitor_Search_Components().get_start_hour())
+            minute = Read_Visitor_Search_Components().get_start_minuet()
+            period = str(Read_Visitor_Search_Components().get_start_am_pm_period())
 
             e_month = str(Read_Visitor_Search_Components().get_end_month())
             e_date = int(Read_Visitor_Search_Components().get_end_date())
             e_year = int(Read_Visitor_Search_Components().get_end_year())
-            e_hour = str(Read_Visitor_Search_jobs_Components().vsj_end_hour())
-            e_minute = Read_Visitor_Search_jobs_Components().vsj_end_minuet()
-            e_period = str(Read_Visitor_Search_jobs_Components().vsj_end_am_pm_period())
+            e_hour = str(Read_Visitor_Search_Components().get_end_hour())
+            e_minute = Read_Visitor_Search_Components().get_end_minuet()
+            e_period = str(Read_Visitor_Search_Components().get_end_am_pm_period())
 
             try:
                 Visitor_Search_Module_pom().handle_calender_pop_up("from", date, month, year, hour, minute, period)
+
                 time.sleep(web_driver.one_second)
                 Visitor_Search_Module_pom().handle_calender_pop_up("to", e_date, e_month, e_year, e_hour, e_minute,
                                                                    e_period)
@@ -440,7 +441,44 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
             login().login_with_persona_user(self.d, user[4])
             time.sleep(web_driver.two_second)
             self.click_on_visitor_search_jobs_btn()
+            search_dropdown = web_driver.explicit_wait(self, 10, "XPATH",
+                                                       Read_Visitor_Search_jobs_Components().
+                                                       visitor_search_jobs_panel_search_button(), self.d)
+            search_dropdown.click()
+            include_jobs_from_all_users = web_driver.explicit_wait(self, 10, "XPATH",
+                                                                   Read_Visitor_Search_jobs_Components().
+                                                                   yes_btn_for_include_jobs_for_all_users_by_xpath(),
+                                                                   self.d)
+            include_jobs_from_all_users.click()
+            self.logger.info("Clicked on Include Jobs For All Users option...")
+            time.sleep(web_driver.one_second)
+            search_button = self.d.find_element(By.XPATH, Read_Visitor_Search_jobs_Components().
+                                                search_button_on_search_dialog_by_xpath())
+            search_button.click()
+            time.sleep(web_driver.one_second)
+            job_checkbox = web_driver.explicit_wait(self, 10, "XPATH",
+                                                    Read_Visitor_Search_jobs_Components().VSJ_checkbox_by_xpath(),
+                                                    self.d)
+            job_checkbox = self.d.find_elements(By.XPATH, Read_Visitor_Search_jobs_Components().VSJ_checkbox_by_xpath())
+            no_of_jobs_before = len(job_checkbox)
+            self.logger.info(f"before: {no_of_jobs_before}")
             self.select_date_range()
+            time.sleep(web_driver.one_second)
+            job_checkbox = web_driver.explicit_wait(self, 10, "XPATH",
+                                                    Read_Visitor_Search_jobs_Components().VSJ_checkbox_by_xpath(),
+                                                    self.d)
+            job_checkbox = self.d.find_elements(By.XPATH, Read_Visitor_Search_jobs_Components().VSJ_checkbox_by_xpath())
+            no_of_jobs_after = len(job_checkbox)
+            self.logger.info(f"after: {no_of_jobs_after}")
+            time.sleep(web_driver.two_second)
+            if len(job_checkbox) == 1:
+                no_results_message = self.d.find_element(By.XPATH, Read_Visitor_Search_jobs_Components().there_are_no_results_message_by_xpath())
+                if no_results_message.is_displayed():
+                    self.logger.info(f"{no_results_message.text}")
+            elif no_of_jobs_before > no_of_jobs_after:
+                result.append(True)
+            else:
+                result.append(False)
             self.logger.info(f"status: {result}")
             if False in result:
                 self.d.save_screenshot(f"{self.screenshots_path}\\test_VSJ_06_failed.png")
@@ -767,7 +805,7 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
             start_check_bx.click()
             time.sleep(web_driver.two_second)
             self.logger.info("checkbox selected...")
-            start_date_txt_bx =  web_driver.explicit_wait(self, 10, "XPATH", Read_Visitor_Search_jobs_Components().start_date_by_xpath(), self.d)
+            start_date_txt_bx = web_driver.explicit_wait(self, 10, "XPATH", Read_Visitor_Search_jobs_Components().start_date_by_xpath(), self.d)
             self.d.execute_script("arguments[0].scrollIntoView();", start_date_txt_bx)
             start_date_txt_bx.click()
             self.logger.info("start date selected")
@@ -976,56 +1014,6 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
         else:
             return True
 
-    def verify_Must_specify_start_and_end_date_for_meta_data_only_search(self):
-        ele = web_driver.explicit_wait(self, 10, "XPATH", Read_Visitor_Search_jobs_Components().start_end_date_validation_msg_verify_xpath(), self.d)
-        actual_validation_text = ele.text.lower()
-        expected_validation_text = Read_Visitor_Search_jobs_Components().meta_data_without_date_validation_msg().strip().lower()
-
-        time.sleep(web_driver.two_second)
-        alert = self.d.switch_to.alert
-        error_msg1 = alert.text
-        self.logger.info(f"alert error message: {error_msg1}")
-        alert.accept()
-        if (ele.is_displayed() and actual_validation_text == expected_validation_text) or (error_msg1 == Read_Visitor_Search_jobs_Components().connection_error()):
-            return True
-        else:
-            return False
-
-    def verify_limited_to_30_min_interval_validation(self):
-        ele = self.d.find_element(By.XPATH, Read_Visitor_Search_jobs_Components().limited_to_30_min_interval_validation())
-        actual_validation_text = ele.text.lower()
-        expected_validation_text = Read_Visitor_Search_jobs_Components().limited_to_30_meta_data_search_validation().strip().lower()
-        print(actual_validation_text)
-        print(expected_validation_text)
-        self.logger.info(f"actual: {actual_validation_text}")
-        self.logger.info(f"expected: {expected_validation_text}")
-        if ele.is_displayed() and actual_validation_text == expected_validation_text:
-            return True
-        else:
-            return False
-
-    def verify_max_matches_not_display(self):
-        """
-        This function is used validate the max matches element
-        :return:
-        """
-        max_matches = self.d.find_element(By.XPATH, Read_Visitor_Search_jobs_Components().max_of_matches_by_xpath())
-        if not max_matches.is_displayed():
-            return True
-        else:
-            return False
-
-    def verify_threshold_not_display(self):
-        """
-        This function is used validate the threshold element
-        :return:
-        """
-        threshold = self.d.find_element(By.XPATH, Read_Visitor_Search_jobs_Components().threshold_slider_by_xpath())
-        if not threshold.is_displayed():
-            return True
-        else:
-            return False
-
     def click_on_visitor_search(self):
         time.sleep(web_driver.two_second)
         visitor_search_btn = web_driver.explicit_wait(self, 10, "XPATH", Read_Visitor_Search_jobs_Components().portal_menu_visitors_search_btn_by_xpath(), self.d)
@@ -1039,46 +1027,6 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
         time.sleep(web_driver.two_second)
         self.d.execute_script("arguments[0].click();", click_on_cloud_menu)
         time.sleep(web_driver.two_second)
-
-    def connection_error(self):
-        ele = self.d.find_elements(By.XPATH, Read_Visitor_Search_jobs_Components().start_end_date_validation_msg_verify_xpath())
-        if len(ele) > 0:
-            self.logger.info("elements found")
-            actual_validation_text = ele[0].text.lower()
-            expected_validation_text = Read_Visitor_Search_jobs_Components().meta_data_without_date_validation_msg().strip().lower()
-            time.sleep(web_driver.two_second)
-            alert = self.d.switch_to.alert
-            error_msg1 = alert.text
-            alert.accept()
-            if (ele.is_displayed() and actual_validation_text == expected_validation_text) or (error_msg1 == Read_Visitor_Search_jobs_Components().connection_error()):
-                return True
-            else:
-                return False
-        else:
-            self.logger.info("No element found")
-
-    def score_list_in_descending_order(self):
-        score_list = self.d.find_elements(By.XPATH, Read_Visitor_Search_jobs_Components().visitor_search_result_panel_scores())
-        count = 0
-        while len(score_list) == 0 or count > 150:
-            score_list = self.d.find_elements(By.XPATH, Read_Visitor_Search_jobs_Components().visitor_search_result_panel_scores())
-            time.sleep(web_driver.two_second)
-            count += 1
-            self.logger.info(f"score list function count: {count}")
-
-        if len(score_list) > 0:
-            score = []
-            for x in score_list:
-                score.append(x.text.split(" ")[1])
-            self.logger.info(f"score: {score}")
-            for i in range(len(score) - 1):
-                if score[i] < score[i + 1]:
-                    self.logger.info("score returning False")
-                    return False
-                self.logger.info("score returning true")
-                return True
-        else:
-            self.logger.info(f"score list length is {len(score_list)} and score: {score_list}")
 
     def get_date_range_from_json(self):
         try:
@@ -1108,7 +1056,7 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
             start_date_calender_box = web_driver.explicit_wait(self, 10, "XPATH", Read_Visitor_Search_jobs_Components().start_date_calender_box_by_xpath(), self.d)
             start_date_checkbox = web_driver.explicit_wait(self, 10, "XPATH", Read_Visitor_Search_jobs_Components().start_date_checkbox_by_xpath(), self.d)
             time.sleep(web_driver.one_second)
-            start_date_checkbox.click()
+            # start_date_checkbox.click()
             start_date_calender_box.click()
             action = ActionChains(self.d)
             time.sleep(web_driver.one_second)
@@ -1119,6 +1067,7 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
             s_month = d_start_date[0]
             s_date = d_start_date[1]
             start_date = Read_Visitor_Search_jobs_Components().vsj_start_date()
+            self.logger.info(f"expected date: {start_date}")
             input_start_date = list(start_date.split('/'))
             input_s_date = input_start_date[0]
             input_s_month = input_start_date[1]
@@ -1183,6 +1132,68 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
         except Exception as ex:
             self.logger.error("start date method exception")
             self.logger.error(ex)
+
+    def select_time(self, strategy, hour, minute, req_period):
+        try:
+            # click on the form calendar popup
+            if strategy == "from":
+                start_check_bx = web_driver.explicit_wait(self, 10, "XPATH",
+                                                          Read_Visitor_Search_jobs_Components().start_date_checkbox_by_xpath(),
+                                                          self.d)
+                start_check_bx.click()
+                time.sleep(web_driver.two_second)
+                self.logger.info("checkbox selected...")
+                start_date_txt_bx = web_driver.explicit_wait(self, 10, "XPATH",
+                                                             Read_Visitor_Search_jobs_Components().start_date_by_xpath(),
+                                                             self.d)
+                self.d.execute_script("arguments[0].scrollIntoView();", start_date_txt_bx)
+                start_date_txt_bx.click()
+                self.logger.info("start date selected")
+            else:
+                # click on the to calendar pop up
+                end_check_bx = web_driver.explicit_wait(self, 10, "XPATH",
+                                                        Read_Visitor_Search_jobs_Components().end_date_checkbox_by_xpath(),
+                                                        self.d)
+                end_check_bx.click()
+                time.sleep(web_driver.two_second)
+                self.logger.info(f"end_ check box selected: {end_check_bx.is_displayed()}")
+                end_date_txt_bx = web_driver.explicit_wait(self, 10, "XPATH",
+                                                           Read_Visitor_Search_jobs_Components().end_date_by_xpath(),
+                                                           self.d)
+                self.d.execute_script("arguments[0].scrollIntoView();", end_date_txt_bx)
+                end_date_txt_bx.click()
+                self.logger.info(f"end date selected: {end_check_bx.is_displayed()}")
+
+            # click on the clock icon
+            calender_clock = web_driver.explicit_wait(self, 10, "XPATH",
+                                                      Read_Visitor_Search_jobs_Components().calender_timer_icon_by_xpath(),
+                                                      self.d)
+            calender_clock.click()
+
+            time.sleep(3)
+
+            # handle the hour and minute based on the strategy
+            if strategy == "from":
+                self.calender_handle_hour_minute_from(hour, minute)
+            else:
+                self.calender_handle_hour_minute_to(hour, minute)
+
+            # select the period am or pm
+            period = web_driver.explicit_wait(self, 10, "XPATH",
+                                              Read_Visitor_Search_jobs_Components().period_by_xpath(), self.d)
+            if period.text == req_period:
+                print("")
+            else:
+                period.click()
+
+            # click on the tick icon
+
+            tick_icon = web_driver.explicit_wait(self, 10, "XPATH",
+                                                 Read_Visitor_Search_jobs_Components().calender_tick_icon_by_xpath(),
+                                                 self.d)
+            tick_icon.click()
+        except Exception as ex:
+            self.logger.info(f"Select time got an exception as: {ex}")
 
     def get_end_date(self):
         try:

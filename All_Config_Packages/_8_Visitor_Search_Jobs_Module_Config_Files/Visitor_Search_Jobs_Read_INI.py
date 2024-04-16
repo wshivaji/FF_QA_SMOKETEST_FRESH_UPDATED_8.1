@@ -90,6 +90,12 @@ class Read_Visitor_Search_jobs_Components:
         except Exception as ex:
             print("visitor_search_jobs_panel_action_button : ", ex)
 
+    def there_are_no_results_message_by_xpath(self):
+        try:
+            ele = self.config.get("LOCATORS", "there_are_no_results_message_by_xpath")
+            return ele
+        except Exception as ex:
+            print("there_are_no_results_message_by_xpath : ", ex)
     def visitor_search_jobs_panel_search_constraints(self):
         try:
             ele = self.config.get("LOCATORS", "visitor_search_jobs_panel_search_constraints")
