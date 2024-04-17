@@ -2501,7 +2501,7 @@ class Read_Identify_and_Enroll_Components:
             print(ex)
 
 
-    def get_operator_to_login(self):
+    def get_username_to_login(self):
         try:
             user = self.config.get("Login_Data", "username")
             return user
@@ -2592,6 +2592,20 @@ class Read_Identify_and_Enroll_Components:
         except Exception as ex:
             print(ex)
 
+    def get_user_name_input_data(self):
+        try:
+            user_name_input_data = self.common_test_data_config.get("system_level_test_Data", "user_name_input_data")
+            print(f"user_name_input_data: {user_name_input_data}")
+            return user_name_input_data
+        except Exception as ex:
+            print(ex.args)
+
+    def get_approver_to_login(self):
+        try:
+            user = self.config.get("Login_Data", "username1")
+            return user
+        except Exception as ex:
+            print(ex.args)
 
 
 
