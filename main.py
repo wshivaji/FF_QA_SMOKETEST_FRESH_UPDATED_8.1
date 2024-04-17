@@ -38,15 +38,18 @@ if __name__ == "__main__":
     report_path_accounts = f"{Path(__file__).parent}\\Reports\\HTML_Reports\\Accounts_Module_test_report_{datetime.datetime.now().strftime('%d_%m_%Y_%H_%M_%S')}.html"
     report_path_reporting = f"{Path(__file__).parent}\\Reports\\HTML_Reports\\Reporting_Module_test_report_{datetime.datetime.now().strftime('%d_%m_%Y_%H_%M_%S')}.html"
     report_path_notes_search_filter = f"{Path(__file__).parent}\\Reports\\HTML_Reports\\Notes_search_filter_Module_test_report_{datetime.datetime.now().strftime('%d_%m_%Y_%H_%M_%S')}.html"
+
+    system_test_report_path = f"{Path(__file__).parent}\\Reports\\HTML_Reports\\System_Test_Report_{datetime.datetime.now().strftime('%d_%m_%Y_%H_%M_%S')}.html"
+    portal_test_report_path = f"{Path(__file__).parent}\\Reports\\HTML_Reports\\Portal_Test_Report_{datetime.datetime.now().strftime('%d_%m_%Y_%H_%M_%S')}.html"
+    dm_test_report_path = f"{Path(__file__).parent}\\Reports\\HTML_Reports\\DM_Test_Report_{datetime.datetime.now().strftime('%d_%m_%Y_%H_%M_%S')}.html"
     # -----------------------------------------------------------------------------------------------------------
     # --------------------------------- regression and p1 - p5 Test suite path  ---------------------------------
     # ************* test suite path ******************
     Regression_test_suite_path = f"{Path(__file__).parent}\\All_Test_Cases_Package\\"
-    p1_test_suite_path = f"{Path(__file__).parent}\\All_Test_Cases_Package\\"
-    p2_test_suite_path = f"{Path(__file__).parent}\\All_Test_Cases_Package\\"
-    p3_test_suite_path = f"{Path(__file__).parent}\\All_Test_Cases_Package\\"
-    p4_test_suite_path = f"{Path(__file__).parent}\\All_Test_Cases_Package\\"
-    p5_test_suite_path = f"{Path(__file__).parent}\\All_Test_Cases_Package\\"
+    system_test_suite_path = f"{Path(__file__).parent}\\All_Test_Cases_Package\\"
+    portal_test_suite_path = f"{Path(__file__).parent}\\All_Test_Cases_Package\\"
+    dm_test_suite_path = f"{Path(__file__).parent}\\All_Test_Cases_Package\\"
+
     # -----------------------------------------------------------------------------------------------------------
     # --------------------------------- Individual Module Test suite path  ---------------------------------
     test_suite_path_pl = f"{Path(__file__).parent}\\All_Test_Cases_Package\\_1_Portal_Login_Module\\"
@@ -75,7 +78,10 @@ if __name__ == "__main__":
 
     # ************************ Commands to Run Test Suite *****************************
     # ************************** P1 Priority Test Run *********************************
-    # pytest.main(['-v', '-m', 'p1', f'{Regression_test_suite_path}', '--html', f'{p1_report_path}'])
+    pytest.main(['-v', '-m', 'system', f'{dm_test_suite_path}', '--html', f'{dm_test_report_path}'])
+    pytest.main(['-v', '-m', 'system', f'{system_test_suite_path}', '--html', f'{system_test_report_path}'])
+    pytest.main(['-v', '-m', 'system', f'{portal_test_suite_path}', '--html', f'{portal_test_report_path}'])
+
 
     # ************************** P2 Priority Test Run *********************************
     # pytest.main(['-v', '-m', 'p2', f'{Regression_test_suite_path}', '--html', f'{p2_report_path}'])
@@ -104,19 +110,19 @@ if __name__ == "__main__":
     # pytest.main(['-v', f'{test_suite_path_users}', '--html', f'{report_path_users}'])
     # pytest.main(['-v', f'{test_suite_path_ng}', '--html', f'{report_path_ng}'])
     # pytest.main(['-v', f'{test_suite_path_eg}', '--html', f'{report_path_eg}'])
-    pytest.main(['-v', f'{test_suite_path_IE}', '--html', f'{report_path_ie}'])
-    pytest.main(['-v', f'{test_suite_path_enrollments}', '--html', f'{report_path_enrollments}'])
-    pytest.main(['-v', f'{test_suite_path_events}', '--html', f'{report_path_events}'])
-
-    pytest.main(['-v', f'{test_suite_path_vs}', '--html', f'{report_path_vs}'])
-    pytest.main(['-v', f'{test_suite_path_vsj}', '--html', f'{report_path_vsj}'])
-    pytest.main(['-v', f'{test_suite_path_detect_faces}', '--html', f'{report_path_detect_faces}'])
-    pytest.main(['-v', f'{test_suite_path_reporting}', '--html', f'{report_path_reporting}'])
-
-    pytest.main(['-v', f'{test_suite_path_notes_search_filter}', '--html', f'{report_path_notes_search_filter}'])
-    pytest.main(['-v', f'{test_suite_path_notifier}', '--html', f'{report_path_notifier}'])
-    pytest.main(['-v', f'{test_suite_path_alr}', '--html', f'{report_path_alr}'])
-    pytest.main(['-v', f'{test_suite_path_acc}', '--html', f'{report_path_accounts}'])
+    # pytest.main(['-v', f'{test_suite_path_IE}', '--html', f'{report_path_ie}'])
+    # pytest.main(['-v', f'{test_suite_path_enrollments}', '--html', f'{report_path_enrollments}'])
+    # pytest.main(['-v', f'{test_suite_path_events}', '--html', f'{report_path_events}'])
+    #
+    # pytest.main(['-v', f'{test_suite_path_vs}', '--html', f'{report_path_vs}'])
+    # pytest.main(['-v', f'{test_suite_path_vsj}', '--html', f'{report_path_vsj}'])
+    # pytest.main(['-v', f'{test_suite_path_detect_faces}', '--html', f'{report_path_detect_faces}'])
+    # pytest.main(['-v', f'{test_suite_path_reporting}', '--html', f'{report_path_reporting}'])
+    #
+    # pytest.main(['-v', f'{test_suite_path_notes_search_filter}', '--html', f'{report_path_notes_search_filter}'])
+    # pytest.main(['-v', f'{test_suite_path_notifier}', '--html', f'{report_path_notifier}'])
+    # pytest.main(['-v', f'{test_suite_path_alr}', '--html', f'{report_path_alr}'])
+    # pytest.main(['-v', f'{test_suite_path_acc}', '--html', f'{report_path_accounts}'])
     #
 
     # ------------------------------------------------------------------------------------------------------------

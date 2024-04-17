@@ -5,26 +5,14 @@ from Base_Package.Web_Logger import web_logger
 from All_POM_Packages._12_Identify_and_Enroll_Module_POM.Identify_and_Enroll_Module_POM import Identify_And_Enroll_POM
 
 
-@pytest.mark.run(order=8)
+@pytest.mark.run(order=5)
 class Test_Identify_and_Enroll_Test_Cases(web_driver, web_logger):
     # d = web_driver.d()
     logger = web_logger.logger_obj()
     logger.info(" ******** Identify & Enroll (Order - 12) Begin ********")
     print("******** Identify & Enroll (Order - 12) Begin ********")
 
-    # @pytest.mark.p1
-    # @pytest.mark.p2
-    # @pytest.mark.p3
-    # @pytest.mark.p4
-    # @pytest.mark.p5
-    # @pytest.mark.p1
-    # def test_TC_IE_00(self):
-    #     if Identify_And_Enroll_POM().Create_New_Enrollment_using_Identify_and_Enroll():
-    #         assert True
-    #     else:
-    #         assert False
-
-    @pytest.mark.p1
+    @pytest.mark.system
     def test_TC_IE_01(self):
         if Identify_And_Enroll_POM().Identify_and_enroll_25_subjects_and_fill_the_required_fields_5_per_Enrollment_groups():
             assert True

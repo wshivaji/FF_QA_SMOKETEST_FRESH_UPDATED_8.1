@@ -4,7 +4,7 @@ from Base_Package.Web_Logger import web_logger
 from All_POM_Packages._5_Enrollment_Groups_Module_POM.Enrollment_Groups_Module_POM import Enrollments_Groups_Module_pom
 
 
-@pytest.mark.run(order=6)
+@pytest.mark.run(order=4)
 class Test_Enrollment_Groups_Module(web_driver, web_logger):
     d = web_driver.d()
     logger = web_logger.logger_obj()

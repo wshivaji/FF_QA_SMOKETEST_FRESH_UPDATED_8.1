@@ -4,7 +4,7 @@ from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
 
 
-@pytest.mark.run(order=5)
+@pytest.mark.run(order=2)
 class Test_Users_Module(web_driver, web_logger):
     logger = web_logger.logger_obj()
     d = web_driver.d()
