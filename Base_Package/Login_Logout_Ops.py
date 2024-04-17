@@ -255,8 +255,8 @@ class login(web_driver, web_logger):
             self.d = d
             time.sleep(web_driver.one_second)
             if self.d.current_url == Portal_login_page_read_ini().get_portal_url():
-                self.logger.info(f"page url: {self.d.current_url}")
-                pass
+               self.logger.info(f"page url: {self.d.current_url}")
+               pass
             else:
                 self.d.get(Portal_login_page_read_ini().get_portal_url())
                 self.d.maximize_window()
@@ -334,8 +334,8 @@ class login(web_driver, web_logger):
             self.d = d
             time.sleep(web_driver.one_second)
             if self.d.current_url == Portal_login_page_read_ini().get_portal_url():
-                self.logger.info(f"page url: {self.d.current_url}")
-                pass
+               self.logger.info(f"page url: {self.d.current_url}")
+               pass
             else:
                 self.d.get(Portal_login_page_read_ini().get_portal_url())
                 self.d.maximize_window()

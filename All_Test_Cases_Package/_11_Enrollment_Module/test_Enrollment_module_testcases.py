@@ -6,6 +6,8 @@ from All_POM_Packages._11_Enrollment_POM.Enrollment_module_POM import enrollment
 
 @pytest.mark.run(order=10)
 class Test_Enrollments_Test_Cases(web_driver, web_logger):
+
+class Test_Identify_and_Enroll_Test_Cases(web_driver, web_logger):
     d = web_driver.d()
     logger = web_logger.logger_obj()
     logger.info(" ******** Enrollment (Order - 10) Begin ********")
@@ -128,11 +130,4 @@ class Test_Enrollments_Test_Cases(web_driver, web_logger):
             assert True
         else:
             assert False
-
-
-
-
-
-
-
 
