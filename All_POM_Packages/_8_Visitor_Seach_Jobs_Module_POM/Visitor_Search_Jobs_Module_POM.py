@@ -111,10 +111,10 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
             except Exception as ex:
                 print(ex)
 
-            org_hierarchy_btn_by_xpath = web_driver.explicit_wait(self, 10, "XPATH", Read_Visitor_Search_jobs_Components().zone_by_xpath(), self.d)
-            org_hierarchy_btn_by_xpath.click()
+            # org_hierarchy_btn_by_xpath = web_driver.explicit_wait(self, 10, "XPATH", Read_Visitor_Search_jobs_Components().zone_by_xpath(), self.d)
+            # org_hierarchy_btn_by_xpath.click()
             zone_data = Read_Visitor_Search_jobs_Components().zone_data_input()
-            self.select_zone(zone_data)
+            self.select_zone_vsj(zone_data)
             self.click_on_submit_search_button()
             self.click_on_cloud_menu()
             self.click_on_visitor_search_jobs_btn()
@@ -132,7 +132,7 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
             self.logger.info(f"test_VSJ_006_exception:  {ex}")
             return False
         finally:
-            self.close_all_panel_one_by_one()
+            self.click_on_logout_button()
 
     def Verify_visitor_search_status_banner_is_visible_visitor_search_jobs_on_VSJ_panel(self):
         result = []
@@ -140,6 +140,21 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
             self.login()
             time.sleep(web_driver.two_second)
             self.click_on_visitor_search_jobs_btn()
+            search_dropdown = web_driver.explicit_wait(self, 10, "XPATH",
+                                                       Read_Visitor_Search_jobs_Components().
+                                                       visitor_search_jobs_panel_search_button(), self.d)
+            search_dropdown.click()
+            include_jobs_from_all_users = web_driver.explicit_wait(self, 10, "XPATH",
+                                                                   Read_Visitor_Search_jobs_Components().
+                                                                   yes_btn_for_include_jobs_for_all_users_by_xpath(),
+                                                                   self.d)
+            include_jobs_from_all_users.click()
+            self.logger.info("Clicked on Include Jobs For All Users option...")
+            time.sleep(web_driver.one_second)
+            search_button = self.d.find_element(By.XPATH, Read_Visitor_Search_jobs_Components().
+                                                search_button_on_search_dialog_by_xpath())
+            search_button.click()
+            time.sleep(web_driver.one_second)
             status_banner = web_driver.explicit_wait(self, 10, "XPATH",
                                                      Read_Visitor_Search_jobs_Components().
                                                      visitor_search_jobs_status_banner_by_xpath(), self.d)
@@ -163,7 +178,7 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
             self.logger.info(f"test_VSJ_02_exception:  {ex}")
             return False
         finally:
-            self.close_all_panel_one_by_one()
+            self.click_on_logout_button()
 
     def verify_when_user_click_on_View_Results_button_of_VSJ_should_display_visitor_search_results_panel(self):
         result = []
@@ -171,7 +186,21 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
             self.login()
             time.sleep(web_driver.two_second)
             self.click_on_visitor_search_jobs_btn()
-
+            search_dropdown = web_driver.explicit_wait(self, 10, "XPATH",
+                                                       Read_Visitor_Search_jobs_Components().
+                                                       visitor_search_jobs_panel_search_button(), self.d)
+            search_dropdown.click()
+            include_jobs_from_all_users = web_driver.explicit_wait(self, 10, "XPATH",
+                                                                   Read_Visitor_Search_jobs_Components().
+                                                                   yes_btn_for_include_jobs_for_all_users_by_xpath(),
+                                                                   self.d)
+            include_jobs_from_all_users.click()
+            self.logger.info("Clicked on Include Jobs For All Users option...")
+            time.sleep(web_driver.one_second)
+            search_button = self.d.find_element(By.XPATH, Read_Visitor_Search_jobs_Components().
+                                                search_button_on_search_dialog_by_xpath())
+            search_button.click()
+            time.sleep(web_driver.one_second)
             view_result = web_driver.explicit_wait(self, 10, "XPATH", Read_Visitor_Search_jobs_Components().
                                                    visitor_search_jobs_panel_view_results(), self.d)
             view_result = self.d.find_element(By.XPATH, Read_Visitor_Search_jobs_Components().visitor_search_jobs_panel_view_results())
@@ -209,7 +238,7 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
             self.logger.info(f"test_VSJ_03_exception:  {ex}")
             return False
         finally:
-            self.close_all_panel_one_by_one()
+            self.click_on_logout_button()
 
     def Verify_the_visitor_search_job_contains_the_selected_threshold_visitors_in_date_range_and_belongs_to_search_Org_Hierarchy_Selection_when_user_performs_a_visitor_search_with_Date_Org(self):
         result = []
@@ -220,7 +249,7 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
             self.click_on_visitor_search()
             self.add_image_search()
 
-            date = int(Read_Visitor_Search_Components().get_start_date())
+            date = int(Read_Visitor_Search_Components().get_vsj_start_date())
             month = str(Read_Visitor_Search_Components().get_start_month())
             year = int(Read_Visitor_Search_Components().get_start_year())
             hour = str(Read_Visitor_Search_Components().get_start_hour())
@@ -243,12 +272,12 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
             except Exception as ex:
                 print(ex)
 
-            org_hierarchy_btn_by_xpath = web_driver.explicit_wait(self, 10, "XPATH",
-                                                                  Read_Visitor_Search_jobs_Components().zone_by_xpath(),
-                                                                  self.d)
-            org_hierarchy_btn_by_xpath.click()
+            # org_hierarchy_btn_by_xpath = web_driver.explicit_wait(self, 10, "XPATH",
+            #                                                       Read_Visitor_Search_jobs_Components().zone_by_xpath(),
+            #                                                       self.d)
+            # org_hierarchy_btn_by_xpath.click()
             zone_data = Read_Visitor_Search_jobs_Components().zone_data_input()
-            self.select_zone(zone_data)
+            self.select_zone_vsj(zone_data)
 
             threshold_data = self.set_thresh_hold_slider()
 
@@ -304,7 +333,7 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
             self.logger.info(f"test_VSJ_04_exception:  {ex}")
             return False
         finally:
-            self.close_all_panel_one_by_one()
+            self.click_on_logout_button()
 
     def select_jobs_for_all_users(self):
         try:
@@ -431,7 +460,7 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
             self.logger.info(f"test_VSJ_05_exception:  {ex}")
             return False
         finally:
-            self.close_all_panel_one_by_one()
+            self.click_on_logout_button()
 
     def Verify_VSJ_filtering_with_date_range_selection_should_list_VSJ_in_the_selected_date_range_only(self):
         result = []
@@ -492,7 +521,7 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
             self.logger.info(f"test_VSJ_06_exception:  {ex}")
             return False
         finally:
-            self.close_all_panel_one_by_one()
+            self.click_on_logout_button()
 
     ################################# generic methods ##############################################
 
@@ -699,6 +728,34 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
         except Exception as ex:
             str(ex)
 
+    def select_zone_vsj(self, region_text):
+        """
+            This function is used to handle the region drop-down and select the required options
+                    :param region_text:
+                    :return:
+                    """
+        time.sleep(web_driver.one_second)
+        region_ele = web_driver.explicit_wait(self, 10, "XPATH", Read_Visitor_Search_Components().zone_name_by_xpath(),
+                                              self.d)
+        region_ele.click()
+        time.sleep(web_driver.one_second)
+        region_text_list = self.d.find_elements(By.XPATH, Read_Visitor_Search_Components().zone_text_list_xpath())
+        expected_region_text = region_text
+        try:
+            for i in range(len(region_text_list) + 1):
+                # self.logger.info(f"for loop: {i}")
+                actual_zone_text = region_text_list.__getitem__(i).text
+                if expected_region_text.upper() == actual_zone_text.upper() :
+                    self.logger.info(actual_zone_text)
+                    self.logger.info(expected_region_text)
+                    region_text_list.__getitem__(i).click()
+                    # self.d.execute_script("arguments[0].click();", region_text_list.__getitem__(i))
+                    break
+            save = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().zone_save_button_xpath())
+            save.click()
+        except Exception as ex:
+            str(ex)
+
     def compare_thresh_hold_value_with_score(self):
         """
         This function is used to compare the threshhold value with actual score
@@ -775,7 +832,7 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
         upload_photo = web_driver.explicit_wait(self, 20, "XPATH", Read_Visitor_Search_jobs_Components().photo_upload_container_by_xpath(), self.d)
         upload_photo.click()
         time.sleep(web_driver.two_second)
-        file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset1\\ab\\00077.png"
+        file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset1\\ab\\00076.png"
 
         time.sleep(web_driver.two_second)
         pyautogui.write(file_path)

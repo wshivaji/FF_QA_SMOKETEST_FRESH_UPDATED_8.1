@@ -108,7 +108,28 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
             edge_name = Read_Visitor_Search_Components().zone_data_input()
 
             self.click_on_visitor_search()
-            self.enter_start_and_end_date()
+            date = int(Read_Visitor_Search_Components().get_start_date())
+            month = str(Read_Visitor_Search_Components().get_start_month())
+            year = int(Read_Visitor_Search_Components().get_start_year())
+            hour = str(Read_Visitor_Search_Components().get_start_hour())
+            minute = Read_Visitor_Search_Components().get_start_minuet()
+            period = str(Read_Visitor_Search_Components().get_start_am_pm_period())
+
+            e_month = str(Read_Visitor_Search_Components().get_end_month())
+            e_date = int(Read_Visitor_Search_Components().get_end_date())
+            e_year = int(Read_Visitor_Search_Components().get_end_year())
+            e_hour = str(Read_Visitor_Search_Components().get_end_hour())
+            e_minute = Read_Visitor_Search_Components().get_end_minuet()
+            e_period = str(Read_Visitor_Search_Components().get_end_am_pm_period())
+
+            try:
+                Visitor_Search_Module_pom().handle_calender_pop_up("from", date, month, year, hour, minute, period)
+                time.sleep(web_driver.one_second)
+                Visitor_Search_Module_pom().handle_calender_pop_up("to", e_date, e_month, e_year, e_hour, e_minute,
+                                                                   e_period)
+                time.sleep(web_driver.three_second)
+            except Exception as ex:
+                self.logger.info(f"select date range got an exception as: {ex}")
 
             self.logger.info(f"edge name: {edge_name}")
             self.select_zone(edge_name)
@@ -169,7 +190,7 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
 
     def enter_start_and_end_date(self):
         try:
-            date = int(Read_Visitor_Search_Components().get_start_date())
+            date = int(Read_Visitor_Search_Components().get_vsj_start_date())
             month = str(Read_Visitor_Search_Components().get_start_month())
             year = int(Read_Visitor_Search_Components().get_start_year())
             hour = str(Read_Visitor_Search_Components().get_start_hour())
@@ -517,7 +538,7 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
             for i in range(len(region_text_list) + 1):
                 # self.logger.info(f"for loop: {i}")
                 actual_zone_text = region_text_list.__getitem__(i).text
-                if expected_region_text.upper() == actual_zone_text.upper() :
+                if expected_region_text.upper() == actual_zone_text.upper():
                     self.logger.info(actual_zone_text)
                     self.logger.info(expected_region_text)
                     region_text_list.__getitem__(i).click()

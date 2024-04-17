@@ -604,6 +604,7 @@ class Read_Visitor_Search_jobs_Components:
             return visitor_search_jobs_status_banner_by_xpath
         except Exception as ex:
             print("visitor_search_jobs_status_banner_by_xpath : ", ex)
+
     def close_all_visitor_search_panel_by_xpath(self):
         try:
             close_all_visitor_search_panel_by_xpath = self.config.get("LOCATORS",

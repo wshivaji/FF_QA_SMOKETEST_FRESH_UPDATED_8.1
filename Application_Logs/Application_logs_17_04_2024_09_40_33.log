@@ -1,0 +1,60 @@
+17/04/2024 09:40:35 AM : root         : INFO     :  ******** Visitor_Search (Order - 7) Begin ********
+17/04/2024 09:40:35 AM : root         : INFO     : ********** Test_VS_03 Begin  **********
+17/04/2024 09:40:43 AM : root         : INFO     : current url: https://scecore6-vm.qa.facefirst.dev/
+17/04/2024 09:40:43 AM : root         : INFO     : url is not open
+17/04/2024 09:40:43 AM : root         : INFO     : opening localhost portal login
+17/04/2024 09:40:43 AM : root         : INFO     : logging in to core
+17/04/2024 09:40:43 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:40:43 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:40:45 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:40:46 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:40:48 AM : root         : INFO     : ******* Login with operator user success *********
+17/04/2024 09:40:50 AM : root         : INFO     : going to visitor search...
+17/04/2024 09:40:50 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:40:50 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:40:52 AM : root         : INFO     : waiting for search panel to appear...
+17/04/2024 09:40:52 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:40:52 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:40:55 AM : root         : INFO     : Strategy: from
+17/04/2024 09:40:55 AM : root         : INFO     : select from date checkbox
+17/04/2024 09:40:57 AM : root         : INFO     : select date time
+17/04/2024 09:40:57 AM : root         : INFO     : datetime clicked
+17/04/2024 09:40:58 AM : root         : INFO     : selecting time
+17/04/2024 09:40:58 AM : root         : INFO     : select time 
+17/04/2024 09:41:02 AM : root         : INFO     : select in from hours and min
+17/04/2024 09:41:02 AM : root         : INFO     : From start date
+17/04/2024 09:41:06 AM : root         : INFO     : Strategy: to
+17/04/2024 09:41:08 AM : root         : INFO     : selecting time
+17/04/2024 09:41:08 AM : root         : INFO     : select time 
+17/04/2024 09:41:12 AM : root         : INFO     : select in to hours and min
+17/04/2024 09:41:12 AM : root         : INFO     : To End Date
+17/04/2024 09:41:17 AM : root         : INFO     : edge name: sceedge6-vm
+17/04/2024 09:41:18 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:41:18 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:41:19 AM : root         : INFO     : SCEEDGE6-VM
+17/04/2024 09:41:19 AM : root         : INFO     : sceedge6-vm
+17/04/2024 09:41:22 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:41:22 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:41:22 AM : root         : INFO     : max matches dropdown is selected..
+17/04/2024 09:41:23 AM : root         : INFO     : waiting for message to appear...
+17/04/2024 09:41:23 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:41:23 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:41:23 AM : root         : INFO     : clicked on submit search button..
+17/04/2024 09:41:25 AM : root         : INFO     : Verifying matches
+17/04/2024 09:41:25 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:41:25 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:41:25 AM : root         : INFO     : no match text displayed: True
+17/04/2024 09:41:25 AM : root         : INFO     : ele2: No Matches Found - SO FAR
+17/04/2024 09:41:26 AM : root         : INFO     : slider_value_str: left: 48%;
+17/04/2024 09:41:26 AM : root         : INFO     : slider_value_text: 48%;
+17/04/2024 09:41:29 AM : root         : INFO     : Verifying matches
+17/04/2024 09:41:31 AM : root         : INFO     : entered explicit wait for 60
+17/04/2024 09:41:31 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:41:31 AM : root         : INFO     : ****************** VISITOR SEARCH COMPLETE banner displayed...
+17/04/2024 09:41:33 AM : root         : INFO     : entered explicit wait for 5
+17/04/2024 09:41:33 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:41:33 AM : root         : INFO     : no match text displayed: True
+17/04/2024 09:41:33 AM : root         : INFO     : ele2: No Matches Found - SO FAR
+17/04/2024 09:41:33 AM : root         : INFO     : Returned: True
+17/04/2024 09:41:34 AM : root         : INFO     : operator User logged out from cloud menu..
+17/04/2024 09:41:35 AM : root         : INFO     : status: [True]

@@ -1,0 +1,208 @@
+17/04/2024 09:31:45 AM : root         : INFO     :  ******** Visitor_Search (Order - 7) Begin ********
+17/04/2024 09:31:45 AM : root         : INFO     : ********** Test_1 Begin  **********
+17/04/2024 09:31:52 AM : root         : INFO     : current url: https://scecore6-vm.qa.facefirst.dev/
+17/04/2024 09:31:52 AM : root         : INFO     : url is not open
+17/04/2024 09:31:52 AM : root         : INFO     : opening localhost portal login
+17/04/2024 09:31:52 AM : root         : INFO     : logging in to core
+17/04/2024 09:31:52 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:31:52 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:31:55 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:31:55 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:31:57 AM : root         : INFO     : ******* Login with operator user success *********
+17/04/2024 09:31:59 AM : root         : INFO     : going to visitor search...
+17/04/2024 09:31:59 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:31:59 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:32:01 AM : root         : INFO     : waiting for search panel to appear...
+17/04/2024 09:32:01 AM : root         : INFO     : Strategy: from
+17/04/2024 09:32:01 AM : root         : INFO     : select from date checkbox
+17/04/2024 09:32:03 AM : root         : INFO     : select date time
+17/04/2024 09:32:03 AM : root         : INFO     : datetime clicked
+17/04/2024 09:32:04 AM : root         : INFO     : selecting time
+17/04/2024 09:32:04 AM : root         : INFO     : select time 
+17/04/2024 09:32:08 AM : root         : INFO     : select in from hours and min
+17/04/2024 09:32:09 AM : root         : INFO     : From start date
+17/04/2024 09:32:11 AM : root         : INFO     : Strategy: to
+17/04/2024 09:32:13 AM : root         : INFO     : selecting time
+17/04/2024 09:32:13 AM : root         : INFO     : select time 
+17/04/2024 09:32:17 AM : root         : INFO     : select in to hours and min
+17/04/2024 09:32:18 AM : root         : INFO     : To End Date
+17/04/2024 09:32:22 AM : root         : INFO     : edge name: sceedge6-vm
+17/04/2024 09:32:23 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:32:23 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:32:24 AM : root         : INFO     : SCEEDGE6-VM
+17/04/2024 09:32:24 AM : root         : INFO     : sceedge6-vm
+17/04/2024 09:32:24 AM : root         : INFO     : waiting for message to appear...
+17/04/2024 09:32:24 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:32:24 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:32:24 AM : root         : INFO     : clicked on submit search button..
+17/04/2024 09:32:26 AM : root         : INFO     : Verifying matches
+17/04/2024 09:32:28 AM : root         : INFO     : entered explicit wait for 60
+17/04/2024 09:32:28 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:32:28 AM : root         : INFO     : ****************** VISITOR SEARCH COMPLETE banner displayed...
+17/04/2024 09:32:30 AM : root         : INFO     : entered explicit wait for 5
+17/04/2024 09:32:30 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:32:30 AM : root         : INFO     : no match text displayed: True
+17/04/2024 09:32:30 AM : root         : INFO     : ele2: No Matches Found - SO FAR
+17/04/2024 09:32:30 AM : root         : INFO     : Returned: True
+17/04/2024 09:32:30 AM : root         : INFO     : start date: 12/04/202412:00PM
+17/04/2024 09:32:30 AM : root         : INFO     : end date: 12/04/202412:30PM
+17/04/2024 09:32:31 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:32:31 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:32:32 AM : root         : INFO     : No Match Found txt: No Matches Found - SO FAR, id visible: True
+17/04/2024 09:32:32 AM : root         : INFO     : expected exp_asser: APR 12, 2024 , in : SEARCH CONSTRAINTS:
+START DATE: APR 16, 2024 11:00 PM END DATE: APR 17, 2024 5:00 PM ORG/HIERARCHY: SCEEDGE6-VM
+17/04/2024 09:32:32 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:32:32 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:32:32 AM : root         : INFO     : zone data: SCEEDGE6-VM
+17/04/2024 09:32:32 AM : root         : INFO     : ac zone: SEARCH CONSTRAINTS:
+START DATE: APR 16, 2024 11:00 PM END DATE: APR 17, 2024 5:00 PM ORG/HIERARCHY: SCEEDGE6-VM
+17/04/2024 09:32:33 AM : root         : INFO     : operator User logged out from cloud menu..
+17/04/2024 09:32:34 AM : root         : INFO     : status: [True]
+17/04/2024 09:32:34 AM : root         : INFO     : ********** Test_VS_02 Begin  **********
+17/04/2024 09:32:35 AM : root         : INFO     : page url: https://scecore6-vm.qa.facefirst.dev/
+17/04/2024 09:32:35 AM : root         : INFO     : current url: https://scecore6-vm.qa.facefirst.dev/
+17/04/2024 09:32:35 AM : root         : INFO     : url is not open
+17/04/2024 09:32:35 AM : root         : INFO     : opening localhost portal login
+17/04/2024 09:32:35 AM : root         : INFO     : logging in to core
+17/04/2024 09:32:35 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:32:35 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:32:37 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:32:38 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:32:40 AM : root         : INFO     : ******* Login with operator user success *********
+17/04/2024 09:32:42 AM : root         : INFO     : going to visitor search...
+17/04/2024 09:32:42 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:32:42 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:32:44 AM : root         : INFO     : waiting for search panel to appear...
+17/04/2024 09:32:44 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:32:44 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:32:48 AM : root         : INFO     : waiting for message to appear...
+17/04/2024 09:32:48 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:32:48 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:32:48 AM : root         : INFO     : clicked on submit search button..
+17/04/2024 09:32:50 AM : root         : INFO     : Verifying matches
+17/04/2024 09:32:52 AM : root         : INFO     : entered explicit wait for 60
+17/04/2024 09:32:52 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:32:52 AM : root         : INFO     : ****************** VISITOR SEARCH COMPLETE banner displayed...
+17/04/2024 09:32:54 AM : root         : INFO     : entered explicit wait for 5
+17/04/2024 09:32:59 AM : root         : INFO     : element not found: //div[@ng-show="searchHasNoMatches"]
+17/04/2024 09:33:02 AM : root         : INFO     : entered explicit wait for 15
+17/04/2024 09:33:02 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:33:02 AM : root         : INFO     : count of matches: 5
+17/04/2024 09:33:02 AM : root         : INFO     : images displayed: True
+17/04/2024 09:33:02 AM : root         : INFO     : Returned: True
+17/04/2024 09:33:03 AM : root         : INFO     : operator User logged out from cloud menu..
+17/04/2024 09:33:04 AM : root         : INFO     : status: [True]
+17/04/2024 09:33:04 AM : root         : INFO     : ********** Test_VS_03 Begin  **********
+17/04/2024 09:33:05 AM : root         : INFO     : page url: https://scecore6-vm.qa.facefirst.dev/
+17/04/2024 09:33:05 AM : root         : INFO     : current url: https://scecore6-vm.qa.facefirst.dev/
+17/04/2024 09:33:05 AM : root         : INFO     : url is not open
+17/04/2024 09:33:06 AM : root         : INFO     : opening localhost portal login
+17/04/2024 09:33:06 AM : root         : INFO     : logging in to core
+17/04/2024 09:33:06 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:33:06 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:33:08 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:33:08 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:33:10 AM : root         : INFO     : ******* Login with operator user success *********
+17/04/2024 09:33:12 AM : root         : INFO     : going to visitor search...
+17/04/2024 09:33:12 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:33:12 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:33:15 AM : root         : INFO     : waiting for search panel to appear...
+17/04/2024 09:33:15 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:33:15 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:33:18 AM : root         : INFO     : Strategy: from
+17/04/2024 09:33:18 AM : root         : INFO     : select from date checkbox
+17/04/2024 09:33:19 AM : root         : INFO     : select date time
+17/04/2024 09:33:19 AM : root         : INFO     : datetime clicked
+17/04/2024 09:33:20 AM : root         : INFO     : selecting time
+17/04/2024 09:33:21 AM : root         : INFO     : select time 
+17/04/2024 09:33:25 AM : root         : INFO     : select in from hours and min
+17/04/2024 09:33:25 AM : root         : INFO     : From start date
+17/04/2024 09:33:28 AM : root         : INFO     : Strategy: to
+17/04/2024 09:33:31 AM : root         : INFO     : selecting time
+17/04/2024 09:33:31 AM : root         : INFO     : select time 
+17/04/2024 09:33:35 AM : root         : INFO     : select in to hours and min
+17/04/2024 09:33:35 AM : root         : INFO     : To End Date
+17/04/2024 09:33:37 AM : root         : INFO     : edge name: sceedge6-vm
+17/04/2024 09:33:38 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:33:38 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:33:39 AM : root         : ERROR    : screenshot file path: C:\Users\FFAzureAdmin\Desktop\FF_Smoke_Test\Reports\Screenshots\TC_VS_03_exception.png
+17/04/2024 09:33:39 AM : root         : ERROR    : TC_VS_03 got exception as: ()
+17/04/2024 09:33:39 AM : root         : INFO     : test_TC_VS_03 execution failed..
+17/04/2024 09:33:40 AM : root         : INFO     : ********** Test_VS_04 Begin  **********
+17/04/2024 09:33:41 AM : root         : INFO     : page url: https://scecore6-vm.qa.facefirst.dev/
+17/04/2024 09:33:41 AM : root         : INFO     : current url: https://scecore6-vm.qa.facefirst.dev/
+17/04/2024 09:33:41 AM : root         : INFO     : url is not open
+17/04/2024 09:33:41 AM : root         : INFO     : opening localhost portal login
+17/04/2024 09:33:41 AM : root         : INFO     : logging in to core
+17/04/2024 09:33:41 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:33:52 AM : root         : INFO     : element not found: //div/input[@id="login-username"]
+17/04/2024 09:33:53 AM : root         : INFO     : exception: ()
+17/04/2024 09:33:53 AM : root         : INFO     : going to visitor search...
+17/04/2024 09:33:53 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:33:53 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:33:55 AM : root         : INFO     : waiting for search panel to appear...
+17/04/2024 09:33:56 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:33:56 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:33:57 AM : root         : INFO     : Root region name on VS: SCEEDGE6-VM
+17/04/2024 09:33:59 AM : root         : INFO     : current url: https://scecore6-vm.qa.facefirst.dev:5000/login
+17/04/2024 09:33:59 AM : root         : INFO     : url is not open
+17/04/2024 09:34:00 AM : root         : INFO     : opening dm login
+17/04/2024 09:34:00 AM : root         : INFO     : logging in to DM
+17/04/2024 09:34:00 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:34:00 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:34:02 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:34:03 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:34:03 AM : root         : INFO     : Login to DM... Welcome dialog is displayed..
+17/04/2024 09:34:04 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:34:04 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:34:06 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:34:06 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:34:08 AM : root         : INFO     : Root region name on DM: KROGER INTERNATIONAL - KCORP
+17/04/2024 09:34:10 AM : root         : INFO     : Root region names on VS and DM are not same...
+17/04/2024 09:34:11 AM : root         : INFO     : operator User logged out from cloud menu..
+17/04/2024 09:34:12 AM : root         : INFO     : status: [False]
+17/04/2024 09:34:12 AM : root         : ERROR    : screenshot file path: C:\Users\FFAzureAdmin\Desktop\FF_Smoke_Test\Reports\Screenshots\TC_VS_04_failed.png
+17/04/2024 09:34:13 AM : root         : INFO     : test_TC_VS_04 execution failed..
+17/04/2024 09:34:13 AM : root         : INFO     : ********** Test_VS_05 Begin  **********
+17/04/2024 09:34:14 AM : root         : INFO     : page url: https://scecore6-vm.qa.facefirst.dev/
+17/04/2024 09:34:14 AM : root         : INFO     : current url: https://scecore6-vm.qa.facefirst.dev/
+17/04/2024 09:34:14 AM : root         : INFO     : url is not open
+17/04/2024 09:34:14 AM : root         : INFO     : opening localhost portal login
+17/04/2024 09:34:14 AM : root         : INFO     : logging in to core
+17/04/2024 09:34:14 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:34:14 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:34:16 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:34:17 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:34:19 AM : root         : INFO     : ******* Login with operator user success *********
+17/04/2024 09:34:21 AM : root         : INFO     : going to visitor search...
+17/04/2024 09:34:21 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:34:21 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:34:23 AM : root         : INFO     : waiting for search panel to appear...
+17/04/2024 09:34:24 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:34:24 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:34:25 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:34:25 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:34:25 AM : root         : INFO     : clicked on Probable Match Events menu...
+17/04/2024 09:34:26 AM : root         : INFO     : clicked on Event image...
+17/04/2024 09:34:27 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:34:27 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:34:27 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:34:27 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:34:30 AM : root         : INFO     : Photo is dropped in upload container...
+17/04/2024 09:34:30 AM : root         : INFO     : waiting for message to appear...
+17/04/2024 09:34:30 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:34:30 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:34:30 AM : root         : INFO     : clicked on submit search button..
+17/04/2024 09:34:32 AM : root         : INFO     : Verifying matches
+17/04/2024 09:34:34 AM : root         : INFO     : entered explicit wait for 60
+17/04/2024 09:34:34 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:34:34 AM : root         : INFO     : ****************** VISITOR SEARCH COMPLETE banner displayed...
+17/04/2024 09:34:36 AM : root         : INFO     : entered explicit wait for 5
+17/04/2024 09:34:41 AM : root         : INFO     : element not found: //div[@ng-show="searchHasNoMatches"]
+17/04/2024 09:34:44 AM : root         : INFO     : entered explicit wait for 15
+17/04/2024 09:34:44 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:34:44 AM : root         : INFO     : count of matches: 3
+17/04/2024 09:34:44 AM : root         : INFO     : images displayed: True
+17/04/2024 09:34:44 AM : root         : INFO     : Returned: True
+17/04/2024 09:34:46 AM : root         : INFO     : operator User logged out from cloud menu..
+17/04/2024 09:34:47 AM : root         : INFO     : status: [True]

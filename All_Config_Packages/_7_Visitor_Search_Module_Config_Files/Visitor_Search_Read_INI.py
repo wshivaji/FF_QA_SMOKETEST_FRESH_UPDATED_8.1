@@ -560,6 +560,14 @@ class Read_Visitor_Search_Components:
         except Exception as ex:
             print("get_start_date : ", ex)
 
+    def get_vsj_start_date(self):
+        try:
+            get_start_date = self.common_test_data_config.get("common_data", "vsj_start_date")
+            print("get_start_date : ", get_start_date)
+            return get_start_date
+        except Exception as ex:
+            print("get_start_date : ", ex)
+
     def get_start_month(self):
         try:
             get_start_month = self.common_test_data_config.get("common_data", "start_month")
