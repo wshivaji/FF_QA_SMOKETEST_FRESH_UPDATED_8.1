@@ -5,21 +5,12 @@ from Base_Package.Web_Logger import web_logger
 from All_POM_Packages._12_Identify_and_Enroll_Module_POM.Identify_and_Enroll_Module_POM import Identify_And_Enroll_POM
 
 
-@pytest.mark.run(order=5)
+@pytest.mark.run(order=8)
 class Test_Identify_and_Enroll_Test_Cases(web_driver, web_logger):
     # d = web_driver.d()
     logger = web_logger.logger_obj()
-    logger.info(" ******** Identify & Enroll (Order - 12) Begin ********")
-    print("******** Identify & Enroll (Order - 12) Begin ********")
-
-    @pytest.mark.system
-
-    @pytest.mark.p1
-    # def test_TC_IE_00(self):
-    #     if Identify_And_Enroll_POM().Create_New_Enrollment_using_Identify_and_Enroll():
-    #         assert True
-    #     else:
-    #         assert False
+    logger.info(" ******** Identify & Enroll (Order - 8) Begin ********")
+    print("******** Identify & Enroll (Order - 8) Begin ********")
 
     @pytest.mark.system
     def test_TC_IE_01(self):
@@ -59,7 +50,7 @@ class Test_Identify_and_Enroll_Test_Cases(web_driver, web_logger):
     @pytest.mark.p1
     def test_TC_IE_06(self):
         if Identify_And_Enroll_POM().Verify_for_above_25_enrolled_subject_region_edges_are_properly_assigned():
-            assert  True
+            assert True
         else:
             assert False
 

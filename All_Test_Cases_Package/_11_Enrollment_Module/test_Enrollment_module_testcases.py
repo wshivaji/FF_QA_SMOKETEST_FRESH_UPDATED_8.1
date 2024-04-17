@@ -4,13 +4,12 @@ from Base_Package.Web_Logger import web_logger
 from All_POM_Packages._11_Enrollment_POM.Enrollment_module_POM import enrollments_POM
 
 
-
-class Test_Identify_and_Enroll_Test_Cases(web_driver, web_logger):
+@pytest.mark.run(order=10)
+class Test_Enrollments_Test_Cases(web_driver, web_logger):
     d = web_driver.d()
     logger = web_logger.logger_obj()
-    logger.info(" ******** Enrollment (Order - 12) Begin ********")
-    print("******** Enrollment (Order - 12) Begin ********")
-
+    logger.info(" ******** Enrollment (Order - 10) Begin ********")
+    print("******** Enrollment (Order - 10) Begin ********")
 
     @pytest.mark.p1
     def test_TC_En_001(self):

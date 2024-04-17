@@ -8,8 +8,8 @@ from All_POM_Packages._5_Enrollment_Groups_Module_POM.Enrollment_Groups_Module_P
 class Test_Enrollment_Groups_Module(web_driver, web_logger):
     d = web_driver.d()
     logger = web_logger.logger_obj()
-    logger.info(" ******** Enrollment_Groups_Module (Order - 5) Begin ********")
-    print("******** Enrollment_Groups_Module (Order - 5) Begin ********")
+    logger.info(" ******** Enrollment_Groups_Module (Order - 4) Begin ********")
+    print("******** Enrollment_Groups_Module (Order - 4) Begin ********")
 
     @pytest.mark.system
     def test_TC_EG_01(self):

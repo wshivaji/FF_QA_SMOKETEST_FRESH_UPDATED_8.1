@@ -4,12 +4,12 @@ from Base_Package.Web_Logger import web_logger
 from All_POM_Packages._2_Portal_Menu_Module_POM.Portal_Menu_Module_POM import Portal_Menu_Module_pom
 
 
-@pytest.mark.run(order=2)
+@pytest.mark.run(order=18)
 class Test_Portal_Menu_Test_Cases(web_driver, web_logger):
     d = web_driver.d
     logger = web_logger.logger_obj()
-    logger.info(" ******** Portal_Menu (Order - 2) Begin ********")
-    print("******** Portal_Menu (Order - 2) Begin ********")
+    logger.info(" ******** Portal_Menu (Order - 18) Begin ********")
+    print("******** Portal_Menu (Order - 18) Begin ********")
 
     @pytest.mark.portal
     def test_TC_PM_1(self):

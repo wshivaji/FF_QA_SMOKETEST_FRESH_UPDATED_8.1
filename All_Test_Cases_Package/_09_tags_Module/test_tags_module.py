@@ -6,12 +6,12 @@ from Base_Package.Web_Logger import web_logger
 from Base_Package.Web_Driver import web_driver
 
 
-@pytest.mark.run(order=13)
+@pytest.mark.run(order=7)
 class Test_Tags_Module(web_driver, web_logger):
     d = web_driver.d()
     logger = web_logger.logger_obj()
-    logger.info(" ******** Tags_Module (Order - 13) Begin ********")
-    print("******** Tags_Module (Order - 13) Begin ********")
+    logger.info(" ******** Tags_Module (Order - 7) Begin ********")
+    print("******** Tags_Module (Order - 7) Begin ********")
 
     @pytest.mark.p1
     def test_TC_TAG_01(self):

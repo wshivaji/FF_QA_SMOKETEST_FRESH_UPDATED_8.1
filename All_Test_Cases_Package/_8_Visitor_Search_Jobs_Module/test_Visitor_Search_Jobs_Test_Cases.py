@@ -4,12 +4,12 @@ from Base_Package.Web_Logger import web_logger
 from All_POM_Packages._8_Visitor_Seach_Jobs_Module_POM.Visitor_Search_Jobs_Module_POM import Visitor_Search_Jobs_Module_pom
 
 
-@pytest.mark.run(order=11)
+@pytest.mark.run(order=6)
 class Test_Visitor_Search_Jobs_Test_Cases(web_driver, web_logger):
     d = web_driver.d()
     logger = web_logger.logger_obj()
-    logger.info(" ******** Visitor_Search_Jobs (Order - 8) Begin ********")
-    print("******** Visitor_Search_Jobs (Order - 8) Begin ********")
+    logger.info(" ******** Visitor_Search_Jobs (Order - 6) Begin ********")
+    print("******** Visitor_Search_Jobs (Order - 6) Begin ********")
 
     @pytest.mark.portal
     def test_VSJ_01(self):

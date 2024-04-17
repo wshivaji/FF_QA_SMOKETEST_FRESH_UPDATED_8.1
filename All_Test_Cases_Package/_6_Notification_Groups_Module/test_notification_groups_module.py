@@ -8,8 +8,8 @@ from All_POM_Packages._6_Notification_Groups_Module.notification_groups_module_P
 @pytest.mark.run(order=3)
 class Test_Notification_Groups_Module(web_driver, web_logger):
     logger = web_logger.logger_obj()
-    logger.info(" ******** Notification_Groups_Module (Order - 6) Begin ********")
-    print("******** Notification_Groups_Module (Order - 6) Begin ********")
+    logger.info(" ******** Notification_Groups_Module (Order - 3) Begin ********")
+    print("******** Notification_Groups_Module (Order - 3) Begin ********")
 
     @pytest.mark.system
     def test_TC_NG_01(self):

@@ -5,36 +5,36 @@ from All_POM_Packages._18_Reporting_Module.Reporting_Events_POM import Reporting
 import pytest
 
 
-@pytest.mark.run(order=19)
+@pytest.mark.run(order=16)
 class Test_Reporting_Module_Test_Cases(web_driver, web_logger):
     d = web_driver.d()
     logger = web_logger.logger_obj()
-    logger.info(" ******** Reporting_Module (Order - 18) Begin ********")
-    print("******** Reporting_Module (Order - 18) Begin ********")
+    logger.info(" ******** Reporting_Module (Order - 16) Begin ********")
+    print("******** Reporting_Module (Order - 16) Begin ********")
 
     @pytest.mark.portal
-    def test_TC_Reporting_EV_ZN_413(self):
+    def test_TC_Reporting_01(self):
         if Reporting_Events_pom().verify_report_for_number_of_events_by_zone_with_default_dates_1_month_and_with_group_selected_as_SOE():
             assert True
         else:
             assert False
 
     @pytest.mark.portal
-    def test_TC_Reporting_EV_EN_370(self):
+    def test_TC_Reporting_02(self):
         if Reporting_Events_pom().verify_report_for_number_of_events_by_enrollment_with_default_dates_1_month_and_with_group_selected_as_ABE():
             assert True
         else:
             assert False
 
     @pytest.mark.portal
-    def test_TC_Reporting_EN_ZN_147(self):
+    def test_TC_Reporting_03(self):
         if Reporting_pom().verify_report_for_number_of_enrollments_by_zone_with_default_dates_1_month_and_with_group_selected_as_SOE():
             assert True
         else:
             assert False
 
     @pytest.mark.portal
-    def test_TC_Reporting_ZN_EN_193(self):
+    def test_TC_Reporting_04(self):
         if Reporting_pom().verify_report_for_number_of_zones_by_enrollment_with_default_dates_last_1_month_and_with_group_selected_as_ABE_and_zone_selected_as_All_devices():
             assert True
         else:

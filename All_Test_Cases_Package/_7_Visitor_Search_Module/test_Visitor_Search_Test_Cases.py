@@ -4,12 +4,12 @@ from Base_Package.Web_Logger import web_logger
 from All_POM_Packages._7_Visitor_Search_Module_POM.Visitor_Search_Module_POM import Visitor_Search_Module_pom
 
 
-@pytest.mark.run(order=10)
+@pytest.mark.run(order=5)
 class Test_Visitor_Search_Test_Cases(web_driver, web_logger):
     d = web_driver.d()
     logger = web_logger.logger_obj()
-    logger.info(" ******** Visitor_Search (Order - 7) Begin ********")
-    print("******** Visitor_Search (Order - 7) Begin ********")
+    logger.info(" ******** Visitor_Search (Order - 5) Begin ********")
+    print("******** Visitor_Search (Order - 5) Begin ********")
 
     @pytest.mark.portal
     def test_TC_VS_01(self):

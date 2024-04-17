@@ -8,8 +8,8 @@ from Base_Package.Web_Logger import web_logger
 class Test_Users_Module(web_driver, web_logger):
     logger = web_logger.logger_obj()
     d = web_driver.d()
-    logger.info(" ******** Users_Module (Order - 4) Begin ********")
-    print("******** Users_Module (Order - 4) Begin ********")
+    logger.info(" ******** Users_Module (Order - 2) Begin ********")
+    print("******** Users_Module (Order - 2) Begin ********")
 
     @pytest.mark.system
     def test_TC_US_1(self):
@@ -26,8 +26,6 @@ class Test_Users_Module(web_driver, web_logger):
         else:
             assert False
 
-
-
     @pytest.mark.system
     def test_TC_US_3(self):
         self.logger.info("user module = test_Tc_US_3_execution stsrted....")
@@ -35,8 +33,6 @@ class Test_Users_Module(web_driver, web_logger):
             assert True
         else:
             assert False
-
-
 
     @pytest.mark.portal
     def test_TC_US_04(self):
