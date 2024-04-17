@@ -5,13 +5,14 @@ from Base_Package.Web_Logger import web_logger
 from All_POM_Packages._12_Identify_and_Enroll_Module_POM.Identify_and_Enroll_Module_POM import Identify_And_Enroll_POM
 
 
-@pytest.mark.run(order=8)
+@pytest.mark.run(order=5)
 class Test_Identify_and_Enroll_Test_Cases(web_driver, web_logger):
     # d = web_driver.d()
     logger = web_logger.logger_obj()
     logger.info(" ******** Identify & Enroll (Order - 12) Begin ********")
     print("******** Identify & Enroll (Order - 12) Begin ********")
 
+    @pytest.mark.system
 
     @pytest.mark.p1
     # def test_TC_IE_00(self):
