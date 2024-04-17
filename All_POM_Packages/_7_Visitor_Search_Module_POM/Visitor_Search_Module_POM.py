@@ -85,6 +85,18 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
         except Exception as ex:
             self.logger.error(ex)
 
+    def click_on_logout_button(self):
+        try:
+            time.sleep(web_driver.one_second)
+            user = self.d.find_element(By.XPATH, Portal_Menu_Module_read_ini().get_user_name_on_taskbar_by_xpath())
+            existing_username = user.text
+            logout_btn = self.d.find_element(By.XPATH, Portal_Menu_Module_read_ini().get_logout_button_on_portal_by_xpath())
+            logout_btn.click()
+            self.logger.info(f"{existing_username} User logged out from cloud menu..")
+            time.sleep(web_driver.one_second)
+        except Exception as ex:
+            self.logger.info(f"logout from cloud menu got an exception as :{ex}")
+
     def Verify_visitor_search_with_metadata_Date_and_Org_Hierarchy_Selection_should_yield_visitor_results_within_selected_search_criteria(self):
         try:
             self.logger.info("********** Test_1 Begin  **********")
@@ -263,6 +275,7 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
             save = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().zone_save_button_xpath())
             save.click()
             # self.d.close()
+            self.d.switch_to.new_window()
             login().login_to_DM_if_not_done(self.d)
             self.get_root_region_name_on_DM()
             root_region_name_on_DM = self.d.find_element(By.XPATH,
@@ -275,8 +288,8 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
             else:
                 self.logger.info(f"Root region names on VS and DM are not same...")
                 status.append(False)
-            self.d.close()
-
+            self.d.switch_to.window(self.d.window_handles[0])
+            self.click_on_logout_button()
             self.logger.info(f"status: {status}")
             if False in status:
                 self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_VS_04_failed.png")
