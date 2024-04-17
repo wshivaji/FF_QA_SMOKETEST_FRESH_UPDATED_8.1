@@ -488,7 +488,7 @@ class login(web_driver, web_logger):
             self.d.save_screenshot(f"{web_driver.screenshots_path}\\login_exception.png")
             print(f"{ex.args}")
 
-    def login_to_facecirst_portal_if_not_done(self, d):
+    def login_to_facefirst_portal_if_not_done(self, d):
         try:
             self.d = d
             time.sleep(web_driver.one_second)
@@ -503,12 +503,14 @@ class login(web_driver, web_logger):
                                                                                             "cloud_or_local_menu_by_xpath"),
                                                           self.d)
             except Exception as ex:
-                print(ex.args)
-            if cloud_menu_btn:
+                self.logger.info(f"logout btn is not visible: {ex.args}")
+
+            if cloud_menu_btn.is_displayed():
                 print(f"logout btn visible: {cloud_menu_btn.is_displayed()}")
             else:
                 if self.d.current_url == Portal_login_page_read_ini().get_portal_url():
                     print(f"page url: {self.d.current_url}")
+
                 else:
                     self.d.get(Portal_login_page_read_ini().get_portal_url())
                     self.d.maximize_window()
