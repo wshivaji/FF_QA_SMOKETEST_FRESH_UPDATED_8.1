@@ -52,13 +52,6 @@ class Test_Enrollments_Test_Cases(web_driver, web_logger):
         else:
             assert False
 
-    @pytest.mark.portal
-    def test_Tc_en_07(self):
-        if enrollments_POM().verify_user_enroller_of_an_enrollment_able_to_delete_enrollment():
-            assert  True
-        else:
-            assert False
-
     @pytest.mark.system
     def test_Tc_en_08(self):
         if enrollments_POM().Verify_core_user_is_able_to_delete_pending_subjects():
@@ -101,23 +94,21 @@ class Test_Enrollments_Test_Cases(web_driver, web_logger):
         else:
             assert False
 
-
-
-    @pytest.mark.p1
+    @pytest.mark.portal
     def test_Tc_en_15(self):
         if enrollments_POM().verify_user_enroller_of_an_enrollment_able_to_see_events_for_a_enrolled_person_on_enrrollments_panel():
             assert True
         else:
             assert False
 
-    @pytest.mark.p1
+    @pytest.mark.portal
     def test_Tc_en_16(self):
         if enrollments_POM().verify_user_enroller_of_an_enrollment_able_to_edit_the_enrollment():
             assert  True
         else:
             assert False
 
-    @pytest.mark.p1
+    @pytest.mark.portal
     def test_tc_en_17(self):
         if enrollments_POM().verify_user_enroller_of_an_enrollment_able_to_delete_enrollment():
             assert True
