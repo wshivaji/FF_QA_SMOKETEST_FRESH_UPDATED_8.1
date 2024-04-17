@@ -1001,36 +1001,10 @@ class enrollments_POM(web_driver, web_logger):
                     self.logger.error(f"test_TC_En_07 got an exception as: {ex}")
                     self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_07_Exception.png")
                     return False
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    def verify_user_able_to_see_disabled_status_for_masked_enrollment(self):
+        try:
+            self.logger.info("enrollment module testcases started")
+            login().login_to_cloud_if_not_done_with_user_credentials(self.d,Read_Identify_and_Enroll_Components().)
             Action_button = self.d.find_element(By.XPATH, read_enrollment_components().Action_button_on_enrollment_panel())
             Action_button.click()
             time.sleep(web_driver.two_second)
@@ -1144,6 +1118,8 @@ class enrollments_POM(web_driver, web_logger):
             time.sleep(web_driver.one_second)
             logout().logout_from_core(self.d)
             time.sleep(web_driver.one_second)
+
+
             login().login_to_cloud_if_not_done_with_user_credentials(self.d,Read_Identify_and_Enroll_Components().get_user_to_login(),Read_Identify_and_Enroll_Components().get_password_to_login())
             time.sleep(web_driver.one_second)
             filter_dropdown1 = self.d.find_element(By.XPATH, read_enrollment_components().filter_dropdown_by_xpath())
@@ -1162,6 +1138,9 @@ class enrollments_POM(web_driver, web_logger):
                                                                          read_enrollment_components().select_checkbox_of_pending_for_review())
             select_check_box_of_pending_Enrollment.click()
             time.sleep(web_driver.two_second)
+
+        except Exception as ex:
+            print(ex.args)
 
 
 

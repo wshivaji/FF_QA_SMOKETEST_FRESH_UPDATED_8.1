@@ -2607,6 +2607,113 @@ class Read_Identify_and_Enroll_Components:
         except Exception as ex:
             print(ex.args)
 
+    def get_operator_to_login(self):
+        try:
+            user = self.config.get("Login_Data", "username")
+            return user
+        except Exception as ex:
+            print(ex.args)
+
+    def get_responder_to_login(self):
+        try:
+            user = self.config.get("Login_Data", "username2")
+            return user
+        except Exception as ex:
+            print(ex.args)
+
+    def get_executive_to_login(self):
+        try:
+            user = self.config.get("Login_Data", "username3")
+            return user
+        except Exception as ex:
+            print(ex.args)
+
+    def get_it_admin_to_login(self):
+        try:
+            user = self.config.get("Login_Data", "user")
+            return user
+        except Exception as ex:
+            print(ex.args)
+
+    def Enrollment_link(self):
+        try:
+            enrollment_link = self.config.get("portal_Login","Enrollment_Link")
+            return enrollment_link
+        except Exception as ex:
+            print(ex.args)
+
+    def region_names_by_xpath(self):
+        try:
+            region_name = self.config.get("portal_Login","region_name_on_enrollment_xpath")
+            return region_name
+        except Exception as ex:
+            print(ex.args)
+
+    def read_region_data(self):
+        try:
+            read_region_data = self.config.get("Login_Data","region_name")
+            return read_region_data
+        except Exception as ex:
+            print(ex.args)
+
+    def read_reported_loss_values_from_ini(self):
+        try:
+            region_name = self.config.get("portal_Login","reported_Loss_vaues")
+            return region_name
+        except Exception as ex:
+            print(ex.args)
+
+    def details_button(self):
+        try:
+            details_button = self.config.get("portal_Login","details_button_xpath")
+            return details_button
+        except Exception as ex:
+            print(ex.args)
+
+    def select_tribar_button_on_enrollment_panel(self):
+        try:
+            tribar = self.config.get("portal_Login","tribar_button")
+            return tribar
+        except Exception as ex:
+            print(ex.args)
+
+    def search_dropdow_on_enrollment(self):
+        try:
+            search = self.config.get("portal_Login","search_dropdown")
+            return search
+        except Exception as ex:
+            print(ex.args)
+
+    def case_subject_xpath(self):
+        try:
+            case_subject = self.config.get("portal_Login","case_subject_xpath")
+            return case_subject
+        except Exception as ex:
+            print(ex.args)
+
+    def enter_case_subject_data(self):
+        try:
+            case_subject = self.config.get("portal_Login","case_subject_xpath")
+            return case_subject
+        except Exception as ex:
+            print(ex.args)
+
+    def search_button(self):
+        try:
+            search_button = self.config.get("portal_Login","search_button")
+            return search_button
+        except Exception as ex:
+            print(ex.args)
+
+    def reported_loss_value_xpath(self):
+        try:
+            loss = self.config.get("portal_Login","reported_loss_xpath")
+            return loss
+        except Exception as ex:
+            print(ex.args)
+
+
+
 
 
 
