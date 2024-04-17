@@ -7,8 +7,8 @@
       "lastname": "operator",
       "userrole": "3. operator",
       "password": "Right_1r1s",
-      "user_orgahierarchy": "sceedge13-vm",
-      "Email":"divya.goli@facefirst.com"
+      "user_orgahierarchy": "sceedge6-vm",
+      "Email":"renuka.shinde@facefirst.com"
 
     },
     {
@@ -18,8 +18,8 @@
       "lastname": "user",
       "userrole": "4. responder",
       "password": "Right_1r1s",
-      "user_orgahierarchy": "sceedge13-vm",
-      "Email":"divya.goli@facefirst.com"
+      "user_orgahierarchy": "sceedge6-vm",
+      "Email":"renuka.shinde@facefirst.com"
     },
     {
       "id": "2",
@@ -29,7 +29,7 @@
       "userrole": "2. approver/supervisor",
       "password": "Right_1r1s",
       "user_orgahierarchy": "Kroger CA",
-      "Email":"divya.goli@facefirst.com"
+      "Email":"renuka.shinde@facefirst.com"
     },
     {
       "id": "3",
@@ -39,7 +39,7 @@
       "userrole": "1. executive",
       "password": "Right_1r1s",
       "user_orgahierarchy": "Kroger USA",
-      "Email":"divya.goli@facefirst.com"
+      "Email":"renuka.shinde@facefirst.com"
     },
     {
       "id": "4",
@@ -49,7 +49,7 @@
       "userrole": "it system admin",
       "password": "Right_1r1s",
       "user_orgahierarchy": "Kroger International",
-      "Email":"divya.goli@facefirst.com"
+      "Email":"renuka.shinde@facefirst.com"
     }
   ]
 }

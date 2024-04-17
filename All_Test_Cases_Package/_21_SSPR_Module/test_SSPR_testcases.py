@@ -17,3 +17,17 @@ class Test_Reporting_Module_Test_Cases(web_driver, web_logger):
             assert True
         else:
             assert False
+
+    @pytest.mark.portal
+    def test_TC_SSPR_002(self):
+        if SSPR_pom().verify_password_length_should_not_accept_less_than_8():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.portal
+    def test_TC_SSPR_003(self):
+        if SSPR_pom().verify_password_combination_alphabets_capital_small_digits_and_symbol_accepted_successfully():
+            assert True
+        else:
+            assert False
