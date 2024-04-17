@@ -14914,8 +14914,8 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             search_dropdown.click()
             self.logger.info("search dropdown is clicked")
             time.sleep(web_driver.one_second)
-            read_case_subject_from_ini = self.d.find_elements(By.XPATH,
-                                                     Read_Identify_and_Enroll_Components().case_subject_inpt_bx_by_xpath())
+            read_case_subject_from_ini = Read_Identify_and_Enroll_Components().case_subject_inpt_bx_by_xpath()
+            read_case_sub = read_case_subject_from_ini.split(',')
             case_subject = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().case_subject_xpath())
             for i in read_case_subject_from_ini:
                 case_subject.clear()
@@ -14923,16 +14923,23 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                 time.sleep(web_driver.one_second)
                 search_button = self.d.find_element(By.XPATH,Read_Identify_and_Enroll_Components().search_button())
                 search_button.click()
-                for j in range(len(enrollment_reported_loss)):
-                    tribar_button = self.d.find_element(By.XPATH,Read_Identify_and_Enroll_Components().select_tribar_button_on_enrollment_panel())
-                    tribar_button.click()
+                self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components().list_of_enrollments_by_xpath(),self.d)
+                en_list = self.d.find_elements(By.XPATH,Read_Identify_and_Enroll_Components().list_of_enrollments_by_xpath())
+                for x in range(len(en_list)):
+
+                    tribar_button = self.d.find_elements(By.XPATH,Read_Identify_and_Enroll_Components().select_tribar_button_on_enrollment_panel())
+                    tribar_button[i].click()
                     self.logger.info("clicking on tribar button")
                     time.sleep(web_driver.one_second)
-                    details_button = self.d.find_element(By.XPATH,Read_Identify_and_Enroll_Components().details_button())
-                    details_button.click()
+                    details_button = self.d.find_elements(By.XPATH,Read_Identify_and_Enroll_Components().details_button())
+                    details_button[i].click()
                     self.logger.info("clicking on details button")
                     time.sleep(web_driver.one_second)
                     reported_loss = self.d.find_element(By.XPATH,Read_Identify_and_Enroll_Components().reported_loss_value_xpath())
+                    rl=reported_loss.text
+                    if rl ==
+
+
 
 
 
