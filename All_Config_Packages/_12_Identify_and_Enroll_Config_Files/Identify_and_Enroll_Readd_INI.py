@@ -109,6 +109,13 @@ class Read_Identify_and_Enroll_Components:
         except Exception as ex:
             print("add_details_save_btn_by_xpath : ", ex)
 
+    def add_details_save_btn_by_xpath1(self):
+        try:
+            add_details_save_btn_by_xpath = self.config.get("LOCATORS", "add_details_submit_btn_by_Xpath")
+            return add_details_save_btn_by_xpath
+        except Exception as ex:
+            print("add_details_save_btn_by_xpath : ", ex)
+
     def expire_date_radio_btn_by_xpath(self):
         try:
             expire_date_radio_btn_by_xpath = self.config.get("LOCATORS", "expire_date_radio_btn_by_xpath")
@@ -2415,13 +2422,6 @@ class Read_Identify_and_Enroll_Components:
         except Exception as ex:
             print(ex.args)
 
-    def submit_review_btn_by_xpath(self):
-        try:
-            submit_review_btn_by_xpath = self.config.get("LOCATORS", "submit_review_btn_by_xpath")
-            return submit_review_btn_by_xpath
-        except Exception as ex:
-            print(ex.args)
-
     def edge_name(self):
         try:
             edge_name = self.common_test_data_config.get("Identify_and_Enroll_Data", "edge_name")
@@ -2500,13 +2500,13 @@ class Read_Identify_and_Enroll_Components:
         except Exception as ex:
             print(ex)
 
-    def get_username_to_login(self):
+
+    def get_operator_to_login(self):
         try:
             user = self.config.get("Login_Data", "username")
             return user
         except Exception as ex:
             print(ex.args)
-
     def get_password_to_login(self):
         try:
             password = self.config.get("Login_Data","password")

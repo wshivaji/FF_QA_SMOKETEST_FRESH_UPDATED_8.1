@@ -1,0 +1,12 @@
+17/04/2024 09:41:06 AM : root         : INFO     :  ******** Identify & Enroll (Order - 12) Begin ********
+17/04/2024 09:41:06 AM : root         : INFO     : enrollment module testcases started
+17/04/2024 09:41:11 AM : root         : INFO     : current url: https://scecore7-vm.qa.facefirst.dev/
+17/04/2024 09:41:11 AM : root         : INFO     : url is not open
+17/04/2024 09:41:11 AM : root         : INFO     : opening localhost portal login
+17/04/2024 09:41:11 AM : root         : INFO     : logging in to core
+17/04/2024 09:41:11 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:41:11 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:41:13 AM : root         : INFO     : entered explicit wait for 10
+17/04/2024 09:41:14 AM : root         : INFO     : exiting explicit wait..
+17/04/2024 09:41:16 AM : root         : INFO     : login success..
+17/04/2024 09:41:19 AM : root         : INFO     : clicking on enrollment link

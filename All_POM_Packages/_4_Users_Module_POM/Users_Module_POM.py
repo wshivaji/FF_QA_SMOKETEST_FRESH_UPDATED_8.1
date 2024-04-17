@@ -70,6 +70,7 @@ def generate_random_number():
 
 class Users_Module_pom(web_driver, web_logger):
     d = web_driver.d()
+    status = []
 
     log = web_logger.logger_obj()
     screenshots_path = f"{Path(__file__).parent.parent.parent}\\Reports\\Screenshots\\"
@@ -208,7 +209,7 @@ class Users_Module_pom(web_driver, web_logger):
             return False
         finally:
             self.delete_randomly_created_users()
-            # self.close_all_panel_one_by_one()
+            self.close_all_panel_one_by_one()
             logout().logout_from_core(self.d)
             self.d.refresh()
 
@@ -256,7 +257,7 @@ class Users_Module_pom(web_driver, web_logger):
                              # self.close_all_panel_one_by_one()
                              users_list.append(True)
                 else:
-                    self.d.save_screenshot(f"{self.screenshots_path}test_TC_US_110_failed.png")
+                    self.d.save_screenshot(f"{self.screenshots_path}test_TC_US_1_failed.png")
                     users_list.append(False)
                 self.close_all_panel_one_by_one()
             self.logger.info(f"user list contains {users_list}")
@@ -322,10 +323,10 @@ class Users_Module_pom(web_driver, web_logger):
             if Read_Users_Components().user_name_input_data() == current_user_info.text:
                 return True
             else:
-                self.d.save_screenshot(f"{self.screenshots_path}test_TC_US_06_failed.png")
+                self.d.save_screenshot(f"{self.screenshots_path}test_TC_US_02_failed.png")
                 return False
         except Exception as ex:
-            self.d.save_screenshot(f"{self.screenshots_path}test_TC_US_06_exception.png")
+            self.d.save_screenshot(f"{self.screenshots_path}test_TC_US_02_exception.png")
             self.log.info(f"test_TC_US_06_exception: {ex}")
             return False
         finally:
@@ -1009,7 +1010,7 @@ class Users_Module_pom(web_driver, web_logger):
             self.d.refresh()
 
 
-    def verify_user_able_to_assign_the_newly_created_user_to_a_notification_group(self):
+    def verify_user_able_to_link_unlink_the_newly_created_user_to_a_notification_group(self):
         try:
             login().login_to_cloud_if_not_done(self.d)
             time.sleep(web_driver.one_second)
@@ -3136,7 +3137,7 @@ class Users_Module_pom(web_driver, web_logger):
             self.d.refresh()
 
 
-    def Verify_user_able_to_link_notification_group_from_Users_panel(self):
+    def Verify_user_able_to_link_unlink_notification_group_from_Users_panel(self):
         try:
             login().login_to_cloud_if_not_done(self.d)
             time.sleep(web_driver.one_second)
@@ -3190,6 +3191,49 @@ class Users_Module_pom(web_driver, web_logger):
 
             details_icon = self.d.find_element(By.XPATH,Read_Users_Components().get_core_details_button())
             details_icon.click()
+
+            username = self.d.find_element(By.XPATH,Read_Users_Components().user_details_username_by_xpath())
+            self.logger.info(f"username is {username.text}")
+            time.sleep(web_driver.one_second)
+            username1 = Read_Users_Components().read_core_username()
+
+            userrole = self.d.find_element(By.XPATH, Read_Users_Components().user_details_user_role_by_xpath())
+            self.logger.info(f"username is {userrole.text}")
+            time.sleep(web_driver.one_second)
+            userrole1 = Read_Users_Components().read_core_user_user_role()
+
+            region = self.d.find_element(By.XPATH, Read_Users_Components().user_details_region_by_xpath())
+            self.logger.info(f"username is {region.text}")
+            time.sleep(web_driver.one_second)
+            region1 = Read_Users_Components().read_core_user_region()
+
+            email = self.d.find_element(By.XPATH, Read_Users_Components().user_details_email_by_xpath())
+            self.logger.info(f"username is {email.text}")
+            time.sleep(web_driver.one_second)
+            email1 = Read_Users_Components().read_core_user_email()
+
+            time_Zone = self.d.find_element(By.XPATH, Read_Users_Components().user_details_timezone_by_xpath())
+            self.logger.info(f"username is {userrole.text}")
+            time.sleep(web_driver.one_second)
+            time_zone1 = Read_Users_Components().read_core_user_timezone()
+
+            if username==username1 and userrole==userrole1 and region==region1 and email==email1 and time_Zone==time_zone1:
+                return  True
+            else:
+                return False
+        except Exception as ex:
+            print(ex)
+
+
+
+
+
+
+
+
+
+
+
         except Exception as ex:
             print(ex)
     def Verify_total_users_are_n_including_default_user(self):
@@ -3234,9 +3278,51 @@ class Users_Module_pom(web_driver, web_logger):
                 time.sleep(web_driver.two_second)
             i =i+1
         except Exception as ex:
-
             print(ex.args)
 
+    def Verify_for_above_5_users_region_edges_are_properly_assigned(self):
+        try:
+            status = []
+            self.logger.info("users module started")
+            login().login_to_cloud_if_not_done(self.d)
+            time.sleep(web_driver.one_second)
+            users_dict = self.Read_user_from_json()
+            self.click_user_on_cloud_menu()
+            x = Read_Users_Components().region_names_from_ini()
+            user_list = x.split(',')
+            self.logger.info(f"eg list: {user_list}")
+
+            count = 0
+            for i in range(len(user_list)):
+                time.sleep(web_driver.one_second)
+                search_box_by_xpath = self.d.find_element(By.XPATH, Read_Users_Components().search_box_by_xpath())
+                search_box_by_xpath.clear()
+                search_box_by_xpath.send_keys(user_list[i])
+                time.sleep(web_driver.one_second)
+                details_button = self.d.find_element(By.XPATH,Read_Users_Components().details_icon_by_xpath())
+                details_button.click()
+                time.sleep(web_driver.one_second)
+                actual_region_name = self.d.find_element(By.XPATH, Read_Users_Components().region_name())
+                self.logger.info(f"actual region name is :{actual_region_name.text}")
+                expected_region_name = users_dict["users"][i]["user_orgahierarchy"]
+                self.logger.info(f"expected username is {expected_region_name}")
+
+                if actual_region_name.text == expected_region_name:
+                    self.status.append(True)
+
+                else:
+                    self.status.append(False)
+                if False in self.status:
+                    self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_IE_100.png")
+                    self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_IE_100_failed.png")
+                    return False
+                else:
+                    return True
+        except Exception as ex:
+                    self.logger.error(f"test_TC_IE_100 got an exception as: {ex}")
+                    self.d.save_screenshot(
+                        f"{self.screenshots_path}\\test_TC_IE_100_Exception.png")
+                    return False
 
 
 
@@ -3258,7 +3344,11 @@ class Users_Module_pom(web_driver, web_logger):
 
 
 
-# Users_Module_pom().verify_details_of_core_user()
+
+
+
+
+
 
 
 
