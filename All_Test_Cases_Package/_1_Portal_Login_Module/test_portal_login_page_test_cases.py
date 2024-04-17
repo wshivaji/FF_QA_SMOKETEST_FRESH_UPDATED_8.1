@@ -39,10 +39,10 @@ class Test_Portal_Login_Page_Test_Cases(web_driver, web_logger):
         else:
             assert False
 
-    # @pytest.mark.portal
-    # def test_Portal_Login_TC05(self):
-    #     if Portal_Login_Page_Pom().\
-    #            verify_user_account_blocked_for_30_min_if_user_enter_wrong_password_for_6_times_verify_message_warning():
-    #         assert True
-    #     else:
-    #         assert False
+    @pytest.mark.portal
+    def test_Portal_Login_TC05(self):
+        if Portal_Login_Page_Pom().\
+               verify_user_account_blocked_for_30_min_if_user_enter_wrong_password_for_6_times_verify_message_warning():
+            assert True
+        else:
+            assert False

@@ -25,7 +25,7 @@ class insight_dashboard_pom(web_driver, web_logger):
         try:
             self.logger.info("************* test_TC_Insight_Dashboard_01 started  **************")
 
-            login().login_to_facecirst_portal_if_not_done(self.d)
+            login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
 
             time.sleep(web_driver.two_second)
@@ -64,7 +64,7 @@ class insight_dashboard_pom(web_driver, web_logger):
     def Verify_user_is_able_to_see_loss_prevented_by_enrollment_group_counts(self):
         try:
             self.logger.info("************* test_TC_Insight_Dashboard_02 started  **************")
-            login().login_to_facecirst_portal_if_not_done(self.d)
+            login().login_to_cloud_if_not_done(self.d)
             self.d.refresh()
             self.status.clear()
             time.sleep(web_driver.two_second)
@@ -87,7 +87,7 @@ class insight_dashboard_pom(web_driver, web_logger):
     def Verify_user_is_able_to_see_Possible_Match_Events_by_enrollment_action_counts(self):
         try:
             self.logger.info("************* test_TC_Insight_Dashboard_03 started  **************")
-            login().login_to_facecirst_portal_if_not_done(self.d)
+            login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             time.sleep(web_driver.two_second)
             self.open_insights_dashboard()
@@ -109,7 +109,7 @@ class insight_dashboard_pom(web_driver, web_logger):
     def Verify_user_is_able_to_see_counts_on_overview_dashboard_organisation_and_individual_groups(self):
         try:
             self.logger.info("************* test_TC_Insight_Dashboard_04 started  **************")
-            login().login_to_facecirst_portal_if_not_done(self.d)
+            login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             time.sleep(web_driver.two_second)
             self.open_insights_dashboard()
@@ -152,7 +152,7 @@ class insight_dashboard_pom(web_driver, web_logger):
     def Verify_user_is_able_to_see_loss_prevented_by_enrollment_group_counts_organisation_and_individual_groups(self):
         try:
             self.logger.info("************* test_TC_Insight_Dashboard_05 started  **************")
-            login().login_to_facecirst_portal_if_not_done(self.d)
+            login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             time.sleep(web_driver.two_second)
             self.open_insights_dashboard()
@@ -191,7 +191,7 @@ class insight_dashboard_pom(web_driver, web_logger):
     def Verify_user_is_able_to_see_Possible_Match_Events_by_enrollment_action_counts_organisation_and_individual_groups(self):
         try:
             self.logger.info("************* test_TC_Insight_Dashboard_06 started  **************")
-            login().login_to_facecirst_portal_if_not_done(self.d)
+            login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             time.sleep(web_driver.two_second)
             self.open_insights_dashboard()
@@ -231,7 +231,7 @@ class insight_dashboard_pom(web_driver, web_logger):
     def Verify_user_is_able_to_see_counts_on_Probable_Match_Events_Dashboard(self):
         try:
             self.logger.info("************* test_TC_Insight_Dashboard_07 started  **************")
-            login().login_to_facecirst_portal_if_not_done(self.d)
+            login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             time.sleep(web_driver.two_second)
             self.open_insights_dashboard()
@@ -251,7 +251,7 @@ class insight_dashboard_pom(web_driver, web_logger):
     def Verify_user_is_able_to_see_cumulative_Probable_Match_Events_by_date_todays_date_and_25_count(self):
         try:
             self.logger.info("************* test_TC_Insight_Dashboard_08 started  **************")
-            login().login_to_facecirst_portal_if_not_done(self.d)
+            login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             time.sleep(web_driver.two_second)
             self.open_insights_dashboard()
@@ -271,7 +271,7 @@ class insight_dashboard_pom(web_driver, web_logger):
     def Verify_user_is_able_to_see_tagged_vs_untagged_Probable_Match_Events_count_as_tagged_and_untagged(self):
         try:
             self.logger.info("************* test_TC_Insight_Dashboard_09 started  **************")
-            login().login_to_facecirst_portal_if_not_done(self.d)
+            login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             time.sleep(web_driver.two_second)
             self.open_insights_dashboard()
@@ -292,7 +292,7 @@ class insight_dashboard_pom(web_driver, web_logger):
     def Verify_user_is_able_to_see_Probable_Match_Events_by_enrollment_groups_counts(self):
         try:
             self.logger.info("************* test_TC_Insight_Dashboard_10 started  **************")
-            login().login_to_facecirst_portal_if_not_done(self.d)
+            login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             time.sleep(web_driver.two_second)
             self.open_insights_dashboard()
@@ -313,7 +313,7 @@ class insight_dashboard_pom(web_driver, web_logger):
     def Verify_user_is_able_to_see_tagged_Probable_Match_Events_by_tag_type(self):
         try:
             self.logger.info("************* test_TC_Insight_Dashboard_11 started  **************")
-            login().login_to_facecirst_portal_if_not_done(self.d)
+            login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             time.sleep(web_driver.two_second)
             self.open_insights_dashboard()
@@ -334,7 +334,7 @@ class insight_dashboard_pom(web_driver, web_logger):
     def Verify_user_is_able_to_see_counts_on_Probable_Match_Events_dashboard_organisation_and_individual_groups(self):
         try:
             self.logger.info("************* test_TC_Insight_Dashboard_12 started  **************")
-            login().login_to_facecirst_portal_if_not_done(self.d)
+            login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             time.sleep(web_driver.two_second)
             self.open_insights_dashboard()
@@ -357,7 +357,7 @@ class insight_dashboard_pom(web_driver, web_logger):
         try:
             # test case 8 adn 13 are similar
             self.logger.info("************* test_TC_Insight_Dashboard_13 started  **************")
-            login().login_to_facecirst_portal_if_not_done(self.d)
+            login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             time.sleep(web_driver.two_second)
             self.open_insights_dashboard()
@@ -378,7 +378,7 @@ class insight_dashboard_pom(web_driver, web_logger):
         try:
             # test case 11 and 14
             self.logger.info("************* test_TC_Insight_Dashboard_14 started  **************")
-            login().login_to_facecirst_portal_if_not_done(self.d)
+            login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             time.sleep(web_driver.two_second)
             self.open_insights_dashboard()
@@ -399,7 +399,7 @@ class insight_dashboard_pom(web_driver, web_logger):
     def Verify_user_is_able_to_see_Probable_Match_Events_by_enrollment_groups_counts_organisation_and_individual_groups(self):
         try:
             self.logger.info("************* test_TC_Insight_Dashboard_15 started  **************")
-            login().login_to_facecirst_portal_if_not_done(self.d)
+            login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             time.sleep(web_driver.two_second)
             self.open_insights_dashboard()
@@ -420,7 +420,7 @@ class insight_dashboard_pom(web_driver, web_logger):
     def Verify_user_is_able_to_see_tagged_Probable_Match_Events_by_tag_type_organisation_and_individual_groups(self):
         try:
             self.logger.info("************* test_TC_Insight_Dashboard_16 started  **************")
-            login().login_to_facecirst_portal_if_not_done(self.d)
+            login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             time.sleep(web_driver.two_second)
             self.open_insights_dashboard()
@@ -441,7 +441,7 @@ class insight_dashboard_pom(web_driver, web_logger):
     def Verify_user_is_able_to_see_on_enrollment_dashboard_as_enrollment_overview_and_cumulative_enrollments_by_date_as_mention_is_link(self):
         try:
             self.logger.info("************* test_TC_Insight_Dashboard_17 started  **************")
-            login().login_to_facecirst_portal_if_not_done(self.d)
+            login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             time.sleep(web_driver.two_second)
             self.open_insights_dashboard()
@@ -462,7 +462,7 @@ class insight_dashboard_pom(web_driver, web_logger):
     def Verify_enrollment_by_date_counts_on_enrollment_dashboard(self):
         try:
             self.logger.info("************* test_TC_Insight_Dashboard_18 started  **************")
-            login().login_to_facecirst_portal_if_not_done(self.d)
+            login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             time.sleep(web_driver.two_second)
             self.open_insights_dashboard()
@@ -486,7 +486,7 @@ class insight_dashboard_pom(web_driver, web_logger):
     def Verify_enrollments_by_enrollment_group_counts_as_mention_in_link(self):
         try:
             self.logger.info("************* test_TC_Insight_Dashboard_19 started  **************")
-            login().login_to_facecirst_portal_if_not_done(self.d)
+            login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             time.sleep(web_driver.two_second)
             self.open_insights_dashboard()
@@ -513,7 +513,7 @@ class insight_dashboard_pom(web_driver, web_logger):
     def Verify_enrollments_by_week_org_counts_as_mention_in_link(self):
         try:
             self.logger.info("************* test_TC_Insight_Dashboard_20 started  **************")
-            login().login_to_facecirst_portal_if_not_done(self.d)
+            login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             time.sleep(web_driver.two_second)
             self.open_insights_dashboard()
@@ -537,7 +537,7 @@ class insight_dashboard_pom(web_driver, web_logger):
     def Verify_Enrollments_by_status_count(self):
         try:
             self.logger.info("************* test_TC_Insight_Dashboard_21 started  **************")
-            login().login_to_facecirst_portal_if_not_done(self.d)
+            login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             time.sleep(web_driver.two_second)
             self.open_insights_dashboard()
@@ -561,7 +561,7 @@ class insight_dashboard_pom(web_driver, web_logger):
     def Verify_user_is_able_to_see_on_enrollment_dashboard_as_enrollment_overview_and_cumulative_enrollments_by_date(self):
         try:
             self.logger.info("************* test_TC_Insight_Dashboard_22 started  **************")
-            login().login_to_facecirst_portal_if_not_done(self.d)
+            login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             time.sleep(web_driver.two_second)
             self.open_insights_dashboard()
@@ -589,7 +589,7 @@ class insight_dashboard_pom(web_driver, web_logger):
     def Verify_enrollment_by_date_counts_as_mention_in_link_organisation_and_individual_group(self):
         try:
             self.logger.info("************* test_TC_Insight_Dashboard_23 started  **************")
-            login().login_to_facecirst_portal_if_not_done(self.d)
+            login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             time.sleep(web_driver.two_second)
             self.open_insights_dashboard()
@@ -616,7 +616,7 @@ class insight_dashboard_pom(web_driver, web_logger):
     def Verify_enrollments_by_enrollment_group_counts_as_mention_in_link_organisation_and_individual_group(self):
         try:
             self.logger.info("************* test_TC_Insight_Dashboard_24 started  **************")
-            login().login_to_facecirst_portal_if_not_done(self.d)
+            login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             time.sleep(web_driver.two_second)
             self.open_insights_dashboard()
@@ -643,7 +643,7 @@ class insight_dashboard_pom(web_driver, web_logger):
     def Verify_enrollments_by_week_counts_as_mention_in_link_organisation_and_individual_groups(self):
         try:
             self.logger.info("************* test_TC_Insight_Dashboard_25 started  **************")
-            login().login_to_facecirst_portal_if_not_done(self.d)
+            login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             time.sleep(web_driver.two_second)
             self.open_insights_dashboard()
@@ -670,7 +670,7 @@ class insight_dashboard_pom(web_driver, web_logger):
     def Verify_Enrollments_by_Status_counts_organisation_and_individual_groups(self):
         try:
             self.logger.info("************* test_TC_Insight_Dashboard_26 started  **************")
-            login().login_to_facecirst_portal_if_not_done(self.d)
+            login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             time.sleep(web_driver.two_second)
             self.open_insights_dashboard()

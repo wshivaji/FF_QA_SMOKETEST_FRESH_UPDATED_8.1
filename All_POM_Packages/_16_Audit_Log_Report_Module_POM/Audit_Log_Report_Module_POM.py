@@ -103,7 +103,7 @@ class Audit_log_report_pom(web_driver, web_logger):
     logger = web_logger().logger_obj()
     status = []
     now = (datetime.datetime.now())
-    DATE_IE = now.strftime('%d-%m-%Y')
+    DATE_IE = now.strftime('%m-%d-%Y')
     TIME_IE = now.strftime('%H:%M')
     AM_PM_IE = now.strftime('%p')
 
@@ -388,8 +388,10 @@ class Audit_log_report_pom(web_driver, web_logger):
             self.logger.info("******************************** TC_ALR_07 Started ***********************************")
             self.status.clear()
             login().login_to_cloud_if_not_done(self.d)
-            # self.enroll_normal_subject_with_user_having_all_permissions()
+            self.enroll_normal_subject_with_user_having_all_permissions()
+            self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().cloud_menu_by_xpath()).click()
             self.enable_masked_enrolled_subject_with_core_credentials()
+
             self.select_checkbox_on_enrollment_panel()
             self.click_on_action_dropdown_on_enrollments_panel()
             self.click_on_enable_selected_enrollment_option()
@@ -1166,7 +1168,7 @@ class Audit_log_report_pom(web_driver, web_logger):
     def enroll_normal_subject_with_user_having_all_permissions(self):
         try:
             self.open_identify_and_enroll_panel()
-            file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset2\\img1.png"
+            file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset2\\disabled1.png"
             self.upload_image_not_enrolled(file_path)
             self.click_on_identify_enroll_btn_on_IE_panel()
             self.add_details_for_enrollment()
