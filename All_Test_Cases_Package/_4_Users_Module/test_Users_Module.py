@@ -10,28 +10,10 @@ class Test_Users_Module(web_driver, web_logger):
     d = web_driver.d()
     logger.info(" ******** Users_Module (Order - 4) Begin ********")
     print("******** Users_Module (Order - 4) Begin ********")
-    #
-    # # delete user is skipped for now
-    # @pytest.mark.skip
-    # def test_TC_US_006(self):
-    #     self.logger.info("Users module = test_TC_US_006 execution started..")
-    #     if Users_Module_pom().verify_user_able_to_see_delete_selected_user():
-    #         assert True
-    #     else:
-    #         assert False
 
 
-    # @pytest.mark.p2
-    # def test_TC_US_022(self):
-    #     self.logger.info("Users module = test_TC_US_022 execution started..")
-    #     if Users_Module_pom()\
-    #             .verify_user_able_to_see_user_role_dropdown_is_present_and_choose_the_user_roles():
-    #         assert True
-    #     else:
-    #         assert False
-
-    @pytest.mark.p1
-    def test_TC_US_1(self):
+    @pytest.mark.system
+    def test_TC_US_01(self):
         self.logger.info("Users module = test_TC_US_110 execution started..")
         if Users_Module_pom().Create_5_users_standard_operator_responder_approver_executive_and_it_admin_with_all_required_field():
             assert True
@@ -165,8 +147,8 @@ class Test_Users_Module(web_driver, web_logger):
         else:
             assert False
 
-    @pytest.mark.p1
-    def test_TC_US_13(self):
+    @pytest.mark.system
+    def test_TC_US_03(self):
         self.logger.info("user module = test_Tc_US_13_execution stsrted....")
         if Users_Module_pom().Verify_total_users_are_n_including_default_user():
             assert True
