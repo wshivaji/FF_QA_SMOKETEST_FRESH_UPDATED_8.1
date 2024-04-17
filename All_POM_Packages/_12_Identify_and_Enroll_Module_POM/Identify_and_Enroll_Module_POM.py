@@ -14132,11 +14132,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
 
 
 
-
-
-
-
-
     def Identify_and_enroll_25_subjects_and_fill_the_required_fields_5_per_Enrollment_groups(self):
         try:
             self.logger.info("************* test_TC_IE_01 started  **************")
@@ -14165,6 +14160,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             return False
 
 
+
     def enroll_5_images(self, folder_name):
         try:
             ab_folder_list_of_images = self.get_img_file_list(folder_name)
@@ -14174,8 +14170,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                 login().login_to_cloud_if_not_done_with_user_credentials(self.d,
                                                                          Read_Identify_and_Enroll_Components().get_operator_to_login(),
                                                                          Read_Identify_and_Enroll_Components().get_password_to_login())
-
-
                 self.status.clear()
 
                 time.sleep(web_driver.two_second)
@@ -14349,9 +14343,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                 time.sleep(2)
         except Exception as ex:
             self.logger.info(f"enroll 5 images exception: {ex.args}")
-
-
-
 
     def verify_user_able_approve_enrollment(self):
         try:
@@ -14895,38 +14886,38 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
         except Exception as ex:
             print(ex.args)
 
-    def Verify_for_above_25_enrolled_subject_reported_loss_are_properly_assigned(self):
-         try:
-            self.logger.info("identify  enroll tc started")
-            login().login_to_cloud_if_not_done(self.d)
-            time.sleep(web_driver.one_second)
-
-
-            Enrollment_details_dict = self.Read_user_from_json()
-            enrollment_link = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().Enrollment_link())
-            enrollment_link.click()
-
-            x = Read_Identify_and_Enroll_Components().region_names_from_ini()
-            enrollment_reported_loss = x.split(',')
-            self.logger.info(f"eg list: {enrollment_reported_loss}")
-
-            for i in range(len(enrollment_reported_loss)):
-
-
-                time.sleep(web_driver.one_second)
-                self.logger.info("clicking on enrollment link")
-                time.sleep(web_driver.one_second)
-
-                tribar_button = self.d.find_element(By.XPATH,Read_Identify_and_Enroll_Components().select_tribar_button_on_enrollment_panel())
-                tribar_button.click()
-                self.logger.info("clicking on tribar button")
-                time.sleep(web_driver.one_second)
-
-                details_button = self.d.find_element(By.XPATH,Read_Identify_and_Enroll_Components().details_button())
-                details_button.click()
-                self.logger.info("clicking on details button")
-                time.sleep(web_driver.one_second)
-
+    # def Verify_for_above_25_enrolled_subject_reported_loss_are_properly_assigned(self):
+    #      try:
+    #         self.logger.info("identify  enroll tc started")
+    #         login().login_to_cloud_if_not_done(self.d)
+    #         time.sleep(web_driver.one_second)
+    #
+    #
+    #         Enrollment_details_dict = self.Read_user_from_json()
+    #         enrollment_link = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().Enrollment_link())
+    #         enrollment_link.click()
+    #
+    #         x = Read_Identify_and_Enroll_Components().region_names_from_ini()
+    #         enrollment_reported_loss = x.split(',')
+    #         self.logger.info(f"eg list: {enrollment_reported_loss}")
+    #
+    #         for i in range(len(enrollment_reported_loss)):
+    #
+    #
+    #             time.sleep(web_driver.one_second)
+    #             self.logger.info("clicking on enrollment link")
+    #             time.sleep(web_driver.one_second)
+    #
+    #             tribar_button = self.d.find_element(By.XPATH,Read_Identify_and_Enroll_Components().select_tribar_button_on_enrollment_panel())
+    #             tribar_button.click()
+    #             self.logger.info("clicking on tribar button")
+    #             time.sleep(web_driver.one_second)
+    #
+    #             details_button = self.d.find_element(By.XPATH,Read_Identify_and_Enroll_Components().details_button())
+    #             details_button.click()
+    #             self.logger.info("clicking on details button")
+    #             time.sleep(web_driver.one_second)
+    #
 
 
 

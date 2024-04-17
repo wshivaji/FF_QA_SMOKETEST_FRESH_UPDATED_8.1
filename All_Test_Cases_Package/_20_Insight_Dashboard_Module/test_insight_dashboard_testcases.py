@@ -4,11 +4,11 @@ from Base_Package.Web_Logger import web_logger
 from All_POM_Packages._20_Insight_Dashboard_Module_POM.Insight_Dashboard_POM import insight_dashboard_pom
 
 
-@pytest.mark.run(order=21)
+@pytest.mark.run(order=13)
 class Test_insight_dashboard_test_cases(web_driver, web_logger):
     logger = web_logger.logger_obj()
-    logger.info(" ******** Insight Dashboard (Order - 21) Begin ********")
-    print("******** Insight Dashboard (Order - 21) Begin ********")
+    logger.info(" ******** Insight Dashboard (Order - 13) Begin ********")
+    print("******** Insight Dashboard (Order - 13) Begin ********")
 
     @pytest.mark.system
     def test_TC_Insight_Dashboard_01(self):
