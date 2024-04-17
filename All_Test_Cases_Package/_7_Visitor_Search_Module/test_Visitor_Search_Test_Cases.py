@@ -11,7 +11,7 @@ class Test_Visitor_Search_Test_Cases(web_driver, web_logger):
     logger.info(" ******** Visitor_Search (Order - 7) Begin ********")
     print("******** Visitor_Search (Order - 7) Begin ********")
 
-    @pytest.mark.p2
+    @pytest.mark.portal
     def test_TC_VS_01(self):
         if Visitor_Search_Module_pom().Verify_visitor_search_with_metadata_Date_and_Org_Hierarchy_Selection_should_yield_visitor_results_within_selected_search_criteria():
             assert True
@@ -20,6 +20,7 @@ class Test_Visitor_Search_Test_Cases(web_driver, web_logger):
             self.logger.info("test_TC_VS_01 execution failed..")
             assert False
 
+    @pytest.mark.portal
     def test_TC_VS_02(self):
         if Visitor_Search_Module_pom().Verify_visitor_search_with_image_only_should_list_the_matching_visitors_with_image():
             assert True
@@ -28,6 +29,7 @@ class Test_Visitor_Search_Test_Cases(web_driver, web_logger):
             self.logger.info("test_TC_VS_02 execution failed..")
             assert False
 
+    @pytest.mark.portal
     def test_TC_VS_03(self):
         if Visitor_Search_Module_pom().Verify_visitor_search_with_Image_and_metadata_should_list_the_matched_visitors_with_search_image_from_selected_Org_Hierarchy_Selection_within_date_range():
             assert True
@@ -36,6 +38,7 @@ class Test_Visitor_Search_Test_Cases(web_driver, web_logger):
             self.logger.info("test_TC_VS_03 execution failed..")
             assert False
 
+    @pytest.mark.portal
     def test_TC_VS_04(self):
         if Visitor_Search_Module_pom().Verify_org_hierarchy_selection_root_name_should_be_able_to_match_with_DM_core_name():
             assert True
@@ -44,6 +47,7 @@ class Test_Visitor_Search_Test_Cases(web_driver, web_logger):
             self.logger.info("test_TC_VS_04 execution failed..")
             assert False
 
+    @pytest.mark.portal
     def test_TC_VS_05(self):
         if Visitor_Search_Module_pom().Verify_warning_message_when_user_is_dropping_the_image_which_is_clicked_on_live_or_file_image_on_events_panel_able_to_perform_image_with_meta_data_idealy_it_should_not_with_larger_image_able_to_perform():
             assert True
