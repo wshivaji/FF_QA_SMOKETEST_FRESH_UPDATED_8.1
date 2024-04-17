@@ -1,6 +1,5 @@
 import os
 import time
-from datetime import date
 import datetime
 from datetime import timedelta
 
@@ -18,7 +17,7 @@ from Base_Package.Login_Logout_Ops import login, logout
 from selenium.webdriver.common.by import By
 from All_Config_Packages._12_Identify_and_Enroll_Config_Files.Identify_and_Enroll_Readd_INI import \
     Read_Identify_and_Enroll_Components
-from All_POM_Packages._4_Users_Module_POM.Users_Module_POM import Users_Module_pom
+
 from pathlib import Path
 
 
@@ -133,7 +132,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             upload_photo.click()
             self.logger.info(f"clicked on upload image icon")
             time.sleep(2)
-            file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\img\\unenrolled_visitor_search_img_1.png"
+            file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset2\\img3.png"
             pyautogui.write(file_path)
             pyautogui.press('enter')
             time.sleep(2)
@@ -14737,135 +14736,216 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             return False
 
 
-def Enter_user_able_delete_again_enrolling_same(self):
+    def verify_user_able_delete_again_enrolling_same(self):
         try:
-            self.logger.info("************* test_TC_IE_06 started  **************")
-            # self.verify_portal_login()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.two_second)
-            self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
-                                        .identify_and_enroll_link_by_xpath(), self.d)
-            link = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
-                                        .identify_and_enroll_link_by_xpath(), self.d)
-            self.d.execute_script("arguments[0].click();", link)
-            self.logger.info(f"clicked on Identify and enroll link")
-            time.sleep(web_driver.two_second)
-            img_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_Data\\dataset2\\img8.png"
-            self.upload_image_not_enrolled(img_path)
-            self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
-                                                       .identify_enroll_panel_identify_enroll_btn_by_xpath(), self.d)
-            identify_enroll_btn = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
-                                                       .identify_enroll_panel_identify_enroll_btn_by_xpath(), self.d)
+                self.logger.info("************* test_TC_IE_06 started  **************")
+                # self.verify_portal_login()
+                login().login_to_cloud_if_not_done(self.d)
+                self.status.clear()
+                time.sleep(web_driver.two_second)
+                self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
+                                            .identify_and_enroll_link_by_xpath(), self.d)
+                link = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
+                                            .identify_and_enroll_link_by_xpath(), self.d)
+                self.d.execute_script("arguments[0].click();", link)
+                self.logger.info(f"clicked on Identify and enroll link")
+                time.sleep(web_driver.two_second)
+                img_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_Data\\dataset2\\img8.png"
+                self.upload_image_not_enrolled(img_path)
+                self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
+                                                           .identify_enroll_panel_identify_enroll_btn_by_xpath(), self.d)
+                identify_enroll_btn = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
+                                                           .identify_enroll_panel_identify_enroll_btn_by_xpath(), self.d)
 
-            self.d.execute_script("arguments[0].click();", identify_enroll_btn)
-            self.logger.info(f"Clicked on Identify and Enroll button")
-            wait_icon = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components()
-                                             .identifying_photo_wait_by_xpath())
-            count = 0
-            while wait_icon.is_displayed():
-                    if count > 15:
-                     break
-            time.sleep(web_driver.two_second)
-            count += 1
-            self.logger.info(f"waiting fir wait icon, count: {count}")
-            # ***************************************Enrollment Process start here**********************
-            time.sleep(web_driver.two_second)
-            self.click_on_enroll_for_already_enrolled()
-            enrollment_basis = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
-                                                   .enrollment_basis_by_xpath(), self.d)
-            select = Select(enrollment_basis)
-            select.select_by_index(1)
-            time.sleep(web_driver.two_second)
-            self.Select_Enrollment_Group(0)
-            enrollment_group = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().enrollment_group_by_xpath())
-            select = Select(enrollment_group)
-            select.select_by_index(2)
-            time.sleep(web_driver.two_second)
-            region_btn = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().region_btn_by_xpath())
-            time.sleep(web_driver.two_second)
-            region_btn.click()
-            time.sleep(web_driver.two_second)
-            region_names = self.d.find_elements(By.XPATH, Read_Identify_and_Enroll_Components().edge_name_list())
-            edge_name = Read_Identify_and_Enroll_Components().edge_name()
-            for i in range(len(region_names)):
-                if edge_name in region_names[i].text:
-                    region_names[i].click()
-                    break
-            save_btn = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().save_btn_by_xpath())
-            save_btn.click()
-            time.sleep(web_driver.two_second)
+                self.d.execute_script("arguments[0].click();", identify_enroll_btn)
+                self.logger.info(f"Clicked on Identify and Enroll button")
+                wait_icon = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components()
+                                                 .identifying_photo_wait_by_xpath())
+                count = 0
+                while wait_icon.is_displayed():
+                        if count > 15:
+                         break
+                time.sleep(web_driver.two_second)
+                count += 1
+                self.logger.info(f"waiting fir wait icon, count: {count}")
+                # ***************************************Enrollment Process start here**********************
+                time.sleep(web_driver.two_second)
+                self.click_on_enroll_for_already_enrolled()
+                enrollment_basis = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
+                                                       .enrollment_basis_by_xpath(), self.d)
+                select = Select(enrollment_basis)
+                select.select_by_index(1)
+                time.sleep(web_driver.two_second)
+                self.Select_Enrollment_Group(0)
+                enrollment_group = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().enrollment_group_by_xpath())
+                select = Select(enrollment_group)
+                select.select_by_index(2)
+                time.sleep(web_driver.two_second)
+                region_btn = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().region_btn_by_xpath())
+                time.sleep(web_driver.two_second)
+                region_btn.click()
+                time.sleep(web_driver.two_second)
+                region_names = self.d.find_elements(By.XPATH, Read_Identify_and_Enroll_Components().edge_name_list())
+                edge_name = Read_Identify_and_Enroll_Components().edge_name()
+                for i in range(len(region_names)):
+                    if edge_name in region_names[i].text:
+                        region_names[i].click()
+                        break
+                save_btn = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().save_btn_by_xpath())
+                save_btn.click()
+                time.sleep(web_driver.two_second)
 
-            location_store = self.d.find_element(By.XPATH,
-                                                 Read_Identify_and_Enroll_Components().location_store_inpt_bx_by_xpath())
-            location_store.send_keys(Read_Identify_and_Enroll_Components().location_store_data())
+                location_store = self.d.find_element(By.XPATH,
+                                                     Read_Identify_and_Enroll_Components().location_store_inpt_bx_by_xpath())
+                location_store.send_keys(Read_Identify_and_Enroll_Components().location_store_data())
 
-            case_subject = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components()
-                                               .case_subject_inpt_bx_by_xpath())
-            case_subject.send_keys(Read_Identify_and_Enroll_Components().case_subject_data())
+                case_subject = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components()
+                                                   .case_subject_inpt_bx_by_xpath())
+                case_subject.send_keys(Read_Identify_and_Enroll_Components().case_subject_data())
 
-            date_incident = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().date_incident_inpt_bx_by_xpath())
-            time.sleep(web_driver.one_second)
-            self.dateTimeAMPM(date_incident)
+                date_incident = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().date_incident_inpt_bx_by_xpath())
+                time.sleep(web_driver.one_second)
+                self.dateTimeAMPM(date_incident)
 
-            time.sleep(web_driver.one_second)
+                time.sleep(web_driver.one_second)
 
-            reported_loss = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components()
-                                                 .reported_loss_inpt_bx_by_xpath())
-            reported_loss.send_keys(Read_Identify_and_Enroll_Components().reported_loss_data())
+                reported_loss = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components()
+                                                     .reported_loss_inpt_bx_by_xpath())
+                reported_loss.send_keys(Read_Identify_and_Enroll_Components().reported_loss_data())
 
-            action_input = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components()
-                                                .action_inpt_bx_by_xpath())
-            action_input.send_keys(Read_Identify_and_Enroll_Components().action_input_data())
-            self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
-                                            .add_details_save_btn_by_xpath(), self.d)
-            save_btn = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components()
-                                            .add_details_save_btn_by_xpath())
-            if save_btn.is_displayed():
-                 self.status.append(True)
-            else:
-                 self.status.append(False)
-            save_btn.click()
-            self.logger.info("Enrollment details filled and save btn is clicked")
-            time.sleep(web_driver.one_second)
-
-            try:
-                 success_msg = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
-                                               .enrollment_success_msg_xpath(), self.d)
-                 if success_msg.text.lower() == Read_Identify_and_Enroll_Components().enrollment_success_msg_validation(). \
-                         lower():
-                     self.logger.info(f"Success msg is visible : {True}")
+                action_input = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components()
+                                                    .action_inpt_bx_by_xpath())
+                action_input.send_keys(Read_Identify_and_Enroll_Components().action_input_data())
+                self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
+                                                .add_details_save_btn_by_xpath(), self.d)
+                save_btn = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components()
+                                                .add_details_save_btn_by_xpath())
+                if save_btn.is_displayed():
                      self.status.append(True)
-                 else:
-                     self.logger.info(f"Success msg is visible : {False}")
+                else:
                      self.status.append(False)
-            except Exception as ex:
-                 self.d.refresh()
+                save_btn.click()
+                self.logger.info("Enrollment details filled and save btn is clicked")
+                time.sleep(web_driver.one_second)
 
-            title = self.d.find_elements(By.XPATH, Read_Identify_and_Enroll_Components().
-                                         add_details_panel_title_panel())
-            for x in title:
-                 if x.text.strip().lower() == Read_Identify_and_Enroll_Components(). \
-                         add_details_panel_validation().lower():
-                     self.status.append(False)
-            time.sleep(2)
-            self.delete_enrollment()
+                try:
+                     success_msg = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
+                                                   .enrollment_success_msg_xpath(), self.d)
+                     if success_msg.text.lower() == Read_Identify_and_Enroll_Components().enrollment_success_msg_validation(). \
+                             lower():
+                         self.logger.info(f"Success msg is visible : {True}")
+                         self.status.append(True)
+                     else:
+                         self.logger.info(f"Success msg is visible : {False}")
+                         self.status.append(False)
+                except Exception as ex:
+                     self.d.refresh()
+
+                title = self.d.find_elements(By.XPATH, Read_Identify_and_Enroll_Components().
+                                             add_details_panel_title_panel())
+                for x in title:
+                     if x.text.strip().lower() == Read_Identify_and_Enroll_Components(). \
+                             add_details_panel_validation().lower():
+                         self.status.append(False)
+                time.sleep(2)
+                self.delete_enrollment()
+
 
             # ***************************************Enrollment Process end here**********************
-            self.close_all_panel_one_by_one()
-    #        # self.click_on_logout_button()
-            self.logger.info(f"status: {self.status}")
-            if False in self.status:
-                 self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_IE_100.png")
-                 self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_IE_100_failed.png")
-                 return False
-            else:
-                 return True
+                self.close_all_panel_one_by_one()
+        #        # self.click_on_logout_button()
+                self.logger.info(f"status: {self.status}")
+                if False in self.status:
+                     self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_IE_100.png")
+                     self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_IE_100_failed.png")
+                     return False
+                else:
+                     return True
         except Exception as ex:
              self.logger.error(f"test_TC_IE_100 got an exception as: {ex}")
              self.d.save_screenshot(
                  f"{self.screenshots_path}\\test_TC_IE_100_Exception.png")
              return False
+
+    def Verify_for_above_25_enrolled_subject_region_edges_are_properly_assigned(self):
+        global region
+        try:
+            self.logger.info("enrollment module testcases started")
+            login().login_to_cloud_if_not_done(self.d)
+            time.sleep(web_driver.one_second)
+            Enrollment_link = self.d.find_element(By.XPATH,Read_Identify_and_Enroll_Components().Enrollment_link())
+            Enrollment_link.click()
+            self.logger.info("clicking on enrollment link")
+            time.sleep(web_driver.one_second)
+
+            region_names_list = self.d.find_elements(By.XPATH,Read_Identify_and_Enroll_Components().region_name_xpath_on_enrollment())
+            expected_region_name = Read_Identify_and_Enroll_Components().read_region_name()
+            for region in region_names_list:
+                self.logger.info(f"actual region name is {region.text}")
+                if region.text == expected_region_name:
+                    self.logger.info("actual and expected regions are same")
+                    self.status.append(True)
+                else:
+                    self.logger.info("actual and expected  regions are not same")
+                    self.status.append(False)
+                if False in self.status:
+                    return False
+                else:
+                    return True
+        except Exception as ex:
+            print(ex.args)
+
+    def Verify_for_above_25_enrolled_subject_reported_loss_are_properly_assigned(self):
+         try:
+            self.logger.info("identify  enroll tc started")
+            login().login_to_cloud_if_not_done(self.d)
+            time.sleep(web_driver.one_second)
+
+
+            Enrollment_details_dict = self.Read_user_from_json()
+            enrollment_link = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().Enrollment_link())
+            enrollment_link.click()
+
+            x = Read_Identify_and_Enroll_Components().region_names_from_ini()
+            enrollment_reported_loss = x.split(',')
+            self.logger.info(f"eg list: {enrollment_reported_loss}")
+
+            for i in range(len(enrollment_reported_loss)):
+
+
+                time.sleep(web_driver.one_second)
+                self.logger.info("clicking on enrollment link")
+                time.sleep(web_driver.one_second)
+
+                tribar_button = self.d.find_element(By.XPATH,Read_Identify_and_Enroll_Components().select_tribar_button_on_enrollment_panel())
+                tribar_button.click()
+                self.logger.info("clicking on tribar button")
+                time.sleep(web_driver.one_second)
+
+                details_button = self.d.find_element(By.XPATH,Read_Identify_and_Enroll_Components().details_button())
+                details_button.click()
+                self.logger.info("clicking on details button")
+                time.sleep(web_driver.one_second)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

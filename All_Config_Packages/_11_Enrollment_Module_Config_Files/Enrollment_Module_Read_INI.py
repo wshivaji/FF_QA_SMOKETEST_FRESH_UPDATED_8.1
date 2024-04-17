@@ -468,6 +468,48 @@ class read_enrollment_components:
         except Exception as ex:
             print(ex.args)
 
+    def save_button_on_en_details(self):
+        try:
+            save = self.config.get("Locators","save_button_on_en_details")
+            return save
+        except Exception as ex:
+            print(ex.args)
+
+    def get_edited_text(self):
+        try:
+            edit_text = self.config.get("Locators","get_edited_text")
+            return edit_text
+        except Exception as ex:
+            print(ex.args)
+
+    def read_case_event_type(self):
+        try:
+            read_case_event = self.config.get("data","case_event_type")
+            return  read_case_event
+        except Exception as ex:
+            print(ex.args)
+
+    def search_dropdown_xpath(self):
+        try:
+            search_dropdown = self.config.get("Locators","search_dropdown")
+            return search_dropdown
+        except Exception as ex:
+            print(ex.args)
+
+    def case_subject_xpath(self):
+        try:
+            case_subject = self.config.get("Locators","case_subject_xpath")
+            return case_subject
+        except Exception as ex:
+            print(ex.args)
+
+    def search_button(self):
+        try:
+            search_button = self.config.get("Locators","search_button")
+            return search_button
+        except Exception as ex:
+            print(ex.args)
+
 
 
 

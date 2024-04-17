@@ -916,6 +916,7 @@ class enrollments_POM(web_driver, web_logger):
         try:
             self.logger.info("enrollment module tc 016 started")
             time.sleep(web_driver.one_second)
+            login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
 
             self.click_on_Enrollment_link()
@@ -923,6 +924,99 @@ class enrollments_POM(web_driver, web_logger):
 
             self.clicking_on_one_of_the_tribar_button()
             time.sleep(web_driver.one_second)
+
+            self.click_one_of_details_button_of_enrollment()
+            time.sleep(web_driver.one_second)
+
+            self.clicking_on_action_dropdown_on_en_details()
+            time.sleep(web_driver.one_second)
+
+            edit_option = self.d.find_element(By.XPATH,read_enrollment_components().edit_option_on_en_details_panel())
+            edit_option.click()
+            time.sleep(web_driver.one_second)
+
+            case_event_type_dropdown = self.d.find_element(By.XPATH,read_enrollment_components().case_event_type_dropdown())
+            select = Select(case_event_type_dropdown)
+            select.select_by_index(1)
+            time.sleep(web_driver.two_second)
+
+            save_button = self.d.find_element(By.XPATH,read_enrollment_components().save_button_on_en_details())
+            save_button.click()
+            time.sleep(web_driver.one_second)
+
+            edited_case_event_type = self.d.find_element(By.XPATH,read_enrollment_components().get_edited_text())
+            self.logger.info(f"edited case event type : {edited_case_event_type.text}")
+            time.sleep(web_driver.one_second)
+
+            case_event_type = read_enrollment_components().read_case_event_type()
+
+            if edited_case_event_type.text == case_event_type:
+                self.logger.info("edited case event is edited")
+                self.status.append(True)
+            else:
+                self.logger.info("edited case event is not edited")
+                self.status.append(False)
+            if False in self.status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_En_16png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_16_failed.png")
+                return False
+            else:
+                return True
+        except Exception as ex:
+            self.logger.error(f"test_TC_En_13 got an exception as: {ex}")
+            self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_16_Exception.png")
+            return False
+
+    def verify_user_enroller_of_an_enrollment_able_to_delete_enrollment(self):
+        try:
+            self.logger.info("Enrollment group module tc=17 started")
+            login().login_to_cloud_if_not_done_with_user_credentials(self.d,Read_Identify_and_Enroll_Components().get_executive_to_login(),Read_Identify_and_Enroll_Components().get_password_to_login())
+            self.status.clear()
+            time.sleep(web_driver.one_second)
+
+            Identify_And_Enroll_POM().Create_New_Enrollment_using_Identify_and_Enroll()
+            time.sleep(web_driver.one_second)
+
+            self.click_on_Enrollment_link()
+            time.sleep(web_driver.one_second)
+
+            Identify_And_Enroll_POM().delete_enrollment()
+            time.sleep(web_driver.one_second)
+
+            delete_enrollment_success_msg = self.d.find_element(By.XPATH,
+                                                                read_enrollment_components().delete_enrollment_successfully_message())
+            if delete_enrollment_success_msg.is_displayed():
+                self.logger.info("Enrollment deleted successfully")
+                self.status.append(True)
+            else:
+                self.status.append(False)
+                self.status.append("Enrollment is not deleted")
+            if False in self.status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_En_03`.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_03_failed.png")
+                return False
+            else:
+                return True
+        except Exception as ex:
+                    self.logger.error(f"test_TC_En_07 got an exception as: {ex}")
+                    self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_07_Exception.png")
+                    return False
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1019,7 +1113,25 @@ class enrollments_POM(web_driver, web_logger):
             self.logger.info("clicking on details button ")
 
     def clicking_on_action_dropdown_on_en_details(self):
-        action = self.d.find_element(By.XPATH,read_enrollment_components().a)
+        action = self.d.find_element(By.XPATH,read_enrollment_components().Action_dropdown_on_en_details_panel())
+        action.click()
+        self.logger.info("clicking on action dropdown option on enrollment details")
+
+    def clicking_on_search_dropdown(self):
+        search_dropdown = self.d.find_element(By.XPATH,read_enrollment_components().search_dropdown_xpath())
+        search_dropdown.click()
+        self.logger.info("clicking on search deopdown")
+
+    def enter_case_subject(self,case_subject):
+        try:
+            case_subject = self.d.find_element(By.XPATH,read_enrollment_components().case_subject_xpath())
+            case_subject.click()
+            case_subject.send_keys(case_subject)
+            self.logger.info("entering case/subject ")
+        except Exception as ex:
+            print(ex.args)
+
+
 
 
 

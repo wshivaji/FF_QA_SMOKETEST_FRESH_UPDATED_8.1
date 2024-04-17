@@ -2630,6 +2630,61 @@ class Read_Identify_and_Enroll_Components:
         except Exception as ex:
             print(ex.args)
 
+    def region_name_xpath_on_enrollment(self):
+        try:
+            region = self.config.get("portal_Login","region_name_on_enrollment_xpath")
+            return region
+        except Exception as ex:
+            print(ex.args)
+    def read_region_name(self):
+        try:
+            region_name = self.config.get("Login_Data","region_name")
+            return region_name
+        except Exception as ex:
+            print(ex.args)
+
+    def read_enrollment_case_subject(self):
+        try:
+            case_subject = self.config.get("portal_Login","case_subject")
+            return case_subject
+        except Exception as ex:
+            print(ex.args)
+
+    def read_enroment_action(self):
+        try:
+            enrollment_action = self.config.get("portal_Login","action_taken")
+            return enrollment_action
+        except Exception as ex:
+            print(ex.args)
+
+    def reported_loss_values(self):
+        try:
+            reported_loss = self.config.get("portal_Login","reported_Loss_vaues")
+            return reported_loss
+        except Exception as ex:
+            print(ex.args)
+
+    def Enrollment_link(self):
+        try:
+            enrollment_link = self.config.get("portal_Login", "Enrollment_Link")
+            return enrollment_link
+        except Exception as ex:
+            print(ex.args)
+
+    def details_button(self):
+        try:
+            details_button = self.config.get("portal_Login","details_button_xpath")
+            return details_button
+        except Exception as ex:
+            print(ex.args)
+
+    def select_tribar_button_on_enrollment_panel(self):
+        try:
+            tribar = self.config.get("portal_Login","tribar_button")
+            return tribar
+        except Exception as ex:
+            print(ex.args)
+
 
 
 
