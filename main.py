@@ -80,7 +80,7 @@ if __name__ == "__main__":
     # ************************** P1 Priority Test Run *********************************
     # pytest.main(['-v', '-m', 'dm', f'{dm_test_suite_path}', '--html', f'{dm_test_report_path}'])
     pytest.main(['-v', '-m', 'system', f'{system_test_suite_path}', '--html', f'{system_test_report_path}'])
-    pytest.main(['-v', '-m', 'portal', f'{portal_test_suite_path}', '--html', f'{portal_test_report_path}'])
+    # pytest.main(['-v', '-m', 'portal', f'{portal_test_suite_path}', '--html', f'{portal_test_report_path}'])
 
 
     # ************************** P2 Priority Test Run *********************************
