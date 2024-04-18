@@ -1,7 +1,7 @@
 import pytest
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
-from All_POM_Packages._21_SSPR_Module_POM.Sspr_POM import SSPR_pom
+from All_POM_Packages.SSPR_Module_POM.Sspr_POM import SSPR_pom
 
 
 @pytest.mark.run(order=21)

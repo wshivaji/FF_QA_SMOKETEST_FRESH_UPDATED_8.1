@@ -12,7 +12,7 @@ from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
 from Base_Package.Login_Logout_Ops import login,logout
 from All_Config_Packages._12_Identify_and_Enroll_Config_Files.Identify_and_Enroll_Readd_INI import Read_Identify_and_Enroll_Components
-from All_POM_Packages._12_Identify_and_Enroll_Module_POM.Identify_and_Enroll_Module_POM import Identify_And_Enroll_POM
+from All_POM_Packages.Identify_and_Enroll_Module_POM.Identify_and_Enroll_Module_POM import Identify_And_Enroll_POM
 
 
 class enrollments_POM(web_driver, web_logger):

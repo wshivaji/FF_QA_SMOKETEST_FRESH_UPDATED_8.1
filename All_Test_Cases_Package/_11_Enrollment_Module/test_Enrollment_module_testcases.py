@@ -1,7 +1,7 @@
 import pytest
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
-from All_POM_Packages._11_Enrollment_POM.Enrollment_module_POM import enrollments_POM
+from All_POM_Packages.Enrollment_POM.Enrollment_module_POM import enrollments_POM
 
 
 @pytest.mark.run(order=10)
@@ -91,7 +91,7 @@ class Test_Enrollments_Test_Cases(web_driver, web_logger):
     @pytest.mark.portal
     def test_TC_en_14(self):
         if enrollments_POM().verify_user_able_to_add_more_faces_to_an_enrollment():
-            assert  True
+            assert True
         else:
             assert False
 

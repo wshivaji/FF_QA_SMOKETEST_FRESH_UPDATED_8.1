@@ -1,7 +1,7 @@
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
-from All_POM_Packages._18_Reporting_Module.Reporting_POM import Reporting_pom
-from All_POM_Packages._18_Reporting_Module.Reporting_Events_POM import Reporting_Events_pom
+from All_POM_Packages.Reporting_Module.Reporting_POM import Reporting_pom
+from All_POM_Packages.Reporting_Module.Reporting_Events_POM import Reporting_Events_pom
 import pytest
 
 

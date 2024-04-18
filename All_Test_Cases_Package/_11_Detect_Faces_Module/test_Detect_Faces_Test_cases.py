@@ -1,5 +1,5 @@
 import pytest
-from All_POM_Packages._8_Detect_Faces_Module_POM.Detect_Faces_pom import detect_faces_pom
+from All_POM_Packages.Detect_Faces_Module_POM.Detect_Faces_pom import detect_faces_pom
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
 from Base_Package.Login_Logout_Ops import login, logout
