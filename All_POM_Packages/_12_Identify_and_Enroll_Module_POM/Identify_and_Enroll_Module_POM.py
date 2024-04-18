@@ -14130,13 +14130,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
         except Exception as ex:
             self.logger.info(f"readiing Enrollment  from json: {ex.args}" )
 
-
-
-
-
-
-
-
     def Identify_and_enroll_25_subjects_and_fill_the_required_fields_5_per_Enrollment_groups(self):
         try:
             self.logger.info("************* test_TC_IE_01 started  **************")
@@ -14164,7 +14157,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_IE_01_Exception.png")
             return False
 
-
     def enroll_5_images(self, folder_name):
         try:
             ab_folder_list_of_images = self.get_img_file_list(folder_name)
@@ -14174,7 +14166,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                 login().login_to_cloud_if_not_done_with_user_credentials(self.d,
                                                                          Read_Identify_and_Enroll_Components().get_operator_to_login(),
                                                                          Read_Identify_and_Enroll_Components().get_password_to_login())
-
 
                 self.status.clear()
 
@@ -14238,8 +14229,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                     Enrollment_details_dict_1 = Enrollment_details_dict["Enrollment_details"][5]
 
                 self.logger.info(f"enrollment details : {Enrollment_details_dict_1}")
-                
-                    
+
                 dictionary_length = len(Enrollment_details_dict_1)
                 print("length of dictionary is", dictionary_length)
 
@@ -14276,7 +14266,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                         region_names[i].click()
                         self.logger.info(f"region name selected: {region_names[i].text}")
                         break
-
 
                 save_btn = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().save_btn_by_xpath())
                 self.d.execute_script("arguments[0].click();", save_btn)
@@ -14896,11 +14885,11 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             print(ex.args)
 
     def Verify_for_above_25_enrolled_subject_reported_loss_are_properly_assigned(self):
-         try:
+        try:
+
             self.logger.info("identify  enroll tc started")
             login().login_to_cloud_if_not_done(self.d)
             time.sleep(web_driver.one_second)
-
 
             Enrollment_details_dict = self.Read_user_from_json()
             enrollment_link = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().Enrollment_link())
@@ -14918,12 +14907,14 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                                                      Read_Identify_and_Enroll_Components().case_subject_inpt_bx_by_xpath())
             case_subject = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().case_subject_xpath())
             for i in read_case_subject_from_ini:
+
                 case_subject.clear()
                 case_subject.send_keys(i)
                 time.sleep(web_driver.one_second)
                 search_button = self.d.find_element(By.XPATH,Read_Identify_and_Enroll_Components().search_button())
                 search_button.click()
                 for j in range(len(enrollment_reported_loss)):
+
                     tribar_button = self.d.find_element(By.XPATH,Read_Identify_and_Enroll_Components().select_tribar_button_on_enrollment_panel())
                     tribar_button.click()
                     self.logger.info("clicking on tribar button")
@@ -14933,6 +14924,11 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                     self.logger.info("clicking on details button")
                     time.sleep(web_driver.one_second)
                     reported_loss = self.d.find_element(By.XPATH,Read_Identify_and_Enroll_Components().reported_loss_value_xpath())
+
+        except Exception as ex:
+
+            self.logger.info(f"{ex.args}")
+
 
 
 

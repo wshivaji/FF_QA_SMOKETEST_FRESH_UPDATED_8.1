@@ -1,4 +1,6 @@
+import configparser
 import time
+from pathlib import Path
 
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
@@ -6,8 +8,8 @@ from selenium.webdriver.common.by import By
 # from All_Config_Packages._17_Notifier_Module_Config_Files.Notifier_Read_INI import Notifier_Read_ini
 # from All_Config_Packages._18_Reporting_Module_Config_Files.Reporting_Read_INI import Reporting_read_ini
 # from All_Config_Packages._0_login_logout_config_file.login_logout_read_ini import LoginLogout_Read_ini
-# from All_Config_Packages._2_Portal_Menu_Module_Config_Files.Portal_Menu_Module_Read_INI import \
-#     Portal_Menu_Module_read_ini
+from All_Config_Packages._2_Portal_Menu_Module_Config_Files.Portal_Menu_Module_Read_INI import \
+     Portal_Menu_Module_read_ini
 # from All_Config_Packages._6_Notification_Groups_Module_Config_Files.Notification_Groups_Read_INI import \
 #     Read_Notification_Groups_Components
 from All_Config_Packages._20_Insight_Dashboard_Config_File.Insight_Dashboard_Read_INI import insight_dashboard_read_ini
@@ -27,6 +29,7 @@ class insight_dashboard_pom(web_driver, web_logger):
 
             login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
+            self.get_insight_dashboard_data()
 
             time.sleep(web_driver.two_second)
             self.open_insights_dashboard()
@@ -696,8 +699,66 @@ class insight_dashboard_pom(web_driver, web_logger):
 
     # ****************************** user Methods *******************************************
 
+
+    def get_insight_dashboard_data(self):
+        try:
+            common_test_data_ini_file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_Data\\common_test_data.ini"
+            file = Path(common_test_data_ini_file_path)
+            config = configparser.ConfigParser()
+            config.read(file)
+            total_enrollments = self.get_total_enrollments()
+            total_events = self.get_total_events()
+            total_visitor_search = self.get_total_visitor_search_count()
+
+            config.set("Insights_Dashboard_Data", "total_enrollments_count", total_enrollments)
+            config.set("Insights_Dashboard_Data", "total_events_count", total_events)
+            config.set("Insights_Dashboard_Data", "total_visitor_search_count", total_visitor_search)
+            config.write(file.open('w'))
+        except Exception as ex:
+            self.logger.info(f"get_insight_dashboard_data ex: {ex.args}")
+
+    def get_total_enrollments(self):
+        try:
+            enrollments_menu = self.explicit_wait(5, "XPATH", insight_dashboard_read_ini().enrollments_menu_item_by_xpath(), self.d)
+            self.logger.info(f"enrollments menu: {enrollments_menu.is_displayed()}")
+            enrollments_menu.click()
+            enrollments_count_text = self.explicit_wait(5, "XPATH", insight_dashboard_read_ini().total_enrollments_text_on_enrollments_panel_by_xpath(), self.d)
+            self.logger.info(f"text: {enrollments_count_text.text}")
+            text_list = enrollments_count_text.text.split(" ")
+            self.logger.info(text_list)
+            return text_list[3]
+        except Exception as ex:
+            self.logger.info(f"get_total_enrollments ex: {ex.args}")
+
+    def get_total_events(self):
+        try:
+            self.d.find_element(By.XPATH, insight_dashboard_read_ini().cloud_menu_by_xpath()).click()
+            events_menu = self.explicit_wait(5, "XPATH", Portal_Menu_Module_read_ini().get_events_menu_by_xpath(), self.d)
+            events_menu.click()
+            total_events_text = self.explicit_wait(5, "XPATH", insight_dashboard_read_ini().probable_match_events_text_on_events_panel_by_xpath(), self.d)
+            self.logger.info(f"total events text: {total_events_text.text}")
+            total_events_text_list = total_events_text.text.split(' ')
+            self.logger.info(f"text list: {total_events_text_list}")
+            return total_events_text_list[3]
+        except Exception as ex:
+            self.logger.info(f"get_total_events ex : {ex.args}")
+
+    def get_total_visitor_search_count(self):
+        try:
+            self.d.find_element(By.XPATH, insight_dashboard_read_ini().cloud_menu_by_xpath()).click()
+            vsj_menu_item = self.explicit_wait(5, "XPATH", insight_dashboard_read_ini().visitor_search_jobs_menu_item_by_xpath(), self.d)
+            vsj_menu_item.click()
+            total_vs_text = self.explicit_wait(5, "XPATH", insight_dashboard_read_ini().visitor_search_count_text_on_vsj_panel(), self.d)
+            self.logger.info(f"vs text: {total_vs_text.text}")
+            total_vs_text_list = total_vs_text.text.split(' ')
+            self.logger.info(f"vs text list: {total_vs_text_list}")
+            return total_vs_text_list[3]
+        except Exception as ex:
+            self.logger.info(f"get_total_visitor_search_count ex: {ex.args}")
+
     def open_insights_dashboard(self):
         try:
+            self.d.find_element(By.XPATH, insight_dashboard_read_ini().cloud_menu_by_xpath()).click()
             time.sleep(web_driver.one_second)
             insight_dashboard_menu = self.explicit_wait(5, "XPATH", insight_dashboard_read_ini().Insight_Dashboard_menu_by_xpath(), self.d)
             if insight_dashboard_menu:
@@ -758,14 +819,19 @@ class insight_dashboard_pom(web_driver, web_logger):
         try:
             total_loss_prevented_text = self.explicit_wait(5, "XPATH", insight_dashboard_read_ini().total_loss_prevented_label_by_xpath(), self.d)
             self.logger.info(f"total loss prevented text visible: {total_loss_prevented_text.is_displayed()}")
+            self.logger.info(f"total loss text: {total_loss_prevented_text.text}")
             total_loss_prevented_count = self.explicit_wait(5, "XPATH", insight_dashboard_read_ini().total_loss_prevented_amount_by_xpath(), self.d)
             self.logger.info(f"total loss prevented amount visible: {total_loss_prevented_count.is_displayed()}")
+            self.logger.info(f"total loss: {total_loss_prevented_count.text}")
+            loss_count = total_loss_prevented_count.text[1:]
+            self.logger.info(f"loss count int: {loss_count}")
             x = []
             if total_loss_prevented_text:
                 if total_loss_prevented_text.is_displayed():
                     x.append(True)
                 else:
                     x.append(False)
+
             if total_loss_prevented_count:
                 if total_loss_prevented_text.is_displayed():
                     x.append(True)
@@ -782,8 +848,11 @@ class insight_dashboard_pom(web_driver, web_logger):
         try:
             total_new_enrollments_text = self.explicit_wait(5, "XPATH", insight_dashboard_read_ini().total_new_enrollments_label_by_xpath(), self.d)
             self.logger.info(f"total_new_enrollments text visible: {total_new_enrollments_text.is_displayed()}")
+            self.logger.info(f"text: {total_new_enrollments_text.text}")
             total_new_enrollments_count = self.explicit_wait(5, "XPATH", insight_dashboard_read_ini().total_new_enrollments_count_by_xpath(), self.d)
             self.logger.info(f"total_new_enrollments count visible: {total_new_enrollments_count.is_displayed()}")
+            self.logger.info(f"count: {total_new_enrollments_count.text}")
+            total_enrollments = total_new_enrollments_count.text
             x = []
             if total_new_enrollments_text:
                 if total_new_enrollments_text.is_displayed():
@@ -795,6 +864,10 @@ class insight_dashboard_pom(web_driver, web_logger):
                     x.append(True)
                 else:
                     x.append(False)
+            if total_enrollments == insight_dashboard_read_ini().total_enrollments_count():
+                x.append(True)
+            else:
+                x.append(False)
             if False in x:
                 return False
             else:
@@ -806,8 +879,11 @@ class insight_dashboard_pom(web_driver, web_logger):
         try:
             total_facefirst_enrollments_text = self.explicit_wait(5, "XPATH", insight_dashboard_read_ini().total_facefirst_enrollments_label_by_xpath(), self.d)
             self.logger.info(f"total_facefirst_enrollments text visible: {total_facefirst_enrollments_text.is_displayed()}")
+            self.logger.info(f"text: {total_facefirst_enrollments_text.text}")
             total_facefirst_enrollments_count = self.explicit_wait(5, "XPATH", insight_dashboard_read_ini().total_facefirst_enrollments_count_by_xpath(), self.d)
             self.logger.info(f"total_facefirst_enrollments count visible: {total_facefirst_enrollments_count.is_displayed()}")
+            self.logger.info(f"count: {total_facefirst_enrollments_count.text}")
+            total_facefirst_count = total_facefirst_enrollments_count.text
             x = []
             if total_facefirst_enrollments_text:
                 if total_facefirst_enrollments_text.is_displayed():
@@ -819,6 +895,10 @@ class insight_dashboard_pom(web_driver, web_logger):
                     x.append(True)
                 else:
                     x.append(False)
+            if total_facefirst_count == insight_dashboard_read_ini().total_enrollments_count():
+                x.append(True)
+            else:
+                x.append(False)
             if False in x:
                 return False
             else:
@@ -830,8 +910,14 @@ class insight_dashboard_pom(web_driver, web_logger):
         try:
             total_match_events_text = self.explicit_wait(5, "XPATH", insight_dashboard_read_ini().total_probable_match_events_label_by_xpath(), self.d)
             self.logger.info(f"total_match_events text visible: {total_match_events_text.is_displayed()}")
+            self.logger.info(f"text: {total_match_events_text.text}")
             total_match_events_count = self.explicit_wait(5, "XPATH", insight_dashboard_read_ini().total_probable_match_events_count_by_xpath(), self.d)
             self.logger.info(f"total_match_events count visible: {total_match_events_count.is_displayed()}")
+            self.logger.info(f"count: {total_match_events_count.text}")
+            y = total_match_events_count.text[0]
+            z = total_match_events_count.text[2:]
+            m = y+z
+            total_match_events_count_actual = m
             x = []
             if total_match_events_text:
                 if total_match_events_text.is_displayed():
@@ -843,6 +929,10 @@ class insight_dashboard_pom(web_driver, web_logger):
                     x.append(True)
                 else:
                     x.append(False)
+            if total_match_events_count_actual == insight_dashboard_read_ini().total_events_count():
+                x.append(True)
+            else:
+                x.append(False)
             if False in x:
                 return False
             else:
@@ -854,8 +944,12 @@ class insight_dashboard_pom(web_driver, web_logger):
         try:
             visitor_searches_text = self.explicit_wait(5, "XPATH", insight_dashboard_read_ini().visitor_searches_label_by_xpath(), self.d)
             self.logger.info(f"visitor_searches text visible: {visitor_searches_text.is_displayed()}")
+            self.logger.info(f"text: {visitor_searches_text.text}")
+
             visitor_searches_count = self.explicit_wait(5, "XPATH", insight_dashboard_read_ini().visitor_searches_count_by_xpath(), self.d)
             self.logger.info(f"visitor_searches count visible: {visitor_searches_count.is_displayed()}")
+            self.logger.info(f"count: {visitor_searches_count.text}")
+            visitor_search_count_actual = visitor_searches_count.text
             x = []
             if visitor_searches_text:
                 if visitor_searches_text.is_displayed():
@@ -867,6 +961,10 @@ class insight_dashboard_pom(web_driver, web_logger):
                     x.append(True)
                 else:
                     x.append(False)
+            if visitor_search_count_actual == insight_dashboard_read_ini().total_visitor_search_count():
+                x.append(True)
+            else:
+                x.append(False)
             if False in x:
                 return False
             else:
@@ -878,8 +976,11 @@ class insight_dashboard_pom(web_driver, web_logger):
         try:
             investigation_time_text = self.explicit_wait(5, "XPATH", insight_dashboard_read_ini().investigation_saving_time_label_by_xpath(), self.d)
             self.logger.info(f"investigation_time text visible: {investigation_time_text.is_displayed()}")
+            self.logger.info(f"text: {investigation_time_text.text}")
             investigation_time_count = self.explicit_wait(5, "XPATH", insight_dashboard_read_ini().investigation_saving_time_count_by_xpath(), self.d)
             self.logger.info(f"investigation_time count visible: {investigation_time_count.is_displayed()}")
+            self.logger.info(f"count: {investigation_time_count.text}")
+            investigation_time_count_actual = investigation_time_count.text
             x = []
             if investigation_time_text:
                 if investigation_time_text.is_displayed():
