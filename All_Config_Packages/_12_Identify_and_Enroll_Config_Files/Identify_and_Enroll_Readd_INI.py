@@ -2712,6 +2712,13 @@ class Read_Identify_and_Enroll_Components:
         except Exception as ex:
             print(ex.args)
 
+    def list_of_enrollments_by_xpath(self):
+        try:
+            en_list = self.config.get("portal_Login","list_of_enrollments_by_xpath")
+            return en_list
+        except Exception as ex:
+            print(ex.args)
+
 
 
 

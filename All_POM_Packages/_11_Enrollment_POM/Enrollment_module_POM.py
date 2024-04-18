@@ -1001,54 +1001,54 @@ class enrollments_POM(web_driver, web_logger):
                     self.logger.error(f"test_TC_En_07 got an exception as: {ex}")
                     self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_07_Exception.png")
                     return False
-    def verify_user_able_to_see_disabled_status_for_masked_enrollment(self):
-        try:
-            self.logger.info("enrollment module testcases started")
-            login().login_to_cloud_if_not_done_with_user_credentials(self.d,Read_Identify_and_Enroll_Components().)
-            Action_button = self.d.find_element(By.XPATH, read_enrollment_components().Action_button_on_enrollment_panel())
-            Action_button.click()
-            time.sleep(web_driver.two_second)
-            self.logger.info("clicking on Action dropdown")
-
-            reject_enrollment_option_in_Action = self.d.find_element(By.XPATH,read_enrollment_components().reject_enrollment_option())
-            reject_enrollment_option_in_Action.click()
-            time.sleep(web_driver.one_second)
-            self.logger.info("clicking on reject enrollment option in action dropdown")
-
-            yes_reject_button = self.d.find_element(By.XPATH,
-                                                    read_enrollment_components().get_rejected_buttton_in_dialouge_tooltip())
-            time.sleep(web_driver.two_second)
-            # yes_reject_button.click()
-            self.d.execute_script("arguments[0].click();", yes_reject_button)
-            time.sleep(web_driver.one_second)
-
-            filter_dropdown1 = self.d.find_element(By.XPATH,read_enrollment_components().filter_dropdown_by_xpath())
-            filter_dropdown1.click()
-            time.sleep(web_driver.one_second)
-            self.logger.info("clicking on filter dropdown")
-
-            rejected_option_in_filter = self.d.find_element(By.XPATH,read_enrollment_components().rejected_enrollment_option_in_filter())
-            rejected_option_in_filter.click()
-            time.sleep(web_driver.one_second)
-            self.logger.info("")
-
-            rejected_enrollment_text = self.d.find_element(By.XPATH,read_enrollment_components().rejected_enrollment_text())
-            if rejected_enrollment_text.is_displayed():
-                self.logger.info("rejected text is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("rejected text is not dispalyed")
-                self.status.append(False)
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_En_03`.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_03_failed.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"test_TC_En_07 got an exception as: {ex}")
-            self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_07_Exception.png")
-            return False
+    # def verify_user_able_to_see_disabled_status_for_masked_enrollment(self):
+    #     try:
+    #         self.logger.info("enrollment module testcases started")
+    #         login().login_to_cloud_if_not_done_with_user_credentials(self.d,Read_Identify_and_Enroll_Components().get_approver_to_login())
+    #         Action_button = self.d.find_element(By.XPATH, read_enrollment_components().Action_button_on_enrollment_panel())
+    #         Action_button.click()
+    #         time.sleep(web_driver.two_second)
+    #         self.logger.info("clicking on Action dropdown")
+    #
+    #         reject_enrollment_option_in_Action = self.d.find_element(By.XPATH,read_enrollment_components().reject_enrollment_option())
+    #         reject_enrollment_option_in_Action.click()
+    #         time.sleep(web_driver.one_second)
+    #         self.logger.info("clicking on reject enrollment option in action dropdown")
+    #
+    #         yes_reject_button = self.d.find_element(By.XPATH,
+    #                                                 read_enrollment_components().get_rejected_buttton_in_dialouge_tooltip())
+    #         time.sleep(web_driver.two_second)
+    #         # yes_reject_button.click()
+    #         self.d.execute_script("arguments[0].click();", yes_reject_button)
+    #         time.sleep(web_driver.one_second)
+    #
+    #         filter_dropdown1 = self.d.find_element(By.XPATH,read_enrollment_components().filter_dropdown_by_xpath())
+    #         filter_dropdown1.click()
+    #         time.sleep(web_driver.one_second)
+    #         self.logger.info("clicking on filter dropdown")
+    #
+    #         rejected_option_in_filter = self.d.find_element(By.XPATH,read_enrollment_components().rejected_enrollment_option_in_filter())
+    #         rejected_option_in_filter.click()
+    #         time.sleep(web_driver.one_second)
+    #         self.logger.info("")
+    #
+    #         rejected_enrollment_text = self.d.find_element(By.XPATH,read_enrollment_components().rejected_enrollment_text())
+    #         if rejected_enrollment_text.is_displayed():
+    #             self.logger.info("rejected text is visible")
+    #             self.status.append(True)
+    #         else:
+    #             self.logger.info("rejected text is not dispalyed")
+    #             self.status.append(False)
+    #         if False in self.status:
+    #             self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_En_03`.png")
+    #             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_03_failed.png")
+    #             return False
+    #         else:
+    #             return True
+    #     except Exception as ex:
+    #         self.logger.error(f"test_TC_En_07 got an exception as: {ex}")
+    #         self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_07_Exception.png")
+    #         return False
 
     def Verify_core_user_is_able_to_delete_pending_subjects(self):
         try:

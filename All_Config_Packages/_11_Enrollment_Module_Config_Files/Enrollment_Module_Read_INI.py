@@ -748,6 +748,20 @@ class read_enrollment_components:
         except Exception as ex:
             print(ex.args)
 
+    def enabled_text(self):
+        try:
+            enabled_text = self.config.get("Locators","enabled_text")
+            return enabled_text
+        except Exception as ex:
+            print(ex.args)
+
+    def disabled_option_(self):
+        try:
+            disabled_option = self.config.get("Locators","disabled_option")
+            return disabled_option
+        except Exception as ex:
+            print(ex.args)
+
 
 
 
