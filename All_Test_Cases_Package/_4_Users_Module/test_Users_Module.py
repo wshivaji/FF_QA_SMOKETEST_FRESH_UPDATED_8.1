@@ -132,6 +132,13 @@ class Test_Users_Module(web_driver, web_logger):
             assert True
         else:
             assert False
+    @pytest.mark.p1
+    def test_TC_US_15(self):
+        self.logger.info("Users module = test_TC_US_14 execution started..")
+        if Users_Module_pom().Verify_org_hierarchy_selection_root_name_should_be_able_to_match_with_DM_core_name():
+            assert True
+        else:
+            assert False
 
 
 

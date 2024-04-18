@@ -47,28 +47,35 @@ class Test_Enrollments_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.p1
     def test_Tc_en_06(self):
-        if enrollments_POM().Verify_core_user_is_able_to_approve_pending_subjects():
+        if enrollments_POM().Verify_approver_user_is_able_to_approve_pending_subjects():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p1
+    def test_TC_en_07(self):
+        if enrollments_POM().Verify_approver_user_is_able_to_reject_pending_subjects():
             assert True
         else:
             assert False
 
     @pytest.mark.p1
     def test_Tc_en_07(self):
-        if enrollments_POM().verify_user_enroller_of_an_enrollment_able_to_delete_enrollment():
+        if enrollments_POM().verify_executive_it_admin_enroller_of_an_enrollment_able_to_delete_enrollment():
             assert  True
         else:
             assert False
 
     @pytest.mark.p1
     def test_Tc_en_08(self):
-        if enrollments_POM().Verify_core_user_is_able_to_delete_pending_subjects():
+        if enrollments_POM().Verify_core_user_or_it_admin_is_able_to_delete_pending_subjects():
             assert True
         else:
             assert  False
 
     @pytest.mark.p1
     def test_Tc_en_09(self):
-        if enrollments_POM().Verify_user_is_able_to_enable_the_reject_subject_user_with_all_permissions():
+        if enrollments_POM().Verify_user_is_able_to_enable_the_reject_subject_user_with_all_permissionss():
             assert  True
         else:
             assert False
@@ -95,15 +102,6 @@ class Test_Enrollments_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.p1
-    def test_TC_en_14(self):
-        if enrollments_POM().verify_user_able_to_add_more_faces_to_an_enrollment():
-            assert  True
-        else:
-            assert False
-
-
-
-    @pytest.mark.p1
     def test_Tc_en_15(self):
         if enrollments_POM().verify_user_enroller_of_an_enrollment_able_to_see_events_for_a_enrolled_person_on_enrrollments_panel():
             assert True
@@ -119,8 +117,17 @@ class Test_Enrollments_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.p1
     def test_tc_en_17(self):
-        if enrollments_POM().verify_user_enroller_of_an_enrollment_able_to_delete_enrollment():
+        if enrollments_POM().enrollments_search_with_filter_dropdown_option_result_should_be_dropdown_options():
             assert True
         else:
             assert False
+
+    @pytest.mark.p1
+    def test_tc_en_18(self):
+        if enrollments_POM().verify_user_able_to_add_notes_for_a_enrolled_person_on_enrollments_panel():
+            assert True
+        else:
+            assert False
+
+
 

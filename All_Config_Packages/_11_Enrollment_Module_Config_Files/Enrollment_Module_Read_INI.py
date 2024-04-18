@@ -762,6 +762,27 @@ class read_enrollment_components:
         except Exception as ex:
             print(ex.args)
 
+    def list_of_filter_dropdown_option(self):
+        try:
+            filter_li = self.config.get("Locators","list_of_filter_dropdown_options")
+            return filter_li
+        except Exception as ex:
+            print(ex.args)
+
+    def enabled_en_list(self):
+        try:
+            filter_li = self.config.get("Locators","enabled_enrollments_list")
+            return filter_li
+        except Exception as ex:
+            print(ex.args)
+
+    def message_there_are_no_enrollment(self):
+        try:
+            msg = self.config.get("Locators","message_to_there_are_no_en")
+            return msg
+        except Exception as ex:
+            print(ex.args)
+
 
 
 
