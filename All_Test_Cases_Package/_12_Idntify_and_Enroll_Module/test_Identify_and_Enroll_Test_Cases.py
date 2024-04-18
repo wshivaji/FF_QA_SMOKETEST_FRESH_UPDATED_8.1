@@ -22,14 +22,14 @@ class Test_Identify_and_Enroll_Test_Cases(web_driver, web_logger):
     @pytest.mark.system
     def test_TC_IE_02(self):
         if Identify_And_Enroll_POM().verify_user_able_approve_enrollment():
-            assert  True
+            assert True
         else:
             assert False
 
     @pytest.mark.portal
     def test_TC_IE_03(self):
         if Identify_And_Enroll_POM().Verify_user_is_able_to_enroll_the_person_by_uploading_the_image_cropping_the_same_and_adding_the_required_details_for_the_same():
-            assert  True
+            assert True
         else:
             assert False
 
