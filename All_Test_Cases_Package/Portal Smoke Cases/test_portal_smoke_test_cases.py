@@ -160,10 +160,10 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
     '''''
         Below cases will perform, creating new alert groups and linking them to Users.
     '''
-
     @pytest.mark.system
     def test_SM_TC018(self):
-        if Notification_Groups_Module_pom().Create_5_Notification_groups_fill_the_details_and_link_the_particular_user_to_particular_NG_based_on_naming_convention():
+        if (Notification_Groups_Module_pom().
+                Create_5_Notification_groups_fill_the_details_and_link_the_particular_user_to_particular_NG_based_on_naming_convention()):
             assert True
         else:
             assert False
@@ -179,7 +179,6 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
     '''''
         Below cases will perform, creating new case groups and linking them to alert groups.
     '''
-
     @pytest.mark.system
     def test_SM_TC020(self):
         if (Enrollments_Groups_Module_pom().
@@ -199,6 +198,32 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
     def test_SM_TC022(self):
         if (Enrollments_Groups_Module_pom().
                 Verify_for_above_all_5_EG_face_and_mask_threshold_value_should_be_point_83_and_suppress_duplicate_events_value_should_be_0_minute()):
+            assert True
+        else:
+            assert False
+
+    # ---------------------------------------------------  Tags Cases  ---------------------------------------------- #
+    '''''
+        Below cases will perform, creating 3 serious and 1 non-serious tags.
+    '''
+
+    # --------------------------------------------  Identify & Enroll Cases  ----------------------------------------- #
+    '''''
+        Below cases will perform, enrolling 25 subjects (5 for each EG) by "operator" user and approve them by 
+        "approver" user.
+    '''
+
+    @pytest.mark.system
+    def test_SM_TC025(self):
+        if (Identify_And_Enroll_POM().
+                Identify_and_enroll_25_subjects_and_fill_the_required_fields_5_per_Enrollment_groups()):
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC026(self):
+        if Identify_And_Enroll_POM().verify_user_able_approve_enrollment():
             assert True
         else:
             assert False
