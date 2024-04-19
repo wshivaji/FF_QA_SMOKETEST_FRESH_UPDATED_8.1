@@ -548,3 +548,59 @@ class insight_dashboard_read_ini:
             return probable_match_events_text_on_events_panel_by_xpath
         except Exception as ex:
             print(ex.args)
+
+    def enrollment_groups_menu_item_by_xpath(self):
+        try:
+            enrollment_groups_menu_item_by_xpath = self.config.get("Insight_Dashboard_Locators", "enrollment_groups_menu_item_by_xpath")
+            print("enrollment_groups_menu_item_by_xpath: ", enrollment_groups_menu_item_by_xpath)
+            return enrollment_groups_menu_item_by_xpath
+        except Exception as ex:
+            print(ex.args)
+
+    def enrollment_groups_list_by_xpath(self):
+        try:
+            enrollment_groups_list_by_xpath = self.config.get("Insight_Dashboard_Locators", "enrollment_groups_list_by_xpath")
+            print("enrollment_groups_list_by_xpath: ", enrollment_groups_list_by_xpath)
+            return enrollment_groups_list_by_xpath
+        except Exception as ex:
+            print(ex.args)
+
+    def eg_name_by_xpath_part_1(self):
+        try:
+            eg_name_by_xpath_part_1 = self.config.get("Insight_Dashboard_Locators", "eg_name_by_xpath_part_1")
+            print("eg_name_by_xpath_part_1: ", eg_name_by_xpath_part_1)
+            return eg_name_by_xpath_part_1
+        except Exception as ex:
+            print(ex.args)
+
+    def eg_name_by_xpath_part_2(self):
+        try:
+            eg_name_by_xpath_part_2 = self.config.get("Insight_Dashboard_Locators", "eg_name_by_xpath_part_2")
+            print("eg_name_by_xpath_part_2: ", eg_name_by_xpath_part_2)
+            return eg_name_by_xpath_part_2
+        except Exception as ex:
+            print(ex.args)
+
+    def enrollments_in_eg_count_by_xpath_part_1(self):
+        try:
+            enrollments_in_eg_count_by_xpath_part_1 = self.config.get("Insight_Dashboard_Locators", "enrollments_in_eg_count_by_xpath_part_1")
+            print("enrollments_in_eg_count_by_xpath_part_1: ", enrollments_in_eg_count_by_xpath_part_1)
+            return enrollments_in_eg_count_by_xpath_part_1
+        except Exception as ex:
+            print(ex.args)
+
+    def enrollments_in_eg_count_by_xpath_part_2(self):
+        try:
+            enrollments_in_eg_count_by_xpath_part_2 = self.config.get("Insight_Dashboard_Locators", "enrollments_in_eg_count_by_xpath_part_2")
+            print("enrollments_in_eg_count_by_xpath_part_2: ", enrollments_in_eg_count_by_xpath_part_2)
+            return enrollments_in_eg_count_by_xpath_part_2
+        except Exception as ex:
+            print(ex.args)
+
+    def enrollment_groups_count_text_on_enrollment_groups_panel_by_xpath(self):
+        try:
+            enrollment_groups_count_text_on_enrollment_groups_panel_by_xpath = self.config.get("Insight_Dashboard_Locators", "enrollment_groups_count_text_on_enrollment_groups_panel_by_xpath")
+            print("enrollment_groups_count_text_on_enrollment_groups_panel_by_xpath: ", enrollment_groups_count_text_on_enrollment_groups_panel_by_xpath)
+            return enrollment_groups_count_text_on_enrollment_groups_panel_by_xpath
+        except Exception as ex:
+            print(ex.args)

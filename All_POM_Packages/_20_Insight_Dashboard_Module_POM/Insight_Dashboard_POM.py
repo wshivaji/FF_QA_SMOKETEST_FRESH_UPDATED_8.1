@@ -1,4 +1,5 @@
 import configparser
+import os
 import time
 from pathlib import Path
 
@@ -21,6 +22,9 @@ class insight_dashboard_pom(web_driver, web_logger):
     d = web_driver.d()
     logger = web_logger.logger_obj()
     status = []
+    enrollment_group_name_list = []
+    enrollment_count_list = []
+    current_file_path = os.path.abspath(__file__)
 
     def Verify_user_is_able_to_see_counts_on_overview_dashboard_as_total_loss_prevented_5500_active_enrollment_25_total_match_events_25_visito_searches_0_investgation_saving_time_0_repeat_people_of_interest_0(
             self):
@@ -714,8 +718,63 @@ class insight_dashboard_pom(web_driver, web_logger):
             config.set("Insights_Dashboard_Data", "total_events_count", total_events)
             config.set("Insights_Dashboard_Data", "total_visitor_search_count", total_visitor_search)
             config.write(file.open('w'))
+            self.get_enrollment_groups_data()
         except Exception as ex:
             self.logger.info(f"get_insight_dashboard_data ex: {ex.args}")
+
+    def get_enrollment_groups_data(self):
+        try:
+            # common_test_data_ini_file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_Data\\common_test_data.ini"
+            # file = Path(common_test_data_ini_file_path)
+            # config = configparser.ConfigParser()
+            # config.read(file)
+            # section_name = 'Enrollment_Group_Data_For_Insight_Dashboard'
+            # if config.has_section(section_name):
+            #     config.remove_section(section_name)
+            # with open(file, 'w') as configfile:
+            #     config.write(configfile)
+
+            self.d.find_element(By.XPATH, insight_dashboard_read_ini().cloud_menu_by_xpath()).click()
+            enrollment_groups_menu = self.explicit_wait(5, "XPATH", insight_dashboard_read_ini().enrollment_groups_menu_item_by_xpath(), self.d)
+            self.logger.info(f"enrollment groups menu visible: {enrollment_groups_menu.is_displayed()}")
+            enrollment_groups_menu.click()
+            self.explicit_wait(5, "XPATH", insight_dashboard_read_ini().enrollment_groups_list_by_xpath(), self.d)
+            enrollment_groups_list = self.d.find_elements(By.XPATH, insight_dashboard_read_ini().enrollment_groups_list_by_xpath())
+            self.logger.info(f"enrollment_groups_count = {len(enrollment_groups_list)}")
+            eg_name_list = []
+            eg_count_list = []
+
+            for i in range(1, len(enrollment_groups_list)):
+                eg_name_xpath = insight_dashboard_read_ini().eg_name_by_xpath_part_1()+str(i)+insight_dashboard_read_ini().eg_name_by_xpath_part_2()
+                self.logger.info(f"eg_name_xpath: {eg_name_xpath}")
+                eg = self.d.find_element(By.XPATH, eg_name_xpath)
+                eg_name_list.append(eg.text)
+                eg_count_xpath = insight_dashboard_read_ini().enrollments_in_eg_count_by_xpath_part_1()+str(i)+insight_dashboard_read_ini().enrollments_in_eg_count_by_xpath_part_2()
+                self.logger.info(f"eg_count_xpath: {eg_count_xpath}")
+                eg_count = self.d.find_element(By.XPATH, eg_count_xpath)
+                eg_count_list.append(eg_count.text)
+
+            self.logger.info(f"EG Names: {eg_name_list}")
+            self.logger.info(f"EG Count: {eg_count_list}")
+            if len(eg_count_list) == len(eg_name_list):
+                self.logger.info("eg names and eg enrollment count are equal.")
+                # Open the current file in write mode
+                file = open(self.current_file_path, 'a')
+
+                # Write the variables to the file
+                file.write(f"enrollment_group_name_list = {eg_name_list}\n")
+                file.write(f"enrollment_count_list = {eg_count_list}\n")
+                # Close the file
+                file.close()
+
+                # for i in range(len(eg_count_list)):
+                #     config.set("Enrollment_Group_Data_For_Insight_Dashboard", eg_name_list[i], eg_count_list[i])
+                #     config.write(file.open('w'))
+            else:
+                self.logger.info("eg names and eg enrollment count are not equal.")
+
+        except Exception as ex:
+            self.logger.info(f"get_enrollment_groups_data: {ex.args}")
 
     def get_total_enrollments(self):
         try:
@@ -2010,3 +2069,7 @@ class insight_dashboard_pom(web_driver, web_logger):
                 return True
         except Exception as ex:
             self.logger.info(f"Enrollments_by_Status_counts_organisation_and_individual_groups ex:{ex.args}")
+enrollment_group_name_list = ['abe', 'Default Enrollment Group', 'fraude', 'pte', 'soe', 't1eg1', 't2eg1', 't2eg2', 't2eg3', 't2eg4', 't2eg5', 't3eg1', 't4eg1', 't4eg2', 't4eg3', 't4eg4', 't4eg5', 't5eg1', 't6eg1', 't6eg2', 't6eg3', 't6eg4']
+enrollment_count_list = ['10', '0', '5', '5', '7', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1']
+enrollment_group_name_list = ['abe', 'Default Enrollment Group', 'fraude', 'pte', 'soe', 't1eg1', 't2eg1', 't2eg2', 't2eg3', 't2eg4', 't2eg5', 't3eg1', 't4eg1', 't4eg2', 't4eg3', 't4eg4', 't4eg5', 't5eg1', 't6eg1', 't6eg2', 't6eg3', 't6eg4']
+enrollment_count_list = ['10', '0', '5', '5', '7', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1']
