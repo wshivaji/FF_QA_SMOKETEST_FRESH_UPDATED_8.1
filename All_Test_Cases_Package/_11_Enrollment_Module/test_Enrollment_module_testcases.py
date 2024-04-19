@@ -1,7 +1,7 @@
 import pytest
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
-from All_POM_Packages._11_Enrollment_POM.Enrollment_module_POM import enrollments_POM
+from All_POM_Packages.Enrollment_POM.Enrollment_module_POM import enrollments_POM
 
 
 @pytest.mark.run(order=10)
@@ -32,7 +32,8 @@ class Test_Enrollments_Test_Cases(web_driver, web_logger):
         else:
             assert False
 
-    def test_Tc_En_system(self):
+    @pytest.mark.system
+    def test_Tc_En_04(self):
         if enrollments_POM().Verify_user_is_able_to_add_single_note_for_enabled_mask_enrollment():
             assert True
         else:
@@ -46,7 +47,7 @@ class Test_Enrollments_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_Tc_en_06(self):
+    def test_Tc_en_07(self):
         if enrollments_POM().Verify_core_user_is_able_to_approve_pending_subjects():
             assert True
         else:
@@ -57,12 +58,12 @@ class Test_Enrollments_Test_Cases(web_driver, web_logger):
         if enrollments_POM().Verify_core_user_is_able_to_delete_pending_subjects():
             assert True
         else:
-            assert  False
+            assert False
 
     @pytest.mark.system
-    def test_Tc_en_09(self):
+    def test_Tc_en_06(self):
         if enrollments_POM().Verify_user_is_able_to_enable_the_reject_subject_user_with_all_permissions():
-            assert  True
+            assert True
         else:
             assert False
 
@@ -90,7 +91,7 @@ class Test_Enrollments_Test_Cases(web_driver, web_logger):
     @pytest.mark.portal
     def test_TC_en_14(self):
         if enrollments_POM().verify_user_able_to_add_more_faces_to_an_enrollment():
-            assert  True
+            assert True
         else:
             assert False
 

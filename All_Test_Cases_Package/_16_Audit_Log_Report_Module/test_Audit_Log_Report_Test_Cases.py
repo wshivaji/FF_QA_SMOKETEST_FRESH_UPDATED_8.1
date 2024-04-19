@@ -1,7 +1,7 @@
 
 import pytest
 # from All_POM_Package.Audit_Log_Reports.Audit_Log_Reports_POM import Audit_log_report_pom
-from All_POM_Packages._16_Audit_Log_Report_Module_POM.Audit_Log_Report_Module_POM import Audit_log_report_pom
+from All_POM_Packages.Audit_Log_Report_Module_POM.Audit_Log_Report_Module_POM import Audit_log_report_pom
 # from All_Test_Cases_Package.conftest import Base_Class
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger

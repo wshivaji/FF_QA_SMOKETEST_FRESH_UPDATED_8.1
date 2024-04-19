@@ -5,7 +5,7 @@ from selenium.webdriver.support.select import Select
 
 from All_Config_Packages._1_Portal_Login_Module_Config_Files.Portal_Login_Page_Read_INI import \
     Portal_login_page_read_ini
-from All_POM_Packages._2_Portal_Menu_Module_POM.Portal_Menu_Module_POM import Portal_Menu_Module_pom
+from All_POM_Packages.Portal_Menu_Module_POM.Portal_Menu_Module_POM import Portal_Menu_Module_pom
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
 from selenium.webdriver.common.by import By
@@ -843,6 +843,7 @@ class Notification_Groups_Module_pom(web_driver, web_logger):
             status = []
             login().login_to_cloud_if_not_done(self.d)
 
+            self.open_notification_groups_module()
             action_btn = self.explicit_wait(10, "XPATH",
                                             Read_Notification_Groups_Components().action_dropdown_button_by_xpath(),
                                             self.d)
@@ -969,8 +970,10 @@ class Notification_Groups_Module_pom(web_driver, web_logger):
                                                           enrollment_groups_list_by_xpath(), self.d)
                     case_groups_list = self.d.find_elements(By.XPATH, Read_Notification_Groups_Components().
                                                             enrollment_groups_list_by_xpath())
+                    self.logger.info(f"length of case group list: {len(case_groups_list)}, {case_groups_list[0].text}")
                     default_case_group = Read_Enrollment_Groups_Components().default_enrollment_group_details()
                     default_case_group = default_case_group.split(',')
+                    self.logger.info(f"default_case_group name: {default_case_group[0]}")
                     if (len(case_groups_list) == 1) and (case_groups_list[0].text == default_case_group[0]):
                         self.logger.info(f"Default Enrollment Group linked with default alert group is: {case_groups_list[0].text}")
                         status.append(True)
@@ -992,7 +995,7 @@ class Notification_Groups_Module_pom(web_driver, web_logger):
             return False
 
     # ***************************** Reusable Methods ************************************ #
-    
+
     def validate_successful_message(self):
         """
         checks if the error message "Success! A user has been created." is displayed.

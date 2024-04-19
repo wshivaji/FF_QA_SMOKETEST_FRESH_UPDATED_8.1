@@ -269,6 +269,8 @@ class Users_Module_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}test_TC_US_1_exception.png")
             self.log.info(f"test_TC_US_1_exception: {ex}")
             return False
+        finally:
+            logout().logout_from_core(self.d)
 
 
     def verify_login_with_newly_created_user_and_validate_login_successful(self):
@@ -1110,21 +1112,6 @@ class Users_Module_pom(web_driver, web_logger):
             self.delete_randomly_created_users()
             logout().logout_from_core(self.d)
             self.d.refresh()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     def on_alert_schedule_panel_click_on_close_panel_button_and_verify_alert_schedule_panel_is_closing(self):
         try:
@@ -3223,19 +3210,9 @@ class Users_Module_pom(web_driver, web_logger):
                 return False
         except Exception as ex:
             print(ex)
+        finally:
+            logout().logout_from_core(self.d)
 
-
-
-
-
-
-
-
-
-
-
-        except Exception as ex:
-            print(ex)
     def Verify_total_users_are_n_including_default_user(self):
         try:
             login().login_to_cloud_if_not_done(self.d)
@@ -3254,6 +3231,8 @@ class Users_Module_pom(web_driver, web_logger):
                 return False
         except Exception as ex:
             print(ex.args)
+        finally:
+            logout().logout_from_core(self.d)
     def Create_5_users_with_all_required_field(self):
         global i
         try:
@@ -3323,6 +3302,58 @@ class Users_Module_pom(web_driver, web_logger):
                     self.d.save_screenshot(
                         f"{self.screenshots_path}\\test_TC_IE_100_Exception.png")
                     return False
+        finally:
+            logout().logout_from_core(self.d)
+
+    def Verify_org_hierarchy_selection_root_name_should_be_able_to_match_with_DM_core_name(self):
+        try:
+            status =[]
+            self.logger.info("users modue started")
+            time.sleep(web_driver.one_second)
+            login().login_to_cloud_if_not_done(self.d)
+            time.sleep(web_driver.one_second)
+            self.click_user_on_cloud_menu()
+            time.sleep(web_driver.two_second)
+            self.click_on_action_btn()
+            time.sleep(web_driver.one_second)
+            create_user = self.d.find_element(By.XPATH,Read_Users_Components().create_user_by_xpath())
+            create_user.click()
+            time.sleep(web_driver.two_second)
+            region_ele = web_driver.explicit_wait(self, 10, "XPATH", Read_Users_Components().region_by_xpath(), self.d)
+            region_ele.click()
+            time.sleep(web_driver.two_second)
+            region_text_list = self.d.find_elements(By.XPATH, Read_Users_Components().region_list_by_xpath())
+            expected_region_text = Read_Users_Components().root_region_name()
+            for i in range(len(region_text_list) + 1):
+                actual_zone_text = region_text_list.__getitem__(i).text
+                self.log.info(actual_zone_text)
+                self.log.info(expected_region_text)
+                if expected_region_text.upper() in actual_zone_text.upper():
+                    self.logger.info("root region is same as expected region")
+                    self.status.append(True)
+                else:
+                    self.logger.info("root region is not same as expected region")
+                    self.status.append(False)
+                if False in self.status:
+                    self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_IE_100.png")
+                    self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_IE_100_failed.png")
+                    return False
+                else:
+                    return True
+        except Exception as ex:
+                    self.logger.error(f"test_TC_IE_100 got an exception as: {ex}")
+                    self.d.save_screenshot(
+                        f"{self.screenshots_path}\\test_TC_IE_100_Exception.png")
+                    return False
+        finally:
+            logout().logout_from_core(self.d)
+
+
+
+
+
+
+
 
 
 

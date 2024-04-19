@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
 from All_Config_Packages._8_detect_faces_config_Files.Detect_Faces_Read_Ini import detect_Faces_Read_Ini
-from All_POM_Packages._7_Visitor_Search_Module_POM.Visitor_Search_Module_POM import Visitor_Search_Module_pom
+from All_POM_Packages.Visitor_Search_Module_POM.Visitor_Search_Module_POM import Visitor_Search_Module_pom
 from Base_Package.Login_Logout_Ops import login, logout
 
 

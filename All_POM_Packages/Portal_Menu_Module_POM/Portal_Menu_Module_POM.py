@@ -13,7 +13,7 @@ from Base_Package.Web_Logger import web_logger
 from selenium.webdriver.common.by import By
 from All_Config_Packages._2_Portal_Menu_Module_Config_Files.Portal_Menu_Module_Read_INI import \
     Portal_Menu_Module_read_ini
-from All_POM_Packages._4_Users_Module_POM.Users_Module_POM import Users_Module_pom
+from All_POM_Packages.Users_Module_POM.Users_Module_POM import Users_Module_pom
 from All_Config_Packages._4_Users_Module_Config_Files.Users_Read_INI import Read_Users_Components
 from All_Config_Packages._0_login_logout_config_file.login_logout_read_ini import LoginLogout_Read_ini
 from Base_Package.Login_Logout_Ops import login

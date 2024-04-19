@@ -1,7 +1,7 @@
 import pytest
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
-from All_POM_Packages._5_Enrollment_Groups_Module_POM.Enrollment_Groups_Module_POM import Enrollments_Groups_Module_pom
+from All_POM_Packages.Enrollment_Groups_Module_POM.Enrollment_Groups_Module_POM import Enrollments_Groups_Module_pom
 
 
 @pytest.mark.run(order=4)

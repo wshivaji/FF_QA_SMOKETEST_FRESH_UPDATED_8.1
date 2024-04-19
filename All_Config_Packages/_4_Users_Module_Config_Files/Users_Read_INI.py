@@ -1998,3 +1998,17 @@ class Read_Users_Components:
             return time_zone
         except Exception as ex:
             print(ex.args)
+
+    def root_region_xpath(self):
+        try:
+            root = self.config.get("Portal_Login_Page","root_region_xpath")
+            return root
+        except Exception as ex:
+            print(ex.args)
+
+    def root_region_name(self):
+        try:
+            name = self.config.get("DATA","root_region_name")
+            return name
+        except Exception as ex:
+            print(ex.args)
