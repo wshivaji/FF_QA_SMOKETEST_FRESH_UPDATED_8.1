@@ -1,3 +1,5 @@
+import configparser
+import os
 from pathlib import Path
 
 import time
@@ -6,9 +8,13 @@ import pandas as pd
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
+
+from All_Config_Packages._7_Visitor_Search_Module_Config_Files.Visitor_Search_Read_INI import \
+    Read_Visitor_Search_Components
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
 from Base_Package.Login_Logout_Ops import login
+from All_Config_Packages._6_Notification_Groups_Module_Config_Files.Notification_Groups_Read_INI import Read_Notification_Groups_Components
 from All_Config_Packages._18_Reporting_Module_Config_Files.Reporting_Read_INI import Reporting_read_ini
 from All_POM_Packages.Reporting_Module.Reporting_POM import Reporting_pom
 from All_Config_Packages._2_Portal_Menu_Module_Config_Files.Portal_Menu_Module_Read_INI import Portal_Menu_Module_read_ini
@@ -18,6 +24,7 @@ class Reporting_Events_pom(web_driver, web_logger):
     d = web_driver.d()
     logger = web_logger.logger_obj()
     status = []
+    current_file_path = os.path.abspath(__file__)
 
     def __init__(self):
         self.end_datetime = self.end_time = self.end_date = self.end_date_and_time = self.start_datetime = \
@@ -63,7 +70,9 @@ class Reporting_Events_pom(web_driver, web_logger):
     
     def load_reporting_module_for_admin(self):
         try:
-            login().login_to_cloud_if_not_done(self.d)
+            x = Read_Notification_Groups_Components().get_user_name_input_data()
+            username = x.split(',')
+            login().login_with_persona_user(self.d, username[3])
             time.sleep(web_driver.one_second)
             reporting_module = self.explicit_wait(10, "XPATH", Reporting_read_ini().get_reporting_module_by_xpath(), self.d)
             if reporting_module.is_displayed():
@@ -113,6 +122,206 @@ class Reporting_Events_pom(web_driver, web_logger):
                 time.sleep(web_driver.one_second)
         except Exception as ex:
             self.logger.error(ex)
+
+    def get_events_by_zone_data(self):
+        try:
+            common_test_data_ini_file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_Data\\common_test_data.ini"
+            file = Path(common_test_data_ini_file_path)
+            config = configparser.ConfigParser()
+            config.read(file)
+            events_by_zone_counts = self.d.find_element(By.XPATH, "//*[local-name()='svg']")
+            # all_devices = all_devices.text.replace(" ", ",")
+            cleaned_string = events_by_zone_counts.text.replace('\n', ',').replace('\t', '')
+            print(cleaned_string)
+            config.set("Reporting_Data", "events_by_zone_counts", cleaned_string)
+            config.write(file.open('w'))
+
+        except Exception as ex:
+            self.logger.info(f"get_events_by_zone_counts_data ex: {ex.args}")
+
+    def get_events_count_by_edge(self, edge):
+        try:
+            region_name = edge
+            search_dropdown = self.explicit_wait(10, "XPATH", Reporting_read_ini().
+                                                 get_search_dropdown_on_events_panel_by_xpath(), self.d)
+            search_dropdown.click()
+            self.logger.info(f"clicked on search dropdown")
+            time.sleep(web_driver.one_second)
+            org_hierarchy_btn = self.explicit_wait(10, "XPATH", Reporting_read_ini().
+                                                   get_org_hierarchy_selection_btn_on_event_search_by_xpath(), self.d)
+            org_hierarchy_btn.click()
+            self.logger.info(f"clicked on org hierarchy btn")
+            time.sleep(web_driver.one_second)
+            region_text_list = self.d.find_elements(By.XPATH, Reporting_read_ini().get_regions_text_list_by_xpath())
+            self.logger.info(f"length of regions: {len(region_text_list)}")
+            expected_region_text = region_name
+            self.logger.info(f"expected_region: {expected_region_text}")
+            region_checkboxes = self.d.find_elements(By.XPATH, Reporting_read_ini().get_region_checkboxes_by_xpath())
+            try:
+                time.sleep(web_driver.one_second)
+                for i in range(len(region_text_list) + 1):
+                    # self.logger.info(f"for loop: {i}")
+                    actual_zone_text = region_text_list.__getitem__(i).text
+                    if expected_region_text.upper() == actual_zone_text.upper():
+                        self.logger.info(actual_zone_text)
+                        self.logger.info(expected_region_text)
+                        region_checkboxes.__getitem__(i).click()
+                        # self.d.execute_script("arguments[0].click();", region_text_list.__getitem__(i))
+                        break
+                save = self.d.find_element(By.XPATH, Reporting_read_ini().get_save_button_on_org_hierarchy_by_xpath())
+                save.click()
+                self.logger.info("clicked on save button..")
+                search_btn = self.explicit_wait(10, "XPATH", Reporting_read_ini().
+                                                get_search_btn_on_search_dropdown_on_events_panel_by_xpath(), self.d)
+                search_btn.click()
+            except Exception as ex:
+                str(ex)
+            time.sleep(web_driver.one_second)
+            expected_edge_events_count = self.explicit_wait(10, "XPATH", Reporting_read_ini().
+                                                           get_total_events_count_on_events_panel_by_xpath(), self.d)
+            expected_edge_events_count = self.d.find_element(By.XPATH, Reporting_read_ini().
+                                                            get_total_events_count_on_events_panel_by_xpath()).text
+            self.logger.info(f"expected_edge_events_count: {expected_edge_events_count}")
+            return expected_edge_events_count
+        except Exception as ex:
+            self.logger.info(f"events count by edge got an exception as: {ex}")
+
+    def Verify_report_for_number_of_probable_match_events_by_zone_with_default_dates_and_optional_filters(self):
+        try:
+            self.logger.info("********* TC_Reporting_01 started ************")
+            self.load_reporting_module_for_admin()
+            self.select_number_of_events_by_zone()
+            time.sleep(web_driver.one_second)
+            generate_report = self.explicit_wait(10, "XPATH",
+                                                Reporting_read_ini().get_generate_report_button_by_xpath(), self.d)
+            generate_report.click()
+            time.sleep(web_driver.two_second)
+            self.logger.info("Clicked on generate report button...")
+            new_reporting_panel = self.explicit_wait(10, "XPATH",
+                                                     Reporting_read_ini().get_new_reporting_panel_heading(), self.d)
+            if new_reporting_panel.is_displayed():
+                self.logger.info(f"Reporting panel heading: {new_reporting_panel.text}")
+                self.status.append(True)
+            else:
+                self.status.append(False)
+            time.sleep(web_driver.one_second)
+
+            self.get_events_by_zone_data()
+            region_names_and_events_count = Reporting_read_ini().get_events_by_zone_counts()
+            region_names_and_events_count = region_names_and_events_count.split(',')
+            all_devices_count = region_names_and_events_count[1]
+
+            cloud_menu_button = self.explicit_wait(10, "XPATH", Portal_Menu_Module_read_ini().
+                                                  get_CLOUD_MENU_button_by_xpath(), self.d)
+            cloud_menu_button.click()
+            time.sleep(web_driver.one_second)
+
+            events_panel = self.explicit_wait(10, "XPATH",
+                                              Portal_Menu_Module_read_ini().get_events_menu_by_xpath(), self.d)
+            events_panel.click()
+            time.sleep(web_driver.one_second)
+            expected_all_events_count = self.explicit_wait(10, "XPATH", Reporting_read_ini().
+                                              get_total_events_count_on_events_panel_by_xpath(), self.d)
+            self.logger.info(f"expected_all_events_count: {expected_all_events_count.text}")
+
+            if all_devices_count == expected_all_events_count:
+                self.status.append(True)
+            else:
+                self.status.append(False)
+
+            get_edge_event_count = self.get_events_count_by_edge(region_names_and_events_count[2])
+            self.logger.info(f"edge event count: {get_edge_event_count}")
+            if get_edge_event_count == region_names_and_events_count[3]:
+                self.status.append(True)
+            else:
+                self.status.append(False)
+
+            self.logger.info(f"status: {self.status}")
+            if False in self.status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_Reporting_01.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_Reporting_01.png")
+                return False
+            else:
+                return True
+        except Exception as ex:
+            self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_Reporting_01_exception.png")
+            self.d.save_screenshot(f"{self.screenshots_path}\\TC_Reporting_01_exception.png")
+            self.logger.error(f"TC_Reporting_01 got exception as: {ex}")
+        finally:
+            Reporting_pom().close_reporting_module()
+
+    def get_events_by_enrollment_count(self):
+        try:
+            common_test_data_ini_file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_Data\\common_test_data.ini"
+            file = Path(common_test_data_ini_file_path)
+            config = configparser.ConfigParser()
+            config.read(file)
+            events_by_enrollment_count = self.d.find_element(By.XPATH, Reporting_read_ini().
+                                                   get_events_by_enrollments_count_on_reporting_by_xpath())
+            # all_devices = all_devices.text.replace(" ", ",")
+            config.set("Reporting_Data", "events_by_enrollment_count", events_by_enrollment_count.text)
+            config.write(file.open('w'))
+            self.logger.info(f"enrollments_count: {events_by_enrollment_count.text}")
+
+        except Exception as ex:
+            self.logger.info(f"verify events by enrollments count got an exception as: {ex}")
+
+    def Verify_report_for_number_of_probable_match_events_by_enrollment_with_default_dates_and_optional_filters(self):
+        try:
+            self.logger.info("********* TC_Reporting_02 started ************")
+            self.load_reporting_module_for_admin()
+            self.select_number_of_events_by_enrollment()
+            time.sleep(web_driver.one_second)
+
+            generate_report = self.explicit_wait(10, "XPATH",
+                                                 Reporting_read_ini().get_generate_report_button_by_xpath(), self.d)
+            generate_report.click()
+            time.sleep(web_driver.two_second)
+            self.logger.info("Clicked on generate report button...")
+
+            new_reporting_panel = self.d.find_element(By.XPATH, Reporting_read_ini().
+                                                      get_new_reporting_panel_heading())
+            if new_reporting_panel.is_displayed():
+                self.logger.info(f"title on the report panel:- {new_reporting_panel.text}")
+                self.status.append(True)
+            else:
+                self.status.append(False)
+            time.sleep(web_driver.one_second)
+            self.get_events_by_enrollment_count()
+            x = Reporting_read_ini().events_by_enrollment_count()
+            x = x.strip("viewing 1 thru ")
+            events_by_enrollment_count = x
+            self.logger.info(f"actual events_by_enrollment_count: {events_by_enrollment_count}")
+            cloud_menu_button = self.explicit_wait(10, "XPATH", Portal_Menu_Module_read_ini().
+                                                   get_CLOUD_MENU_button_by_xpath(), self.d)
+            cloud_menu_button.click()
+            time.sleep(web_driver.one_second)
+
+            enrollment_panel = self.explicit_wait(10, "XPATH",
+                                              Portal_Menu_Module_read_ini().get_Enrollments_menu_by_xpath(), self.d)
+            enrollment_panel.click()
+            time.sleep(web_driver.one_second)
+            total_enrollments_count = self.explicit_wait(10, "XPATH", Reporting_read_ini().
+                                                          get_total_enrollments_count_on_enrollments_panel_by_xpath(),
+                                                          self.d)
+            self.logger.info(f"expected events_by_enrollment_count: {total_enrollments_count.text} of {total_enrollments_count.text}")
+            if events_by_enrollment_count == (f"{total_enrollments_count.text} of {total_enrollments_count.text}"):
+                self.status.append(True)
+            else:
+                self.status.append(False)
+            self.logger.info(f"status: {self.status}")
+            if False in self.status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_Reporting_02.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_Reporting_02.png")
+                return False
+            else:
+                return True
+        except Exception as ex:
+            self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_Reporting_02_exception.png")
+            self.d.save_screenshot(f"{self.screenshots_path}\\TC_Reporting_02_exception.png")
+            self.logger.error(f"TC_Reporting_02 got exception as: {ex}")
+        # finally:
+        #     Reporting_pom().close_reporting_module()
 
     def For_number_of_events_by_enrollment_verify_number_of_events_from_report_field1_and_enrollment_from_report_field2_texts_are_visible_on_dropdown(self):
         try:
