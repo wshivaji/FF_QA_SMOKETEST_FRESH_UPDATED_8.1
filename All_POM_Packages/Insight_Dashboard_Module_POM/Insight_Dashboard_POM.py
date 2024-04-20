@@ -18,12 +18,31 @@ from Base_Package.Login_Logout_Ops import login, logout
 # from All_Other_Utility_Packages._3_User_Roles_Module.Read_Excel import Read_excel
 
 
+class insight_dashboard_count_variables:
+    current_file_path = os.path.abspath(__file__)
+    # enrollment_groups_enlisted_name_list = []
+    # enrollments_linked_to_enrollment_groups_enlisted_list = []
+
+    @classmethod
+    def update_and_write_to_file(cls, x, y):
+        enrollment_groups_enlisted_name_list.clear()
+        enrollments_linked_to_enrollment_groups_enlisted_list.clear()
+
+        enrollment_groups_enlisted_name_list.extend(x)
+        enrollments_linked_to_enrollment_groups_enlisted_list.extend(y)
+
+        print(enrollment_groups_enlisted_name_list)
+        print(enrollments_linked_to_enrollment_groups_enlisted_list)
+
+        with open(cls.current_file_path, "a") as file:
+            file.write(f"enrollment_groups_enlisted_name_list = {repr(enrollment_groups_enlisted_name_list)}\n")
+            file.write(f"enrollments_linked_to_enrollment_groups_enlisted_list = {repr(enrollments_linked_to_enrollment_groups_enlisted_list)}\n")
+
+
 class insight_dashboard_pom(web_driver, web_logger):
     d = web_driver.d()
     logger = web_logger.logger_obj()
     status = []
-    enrollment_group_name_list = []
-    enrollment_count_list = []
     current_file_path = os.path.abspath(__file__)
 
     def Verify_user_is_able_to_see_counts_on_overview_dashboard_as_total_loss_prevented_5500_active_enrollment_25_total_match_events_25_visito_searches_0_investgation_saving_time_0_repeat_people_of_interest_0(
@@ -756,14 +775,16 @@ class insight_dashboard_pom(web_driver, web_logger):
 
             self.logger.info(f"EG Names: {eg_name_list}")
             self.logger.info(f"EG Count: {eg_count_list}")
+            # insight_dashboard_count_variables().update_and_write_variables(self.current_file_path, eg_name_list, eg_count_list)
+
             if len(eg_count_list) == len(eg_name_list):
                 self.logger.info("eg names and eg enrollment count are equal.")
                 # Open the current file in write mode
                 file = open(self.current_file_path, 'a')
-
+                insight_dashboard_count_variables.update_and_write_to_file(eg_name_list, eg_count_list)
                 # Write the variables to the file
-                file.write(f"enrollment_group_name_list = {eg_name_list}\n")
-                file.write(f"enrollment_count_list = {eg_count_list}\n")
+                # file.write(f"enrollment_group_name_list = {eg_name_list}\n")
+                # file.write(f"enrollment_count_list = {eg_count_list}\n")
                 # Close the file
                 file.close()
 
@@ -808,10 +829,14 @@ class insight_dashboard_pom(web_driver, web_logger):
             vsj_menu_item = self.explicit_wait(5, "XPATH", insight_dashboard_read_ini().visitor_search_jobs_menu_item_by_xpath(), self.d)
             vsj_menu_item.click()
             total_vs_text = self.explicit_wait(5, "XPATH", insight_dashboard_read_ini().visitor_search_count_text_on_vsj_panel(), self.d)
-            self.logger.info(f"vs text: {total_vs_text.text}")
-            total_vs_text_list = total_vs_text.text.split(' ')
-            self.logger.info(f"vs text list: {total_vs_text_list}")
-            return total_vs_text_list[3]
+            if total_vs_text:
+                self.logger.info(f"vs text: {total_vs_text.text}")
+                total_vs_text_list = total_vs_text.text.split(' ')
+                self.logger.info(f"vs text list: {total_vs_text_list}")
+                return total_vs_text_list[3]
+            else:
+                self.logger.info(f"visitor search count is not visible.")
+                return "x"
         except Exception as ex:
             self.logger.info(f"get_total_visitor_search_count ex: {ex.args}")
 
@@ -2067,9 +2092,11 @@ class insight_dashboard_pom(web_driver, web_logger):
                 return False
             else:
                 return True
+
         except Exception as ex:
             self.logger.info(f"Enrollments_by_Status_counts_organisation_and_individual_groups ex:{ex.args}")
-enrollment_group_name_list = ['abe', 'Default Enrollment Group', 'fraude', 'pte', 'soe', 't1eg1', 't2eg1', 't2eg2', 't2eg3', 't2eg4', 't2eg5', 't3eg1', 't4eg1', 't4eg2', 't4eg3', 't4eg4', 't4eg5', 't5eg1', 't6eg1', 't6eg2', 't6eg3', 't6eg4']
-enrollment_count_list = ['10', '0', '5', '5', '7', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1']
-enrollment_group_name_list = ['abe', 'Default Enrollment Group', 'fraude', 'pte', 'soe', 't1eg1', 't2eg1', 't2eg2', 't2eg3', 't2eg4', 't2eg5', 't3eg1', 't4eg1', 't4eg2', 't4eg3', 't4eg4', 't4eg5', 't5eg1', 't6eg1', 't6eg2', 't6eg3', 't6eg4']
-enrollment_count_list = ['10', '0', '5', '5', '7', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1']
+
+
+enrollment_groups_enlisted_name_list = ['abe', 'Default Enrollment Group', 'fraude', 'pte', 'soe']
+enrollments_linked_to_enrollment_groups_enlisted_list = ['5', '0', '5', '5', '5']
+

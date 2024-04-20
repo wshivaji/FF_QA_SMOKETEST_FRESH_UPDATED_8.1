@@ -21,18 +21,19 @@ from All_Config_Packages._12_Identify_and_Enroll_Config_Files.Identify_and_Enrol
 from pathlib import Path
 
 
+
 class Identify_And_Enroll_POM(web_driver, web_logger):
     d = web_driver.d()
     logger = web_logger.logger_obj()
     status = []
 
     now = (datetime.datetime.now())
-    DATE_IE = now.strftime('%m/%d/%Y')
+    DATE_IE = now.strftime('%d/%m/%Y')
     TIME_IE = now.strftime('%H%M')
     AM_PM_IE = now.strftime('%p')
     tomorrow = now + timedelta(2)
 
-    expirationDATE_IE = tomorrow.strftime('%m/%d/%Y')
+    expirationDATE_IE = tomorrow.strftime('%d/%m/%Y')
     expirationTIME_IE = now.strftime('%H%M')
     expirationAM_PM_IE = now.strftime('%p')
 
@@ -69,6 +70,33 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
         else:
             self.logger.info(f"element length: {len(element_list)}")
             return element_list[0]
+
+    def upload_image_not_enrolled(self, img_path):
+
+        """
+        This function is usd to upload the image and click on the search button
+        :return:
+        """
+        file_path = img_path
+        time.sleep(2)
+        self.logger.info(f"image uploaded: {file_path}")
+        # upload_image = self.explicit_wait(10, "NAME", "image", self.d)
+        upload_image = self.d.find_element(By.NAME, "image")
+        upload_image.send_keys(file_path)
+
+    # def upload_image(self, file_path):
+    #     """
+    #     This function is usd to upload the image and click on the search button
+    #     :return:
+    #     """
+    #     # self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components().upload_image_by_xpath(), self.d)
+    #     # file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset1\\ab\\00076.png"
+    #     self.logger.info(f"image uploaded: {file_path}")
+    #     # upload_image = self.explicit_wait(10, "NAME", "image", self.d)
+    #     upload_image = self.d.find_element(By.NAME, "image")
+    #     upload_image.send_keys(file_path)
+
+        self.logger.info("Photo Selected....")
 
     def load_portal_login_page_if_not_loaded(self):
         try:
@@ -339,26 +367,31 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                     f"{Path(__file__).parent.parent}\\Screenshots\\login_failed_for_portal_menu_pg_03.png")
                 return False
 
-
-    def upload_image(self):
+    def upload_image(self, img_path):
         """
         This function is usd to upload the image and click on the search button
         :return:
         """
-        self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components().upload_image_by_xpath(), self.d)
-        upload_photo = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
-                                              .upload_image_by_xpath(), self.d)
-        upload_photo.click()
-        self.logger.info(f"clicked on upload image icon")
-        self.logger.info("Clicked on 'Select photo'....")
-        time.sleep(web_driver.one_second)
-        file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset1\\ab\\00076.png"
-
-        pyautogui.write(file_path)
-        pyautogui.press('enter')
-        time.sleep(web_driver.one_second)
-        pyautogui.press('enter')
-        time.sleep(web_driver.one_second)
+        # self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components().upload_image_by_xpath(), self.d)
+        # upload_photo = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
+        #                                       .upload_image_by_xpath(), self.d)
+        # upload_photo.click()
+        # self.logger.info(f"clicked on upload image icon")
+        # self.logger.info("Clicked on 'Select photo'....")
+        # time.sleep(web_driver.one_second)
+        # file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset1\\ab\\00076.png"
+        #
+        # pyautogui.write(file_path)
+        # pyautogui.press('enter')
+        # time.sleep(web_driver.one_second)
+        # pyautogui.press('enter')
+        # time.sleep(web_driver.one_second)
+        file_path = img_path
+        time.sleep(2)
+        self.logger.info(f"image uploaded: {file_path}")
+        # upload_image = self.explicit_wait(10, "NAME", "image", self.d)
+        upload_image_box = self.d.find_element(By.NAME, "image")
+        upload_image_box.send_keys(file_path)
         self.logger.info("Photo Selected....")
 
     def upload_image_not_enrolled(self, img_path):
@@ -413,7 +446,8 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
         self.d.execute_script("arguments[0].click();", link)
         self.logger.info(f"clicked on Identify and enroll link")
         time.sleep(web_driver.one_second)
-        self.upload_image()
+        file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset1\\ab\\00076.png"
+        self.upload_image(file_path)
 
         identify_enroll_btn = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components()
                                                   .identify_enroll_panel_identify_enroll_btn_by_xpath())
@@ -672,8 +706,8 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.d.execute_script("arguments[0].click();", link)
             self.logger.info(f"clicked on Identify and enroll link")
             time.sleep(web_driver.one_second)
-
-            self.upload_image()
+            file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset1\\ab\\00076.png"
+            self.upload_image(file_path)
 
             identify_enroll_btn = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
                                                       .identify_enroll_panel_identify_enroll_btn_by_xpath(), self.d)
@@ -749,14 +783,13 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                 try:
                     self.d.switch_to.alert.accept()
                 except Exception as ex:
-                    self.logger.info("Alert handled")
+                    self.logger.info(f"Alert handled {ex.args}")
             else:
                 pass
             time.sleep(web_driver.one_second)
 
-
         except Exception as ex:
-            self.logger.error(f"Exception crated: {ex}")
+            self.logger.error(f"Exception crated: {ex.args}")
             self.d.save_screenshot(f"{Path(__file__).parent.parent}\\Screenshots\\test_TC_IE_05_exception.png")
             return False
 
@@ -993,13 +1026,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
         except Exception as ex:
             self.logger.info(f"readiing Enrollment  from json: {ex.args}" )
 
-
-
-
-
-
-
-
     def Identify_and_enroll_25_subjects_and_fill_the_required_fields_5_per_Enrollment_groups(self):
         try:
             self.logger.info("************* test_TC_IE_01 started  **************")
@@ -1049,16 +1075,17 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                 self.logger.info(f"clicked on Identify and enroll link")
                 time.sleep(web_driver.one_second)
 
-                upload_photo = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
-                                                  .upload_image_by_xpath(), self.d)
-                upload_photo.click()
-                self.logger.info(f"clicked on upload image icon")
-                time.sleep(2)
+                # upload_photo = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
+                #                                   .upload_image_by_xpath(), self.d)
+                # upload_photo.click()
+                # self.logger.info(f"clicked on upload image icon")
+                # time.sleep(2)
                 file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset1\\{folder_name}\\{image} "
-                pyautogui.write(file_path)
-                pyautogui.press('enter')
-                time.sleep(2)
-                pyautogui.press('enter')
+                self.upload_image(file_path)
+                # pyautogui.write(file_path)
+                # pyautogui.press('enter')
+                # time.sleep(2)
+                # pyautogui.press('enter')
                 self.logger.info(f"Image upload success")
                 time.sleep(web_driver.one_second)
                 self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
@@ -1120,7 +1147,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                 select = Select(enrollment_group)
                 select.select_by_visible_text(Enrollment_details_dict_1["Enrollment_group"])
 
-
                 enrollment_group_selected = select.first_selected_option
                 self.logger.info(f"enrollment group selected = {enrollment_group_selected.text}")
                 print(f"enrollment group selected: {enrollment_group_selected.text}")
@@ -1132,7 +1158,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                 self.logger.info("region btn clicked")
                 time.sleep(web_driver.one_second)
                 region_names = self.d.find_elements(By.XPATH, Read_Identify_and_Enroll_Components().edge_name_list())
-                edge_name =Enrollment_details_dict_1["region_hierarchy"]
+                edge_name = Enrollment_details_dict_1["region_hierarchy"]
                 self.logger.info(f"edge name: {edge_name}")
                 for i in range(len(region_names)):
                     if edge_name in region_names[i].text:
@@ -1975,8 +2001,8 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                                       .identify_and_enroll_link_by_xpath(), self.d)
             self.d.execute_script("arguments[0].click();", link)
             self.logger.info(f"clicked on Identify and enroll link")
-
-            self.upload_image()
+            file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset1\\ab\\00076.png"
+            self.upload_image(file_path)
 
             identify_enroll_btn = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
                                                      .identify_enroll_panel_identify_enroll_btn_by_xpath(), self.d)

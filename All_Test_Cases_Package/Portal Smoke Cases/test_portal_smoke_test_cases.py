@@ -196,8 +196,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.system
     def test_SM_TC022(self):
-        if (Enrollments_Groups_Module_pom().
-                Verify_for_above_all_5_EG_face_and_mask_threshold_value_should_be_point_83_and_suppress_duplicate_events_value_should_be_0_minute()):
+        if Enrollments_Groups_Module_pom().Verify_for_above_all_5_EG_face_and_mask_threshold_value_should_be_point_83_and_suppress_duplicate_events_value_should_be_0_minute():
             assert True
         else:
             assert False
