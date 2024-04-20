@@ -33,11 +33,14 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
     AM_PM_IE = now.strftime('%p')
     tomorrow = now + timedelta(2)
 
-    expirationDATE_IE = tomorrow.strftime('%d/%m/%Y')
+    expirationDATE_IE = tomorrow.strftime('%m/%d/%Y')
     expirationTIME_IE = now.strftime('%H%M')
     expirationAM_PM_IE = now.strftime('%p')
 
     def dateTimeAMPM(self, date_incident):
+        self.logger.info(f" date : {self.DATE_IE}")
+        # date_incident.click()
+        # date_incident.clear()
         date_incident.send_keys(self.DATE_IE)
         time.sleep(web_driver.one_second)
         date_incident.send_keys(self.TIME_IE)
@@ -49,9 +52,9 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
         self.logger.info(f" tommorow date : {self.expirationDATE_IE}")
         date_incident.send_keys(self.expirationDATE_IE)
         time.sleep(web_driver.one_second)
-        date_incident.send_keys(self.TIME_IE)
+        date_incident.send_keys(" " + self.TIME_IE)
         time.sleep(web_driver.one_second)
-        date_incident.send_keys(self.AM_PM_IE)
+        date_incident.send_keys(" " + self.AM_PM_IE)
         time.sleep(web_driver.one_second)
 
     def wait_for_element_to_appear(self, element_list, xpath):
@@ -1242,9 +1245,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
         finally:
             logout().logout_from_core(self.d)
 
-
-
-
     def verify_user_able_approve_enrollment(self):
         try:
             self.logger.info("Identify_enroll_Tc_02_started")
@@ -1324,17 +1324,9 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.logger.info(f"clicked on Identify and enroll link")
             time.sleep(web_driver.one_second)
 
-            upload_photo = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
-                                              .upload_image_by_xpath(), self.d)
-            upload_photo.click()
-            self.logger.info(f"clicked on upload image icon")
-            time.sleep(2)
             file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset2\\img1.png"
-            pyautogui.write(file_path)
-            pyautogui.press('enter')
-            time.sleep(2)
-            pyautogui.press('enter')
-            self.logger.info(f"Image upload success")
+            self.upload_image(file_path)
+
             time.sleep(web_driver.two_second)
             image = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().image_Xpath())
 
@@ -1467,7 +1459,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             # # Scroll down to bottom
 
 
-
     def Verify_user_is_able_to_enroll_the_person_by_uploading_the_image_and_adding_the_required_details_for_the_same_along_with_expiry_date_and_time_range(self):
         try:
 
@@ -1483,17 +1474,9 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.logger.info(f"clicked on Identify and enroll link")
             time.sleep(web_driver.one_second)
 
-            upload_photo = self.explicit_wait(7, "XPATH", Read_Identify_and_Enroll_Components()
-                                              .upload_image_by_xpath(), self.d)
-            upload_photo.click()
-            self.logger.info(f"clicked on upload image icon")
-            time.sleep(2)
-            file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset2\\img2.png."
-            pyautogui.write(file_path)
-            pyautogui.press('enter')
-            time.sleep(2)
-            pyautogui.press('enter')
-            self.logger.info(f"Image upload success")
+            file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset2\\img2.png"
+            self.upload_image(file_path)
+
             time.sleep(web_driver.one_second)
             self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
                                .identify_enroll_panel_identify_enroll_btn_by_xpath(), self.d)
@@ -1517,7 +1500,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.click_on_enroll_for_already_enrolled()
             time.sleep(web_driver.two_second)
 
-            expiration_date = self.d.find_element(By.XPATH,Read_Identify_and_Enroll_Components().get_expiration_date_xpath())
+            expiration_date = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().get_expiration_date_xpath())
             time.sleep(web_driver.one_second)
             expiration_date.send_keys(Keys.CONTROL,'a')
             time.sleep(web_driver.one_second)
@@ -1567,19 +1550,20 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                                                .case_subject_inpt_bx_by_xpath())
             case_subject.send_keys(Read_Identify_and_Enroll_Components().case_subject_data())
 
+            reported_loss = self.d.find_element(By.XPATH,
+                                                Read_Identify_and_Enroll_Components().reported_loss_inpt_bx_by_xpath())
+            reported_loss.send_keys(Read_Identify_and_Enroll_Components().reported_loss_data())
+
             date_incident = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components()
                                                 .date_incident_inpt_bx_by_xpath())
             time.sleep(web_driver.two_second)
             self.dateTimeAMPM(date_incident)
 
 
-            reported_loss = self.d.find_element(By.XPATH,
-                                                Read_Identify_and_Enroll_Components().reported_loss_inpt_bx_by_xpath())
-            reported_loss.send_keys(Read_Identify_and_Enroll_Components().reported_loss_data())
 
             action_input = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().action_inpt_bx_by_xpath())
             action_input.send_keys(Read_Identify_and_Enroll_Components().action_input_data())
-
+            time.sleep(web_driver.one_second)
             save_btn = self.d.find_element(By.XPATH,
                                            Read_Identify_and_Enroll_Components().add_details_save_btn_by_xpath())
             if save_btn.is_displayed():
@@ -2188,10 +2172,10 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                 return True
 
         except Exception as ex:
-                self.logger.error(f"test_TC_IE_08 got an exception as: {ex}")
-                self.d.save_screenshot(
-                    f"{self.screenshots_path}\\test_TC_IE_08_Exception.png")
-                return False
+            self.logger.error(f"test_TC_IE_08 got an exception as: {ex}")
+            self.d.save_screenshot(
+                f"{self.screenshots_path}\\test_TC_IE_08_Exception.png")
+            return False
         finally:
             logout().logout_from_core(self.d)
 
