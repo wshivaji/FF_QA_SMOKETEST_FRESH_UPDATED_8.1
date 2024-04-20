@@ -40,6 +40,15 @@ class Reporting_read_ini:
         except Exception as ex:
             print(ex)
 
+    def get_total_events_count_on_events_panel_by_xpath(self):
+        try:
+            total_events_count_on_events_panel_by_xpath = (
+                self.config.get("Reporting", "total_events_count_on_events_panel_by_xpath"))
+            print("total_events_count_on_events_panel_by_xpath: ", total_events_count_on_events_panel_by_xpath)
+            return total_events_count_on_events_panel_by_xpath
+        except Exception as ex:
+            print(ex)
+
     def get_reporting_module(self):
         try:
             reporting_module_name = self.common_test_data_config.get("Reporting_Data", "reporting_module")
@@ -48,11 +57,100 @@ class Reporting_read_ini:
         except Exception as ex:
             print(ex)
 
+    def get_events_by_zone_counts(self):
+        try:
+            events_by_zone_counts = self.common_test_data_config.get("Reporting_Data", "events_by_zone_counts")
+            print("events_by_zone_counts: ", events_by_zone_counts)
+            return events_by_zone_counts
+        except Exception as ex:
+            print(ex)
+
+    def events_by_enrollment_count(self):
+        try:
+            events_by_enrollment_count = self.common_test_data_config.get("Reporting_Data", "events_by_enrollment_count")
+            print("events_by_enrollment_count: ", events_by_enrollment_count)
+            return events_by_enrollment_count
+        except Exception as ex:
+            print(ex)
+
     def get_reporting_module_by_xpath(self):
         try:
             reporting_module = self.config.get("Reporting", "reporting_module_by_xpath")
             print("reporting module: ", reporting_module)
             return reporting_module
+        except Exception as ex:
+            print(ex)
+
+    def get_total_enrollments_count_on_enrollments_panel_by_xpath(self):
+        try:
+            total_enrollments_count_on_enrollments_panel_by_xpath = (
+                self.config.get("Reporting", "total_enrollments_count_on_enrollments_panel_by_xpath"))
+            print("total_enrollments_count_on_enrollments_panel_by_xpath: ",
+                  total_enrollments_count_on_enrollments_panel_by_xpath)
+            return total_enrollments_count_on_enrollments_panel_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def get_search_dropdown_on_events_panel_by_xpath(self):
+        try:
+            search_dropdown_on_events_panel_by_xpath = self.config.get("Reporting",
+                                                                       "search_dropdown_on_events_panel_by_xpath")
+            print("search_dropdown_on_events_panel_by_xpath: ", search_dropdown_on_events_panel_by_xpath)
+            return search_dropdown_on_events_panel_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def get_org_hierarchy_selection_btn_on_event_search_by_xpath(self):
+        try:
+            org_hierarchy_selection_btn_on_event_search_by_xpath = (
+                self.config.get("Reporting", "org_hierarchy_selection_btn_on_event_search_by_xpath"))
+            print("org_hierarchy_selection_btn_on_event_search_by_xpath: ",
+                  org_hierarchy_selection_btn_on_event_search_by_xpath)
+            return org_hierarchy_selection_btn_on_event_search_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def get_regions_text_list_by_xpath(self):
+        try:
+            regions_text_list_by_xpath = (self.config.get("Reporting", "regions_text_list_by_xpath"))
+            print("regions_text_list_by_xpath: ", regions_text_list_by_xpath)
+            return regions_text_list_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def get_region_checkboxes_by_xpath(self):
+        try:
+            region_checkboxes_by_xpath = (self.config.get("Reporting", "region_checkboxes_by_xpath"))
+            print("region_checkboxes_by_xpath: ", region_checkboxes_by_xpath)
+            return region_checkboxes_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def get_save_button_on_org_hierarchy_by_xpath(self):
+        try:
+            save_button_on_org_hierarchy_by_xpath = (self.config.get("Reporting",
+                                                                     "save_button_on_org_hierarchy_by_xpath"))
+            print("save_button_on_org_hierarchy_by_xpath: ", save_button_on_org_hierarchy_by_xpath)
+            return save_button_on_org_hierarchy_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def get_events_by_enrollments_count_on_reporting_by_xpath(self):
+        try:
+            events_by_enrollments_count_on_reporting_by_xpath = (self.config.get("Reporting",
+                                                                     "events_by_enrollments_count_on_reporting_by_xpath"))
+            print("events_by_enrollments_count_on_reporting_by_xpath: ", events_by_enrollments_count_on_reporting_by_xpath)
+            return events_by_enrollments_count_on_reporting_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def get_search_btn_on_search_dropdown_on_events_panel_by_xpath(self):
+        try:
+            search_btn_on_search_dropdown_on_events_panel_by_xpath = \
+                (self.config.get("Reporting", "search_btn_on_search_dropdown_on_events_panel_by_xpath"))
+            print("search_btn_on_search_dropdown_on_events_panel_by_xpath: ",
+                  search_btn_on_search_dropdown_on_events_panel_by_xpath)
+            return search_btn_on_search_dropdown_on_events_panel_by_xpath
         except Exception as ex:
             print(ex)
 

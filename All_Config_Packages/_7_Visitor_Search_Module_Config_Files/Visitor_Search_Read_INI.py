@@ -453,6 +453,13 @@ class Read_Visitor_Search_Components:
         except Exception as ex:
             print("zone_data_input : ", ex)
 
+    def start_monthYear(self):
+        try:
+            start_month_Year = self.common_test_data_config.get("common_data", "start_monthYear")
+            return start_month_Year
+        except Exception as ex:
+            print("start_monthYear : ", ex)
+
     def vsj_start_date(self):
         try:
             ele = self.common_test_data_config.get("common_data", "vsj_start_date")

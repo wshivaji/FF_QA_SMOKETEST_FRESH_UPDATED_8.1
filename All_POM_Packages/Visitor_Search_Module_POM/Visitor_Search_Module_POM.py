@@ -1,3 +1,6 @@
+import os, json, time
+import datetime
+
 import pandas as pd
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -29,24 +32,6 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
         self.custom_dates_json = \
             f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\7_Visitor_Search_Module\\Data_From_JSON\\custom_dates_json.json"
 
-
-    def wait_for_element_to_appear(self, element_list, xpath):
-        count = 0
-        if len(element_list) == 0:
-            while len(element_list) == 0 or count == 10:
-                element_list = self.d.find_elements(By.XPATH, xpath)
-                time.sleep(web_driver.one_second)
-                if len(element_list) > 0:
-                    self.logger.info("element is visible...")
-                    return element_list[0]
-                else:
-                    self.logger.info("waiting for element...")
-                count += 1
-                self.logger.info(f"wait count: {count}")
-        else:
-            self.logger.info(f"element length: {len(element_list)}")
-            return element_list[0]
-
     def click_on_visitor_search(self):
         self.logger.info("going to visitor search...")
         visitor_search_btn = web_driver.explicit_wait(self, 10, "XPATH",
@@ -59,11 +44,6 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
 
     def login(self):
         login().login_to_cloud_if_not_done(self.d)
-        # login().login_to_localhost_if_not_done()
-        # if self.d.title == "" or self.d.find_element(By.ID, Read_Visitor_Search_Components().get_loginButton()).is_displayed():
-        #     login().login_to_cloud_if_not_done(self.d)
-        #
-        #     time.sleep(web_driver.two_second)
 
     def get_date_range_from_json(self):
         try:
@@ -835,6 +815,135 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
         tick_icon.click()
         # tick_icon.click()
 
+    def startDateSelection(self, strategy, date, month, year, hour, minute, req_period):
+        web_driver.implicit_wait(self, web_driver.one_second, self.d)
+        self.logger.info("select from date checkbox")
+        start_check_bx = self.d.find_element(By.XPATH,
+                                             Read_Visitor_Search_Components().start_date_checkbox_by_xpath())
+        start_check_bx.click()
+        time.sleep(web_driver.one_second)
+
+        self.logger.info("select date time")
+        start_date_txt_bx = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().start_date_by_xpath())
+        self.d.execute_script("arguments[0].scrollIntoView();", start_date_txt_bx)
+        start_date_txt_bx.click()
+
+        self.logger.info("datetime clicked")
+        time.sleep(web_driver.one_second)
+        web_driver.implicit_wait(self, web_driver.one_second, self.d)
+
+        end_check_bx = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().end_date_checkbox_by_xpath())
+        end_check_bx.click()
+        time.sleep(web_driver.one_second)
+        web_driver.implicit_wait(self, web_driver.one_second, self.d)
+        end_date_txt_bx = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().end_date_by_xpath())
+        self.d.execute_script("arguments[0].scrollIntoView();", end_date_txt_bx)
+        end_date_txt_bx.click()
+        time.sleep(web_driver.one_second)
+        web_driver.implicit_wait(self, web_driver.one_second, self.d)
+
+
+
+
+        # click on the clock icon
+        self.logger.info("selecting time")
+        calender_clock = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().calender_timer_icon_by_xpath())
+        calender_clock.click()
+        self.logger.info("select time ")
+        time.sleep(web_driver.one_second)
+        web_driver.implicit_wait(self, web_driver.one_second, self.d)
+        time.sleep(3)
+
+        # handle the hour and minute based on the strategy
+        if strategy == "from":
+            self.logger.info("select in from hours and min")
+            self.calender_handle_hour_minute_from(hour, minute)
+        else:
+            self.logger.info("select in to hours and min")
+            self.calender_handle_hour_minute_to(hour, minute)
+
+        # select the period am or pm
+        period = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().period_by_xpath())
+        if period.text == req_period:
+            print("")
+        else:
+            period.click()
+
+        # click on the tick icon
+        tick_icon = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().calender_tick_icon_by_xpath())
+        tick_icon.click()
+
+        if strategy == "from":
+            self.logger.info("From start date")
+            start_date_txt_bx = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().start_date_by_xpath())
+            start_date_txt_bx.click()
+            time.sleep(web_driver.one_second)
+            web_driver.implicit_wait(self, web_driver.one_second, self.d)
+
+        else:
+            # click on the to calendar pop up
+            self.logger.info("To End Date")
+            start_date_txt_bx = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().end_date_by_xpath())
+            start_date_txt_bx.click()
+            time.sleep(web_driver.one_second)
+            web_driver.implicit_wait(self, web_driver.one_second, self.d)
+
+        req_month = month
+        req_year = year
+        month_to_num = {
+            "January": 1,
+            "February": 2,
+            "March": 3,
+            "April": 4,
+            "May": 5,
+            "June": 6,
+            "July": 7,
+            "August": 8,
+            "September": 9,
+            "October": 10,
+            "November": 11,
+            "December": 12
+        }
+        month_year = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().calender_month_year_by_xpath())
+        ac_month = month_year.text.split(" ")[0]
+        ac_year = int(month_year.text.split(" ")[1])
+
+        # click on the back button
+        while month_to_num.get(req_month) < month_to_num.get(ac_month) or req_year < ac_year:
+            cal_back_button = self.d.find_element(By.XPATH,
+                                                  Read_Visitor_Search_Components().calender_back_button_by_xpath())
+            if cal_back_button.is_enabled():
+                cal_back_button.click()
+            time.sleep(1)
+            month_year = self.d.find_element(By.XPATH,
+                                             Read_Visitor_Search_Components().calender_month_year_by_xpath())
+            ac_month = month_year.text.split(" ")[0]
+            ac_year = int(month_year.text.split(" ")[1])
+
+        # click on the forward button
+        while month_to_num.get(req_month) > month_to_num.get(ac_month) or req_year > ac_year:
+            cal_back_button = self.d.find_element(By.XPATH,
+                                                  Read_Visitor_Search_Components().calender_forward_button_by_xpath())
+            if cal_back_button.is_enabled():
+                cal_back_button.click()
+            time.sleep(1)
+            month_year = self.d.find_element(By.XPATH,
+                                             Read_Visitor_Search_Components().calender_month_year_by_xpath())
+            ac_month = month_year.text.split(" ")[0]
+            ac_year = int(month_year.text.split(" ")[1])
+
+        # click on the required date
+        date = self.d.find_element(By.XPATH,
+                                   "(//td[@class='day' or @class='day weekend' or @class='day active' "
+                                   "or @class='day active today'])[" + str(date) + "]")
+        date.click()
+
+        # click on the tick icon
+        tick_icon = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().calender_tick_icon_by_xpath())
+
+        tick_icon.click()
+        # tick_icon.click()
+
     def calender_handle_hour_minute_to(self, hour, minute):
         # set the hour
         current_hour_ele = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().current_hour_ele_by_xpath())
@@ -884,87 +993,3 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
             current_min_ele = self.d.find_element(By.XPATH, Read_Visitor_Search_Components()
                                                   .current_minute_element_by_xpath())
             cur_min = int(current_min_ele.text)
-
-    def get_start_date(self):
-        try:
-            # self.get_date_range_from_json()
-            time.sleep(web_driver.one_second)
-
-            start_date_calender_box = web_driver.explicit_wait(self, 10, "XPATH", Read_Visitor_Search_Components().get_start_date_calender_box_by_xpath(), self.d)
-            start_date_checkbox = web_driver.explicit_wait(self, 10, "XPATH", Read_Visitor_Search_Components().start_date_checkbox_by_xpath(), self.d)
-            time.sleep(web_driver.one_second)
-            start_date_checkbox.click()
-            start_date_calender_box.click()
-            action = ActionChains(self.d)
-            time.sleep(web_driver.one_second)
-            default_start_date = start_date_calender_box.get_attribute('value')
-            default_start_date = list(default_start_date.split(' '))
-            d_start_date = default_start_date[0]
-            d_start_date = list(d_start_date.split('/'))
-            s_month = d_start_date[0]
-            s_date = d_start_date[1]
-            start_date = Read_Visitor_Search_Components().vsj_start_date()
-            input_start_date = list(start_date.split('/'))
-            input_s_date = input_start_date[0]
-            input_s_month = input_start_date[1]
-            input_s_year = input_start_date[2]
-            status = True
-            if s_month < input_s_month:
-                while status:
-                    action.key_down(Keys.ARROW_RIGHT).key_up(Keys.ARROW_RIGHT).perform()
-                    current_date_and_time = start_date_calender_box.get_attribute('value')
-                    current_date_and_time = list(current_date_and_time.split(' '))
-                    current_date = current_date_and_time[0]
-                    current_date = list(current_date.split('/'))
-                    c_date = current_date[1]
-                    c_month = current_date[0]
-                    # c_year = current_date[2]
-                    if c_month == input_s_month and c_date == input_s_date:
-                        action.key_down(Keys.ENTER).key_up(Keys.ENTER).perform()
-                        self.logger.info(F"Start date selected as:- {input_s_date}/{input_s_month}/{input_s_year}")
-                        status = False
-            elif s_month > input_s_month:
-                while status:
-                    action.key_down(Keys.ARROW_LEFT).key_up(Keys.ARROW_LEFT).perform()
-                    current_date_and_time = start_date_calender_box.get_attribute('value')
-                    current_date_and_time = list(current_date_and_time.split(' '))
-                    current_date = current_date_and_time[0]
-                    current_date = list(current_date.split('/'))
-                    c_date = current_date[1]
-                    c_month = current_date[0]
-                    if c_month == input_s_month and c_date == input_s_date:
-                        action.key_down(Keys.ENTER).key_up(Keys.ENTER).perform()
-                        self.logger.info(F"Start date selected as:- {input_s_date}/{input_s_month}/{input_s_year}")
-                        status = False
-            else:
-                if s_date > input_s_date:
-                    while status:
-                        action.key_down(Keys.ARROW_LEFT).key_up(Keys.ARROW_LEFT).perform()
-                        current_date_and_time = start_date_calender_box.get_attribute('value')
-                        current_date_and_time = list(current_date_and_time.split(' '))
-                        current_date = current_date_and_time[0]
-                        current_date = list(current_date.split('/'))
-                        c_date = current_date[1]
-                        c_month = current_date[0]
-                        if c_month == input_s_month and c_date == input_s_date:
-                            action.key_down(Keys.ENTER).key_up(Keys.ENTER).perform()
-                            self.logger.info(F"Start date selected as:- {input_s_date}/{input_s_month}/{input_s_year}")
-                            status = False
-                elif s_date < input_s_date:
-                    while status:
-                        action.key_down(Keys.ARROW_RIGHT).key_up(Keys.ARROW_RIGHT).perform()
-                        current_date_and_time = start_date_calender_box.get_attribute('value')
-                        current_date_and_time = list(current_date_and_time.split(' '))
-                        current_date = current_date_and_time[0]
-                        current_date = list(current_date.split('/'))
-                        c_date = current_date[1]
-                        c_month = current_date[0]
-                        if c_month == input_s_month and c_date == input_s_date:
-                            action.key_down(Keys.ENTER).key_up(Keys.ENTER).perform()
-                            self.logger.info(F"Start date selected as:- {input_s_date}/{input_s_month}/{input_s_year}")
-                            status = False
-                else:
-                    action.key_down(Keys.ENTER).key_up(Keys.ENTER).perform()
-        except Exception as ex:
-            self.logger.error("start date method exception")
-            self.logger.error(ex)

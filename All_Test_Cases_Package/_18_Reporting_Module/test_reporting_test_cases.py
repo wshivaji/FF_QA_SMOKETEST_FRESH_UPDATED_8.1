@@ -14,14 +14,15 @@ class Test_Reporting_Module_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.portal
     def test_TC_Reporting_01(self):
-        if Reporting_Events_pom().verify_report_for_number_of_events_by_zone_with_default_dates_1_month_and_with_group_selected_as_SOE():
+        if (Reporting_Events_pom().
+                Verify_report_for_number_of_probable_match_events_by_zone_with_default_dates_and_optional_filters()):
             assert True
         else:
             assert False
 
     @pytest.mark.portal
     def test_TC_Reporting_02(self):
-        if Reporting_Events_pom().verify_report_for_number_of_events_by_enrollment_with_default_dates_1_month_and_with_group_selected_as_ABE():
+        if Reporting_Events_pom().Verify_report_for_number_of_probable_match_events_by_enrollment_with_default_dates_and_optional_filters():
             assert True
         else:
             assert False
