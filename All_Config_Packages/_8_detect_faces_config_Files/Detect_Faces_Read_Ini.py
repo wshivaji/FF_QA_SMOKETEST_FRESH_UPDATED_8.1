@@ -219,6 +219,15 @@ class detect_Faces_Read_Ini:
         except Exception as ex:
             print(ex)
 
+    def image_box_click_to_select_image_by_xpath(self):
+        try:
+
+            image_box_click_to_select_image_by_xpath = self.config.get("Detect_faces_locators", "image_box_click_to_select_image_by_xpath")
+            print("image_box_click_to_select_image_by_xpath ", image_box_click_to_select_image_by_xpath)
+            return image_box_click_to_select_image_by_xpath
+        except Exception as ex:
+            print(ex)
+
 
 
 
