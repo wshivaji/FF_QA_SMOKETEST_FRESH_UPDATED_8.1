@@ -660,15 +660,19 @@ class detect_faces_pom(web_driver, web_logger):
             self.logger.info("detect faces clicked")
             time.sleep(web_driver.two_second)
             self.logger.info("reached to image")
-            file_image_path = f"{Path(__file__).parent.parent.parent}\\Other_IMP_Files\\Images\\Images\\img1.png"
+            file_image_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\detect_faces\\img2.jpg"
+            time.sleep(web_driver.two_second)
             self.d.find_element(By.ID, "image").send_keys(file_image_path)
-            time.sleep(5)
+            time.sleep(15)
+            select_img = self.explicit_wait(5, "XPATH", detect_Faces_Read_Ini().image_box_click_to_select_image_by_xpath(), self.d)
+            select_img.click()
             question_mark_symbol = self.explicit_wait(10, "XPATH", detect_Faces_Read_Ini().question_mark_symbol(), self.d)
             question_mark_symbol.click()
             self.logger.info("question mark symbol is clicked")
             time.sleep(web_driver.two_second)
             download_image = self.explicit_wait(10, "XPATH", detect_Faces_Read_Ini().download_image_button(), self.d)
             if download_image.is_displayed():
+                download_image.click()
                 self.logger.info("download image button is visible")
                 self.status.append(True)
             else:
@@ -905,9 +909,13 @@ class detect_faces_pom(web_driver, web_logger):
             self.logger.info("detect faces clicked")
             time.sleep(web_driver.two_second)
             self.logger.info("reached to image")
-            file_image_path = f"{Path(__file__).parent.parent.parent}\\Other_IMP_Files\\Images\\Images\\img1.png"
+            file_image_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\detect_faces\\img2.jpg"
+            time.sleep(web_driver.two_second)
             self.d.find_element(By.ID, "image").send_keys(file_image_path)
-            time.sleep(5)
+            time.sleep(15)
+            select_img = self.explicit_wait(5, "XPATH",
+                                            detect_Faces_Read_Ini().image_box_click_to_select_image_by_xpath(), self.d)
+            select_img.click()
             question_mark_symbol = self.explicit_wait(10, "XPATH", detect_Faces_Read_Ini().question_mark_symbol(), self.d)
             question_mark_symbol.click()
             self.logger.info("question mark symbol is clicked")
@@ -1382,9 +1390,13 @@ class detect_faces_pom(web_driver, web_logger):
             self.logger.info("detect faces clicked")
             time.sleep(web_driver.two_second)
             self.logger.info("reached to image")
-            file_image_path = f"{Path(__file__).parent.parent.parent}\\Other_IMP_Files\\Images\\Images\\img1.png"
+            file_image_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\detect_faces\\img2.jpg"
+            time.sleep(web_driver.two_second)
             self.d.find_element(By.ID, "image").send_keys(file_image_path)
-            time.sleep(5)
+            time.sleep(15)
+            select_img = self.explicit_wait(5, "XPATH",
+                                            detect_Faces_Read_Ini().image_box_click_to_select_image_by_xpath(), self.d)
+            select_img.click()
             question_mark_symbol = self.explicit_wait(10, "XPATH", detect_Faces_Read_Ini().question_mark_symbol(), self.d)
             question_mark_symbol.click()
             self.logger.info("question mark symbol is clicked")
