@@ -44,6 +44,19 @@ class Test_notes_page_testcases(web_driver, web_logger):
         else:
             assert False
 
+    def test_NOTES_TC_7(self):
+        if notes_pom().verify_user_is_able_to_see_the_enrollment_associated_to_particular_note():
+            assert True
+        else:
+            assert False
+
+    def test_NOTES_TC_08(self):
+        if notes_pom().Verify_user_is_able_to_add_photo_when_image_icon_is_clicked():
+            assert True
+        else:
+            assert False
+
+
     #
     # @pytest.mark.p3
     # def test_NOTES_Tc_01(self):
