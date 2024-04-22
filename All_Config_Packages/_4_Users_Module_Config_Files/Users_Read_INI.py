@@ -1953,3 +1953,62 @@ class Read_Users_Components:
         except Exception as ex:
             print(ex.args)
 
+    def region_name(self):
+        try:
+            region = self.config.get("LOCATORS","region_name")
+            return region
+        except Exception as ex:
+            print(ex.args)
+    def region_names_from_ini(self):
+        try:
+            region = self.common_test_data_config.get("system_level_test_Data","user_name_input_data")
+            return region
+        except Exception as ex:
+            print(ex.args)
+    def read_core_username(self):
+        try:
+            core_user = self.config.get("DATA","username_core")
+            return core_user
+        except Exception as ex:
+            print(ex.args)
+
+
+    def read_core_user_user_role(self):
+        try:
+            core_userrole = self.config.get("DATA","user_role")
+            return core_userrole
+        except Exception as ex:
+            print(ex.args)
+    def read_core_user_region(self):
+        try:
+            core_region = self.config.get("DATA","region")
+            return core_region
+        except Exception as ex:
+            print(ex.args)
+    def read_core_user_email(self):
+        try:
+            core_email = self.config.get("DATA","core_user_email")
+            return core_email
+        except Exception as ex:
+            print(ex.args)
+
+    def read_core_user_timezone(self):
+        try:
+            time_zone = self.config.get("DATA","core_user_time_zone")
+            return time_zone
+        except Exception as ex:
+            print(ex.args)
+
+    def root_region_xpath(self):
+        try:
+            root = self.config.get("Portal_Login_Page","root_region_xpath")
+            return root
+        except Exception as ex:
+            print(ex.args)
+
+    def root_region_name(self):
+        try:
+            name = self.config.get("DATA","root_region_name")
+            return name
+        except Exception as ex:
+            print(ex.args)

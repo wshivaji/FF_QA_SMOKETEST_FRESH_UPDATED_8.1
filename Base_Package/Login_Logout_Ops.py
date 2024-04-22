@@ -141,6 +141,70 @@ class login(web_driver, web_logger):
             self.d.save_screenshot(f"{web_driver.screenshots_path}\\login_exception.png")
             print(f"{ex.args}")
 
+    def login_to_DM_if_not_done(self, d):
+        try:
+            self.d = d
+            time.sleep(web_driver.one_second)
+            if self.d.current_url == Portal_login_page_read_ini().get_dm_url():
+                self.logger.info(f"page url: {self.d.current_url}")
+                pass
+            else:
+                self.d.get(Portal_login_page_read_ini().get_dm_url())
+                # self.d.maximize_window()
+                # # time.sleep(web_driver.two_second)
+                # time.sleep(web_driver.one_second)
+                # for i in range(4):
+                #     pyautogui.hotkey('ctrl', '-')
+                #     time.sleep(0.5)
+
+            login_btn = self.d.find_elements(By.XPATH, self.common_test_data_config.get("Login_Logout_Data", "login_btn_on_dm_by_xpath"))
+            current_url = self.d.current_url
+            self.logger.info(f"current url: {current_url}")
+
+            if current_url is None or len(login_btn) > 0:
+                print("current url", current_url)
+                self.logger.info("url is not open")
+                self.d.get(self.common_test_data_config.get("Login_Logout_Data", "dm_login_url"))
+                self.d.maximize_window()
+                self.logger.info("opening dm login")
+                self.logger.info("logging in to DM")
+                self.implicit_wait(web_driver.one_second, self.d)
+                print(f"DM page title: {self.d.title}")
+                username_textbox = web_driver.explicit_wait(self, 10, "XPATH", self.common_test_data_config.get("Login_Logout_Data", "dm_username_txtbx_by_xpath"), self.d)
+                password_textbox = self.d.find_element(By.XPATH, self.common_test_data_config.get("Login_Logout_Data", "dm_password_txtbx_by_xpath"))
+                login_btn = self.d.find_element(By.XPATH, self.common_test_data_config.get("Login_Logout_Data", "login_btn_on_dm_by_xpath"))
+                self.implicit_wait(web_driver.one_second, self.d)
+                if username_textbox != None:
+                    if username_textbox.text == "":
+                        username_textbox.send_keys(self.common_test_data_config.get("Login_Logout_Data", "email"))
+                        time.sleep(web_driver.one_second)
+                self.implicit_wait(web_driver.one_second, self.d)
+                if password_textbox != None:
+                    if password_textbox.text == "":
+                        password_textbox.send_keys(self.common_test_data_config.get("Login_Logout_Data", "password"))
+                        time.sleep(web_driver.one_second)
+                self.implicit_wait(web_driver.one_second, self.d)
+                login_btn.click()
+                # self.implicit_wait(web_driver.one_second, self.d)
+                # logout_btn = web_driver.explicit_wait(self, 10, "XPATH", self.config.get("logout_locators", "logout_btn_by_xpath"), self.d)
+                #
+                # time.sleep(web_driver.two_second)
+                # if logout_btn.is_displayed():
+                #     self.logger.info("login success..")
+                # else:
+                #     self.logger.info("login unsuccessful.. please check code.")
+                #     self.d.save_screenshot(f"{web_driver.screenshots_path}\\login_failed.png")
+                # time.sleep(web_driver.two_second)
+            else:
+                print("portal logged in")
+                self.logger.info("Portal already logged in")
+                time.sleep(web_driver.two_second)
+            return self.d
+        except Exception as ex:
+            self.logger.info(f"exception: {ex.args}")
+            self.d.save_screenshot(f"{web_driver.screenshots_path}\\login_exception.png")
+            print(f"{ex.args}")
+
     def login_to_cloud_if_not_done_with_user_credentials(self, d, username, password):
         try:
             self.d = d
@@ -216,8 +280,8 @@ class login(web_driver, web_logger):
             self.d = d
             time.sleep(web_driver.one_second)
             if self.d.current_url == Portal_login_page_read_ini().get_portal_url():
-                self.logger.info(f"page url: {self.d.current_url}")
-                pass
+               self.logger.info(f"page url: {self.d.current_url}")
+               pass
             else:
                 self.d.get(Portal_login_page_read_ini().get_portal_url())
                 self.d.maximize_window()
@@ -295,8 +359,8 @@ class login(web_driver, web_logger):
             self.d = d
             time.sleep(web_driver.one_second)
             if self.d.current_url == Portal_login_page_read_ini().get_portal_url():
-                self.logger.info(f"page url: {self.d.current_url}")
-                pass
+               self.logger.info(f"page url: {self.d.current_url}")
+               pass
             else:
                 self.d.get(Portal_login_page_read_ini().get_portal_url())
                 self.d.maximize_window()
@@ -391,7 +455,7 @@ class login(web_driver, web_logger):
                 time.sleep(web_driver.two_second)
 
                 time.sleep(web_driver.one_second)
-                for i in range(4):
+                for i in range(5):
                     pyautogui.hotkey('ctrl', '-')
                     time.sleep(0.5)
 
@@ -449,7 +513,7 @@ class login(web_driver, web_logger):
             self.d.save_screenshot(f"{web_driver.screenshots_path}\\login_exception.png")
             print(f"{ex.args}")
 
-    def login_to_facecirst_portal_if_not_done(self, d):
+    def login_to_facefirst_portal_if_not_done(self, d):
         try:
             self.d = d
             time.sleep(web_driver.one_second)
@@ -464,12 +528,14 @@ class login(web_driver, web_logger):
                                                                                             "cloud_or_local_menu_by_xpath"),
                                                           self.d)
             except Exception as ex:
-                print(ex.args)
-            if cloud_menu_btn:
+                self.logger.info(f"logout btn is not visible: {ex.args}")
+
+            if cloud_menu_btn.is_displayed():
                 print(f"logout btn visible: {cloud_menu_btn.is_displayed()}")
             else:
                 if self.d.current_url == Portal_login_page_read_ini().get_portal_url():
                     print(f"page url: {self.d.current_url}")
+
                 else:
                     self.d.get(Portal_login_page_read_ini().get_portal_url())
                     self.d.maximize_window()
