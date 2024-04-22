@@ -2,7 +2,7 @@ from pathlib import Path
 import pytest
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
-from All_POM_Packages._6_Notification_Groups_Module.notification_groups_module_POM import Notification_Groups_Module_pom
+from All_POM_Packages.Notification_Groups_Module.notification_groups_module_POM import Notification_Groups_Module_pom
 
 
 @pytest.mark.run(order=3)

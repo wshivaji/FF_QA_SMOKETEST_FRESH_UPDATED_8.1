@@ -1,7 +1,7 @@
 import pytest
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
-from All_POM_Packages._20_Insight_Dashboard_Module_POM.Insight_Dashboard_POM import insight_dashboard_pom
+from All_POM_Packages.Insight_Dashboard_Module_POM.Insight_Dashboard_POM import insight_dashboard_pom
 
 
 @pytest.mark.run(order=13)

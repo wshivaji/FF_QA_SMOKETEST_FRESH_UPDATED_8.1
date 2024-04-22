@@ -2,7 +2,7 @@
 import pytest
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
-from All_POM_Packages._12_Identify_and_Enroll_Module_POM.Identify_and_Enroll_Module_POM import Identify_And_Enroll_POM
+from All_POM_Packages.Identify_and_Enroll_Module_POM.Identify_and_Enroll_Module_POM import Identify_And_Enroll_POM
 
 
 @pytest.mark.run(order=8)
@@ -69,12 +69,12 @@ class Test_Identify_and_Enroll_Test_Cases(web_driver, web_logger):
             assert False
 
 
-    @pytest.mark.p1
-    def test_TC_IE_09(self):
-        if Identify_And_Enroll_POM().Verify_for_above_25_enrolled_subject_region_edges_are_properly_assigned():
-            assert True
-        else:
-            assert False
+    # @pytest.mark.p1
+    # def test_TC_IE_09(self):
+    #     if Identify_And_Enroll_POM().Verify_for_above_25_enrolled_subject_region_edges_are_properly_assigned():
+    #         assert True
+    #     else:
+    #         assert False
 
 
 

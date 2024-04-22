@@ -1,5 +1,5 @@
 import pytest
-from All_POM_Packages._4_Users_Module_POM.Users_Module_POM import Users_Module_pom
+from All_POM_Packages.Users_Module_POM.Users_Module_POM import Users_Module_pom
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
 
@@ -130,6 +130,7 @@ class Test_Users_Module(web_driver, web_logger):
             assert True
         else:
             assert False
+
     @pytest.mark.p1
     def test_TC_US_15(self):
         self.logger.info("Users module = test_TC_US_14 execution started..")
@@ -137,19 +138,3 @@ class Test_Users_Module(web_driver, web_logger):
             assert True
         else:
             assert False
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

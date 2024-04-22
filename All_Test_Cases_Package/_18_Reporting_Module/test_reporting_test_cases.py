@@ -1,7 +1,6 @@
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
-from All_POM_Packages._18_Reporting_Module.Reporting_POM import Reporting_pom
-from All_POM_Packages._18_Reporting_Module.Reporting_Events_POM import Reporting_Events_pom
+from All_POM_Packages.Reporting_Module.Reporting_Events_POM import Reporting_Events_pom
 import pytest
 
 
@@ -14,28 +13,31 @@ class Test_Reporting_Module_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.portal
     def test_TC_Reporting_01(self):
-        if Reporting_Events_pom().verify_report_for_number_of_events_by_zone_with_default_dates_1_month_and_with_group_selected_as_SOE():
+        if (Reporting_Events_pom().
+                Verify_report_for_number_of_probable_match_events_by_zone_with_default_dates_and_optional_filters()):
             assert True
         else:
             assert False
 
     @pytest.mark.portal
     def test_TC_Reporting_02(self):
-        if Reporting_Events_pom().verify_report_for_number_of_events_by_enrollment_with_default_dates_1_month_and_with_group_selected_as_ABE():
+        if (Reporting_Events_pom().
+                Verify_report_for_number_of_probable_match_events_by_enrollment_with_default_dates_and_optional_filters()):
             assert True
         else:
             assert False
 
     @pytest.mark.portal
     def test_TC_Reporting_03(self):
-        if Reporting_pom().verify_report_for_number_of_enrollments_by_zone_with_default_dates_1_month_and_with_group_selected_as_SOE():
+        if (Reporting_Events_pom().
+                Verify_report_for_number_of_enrollment_by_zones_with_default_dates_and_optional_filters()):
             assert True
         else:
             assert False
 
     @pytest.mark.portal
     def test_TC_Reporting_04(self):
-        if Reporting_pom().verify_report_for_number_of_zones_by_enrollment_with_default_dates_last_1_month_and_with_group_selected_as_ABE_and_zone_selected_as_All_devices():
+        if Reporting_Events_pom().Verify_report_for_number_of_zones_by_enrollment_with_default_dates_and_optional_filters():
             assert True
         else:
             assert False

@@ -1,7 +1,7 @@
 
 import pytest
-# from All_POM_Packages._9_tags_module_POM.Tags_Module_POM import Tags_Module_pom
-from All_POM_Packages._9_tags_module_POM.Tags_Module_POM import Tags_Module_pom
+# from All_POM_Packages.tags_module_POM.Tags_Module_POM import Tags_Module_pom
+from All_POM_Packages.tags_module_POM.Tags_Module_POM import Tags_Module_pom
 from Base_Package.Web_Logger import web_logger
 from Base_Package.Web_Driver import web_driver
 
