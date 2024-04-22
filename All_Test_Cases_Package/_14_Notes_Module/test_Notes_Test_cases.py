@@ -56,7 +56,6 @@ class Test_notes_page_testcases(web_driver, web_logger):
         else:
             assert False
 
-
     #
     # @pytest.mark.p3
     # def test_NOTES_Tc_01(self):
