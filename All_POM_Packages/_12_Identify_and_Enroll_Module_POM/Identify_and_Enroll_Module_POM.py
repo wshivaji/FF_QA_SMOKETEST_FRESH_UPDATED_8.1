@@ -1116,7 +1116,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                 enrollment_group = self.d.find_element(By.XPATH,
                                                        Read_Identify_and_Enroll_Components().enrollment_group_by_xpath())
                 self.logger.info("enrollment group selection")
-                time.sleep(web_driver.one_second)
+                time.sleep(web_driver.three_second)
                 select = Select(enrollment_group)
                 select.select_by_visible_text(Enrollment_details_dict_1["Enrollment_group"])
 
@@ -1258,11 +1258,11 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             Action_button.click()
             time.sleep(web_driver.two_second)
 
-            approve_enrollment_link = self.d.find_element(By.XPATH,Read_Identify_and_Enroll_Components().approve_enrollment_link())
+            approve_enrollment_link = web_driver.explicit_wait(self,5,"XPATH",Read_Identify_and_Enroll_Components().approve_enrollment_link(),self.d)
             approve_enrollment_link.click()
             time.sleep(web_driver.two_second)
 
-            message_after_approving = self.d.find_element(By.XPATH,Read_Identify_and_Enroll_Components().after_approving_message_to_user())
+            message_after_approving = web_driver.explicit_wait(self,10,"XPATH",Read_Identify_and_Enroll_Components().after_approving_message_to_user())
             if message_after_approving.is_displayed():
                 self.logger.info(f"message to the user : {message_after_approving.text}")
                 self.status.append(True)
@@ -1436,7 +1436,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.logger.error(f"test_TC_IE_01 got an exception as: {ex}")
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_IE_03_Exception.png")
             return False
-        logout().logout_from_core(self.d)
 
             # # Scroll down to bottom
 
@@ -1510,7 +1509,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
 
             enrollment_group = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().enrollment_group_by_xpath())
             select = Select(enrollment_group)
-            select.select_by_index(2)
+            select.select_by_index(3)
 
             time.sleep(web_driver.two_second)
             region_btn = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().region_btn_by_xpath())
@@ -1647,10 +1646,10 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                 select = Select(enrollment_basis)
                 select.select_by_index(1)
                 time.sleep(web_driver.two_second)
-                self.Select_Enrollment_Group(0)
+                # self.Select_Enrollment_Group(3)
                 enrollment_group = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().enrollment_group_by_xpath())
                 select = Select(enrollment_group)
-                select.select_by_index(2)
+                select.select_by_index(3)
                 time.sleep(web_driver.two_second)
                 region_btn = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().region_btn_by_xpath())
                 time.sleep(web_driver.two_second)
