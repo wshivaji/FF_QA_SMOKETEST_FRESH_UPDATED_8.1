@@ -1,5 +1,5 @@
 import pytest
-from All_POM_Packages._10_Account_module_POM.Account_pom import account_pom
+from All_POM_Packages.Account_module_POM.Account_pom import account_pom
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
 

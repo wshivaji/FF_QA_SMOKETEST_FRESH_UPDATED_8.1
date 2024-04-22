@@ -1135,7 +1135,6 @@ class Notifier_pom(web_driver, web_logger):
             else:
                 self.status.append(False)
 
-            # collapse_all_btn = self.d.find_element(By.XPATH, Notifier_Read_ini().get_collapse_all_button_on_region_selection_panel_by_xpath())
             collapse_all_btn = web_driver.explicit_wait(self, 10, "XPATH", Notifier_Read_ini().get_collapse_all_button_on_region_selection_panel_by_xpath(), self.d)
             collapse_all_btn.click()
             self.logger.info("Clicked on 'Collapse all' button....")
@@ -1272,19 +1271,44 @@ class Notifier_pom(web_driver, web_logger):
             self.close_notifier_module()
 
 
-    def Click_on_Unselect_all_and_verify_all_regions_are_unselecting(self):
+    def Verify_org_hierarchy_selection_features_collapse_all_expand_all_select_all_and_unselect_all(self):
         try:
             self.logger.info("*********** TC_Notifier_022 started **********")
             login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             self.load_notifier_module()
-            # org_hierarchy_selection_button = self.d.find_element(By.XPATH, Notifier_Read_ini().get_org_hierarchy_selection_button_by_xpath())
-            org_hierarchy_selection_button = web_driver.explicit_wait(self, 10, "XPATH", Notifier_Read_ini().get_org_hierarchy_selection_button_by_xpath(), self.d)
+            org_hierarchy_selection_button = web_driver.explicit_wait(self, 10, "XPATH", Notifier_Read_ini().
+                                                                      get_org_hierarchy_selection_button_by_xpath(),
+                                                                      self.d)
             org_hierarchy_selection_button.click()
             time.sleep(web_driver.one_second)
             self.logger.info("Clicked on Org/Hierarchy Selection button...")
-            expand_all_btn = self.d.find_element(By.XPATH, Notifier_Read_ini().get_expand_all_button_on_region_selection_panel_by_xpath())
+            time.sleep(web_driver.one_second)
+            region_list = self.d.find_elements(By.XPATH, Notifier_Read_ini().
+                                               get_region_list_in_org_hierarchy_selection_by_xpath())
+            collapse_all_btn = web_driver.explicit_wait(self, 10, "XPATH", Notifier_Read_ini().
+                                                        get_collapse_all_button_on_region_selection_panel_by_xpath(),
+                                                        self.d)
+            collapse_all_btn.click()
+            self.logger.info("Clicked on 'Collapse all' button....")
+            if region_list[0].is_displayed():
+                self.status.append(False)
+            else:
+                self.logger.info("Region names are collapsed...")
+                self.status.append(True)
+
+            time.sleep(web_driver.one_second)
+            expand_all_btn = self.d.find_element(By.XPATH, Notifier_Read_ini().
+                                                 get_expand_all_button_on_region_selection_panel_by_xpath())
             expand_all_btn.click()
+            self.logger.info("Clicked on 'Expand All' button....")
+            time.sleep(web_driver.one_second)
+            if region_list[0].is_displayed():
+                self.logger.info("Region names are expanded...")
+                self.status.append(True)
+            else:
+                self.status.append(False)
+
             time.sleep(web_driver.one_second)
             select_all_btn = self.d.find_element(By.XPATH, Notifier_Read_ini().
                                                  get_select_all_button_on_region_selection_panel_by_xpath())

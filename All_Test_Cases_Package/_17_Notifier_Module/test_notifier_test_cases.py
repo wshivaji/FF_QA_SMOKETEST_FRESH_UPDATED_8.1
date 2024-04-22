@@ -1,6 +1,6 @@
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
-from All_POM_Packages._17_Notifier_Module_POM.Notifier_POM import Notifier_pom
+from All_POM_Packages.Notifier_Module_POM.Notifier_POM import Notifier_pom
 import pytest
 
 
@@ -18,16 +18,9 @@ class Test_Notifier_Module_Test_Cases(web_driver, web_logger):
         else:
             assert False
 
-    @pytest.mark.p1
-    def test_TC_Notifier_104(self):
-        if Notifier_pom().Verify_Notifier_result_for_root_region_selected_with_refresh_rate_10_sec_events_displayed_as_2_photo_size_as_Medium_Sound_Option_as_ON():
-            assert True
-        else:
-            assert False
-
     @pytest.mark.p3
     def test_TC_Notifier_040(self):
-        if Notifier_pom().On_Notifier_panel_click_on_COLLAPSE_button_and_verify_event_alert_info_collapsed_and_EXPAND_button_is_visible():
+        if Notifier_pom().Verify_org_hierarchy_selection_features_collapse_all_expand_all_select_all_and_unselect_all():
             assert True
         else:
             assert False

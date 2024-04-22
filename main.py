@@ -40,14 +40,14 @@ if __name__ == "__main__":
     report_path_notes_search_filter = f"{Path(__file__).parent}\\Reports\\HTML_Reports\\Notes_search_filter_Module_test_report_{datetime.datetime.now().strftime('%d_%m_%Y_%H_%M_%S')}.html"
 
     system_test_report_path = f"{Path(__file__).parent}\\Reports\\HTML_Reports\\System_Test_Report_{datetime.datetime.now().strftime('%d_%m_%Y_%H_%M_%S')}.html"
-    portal_test_report_path = f"{Path(__file__).parent}\\Reports\\HTML_Reports\\Portal_Test_Report_{datetime.datetime.now().strftime('%d_%m_%Y_%H_%M_%S')}.html"
+    sspr_test_report_path = f"{Path(__file__).parent}\\Reports\\HTML_Reports\\SSPR_Test_Report_{datetime.datetime.now().strftime('%d_%m_%Y_%H_%M_%S')}.html"
     dm_test_report_path = f"{Path(__file__).parent}\\Reports\\HTML_Reports\\DM_Test_Report_{datetime.datetime.now().strftime('%d_%m_%Y_%H_%M_%S')}.html"
     # -----------------------------------------------------------------------------------------------------------
     # --------------------------------- regression and p1 - p5 Test suite path  ---------------------------------
     # ************* test suite path ******************
-    Regression_test_suite_path = f"{Path(__file__).parent}\\All_Test_Cases_Package\\"
-    system_test_suite_path = f"{Path(__file__).parent}\\All_Test_Cases_Package\\"
-    portal_test_suite_path = f"{Path(__file__).parent}\\All_Test_Cases_Package\\"
+    # Regression_test_suite_path = f"{Path(__file__).parent}\\All_Test_Cases_Package\\"
+    system_test_suite_path = f"{Path(__file__).parent}\\All_Test_Cases_Package\\Portal Smoke Cases\\test_portal_smoke_test_cases.py"
+    sspr_test_suite_path = f"{Path(__file__).parent}\\All_Test_Cases_Package\\Portal Smoke Cases\\test_portal_smoke_test_cases.py"
     dm_test_suite_path = f"{Path(__file__).parent}\\All_Test_Cases_Package\\"
 
     # -----------------------------------------------------------------------------------------------------------
@@ -79,8 +79,8 @@ if __name__ == "__main__":
     # ************************ Commands to Run Test Suite *****************************
     # ************************** P1 Priority Test Run *********************************
     # pytest.main(['-v', '-m', 'dm', f'{dm_test_suite_path}', '--html', f'{dm_test_report_path}'])
-    # pytest.main(['-v', '-m', 'system', f'{system_test_suite_path}', '--html', f'{system_test_report_path}'])
-    pytest.main(['-v', '-m', 'portal', f'{portal_test_suite_path}', '--html', f'{portal_test_report_path}'])
+    pytest.main(['-v', '-m', 'system', f'{system_test_suite_path}', '--html', f'{system_test_report_path}'])
+    # pytest.main(['-v', '-m', 'sspr', f'{sspr_test_suite_path}', '--html', f'{sspr_test_report_path}'])
 
 
     # ************************** P2 Priority Test Run *********************************

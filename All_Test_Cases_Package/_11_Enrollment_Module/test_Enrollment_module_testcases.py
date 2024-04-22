@@ -55,7 +55,7 @@ class Test_Enrollments_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.system
     def test_Tc_en_08(self):
-        if enrollments_POM().Verify_core_user_is_able_to_delete_pending_subjects():
+        if enrollments_POM().Verify_core_or_itadmin_user_is_able_to_delete_pending_subjects():
             assert True
         else:
             assert False
