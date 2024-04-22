@@ -256,6 +256,19 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
             time.sleep(web_driver.two_second)
         except Exception as ex:
             self.logger.info(f"Getting Root name on Dm got exception as: {ex}")
+    def close_current_tab(self):
+        try:
+            open_tabs = self.d.window_handles
+            parent = self.d.window_handles[0]
+            child = self.d.window_handles[1]
+            # i = 1
+            # for i in range(open_tabs):
+            #     child = self.d.window_handles[i]
+            self.d.switch_to.window(child)
+            self.d.close()
+            self.d.switch_to.window(parent)
+        except Exception as ex:
+            self.logger.info(f"close current tab: {ex.args}")
 
     def Verify_org_hierarchy_selection_root_name_should_be_able_to_match_with_DM_core_name(self):
         try:
@@ -279,8 +292,8 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
             self.d.switch_to.new_window()
             login().login_to_DM_if_not_done(self.d)
             self.get_root_region_name_on_DM()
-            root_region_name_on_DM = self.d.find_element(By.XPATH,
-                                                         Portal_login_page_read_ini().get_root_region_name_on_dm_by_xpath())
+            root_region_name_on_DM = self.d.find_element(By.XPATH, Portal_login_page_read_ini().
+                                                         get_root_region_name_on_dm_by_xpath())
             self.logger.info(f"Root region name on DM: {root_region_name_on_DM.text.upper()}")
             time.sleep(web_driver.two_second)
             if root_region_name_on_VS.upper() == root_region_name_on_DM.text.upper():
@@ -289,7 +302,7 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
             else:
                 self.logger.info(f"Root region names on VS and DM are not same...")
                 status.append(False)
-            self.d.switch_to.window(self.d.window_handles[0])
+            self.close_current_tab()
             self.click_on_logout_button()
             self.logger.info(f"status: {status}")
             if False in status:
