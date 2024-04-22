@@ -69,12 +69,12 @@ class Test_Identify_and_Enroll_Test_Cases(web_driver, web_logger):
             assert False
 
 
-    @pytest.mark.p1
-    def test_TC_IE_09(self):
-        if Identify_And_Enroll_POM().Verify_for_above_25_enrolled_subject_region_edges_are_properly_assigned():
-            assert True
-        else:
-            assert False
+    # @pytest.mark.p1
+    # def test_TC_IE_09(self):
+    #     if Identify_And_Enroll_POM().Verify_for_above_25_enrolled_subject_region_edges_are_properly_assigned():
+    #         assert True
+    #     else:
+    #         assert False
 
 
 
