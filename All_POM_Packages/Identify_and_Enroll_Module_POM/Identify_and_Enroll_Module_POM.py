@@ -158,17 +158,9 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.logger.info(f"clicked on Identify and enroll link")
             time.sleep(web_driver.one_second)
 
-            upload_photo = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
-                                              .upload_image_by_xpath(), self.d)
-            upload_photo.click()
-            self.logger.info(f"clicked on upload image icon")
-            time.sleep(2)
             file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset2\\img4.png"
-            pyautogui.write(file_path)
-            pyautogui.press('enter')
-            time.sleep(2)
-            pyautogui.press('enter')
-            self.logger.info(f"Image upload success")
+            self.upload_image(file_path)
+
             time.sleep(web_driver.one_second)
             self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
                                                       .identify_enroll_panel_identify_enroll_btn_by_xpath(), self.d)
@@ -1251,6 +1243,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.status.clear()
             login().login_to_cloud_if_not_done_with_user_credentials(self.d,Read_Identify_and_Enroll_Components().get_approver_to_login(),Read_Identify_and_Enroll_Components().get_password_to_login())
             time.sleep(web_driver.one_second)
+            self.enroll_person()
 
             Enrollment_link = self.d.find_element(By.XPATH,Read_Identify_and_Enroll_Components().get_enrollment_link())
             Enrollment_link.click()
