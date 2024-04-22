@@ -53,35 +53,35 @@ class Test_account_testcases(web_driver, web_logger):
         else:
             assert False
 
-    @pytest.mark.p2
+    @pytest.mark.system
     def test_account_TC_034(self):
         if account_pom().click_on_image_sources_and_check_theplanel_heading_of_Account_Image_sources_is_displayed():
             assert True
         else:
             assert False
 
-    @pytest.mark.p2
+    @pytest.mark.system
     def test_account_TC_036(self):
         if account_pom().click_on_location_on_View_dropdown_map_is_visible():
             assert True
         else:
             assert False
 
-    @pytest.mark.p2
+    @pytest.mark.system
     def test_account_TC_038(self):
         if account_pom().click_on_regions_button_verify_panel_heading():
             assert True
         else:
             assert False
 
-    @pytest.mark.p2
+    @pytest.mark.system
     def test_account_TC_040(self):
         if account_pom().click_on_detailsbutton_verify_imagesource_panel_heading_is_visible():
             assert True
         else:
             assert False
 
-    @pytest.mark.p2
+    @pytest.mark.system
     def test_account_TC_042(self):
         if account_pom().click_on_viewlocation_button_on_imagesource_verify_location():
             assert True
@@ -102,7 +102,7 @@ class Test_account_testcases(web_driver, web_logger):
     #     else:
     #         assert False
     #
-    # @pytest.mark.p2
+    # @pytest.mark.system
     # def test_account_TC_007(self):
     #     if account_pom().verify_Enabled_true_is_displayed():
     #         assert True
@@ -277,7 +277,7 @@ class Test_account_testcases(web_driver, web_logger):
     #     else:
     #         assert False
     #
-    # @pytest.mark.p2
+    # @pytest.mark.system
     # def test_account_TC_032(self):
     #     if account_pom().click_on_subscription_button_verify_account_subscription_banner_is_visible():
     #         assert True
@@ -291,7 +291,7 @@ class Test_account_testcases(web_driver, web_logger):
     #     else:
     #         assert False
     #
-    # @pytest.mark.p2
+    # @pytest.mark.system
     # def test_account_TC_034(self):
     #     if account_pom().click_on_image_sources_and_check_theplanel_heading_of_Account_Image_sources_is_displayed():
     #         assert True
@@ -305,7 +305,7 @@ class Test_account_testcases(web_driver, web_logger):
     #     else:
     #         assert False
     #
-    # @pytest.mark.p2
+    # @pytest.mark.system
     # def test_account_TC_036(self):
     #     if account_pom().click_on_location_on_View_dropdown_map_is_visible():
     #         assert True
@@ -319,7 +319,7 @@ class Test_account_testcases(web_driver, web_logger):
     #     else:
     #         assert False
     #
-    # @pytest.mark.p2
+    # @pytest.mark.system
     # def test_account_TC_038(self):
     #     if account_pom().click_on_regions_button_verify_panel_heading():
     #         assert True
@@ -333,7 +333,7 @@ class Test_account_testcases(web_driver, web_logger):
     #     else:
     #         assert False
     #
-    # @pytest.mark.p2
+    # @pytest.mark.system
     # def test_account_TC_040(self):
     #     if account_pom().click_on_detailsbutton_verify_imagesource_panel_heading_is_visible():
     #         assert True
@@ -347,7 +347,7 @@ class Test_account_testcases(web_driver, web_logger):
     #     else:
     #         assert False
     #
-    # @pytest.mark.p2
+    # @pytest.mark.system
     # def test_account_TC_042(self):
     #     if account_pom().click_on_viewlocation_button_on_imagesource_verify_location():
     #         assert True

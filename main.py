@@ -81,8 +81,8 @@ if __name__ == "__main__":
 
     # ************************ Commands to Run Test Suite *****************************
     # ************************** P1 Priority Test Run *********************************
-    pytest.main(['-v', '-m', 'p1', f'{dm_test_suite_path}', '--html', f'{dm_test_report_path}'])
-    # pytest.main(['-v', '-m', 'p1', f'{dm_edge_test_suite_path}', '--html', f'{dm_edge_test_report_path}'])
+    pytest.main(['-v', '-m', 'core', f'{dm_test_suite_path}', '--html', f'{dm_test_report_path}'])
+    # pytest.main(['-v', '-m', 'edge', f'{dm_edge_test_suite_path}', '--html', f'{dm_edge_test_report_path}'])
 
     # pytest.main(['-v', '-m', 'system', f'{system_test_suite_path}', '--html', f'{system_test_report_path}'])
     # pytest.main(['-v', '-m', 'sspr', f'{sspr_test_suite_path}', '--html', f'{sspr_test_report_path}'])
