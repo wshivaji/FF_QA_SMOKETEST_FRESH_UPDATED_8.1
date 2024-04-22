@@ -1,6 +1,6 @@
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
-from All_POM_Packages._17_Notifier_Module_POM.Notifier_POM import Notifier_pom
+from All_POM_Packages.Notifier_Module_POM.Notifier_POM import Notifier_pom
 import pytest
 
 

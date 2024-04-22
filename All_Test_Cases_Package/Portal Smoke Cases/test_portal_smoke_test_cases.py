@@ -8,8 +8,8 @@ from All_POM_Packages.Enrollment_Groups_Module_POM.Enrollment_Groups_Module_POM 
 from All_POM_Packages.Notification_Groups_Module.notification_groups_module_POM import Notification_Groups_Module_pom
 from All_POM_Packages.Visitor_Search_Module_POM.Visitor_Search_Module_POM import Visitor_Search_Module_pom
 from All_POM_Packages.Visitor_Seach_Jobs_Module_POM.Visitor_Search_Jobs_Module_POM import Visitor_Search_Jobs_Module_pom
-from All_POM_Packages._10_Account_module_POM.Account_pom import account_pom
-from All_POM_Packages._17_Notifier_Module_POM.Notifier_POM import Notifier_pom
+from All_POM_Packages.Account_module_POM.Account_pom import account_pom
+from All_POM_Packages.Notifier_Module_POM.Notifier_POM import Notifier_pom
 from All_POM_Packages.tags_module_POM.Tags_Module_POM import Tags_Module_pom
 from All_POM_Packages.Enrollment_POM.Enrollment_module_POM import enrollments_POM
 from All_POM_Packages.Insight_Dashboard_Module_POM.Insight_Dashboard_POM import insight_dashboard_pom
@@ -684,7 +684,6 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
     # ------------------------------------------ Users Cases (CERD) cases----------------------------------------- #
     @pytest.mark.system
     def test_SM_TC091(self):
-        self.logger.info("Users module = test_TC_US_04 execution started..")
         if Users_Module_pom() \
                 .verify_if_user_creates_a_new_users_marked_as_enabled_it_should_reflect_as_enabled():
             assert True
@@ -693,7 +692,6 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.system
     def test_SM_TC092(self):
-        self.logger.info("Users module = test_TC_US_05 execution started..")
         if Users_Module_pom() \
                 .verify_if_user_creates_a_new_users_marked_as_disabled_it_should_reflect_as_disabled():
             assert True
@@ -702,7 +700,6 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.system
     def test_SM_TC093(self):
-        self.logger.info("Users module = test_TC_US_06 execution started..")
         if Users_Module_pom() \
                 .verify_user_able_to_edit_the_details_for_the_newly_created_user_details():
             assert True
@@ -711,7 +708,6 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.system
     def test_SM_TC094(self):
-        self.logger.info("Users module = test_TC_US_07 execution started..")
         if Users_Module_pom() \
                 .verify_user_able_to_delete_the_newly_created_user():
             assert True
@@ -720,7 +716,6 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.system
     def test_SM_TC095(self):
-        self.logger.info("Users module = test_TC_US_08 execution started..")
         if Users_Module_pom() \
                 .verify_login_with_newly_created_user_and_validate_login_successful():
             assert True
@@ -729,7 +724,6 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.system
     def test_SM_TC096(self):
-        self.logger.info("Users module = test_TC_US_9 execution started..")
         if Users_Module_pom() \
                 .verify_user_should_not_be_able_to_create_user_which_already_exist():
             assert True
@@ -738,7 +732,6 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.system
     def test_SM_TC097(self):
-        self.logger.info("Users module = test_TC_US_10 execution started..")
         if Users_Module_pom() \
                 .on_alert_schedule_edit_user_alert_schedule_and_verify_the_panel_should_be_editable():
             assert True
@@ -747,7 +740,6 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.system
     def test_SM_TC098(self):
-        self.logger.info("Users module = test_TC_US_11 execution started..")
         if Users_Module_pom() \
                 .verify_send_sms_send_mms_send_email_send_in_app_notifications_enable_disable_alerts_Yes_No_button():
             assert True
@@ -756,7 +748,6 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.system
     def test_SM_TC099(self):
-        self.logger.info("Users module = test_TC_US_12 execution started..")
         if Users_Module_pom() \
                 .Verify_reassigning_user_to_diferrent_region():
             assert True
@@ -765,7 +756,6 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.system
     def test_SM_TC100(self):
-        self.logger.info("Users module = test_TC_US_13 execution started..")
         if Users_Module_pom().verify_user_able_to_link_unlink_the_newly_created_user_to_a_notification_group():
             assert True
         else:
@@ -773,7 +763,6 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.system
     def test_SM_TC101(self):
-        self.logger.info("Users module = test_TC_US_14 execution started..")
         if Users_Module_pom().verify_details_of_core_user():
             assert True
         else:
@@ -781,7 +770,6 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.system
     def test_SM_TC102(self):
-        self.logger.info("Users module = test_TC_US_14 execution started..")
         if Users_Module_pom().Verify_org_hierarchy_selection_root_name_should_be_able_to_match_with_DM_core_name():
             assert True
         else:
