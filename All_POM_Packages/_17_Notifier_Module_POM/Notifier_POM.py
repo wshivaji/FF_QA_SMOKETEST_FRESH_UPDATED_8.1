@@ -6635,13 +6635,12 @@ class Notifier_pom(web_driver, web_logger):
 
     def Verify_Notifier_result_for_first_camera_of_first_region_selected_with_group_selected_as_ABE_with_Auto_Refresh_Of_events_displayed_as_2_photo_size_as_Medium_and_Sound_Option_as_OFF(self):
         try:
-            self.logger.info("*********** TC_Notifier_099 started **********")
+            self.logger.info("*********** TC_Notifier_01 started **********")
             login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             self.load_notifier_module()
             self.get_region_and_group_data()
 
-            # org_hierarchy_selection_button = self.d.find_element(By.XPATH, Notifier_Read_ini().get_org_hierarchy_selection_button_by_xpath())
             org_hierarchy_selection_button = web_driver.explicit_wait(self, 10, "XPATH", Notifier_Read_ini().get_org_hierarchy_selection_button_by_xpath(), self.d)
             org_hierarchy_selection_button.click()
             time.sleep(web_driver.one_second)
@@ -6659,10 +6658,7 @@ class Notifier_pom(web_driver, web_logger):
             checkbox.click()
             self.logger.info(f"Camera selected as: {Notifier_Read_ini().get_camera0()}")
             time.sleep(web_driver.one_second)
-            collapse_all_btn = self.d.find_element(By.XPATH, Notifier_Read_ini().
-                                                   get_collapse_all_button_on_region_selection_panel_by_xpath())
-            collapse_all_btn.click()
-            time.sleep(web_driver.one_second)
+
             save_btn = self.d.find_element(By.XPATH, Notifier_Read_ini().get_save_button_on_org_hierarchy_panel_by_xpath())
             self.d.execute_script("arguments[0].click();", save_btn)
             self.select_ABE_group_from_ini()
@@ -6671,24 +6667,21 @@ class Notifier_pom(web_driver, web_logger):
             self.get_default_notifier_setting_values()
             self.notifier_result_verification()
 
-            # close_all_panels = self.d.find_elements(By.XPATH, Notifier_Read_ini().get_close_panel_buttons_by_xpath())
-            # for btn in close_all_panels:
-            #     btn.click()
 
             self.logger.info(f"status: {self.status}")
             if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_Notifier_099.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_Notifier_099.png")
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_Notifier_01.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_Notifier_01.png")
                 return False
             else:
                 return True
         except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_Notifier_099_exception.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_Notifier_099_exception.png")
-            self.logger.error(f"TC_Notifier_099 got exception as: {ex}")
-        finally:
-            pass
-            #self.close_notifier_module()
+            self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_Notifier_01_exception.png")
+            self.d.save_screenshot(f"{self.screenshots_path}\\TC_Notifier_01_exception.png")
+            self.logger.error(f"TC_Notifier_01 got exception as: {ex}")
+
+
+
 
     def Verify_Notifier_result_for_first_camera_of_first_region_selected_with_group_selected_as_PTE_with_Auto_Refresh_Of_events_displayed_as_2_photo_size_as_Medium_and_Sound_Option_as_OFF(
             self):

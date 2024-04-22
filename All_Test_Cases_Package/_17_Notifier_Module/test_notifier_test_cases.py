@@ -12,8 +12,8 @@ class Test_Notifier_Module_Test_Cases(web_driver, web_logger):
     print("******** Notifier (Order - 17) Begin ********")
 
     @pytest.mark.p2
-    def test_TC_Notifier_069(self):
-        if Notifier_pom().Verify_Notifier_result_for_root_region_selected_with_group_selected_as_ABE_with_Auto_Refresh_Of_events_displayed_as_2_photo_size_as_Medium_and_Sound_Option_as_OFF():
+    def test_TC_Notifier_01(self):
+        if Notifier_pom().Verify_Notifier_result_for_first_camera_of_first_region_selected_with_group_selected_as_ABE_with_Auto_Refresh_Of_events_displayed_as_2_photo_size_as_Medium_and_Sound_Option_as_OFF():
             assert True
         else:
             assert False
