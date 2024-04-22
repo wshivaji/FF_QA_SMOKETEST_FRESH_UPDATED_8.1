@@ -328,7 +328,7 @@ class detect_faces_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_detect_faces_008.png")
             self.logger.error(f"TC_detect_faces_008 got exception as: {ex} ")
         finally:
-            self.l
+            Visitor_Search_Module_pom().click_on_logout_button()
 
     def on_Detect_faces_page_upload_a_image_having_more_no_of_faces_verify_banner_showing_number_of_faces_on_a_image(self):
         try:
@@ -361,8 +361,7 @@ class detect_faces_pom(web_driver, web_logger):
                 self.status.append(False)
             self.logger.info(f"status :{self.status}")
             time.sleep(web_driver.three_second)
-            logout().logout_from_core(self.d)
-            
+
             if False in self.status:
                 self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_detect_faces_009.png")
                 self.d.save_screenshot(f"{self.screenshots_path}\\TC_detect_faces_009.png")
@@ -680,7 +679,7 @@ class detect_faces_pom(web_driver, web_logger):
                 self.status.append(False)
             self.logger.info(f"status :{self.status}")
             time.sleep(web_driver.one_second)
-            logout().logout_from_core(self.d)
+
             if False in self.status:
                 self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_detect_faces_017.png")
                 self.d.save_screenshot(f"{self.screenshots_path}\\TC_detect_faces_017.png")
@@ -691,6 +690,8 @@ class detect_faces_pom(web_driver, web_logger):
             self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_detect_faces_017.png")
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_detect_faces_017.png")
             self.logger.error(f"TC_detect_faces_017 got exception as: {ex} ")
+        finally:
+            Visitor_Search_Module_pom().click_on_logout_button()
 
     def on_image_quality_page_verify_view_file_info_button_is_visible(self):
         try:
@@ -936,7 +937,6 @@ class detect_faces_pom(web_driver, web_logger):
                 self.status.append(False)
             self.logger.info(f"status :{self.status}")
             time.sleep(web_driver.one_second)
-            # self.d.find_element(By.XPATH, Web_portal_login_Read_INI().get_facefirst_logout_button()).click()
             if False in self.status:
                 self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_detect_faces_23.png")
                 self.d.save_screenshot(f"{self.screenshots_path}\\TC_detect_faces_23.png")
@@ -947,6 +947,8 @@ class detect_faces_pom(web_driver, web_logger):
             self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_detect_faces_23.png")
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_detect_faces_23.png")
             self.logger.error(f"TC_detect_faces_23 got exception as: {ex} ")
+        finally:
+            Visitor_Search_Module_pom().click_on_logout_button()
 
     def In_identify_and_enroll_page_if_person_is_already_enrolled_identify_results_page_is_visible(self):
         try:
@@ -1416,7 +1418,7 @@ class detect_faces_pom(web_driver, web_logger):
                 self.status.append(False)
             self.logger.info(f"status :{self.status}")
             time.sleep(web_driver.one_second)
-            logout().logout_from_core(self.d)
+
             if False in self.status:
                 self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_detect_faces_32.png")
                 self.d.save_screenshot(f"{self.screenshots_path}\\TC_detect_faces_32.png")
@@ -1427,6 +1429,8 @@ class detect_faces_pom(web_driver, web_logger):
             self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_detect_faces_32.png")
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_detect_faces_32.png")
             self.logger.error(f"TC_detect_faces_32 got exception as: {ex} ")
+        finally:
+            Visitor_Search_Module_pom().click_on_logout_button()
 
     def on_image_quality_page_In_action_dropdown_verify_download_image_option_is_visible(self):
         try:

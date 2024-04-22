@@ -7,6 +7,7 @@ import configparser
 from selenium.webdriver.common.by import By
 from All_Config_Packages._1_Portal_Login_Module_Config_Files.Portal_Login_Page_Read_INI import \
     Portal_login_page_read_ini
+from All_Config_Packages._00_deployment_manager_config_file.deployment_manager_read_ini import DeploymentManager_Read_ini
 
 
 class login(web_driver, web_logger):
@@ -23,8 +24,32 @@ class login(web_driver, web_logger):
         self.config.read(self.file_path)
         self.cloud_url = self.common_test_data_config.get("Login_Logout_Data", "cloud_login_url")
         print(f"cloud url: {self.cloud_url}")
+        self.register_login_url = DeploymentManager_Read_ini().get_register_login_link_from_register_url()
+        print(f"cloud url: {self.register_login_url}")
         self.d = None
         self.logger = web_logger.logger_obj()
+
+    def login_to_dm_if_not_done(self, d):
+        try:
+            self.d = d
+            current_url = self.d.current_url
+
+            if current_url is None or current_url == self.register_login_url:
+                self.logger.info("url is not open")
+                self.d.get(self.register_login_url)
+                self.logger.info("opening localhost portal login")
+                self.logger.info("logging in to localhost")
+                self.d.maximize_window()
+                for i in range(4):
+                    pyautogui.hotkey('ctrl', '-')
+                    time.sleep(0.5)
+                return self.d
+            else:
+                self.logger.info("Portal already logged in")
+
+        except Exception as ex:
+            self.logger.info(f"exception: {ex.args}")
+            print(f"{ex.args}")
 
     def login_to_localhost_if_not_done(self, d):
         try:
@@ -127,10 +152,10 @@ class login(web_driver, web_logger):
                 self.d.get(Portal_login_page_read_ini().get_dm_url())
                 # self.d.maximize_window()
                 # # time.sleep(web_driver.two_second)
-                # time.sleep(web_driver.one_second)
-                # for i in range(4):
-                #     pyautogui.hotkey('ctrl', '-')
-                #     time.sleep(0.5)
+                time.sleep(web_driver.one_second)
+                for i in range(4):
+                    pyautogui.hotkey('ctrl', '-')
+                    time.sleep(0.5)
 
             login_btn = self.d.find_elements(By.XPATH, self.common_test_data_config.get("Login_Logout_Data", "login_btn_on_dm_by_xpath"))
             current_url = self.d.current_url

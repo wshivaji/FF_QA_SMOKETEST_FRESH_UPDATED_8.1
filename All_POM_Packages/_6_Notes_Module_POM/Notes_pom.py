@@ -6,9 +6,11 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.keys import Keys
 
 from All_Config_Packages._6_Notes_Module_Config_Files.Notes_Read_Ini import notes_Read_Ini
+from All_Config_Packages._2_Portal_Menu_Module_Config_Files.Portal_Menu_Module_Read_INI import Portal_Menu_Module_read_ini
 from Base_Package.Web_Logger import web_logger
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Login_Logout_Ops import login, logout
+
 
 
 class notes_pom(web_driver, web_logger):
@@ -5098,25 +5100,248 @@ class notes_pom(web_driver, web_logger):
         except Exception as ex:
             self.logger.info(f"verif_use_is_able_to_select_any_one_note_and_click_on_location_in_view_dropdown ex: {ex.args}")
 
-
-'''
-    def Enter_username_password_click_on_cloud_Login(self):
+    def verify_user_is_able_to_see_the_enrollment_associated_to_particular_note(self):
         try:
+            self.logger.info("********TC_7***** started")
+            login().login_to_cloud_if_not_done(self.d)
+            self.status.clear()
             time.sleep(web_driver.two_second)
-            username = self.d.find_element(By.XPATH, notes_Read_Ini().get_username_textbox())
-            username.clear()
-            username.send_keys(notes_Read_Ini().get_valid_username())
-            time.sleep(web_driver.one_second)
-            password = self.d.find_element(By.XPATH, notes_Read_Ini().get_password_textbox())
-            password.clear()
-            password.send_keys(notes_Read_Ini().get_valid_password())
-            time.sleep(web_driver.one_second)
-            cloud_login = self.d.find_element(By.XPATH, notes_Read_Ini().get_cloudmenu_textbox())
-            cloud_login.click()
-            time.sleep(web_driver.one_second)
+            self.open_enrollments_panel()
+            self.click_on_extend_menu_on_enrollments_panel()
+            self.click_on_notes_btn_on_enrollments_panel()
+            self.verify_no_notes_error_msg_on_enrollment_notes_panel()
+            self.click_on_Action_Drop_down()
+            self.click_on_add_a_new_note_option()
+            self.verify_enrollment_create_note_panel_displayed()
+            file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_Data\\dataset2\\img1.png"
+            self.upload_image_and_create_a_note(file_path)
+            self.close_panels_one_by_one()
+            self.logger.info(f"status:{self.status}")
+            if False in self.status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_notes_7.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_notes_7.png")
+                return False
+            else:
+                return True
         except Exception as ex:
-            print(ex)'''
+            self.logger.info(f" exception : {ex.args}")
+
+    def Verify_user_is_able_to_add_photo_when_image_icon_is_clicked(self):
+        try:
+            self.logger.info("********TC_7***** started")
+            login().login_to_cloud_if_not_done(self.d)
+            self.status.clear()
+            time.sleep(web_driver.two_second)
+            self.open_enrollments_panel()
+            self.click_on_extend_menu_on_enrollments_panel()
+            self.click_on_notes_btn_on_enrollments_panel()
+            self.verify_no_notes_error_msg_on_enrollment_notes_panel()
+            self.click_on_Action_Drop_down()
+            self.click_on_add_a_new_note_option()
+            file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_Data\\dataset2\\img1.png"
+            self.click_on_image_icon_and_add_photo(file_path)
+            self.verify_image_uploaded_to_image_box_on_create_note_panel()
+            self.close_panels_one_by_one()
+            self.logger.info(f"status:{self.status}")
+            if False in self.status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_notes_8.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_notes_8.png")
+                return False
+            else:
+                return True
+        except Exception as ex:
+            self.logger.info(f"Verify_user_is_able_to_add_photo_when_image_icon_is_clicked ex: {ex.args}")
+
+    # **************************************** User Methods ***************************************
+
+    def verify_image_uploaded_to_image_box_on_create_note_panel(self):
+        try:
+            image_box_post_image_upload = self.explicit_wait(5, "XPATH", notes_Read_Ini().image_uploaded_to_img_box_by_xpath(), self.d)
+            self.logger.info(f"verify_image_uploaded_to_image_box_on_create_note_panel visible: {image_box_post_image_upload.is_displayed()}")
+            if image_box_post_image_upload.is_displayed():
+                self.status.append(True)
+            else:
+                self.status.append(False)
+                self.logger.info(f"verify_image_uploaded_to_image_box_on_create_note_panel is not displayed.")
+
+        except Exception as ex:
+            self.logger.info(f"verify_image_uploaded_to_image_box_on_create_note_panel ex: {ex.args}")
+
+    def click_on_image_icon_and_add_photo(self, img_file):
+        try:
+            print("reached to img box")
+            # file_image_path = f"{Path(__file__).parent.parent.parent}\\Other_IMP_Files\\Images\\images\\img1.png"
+            self.d.find_element(By.ID, "image0").send_keys(img_file)
+            time.sleep(web_driver.two_second)
+            add_image_heading = self.d.find_element(By.XPATH, notes_Read_Ini().add_note_image_panel_heading())
+            time.sleep(web_driver.three_second)
+            skip_cropping = self.d.find_element(By.XPATH, notes_Read_Ini().skip_cropping_button_in_add_image())
+            skip_cropping.click()
+            time.sleep(web_driver.two_second)
+            select_image = self.d.find_element(By.XPATH, notes_Read_Ini().select_image_button())
+            select_image.click()
+            time.sleep(web_driver.three_second)
+        except Exception as ex:
+            self.logger.info(f"click_on_image_icon_and_add_photo ex: {ex.args}")
+
+    def upload_image_and_create_a_note(self, img_file):
+        try:
+            print("reached to img box")
+            # file_image_path = f"{Path(__file__).parent.parent.parent}\\Other_IMP_Files\\Images\\images\\img1.png"
+            self.d.find_element(By.ID, "image0").send_keys(img_file)
+            time.sleep(web_driver.two_second)
+            add_image_heading = self.d.find_element(By.XPATH, notes_Read_Ini().add_note_image_panel_heading())
+            time.sleep(web_driver.three_second)
+            skip_cropping = self.d.find_element(By.XPATH, notes_Read_Ini().skip_cropping_button_in_add_image())
+            skip_cropping.click()
+            time.sleep(web_driver.two_second)
+            select_image = self.d.find_element(By.XPATH, notes_Read_Ini().select_image_button())
+            select_image.click()
+            time.sleep(web_driver.three_second)
+
+            Location_store_textbox_in_createnote = self.d.find_element(By.XPATH,
+                                                                       notes_Read_Ini().Location_store_textbox_on_create_note())
+            Location_store_textbox_in_createnote.clear()
+            Location_store_textbox_in_createnote.send_keys(
+                notes_Read_Ini().Enter_text_in_Location_store_in_create_note())
+            time.sleep(web_driver.one_second)
+            case_subject_in_createnote = self.d.find_element(By.XPATH,
+                                                             notes_Read_Ini().case_subject_textbox_in_create_note())
+            case_subject_in_createnote.clear()
+            case_subject_in_createnote.send_keys(notes_Read_Ini().Enter_text_in_case_subject_in_create_note())
+            time.sleep(web_driver.one_second)
+            reported_loss = self.d.find_element(By.XPATH, notes_Read_Ini().reported_loss_in_create_note())
+            reported_loss.clear()
+            reported_loss.send_keys(notes_Read_Ini().Enter_reported_loss())
+            time.sleep(web_driver.one_second)
+            build_on_create_note = self.d.find_element(By.XPATH, notes_Read_Ini().build_on_createnote())
+            build_on_create_note.send_keys(notes_Read_Ini().Enter_a_test_in_build())
+            time.sleep(web_driver.one_second)
+            body_markings = self.d.find_element(By.XPATH, notes_Read_Ini().body_markings_textbox())
+            body_markings.send_keys(notes_Read_Ini().Enter_a_text_on_bodymarkings())
+            time.sleep(web_driver.one_second)
+            gender_dropdown = self.d.find_element(By.XPATH, notes_Read_Ini().gender_dropdown())
+            gender_dropdown.click()
+            time.sleep(web_driver.one_second)
+            female_option_in_dropdown = self.d.find_element(By.XPATH, notes_Read_Ini().female_in_genderdropdown())
+            female_option_in_dropdown.click()
+            time.sleep(web_driver.one_second)
+            Height_dropdown = self.d.find_element(By.XPATH, notes_Read_Ini().Height_dropdown())
+            Height_dropdown.click()
+            time.sleep(web_driver.one_second)
+            Height_dropdown_options = self.d.find_element(By.XPATH, notes_Read_Ini().Height_dropdown_options())
+            Height_dropdown_options.click()
+            time.sleep(web_driver.one_second)
+            narratives_textbox = self.d.find_element(By.XPATH, notes_Read_Ini().Narratives_textbox())
+            narratives_textbox.send_keys(notes_Read_Ini().enter_text_in_narratives_textbox())
+            time.sleep(web_driver.one_second)
+            action_textbox = self.d.find_element(By.XPATH, notes_Read_Ini().action_textbox())
+            action_textbox.send_keys(notes_Read_Ini().entering_text_in_action_textbox())
+            time.sleep(web_driver.one_second)
+            add_location_button = self.d.find_element(By.XPATH, notes_Read_Ini().add_location_button())
+            add_location_button.click()
+            time.sleep(web_driver.two_second)
+            heading_notes_location = self.d.find_element(By.XPATH, notes_Read_Ini().get_heading_of_notes_location())
+            move_cursur_to_map = self.d.find_element(By.XPATH, notes_Read_Ini().moving_mouse_into_map())
+            action = ActionChains(self.d).move_to_element_with_offset(move_cursur_to_map, 50, 70).click().perform()
+            time.sleep(web_driver.two_second)
+            save_button = self.d.find_element(By.XPATH, notes_Read_Ini().save_button_in_createnote())
+            save_button.click()
+        except Exception as ex:
+            self.logger.info(f"upload_image_and_create_a_note ex: {ex.args}")
+
+    def verify_enrollment_create_note_panel_displayed(self):
+        try:
+            panel_heading = self.explicit_wait(5, "XPATH", notes_Read_Ini().create_note_panel_heading(), self.d)
+            self.logger.info(f"enrollment create note panel heading visible: {panel_heading.is_displayed()}")
+            if panel_heading.is_displayed():
+                self.status.append(True)
+            else:
+                self.status.append(False)
+                self.logger.info(f"enrollment create note  panel is not displayed.")
+        except Exception as ex:
+            self.logger.info(f"verify_enrollment_create_note_panel_displayed ex: {ex.args}")
+
+    def click_on_add_a_new_note_option(self):
+        try:
+            add_a_new_note_to_person_option = self.explicit_wait(5, "XPATH", notes_Read_Ini().add_a_new_note_to_person_option_by_xpath(), self.d)
+            self.logger.info(f"add_a_new_note_to_person_option_by_xpath is visible: {add_a_new_note_to_person_option.is_displayed()}")
+            if add_a_new_note_to_person_option.is_displayed():
+                self.status.append(True)
+                add_a_new_note_to_person_option.click()
+            else:
+                self.status.append(False)
+                self.logger.info(f"add_a_new_note_to_person_option_by_xpath is not displayed.")
+
+        except Exception as ex:
+            self.logger.info(f"click_on_add_a_new_note_option ex: {ex.args}")
+
+    def click_on_Action_Drop_down(self):
+        try:
+            action_dropdown = self.explicit_wait(5, "XPATH", notes_Read_Ini().get_Action_dropdown_on_notes_page(), self.d)
+            self.logger.info(f"action dropdown is visible: {action_dropdown.is_displayed()}")
+            if action_dropdown.is_displayed():
+                self.status.append(True)
+                action_dropdown.click()
+            else:
+                self.status.append(False)
+                self.logger.info(f"action dropdown is not visible.")
+        except Exception as ex:
+            self.logger.info(f"click_on_Action_Drop_down ex: {ex.args}")
+
+    def verify_no_notes_error_msg_on_enrollment_notes_panel(self):
+        try:
+            no_notes_msg = self.explicit_wait(5, "XPATH", notes_Read_Ini().no_notes_error_msg_on_enrollment_notes_panel_by_xpath(), self.d)
+            self.logger.info(f"no notes msg is visible: {no_notes_msg.is_displayed()}")
+            if no_notes_msg.is_displayed():
+                self.status.append(True)
+
+            else:
+                self.status.append(False)
+                self.logger.info("no notes msg is not displayed, therefore there must be some notes enlisted.")
+
+        except Exception as ex:
+            self.logger.info(f"verify_no_notes_error_msg_on_enrollment_notes_panel ex: {ex.args}")
+
+    def click_on_notes_btn_on_enrollments_panel(self):
+        try:
+            notes_btn = self.explicit_wait(5, "XPATH", notes_Read_Ini().notes_btn_by_xpath(), self.d)
+            self.logger.info(f"notes btn is visible: {notes_btn.is_displayed()}")
+            if notes_btn.is_displayed():
+                self.status.append(True)
+                notes_btn.click()
+            else:
+                self.status.append(False)
+                self.logger.info(f"notes_btn is not displayed.")
+
+        except Exception as ex:
+            self.logger.info(f"click_on_notes_btn_on_enrollments_panel ex: {ex.args}")
+
+    def click_on_extend_menu_on_enrollments_panel(self):
+        try:
+            extend_menu = self.explicit_wait(5, "XPATH", notes_Read_Ini().tribar_in_notes(), self.d)
+            self.logger.info(f"extend btn visible: {extend_menu.is_displayed()}")
+            if extend_menu.is_displayed():
+                self.status.append(True)
+                extend_menu.click()
+            else:
+                self.status.append(False)
+                self.logger.info(f"extend btn is not displayed. ")
+
+        except Exception as ex:
+            self.logger.info(f"click_on_extend_menu_on_enrollments_panel ex:{ex.args}")
+
+    def open_enrollments_panel(self):
+        try:
+            enrollments_menu_item = self.explicit_wait(5, "XPATH", Portal_Menu_Module_read_ini().get_Enrollments_menu_by_xpath(), self.d)
+            self.logger.info(f"enrollment menu item is visible: {enrollments_menu_item.is_displayed()}")
+            if enrollments_menu_item.is_displayed():
+                self.status.append(True)
+                enrollments_menu_item.click()
+            else:
+                self.status.append(False)
+                self.logger.info(f"enrollments panel is not displayed.")
+        except Exception as ex:
+            self.logger.info(f"open_enrollments_panel ex: {ex.args}")
 
 
-# notes_pom().verify_tribar_in_notes()
-# notes_pom().click_on_ADD_LOCATION_on_create_note_notes_location_page_is_visible_followed_by_click_on_any_location_facefirst_logo_is_displayed()

@@ -283,7 +283,7 @@ class notes_Read_Ini:
 
     def get_Action_dropdown_on_notes_page(self):
         Action_dropdown = self.config.get("notes_locators", "Action_dropdown_on_notes")
-        print("Action dropdoen is visible", Action_dropdown)
+        print("Action dropdown is visible", Action_dropdown)
         return Action_dropdown
 
     def get_create_note_on_action_dropdown(self):
@@ -526,6 +526,11 @@ class notes_Read_Ini:
         print("delete selected notes", delete_selected_notes)
         return delete_selected_notes
 
+    def add_a_new_note_to_person_option_by_xpath(self):
+        add_a_new_note_to_person_option_by_xpath = self.config.get("notes_locators", "add_a_new_note_to_person_option_by_xpath")
+        print("add_a_new_note_to_person_option_by_xpath", add_a_new_note_to_person_option_by_xpath)
+        return add_a_new_note_to_person_option_by_xpath
+
     def refresh_in_action_dropdown(self):
         refresh = self.config.get("notes_locators", "refresh_in_action_dropdown")
         print("click on refresh", refresh)
@@ -605,6 +610,11 @@ class notes_Read_Ini:
         location_symbol = self.config.get("notes_locators","location_symbol")
         print("location symbol is visible",location_symbol)
         return location_symbol
+
+    def notes_btn_by_xpath(self):
+        notes_btn_by_xpath=self.config.get("notes_locators","notes_btn_by_xpath")
+        print("notes_btn_by_xpath",notes_btn_by_xpath)
+        return notes_btn_by_xpath
 
     def view_details_button(self):
         view_details=self.config.get("notes_locators","view_details_button")
@@ -687,7 +697,19 @@ class notes_Read_Ini:
         except Exception as ex:
             print(ex)
 
+    def no_notes_error_msg_on_enrollment_notes_panel_by_xpath(self):
+        try:
+            no_notes_error_msg_on_enrollment_notes_panel_by_xpath = self.config.get("notes_locators","no_notes_error_msg_on_enrollment_notes_panel_by_xpath")
+            return no_notes_error_msg_on_enrollment_notes_panel_by_xpath
+        except Exception as ex:
+            print(ex)
 
+    def image_uploaded_to_img_box_by_xpath(self):
+        try:
+            image_uploaded_to_img_box_by_xpath = self.config.get("notes_locators","image_uploaded_to_img_box_by_xpath")
+            return image_uploaded_to_img_box_by_xpath
+        except Exception as ex:
+            print(ex)
 
 
 
