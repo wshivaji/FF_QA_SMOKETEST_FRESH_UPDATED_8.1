@@ -21,7 +21,6 @@ from All_Config_Packages._12_Identify_and_Enroll_Config_Files.Identify_and_Enrol
 from pathlib import Path
 
 
-
 class Identify_And_Enroll_POM(web_driver, web_logger):
     d = web_driver.d()
     logger = web_logger.logger_obj()

@@ -127,10 +127,10 @@ class login(web_driver, web_logger):
                 self.d.get(Portal_login_page_read_ini().get_dm_url())
                 # self.d.maximize_window()
                 # # time.sleep(web_driver.two_second)
-                # time.sleep(web_driver.one_second)
-                # for i in range(4):
-                #     pyautogui.hotkey('ctrl', '-')
-                #     time.sleep(0.5)
+                time.sleep(web_driver.one_second)
+                for i in range(4):
+                    pyautogui.hotkey('ctrl', '-')
+                    time.sleep(0.5)
 
             login_btn = self.d.find_elements(By.XPATH, self.common_test_data_config.get("Login_Logout_Data", "login_btn_on_dm_by_xpath"))
             current_url = self.d.current_url
