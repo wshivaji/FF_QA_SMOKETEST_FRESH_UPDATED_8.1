@@ -1135,7 +1135,7 @@ class events_pom(web_driver, web_logger):
     def Verify_user_is_able_to_perform_identify_within_enrollments_fromEnrollment_View_panel_when_event_icon_is_click(self):
 
         try:
-            self.logger.info("*******TC_107***** started")
+            self.logger.info("*******TC_05***** started")
             login().login_to_cloud_if_not_done(self.d)
             # # login().login_to_localhost_if_not_done()
             self.status.clear()
@@ -1180,21 +1180,21 @@ class events_pom(web_driver, web_logger):
             self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
             self.logger.info(f"status:{self.status}")
             if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_107.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_107.png")
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_05.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_05.png")
                 self.logger.info("returning False.")
                 return False
             else:
                 self.logger.info("returning True.")
                 return True
         except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_107.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_107.png")
-            self.logger.error(f"TC_events_107 got exception as: {ex} ")
+            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_05.png")
+            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_05.png")
+            self.logger.error(f"TC_events_05 got exception as: {ex} ")
 
     def Verify_user_is_able_to_perform_identify_within_visitors_from_Probable_Match_Enrollment_View_panel_when_event_icon_is_click(self):
         try:
-            self.logger.info("********TC_108********* started")
+            self.logger.info("********TC_06********* started")
             # self.load_login_page_if_not_loaded()
             login().login_to_cloud_if_not_done(self.d)
             # # login().login_to_localhost_if_not_done()
@@ -1231,19 +1231,19 @@ class events_pom(web_driver, web_logger):
             self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
             self.logger.info(f"status:{self.status}")
             if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_108.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_108.png")
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_06.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_06.png")
                 return False
             else:
                 return True
         except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_108.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_108.png")
-            self.logger.error(f"TC_events_108 got exception as: {ex} ")
+            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_06.png")
+            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_06.png")
+            self.logger.error(f"TC_events_06 got exception as: {ex} ")
 
     def on_Enrollment_view_click_on_view_Edits_details_in_Acton_dropdown_and_verify_Enrollment_details_panel_is_visible(self):
         try:
-            self.logger.info("*******TC_109******* started")
+            self.logger.info("*******TC_07******* started")
             # self.load_login_page_if_not_loaded()
             login().login_to_cloud_if_not_done(self.d)
             # # login().login_to_localhost_if_not_done()
@@ -1272,15 +1272,15 @@ class events_pom(web_driver, web_logger):
             self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
             self.logger.info(f"status:{self.status}")
             if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_109.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_109.png")
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_07.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_07.png")
                 return False
             else:
                 return True
         except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_109.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_109.png")
-            self.logger.error(f"TC_events_109 got exception as: {ex} ")
+            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_07.png")
+            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_07.png")
+            self.logger.error(f"TC_events_07 got exception as: {ex} ")
 
     def Verify_user_enroller_of_an_enrollment_is_able_to_enable_the_disable_enrolled_subject_on_Enrollment_View_modules(self):
         try:
@@ -1344,7 +1344,7 @@ class events_pom(web_driver, web_logger):
 
     def Verify_user_is_able_to_edit_the_Enrollment_details_on_Enrollment_View_panel_when_ProbableMatch_Event_icon_is_click(self):
         try:
-            self.logger.info("*********TC_114******* started")
+            self.logger.info("*********TC_08******* started")
             # self.load_login_page_if_not_loaded()
             login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
@@ -1394,21 +1394,21 @@ class events_pom(web_driver, web_logger):
             self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
             self.logger.info(f"status:{self.status}")
             if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_114.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_114.png")
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_08.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_08.png")
                 return False
             else:
                 return True
         except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_114.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_114.png")
-            self.logger.error(f"TC_events_114 got exception as: {ex} ")
+            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_08.png")
+            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_08.png")
+            self.logger.error(f"TC_events_08 got exception as: {ex} ")
 
 
 
     def Verify_user_is_able_to_add_face_on_Enrollment_view_panel_when_event_icon_is_click(self):
         try:
-            self.logger.info("******TC_117********* started")
+            self.logger.info("******TC_09********* started")
             # self.load_login_page_if_not_loaded()
             login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
@@ -1459,21 +1459,21 @@ class events_pom(web_driver, web_logger):
             self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
             self.logger.info(f"status:{self.status}")
             if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_117.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_117.png")
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_09.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_09.png")
                 return False
             else:
                 return True
         except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_117.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_117.png")
-            self.logger.error(f"TC_events_117 got exception as: {ex} ")
+            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_09.png")
+            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_09.png")
+            self.logger.error(f"TC_events_09 got exception as: {ex} ")
 
 
     def Verify_user_is_able_to_see_probable_match_events_associated_to_same_person_on_Enrollment_View_panel_when_probable_match_event_icon_is_click(self):
 
         try:
-            self.logger.info("*********TC_119***** started")
+            self.logger.info("*********TC_10***** started")
             # self.load_login_page_if_not_loaded()
             login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
@@ -1500,20 +1500,20 @@ class events_pom(web_driver, web_logger):
             self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
             self.logger.info(f"status:{self.status}")
             if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_119.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_119.png")
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_10.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_10.png")
                 return False
             else:
                 return True
         except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_119.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_119.png")
-            self.logger.error(f"TC_events_119 got exception as: {ex} ")
+            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_10.png")
+            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_10.png")
+            self.logger.error(f"TC_events_10 got exception as: {ex} ")
 
     def Verify_user_able_to_link_a_enrollment_group_and_add_the_person_to_the_group(self):
 
         try:
-            self.logger.info("********TC_120******* started")
+            self.logger.info("********TC_11******* started")
             # self.load_login_page_if_not_loaded()
             login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
@@ -1583,19 +1583,19 @@ class events_pom(web_driver, web_logger):
             self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
             self.logger.info(f"status:{self.status}")
             if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_120.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_120.png")
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_11.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_11.png")
                 return False
             else:
                 return True
         except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_120.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_120.png")
-            self.logger.error(f"TC_events_120 got exception as: {ex} ")
+            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_11.png")
+            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_11.png")
+            self.logger.error(f"TC_events_11 got exception as: {ex} ")
 
     def Verify_user_able_to_unlink_same_enrollment_group_and_remove_the_person_from_selected_group(self):
         try:
-            self.logger.info("*******TC_121****** started")
+            self.logger.info("*******TC_12****** started")
             # self.load_login_page_if_not_loaded()
             login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
@@ -1681,22 +1681,22 @@ class events_pom(web_driver, web_logger):
             ele.click()
             self.logger.info(f"status:{self.status}")
             if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_121.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_121.png")
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_12.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_12.png")
                 self.logger.info("returning False")
                 return False
             else:
                 self.logger.info("returning True")
                 return True
         except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_121.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_121.png")
-            self.logger.error(f"TC_events_121 got exception as: {ex} ")
+            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_12.png")
+            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_12.png")
+            self.logger.error(f"TC_events_12 got exception as: {ex} ")
 
 
     def on_Enrollment_view_panel_click_on_Notes_button_and_verify_Enrollment_notes_panel_is_visible(self):
         try:
-            self.logger.info("*******TC_123****** started")
+            self.logger.info("*******TC_13****** started")
             # self.load_login_page_if_not_loaded()
             login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
@@ -1784,19 +1784,19 @@ class events_pom(web_driver, web_logger):
             self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
             self.logger.info(f"status:{self.status}")
             if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_123.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_123.png")
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_13.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_13.png")
                 return False
             else:
                 return True
         except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_123.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_123.png")
-            self.logger.error(f"TC_events_123 got exception as: {ex} ")
+            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_13.png")
+            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_13.png")
+            self.logger.error(f"TC_events_13 got exception as: {ex} ")
 
     def on_Event_page_click_on_tags_symbol_and_verify_Events_Tags_panel_is_visible(self):
         try:
-            self.logger.info("******TC_124***** started")
+            self.logger.info("******TC_14***** started")
             # self.load_login_page_if_not_loaded()
             login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
@@ -1821,15 +1821,15 @@ class events_pom(web_driver, web_logger):
             self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
             self.logger.info(f"status:{self.status}")
             if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_124.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_124.png")
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_14.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_14.png")
                 return False
             else:
                 return True
         except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_124.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_124.png")
-            self.logger.error(f"TC_events_124 got exception as: {ex} ")
+            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_14.png")
+            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_14.png")
+            self.logger.error(f"TC_events_14 got exception as: {ex} ")
 
     def on_Eventpage_click_on_extent_menu_button_and_verify_video_location_symbol_is_visible(self):
         try:
@@ -2003,6 +2003,7 @@ class events_pom(web_driver, web_logger):
 
     def Verify_25_events_are_generated_for_25_enrolled_subjects(self):
         try:
+            self.logger.info("Events testcases tc=15 started")
             login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             time.sleep(web_driver.one_second)
@@ -2034,8 +2035,8 @@ class events_pom(web_driver, web_logger):
 
             self.logger.info(f"status:{self.status}")
             if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_128.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_128.png")
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_15.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_15.png")
                 return False
             else:
                 return True
@@ -2047,12 +2048,13 @@ class events_pom(web_driver, web_logger):
 
     def Verify_5_events_for_each_group_soe_abe_pte_fraude_and_vipe_using_enrollment_group_selection_in_search_dropdown(self):
             try:
+                self.logger.info("events testcase tc=16 started")
                 login().login_to_cloud_if_not_done(self.d)
                 list_of_egs =  []
                 x = events_Read_Ini().enrollment_group_name_list()
                 enrollment_group_list = x.split(',')
-                self.logger.info(f"enrollment group list is :{enrollment_group_list.text}")
-                list_of_egs = enrollment_group_list.text
+                self.logger.info(f"enrollment group list is :{enrollment_group_list}")
+                list_of_egs = enrollment_group_list
                 for eg in range(len(enrollment_group_list)):
                         self.click_on_event_menu()
                         self.click_on_search_button()
