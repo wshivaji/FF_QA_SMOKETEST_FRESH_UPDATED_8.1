@@ -508,3 +508,38 @@ class account_Read_Ini:
         print("case_TTL_text", case_TTL_text)
         return case_TTL_text
 
+    def start_enrollments_count(self):
+        start_enrollments_count = self.common_test_data_config.get("Account_Module_Data", "start_enrollments_count")
+        print("start_enrollments_count", start_enrollments_count)
+        return start_enrollments_count
+
+    def start_users_count(self):
+        start_users_count = self.common_test_data_config.get("Account_Module_Data", "start_users_count")
+        print("start_users_count", start_users_count)
+        return start_users_count
+
+    def start_max_investigation_length_count(self):
+        start_max_investigation_length_count = self.common_test_data_config.get("Account_Module_Data", "start_max_investigation_length_count")
+        print("start_max_investigation_length_count", start_max_investigation_length_count)
+        return start_max_investigation_length_count
+
+    def start_enrollment_groups_count(self):
+        start_enrollment_groups_count = self.common_test_data_config.get("Account_Module_Data", "start_enrollment_groups_count")
+        print("start_enrollment_groups_count", start_enrollment_groups_count)
+        return start_enrollment_groups_count
+
+    def start_notification_groups_count(self):
+        start_notification_groups_count = self.common_test_data_config.get("Account_Module_Data", "start_notification_groups_count")
+        print("start_notification_groups_count", start_notification_groups_count)
+        return start_notification_groups_count
+
+    def start_stations_count(self):
+        start_stations_count = self.common_test_data_config.get("Account_Module_Data", "start_stations_count")
+        print("start_stations_count", start_stations_count)
+        return start_stations_count
+
+    def start_email(self):
+        start_email = self.common_test_data_config.get("Account_Module_Data", "start_email")
+        print("start_email", start_email)
+        return start_email
+
