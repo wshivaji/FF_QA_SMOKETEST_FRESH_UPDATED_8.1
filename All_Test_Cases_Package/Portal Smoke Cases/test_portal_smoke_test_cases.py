@@ -213,6 +213,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
         Below cases will perform, creating 3 serious and 1 non-serious tags.
     '''
 
+
     # --------------------------------------------  Identify & Enroll Cases  ----------------------------------------- #
     '''''
         Below cases will perform, enrolling 25 subjects (5 for each EG) by "operator" user and approve them by 

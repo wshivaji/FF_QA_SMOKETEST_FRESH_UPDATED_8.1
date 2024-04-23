@@ -964,8 +964,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                 f"{self.screenshots_path}\\test_TC_IE_101_Exception.png")
             return False
 
-
-
     def click_on_close_all_panel_btn(self):
         panel_list = self.d.find_elements(By.XPATH, Read_Identify_and_Enroll_Components().get_panel_by_xpath())
         if len(panel_list) > 0:
@@ -987,8 +985,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.logger.info("Re-enroll for already enrolled ")
             self.logger.info("clicked on enroll button")
 
-
-
     def get_img_file_list(self, folder_name):
         try:
             img_folder = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset1\\{folder_name}"
@@ -1005,9 +1001,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             return img_name_list
         except Exception as ex:
             self.logger.info(f"images list exception : {ex.args}")
-
-
-
     def Read_user_from_json(self):
         try:
             file_path = f'{Path(__file__).parent.parent.parent}\\All_Test_Data\\12_Identify_and_Enroll_Module\\Data_From_Json\\Enrollment_group.json'
