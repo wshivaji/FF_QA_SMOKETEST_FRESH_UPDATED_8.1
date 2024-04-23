@@ -52,6 +52,7 @@ class Tags_Module_pom(web_driver, web_logger):
             self.log.info(f"element length: {len(element_list)}")
             return element_list[0]
 
+
     def create_tags_for_serious_event(self):
         # rows = XLUtils.getRowCount(test_data, 'serious_event_tags_data')
         try:
