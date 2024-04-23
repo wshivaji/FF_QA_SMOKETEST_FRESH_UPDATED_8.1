@@ -543,3 +543,27 @@ class account_Read_Ini:
         print("start_email", start_email)
         return start_email
 
+    def no_enrollments_message_by_xpath(self):
+        no_enrollments_message_by_xpath = self.config.get("account_locators", "count_of_enrollments_by_xpath")
+        print("no_enrollments_message_by_xpath", no_enrollments_message_by_xpath)
+        return no_enrollments_message_by_xpath
+
+    def count_of_users_by_xpath(self):
+        count_of_users_by_xpath = self.config.get("account_locators", "count_of_users_by_xpath")
+        print("count_of_users_by_xpath", count_of_users_by_xpath)
+        return count_of_users_by_xpath
+
+    def count_of_enrollment_groups_by_xpath(self):
+        count_of_enrollment_groups_by_xpath = self.config.get("account_locators", "count_of_enrollment_groups_by_xpath")
+        print("count_of_enrollment_groups_by_xpath", count_of_enrollment_groups_by_xpath)
+        return count_of_enrollment_groups_by_xpath
+
+    def count_of_notification_groups_by_xpath(self):
+        count_of_notification_groups_by_xpath = self.config.get("account_locators", "count_of_notification_groups_by_xpath")
+        print("count_of_notification_groups_by_xpath", count_of_notification_groups_by_xpath)
+        return count_of_notification_groups_by_xpath
+
+    def count_of_stations_by_xpath(self):
+        count_of_stations_by_xpath = self.config.get("account_locators", "count_of_stations_by_xpath")
+        print("count_of_stations_by_xpath", count_of_stations_by_xpath)
+        return count_of_stations_by_xpath

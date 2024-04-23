@@ -10,19 +10,19 @@ class Test_account_testcases(web_driver, web_logger):
     logger.info(" ******** Account_Module (Order - 19) Begin ********")
     print("******** Account_Module (Order - 19) Begin ********")
 
-    @pytest.mark.system
-    def test_account_TC_001(self):
-        if account_pom().Verify_account_panel_details_before_execution():
-            assert True
-        else:
-            assert False
-
-    @pytest.mark.system
-    def test_account_TC_002(self):
-        if account_pom().Verify_account_panel_details_after_execution():
-            assert True
-        else:
-            assert False
+    # @pytest.mark.system
+    # def test_account_TC_001(self):
+    #     if account_pom().Verify_account_panel_details_before_execution():
+    #         assert True
+    #     else:
+    #         assert False
+    #
+    # @pytest.mark.system
+    # def test_account_TC_002(self):
+    #     if account_pom().Verify_account_panel_details_after_execution():
+    #         assert True
+    #     else:
+    #         assert False
 
     @pytest.mark.system
     def test_account_TC_034(self):

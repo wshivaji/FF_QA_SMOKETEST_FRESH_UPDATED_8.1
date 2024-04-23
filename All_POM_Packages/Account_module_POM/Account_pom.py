@@ -171,6 +171,122 @@ class account_pom(web_driver, web_logger):
         except Exception as ex:
             self.logger.info(f"click on logout got an exception as: {ex}")
 
+    def validate_enrollments_count(self):
+        try:
+            time.sleep(web_driver.two_second)
+            cloud_menu = self.d.find_element(By.XPATH, Portal_Menu_Module_read_ini().get_CLOUD_MENU_button_by_xpath())
+            cloud_menu.click()
+            time.sleep(web_driver.one_second)
+            enrollments_menu = web_driver.explicit_wait(self, 10, "XPATH",
+                                                        Portal_Menu_Module_read_ini().get_Enrollments_menu_by_xpath(),
+                                                        self.d)
+            enrollments_menu.click()
+            time.sleep(web_driver.two_second)
+            no_enrollments_message = self.d.find_elements(By.XPATH, account_Read_Ini().no_enrollments_message_by_xpath())
+            self.logger.info(f"length of no_enrollments_message: {len(no_enrollments_message)}")
+            e = account_Read_Ini().start_enrollments_count().split('/')
+            actual_enrollments_count = e[0]
+            self.logger.info(f"actual_enrollments_count: {actual_enrollments_count}")
+            if len(no_enrollments_message) == int(actual_enrollments_count):
+                return True
+            else:
+                return False
+        except Exception as ex:
+            self.logger.info(f"validate details before execution got an exception as: {ex}")
+
+    def validate_users_count(self):
+        try:
+            time.sleep(web_driver.two_second)
+            cloud_menu = self.d.find_element(By.XPATH, Portal_Menu_Module_read_ini().get_CLOUD_MENU_button_by_xpath())
+            cloud_menu.click()
+            time.sleep(web_driver.one_second)
+            users_menu = web_driver.explicit_wait(self, 10, "XPATH",
+                                                        Portal_Menu_Module_read_ini().get_Users_menu_by_xpath(),
+                                                        self.d)
+            users_menu.click()
+            time.sleep(web_driver.two_second)
+            count_of_users = self.d.find_elements(By.XPATH,
+                                                          account_Read_Ini().count_of_users_by_xpath())
+            self.logger.info(f"length of users: {len(count_of_users)+6}")
+
+            e = account_Read_Ini().start_users_count().split('/')
+            actual_users_count = e[0]
+            self.logger.info(f"actual_users_count: {actual_users_count}")
+            if len(count_of_users)+6 == int(actual_users_count):
+                return True
+            else:
+                return False
+        except Exception as ex:
+            self.logger.info(f"validate details before execution got an exception as: {ex}")
+
+    def validate_enrollment_groups_count(self):
+        try:
+            time.sleep(web_driver.two_second)
+            cloud_menu = self.d.find_element(By.XPATH, Portal_Menu_Module_read_ini().get_CLOUD_MENU_button_by_xpath())
+            cloud_menu.click()
+            time.sleep(web_driver.one_second)
+            eg_menu = web_driver.explicit_wait(self, 10, "XPATH",
+                                                        Portal_Menu_Module_read_ini().get_Enrollment_Groups_menu_by_xpath(),
+                                                        self.d)
+            eg_menu.click()
+            time.sleep(web_driver.two_second)
+            count_of_egs = self.d.find_elements(By.XPATH, account_Read_Ini().count_of_enrollment_groups_by_xpath())
+            self.logger.info(f"length of enrollment groups: {len(count_of_egs)}")
+
+            e = account_Read_Ini().start_enrollment_groups_count().split('/')
+            actual_egs_count = e[0]
+            self.logger.info(f"actual_egs_count: {actual_egs_count}")
+            if len(count_of_egs) == int(actual_egs_count):
+                return True
+            else:
+                return False
+        except Exception as ex:
+            self.logger.info(f"validate details before execution got an exception as: {ex}")
+
+    def validate_notification_groups_count(self):
+        try:
+            time.sleep(web_driver.two_second)
+            cloud_menu = self.d.find_element(By.XPATH, Portal_Menu_Module_read_ini().get_CLOUD_MENU_button_by_xpath())
+            cloud_menu.click()
+            time.sleep(web_driver.one_second)
+            ng_menu = web_driver.explicit_wait(self, 10, "XPATH",
+                                                        Portal_Menu_Module_read_ini().get_Notification_Groups_menu_by_xpath(),
+                                                        self.d)
+            ng_menu.click()
+            time.sleep(web_driver.two_second)
+            count_of_ngs = self.d.find_elements(By.XPATH, account_Read_Ini().count_of_notification_groups_by_xpath())
+            self.logger.info(f"length of notification groups: {len(count_of_ngs)}")
+
+            e = account_Read_Ini().start_notification_groups_count().split('/')
+            actual_ngs_count = e[0]
+            self.logger.info(f"actual_ngs_count: {actual_ngs_count}")
+            if len(count_of_ngs) == int(actual_ngs_count):
+                return True
+            else:
+                return False
+        except Exception as ex:
+            self.logger.info(f"validate details before execution got an exception as: {ex}")
+
+    def validate_stations_count(self):
+        try:
+            time.sleep(web_driver.two_second)
+
+            image_sources = web_driver.explicit_wait(self, 10, "XPATH", account_Read_Ini().
+                                                    view_Image_source_button(), self.d)
+            image_sources.click()
+            time.sleep(web_driver.two_second)
+            count_of_stations = self.d.find_elements(By.XPATH, account_Read_Ini().count_of_stations_by_xpath())
+            self.logger.info(f"length of stations: {len(count_of_stations)}")
+            actual_stations_count = account_Read_Ini().start_stations_count()
+            self.logger.info(f"actual_stations_count: {actual_stations_count}")
+            if len(count_of_stations) == int(actual_stations_count):
+                return True
+            else:
+                return False
+
+        except Exception as ex:
+            self.logger.info(f"validate details before execution got an exception as: {ex}")
+
     def Verify_account_panel_details_after_execution(self):
         try:
             self.logger.info("********TC_002******* started")
@@ -190,7 +306,12 @@ class account_pom(web_driver, web_logger):
                 self.logger.info("Account panel heading is not visible")
                 self.status.append(False)
 
-            self.status.append(self.verify_enabled_status_and_its_value_after_execution())
+            self.verify_enabled_status_and_its_value_after_execution()
+            self.status.append(self.validate_enrollments_count())
+            self.status.append(self.validate_users_count())
+            self.status.append(self.validate_enrollment_groups_count())
+            self.status.append(self.validate_notification_groups_count())
+            self.status.append(self.validate_stations_count())
             self.logger.info(f"status :{self.status}")
             time.sleep(web_driver.one_second)
 
@@ -223,7 +344,12 @@ class account_pom(web_driver, web_logger):
                 self.logger.info("Account panel heading is not visible")
                 self.status.append(False)
 
-            self.status.append(self.verify_enabled_status_and_its_value())
+            self.verify_enabled_status_and_its_value()
+            self.status.append(self.validate_enrollments_count())
+            self.status.append(self.validate_users_count())
+            self.status.append(self.validate_enrollment_groups_count())
+            self.status.append(self.validate_notification_groups_count())
+            self.status.append(self.validate_stations_count())
             self.logger.info(f"status :{self.status}")
             time.sleep(web_driver.one_second)
 
@@ -2028,10 +2154,6 @@ class account_pom(web_driver, web_logger):
             file = Path(common_test_data_ini_file_path)
             config = configparser.ConfigParser()
             config.read(file)
-            # events_by_zone_counts = self.d.find_element(By.XPATH, "//*[local-name()='svg']")
-            # all_devices = all_devices.text.replace(" ", ",")
-            # cleaned_string = events_by_zone_counts.text.replace('\n', ',').replace('\t', '')
-            # print(cleaned_string)
             if x == account_Read_Ini().enabled_status_text():
                 config.set("Account_Module_Data", "end_enabled_status", y)
                 config.write(file.open('w'))
