@@ -1999,7 +1999,8 @@ class events_pom(web_driver, web_logger):
 
     def Verify_25_events_are_generated_for_25_enrolled_subjects(self):
         try:
-            self.logger.info("Events testcases tc=15 started")
+            self.logger.info("*************************** Events testcases TC_001 started *******************************")
+            self.status.clear()
             login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             time.sleep(web_driver.one_second)
@@ -2038,53 +2039,55 @@ class events_pom(web_driver, web_logger):
                 return True
 
         except Exception as ex:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_128.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_128.png")
-                self.logger.error(f"TC_events_128 got exception as: {ex} ")
+            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_128.png")
+            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_128.png")
+            self.logger.error(f"TC_events_128 got exception as: {ex} ")
 
     def Verify_5_events_for_each_group_soe_abe_pte_fraude_and_vipe_using_enrollment_group_selection_in_search_dropdown(self):
-            try:
-                self.logger.info("events testcase tc=16 started")
-                login().login_to_cloud_if_not_done(self.d)
-                list_of_egs =  []
-                x = events_Read_Ini().enrollment_group_name_list()
-                enrollment_group_list = x.split(',')
-                self.logger.info(f"enrollment group list is :{enrollment_group_list}")
-                list_of_egs = enrollment_group_list
-                for eg in range(len(enrollment_group_list)):
-                        self.click_on_event_menu()
-                        self.click_on_search_button()
-                        self.enrollment_group_selection()
-                        filter_text_box_in_eg = self.d.find_element(By.XPATH,events_Read_Ini().enrollment_group_filter())
-                        filter_text_box_in_eg.clear()
-                        filter_text_box_in_eg.send_keys(eg)
-                        self.click_on_save_button()
-                        self.click_on_event_filter_search_button()
-                        # self.enrollment_group_search_result_validation()
-                        Total_events_count_of_each_group = self.d.find_element(By.XPATH,events_Read_Ini().Events_count_each_eg())
-                        self.logger.info(f"Total number of events on each group is {Total_events_count_of_each_group.text}")
-                        time.sleep(web_driver.one_second)
-                        expected_events_counts = events_Read_Ini().five_events_from_each_group()
-                        if expected_events_counts in Total_events_count_of_each_group.text:
-                            self.logger.info("Displaying 5 events from each group")
-                            self.status.append(True)
+        try:
+            self.logger.info("************************************ test_events_TC_002 *******************************")
+            self.status.clear()
+            login().login_to_cloud_if_not_done(self.d)
+            x = events_Read_Ini().get_enrollment_group()
+            enrollment_group_list = x.split(',')
+            self.logger.info(f"enrollment group list is :{enrollment_group_list}")
+            for i in range(len(enrollment_group_list)):
+                self.click_on_event_menu()
+                self.click_on_search_button()
+                self.click_on_enrollment_group()
+                eg_name = enrollment_group_list[i]
+                filter_text_box_in_eg = self.d.find_element(By.XPATH, events_Read_Ini().enrollment_group_filter())
+                filter_text_box_in_eg.clear()
+                filter_text_box_in_eg.send_keys(eg_name)
+                self.select_enrollment_group(eg_name)
+                self.click_on_save_button()
+                self.click_on_event_filter_search_button()
+                # self.enrollment_group_search_result_validation()
+                Total_events_count_of_each_group = self.explicit_wait(5, "XPATH", events_Read_Ini().Events_count_each_eg(), self.d)
+                self.logger.info(f"Total number of events on each group is {Total_events_count_of_each_group.text}")
+                time.sleep(web_driver.one_second)
+                expected_events_counts = events_Read_Ini().five_events_from_each_group()
+                if expected_events_counts in Total_events_count_of_each_group.text:
+                    self.logger.info("Displaying 5 events from each group")
+                    self.status.append(True)
 
-                        else:
-                            self.status.append(False)
-                        self.enrollment_group_selection()
-                if False in self.status:
-                    self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_128.png")
-                    self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_128.png")
-                    return False
                 else:
-                    return True
-            except Exception as ex:
-                self.d.save_screenshot(f"{self.screenshots_path}\\event_search_with_enrollmentGroup_filter_combination_"
-                                       f"failed.png")
-                self.logger.info(f"event_search_with_enrollmentGroup_filter_combination failed:  {ex.args}")
+                    self.status.append(False)
+                self.click_on_search_button()
+                self.click_on_enrollment_group()
+                eg_name = enrollment_group_list[i]
+                self.select_enrollment_group(eg_name)
+                self.close_all_panel_one_by_one()
+            if False in self.status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_events_TC_002.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\test_events_TC_002.png")
                 return False
-            # finally:
-            #     # self.close_all_panel_one_by_one()
+            else:
+                return True
+        except Exception as ex:
+            self.d.save_screenshot(f"{self.screenshots_path}\\test_events_TC_002.png")
+            self.logger.info(f"event_search_with_enrollmentGroup_filter_combination failed:  {ex.args}")
+            return False
 
     def logout_from_portal(self):
         try:
@@ -2099,10 +2102,193 @@ class events_pom(web_driver, web_logger):
         except Exception as ex:
             self.logger.info(f"logout_from_portal ex: {ex.args}")
 
+    def Verify_25_events_using_Org_hierarchy_selection_in_search_dropdown(self):
+        try:
+            self.logger.info("************************* test_events_TC_003 ******************************")
+            self.status.clear()
+            login().login_to_cloud_if_not_done(self.d)
+            x = events_Read_Ini().get_enrollment_group()
+            enrollment_group_list = x.split(',')
+            self.logger.info(f"enrollment group list is :{enrollment_group_list}")
+            # for i in range(len(enrollment_group_list)):
+            self.click_on_event_menu()
+            self.click_on_search_button()
+            self.click_on_org_hierarchy_selection_btn()
+            self.select_region_from_org_hierarchy()
+            self.click_on_event_filter_search_button()
+            # self.enrollment_group_search_result_validation()
+            Total_events_count_of_each_group = self.explicit_wait(5, "XPATH", events_Read_Ini().Events_count_each_eg(), self.d)
+            self.logger.info(f"Total number of events on each group is {Total_events_count_of_each_group.text}")
+            time.sleep(web_driver.one_second)
+            expected_events_counts = events_Read_Ini().read_total_number_of_events()
+            if expected_events_counts in Total_events_count_of_each_group.text:
+                self.logger.info("Displaying 25 events")
+                self.status.append(True)
+            else:
+                self.status.append(False)
 
+            self.logger.info(f"status: {self.status}")
+            if False in self.status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_events_TC_003.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\test_events_TC_003.png")
+                self.close_all_panel_one_by_one()
+                return False
+            else:
+                self.close_all_panel_one_by_one()
+                return True
+        except Exception as ex:
+            self.logger.info(f"Verify_25_events_using_Org_hierarchy_selection_in_search_dropdown ex: {ex.args}")
 
+    def Verify_5_events_for_each_group_soe_abe_pte_fraude_and_vipe_using_enrollment_group_and_org_hierarchy_selection_in_search_dropdown(self):
+        try:
+            self.logger.info("************************ test_events_TC_004 **********************************")
+            self.status.clear()
+            login().login_to_cloud_if_not_done(self.d)
+            x = events_Read_Ini().get_enrollment_group()
+            enrollment_group_list = x.split(',')
+            self.logger.info(f"enrollment group list is :{enrollment_group_list}")
+            for i in range(len(enrollment_group_list)):
+                self.click_on_event_menu()
+                self.click_on_search_button()
+                self.click_on_enrollment_group()
+                eg_name = enrollment_group_list[i]
+                # filter_text_box_in_eg = self.d.find_element(By.XPATH, events_Read_Ini().enrollment_group_filter())
+                # filter_text_box_in_eg.clear()
+                # filter_text_box_in_eg.send_keys(eg_name)
+                self.select_enrollment_group(eg_name)
+                self.click_on_save_button()
+                self.click_on_event_filter_search_button()
+                # self.enrollment_group_search_result_validation()
+                Total_events_count_of_each_group = self.explicit_wait(5, "XPATH",
+                                                                      events_Read_Ini().Events_count_each_eg(), self.d)
+                self.logger.info(f"Total number of events on each group is {Total_events_count_of_each_group.text}")
+                time.sleep(web_driver.one_second)
+                expected_events_counts = events_Read_Ini().five_events_from_each_group()
+                if expected_events_counts in Total_events_count_of_each_group.text:
+                    self.logger.info("Displaying 5 events from each group")
+                    self.status.append(True)
 
+                else:
+                    self.status.append(False)
+                self.click_on_search_button()
+                self.click_on_enrollment_group()
+                eg_name = enrollment_group_list[i]
+                self.select_enrollment_group(eg_name)
+                self.close_all_panel_one_by_one()
+            self.logger.info(f"status: {self.status}")
+            if False in self.status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_events_TC_004.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\test_events_TC_004.png")
+                return False
+            else:
+                return True
+        except Exception as ex:
+            self.logger.info(f"Verify_5_events_for_each_group_soe_abe_pte_fraude_and_vipe_using_enrollment_group_and_org_hierarchy_selection_in_search_dropdown ex: {ex.args}")
 
+    def Add_the_tags_with_respective_enrollment_groups_and_org_hierarchy_selection_example_soe_deterred_and_assualt_abe_deterred_and_threat_pte_deterred_and_push_cart_fraude_and_vipe_deterred_and_fraud(self):
+        try:
+            self.logger.info("************************ test_events_TC_005 **********************************")
+            self.status.clear()
+            login().login_to_cloud_if_not_done(self.d)
+            x = events_Read_Ini().get_enrollment_group()
+            enrollment_group_list = x.split(',')
+            self.logger.info(f"enrollment group list is :{enrollment_group_list}")
+            for i in range(len(enrollment_group_list)):
+                self.click_on_event_menu()
+                self.click_on_search_button()
+                self.click_on_enrollment_group()
+                eg_name = enrollment_group_list[i]
+                # filter_text_box_in_eg = self.d.find_element(By.XPATH, events_Read_Ini().enrollment_group_filter())
+                # filter_text_box_in_eg.clear()
+                # filter_text_box_in_eg.send_keys(eg_name)
+                self.select_enrollment_group(eg_name)
+                self.click_on_save_button()
+                self.click_on_event_filter_search_button()
+                # self.enrollment_group_search_result_validation()
+                Total_events_count_of_each_group = self.explicit_wait(5, "XPATH",
+                                                                      events_Read_Ini().Events_count_each_eg(), self.d)
+                self.logger.info(f"Total number of events on each group is {Total_events_count_of_each_group.text}")
+                time.sleep(web_driver.one_second)
+                expected_events_counts = events_Read_Ini().five_events_from_each_group()
+                if expected_events_counts in Total_events_count_of_each_group.text:
+                    self.logger.info("Displaying 5 events from each group")
+                    self.status.append(True)
+                    self.click_on_select_all_checkbox()
+                    self.click_on_action_dropdown()
+                    self.click_on_edit_tags_option_inside_action_dropdown()
+                    self.status.append(self.verify_probable_match_event_tags_panel_displayed())
+                    self.click_on_filter_dropdown_on_event_tags_panel()
+                    self.click_on_unlinked_tags_option_inside_filter_dropdown()
+                    # self.verify_all_Tags_available()
+                    self.select_tags_to_add_to_events(eg_name)
+                    self.click_action_dropdown_on_event_tags_panel()
+                    self.click_on_add_tags_to_selected_events_option()
+
+                else:
+                    self.status.append(False)
+                self.click_on_search_button()
+                self.click_on_enrollment_group()
+                eg_name = enrollment_group_list[i]
+                self.select_enrollment_group(eg_name)
+                self.close_all_panel_one_by_one()
+            self.logger.info(f"status: {self.status}")
+            if False in self.status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_events_TC_005.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\test_events_TC_005.png")
+                return False
+            else:
+                return True
+        except Exception as ex:
+            self.logger.info(f"Add_the_tags_with_respective_enrollment_groups_and_org_hierarchy_selection_example_soe_deterred_and_assualt_abe_deterred_and_threat_pte_deterred_and_push_cart_fraude_and_vipe_deterred_and_fraud  ex: {ex.args}")
+
+    def Verify_5_events_are_visible_by_enrollment_group_org_hierarchy_and_Tag_selection(self):
+        try:
+            self.logger.info("************************ test_events_TC_006 **********************************")
+            self.status.clear()
+            login().login_to_cloud_if_not_done(self.d)
+            x = events_Read_Ini().get_enrollment_group()
+            enrollment_group_list = x.split(',')
+            for i in range(len(enrollment_group_list)):
+                self.click_on_event_menu()
+                self.click_on_search_button()
+                self.click_on_enrollment_group()
+                eg_name = enrollment_group_list[i]
+                # filter_text_box_in_eg = self.d.find_element(By.XPATH, events_Read_Ini().enrollment_group_filter())
+                # filter_text_box_in_eg.clear()
+                # filter_text_box_in_eg.send_keys(eg_name)
+                self.select_enrollment_group(eg_name)
+                self.click_on_save_button()
+                self.click_on_org_hierarchy_selection_btn()
+                self.select_region_from_org_hierarchy()
+                self.click_on_tag_selection_btn()
+                self.select_tag_from_tag_list(eg_name)
+
+                self.click_on_event_filter_search_button()
+                # self.enrollment_group_search_result_validation()
+                Total_events_count_of_each_group = self.explicit_wait(5, "XPATH", events_Read_Ini().Events_count_each_eg(), self.d)
+                self.logger.info(f"Total number of events on each group is {Total_events_count_of_each_group.text}")
+                time.sleep(web_driver.one_second)
+                # expected_events_counts = events_Read_Ini().five_events_from_each_group()
+                self.verify_events_displayed_as_expected(eg_name)
+                # if expected_events_counts in Total_events_count_of_each_group.text:
+                #     self.logger.info("Displaying 5 events from each group")
+                #     self.status.append(True)
+                # else:
+                #     self.status.append(False)
+                self.click_on_search_button()
+                self.click_on_enrollment_group()
+                eg_name = enrollment_group_list[i]
+                self.select_enrollment_group(eg_name)
+                self.close_all_panel_one_by_one()
+            self.logger.info(f"status: {self.status}")
+            if False in self.status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_events_TC_006.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\test_events_TC_006.png")
+                return False
+            else:
+                return True
+        except Exception as ex:
+            self.logger.info(f"Verify_5_events_are_visible_by_enrollment_group_org_hierarchy_and_Tag_selection ex: {ex.args}")
 
 
 
@@ -2113,6 +2299,316 @@ class events_pom(web_driver, web_logger):
 
 ################################################ Event_search_filter_methods ##############################################
 
+    def verify_events_displayed_as_expected(self, eg_name):
+        try:
+            self.explicit_wait(5, "XPATH", events_Read_Ini().tags_attached_list_by_xpath(), self.d)
+            tags_attached_list = self.d.find_elements(By.XPATH, events_Read_Ini().tags_attached_list_by_xpath())
+            self.logger.info(f"tags attached list count: {len(tags_attached_list)}")
+            tags_attached_names = []
+            for i in range(len(tags_attached_list)):
+                tags_attached_names.append(tags_attached_list[i].text)
+            if "ABE" == eg_name.upper():
+                tag_name = "THREAT"
+                if tag_name in tags_attached_names:
+                    self.status.append(True)
+                else:
+                    self.status.append(False)
+            elif "PTE" == eg_name.upper():
+                tag_name = "PUSH_CART"
+                if tag_name in tags_attached_names:
+                    self.status.append(True)
+                else:
+                    self.status.append(False)
+            elif "SOE" == eg_name.upper():
+                tag_name = "ASSAULT"
+                if tag_name in tags_attached_names:
+                    self.status.append(True)
+                else:
+                    self.status.append(False)
+            elif "FRAUDE" == eg_name.upper():
+                tag_name = "FRAUD"
+                if tag_name in tags_attached_names:
+                    self.status.append(True)
+                else:
+                    self.status.append(False)
+            elif "VIPE" == eg_name.upper():
+                tag_name = "FRAUD"
+                if tag_name in tags_attached_names:
+                    self.status.append(True)
+                else:
+                    self.status.append(False)
+            else:
+                self.logger.info(f"eg_name doesn't match, eg_name: {eg_name}")
+                tag_name = None
+                self.status.append(False)
+        except Exception as ex:
+            self.logger.info(f"verify_events_displayed_as_expected ex: {ex.args}")
+
+    def select_tag_from_tag_list(self, eg_name):
+        try:
+            self.explicit_wait(5, "XPATH", events_Read_Ini().tag_name_list_by_xpath(), self.d)
+            tag_name_list = self.d.find_elements(By.XPATH, events_Read_Ini().tag_name_list_by_xpath())
+            self.explicit_wait(5, "XPATH", events_Read_Ini().tag_name_checkbox_list(), self.d)
+            tag_name_checkbox_list = self.d.find_elements(By.XPATH, events_Read_Ini().tag_name_checkbox_list())
+            if "ABE" == eg_name.upper():
+                tag_name = "THREAT"
+                for i in range(len(tag_name_list)):
+                    self.logger.info(f"tag name: {tag_name_list[i].text}")
+                    if tag_name_list[i].text == tag_name:
+                        tag_name_checkbox_list[i].click()
+            elif "PTE" == eg_name.upper():
+                tag_name = "PUSH_CART"
+                for i in range(len(tag_name_list)):
+                    self.logger.info(f"tag name: {tag_name_list[i].text}")
+                    if tag_name_list[i].text == tag_name:
+                        tag_name_checkbox_list[i].click()
+            elif "SOE" == eg_name.upper():
+                tag_name = "ASSAULT"
+                for i in range(len(tag_name_list)):
+                    self.logger.info(f"tag name: {tag_name_list[i].text}")
+                    if tag_name_list[i].text == tag_name:
+                        tag_name_checkbox_list[i].click()
+            elif "FRAUDE" == eg_name.upper():
+                tag_name = "FRAUD"
+                for i in range(len(tag_name_list)):
+                    self.logger.info(f"tag name: {tag_name_list[i].text}")
+                    if tag_name_list[i].text == tag_name:
+                        tag_name_checkbox_list[i].click()
+            elif "VIPE" == eg_name.upper():
+                tag_name = "FRAUD"
+                for i in range(len(tag_name_list)):
+                    self.logger.info(f"tag name: {tag_name_list[i].text}")
+                    if tag_name_list[i].text == tag_name:
+                        tag_name_checkbox_list[i].click()
+            else:
+                self.logger.info(f"eg_name doesn't match, eg_name: {eg_name}")
+                tag_name = None
+            save_btn = self.explicit_wait(5, "XPATH", events_Read_Ini().save_btn_on_tag_selection_by_xpath(), self.d)
+            save_btn.click()
+        except Exception as ex:
+            self.logger.info(f"select_tag_from_tag_list ex: {ex.args}")
+
+    def click_on_tag_selection_btn(self):
+        try:
+            tag_selection_btn = self.explicit_wait(5, "XPATH", events_Read_Ini().tag_selection(), self.d)
+            self.logger.info(f"tag selection btn: {tag_selection_btn.is_displayed()}")
+            if tag_selection_btn.is_displayed():
+                tag_selection_btn.click()
+            else:
+                self.logger.info("tag selection btn not displayed.")
+
+        except Exception as ex:
+            self.logger.info(f"click_on_tag_selection_btn ex: {ex.args}")
+
+    def click_on_add_tags_to_selected_events_option(self):
+        try:
+            add_tags_option = self.explicit_wait(5, "XPATH", events_Read_Ini().add_tags_to_event_option_in_event_tags_1(), self.d)
+            self.logger.info(f"add tags to events option visible: {add_tags_option.is_displayed()}")
+            if add_tags_option.is_displayed():
+                add_tags_option.click()
+                self.status.append(True)
+            else:
+                self.status.append(False)
+                self.logger.info(f"add tags option is not displayed.")
+        except Exception as ex:
+            self.logger.info(f"click_on_add_tags_to_selected_events_option ex: {ex.args}")
+
+    def click_action_dropdown_on_event_tags_panel(self):
+        try:
+            action_dropdown = self.explicit_wait(5, "XPATH", events_Read_Ini().action_dropdown_on_event_tags_panel_by_xpath(), self.d)
+            self.logger.info(f"action dropdown on event tags: {action_dropdown.is_displayed()}")
+            if action_dropdown.is_displayed():
+                action_dropdown.click()
+            else:
+                self.logger.info(f"action dropdown is not displayed.")
+        except Exception as ex:
+            self.logger.info(f"click_action_dropdown_on_event_tags_panel ex: {ex.args}")
+
+    def select_tags_to_add_to_events(self, eg_name):
+        try:
+            if "ABE" == eg_name.upper():
+                tag_name = "THREAT"
+            elif "PTE" == eg_name.upper():
+                tag_name = "PUSH_CART"
+            elif "SOE" == eg_name.upper():
+                tag_name = "ASSAULT"
+            elif "FRAUDE" == eg_name.upper():
+                tag_name = "FRAUD"
+            elif "VIPE" == eg_name.upper():
+                tag_name = "FRAUD"
+            else:
+                self.logger.info(f"eg_name doesn't match, eg_name: {eg_name}")
+                tag_name = None
+            if tag_name is not None:
+                tag_name_list = self.d.find_elements(By.XPATH, events_Read_Ini().tags_names())
+                tag_checkbox_list = self.d.find_elements(By.XPATH, events_Read_Ini().checkbox_number_twentyfour())
+                if tag_name == "THREAT":
+                    tag_checkbox_list[0].click()
+                    for i in range(len(tag_name_list)):
+                        self.logger.info(f"tag names: {tag_name_list[i].text}")
+                        if tag_name_list[i].text == tag_name:
+                            tag_checkbox_list[i].click()
+                elif tag_name == "PUSH_CART":
+                    tag_checkbox_list[0].click()
+                    for i in range(len(tag_name_list)):
+                        self.logger.info(f"tag names: {tag_name_list[i].text}")
+                        if tag_name_list[i].text == tag_name:
+                            tag_checkbox_list[i].click()
+                elif tag_name == "ASSAULT":
+                    tag_checkbox_list[0].click()
+                    for i in range(len(tag_name_list)):
+                        self.logger.info(f"tag names: {tag_name_list[i].text}")
+                        if tag_name_list[i].text == tag_name:
+                            tag_checkbox_list[i].click()
+                elif tag_name == "FRAUD":
+                    tag_checkbox_list[0].click()
+                    for i in range(len(tag_name_list)):
+                        self.logger.info(f"tag names: {tag_name_list[i].text}")
+                        if tag_name_list[i].text == tag_name:
+                            tag_checkbox_list[i].click()
+                else:
+                    self.logger.info(f"tag name is not as expected.")
+            else:
+                self.logger.info(f"enrollment group name given is not as expected")
+        except Exception as ex:
+            self.logger.info(f"select_tags_to_add_to_events ex: {ex.args}")
+
+    def click_on_tags_submenu(self):
+        try:
+            tags_menu = self.explicit_wait(5, "XPATH", events_Read_Ini().tags_menu_item_by_xpath(), self.d)
+            self.logger.info(f"tags menu visible: {tags_menu.is_displayed()}")
+            if tags_menu.is_displayed():
+                tags_menu.click()
+            else:
+                self.logger.info("tags menu is not displayed")
+        except Exception as ex:
+            self.logger.info(f"click_on_tags_submenu ex: {ex.args}")
+
+    def click_on_cloud_menu_btn(self):
+        try:
+            cloud_menu = self.explicit_wait(5, "XPATH", events_Read_Ini().get_cloud_menu(), self.d)
+            self.logger.info(f"cloud menu visible: {cloud_menu.is_displayed()}")
+            if cloud_menu.is_displayed():
+                cloud_menu.click()
+            else:
+                self.logger.info("cloud menu is not displayed.")
+        except Exception as ex:
+            self.logger.info(f"click_on_cloud_menu_btn ex: {ex.args}")
+
+    def verify_all_Tags_available(self):
+        try:
+            tags_enlisted = self.d.find_elements(By.XPATH, events_Read_Ini().tags_list_enlisted_by_xpath())
+            self.logger.info(f"tags list enlisted count: {len(tags_enlisted)}")
+            if len(tags_enlisted) == 1:
+                self.logger.info(f"tags enlisted did not have other tags ")
+
+            else:
+                self.logger.info("tags enlisted did have tags. creating tags")
+
+        except Exception as ex:
+            self.logger.info(f"verify_all_Tags_available ex: {ex.args}")
+
+    def click_on_unlinked_tags_option_inside_filter_dropdown(self):
+        try:
+            unlinked_tags_option = self.explicit_wait(5, "XPATH", events_Read_Ini().unlinked_tags_by_xpath(), self.d)
+            self.logger.info(f"unlinked tags option ex: {unlinked_tags_option.is_displayed()}")
+            if unlinked_tags_option.is_displayed():
+                unlinked_tags_option.click()
+            else:
+                self.logger.info(f"unlinked tags option is not displayed.")
+        except Exception as ex:
+            self.logger.info(f"click_on_unlinked_tags_option_inside_filter_dropdown ex: {ex.args}")
+
+    def click_on_filter_dropdown_on_event_tags_panel(self):
+        try:
+            filter_dropdown = self.explicit_wait(5, "XPATH", events_Read_Ini().filter_dropdown_in_events_tag(), self.d)
+            self.logger.info(f"filter dropdown in event tags visible: {filter_dropdown.is_displayed()}")
+            if filter_dropdown.is_displayed():
+                filter_dropdown.click()
+            else:
+                self.logger.info("filter dropdown is not displayed.")
+        except Exception as ex:
+            self.logger.info(f"click_on_filter_dropdown_on_event_tags_panel ex: {ex.args}")
+
+    def verify_probable_match_event_tags_panel_displayed(self):
+        try:
+            probable_match_event_tags_panel_heading = self.explicit_wait(5, "XPATH", events_Read_Ini().events_tags_panel_heading(), self.d)
+            self.logger.info(f"verify_probable_match_event_tags_panel_displayed visible: {probable_match_event_tags_panel_heading.is_displayed()}")
+            if probable_match_event_tags_panel_heading.is_displayed():
+                return True
+            else:
+                self.logger.info(f"event tags panel not displayed.")
+                return False
+        except Exception as ex:
+            self.logger.info(f"verify_probable_match_event_tags_panel_displayed ex: {ex.args}")
+
+    def click_on_edit_tags_option_inside_action_dropdown(self):
+        try:
+            edit_tags_option = self.explicit_wait(5, "XPATH", events_Read_Ini().edit_tags_in_actiondropdown(), self.d)
+            self.logger.info(f"edit tags option visible: {edit_tags_option.is_displayed()}")
+            if edit_tags_option.is_displayed():
+                edit_tags_option.click()
+            else:
+                self.logger.info("edit tags option is not displayed")
+        except Exception as ex:
+            self.logger.info(f"click_on_edit_tags_option_inside_action_dropdown ex: {ex.args}")
+
+    def click_on_action_dropdown(self):
+        try:
+            action_dropdown = self.explicit_wait(5, "XPATH", events_Read_Ini().action_dropdown_in_events(), self.d)
+            self.logger.info(f"action dropdown is visible: {action_dropdown.is_displayed()}")
+            if action_dropdown.is_displayed():
+                action_dropdown.click()
+            else:
+                self.logger.info("action dropdown is not displayed.")
+        except Exception as ex:
+            self.logger.info(f"click_on_action_dropdown ex: {ex.args}")
+
+    def click_on_select_all_checkbox(self):
+        try:
+            select_all_checkbox = self.explicit_wait(5, "XPATH", events_Read_Ini().select_all_checkbox(), self.d)
+            self.logger.info(f"select all checkbox visible: {select_all_checkbox.is_displayed()}")
+            if select_all_checkbox.is_displayed():
+                select_all_checkbox.click()
+            else:
+                self.logger.info("select all checkbox is not displayed.")
+        except Exception as ex:
+            self.logger.info(f"click_on_select_all_checkbox ex: {ex.args}")
+
+    def select_region_from_org_hierarchy(self):
+        try:
+            # self.explicit_wait(5, "XPATH", events_Read_Ini().regions_xpath(), self.d)
+            time.sleep(web_driver.two_second)
+            region_list = self.d.find_elements(By.XPATH, events_Read_Ini().regions_xpath())
+            region_checkbox_list = self.d.find_elements(By.XPATH, events_Read_Ini().region_checkbox_xpath())
+
+            self.logger.info(f"region length: {len(region_list)}")
+            if len(region_list) > 0:
+                for i in range(len(region_list)):
+                    self.logger.info(f"region name: {region_list[i].text}")
+                    if region_list[i].text == events_Read_Ini().edge_name():
+                        region_checkbox_list[i].click()
+            else:
+                self.logger.info(f"region name list not displayed.")
+            save_btn = self.explicit_wait(5, "XPATH", events_Read_Ini().save_zone_button_by_xpath(), self.d)
+            if save_btn.is_displayed():
+                self.logger.info(f"save btn is visible: {save_btn.is_displayed()}")
+                save_btn.click()
+            else:
+                self.logger.info("save btn not displayed.")
+        except Exception as ex:
+            self.logger.info(f"select_region_from_org_hierarchy ex: {ex.args}")
+
+    def click_on_org_hierarchy_selection_btn(self):
+        try:
+            org_hierarchy_btn = self.explicit_wait(5, "XPATH", events_Read_Ini().org_hierarchy_selection(), self.d)
+            self.logger.info(f"org hierarchy selection btn visible: {org_hierarchy_btn.is_displayed()}")
+            if org_hierarchy_btn.is_displayed():
+                org_hierarchy_btn.click()
+            else:
+                self.logger.info(f"org hierarchy selection btn not displayed.")
+        except Exception as ex:
+            self.logger.info(f"click_on_org_hierarchy_selection_btn ex: {ex.args}")
 
     def click_on_event_menu(self):
         time.sleep(web_driver.one_second)
@@ -2139,9 +2635,12 @@ class events_pom(web_driver, web_logger):
         end_date_checkbox.click()
 
     def click_on_save_button(self):
-        click_on_save_button = self.d.find_element(By.XPATH,
-                                                   events_Read_Ini().save_button_by_xpath())
-        click_on_save_button.click()
+        click_on_save_button = self.explicit_wait(5, "XPATH", events_Read_Ini().save_button_by_xpath(), self.d)
+        self.logger.info(f"save btn visible: {click_on_save_button.is_displayed()}")
+        if click_on_save_button.is_displayed():
+            click_on_save_button.click()
+        else:
+            self.logger.info("save btn is not displayed.")
 
     def click_on_save_zone_button(self):
         click_on_save_zone_button = self.d.find_element(By.XPATH,
@@ -2167,11 +2666,13 @@ class events_pom(web_driver, web_logger):
         # while wait_icon.is_displayed():
         # time.sleep(web_driver.two_second)
 
-    def enrollment_group_selection(self):
-        enrollment_group_selection = self.d.find_element(By.XPATH,
-                                                         events_Read_Ini().enrollment_group_drop_down())
-        enrollment_group_selection.click()
-
+    def click_on_enrollment_group(self):
+        enrollment_group_selection = self.explicit_wait(5, "XPATH", events_Read_Ini().enrollment_group_drop_down(), self.d)
+        self.logger.info(f"enrollment group visible: {enrollment_group_selection.is_displayed()}")
+        if enrollment_group_selection.is_displayed():
+            enrollment_group_selection.click()
+        else:
+            self.logger.info(f"enrollment group is not displayed.")
         # checkbox_list = self.d.find_elements(By.XPATH,
         #                                      events_Read_Ini().enrollment_group_checkbox_list())
         # group_text_list = self.d.find_elements(By.XPATH,
@@ -2193,6 +2694,23 @@ class events_pom(web_driver, web_logger):
         # except Exception as ex:
         #     self.logger.info(ex.args)
 
+    def select_enrollment_group(self, eg_name):
+        try:
+            checkbox_list = self.d.find_elements(By.XPATH, events_Read_Ini().enrollment_group_checkbox_list())
+            group_text_list = self.d.find_elements(By.XPATH, events_Read_Ini().enrollment_group_name_list())
+            for i in range(len(group_text_list)):
+                self.logger.info(f"enrollment group list are {group_text_list[i].text}")
+                actual_enrollment_group_text = group_text_list[i].text
+                self.logger.info(f"actual text: {actual_enrollment_group_text}")
+                self.logger.info(f"expected text: {eg_name.upper()}")
+                # for x in expected_en_group_list:
+                if eg_name.upper() in group_text_list[i].text:
+                    checkbox_list[i].click()
+                    break
+
+        except Exception as ex:
+            self.logger.info(f"select_enrollment_group ex: {ex.args}")
+
     def zone_selection(self):
         zone_selection = self.d.find_element(By.XPATH,
                                              events_Read_Ini().zone_selection_drop_down())
@@ -2211,9 +2729,9 @@ class events_pom(web_driver, web_logger):
 
             for i in range(len(zone_text_list)):
                 actual_zone_text = zone_text_list.__getitem__(i).text
-                self.log.info(f"actual zone: {actual_zone_text}")
+                self.logger.info(f"actual zone: {actual_zone_text}")
                 expected_zone_text = events_Read_Ini().get_zone()
-                self.log.info(f"expected zone: {expected_zone_text}")
+                self.loggger.info(f"expected zone: {expected_zone_text}")
                 if expected_zone_text.lower() in actual_zone_text.lower():
                     if checkbox_list.__getitem__(i).is_selected():
                         checkbox_list.__getitem__(i).click()
@@ -2223,7 +2741,7 @@ class events_pom(web_driver, web_logger):
                     break
                 time.sleep(web_driver.one_second)
         except Exception as ex:
-            self.log.info(ex.args)
+            self.logger.info(ex.args)
 
     def tags_selection(self):
         tags_selection = self.d.find_element(By.XPATH,
@@ -2245,7 +2763,7 @@ class events_pom(web_driver, web_logger):
                 if actual_tag_text == expected_tag_text:
                     checkbox_list.__getitem__(i).click()
         except Exception as ex:
-            self.log.info(ex.args)
+            self.logger.info(ex.args)
 
     # validation methods
 
@@ -2410,7 +2928,7 @@ class events_pom(web_driver, web_logger):
                                            date) + "]")
             date.click()
         except Exception as ex:
-            self.log.info(ex.args)
+            self.logger.info(ex.args)
 
         # click on the tick icon
         tick_icon = self.d.find_element(By.XPATH, events_Read_Ini().calender_tick_icon_by_xpath())
@@ -2475,7 +2993,7 @@ class events_pom(web_driver, web_logger):
                 i.click()
                 time.sleep(web_driver.one_second)
         except Exception as ex:
-            self.log.info(ex.args)
+            self.logger.info(ex.args)
 
     def click_on_logout_button(self):
         try:
@@ -2484,7 +3002,7 @@ class events_pom(web_driver, web_logger):
             logout_button.click()
         except Exception as ex:
             self.d.save_screenshot(f"{self.screenshots_path}\\click_on_logout_button_failed.png")
-            self.log.info(f"exception:  {ex.args}")
+            self.logger.info(f"exception:  {ex.args}")
             return False
 
 

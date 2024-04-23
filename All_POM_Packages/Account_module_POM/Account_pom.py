@@ -198,13 +198,11 @@ class account_pom(web_driver, web_logger):
 
     def save_account_panel_details_before_execution(self):
         try:
-
             self.logger.info("********TC_001******* started")
             login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             time.sleep(web_driver.one_second)
             self.open_accounts_panel()
-
             time.sleep(web_driver.one_second)
             account_panel_heading = self.explicit_wait(5, "XPATH", account_Read_Ini().Account_panel_heading(), self.d)
             # account_panel_heading = self.d.find_element(By.XPATH, account_Read_Ini().Account_panel_heading())
@@ -215,7 +213,6 @@ class account_pom(web_driver, web_logger):
             else:
                 self.logger.info("Account panel heading is not visible")
                 self.status.append(False)
-
             self.status.append(self.verify_enabled_status_and_its_value())
             self.logger.info(f"status :{self.status}")
             time.sleep(web_driver.one_second)

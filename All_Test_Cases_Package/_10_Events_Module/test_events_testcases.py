@@ -15,10 +15,68 @@ class Test_eVents_testcases(web_driver, web_logger):
 
     @pytest.mark.p1
     def test_events_TC_001(self):
-        if events_pom().Launching_login_page():
+        if events_pom().Verify_25_events_are_generated_for_25_enrolled_subjects():
             assert True
         else:
             assert False
+
+    @pytest.mark.p1
+    def test_events_TC_002(self):
+        self.logger.info("Verify_5_events_for_each_group_soe_abe_pte_fraude_and_vipe_using_enrollment_group_selection_in_search_dropdown")
+        if events_pom().Verify_5_events_for_each_group_soe_abe_pte_fraude_and_vipe_using_enrollment_group_selection_in_search_dropdown():
+            assert True
+        else:
+            self.d.save_screenshot(f"{self.screenshots_path}\\test_events_TC_002.png")
+            self.logger.info("test_events_TC_002 fail")
+            assert False
+
+    @pytest.mark.p1
+    def test_events_TC_003(self):
+        self.logger.info("Verify 25 events using Org/hierarchy selection in search dropdown")
+        if events_pom().Verify_25_events_using_Org_hierarchy_selection_in_search_dropdown():
+            assert True
+        else:
+            self.d.save_screenshot(f"{self.screenshots_path}\\test_events_TC_003.png")
+            self.logger.info("test_events_TC_003 fail")
+            assert False
+
+    @pytest.mark.p1
+    def test_events_TC_004(self):
+        self.logger.info("Verify 5 events for each group (soe, abe, pte, fraude and vipe) using enrollment group and org/hierarchy selection in search dropdown")
+        if events_pom().Verify_5_events_for_each_group_soe_abe_pte_fraude_and_vipe_using_enrollment_group_and_org_hierarchy_selection_in_search_dropdown():
+            assert True
+        else:
+            self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_ESFC_05.png")
+            self.logger.info("test_TC_ESFC_05 fail")
+            assert False
+
+    @pytest.mark.p1
+    def test_events_TC_005(self):
+        self.logger.info("Add the tags with respective enrollment groups and org/hierarchy selection (example soe: deterred and assualt, abe: deterred and threat, pte: deterred and push cart, fraude and vipe: deterred and fraud) ")
+        if events_pom().Add_the_tags_with_respective_enrollment_groups_and_org_hierarchy_selection_example_soe_deterred_and_assualt_abe_deterred_and_threat_pte_deterred_and_push_cart_fraude_and_vipe_deterred_and_fraud():
+            assert True
+        else:
+            self.d.save_screenshot(f"{self.screenshots_path}\\test_events_TC_005.png")
+            self.logger.info("test_events_TC_005 fail")
+            assert False
+
+    @pytest.mark.p1
+    def test_events_TC_006(self):
+        self.logger.info("Verify 5 events are visible by enrollment group, org/hierarchy and Tag selection")
+        if events_pom().Verify_5_events_are_visible_by_enrollment_group_org_hierarchy_and_Tag_selection():
+            assert True
+        else:
+            self.d.save_screenshot(f"{self.screenshots_path}\\test_events_TC_006.png")
+            self.logger.info("test_events_TC_006 fail")
+            assert False
+
+
+    # @pytest.mark.p1
+    # def test_events_TC_001(self):
+    #     if events_pom().Launching_login_page():
+    #         assert True
+    #     else:
+    #         assert False
     #
     # @pytest.mark.p1
     # def test_events_TC_002(self):
@@ -27,40 +85,40 @@ class Test_eVents_testcases(web_driver, web_logger):
     #     else:
     #         assert False
             
-    @pytest.mark.p1
-    def test_events_TC_003(self):
-        if events_pom().verify_on_cloud_menu_after_login():
-            assert True
-        else:
-            assert False
+    # @pytest.mark.p1
+    # def test_events_TC_003(self):
+    #     if events_pom().verify_on_cloud_menu_after_login():
+    #         assert True
+    #     else:
+    #         assert False
             
-    @pytest.mark.p1
-    def test_events_TC_004(self):
-        if events_pom().verify_Events_are_displayed_in_dashboard_items():
-            assert True
-        else:
-            assert False
+    # @pytest.mark.p1
+    # def test_events_TC_004(self):
+    #     if events_pom().verify_Events_are_displayed_in_dashboard_items():
+    #         assert True
+    #     else:
+    #         assert False
             
-    @pytest.mark.p1
-    def test_events_TC_005(self):
-        if events_pom().click_on_Events_and_verify_panel_heading_of_Events_is_visible():
-            assert True
-        else:
-            assert False
+    # @pytest.mark.p1
+    # def test_events_TC_005(self):
+    #     if events_pom().click_on_Events_and_verify_panel_heading_of_Events_is_visible():
+    #         assert True
+    #     else:
+    #         assert False
             
-    @pytest.mark.p2
-    def test_events_TC_006(self):
-        if events_pom().verify_view_dropdown_is_visible():
-            assert True
-        else:
-            assert False
+    # @pytest.mark.p2
+    # def test_events_TC_006(self):
+    #     if events_pom().verify_view_dropdown_is_visible():
+    #         assert True
+    #     else:
+    #         assert False
             
-    @pytest.mark.p2
-    def test_events_TC_007(self):
-        if events_pom().on_Events_panel_heading_verify_cross_symbol_is_visible():
-            assert True
-        else:
-            assert False
+    # @pytest.mark.p2
+    # def test_events_TC_007(self):
+    #     if events_pom().on_Events_panel_heading_verify_cross_symbol_is_visible():
+    #         assert True
+    #     else:
+    #         assert False
             
     @pytest.mark.p1
     def test_events_TC_008(self):
@@ -774,19 +832,19 @@ class Test_eVents_testcases(web_driver, web_logger):
         else:
             assert False
 
-    @pytest.mark.p1
-    def test_events_TC_129(self):
-        if events_pom().Verify_25_events_are_generated_for_25_enrolled_subjects():
-            assert True
-        else:
-            assert False
+    # @pytest.mark.p1
+    # def test_events_TC_129(self):
+    #     if events_pom().Verify_25_events_are_generated_for_25_enrolled_subjects():
+    #         assert True
+    #     else:
+    #         assert False
 
-    @pytest.mark.p1
-    def test_TC_ESFC_05(self):
-        self.logger.info("Event Search Filter Combination = test_TC_ESFC_05 execution started..")
-        if events_pom().Verify_5_events_for_each_group_soe_abe_pte_fraude_and_vipe_using_enrollment_group_selection_in_search_dropdown():
-            assert True
-        else:
-            self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_ESFC_05.png")
-            self.logger.info("test_TC_ESFC_05 fail")
-            assert False
+    # @pytest.mark.p1
+    # def test_TC_ESFC_05(self):
+    #     self.logger.info("Event Search Filter Combination = test_TC_ESFC_05 execution started..")
+    #     if events_pom().Verify_5_events_for_each_group_soe_abe_pte_fraude_and_vipe_using_enrollment_group_selection_in_search_dropdown():
+    #         assert True
+    #     else:
+    #         self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_ESFC_05.png")
+    #         self.logger.info("test_TC_ESFC_05 fail")
+    #         assert False

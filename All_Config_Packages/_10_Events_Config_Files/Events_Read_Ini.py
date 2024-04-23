@@ -65,6 +65,11 @@ class events_Read_Ini:
         print("cloud menu is displayed",  cloud_menu)
         return cloud_menu
 
+    def tags_menu_item_by_xpath(self):
+        tags_menu_item_by_xpath = self.config.get("login_locators", "tags_menu_item_by_xpath")
+        print("tags_menu_item_by_xpath: ",  tags_menu_item_by_xpath)
+        return tags_menu_item_by_xpath
+
     def get_logout(self):
         logout = self.config.get("login_locators", "logout")
         print("logout is", logout)
@@ -264,6 +269,22 @@ class events_Read_Ini:
             return region
         except Exception as ex:
             print(ex)
+
+    def regions_xpath(self):
+        try:
+            region_xpath = self.config.get("LOCATOR",  "region_xpath")
+            print("region of an event",  region_xpath)
+            return region_xpath
+        except Exception as ex:
+            print(ex)
+
+    def region_checkbox_xpath(self):
+        try:
+            region_checkbox_xpath = self.config.get("LOCATOR",  "region_checkbox_xpath")
+            print("region of an event",  region_checkbox_xpath)
+            return region_checkbox_xpath
+        except Exception as ex:
+            print(ex)
             
     def live_image_text(self):
         try:
@@ -458,11 +479,43 @@ class events_Read_Ini:
         except Exception as ex:
             print(ex)
 
+    def tag_name_list_by_xpath(self):
+        try:
+            tag_name_list_by_xpath = self.config.get("events_locators", "tag_name_list_by_xpath")
+            print("tag_name_list_by_xpath ", tag_name_list_by_xpath)
+            return tag_name_list_by_xpath
+        except Exception as ex:
+            print(ex)
+
     def sort_by_dropdown_in_searchdropdown(self):
         try:
             sort_by_dropdown = self.config.get("events_locators", "sort_by_dropdown_in_searchdropdown")
             print("sort by dropdown in search dropdown is", sort_by_dropdown)
             return sort_by_dropdown
+        except Exception as ex:
+            print(ex)
+
+    def tag_name_checkbox_list(self):
+        try:
+            tag_name_checkbox_list = self.config.get("events_locators", "tag_name_checkbox_list")
+            print("tag_name_checkbox_list ", tag_name_checkbox_list)
+            return tag_name_checkbox_list
+        except Exception as ex:
+            print(ex)
+
+    def save_btn_on_tag_selection_by_xpath(self):
+        try:
+            save_btn_on_tag_selection_by_xpath = self.config.get("events_locators", "save_btn_on_tag_selection_by_xpath")
+            print("save_btn_on_tag_selection_by_xpath ", save_btn_on_tag_selection_by_xpath)
+            return save_btn_on_tag_selection_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def tags_attached_list_by_xpath(self):
+        try:
+            tags_attached_list_by_xpath = self.config.get("events_locators", "tags_attached_list_by_xpath")
+            print("tags_attached_list_by_xpath ", tags_attached_list_by_xpath)
+            return tags_attached_list_by_xpath
         except Exception as ex:
             print(ex)
             
@@ -569,6 +622,14 @@ class events_Read_Ini:
             return linked_tags
         except Exception as ex:
             print(ex)
+
+    def tags_list_enlisted_by_xpath(self):
+        try:
+            tags_list_enlisted_by_xpath = self.config.get("events_locators", "tags_list_enlisted_by_xpath")
+            print("tags_list_enlisted_by_xpath: ", tags_list_enlisted_by_xpath)
+            return tags_list_enlisted_by_xpath
+        except Exception as ex:
+            print(ex)
             
     def unlinked_tags_by_xpath(self):
         try:
@@ -599,6 +660,14 @@ class events_Read_Ini:
             text = self.common_test_data_config.get("Events_Data",  "text1")
             print("enter a text in filter texbox",  text)
             return text
+        except Exception as ex:
+            print(ex)
+
+    def edge_name(self):
+        try:
+            edge_name = self.common_test_data_config.get("common_data",  "zone_data_input")
+            print("edge_name: ",  edge_name)
+            return edge_name
         except Exception as ex:
             print(ex)
             
@@ -633,6 +702,14 @@ class events_Read_Ini:
             return add_tags
         except Exception as ex:
             print(ex)
+
+    def add_tags_to_event_option_in_event_tags_1(self):
+        try:
+            add_tags = self.config.get("events_locators", "add_tags_to_event_option_1")
+            print("add tags to an event", add_tags)
+            return add_tags
+        except Exception as ex:
+            print(ex)
             
     def checkbox_number_twentyfour(self):
         try:
@@ -641,7 +718,15 @@ class events_Read_Ini:
             return checkbox
         except Exception as ex:
             print(ex)
-            
+
+    def action_dropdown_on_event_tags_panel_by_xpath(self):
+        try:
+            action_dropdown_on_event_tags_panel_by_xpath = self.config.get("events_locators", "action_dropdown_on_event_tags_panel_by_xpath")
+            print("action_dropdown_on_event_tags_panel_by_xpath ", action_dropdown_on_event_tags_panel_by_xpath)
+            return action_dropdown_on_event_tags_panel_by_xpath
+        except Exception as ex:
+            print(ex)
+
     def remove_tags_to_event_in_eventstag(self):
         try:
             remove = self.config.get("events_locators", "remove_tags_o_event")
@@ -1268,7 +1353,7 @@ class events_Read_Ini:
 
     def enrollment_group_filter(self):
         try:
-            enrollment_group_filter = self.config.get("data", "enrollment_group_filter")
+            enrollment_group_filter = self.config.get("events_locators", "enrollment_group_filter")
             return enrollment_group_filter
         except Exception as ex:
             print(ex.args)
