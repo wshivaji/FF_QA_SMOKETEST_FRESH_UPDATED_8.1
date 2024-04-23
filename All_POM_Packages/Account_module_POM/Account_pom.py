@@ -6,6 +6,7 @@ from selenium.webdriver.common.by import By
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
 from Base_Package.Login_Logout_Ops import login, logout
+from All_Config_Packages._2_Portal_Menu_Module_Config_Files.Portal_Menu_Module_Read_INI import Portal_Menu_Module_read_ini
 from All_Config_Packages._10_Account_config_Files.Accounts_Read_INI import account_Read_Ini
 
 
@@ -163,7 +164,130 @@ class account_pom(web_driver, web_logger):
                self.logger.error(f"TC_account_004 got exception as: {ex} ")
     '''
 
-    def save_account_panel_details_after_execution(self):
+    def click_on_logout(self):
+        try:
+            time.sleep(web_driver.one_second)
+            self.d.find_element(By.XPATH, Portal_Menu_Module_read_ini().get_logout_button_on_portal_by_xpath()).click()
+        except Exception as ex:
+            self.logger.info(f"click on logout got an exception as: {ex}")
+
+    def validate_enrollments_count(self):
+        try:
+            time.sleep(web_driver.two_second)
+            cloud_menu = self.d.find_element(By.XPATH, Portal_Menu_Module_read_ini().get_CLOUD_MENU_button_by_xpath())
+            cloud_menu.click()
+            time.sleep(web_driver.one_second)
+            enrollments_menu = web_driver.explicit_wait(self, 10, "XPATH",
+                                                        Portal_Menu_Module_read_ini().get_Enrollments_menu_by_xpath(),
+                                                        self.d)
+            enrollments_menu.click()
+            time.sleep(web_driver.two_second)
+            no_enrollments_message = self.d.find_elements(By.XPATH, account_Read_Ini().no_enrollments_message_by_xpath())
+            self.logger.info(f"length of no_enrollments_message: {len(no_enrollments_message)}")
+            e = account_Read_Ini().start_enrollments_count().split('/')
+            actual_enrollments_count = e[0]
+            self.logger.info(f"actual_enrollments_count: {actual_enrollments_count}")
+            if len(no_enrollments_message) == int(actual_enrollments_count):
+                return True
+            else:
+                return False
+        except Exception as ex:
+            self.logger.info(f"validate details before execution got an exception as: {ex}")
+
+    def validate_users_count(self):
+        try:
+            time.sleep(web_driver.two_second)
+            cloud_menu = self.d.find_element(By.XPATH, Portal_Menu_Module_read_ini().get_CLOUD_MENU_button_by_xpath())
+            cloud_menu.click()
+            time.sleep(web_driver.one_second)
+            users_menu = web_driver.explicit_wait(self, 10, "XPATH",
+                                                        Portal_Menu_Module_read_ini().get_Users_menu_by_xpath(),
+                                                        self.d)
+            users_menu.click()
+            time.sleep(web_driver.two_second)
+            count_of_users = self.d.find_elements(By.XPATH,
+                                                          account_Read_Ini().count_of_users_by_xpath())
+            self.logger.info(f"length of users: {len(count_of_users)+6}")
+
+            e = account_Read_Ini().start_users_count().split('/')
+            actual_users_count = e[0]
+            self.logger.info(f"actual_users_count: {actual_users_count}")
+            if len(count_of_users)+6 == int(actual_users_count):
+                return True
+            else:
+                return False
+        except Exception as ex:
+            self.logger.info(f"validate details before execution got an exception as: {ex}")
+
+    def validate_enrollment_groups_count(self):
+        try:
+            time.sleep(web_driver.two_second)
+            cloud_menu = self.d.find_element(By.XPATH, Portal_Menu_Module_read_ini().get_CLOUD_MENU_button_by_xpath())
+            cloud_menu.click()
+            time.sleep(web_driver.one_second)
+            eg_menu = web_driver.explicit_wait(self, 10, "XPATH",
+                                                        Portal_Menu_Module_read_ini().get_Enrollment_Groups_menu_by_xpath(),
+                                                        self.d)
+            eg_menu.click()
+            time.sleep(web_driver.two_second)
+            count_of_egs = self.d.find_elements(By.XPATH, account_Read_Ini().count_of_enrollment_groups_by_xpath())
+            self.logger.info(f"length of enrollment groups: {len(count_of_egs)}")
+
+            e = account_Read_Ini().start_enrollment_groups_count().split('/')
+            actual_egs_count = e[0]
+            self.logger.info(f"actual_egs_count: {actual_egs_count}")
+            if len(count_of_egs) == int(actual_egs_count):
+                return True
+            else:
+                return False
+        except Exception as ex:
+            self.logger.info(f"validate details before execution got an exception as: {ex}")
+
+    def validate_notification_groups_count(self):
+        try:
+            time.sleep(web_driver.two_second)
+            cloud_menu = self.d.find_element(By.XPATH, Portal_Menu_Module_read_ini().get_CLOUD_MENU_button_by_xpath())
+            cloud_menu.click()
+            time.sleep(web_driver.one_second)
+            ng_menu = web_driver.explicit_wait(self, 10, "XPATH",
+                                                        Portal_Menu_Module_read_ini().get_Notification_Groups_menu_by_xpath(),
+                                                        self.d)
+            ng_menu.click()
+            time.sleep(web_driver.two_second)
+            count_of_ngs = self.d.find_elements(By.XPATH, account_Read_Ini().count_of_notification_groups_by_xpath())
+            self.logger.info(f"length of notification groups: {len(count_of_ngs)}")
+
+            e = account_Read_Ini().start_notification_groups_count().split('/')
+            actual_ngs_count = e[0]
+            self.logger.info(f"actual_ngs_count: {actual_ngs_count}")
+            if len(count_of_ngs) == int(actual_ngs_count):
+                return True
+            else:
+                return False
+        except Exception as ex:
+            self.logger.info(f"validate details before execution got an exception as: {ex}")
+
+    def validate_stations_count(self):
+        try:
+            time.sleep(web_driver.two_second)
+
+            image_sources = web_driver.explicit_wait(self, 10, "XPATH", account_Read_Ini().
+                                                    view_Image_source_button(), self.d)
+            image_sources.click()
+            time.sleep(web_driver.two_second)
+            count_of_stations = self.d.find_elements(By.XPATH, account_Read_Ini().count_of_stations_by_xpath())
+            self.logger.info(f"length of stations: {len(count_of_stations)}")
+            actual_stations_count = account_Read_Ini().start_stations_count()
+            self.logger.info(f"actual_stations_count: {actual_stations_count}")
+            if len(count_of_stations) == int(actual_stations_count):
+                return True
+            else:
+                return False
+
+        except Exception as ex:
+            self.logger.info(f"validate details before execution got an exception as: {ex}")
+
+    def Verify_account_panel_details_after_execution(self):
         try:
             self.logger.info("********TC_002******* started")
             login().login_to_cloud_if_not_done(self.d)
@@ -182,11 +306,15 @@ class account_pom(web_driver, web_logger):
                 self.logger.info("Account panel heading is not visible")
                 self.status.append(False)
 
-            self.status.append(self.verify_enabled_status_and_its_value_after_execution())
+            self.verify_enabled_status_and_its_value_after_execution()
+            self.status.append(self.validate_enrollments_count())
+            self.status.append(self.validate_users_count())
+            self.status.append(self.validate_enrollment_groups_count())
+            self.status.append(self.validate_notification_groups_count())
+            self.status.append(self.validate_stations_count())
             self.logger.info(f"status :{self.status}")
             time.sleep(web_driver.one_second)
-            # logout().logout_from_core(self.d)
-            # self.d.find_element(By.XPATH, Web_portal_login_Read_INI().get_facefirst_logout_button()).click()
+
             if False in self.status:
                 self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_account_002_failed.png")
                 self.d.save_screenshot(f"{self.screenshots_path}\\TC_account_002_failed.png")
@@ -195,10 +323,11 @@ class account_pom(web_driver, web_logger):
                 return True
         except Exception as ex:
             self.logger.info(f"save_account_panel_details_after_execution ex: {ex.args}")
+        finally:
+            self.click_on_logout()
 
-    def save_account_panel_details_before_execution(self):
+    def Verify_account_panel_details_before_execution(self):
         try:
-
             self.logger.info("********TC_001******* started")
             login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
@@ -207,7 +336,6 @@ class account_pom(web_driver, web_logger):
 
             time.sleep(web_driver.one_second)
             account_panel_heading = self.explicit_wait(5, "XPATH", account_Read_Ini().Account_panel_heading(), self.d)
-            # account_panel_heading = self.d.find_element(By.XPATH, account_Read_Ini().Account_panel_heading())
             self.logger.info(f"account_panel_heading_displayed: {account_panel_heading.is_displayed()}")
             if account_panel_heading.is_displayed():
                 self.logger.info("Account panel heading is displayed")
@@ -216,11 +344,15 @@ class account_pom(web_driver, web_logger):
                 self.logger.info("Account panel heading is not visible")
                 self.status.append(False)
 
-            self.status.append(self.verify_enabled_status_and_its_value())
+            self.verify_enabled_status_and_its_value()
+            self.status.append(self.validate_enrollments_count())
+            self.status.append(self.validate_users_count())
+            self.status.append(self.validate_enrollment_groups_count())
+            self.status.append(self.validate_notification_groups_count())
+            self.status.append(self.validate_stations_count())
             self.logger.info(f"status :{self.status}")
             time.sleep(web_driver.one_second)
-            # logout().logout_from_core(self.d)
-            # self.d.find_element(By.XPATH, Web_portal_login_Read_INI().get_facefirst_logout_button()).click()
+
             if False in self.status:
                 self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_account_001_failed.png")
                 self.d.save_screenshot(f"{self.screenshots_path}\\TC_account_001_failed.png")
@@ -229,6 +361,8 @@ class account_pom(web_driver, web_logger):
                 return True
         except Exception as ex:
             self.logger.info(f"save_account_panel_details_before_execution ex:{ex.args}")
+        finally:
+            self.click_on_logout()
 
     def wait_for_element_to_appear(self, element_list, xpath):
         count = 0
@@ -1920,10 +2054,7 @@ class account_pom(web_driver, web_logger):
             file = Path(common_test_data_ini_file_path)
             config = configparser.ConfigParser()
             config.read(file)
-            # events_by_zone_counts = self.d.find_element(By.XPATH, "//*[local-name()='svg']")
-            # all_devices = all_devices.text.replace(" ", ",")
-            # cleaned_string = events_by_zone_counts.text.replace('\n', ',').replace('\t', '')
-            # print(cleaned_string)
+
             if x == account_Read_Ini().enabled_status_text():
                 config.set("Account_Module_Data", "start_enabled_status", y)
                 config.write(file.open('w'))
@@ -2023,10 +2154,6 @@ class account_pom(web_driver, web_logger):
             file = Path(common_test_data_ini_file_path)
             config = configparser.ConfigParser()
             config.read(file)
-            # events_by_zone_counts = self.d.find_element(By.XPATH, "//*[local-name()='svg']")
-            # all_devices = all_devices.text.replace(" ", ",")
-            # cleaned_string = events_by_zone_counts.text.replace('\n', ',').replace('\t', '')
-            # print(cleaned_string)
             if x == account_Read_Ini().enabled_status_text():
                 config.set("Account_Module_Data", "end_enabled_status", y)
                 config.write(file.open('w'))

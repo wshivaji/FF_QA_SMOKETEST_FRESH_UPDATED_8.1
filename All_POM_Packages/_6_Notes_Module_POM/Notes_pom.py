@@ -3623,7 +3623,7 @@ class notes_pom(web_driver, web_logger):
             self.logger.error(f"TC_notes_076 got exception as: {ex} ")
             print(ex)
 
-    def create_note_by_filling_all_details_on_create_note(self):
+    def verify_user_able_create_notes_successfully(self):
         try:
             self.logger.info("*********TC_082********** started")
             login().login_to_cloud_if_not_done(self.d)
@@ -4117,7 +4117,7 @@ class notes_pom(web_driver, web_logger):
             self.logger.error(f"TC_notes_087 got exception as: {ex} ")
             print(ex)
 
-    def on_notes_panel_selecting_a_checkbox_and_click_on_delete_selected_notes_a_WARNING_message_window_is_displayed_click_on_yes_button(self):
+    def verify_user_able_to_delete_notes_successfully(self):
         try:
             self.logger.info("********TC_107***** started")
             login().login_to_cloud_if_not_done(self.d)
@@ -4605,7 +4605,7 @@ class notes_pom(web_driver, web_logger):
             self.logger.error(f"TC_notes_93 got exception as: {ex} ")
             print(ex)
 
-    def on_notes_panel_click_on_location_symbol_map_is_visible(self):
+    def verify_user_is_able_to_select_any_one_note_and_click_on_location_icon(self):
         try:
             self.logger.info("********TC_94******* started")
             login().login_to_cloud_if_not_done(self.d)
@@ -4913,7 +4913,7 @@ class notes_pom(web_driver, web_logger):
         except Exception as ex:
             print(ex)
 
-    def click_on_Edit_note_on_notes_details_panel_and_verify_notes_is_edited(self):
+    def verify_user_able_to_edit_details_by_selecting_details_icon(self):
         try:
             self.logger.info("**********TC_88******** started")
             login().login_to_cloud_if_not_done(self.d)
@@ -5039,7 +5039,7 @@ class notes_pom(web_driver, web_logger):
         save_button = self.d.find_element(By.XPATH, notes_Read_Ini().save_button_in_createnote())
         save_button.click()
 
-    def verif_use_is_able_to_select_any_one_note_and_click_on_location_in_view_dropdown(self):
+    def verify_user_is_able_to_select_any_one_note_and_click_on_location_in_view_dropdown(self):
         try:
             self.logger.info("********TC_107***** started")
             login().login_to_cloud_if_not_done(self.d)

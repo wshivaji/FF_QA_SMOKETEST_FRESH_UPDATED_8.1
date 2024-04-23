@@ -1,6 +1,6 @@
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
-from All_POM_Packages._3_User_Roles_Module_POM.User_Roles_Module_POM import user_roles_module_pom
+from All_POM_Packages.User_Roles_Module_POM.User_Roles_Module_POM import user_roles_module_pom
 import pytest
 
 
