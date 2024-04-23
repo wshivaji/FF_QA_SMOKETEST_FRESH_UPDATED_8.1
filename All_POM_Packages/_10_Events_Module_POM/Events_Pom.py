@@ -2041,49 +2041,54 @@ class events_pom(web_driver, web_logger):
                 return True
 
         except Exception as ex:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_128.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_128.png")
-                self.logger.error(f"TC_events_128 got exception as: {ex} ")
+            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_128.png")
+            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_128.png")
+            self.logger.error(f"TC_events_128 got exception as: {ex} ")
 
     def Verify_5_events_for_each_group_soe_abe_pte_fraude_and_vipe_using_enrollment_group_selection_in_search_dropdown(self):
-            try:
-                login().login_to_cloud_if_not_done(self.d)
-
-                x = events_Read_Ini().enrollment_group_name_list()
-                enrollment_group_list = x.split(',')
-                self.logger.info(f"enrollment group list is :{enrollment_group_list}")
-                for eg in range(len(enrollment_group_list)):
-                        self.click_on_event_menu()
-                        self.click_on_search_button()
-                        self.enrollment_group_selection()
-                        self.click_on_save_button()
-                        self.click_on_event_filter_search_button()
-                        self.enrollment_group_search_result_validation()
-                        Total_events_count_of_each_group = self.d.find_element(By.XPATH,events_Read_Ini().Events_count_each_eg())
-
-                        self.logger.info(f"Total number of events on each group is {Total_events_count_of_each_group.text}")
-                        time.sleep(web_driver.one_second)
-                        expected_events_counts = events_Read_Ini().five_events_from_each_group()
-                        if expected_events_counts in Total_events_count_of_each_group.text:
-                            self.logger.info("Displaying 5 events from each group")
-                            self.status.append(True)
-
-                        else:
-                            self.status.append(False)
-                        self.enrollment_group_selection()
-                if False in self.status:
-                    self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_128.png")
-                    self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_128.png")
-                    return False
+        try:
+            login().login_to_cloud_if_not_done(self.d)
+            expected_enrollment_group_text = events_Read_Ini().get_enrollment_group().upper()
+            expected_en_group_list = expected_enrollment_group_text.split(',')
+            # x = events_Read_Ini().enrollment_group_name_list()
+            # enrollment_group_list = x.split(',')
+            self.logger.info(f"enrollment group list is :{expected_en_group_list}")
+            for i in range(len(expected_en_group_list)):
+                self.click_on_event_menu()
+                self.click_on_search_button()
+                eg_name = expected_en_group_list[i].upper()
+                self.logger.info(f"eg name: {eg_name}")
+                self.select_enrollment_group(eg_name)
+                self.click_on_save_button()
+                self.click_on_event_filter_search_button()
+                self.enrollment_group_search_result_validation()
+                Total_events_count_of_each_group = self.d.find_element(By.XPATH,events_Read_Ini().Events_count_each_eg())
+                self.logger.info(f"Total number of events on each group is {Total_events_count_of_each_group.text}")
+                time.sleep(web_driver.one_second)
+                expected_events_counts = events_Read_Ini().five_events_from_each_group()
+                if expected_events_counts in Total_events_count_of_each_group.text:
+                    self.logger.info("Displaying 5 events from each group")
+                    self.status.append(True)
                 else:
-                    return True
-            except Exception as ex:
-                self.d.save_screenshot(f"{self.screenshots_path}\\event_search_with_enrollmentGroup_filter_combination_"
-                                       f"failed.png")
-                self.logger.info(f"event_search_with_enrollmentGroup_filter_combination failed:  {ex.args}")
+                    self.status.append(False)
+
+                self.click_on_search_button()
+                self.select_enrollment_group(eg_name)
+                self.close_all_panel_one_by_one()
+            self.logger.info(f"status: {self.status}")
+            if False in self.status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_128.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_128.png")
                 return False
-            # finally:
-            #     # self.close_all_panel_one_by_one()
+            else:
+                return True
+        except Exception as ex:
+            self.d.save_screenshot(f"{self.screenshots_path}\\event_search_with_enrollmentGroup_filter_combination_"
+                                   f"failed.png")
+            self.logger.info(f"event_search_with_enrollmentGroup_filter_combination failed:  {ex.args}")
+            return False
+        # finally:
+        #     # self.close_all_panel_one_by_one()
 
     def logout_from_portal(self):
         try:
@@ -2122,10 +2127,12 @@ class events_pom(web_driver, web_logger):
 
     def click_on_search_button(self):
         time.sleep(web_driver.one_second)
-        event_search_button = self.d.find_element(By.XPATH,
-                                                  events_Read_Ini().event_search_button_by_xpath())
-        event_search_button.click()
-        time.sleep(web_driver.one_second)
+        event_search_button = self.explicit_wait(5, "XPATH", events_Read_Ini().event_search_button_by_xpath(), self.d)
+        self.logger.error(f"evnet search dropdown visible: {event_search_button.is_displayed()}")
+        if event_search_button.is_displayed():
+            event_search_button.click()
+        else:
+            self.logger.info("event search dropdown not displayed.")
 
     def click_on_start_date_checkbox(self):
         start_date_checkbox = self.d.find_element(By.XPATH,
@@ -2186,6 +2193,31 @@ class events_pom(web_driver, web_logger):
             for x in expected_en_group_list:
                 if actual_enrollment_group_text == x:
                     checkbox_list.__getitem__().click()
+                    break
+        except Exception as ex:
+            self.logger.info(ex.args)
+
+    def select_enrollment_group(self, eg):
+        enrollment_group_selection = self.explicit_wait(5, "XPATH", events_Read_Ini().enrollment_group_drop_down(), self.d)
+        enrollment_group_selection.click()
+
+        checkbox_list = self.d.find_elements(By.XPATH,
+                                             events_Read_Ini().enrollment_group_checkbox_list())
+        group_text_list = self.d.find_elements(By.XPATH,
+                                               events_Read_Ini().enrollment_group_name_list())
+
+        try:
+            # for i in range(len(group_text_list) - 1):
+            # actual_enrollment_group_text = group_text_list.__getitem__().text
+            # self.logger.info(f"actual text: {actual_enrollment_group_text}")
+
+            self.logger.info(f"expected text: {eg}")
+            for x in range(len(group_text_list)):
+                self.logger.info(f"x: {x}")
+                self.logger.info(f"expected: {eg}")
+                self.logger.info(f"eg: {group_text_list[x].text}")
+                if group_text_list[x].text == eg:
+                    checkbox_list[x].click()
                     break
         except Exception as ex:
             self.logger.info(ex.args)
@@ -2253,8 +2285,9 @@ class events_pom(web_driver, web_logger):
         actual_text = enrollment_group_search_validation.text
         expected_text = events_Read_Ini().get_enrollment_group()
         time.sleep(web_driver.one_second)
-        if actual_text.lower() == expected_text.lower():
-            self.logger.info(f"actual text is {actual_text.lower()},{expected_text.lower()}")
+        self.logger.info(f"actual text is: {actual_text.lower()}")
+        self.logger.info(f"expected text is: {expected_text.lower()}")
+        if actual_text.lower() in expected_text.lower():
             self.status.append(True)
         else:
             self.status.append(False)

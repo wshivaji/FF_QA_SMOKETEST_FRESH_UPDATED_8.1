@@ -23,9 +23,8 @@ from All_POM_Packages.SSPR_Module_POM.Sspr_POM import SSPR_pom
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
 
-
-# @pytest.mark.run(order=1)
-@pytest.mark.skip
+@pytest.mark.run(order=1)
+# @pytest.mark.skip
 class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
     logger = web_logger.logger_obj()
     logger.info(" ******** Portal_Smoke_Test_Cases Begin ********")
