@@ -1046,6 +1046,8 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.logger.error(f"test_TC_IE_00 got an exception as: {ex}")
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_IE_01_Exception.png")
             return False
+        finally:
+            self.click_on_logout_button()
 
 
     def enroll_5_images(self, folder_name):
@@ -1288,7 +1290,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             else:
                 self.status.append(False)
 
-
             if False in self.status:
                 self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_IE_02.png")
                 self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_IE_02_failed.png")
@@ -1300,7 +1301,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_IE_02_Exception.png")
             return False
         finally:
-            logout().logout_from_core(self.d)
+            self.click_on_logout_button()
 
     def Verify_user_is_able_to_enroll_the_person_by_uploading_the_image_cropping_the_same_and_adding_the_required_details_for_the_same(self):
         try:
