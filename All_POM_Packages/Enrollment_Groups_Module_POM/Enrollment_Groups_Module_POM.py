@@ -306,6 +306,8 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_EG_03_exception.png")
             self.logger.error(f"TC_EG_03 got exception as: {ex.args}")
             return False
+        finally:
+            self.d.find_element(By.XPATH, Portal_Menu_Module_read_ini().get_logout_button_on_portal_by_xpath()).click()
 
     def Verify_user_able_to_create_a_new_Enrollment_Group_by_filling_all_the_fields_and_verify_present_3_buttons_below_are_activated(self):
         try:

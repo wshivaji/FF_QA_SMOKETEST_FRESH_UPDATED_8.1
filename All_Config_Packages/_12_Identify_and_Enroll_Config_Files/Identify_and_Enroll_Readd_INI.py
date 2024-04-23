@@ -673,6 +673,14 @@ class Read_Identify_and_Enroll_Components:
         except Exception as ex:
             print("enrollment_view_enrolled_on_ele_by_xpath : ", ex)
 
+
+    def logout_btn_by_xpath(self):
+        try:
+            ele = self.config.get('LOCATORS', 'logout_btn_by_xpath')
+            return ele
+        except Exception as ex:
+            print(ex)
+
     def enrollment_view_enrolled_on_info_by_xpath(self):
         try:
             ele = self.config.get("LOCATORS", "enrollment_view_enrolled_on_info_by_xpath")

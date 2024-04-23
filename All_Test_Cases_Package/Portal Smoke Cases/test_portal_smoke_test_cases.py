@@ -10,6 +10,7 @@ from All_POM_Packages.Visitor_Search_Module_POM.Visitor_Search_Module_POM import
 from All_POM_Packages.Visitor_Seach_Jobs_Module_POM.Visitor_Search_Jobs_Module_POM import Visitor_Search_Jobs_Module_pom
 from All_POM_Packages.Account_module_POM.Account_pom import account_pom
 from All_POM_Packages.Notifier_Module_POM.Notifier_POM import Notifier_pom
+from All_POM_Packages.Zones_Module_POM.Zones_Module_POM import Zones_pom
 from All_POM_Packages.tags_module_POM.Tags_Module_POM import Tags_Module_pom
 from All_POM_Packages.Enrollment_POM.Enrollment_module_POM import enrollments_POM
 from All_POM_Packages.Insight_Dashboard_Module_POM.Insight_Dashboard_POM import insight_dashboard_pom
@@ -22,8 +23,8 @@ from All_POM_Packages.SSPR_Module_POM.Sspr_POM import SSPR_pom
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
 
-
 @pytest.mark.run(order=1)
+# @pytest.mark.skip
 class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
     logger = web_logger.logger_obj()
     logger.info(" ******** Portal_Smoke_Test_Cases Begin ********")
@@ -65,7 +66,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     # ----------------------------------------------- Account Cases ------------------------------------------------- #
     '''''
-        After login to portal url, this test case will verify all counts on Accounts panel as 0 before creating Users, 
+        After login to portal url, this test case will verify all counts on Accounts panel as 0 before creating Users,
         Enrollments, EG and NG and perform VS.
      '''
     @pytest.mark.system
@@ -74,10 +75,6 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert True
         else:
             assert False
-    # ------------------------------------------------ Zones Cases -------------------------------------------------- #
-    '''''
-        This test case will verify zone names and their cameras 
-    '''
     # ----------------------------------------------- User Role Cases ----------------------------------------------- #
     '''''
         These cases will validate default and 5 newly added user roles (persona) and its total count.
@@ -85,7 +82,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     # ------------------------------------------------  Users Cases  ------------------------------------------------ #
     '''''
-        These cases will create 5 new users using above user roles, validate their region assignment & total count of 
+        These cases will create 5 new users using above user roles, validate their region assignment & total count of
         users.
         '''
     @pytest.mark.system
@@ -115,8 +112,8 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     # ----------------------------------------------  Portal Menu Cases  -------------------------------------------- #
     '''''
-        Below cases will perform, logging with different users and verify & validate different cloud menus appears or 
-        not. 
+        Below cases will perform, logging with different users and verify & validate different cloud menus appears or
+        not.
     '''
     @pytest.mark.system
     def test_SM_TC012(self):
@@ -214,6 +211,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
     '''''
         Below cases will perform, creating 3 serious and 1 non-serious tags.
     '''
+
 
     # --------------------------------------------  Identify & Enroll Cases  ----------------------------------------- #
     '''''
@@ -1090,6 +1088,39 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
     @pytest.mark.system
     def test_SM_TC146(self):
         if account_pom().click_on_viewlocation_button_on_imagesource_verify_location():
+            assert True
+        else:
+            assert False
+
+    # ------------------------------------------------ Zones Cases -------------------------------------------------- #
+        '''''
+            This test case will verify zone names and their cameras
+        '''
+
+    @pytest.mark.system
+    def test_SM_TC147(self):
+        if Zones_pom().open_zones_panel_and_verify_zones_panel_displayed():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC148(self):
+        if Zones_pom().verify_zone_list_enlisted_and_zone_names_displayed_as_expected():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC149(self):
+        if Zones_pom().verify_zone_list_enlisted_and_zone_details_btn_displayed_as_expected():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC150(self):
+        if Zones_pom().verify_zone_list_enlisted_and_zone_select_checkbox_displayed_as_expected():
             assert True
         else:
             assert False

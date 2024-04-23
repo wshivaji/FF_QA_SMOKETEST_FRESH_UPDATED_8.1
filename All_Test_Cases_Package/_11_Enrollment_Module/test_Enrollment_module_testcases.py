@@ -48,7 +48,7 @@ class Test_Enrollments_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.system
     def test_Tc_en_07(self):
-        if enrollments_POM().Verify_core_user_is_able_to_approve_pending_subjects():
+        if enrollments_POM().Verify_approver_user_is_able_to_approve_pending_subjects():
             assert True
         else:
             assert False
@@ -111,7 +111,7 @@ class Test_Enrollments_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.portal
     def test_tc_en_17(self):
-        if enrollments_POM().verify_user_enroller_of_an_enrollment_able_to_delete_enrollment():
+        if enrollments_POM().verify_executive_it_admin_enroller_of_an_enrollment_able_to_delete_enrollment():
             assert True
         else:
             assert False

@@ -719,6 +719,7 @@ class Deployment_Manager_Page_Pom(web_driver, web_logger):
             self.email_configure()
             self.d.refresh()
             self.d.refresh()
+            time.sleep(web_driver.two_second)
             mail_msg = self.d.find_element("xpath", "(//div[@class='jss137 jss140 jss145 jss147'])[7]//div//p")
             print(mail_msg.text)
             if mail_msg.text != "Disabled":
@@ -855,7 +856,7 @@ class Deployment_Manager_Page_Pom(web_driver, web_logger):
             self.d.find_element("xpath", "(//button[@class='btn authorize unlocked'])[1]").click()
             time.sleep(web_driver.two_second)
             # username
-            self.d.find_element("xpath", "(//input[@name='username'])[1]").send_keys(Portal_login_page_read_ini().get_portal_login_username())
+            self.d.find_element("xpath", "(//input[@name='username'])[1]").send_keys(Portal_login_page_read_ini().get_valid_login_username())
             time.sleep(web_driver.two_second)
             # password
             self.d.find_element("xpath", "(//input[@name='password'])[1]").send_keys(Portal_login_page_read_ini().get_portal_login_password())
@@ -899,7 +900,7 @@ class Deployment_Manager_Page_Pom(web_driver, web_logger):
             self.d.find_element("xpath", "(//button[@class='btn authorize unlocked'])[1]").click()
             time.sleep(web_driver.two_second)
             # username
-            self.d.find_element("xpath", "(//input[@name='username'])[1]").send_keys(Portal_login_page_read_ini().get_portal_login_username())
+            self.d.find_element("xpath", "(//input[@name='username'])[1]").send_keys(Portal_login_page_read_ini().get_valid_login_username())
             time.sleep(web_driver.two_second)
             # password
             self.d.find_element("xpath", "(//input[@name='password'])[1]").send_keys(Portal_login_page_read_ini().get_portal_login_password())

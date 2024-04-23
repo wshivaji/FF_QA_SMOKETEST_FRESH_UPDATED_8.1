@@ -81,10 +81,12 @@ if __name__ == "__main__":
 
     # ************************ Commands to Run Test Suite *****************************
     # ************************** P1 Priority Test Run *********************************
-    pytest.main(['-v', '-m', 'p1', f'{dm_test_suite_path}', '--html', f'{dm_test_report_path}'])
+    # pytest.main(['-v', '-m', 'p1', f'{dm_test_suite_path}', '--html', f'{dm_test_report_path}'])
     # pytest.main(['-v', '-m', 'p1', f'{dm_edge_test_suite_path}', '--html', f'{dm_edge_test_report_path}'])
+    # pytest.main(['-v', '-m', 'p1', f'{dm_test_suite_path}', '--html', f'{dm_test_report_path}'])
+    pytest.main(['-v', '-m', 'p1', f'{dm_edge_test_suite_path}', '--html', f'{dm_edge_test_report_path}'])
 
-    # pytest.main(['-v', '-m', 'system', f'{system_test_suite_path}', '--html', f'{system_test_report_path}'])
+    pytest.main(['-v', '-m', 'system', f'{system_test_suite_path}', '--html', f'{system_test_report_path}'])
     # pytest.main(['-v', '-m', 'sspr', f'{sspr_test_suite_path}', '--html', f'{sspr_test_report_path}'])
 
 
@@ -137,7 +139,7 @@ if __name__ == "__main__":
     # ******************* commands below should only run after first execution is completed **********************
 
     # ***********Re-run Failed p1 tests across all modules *******************
-    # pytest.main(['-v', '--lf', '-m', 'p1', f'{Regression_test_suite_path}', '--html', f'{Regression_suit}'])
+    # pytest.main(['-v', '--lf', '-m', 'p1', f'{dm_test_suite_path}', '--html', f'{dm_test_report_path}'])
 
     # ***********Re-run Failed p2 tests across all modules *******************
     # pytest.main(['-v', '--lf', '-m', 'p2', f'{Regression_test_suite_path}', '--html', f'{p2_report_path}'])

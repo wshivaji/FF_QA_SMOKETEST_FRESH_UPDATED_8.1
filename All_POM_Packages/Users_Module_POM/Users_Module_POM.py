@@ -3222,9 +3222,10 @@ class Users_Module_pom(web_driver, web_logger):
 
             total_number_of_users_displayed = self.d.find_element(By.XPATH,Read_Users_Components().get_Total_number_of_user_displayed())
             print(total_number_of_users_displayed.text)
+            self.logger.info(f"Total number of users created are {total_number_of_users_displayed.text}")
             time.sleep(web_driver.one_second)
             if total_number_of_users_displayed.is_displayed():
-                self.close_all_panel_one_by_one()
+
                 return True
 
             else:
@@ -3285,23 +3286,20 @@ class Users_Module_pom(web_driver, web_logger):
                 self.logger.info(f"actual region name is :{actual_region_name.text}")
                 expected_region_name = users_dict["users"][i]["user_orgahierarchy"]
                 self.logger.info(f"expected username is {expected_region_name}")
-
                 if actual_region_name.text == expected_region_name:
                     self.status.append(True)
-
                 else:
                     self.status.append(False)
-                if False in self.status:
-                    self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_IE_100.png")
-                    self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_IE_100_failed.png")
-                    return False
-                else:
-                    return True
+            if False in self.status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_IE_100.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_IE_100_failed.png")
+                return False
+            else:
+                return True
         except Exception as ex:
-                    self.logger.error(f"test_TC_IE_100 got an exception as: {ex}")
-                    self.d.save_screenshot(
-                        f"{self.screenshots_path}\\test_TC_IE_100_Exception.png")
-                    return False
+            self.logger.error(f"test_TC_IE_100 got an exception as: {ex}")
+            self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_IE_100_Exception.png")
+            return False
         finally:
             logout().logout_from_core(self.d)
 
@@ -3334,12 +3332,12 @@ class Users_Module_pom(web_driver, web_logger):
                 else:
                     self.logger.info("root region is not same as expected region")
                     self.status.append(False)
-                if False in self.status:
-                    self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_IE_100.png")
-                    self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_IE_100_failed.png")
-                    return False
-                else:
-                    return True
+            if False in self.status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_IE_100.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_IE_100_failed.png")
+                return False
+            else:
+                return True
         except Exception as ex:
                     self.logger.error(f"test_TC_IE_100 got an exception as: {ex}")
                     self.d.save_screenshot(
