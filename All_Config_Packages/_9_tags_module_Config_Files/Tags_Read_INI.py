@@ -379,6 +379,22 @@ class Read_Tags_Components:
         except Exception as ex:
             print("input_for_create_serious_event_tags_threat : ", ex)
 
+    def input_for_create_serious_event_tags_test(self):
+        try:
+            input_for_create_serious_event_tags_test = self.config.get("DATA",
+                                                                           "input_for_create_serious_event_tags_test")
+            return input_for_create_serious_event_tags_test
+        except Exception as ex:
+            print("input_for_create_serious_event_tags_threat : ", ex)
+
+    def input_for_create_serious_event_tags_test2(self):
+        try:
+            input_for_create_serious_event_tags_test2 = self.config.get("DATA",
+                                                                           "input_for_create_serious_event_tags_test2")
+            return input_for_create_serious_event_tags_test2
+        except Exception as ex:
+            print("input_for_create_serious_event_tags_threat : ", ex)
+
     def input_for_create_serious_event_tags_assault(self):
         try:
             input_for_create_serious_event_tags_assault = self.config.get("DATA",
@@ -478,3 +494,17 @@ class Read_Tags_Components:
             return delete_tag_msg_by_xpath
         except Exception as ex:
             print("delete_tag_msg_by_xpath : ", ex)
+
+    def read_tags_input_data(self):
+        try:
+            tags = self.common_test_data_config.get("Tags_Data","tags_input_data")
+            return tags
+        except Exception as ex:
+            print(ex.args)
+
+    def lenght_of_tags(self):
+        try:
+            tags_length = self.config.get("DATA","length_of_Tags")
+            return tags_length
+        except Exception as ex:
+            print(ex.args)

@@ -58,14 +58,12 @@ class Tags_Module_pom(web_driver, web_logger):
             self.log.info("************* test_TC_TAG_01 ***************")
             login().login_to_cloud_if_not_done(self.d)
             result = []
+            x = Read_Tags_Components().read_tags_input_data()
+            tags_list = x.split(',')
+            self.logger.info(f"eg list: {tags_list}")
             self.click_on_tags_menu()
-            serious_tags = [
-                            Read_Tags_Components().input_for_create_serious_event_tags_threat(),
-                            Read_Tags_Components().input_for_create_serious_event_tags_assault()
-                            ]
-            for tags in serious_tags:
-                # tags_name = XLUtils.readdata(test_data, 'serious_event_tags_data', r, 2)
-                time.sleep(web_driver.three_second)
+            for tag in range(len(tags_list)):
+                time.sleep(web_driver.one_second)
                 action_button = self.explicit_wait(10, "XPATH", Read_Tags_Components().action_btn_by_xpath(), self.d)
                 action_button.click()
                 self.logger.info("action button is clicked")
@@ -73,27 +71,26 @@ class Tags_Module_pom(web_driver, web_logger):
                 create_button = self.d.find_element(By.XPATH, Read_Tags_Components().create_tags_btn_by_xpath())
                 create_button.click()
                 self.logger.info("create button is clicked")
-                time.sleep(web_driver.three_second)
+                time.sleep(web_driver.one_second)
                 tag_name = self.d.find_element(By.XPATH, Read_Tags_Components().get_tag_name_field_by_xpath())
-                tag_name.send_keys(tags)
-                time.sleep(web_driver.three_second)
+                tag_name.send_keys(tags_list[tag])
+                time.sleep(web_driver.one_second)
                 commit = self.d.find_element(By.XPATH, Read_Tags_Components().get_commit_changes_actual_msg_by_xpath())
                 commit.is_displayed()
-                # result.append(commit.text == Read_Tags_Components().get_commit_changes_expected_msg_by_xpath())
                 serious_event_checkbox = self.d.find_element(By.XPATH,
                                                              Read_Tags_Components().
                                                              get_serious_event_checkbox_by_xpath())
                 serious_event_checkbox.click()
-                time.sleep(web_driver.three_second)
+                time.sleep(web_driver.one_second)
                 save = self.d.find_element(By.XPATH, Read_Tags_Components().get_save_btn_by_xpath())
                 save.click()
                 self.logger.info("save button is clicked")
-                time.sleep(web_driver.three_second)
-                duplicate_tag_msg = self.d.find_element(By.XPATH,
-                                                            Read_Tags_Components().duplicate_tag_msg_by_xpath())
+                time.sleep(web_driver.one_second)
+                duplicate_tag_msg = self.d.find_element(By.XPATH,Read_Tags_Components().duplicate_tag_msg_by_xpath())
+
                 if duplicate_tag_msg.is_displayed():
-                    close_panel = self.d.find_element(By.XPATH,
-                                                          Read_Tags_Components().close_create_tag_panel_by_xpath())
+                    close_panel = self.d.find_element(By.XPATH,Read_Tags_Components().close_create_tag_panel_by_xpath())
+
                     close_panel.click()
                     self.logger.info("close panel button is clicked")
                     close_warning = self.d.find_element(By.XPATH,
@@ -103,14 +100,8 @@ class Tags_Module_pom(web_driver, web_logger):
                     success_msg = self.d.find_element(By.XPATH,Read_Tags_Components().tag_create_success_msg_by_xpath())
                     tag_create_success_actual_validation_msg = success_msg.text
                     self.logger.info(f"tag created msg: {tag_create_success_actual_validation_msg}")
-                    self.logger.info(f"expected msg: {tags.upper()}")
-                    result.append(
-                        tag_create_success_actual_validation_msg == tags.upper())
-                    close_panel = self.d.find_element(By.XPATH,
-                                                      Read_Tags_Components().close_create_tag_panel_by_xpath())
-                    close_panel.click()
-
-                time.sleep(web_driver.three_second)
+                    self.logger.info(f"expected msg: {tags_list[tag].upper()}")
+                    result.append(tag_create_success_actual_validation_msg == tags_list[tag].upper())
 
             if False in result:
                 self.logger.info(f"Status: {False}")
@@ -133,86 +124,50 @@ class Tags_Module_pom(web_driver, web_logger):
         try:
             self.log.info("************ test_TC_TAG_02 **********")
             login().login_to_cloud_if_not_done(self.d)
-            self.click_on_tags_menu()
-            non_serious_tags = [
-                Read_Tags_Components().input_for_create_non_serious_event_tags_assault(),
-                Read_Tags_Components().input_for_create_non_serious_event_tags_threat()
-            ]
             result = []
-            for tags in non_serious_tags:
-                # tags_name = XLUtils.readdata(test_data, 'non_serious_event_tags_data', r, 2)
-                self.explicit_wait(10, "XPATH", Read_Tags_Components().action_btn_by_xpath(), self.d)
-                action_button = self.d.find_element(By.XPATH, Read_Tags_Components().action_btn_by_xpath())
-                action_button.click()
-                self.logger.info("action button is clicked")
-                self.explicit_wait(10, "XPATH", Read_Tags_Components().create_tags_btn_by_xpath(), self.d)
-                create_button = self.d.find_element(By.XPATH, Read_Tags_Components().create_tags_btn_by_xpath())
-                create_button.click()
-                self.logger.info("create button is clicked")
-                self.explicit_wait(10, "XPATH", Read_Tags_Components().get_tag_name_field_by_xpath(), self.d)
-                time.sleep(web_driver.three_second)
-                tag_name = self.d.find_element(By.XPATH, Read_Tags_Components().get_tag_name_field_by_xpath())
-                tag_name.send_keys(tags)
-                time.sleep(web_driver.two_second)
-                commit = self.d.find_element(By.XPATH, Read_Tags_Components().get_commit_changes_actual_msg_by_xpath())
-                commit.is_displayed()
-                time.sleep(web_driver.three_second)
-                result.append(commit.text == Read_Tags_Components().get_commit_changes_expected_msg_by_xpath())
-                print(result)
-                save = self.d.find_element(By.XPATH, Read_Tags_Components().get_save_btn_by_xpath())
-                save.click()
-                self.logger.info("save button is clicked")
-                # time.sleep(web_driver.two_second)
-                time.sleep(web_driver.three_second)
-                duplicate_tag_msg = self.d.find_element(By.XPATH,
-                                                            Read_Tags_Components().duplicate_tag_msg_by_xpath())
-                if duplicate_tag_msg.is_displayed():
-                    close_panel = self.d.find_element(By.XPATH,
-                                                          Read_Tags_Components().close_create_tag_panel_by_xpath())
-                    close_panel.click()
-                    self.logger.info("close panel button is clicked")
-                    close_warning = self.d.find_element(By.XPATH,
-                                                            Read_Tags_Components().close_panel_and_discard_changes_btn_by_xpath())
-                    close_warning.click()
-                else:
-                    success_msg = self.d.find_element(By.XPATH,Read_Tags_Components().tag_create_success_msg_by_xpath())
-                    tag_create_success_actual_validation_msg = success_msg.text
-                    self.logger.info(f"tag created msg: {tag_create_success_actual_validation_msg}")
-                    self.logger.info(f"expected msg: {tags.upper()}")
-                    result.append(
-                        tag_create_success_actual_validation_msg == tags.upper())
-                    close_panel = self.d.find_element(By.XPATH,
-                                                      Read_Tags_Components().close_create_tag_panel_by_xpath())
-                    close_panel.click()
+            self.click_on_tags_menu()
+            non_serious_tags = Read_Tags_Components().input_for_create_non_serious_event_tags_threat()
+            self.explicit_wait(10, "XPATH", Read_Tags_Components().action_btn_by_xpath(), self.d)
+            action_button = self.d.find_element(By.XPATH, Read_Tags_Components().action_btn_by_xpath())
+            action_button.click()
+            self.logger.info("action button is clicked")
+            self.explicit_wait(10, "XPATH", Read_Tags_Components().create_tags_btn_by_xpath(), self.d)
+            create_button = self.d.find_element(By.XPATH, Read_Tags_Components().create_tags_btn_by_xpath())
+            create_button.click()
+            self.logger.info("create button is clicked")
+            self.explicit_wait(10, "XPATH", Read_Tags_Components().get_tag_name_field_by_xpath(), self.d)
+            time.sleep(web_driver.one_second)
+            tag_name = self.d.find_element(By.XPATH, Read_Tags_Components().get_tag_name_field_by_xpath())
+            tag_name.send_keys(non_serious_tags)
+            time.sleep(web_driver.two_second)
+            commit = self.d.find_element(By.XPATH, Read_Tags_Components().get_commit_changes_actual_msg_by_xpath())
+            commit.is_displayed()
+            time.sleep(web_driver.one_second)
+            result.append(commit.text == Read_Tags_Components().get_commit_changes_expected_msg_by_xpath())
+            print(result)
+            save = self.d.find_element(By.XPATH, Read_Tags_Components().get_save_btn_by_xpath())
+            save.click()
+            self.logger.info("save button is clicked")
+            time.sleep(web_driver.three_second)
+            duplicate_tag_msg = self.d.find_element(By.XPATH,Read_Tags_Components().duplicate_tag_msg_by_xpath())
+            if duplicate_tag_msg.is_displayed():
+                close_panel = self.d.find_element(By.XPATH,Read_Tags_Components().close_create_tag_panel_by_xpath())
+                close_panel.click()
+                self.logger.info("close panel button is clicked")
+                close_warning = self.d.find_element(By.XPATH,Read_Tags_Components().close_panel_and_discard_changes_btn_by_xpath())
+                close_warning.click()
+            else:
+                success_msg = self.d.find_element(By.XPATH,Read_Tags_Components().tag_create_success_msg_by_xpath())
+                tag_create_success_actual_validation_msg = success_msg.text
+                self.logger.info(f"tag created msg: {tag_create_success_actual_validation_msg}")
+                self.logger.info(f"expected msg: {non_serious_tags.upper()}")
+                result.append(
+                    tag_create_success_actual_validation_msg == non_serious_tags.upper())
+                close_panel = self.d.find_element(By.XPATH,
+                                                  Read_Tags_Components().close_create_tag_panel_by_xpath())
+                close_panel.click()
 
-                time.sleep(web_driver.three_second)
-
-                # success_msg = self.d.find_element(By.XPATH, Read_Tags_Components().tag_create_success_msg_by_xpath())
-                # # success_msg = web_driver.explicit_wait(self, 10, "XPATH", Read_Tags_Components().tag_create_success_msg_by_xpath(), self.d)
-                # duplicate_tag = self.d.find_element(By.XPATH, Read_Tags_Components().tag_name_already_exists_validation_by_xpath())
-                #
-                # if success_msg.is_displayed():
-                #
-                #     tag_create_success_actual_validation_msg = success_msg.text
-                #     tag_create_success_expected_validation_msg = Read_Tags_Components(). \
-                #         create_tag_success_msg_expected()
-                #     assert tag_create_success_actual_validation_msg == tag_create_success_expected_validation_msg
-                #     close_panel = self.explicit_wait(10, "XPATH", Read_Tags_Components().close_create_tag_panel_by_xpath(), self.d)
-                #     close_panel.click()
-                #     self.logger.info("close panel button is clicked")
-                #
-                # else:
-                #     close_panel = self.explicit_wait(10, "XPATH", Read_Tags_Components().close_create_tag_panel_by_xpath(), self.d)
-                #     close_panel.click()
-                #     self.logger.info("close panel button is clicked")
-                #     time.sleep(web_driver.one_second)
-                #     try:
-                #         close_warning = self.d.find_element(By.XPATH, Read_Tags_Components()
-                #                                             .close_panel_and_discard_changes_btn_by_xpath())
-                #         close_warning.click()
-                #     except Exception as ex:
-                #         self.logger.info("panel is closed")
-                #     time.sleep(web_driver.one_second)
+            time.sleep(web_driver.three_second)
             self.logger.info(f"status: {result}")
             if result.__contains__(False):
                 self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_TAG_02_failed.png")
@@ -223,8 +178,8 @@ class Tags_Module_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_TAG_02_exception.png")
             self.log.info(f"create_tags_for_non_serious_event:  {ex}")
             return False
-        # finally:
-        #     self.close_all_panel_one_by_one()
+        finally:
+            self.close_all_panel_one_by_one()
         #     logout().logout_from_core(self.d)
 
     def filter_serious_event_tags_varify_it(self):
@@ -238,12 +193,7 @@ class Tags_Module_pom(web_driver, web_logger):
                 Read_Tags_Components().input_for_create_serious_event_tags_threat(),
                 Read_Tags_Components().input_for_create_serious_event_tags_assault()
             ]
-            # serious_event_tags_expected = []
-            # for r in range(2, rows + 1):
-            #     tags_name = XLUtils.readdata(test_data, 'serious_event_tags_data', r, 2)
-            #     serious_event_tags_expected.insert(r - 1, tags_name)
-            #     serious_event_tags_expected = [x.lower() for x in serious_event_tags_expected]
-            #     serious_event_tags_expected.sort()
+
             self.explicit_wait(10, "XPATH", Read_Tags_Components().filter_btn_by_xpath(), self.d)
             filter_btn = self.d.find_element(By.XPATH, Read_Tags_Components().filter_btn_by_xpath())
             filter_btn.click()
@@ -277,8 +227,8 @@ class Tags_Module_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_TAG_04_exception.png")
             self.log.info(f"filter_serious_event_tags_varify_it:  {ex}")
             return False
-        # finally:
-        #     self.close_all_panel_one_by_one()
+        finally:
+            self.close_all_panel_one_by_one()
         #     logout().logout_from_core(self.d)
 
     def filter_non_serious_event_tags_varify_it(self):
@@ -292,14 +242,7 @@ class Tags_Module_pom(web_driver, web_logger):
                 Read_Tags_Components().input_for_create_non_serious_event_tags_assault(),
                 Read_Tags_Components().input_for_create_non_serious_event_tags_threat()
             ]
-            # non_serious_event_tags_expected = []
-            # for r in range(2, rows + 1):
-            #     tags_name = XLUtils.readdata(test_data, 'non_serious_event_tags_data', r, 2)
-            #     non_serious_event_tags_expected.insert(r - 1, tags_name)
-            #     non_serious_event_tags_expected = [x.lower() for x in non_serious_event_tags_expected]
-            #     non_serious_event_tags_expected.sort()
-            # non_serious_event_tags_expected = non_serious_event_tags_expected[
-            #                                   1:len(non_serious_event_tags_expected) + 1]
+
             self.explicit_wait(10, "XPATH", Read_Tags_Components().filter_btn_by_xpath(), self.d)
             filter_dropdown = self.d.find_element(By.XPATH, Read_Tags_Components().filter_dropdown_by_xpath())
             filter_dropdown.click()
@@ -332,8 +275,8 @@ class Tags_Module_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_TAG_05_Exception.png")
             self.log.info(f"filter_non_serious_event_tags_varify_it_failed:  {ex}")
             return False
-        # finally:
-        #     self.close_all_panel_one_by_one()
+        finally:
+            self.close_all_panel_one_by_one()
         #     logout().logout_from_core(self.d)
 
     def duplicate_tags_not_create_validation(self):
@@ -346,7 +289,6 @@ class Tags_Module_pom(web_driver, web_logger):
             dup_tag2 = ""
             result = []
             for i in range(2):
-                # tags_name = XLUtils.readdata(test_data, 'serious_event_tags_data', r, 2)
                 action_button = self.d.find_element(By.XPATH, Read_Tags_Components().action_btn_by_xpath())
                 action_button.click()
                 self.logger.info("action button is clicked")
@@ -358,7 +300,7 @@ class Tags_Module_pom(web_driver, web_logger):
                 tag_name = self.d.find_element(By.XPATH, Read_Tags_Components().get_tag_name_field_by_xpath())
                 random_num = random.randint(1, 1000)
                 if i == 0:
-                    dup_tag = non_serious_tags + str(random_num)
+                    dup_tag = non_serious_tags
                     dup_tag2 = dup_tag
                     tag_name.send_keys(dup_tag)
                 else:
@@ -407,11 +349,11 @@ class Tags_Module_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_TAG_06_Exception.png")
             self.log.info(f"duplicate_tags_not_create_validation_failed:  {ex}")
             return False
-        # finally:
-        #     self.close_all_panel_one_by_one()
+        finally:
+            self.close_all_panel_one_by_one()
         #     logout().logout_from_core(self.d)
 
-    def update_serious_event_tag_name(self):
+    def edit_serious_event_tag_name(self):
         rows = XLUtils.getRowCount(test_data, 'serious_event_tags_data')
         try:
             self.log.info("********** test_TC_TAG_07 ************")
@@ -419,13 +361,13 @@ class Tags_Module_pom(web_driver, web_logger):
             self.click_on_tags_menu()
             time.sleep(web_driver.two_second)
             result = []
-            exp_tag_name = [Read_Tags_Components().input_for_update_serious_event_tags_threat(),
-                Read_Tags_Components().input_for_update_serious_event_tags_assault()]
+            exp_tag_name = [Read_Tags_Components().input_for_create_serious_event_tags_test(),
+                            Read_Tags_Components().input_for_create_serious_event_tags_test2()]
             tags_name = []
 
             serious_tags = [
-                Read_Tags_Components().input_for_create_serious_event_tags_threat(),
-                Read_Tags_Components().input_for_create_serious_event_tags_assault()
+                Read_Tags_Components().input_for_create_serious_event_tags_test(),
+                Read_Tags_Components().input_for_create_serious_event_tags_test2()
             ]
             tags_to_update = []
             for tags in serious_tags:
@@ -456,13 +398,6 @@ class Tags_Module_pom(web_driver, web_logger):
                 save = self.d.find_element(By.XPATH, Read_Tags_Components().get_save_btn_by_xpath())
                 save.click()
                 self.logger.info("save button is clicked")
-
-            # for r in range(2, rows + 1):
-            #     exp_tag_name.insert(r - 2, XLUtils.readdata(test_data, 'serious_event_tags_data', r, 3))
-            # for r in range(2, rows + 1):
-            #     tags_name.insert(r - 2, XLUtils.readdata(test_data, 'serious_event_tags_data', r, 2))
-            # exp_tag_name = exp_tag_name[1:len(exp_tag_name) + 1]
-            # tags_name = tags_name[1:len(tags_name) + 1]
             filter_btn = self.d.find_element(By.XPATH, Read_Tags_Components().filter_btn_by_xpath())
             filter_btn.click()
             self.log.info("clicking filter dropdown")
@@ -510,10 +445,10 @@ class Tags_Module_pom(web_driver, web_logger):
                 print(updated_tags.text.lower())
                 print(tag_name_update.lower())
                 time.sleep(web_driver.one_second)
-                close_panel = self.d.find_element(By.XPATH,
-                                                  Read_Tags_Components().close_create_tag_panel_by_xpath())
-                close_panel.click()
-                self.logger.info("close panel button is clicked")
+            close_panel = self.d.find_element(By.XPATH,
+                                              Read_Tags_Components().close_create_tag_panel_by_xpath())
+            close_panel.click()
+            self.logger.info("close panel button is clicked")
             self.logger.info(f"status: {result}")
             if False in result:
                 self.d.save_screenshot(
@@ -566,11 +501,7 @@ class Tags_Module_pom(web_driver, web_logger):
             tags_checkbox = self.d.find_elements(By.XPATH,
                                                  Read_Tags_Components().tag_select_checkbox_list_by_xpath())
             tags_checkbox[0].click()
-            # try:
-            #     for i in range(2, len(tags_checkbox)):
-            #         tags_checkbox[i].click()
-            # except Exception as ex:
-            #     self.log.info(f"delete_all_tags:  {ex}")
+
             time.sleep(web_driver.one_second)
             action_button = self.d.find_element(By.XPATH, Read_Tags_Components().tags_action_btn_by_xpath())
             action_button.click()
@@ -585,9 +516,7 @@ class Tags_Module_pom(web_driver, web_logger):
             delete_yes_btn.click()
             time.sleep(web_driver.two_second)
             delete_msg = self.explicit_wait(10, "XPATH", Read_Tags_Components().delete_tag_msg_by_xpath(), self.d)
-            # tags_checkbox = self.d.find_elements(By.XPATH,
-            #                                      Read_Tags_Components().tag_select_checkbox_list_by_xpath())
-            # result.append(tags_checkbox.__len__() < 3)
+
             result.append(delete_msg.is_displayed())
             self.logger.info(f"status: {result}")
             if False in result:
@@ -657,8 +586,8 @@ class Tags_Module_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_TAG_03_exception.png")
             self.log.info(f"tags_search_functionality:  {ex}")
             return False
-        # finally:
-        #     self.close_all_panel_one_by_one()
+        finally:
+            self.close_all_panel_one_by_one()
         #     logout().logout_from_core(self.d)
 
     def close_panel_and_discard_changes_verify(self):
@@ -773,6 +702,47 @@ class Tags_Module_pom(web_driver, web_logger):
             return False
         finally:
             self.close_all_panel_one_by_one()
+
+    def Verify_total_tags_are_n_including_default_Deterred_tag(self):
+        try:
+            result = []
+            self.logger.info("tags module test exceution started")
+            login().login_to_cloud_if_not_done(self.d)
+            time.sleep(web_driver.one_second)
+            self.click_on_tags_menu()
+            time.sleep(web_driver.one_second)
+            list_of_tags = self.d.find_elements(By.XPATH,Read_Tags_Components().lenght_of_tags())
+            tags_list = len(list_of_tags)
+            self.logger.info(f"tags list is :{tags_list}")
+            if tags_list>0:
+                self.logger.info("Tags are available in tags panel")
+                result.append(True)
+            else:
+                self.logger.info("Tags are not available in the tags panel")
+                result.append(False)
+            if result.__contains__(False):
+                self.d.save_screenshot(f"{self.screenshots_path}\\"
+                                       f"create_tags_for_serious_event_without_login_failed.png")
+                return False
+            else:
+                return True
+        except Exception as ex:
+            self.d.save_screenshot(f"{self.screenshots_path}\\list of tags available .png")
+            self.log.info(f"list of taggs available:  {ex}")
+            return False
+        finally:
+            self.close_all_panel_one_by_one()
+
+
+
+
+
+
+
+
+
+
+
     '''
     def close_all_panel(self):
         try:
