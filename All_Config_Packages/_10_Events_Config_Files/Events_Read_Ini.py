@@ -1266,6 +1266,13 @@ class events_Read_Ini:
         except Exception as ex:
             print(ex.args)
 
+    def enrollment_group_filter(self):
+        try:
+            enrollment_group_filter = self.config.get("data", "enrollment_group_filter")
+            return enrollment_group_filter
+        except Exception as ex:
+            print(ex.args)
+
     ################################ Event_search_filter #####################################################
 
     def menu_event_button_by_xpath(self):
