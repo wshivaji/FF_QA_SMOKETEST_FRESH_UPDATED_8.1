@@ -27,3 +27,40 @@ class Test_User_Roles_Test_Cases(web_driver, web_logger):
         else:
             assert False
 
+    @pytest.mark.p2
+    def test_TC_UR_03(self):
+        self.logger.info("***************** test_TC_UR_03 *****************")
+        if user_roles_module_pom().Verify_user_able_to_create_a_new_users_role_by_filling_all_the_fields():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p1
+    def test_TC_UR_04(self):
+        self.logger.info("***************** test_TC_UR_04 *****************")
+        if user_roles_module_pom().verify_user_able_to_edit_user_roles_detaild_description_with_disabled_enrollment_review_permissions():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p1
+    def test_TC_UR_05(self):
+        self.logger.info("***************** test_TC_UR_05 *****************")
+        if user_roles_module_pom().Verify_details_and_all_permission_of_default_it_admin():
+            assert True
+        else:
+            assert False@pytest.mark.p1
+    def test_TC_UR_06(self):
+        self.logger.info("***************** test_TC_UR_06 *****************")
+        if user_roles_module_pom().Verify_User_role_deletion_functionality_by_deleting_one_user_role():
+            assert True
+        else:
+            assert False
+
+
+
+
+
+
+
+

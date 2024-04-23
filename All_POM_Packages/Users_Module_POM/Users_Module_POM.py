@@ -270,7 +270,7 @@ class Users_Module_pom(web_driver, web_logger):
             self.log.info(f"test_TC_US_1_exception: {ex}")
             return False
         finally:
-            logout().logout_from_core(self.d)
+            self.click_on_logout_button()
 
 
     def verify_login_with_newly_created_user_and_validate_login_successful(self):

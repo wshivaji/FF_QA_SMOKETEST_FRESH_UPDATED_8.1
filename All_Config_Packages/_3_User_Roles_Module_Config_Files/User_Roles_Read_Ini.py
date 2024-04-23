@@ -282,6 +282,14 @@ class user_roles_read_ini:
         except Exception as ex:
             print(ex.args)
 
+    def user_role_link(self):
+        try:
+            user_role_link = self.config.get("user_roles", "user_role_link_on_cloud_menu")
+            print(f"username_by_id: {user_role_link}")
+            return user_role_link
+        except Exception as ex:
+            print(ex.args)
+
     def get_user_roles_profiles_list_by_xpath(self):
         try:
             user_roles_profiles_list_by_xpath = self.config.get("user_roles", "user_roles_profiles_list_by_xpath")
@@ -1882,3 +1890,52 @@ class user_roles_read_ini:
             return user_role_panel_cancel_btn
         except Exception as ex:
             print(ex)
+
+    def details_button_of_created_userrole(self):
+        try:
+            user_role = self.config.get("user_roles", "details_button_of_created_user_role")
+            return user_role
+        except Exception as ex:
+            print(ex)
+
+    def details_button_of_it_admin(self):
+        try:
+            details_button_of_it_admin = self.config.get("user_roles", "details_button_of_it_admin")
+            return details_button_of_it_admin
+        except Exception as ex:
+            print(ex)
+
+    def action_dropdown_on_user_role(self):
+        try:
+            action_dropdown = self.config.get("user_roles", "action_dropdown_on_user_role")
+            return action_dropdown
+        except Exception as ex:
+            print(ex.args)
+
+    def edit_option(self):
+        try:
+            edit_option = self.config.get("user_roles", "edit_option")
+            return edit_option
+        except Exception as ex:
+            print(ex.args)
+
+    def edit_enrollment_review_permission(self):
+        try:
+            edit_enrollment_review_permission = self.config.get("user_roles", "edit_enrollment_review_permission")
+            return edit_enrollment_review_permission
+        except Exception as ex:
+            print(ex.args)
+
+    def after_editing_success_msg(self):
+        try:
+            after_editing_success_msg = self.config.get("user_roles", "after_editing_success_msg")
+            return after_editing_success_msg
+        except Exception as ex:
+            print(ex.args)
+
+    def check_mark(self):
+        try:
+            check_mark = self.config.get("user_roles", "check_mark")
+            return check_mark
+        except Exception as ex:
+            print(ex.args)
