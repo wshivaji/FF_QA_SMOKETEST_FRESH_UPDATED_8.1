@@ -2051,41 +2051,39 @@ class events_pom(web_driver, web_logger):
 
                 x = events_Read_Ini().enrollment_group_name_list()
                 enrollment_group_list = x.split(',')
-                self.click_on_event_menu()
-                self.click_on_search_button()
-                self.enrollment_group_selection()
-                self.click_on_save_button()
+                self.logger.info(f"enrollment group list is :{enrollment_group_list}")
+                for eg in range(len(enrollment_group_list)):
+                        self.click_on_event_menu()
+                        self.click_on_search_button()
+                        self.enrollment_group_selection()
+                        self.click_on_save_button()
+                        self.click_on_event_filter_search_button()
+                        self.enrollment_group_search_result_validation()
+                        Total_events_count_of_each_group = self.d.find_element(By.XPATH,events_Read_Ini().Events_count_each_eg())
 
-                self.click_on_event_filter_search_button()
+                        self.logger.info(f"Total number of events on each group is {Total_events_count_of_each_group.text}")
+                        time.sleep(web_driver.one_second)
+                        expected_events_counts = events_Read_Ini().five_events_from_each_group()
+                        if expected_events_counts in Total_events_count_of_each_group.text:
+                            self.logger.info("Displaying 5 events from each group")
+                            self.status.append(True)
 
-                self.enrollment_group_search_result_validation()
-                Total_events_count_of_each_group = self.d.find_element(By.XPATH,events_Read_Ini().Events_count_each_eg())
-                self.logger.info(f"Total number of events on each group is {Total_events_count_of_each_group.text}")
-                time.sleep(web_driver.one_second)
-                expected_events_counts = events_Read_Ini().five_events_from_each_group()
-
-                if expected_events_counts in Total_events_count_of_each_group:
-                    self.logger.info("Displaying 5 events from each group")
-                    self.status.append(True)
-
-                else:
-                    self.status.append(False)
-
+                        else:
+                            self.status.append(False)
+                        self.enrollment_group_selection()
                 if False in self.status:
                     self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_128.png")
                     self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_128.png")
                     return False
                 else:
                     return True
-
-
             except Exception as ex:
                 self.d.save_screenshot(f"{self.screenshots_path}\\event_search_with_enrollmentGroup_filter_combination_"
                                        f"failed.png")
-                self.log.info(f"event_search_with_enrollmentGroup_filter_combination failed:  {ex.args}")
+                self.logger.info(f"event_search_with_enrollmentGroup_filter_combination failed:  {ex.args}")
                 return False
-            finally:
-                self.close_all_panel_one_by_one()
+            # finally:
+            #     # self.close_all_panel_one_by_one()
 
     def logout_from_portal(self):
         try:
@@ -2179,13 +2177,15 @@ class events_pom(web_driver, web_logger):
                                                events_Read_Ini().enrollment_group_name_list())
 
         try:
-            for i in range(len(group_text_list) - 1):
-                actual_enrollment_group_text = group_text_list.__getitem__(i).text
-                self.logger.info(f"actual text: {actual_enrollment_group_text}")
-                expected_enrollment_group_text = events_Read_Ini().get_enrollment_group().upper()
-                self.logger.info(f"expected text: {expected_enrollment_group_text}")
-                if actual_enrollment_group_text == expected_enrollment_group_text:
-                    checkbox_list.__getitem__(i).click()
+            # for i in range(len(group_text_list) - 1):
+            actual_enrollment_group_text = group_text_list.__getitem__().text
+            self.logger.info(f"actual text: {actual_enrollment_group_text}")
+            expected_enrollment_group_text = events_Read_Ini().get_enrollment_group().upper()
+            expected_en_group_list = expected_enrollment_group_text.split(',')
+            self.logger.info(f"expected text: {expected_enrollment_group_text}")
+            for x in expected_en_group_list:
+                if actual_enrollment_group_text == x:
+                    checkbox_list.__getitem__().click()
                     break
         except Exception as ex:
             self.logger.info(ex.args)
