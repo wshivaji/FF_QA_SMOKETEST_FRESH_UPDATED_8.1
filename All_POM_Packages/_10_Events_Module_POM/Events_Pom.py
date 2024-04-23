@@ -1,13 +1,19 @@
 import time
 from pathlib import Path
+
+import pyautogui
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.keys import Keys
 from All_Config_Packages._10_Events_Config_Files.Events_Read_Ini import events_Read_Ini
+from All_Config_Packages._11_Enrollment_Module_Config_Files.Enrollment_Module_Read_INI import read_enrollment_components
+from All_Config_Packages._12_Identify_and_Enroll_Config_Files.Identify_and_Enroll_Readd_INI import \
+    Read_Identify_and_Enroll_Components
 from Base_Package.Login_Logout_Ops import login
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
+
 
 
 class events_pom(web_driver, web_logger):
@@ -178,189 +184,9 @@ class events_pom(web_driver, web_logger):
         except Exception as ex:
             print(ex)
 
-    def verify_on_cloud_menu_after_login(self):
-        try:
-            self.logger.info("*****TC_003_*****started")
-            # # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.two_second)
-            cloud_menu = self.d.find_element(By.XPATH, events_Read_Ini().get_cloud_menu())
-            if cloud_menu.is_displayed():
-                self.logger.info(f"cloud menu is displayed after login, {cloud_menu}")
-                self.status.append(True)
-            else:
-                self.logger.info(f"cloud menu is not displayed after login, {cloud_menu}")
-                self.status.append(False)
-            self.logger.info(f"status :{self.status}")
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_003.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_003.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_003.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_003.png")
-            self.logger.error(f"TC_events_003 got exception as: {ex} ")
 
-    def verify_Events_are_displayed_in_dashboard_items(self):
-        try:
-            self.logger.info("******TC_004******* started")
-            login().login_to_cloud_if_not_done(self.d)
-            # # self.load_login_page_if_not_loaded()
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            if events.is_displayed():
-                self.logger.info(f"events are visible in dashboard items:")
-                self.status.append(True)
-            else:
-                self.logger.info(f"events  are not visible in dashboard items:")
-                self.status.append(False)
-            self.logger.info(f"status :{self.status}")
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_004.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_004.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_004.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_004.png")
-            self.logger.error(f"TC_events_004 got exception as: {ex} ")
 
-    def click_on_Events_and_verify_panel_heading_of_Events_is_visible(self):
-        try:
-            self.logger.info("******TC_005******** started")
-            login().login_to_cloud_if_not_done(self.d)
-            # # self.load_login_page_if_not_loaded()
-            self.status.clear()
-            time.sleep(web_driver.two_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.one_second)
-            events_panel_heading = self.d.find_element(By.XPATH, events_Read_Ini().get_events_panel_heading())
-            time.sleep(web_driver.one_second)
-            if events_panel_heading.is_displayed():
-                self.logger.info(" panel heading 'events' is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("panel heading 'events' is not visible")
-                self.status.append(False)
-            self.logger.info(f"status :{self.status}")
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            if False in self.status:
 
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_005.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_005.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_005.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_005.png")
-            self.logger.error(f"TC_events_005 got exception as: {ex} ")
-
-    def verify_view_dropdown_is_visible(self):
-        try:
-            self.logger.info("********TC_006******* started")
-            login().login_to_cloud_if_not_done(self.d)
-            # # self.load_login_page_if_not_loaded()
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            time.sleep(web_driver.one_second)
-            if view_dropdown.is_displayed():
-                self.logger.info("view dropdown is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("view dropdown is not visible")
-                self.status.append(False)
-            self.logger.info(f"status :{self.status}")
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_006.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_006.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_006.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_006.png")
-            self.logger.error(f"TC_events_006 got exception as: {ex} ")
-
-    def on_Events_panel_heading_verify_cross_symbol_is_visible(self):
-        try:
-            self.logger.info("********TC_007******** staerted")
-            login().login_to_cloud_if_not_done(self.d)
-            # # self.load_login_page_if_not_loaded()
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.one_second)
-            cross_symbol = self.d.find_element(By.XPATH, events_Read_Ini().event_page_cross_symbol())
-            if cross_symbol.is_displayed():
-                self.logger.info("cross symbol is visible ")
-                self.status.append(True)
-            else:
-                self.logger.info("cross symbol is not visible")
-                self.status.append(False)
-            self.logger.info(f"status :{self.status}")
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_007.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_007.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_007.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_007.png")
-            self.logger.error(f"TC_events_007 got exception as: {ex} ")
-
-    def on_Events_page_verify_filter_search_results_textbox_is_visible_and_clickable_text_on_button_is_visible(self):
-        try:
-            self.logger.info("*******TC_008********* started")
-            login().login_to_cloud_if_not_done(self.d)
-            # # self.load_login_page_if_not_loaded()
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            # events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().get_Events_in_dashboard(), self.d)
-            events.click()
-            time.sleep(web_driver.one_second)
-            search_filter_by_action_textbox = self.d.find_element(By.XPATH, events_Read_Ini().search_filter_by_action_textbox())
-            if search_filter_by_action_textbox.is_displayed():
-                self.logger.info("search filter by action textbox is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("search filter by action textbox is not visible")
-                self.status.append(False)
-            self.logger.info(f"status :{self.status}")
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_008.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_008.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_008.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_008.png")
-            self.logger.error(f"TC_events_008 got exception as: {ex} ")
 
     def on_Events_page_Enter_a_text_in_search_filter_by_action_textbox_and_verify_number_of_events_displayed(self):
         try:
@@ -401,493 +227,6 @@ class events_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_009.png")
             self.logger.error(f"TC_events_009 got exception as: {ex} ")
 
-    def On_Events_page_after_entering_action_verify_remove_filter_button_is_visible(self):
-        try:
-            self.logger.info("*********TC_010****** started")
-            # # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.one_second)
-            search_filter_by_action_textbox = self.d.find_element(By.XPATH, 
-                                                                  events_Read_Ini().search_filter_by_action_textbox())
-            search_filter_by_action_textbox.clear()
-            search_filter_by_action_textbox.send_keys(events_Read_Ini().Enter_a_action_text())
-            time.sleep(web_driver.two_second)
-            remove_filter = self.d.find_element(By.XPATH, events_Read_Ini().remove_filter_button())
-            if remove_filter.is_displayed():
-                self.logger.info("remove filter button is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("remove filter button is not visible")
-                self.status.append(False)
-            self.logger.info(f"status :{self.status}")
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_010.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_010.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_010.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_010.png")
-            self.logger.error(f"TC_events_010 got exception as: {ex} ")
-
-    def on_Events_page_verify_search_dropdown_is_visible_and_clickable_text_on_button_is_visible(self):
-        try:
-            self.logger.info("********TC_010******* started")
-            # # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            # events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events = web_driver.explicit_wait(self,  10, "XPATH", events_Read_Ini().get_Events_in_dashboard(), self.d)
-            events.click()
-            time.sleep(web_driver.one_second)
-            search_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().search_dropdown_in_events())
-            if search_dropdown.is_displayed():
-                self.logger.info("search dropdown is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("search dropdown is not visible")
-                self.status.append(False)
-            self.logger.info(f"status :{self.status}")
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_010.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_010.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_010.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_010.png")
-            self.logger.error(f"TC_events_010 got exception as: {ex} ")
-
-    def on_Events_page_verify_Action_dropdown_is_visible_and_clickable_text_on_button_is_visible(self):
-        try:
-            self.logger.info("********TC_O11**** started")
-            # # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.one_second)
-            action = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_events())
-            if action.is_displayed():
-                self.logger.info("action dropdown is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("action dropdown is not visible")
-                self.status.append(False)
-            self.logger.info(f"status :{self.status}")
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_011.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_011.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_011.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_011.png")
-            self.logger.error(f"TC_events_011 got exception as: {ex} ")
-
-    def on_Events_page_verify_SELECT_ALL_checkbox_is_visible_and_clickable_select_all_text_is_visible(self):
-        try:
-            self.logger.info("********TC_012******** started")
-            # # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().get_Events_in_dashboard(), self.d)
-            events.click()
-            time.sleep(web_driver.one_second)
-            web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().get_events_panel_heading(), self.d)
-            select_all_checkbox = self.d.find_element(By.XPATH, events_Read_Ini().select_all_checkbox())
-            time.sleep(web_driver.one_second)
-            select_all_text = self.d.find_element(By.XPATH, events_Read_Ini().select_all_text())
-            if select_all_checkbox.is_displayed():
-                self.logger.info("select_all_checkbox is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("select all checkbox is not visible")
-                self.status.append(False)
-            if select_all_text.is_displayed():
-                self.logger.info("select all text is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("select all text is not visible")
-                self.status.append(False)
-            self.logger.info(f"status :{self.status}")
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_012.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_012.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_012.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_012.png")
-            self.logger.error(f"TC_events_012 got exception as: {ex} ")
-
-    def on_Events_page_verify_Event_real_time_is_visible(self):
-        try:
-            self.logger.info("*******TC_013********* started")
-            # # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.one_second)
-            event_happened_banner = self.d.find_element(By.XPATH, events_Read_Ini().real_time_event_happened())
-            time.sleep(web_driver.one_second)
-            if event_happened_banner.is_displayed():
-                self.logger.info("time when an event happened is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("time when an event happened is not visible")
-                self.status.append(False)
-            self.logger.info(f"status :{self.status}")
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_013.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_013.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_013.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_013.png")
-            self.logger.error(f"TC_events_013 got exception as: {ex} ")
-
-    def on_Events_page_verify_location_store_along_with_case_subject_Index_score_Action_taken_region_this_event_info_is_visible(self):
-        try:
-            self.logger.info("*******TC_014********* started")
-            # # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            location_subject = self.d.find_element(By.XPATH, events_Read_Ini().location_casesubject_of_an_event())
-            time.sleep(web_driver.one_second)
-            indexscore = self.d.find_element(By.XPATH, events_Read_Ini().indexscore_of_event())
-            time.sleep(web_driver.one_second)
-            action_taken = self.d.find_element(By.XPATH, events_Read_Ini().actiontaken_by_an_event())
-            time.sleep(web_driver.one_second)
-            region = self.d.find_element(By.XPATH, events_Read_Ini().region_ofan_event())
-            if location_subject.is_displayed():
-                self.logger.info("location/case/subject  of event is visible beside of an event ")
-                self.status.append(True)
-            else:
-                self.logger.info("location/case/subject of an event is not visible beside of an event ")
-                self.status.append(False)
-            if indexscore.is_displayed():
-                self.logger.info("indexscore of an event is visible beside an event")
-                self.status.append(True)
-            else:
-                self.logger.info("index score of an event is not visible beside of an event")
-                self.status.append(False)
-            if action_taken.is_displayed():
-                self.logger.info("action taken by an event is visible beside of an event")
-                self.status.append(True)
-            else:
-                self.logger.info("action taken by an event is not visible beside of an event")
-                self.status.append(False)
-            if region.is_displayed():
-                self.logger.info("region of an event is visible beside of an event")
-                self.status.append(True)
-            else:
-                self.logger.info("region of an event is not visible beside of an event")
-                self.status.append(False)
-            self.logger.info(f"status :{self.status}")
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_014.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_014.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_014.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_014.png")
-            self.logger.error(f"TC_events_014 got exception as: {ex} ")
-
-    def on_Events_page_verify_Live_Image_text_and_Live_Image_is_visible(self):
-        try:
-            self.logger.info("********TC_015****** started")
-            # # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            # # login().login_to_localhost_if_not_done()
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            live_image = self.d.find_element(By.XPATH, events_Read_Ini().live_image())
-            time.sleep(web_driver.two_second)
-            live_image_text = self.d.find_element(By.XPATH, events_Read_Ini().live_image_text())
-            time.sleep(web_driver.one_second)
-            if live_image.is_displayed():
-                self.logger.info("live  image is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("live image is not visible")
-                self.status.append(False)
-            if live_image_text.is_displayed():
-                self.logger.info("live image text is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("live image text is not visible")
-                self.status.append(False)
-            self.logger.info(f"status :{self.status}")
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_015.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_015.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_015.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_015.png")
-            self.logger.error(f"TC_events_015 got exception as: {ex} ")
-
-    def on_Events_page_verify_File_Image_text_File_Image_is_visible(self):
-        try:
-            self.logger.info("********TC_016***** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            # # login().login_to_localhost_if_not_done()
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            file_image_text = self.d.find_element(By.XPATH, events_Read_Ini().file_image_text())
-            time.sleep(web_driver.one_second)
-            file_image = self.d.find_element(By.XPATH, events_Read_Ini().file_image())
-            time.sleep(web_driver.one_second)
-            if file_image.is_displayed():
-                self.logger.info("file image is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("file image is not visible")
-                self.status.append(False)
-            if file_image_text.is_displayed():
-                self.logger.info("file image text is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("file image text is not visible")
-                self.status.append(False)
-            self.logger.info(f"status :{self.status}")
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_016.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_016.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_016.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_016.png")
-            self.logger.error(f"TC_events_016 got exception as: {ex} ")
-
-    def on_Events_page_verify_Event_button_is_visible_and_symbol_on_button_is_visible(self):
-        try:
-            self.logger.info("*******TC_017****** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            events_button = self.d.find_element(By.XPATH, events_Read_Ini().events_button())
-            time.sleep(web_driver.one_second)
-            events_symbol = self.d.find_element(By.XPATH, events_Read_Ini().events_button_symbol())
-            if events_button.is_displayed():
-                self.logger.info("events button is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("evnts button is not visible")
-                self.status.append(False)
-            if events_symbol.is_displayed():
-                self.logger.info("events_symbol is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("events_symbol is not visible")
-                self.status.append(False)
-            self.logger.info(f"status :{self.status}")
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_017.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_017.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_017.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_017.png")
-            self.logger.error(f"TC_events_017 got exception as: {ex} ")
-
-    def on_Events_page_verify_tag_button_is_visible_and_symbol_on_button_is_visible(self):
-        try:
-            self.logger.info("********TC_018***** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            tags_button = self.d.find_element(By.XPATH, events_Read_Ini().tags_button_in_eventspage())
-            time.sleep(web_driver.one_second)
-            tags_button_symbol = self.d.find_element(By.XPATH, events_Read_Ini().tags_button_symbol())
-            time.sleep(web_driver.one_second)
-            if tags_button.is_displayed():
-                self.logger.info("tags button is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("tags button is not visible")
-                self.status.append(False)
-            if tags_button_symbol.is_displayed():
-                self.logger.info("tags buttton symbol is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("tags button symbol is not visible")
-                self.status.append(False)
-            self.logger.info(f"status :{self.status}")
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_018.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_018.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_018.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_018.png")
-            self.logger.error(f"TC_events_018 got exception as: {ex} ")
-
-    def on_Events_page_verify_extent_menu_button_and_symbol_on_button_is_visible(self):
-        try:
-            self.logger.info("*******TC_019******* started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            extent_menu = self.d.find_element(By.XPATH, events_Read_Ini().extent_menu())
-            time.sleep(web_driver.one_second)
-            extent_menu_symbol = self.d.find_element(By.XPATH, events_Read_Ini().extent_menu_symbol())
-            time.sleep(web_driver.one_second)
-            if extent_menu.is_displayed():
-                self.logger.info("extent menu is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("extent menu is not visible")
-                self.status.append(False)
-            if extent_menu_symbol.is_displayed():
-                self.logger.info("extent_menu symbol is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("extent-menu symbol is not visible")
-                self.status.append(False)
-            self.logger.info(f"status :{self.status}")
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_019.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_019.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_019.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_019.png")
-            self.logger.error(f"TC_events_019 got exception as: {ex} ")
-
-    def on_Events_page_verify_Load_More_button_is_visible_and_clickable(self):
-        try:
-            self.logger.info("********TC_020****** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_elements(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            if len(events) <= 0:
-                self.d.refresh()
-            events = events[0]
-            events.click()
-            time.sleep(web_driver.three_second)
-            # load_more = self.d.find_element(By.XPATH, events_Read_Ini().loadmore_button())
-            self.status.append(self.verify_load_more_btn())
-
-            self.logger.info(f"status :{self.status}")
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_020.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_020.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_020.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_020.png")
-            self.logger.error(f"TC_events_020 got exception as: {ex} ")
-
-    def on_Events_page_verify_number_of_events_are_visible_below_Load_More_button(self):
-        try:
-            self.logger.info("****TC_021******** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            displaying_number_of_events_text = self.d.find_element(By.XPATH, events_Read_Ini().total_number_of_events_happened_out_of_total_number_of_events())
-            if displaying_number_of_events_text.is_displayed():
-                self.logger.info("displaying number of events out of total number of events happened")
-                self.status.append(True)
-            else:
-                self.logger.info("number of events displayed text is not visible")
-                self.status.append(False)
-            self.logger.info(f"status :{self.status}")
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_021.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_021.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_021.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_021.png")
-            self.logger.error(f"TC_events_021 got exception as: {ex} ")
 
     def on_Events_page_click_on_load_more_button_and_verify_number_of_Events_count_is_40_displayed(self):
         try:
@@ -949,95 +288,6 @@ class events_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_022.png")
             self.logger.error(f"TC_events_022 got exception as: {ex} ")
 
-    def click_on_view_dropdown_and_verify_location_is_visible(self):
-        try:
-            self.logger.info("*******TC_024******* started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            time.sleep(web_driver.one_second)
-            all_options = self.d.find_elements(By.XPATH, events_Read_Ini().view_dropdown_options())
-            for option in all_options:
-                if option.is_displayed():
-                    self.logger.info(f" {option.text} Option in VIEW dropdown is visible...")
-                    self.status.append(True)
-                else:
-                    self.status.append(False)
-
-            # location_in_viewdropdown = self.d.find_element(By.XPATH, events_Read_Ini().location_in_view_dropdown())
-            # if location_in_viewdropdown.is_displayed():
-            #     self.logger.info("location is visible in view dropdown")
-            #     self.status.append(True)
-            # else:
-            #     self.logger.info("location is not visible in view dropdown")
-            #     self.status.append(False)
-            self.logger.info(f"status :{self.status}")
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_024.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_024.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_024.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_024.png")
-            self.logger.error(f"TC_events_024 got exception as: {ex} ")
-
-    def In_view_dropdown_click_on_location_an_alert_is_opened_click_ok_an_alert_select_a_event_and_verify_panel_heading_of_Events_location_is_visible(self):
-        try:
-            self.logger.info("*******TC_025****** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            time.sleep(web_driver.one_second)
-            location_in_viewdropdown = self.d.find_element(By.XPATH, events_Read_Ini().location_in_view_dropdown())
-            location_in_viewdropdown.click()
-            time.sleep(web_driver.one_second)
-            a = self.d.switch_to.alert
-            a.accept()
-            time.sleep(web_driver.one_second)
-            checkbox = self.d.find_element(By.XPATH, events_Read_Ini().select_checkbox_by_xpath())
-            checkbox.click()
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            time.sleep(web_driver.one_second)
-            location_in_viewdropdown = self.d.find_element(By.XPATH, events_Read_Ini().location_in_view_dropdown())
-            location_in_viewdropdown.click()
-            time.sleep(web_driver.one_second)
-            events_location_panel = self.d.find_element(By.XPATH, events_Read_Ini().events_location_panel())
-            time.sleep(web_driver.one_second)
-            if events_location_panel.is_displayed():
-                self.status.append(True)
-            else:
-                self.status.append(False)
-            self.logger.info(f"status :{self.status}")
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_025.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_025.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_025.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_025.png")
-            self.logger.error(f"TC_events_025 got exception as: {ex} ")
 
     def on_Events_location_page_verify_Find_textbox_is_visible(self):
         try:
@@ -1247,794 +497,6 @@ class events_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_029.png")
             self.logger.error(f"TC_events_029 got exception as: {ex} ")
 
-    def on_Events_location_page_verify_extent_menu_is_visible(self):
-        try:
-            self.logger.info("******TC_030 ******* started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            time.sleep(web_driver.one_second)
-            location_in_viewdropdown = self.d.find_element(By.XPATH, events_Read_Ini().location_in_view_dropdown())
-            location_in_viewdropdown.click()
-            time.sleep(web_driver.one_second)
-            a = self.d.switch_to.alert
-            a.accept()
-            time.sleep(web_driver.one_second)
-            checkbox = self.d.find_element(By.XPATH, events_Read_Ini().select_checkbox_by_xpath())
-            checkbox.click()
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            time.sleep(web_driver.one_second)
-            location_in_viewdropdown = self.d.find_element(By.XPATH, events_Read_Ini().location_in_view_dropdown())
-            location_in_viewdropdown.click()
-            time.sleep(web_driver.one_second)
-            extent_menu = self.d.find_element(By.XPATH, events_Read_Ini().get_tribar_on_map())
-            if extent_menu.is_displayed():
-                self.logger.info("extent menu is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("extent menu is not visible")
-                self.status.append(False)
-            self.logger.info(f"status :{self.status}")
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_030.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_030.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_030.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_030.png")
-            self.logger.error(f"TC_events_030 got exception as: {ex} ")
-
-    def on_Events_location_page_click_on_extent_menu_verify_search_target_window_dialouge_box_is_displayed(self):
-        try:
-            self.logger.info("******TC_031***** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            time.sleep(web_driver.one_second)
-            location_in_viewdropdown = self.d.find_element(By.XPATH, events_Read_Ini().location_in_view_dropdown())
-            location_in_viewdropdown.click()
-            time.sleep(web_driver.one_second)
-            a = self.d.switch_to.alert
-            a.accept()
-            time.sleep(web_driver.one_second)
-            checkbox = self.d.find_element(By.XPATH, events_Read_Ini().select_checkbox_by_xpath())
-            checkbox.click()
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            time.sleep(web_driver.one_second)
-            location_in_viewdropdown = self.d.find_element(By.XPATH, events_Read_Ini().location_in_view_dropdown())
-            location_in_viewdropdown.click()
-            time.sleep(web_driver.one_second)
-            extent_menu = self.d.find_element(By.XPATH, events_Read_Ini().get_tribar_on_map())
-            extent_menu.click()
-            time.sleep(web_driver.one_second)
-            search_target_dialougebox = self.d.find_element(By.XPATH, events_Read_Ini().get_linktext_searchtarget_on_map())
-            if search_target_dialougebox.is_displayed():
-                self.logger.info("search target dialouge box is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("search target dialouge box is not visible")
-                self.status.append(False)
-            self.logger.info(f"status :{self.status}")
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_031.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_031.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_031.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_031.png")
-            self.logger.error(f"TC_events_031 got exception as: {ex} ")
-
-    def on_Events_location_page_in_select_a_search_target_dialouge_box_a_dropdown_is_visible_and_clickable(self):
-        try:
-            self.logger.info("**********TC_032 ******** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            time.sleep(web_driver.one_second)
-            location_in_viewdropdown = self.d.find_element(By.XPATH, events_Read_Ini().location_in_view_dropdown())
-            location_in_viewdropdown.click()
-            time.sleep(web_driver.one_second)
-            a = self.d.switch_to.alert
-            a.accept()
-            time.sleep(web_driver.one_second)
-            checkbox = self.d.find_element(By.XPATH, events_Read_Ini().select_checkbox_by_xpath())
-            checkbox.click()
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            time.sleep(web_driver.one_second)
-            location_in_viewdropdown = self.d.find_element(By.XPATH, events_Read_Ini().location_in_view_dropdown())
-            location_in_viewdropdown.click()
-            time.sleep(web_driver.one_second)
-            extent_menu = self.d.find_element(By.XPATH, events_Read_Ini().get_tribar_on_map())
-            extent_menu.click()
-            time.sleep(web_driver.one_second)
-            search_target_dropdow = self.d.find_element(By.XPATH, events_Read_Ini().get_search_target_dropdown())
-            if search_target_dropdow.is_displayed():
-                self.logger.info("search target dropdown is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("search target dropdown is not visible")
-                self.status.append(False)
-            self.logger.info(f"status :{self.status}")
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            if False in self.status:
-
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_032.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_032.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_032.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_032.png")
-            self.logger.error(f"TC_events_032 got exception as: {ex} ")
-
-    def on_Events_location_page_In_select_a_search_target_dropdown_click_on_NOTES_option_Notes_location_page_is_visible(self):
-        try:
-            self.logger.info("******TC_033******** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            time.sleep(web_driver.one_second)
-            location_in_viewdropdown = self.d.find_element(By.XPATH, events_Read_Ini().location_in_view_dropdown())
-            location_in_viewdropdown.click()
-            time.sleep(web_driver.one_second)
-            a = self.d.switch_to.alert
-            a.accept()
-            time.sleep(web_driver.one_second)
-            checkbox = self.d.find_element(By.XPATH, events_Read_Ini().select_checkbox_by_xpath())
-            checkbox.click()
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            time.sleep(web_driver.one_second)
-            location_in_viewdropdown = self.d.find_element(By.XPATH, events_Read_Ini().location_in_view_dropdown())
-            location_in_viewdropdown.click()
-            time.sleep(web_driver.one_second)
-            extent_menu = self.d.find_element(By.XPATH, events_Read_Ini().get_tribar_on_map())
-            extent_menu.click()
-            time.sleep(web_driver.one_second)
-            sel = Select(self.d.find_element(By.XPATH, events_Read_Ini().get_search_target_dropdown()))
-            sel.select_by_visible_text("Notes")
-            self.logger.info("eventsis selected in search target dropdown")
-            time.sleep(web_driver.two_second)
-            Notes_location = self.d.find_element(By.XPATH, events_Read_Ini().get_location_panel_headings())
-            if Notes_location.is_displayed():
-                self.logger.info("eventsloaction panel heading is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("eventslocation panel heading is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_033.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_033.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_033.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_033.png")
-            self.logger.error(f"TC_events_033 got exception as: {ex} ")
-            print(ex)
-
-    def on_Events_location_page_In_select_a_search_target_dropdown_click_on_Events_option_Events_location_page_is_visible(self):
-        try:
-            self.logger.info("********TC_034********* started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().get_Events_in_dashboard(), self.d)
-            events.click()
-            time.sleep(web_driver.one_second)
-            web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().get_events_panel_heading(), self.d)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            time.sleep(web_driver.one_second)
-            location_in_viewdropdown = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini()
-                                                                .location_in_view_dropdown(), self.d)
-            location_in_viewdropdown.click()
-            time.sleep(web_driver.one_second)
-            a = self.d.switch_to.alert
-            a.accept()
-            time.sleep(web_driver.one_second)
-            checkbox = self.d.find_element(By.XPATH, events_Read_Ini().select_checkbox_by_xpath())
-            checkbox.click()
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            time.sleep(web_driver.one_second)
-            location_in_viewdropdown = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini()
-                                                                .location_in_view_dropdown(), self.d)
-            location_in_viewdropdown.click()
-            time.sleep(web_driver.one_second)
-            extent_menu = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().get_tribar_on_map(), self.d)
-            extent_menu.click()
-            time.sleep(web_driver.one_second)
-            sel = Select(self.d.find_element(By.XPATH, events_Read_Ini().get_search_target_dropdown()))
-            sel.select_by_visible_text("Probable Match Events")
-            self.logger.info("selecting events in search target window")
-            time.sleep(web_driver.two_second)
-            Event_location = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini()
-                                                      .get_location_panel_headings(), self.d)
-            if Event_location.is_displayed():
-                self.logger.info("notes-events location panel heading is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("notes-events location panel heading is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_034.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_034.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_034.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_034.png")
-            self.logger.error(f"TC_events_034 got exception as: {ex} ")
-            print(ex)
-
-    def on_Events_location_page_In_select_a_search_target_dialouge_box_verify_cancel_button_is_visible_and_clickable(self):
-        try:
-            self.logger.info("*******TC_035******** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            self.logger.info("events panel opened.")
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            self.logger.info("view dropdown clicked.")
-            time.sleep(web_driver.one_second)
-            location_in_viewdropdown = self.d.find_element(By.XPATH, events_Read_Ini().location_in_view_dropdown())
-            location_in_viewdropdown.click()
-            self.logger.info("location option clicked.")
-            time.sleep(web_driver.one_second)
-            a = self.d.switch_to.alert
-            a.accept()
-            time.sleep(web_driver.one_second)
-            checkbox = self.d.find_element(By.XPATH, events_Read_Ini().select_checkbox_by_xpath())
-            checkbox.click()
-            self.logger.info("checkbox selected.")
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            time.sleep(web_driver.one_second)
-            location_in_viewdropdown = self.d.find_element(By.XPATH, events_Read_Ini().location_in_view_dropdown())
-            location_in_viewdropdown.click()
-            time.sleep(web_driver.one_second)
-            extent_menu = self.d.find_element(By.XPATH, events_Read_Ini().get_tribar_on_map())
-            extent_menu.click()
-            self.logger.info("extent menu clicked.")
-            time.sleep(web_driver.one_second)
-            cancel_button = self.d.find_element(By.XPATH, events_Read_Ini().get_cancel_button())
-            if cancel_button.is_displayed():
-                self.logger.info("cancel button is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("cancel button is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_035.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_035.png")
-                self.logger.info("returning false.")
-                return False
-            else:
-                self.logger.info("returning true.")
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_035.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_035.png")
-            self.logger.error(f"TC_events_035 got exception as: {ex} ")
-            print(ex)
-
-    def on_Events_location_page_In_select_search_target_dropdown_click_on_cancel_button_verify_Events_location_panel_heading_is_visible(self):
-        try:
-            self.logger.info("*******TC_036****** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-
-            self.logger.info("events panel opened.")
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            self.logger.info("view dropdown clicked.")
-            time.sleep(web_driver.one_second)
-            location_in_viewdropdown = self.d.find_element(By.XPATH, events_Read_Ini().location_in_view_dropdown())
-            location_in_viewdropdown.click()
-            self.logger.info("location option selected.")
-            time.sleep(web_driver.one_second)
-            a = self.d.switch_to.alert
-            a.accept()
-            time.sleep(web_driver.one_second)
-            checkbox = self.d.find_element(By.XPATH, events_Read_Ini().select_checkbox_by_xpath())
-            checkbox.click()
-            self.logger.info("checkbox is clicked.")
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            time.sleep(web_driver.one_second)
-            location_in_viewdropdown = self.d.find_element(By.XPATH, events_Read_Ini().location_in_view_dropdown())
-            location_in_viewdropdown.click()
-            self.logger.info("location option selected.")
-            time.sleep(web_driver.one_second)
-            extent_menu = self.d.find_element(By.XPATH, events_Read_Ini().get_tribar_on_map())
-            extent_menu.click()
-            self.logger.info("extent btn is clicked.")
-            time.sleep(web_driver.one_second)
-            cancel_button = self.d.find_element(By.XPATH, events_Read_Ini().get_cancel_button())
-            cancel_button.click()
-            self.logger.info("cancle btn clicked.")
-            Event_location = self.d.find_element(By.XPATH, events_Read_Ini().get_location_panel_headings())
-            self.logger.info(f"events location displayed: {Event_location.is_displayed()}")
-            if Event_location.is_displayed():
-                self.logger.info("notes-events location panel heading is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("notes-events location panel heading is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_036.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_notes_036.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_notes_036.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_notes_036.png")
-            self.logger.error(f"TC_notes_036 got exception as: {ex} ")
-            print(ex)
-
-    def on_Events_location_page_Click_on_full_screen_toggle_symbol_full_screen_is_displayed(self):
-        try:
-            self.logger.info("*****TC_037********* started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            time.sleep(web_driver.one_second)
-            location_in_viewdropdown = self.d.find_element(By.XPATH, events_Read_Ini().location_in_view_dropdown())
-            location_in_viewdropdown.click()
-            time.sleep(web_driver.one_second)
-            a = self.d.switch_to.alert
-            a.accept()
-            time.sleep(web_driver.one_second)
-            checkbox = self.d.find_element(By.XPATH, events_Read_Ini().select_checkbox_by_xpath())
-            checkbox.click()
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            time.sleep(web_driver.one_second)
-            location_in_viewdropdown = self.d.find_element(By.XPATH, events_Read_Ini().location_in_view_dropdown())
-            location_in_viewdropdown.click()
-            time.sleep(web_driver.one_second)
-            toggle_symbol = self.d.find_element(By.XPATH, events_Read_Ini().get_toggle_full_screen_view())
-            toggle_symbol.click()
-            time.sleep(web_driver.one_second)
-            after_clicking_fullscreen_toggle = self.d.find_element(By.XPATH, events_Read_Ini().get_after_clicking_fullscreen_view())
-            if after_clicking_fullscreen_toggle.is_displayed():
-                self.logger.info("full screen toggle symbol is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("full screen toggle symbol is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            after_clicking_fullscreen_toggle.click()
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_037.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_037.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_eventss_037.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_eventss_037.png")
-            self.logger.error(f"TC_events_037 got exception as: {ex} ")
-            print(ex)
-
-    def on_Events_location_page_Click_on_ESC_button_from_keyboard_Full_Screen_view_to_minimize_full_screen_view(self):
-        try:
-            self.logger.info("******TC_038***** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.explicit_wait(10, "XPATH", events_Read_Ini().get_Events_in_dashboard(), self.d)
-            events.click()
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.explicit_wait(10, "XPATH", events_Read_Ini().view_dropdown(), self.d)
-            view_dropdown.click()
-            time.sleep(web_driver.one_second)
-            location_in_viewdropdown = self.explicit_wait(10, "XPATH", events_Read_Ini().location_in_view_dropdown(), self.d)
-            location_in_viewdropdown.click()
-            time.sleep(web_driver.one_second)
-            a = self.d.switch_to.alert
-            a.accept()
-            time.sleep(web_driver.one_second)
-            checkbox = self.d.find_element(By.XPATH, events_Read_Ini().select_checkbox_by_xpath())
-            checkbox.click()
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            time.sleep(web_driver.two_second)
-            location_in_viewdropdown = self.d.find_element(By.XPATH, events_Read_Ini().location_in_view_dropdown())
-            location_in_viewdropdown.click()
-            time.sleep(web_driver.one_second)
-            toggle_symbol = self.explicit_wait(10, "XPATH", events_Read_Ini().get_toggle_full_screen_view(), self.d)
-            toggle_symbol.click()
-            time.sleep(web_driver.one_second)
-            after_clicking_fullscreen_toggle = self.explicit_wait(10, "XPATH", events_Read_Ini()
-                                                                  .get_after_clicking_fullscreen_view(), self.d)
-            time.sleep(web_driver.one_second)
-            after_clicking_fullscreen_toggle.click()
-            # map = self.d.find_element(By.XPATH, events_Read_Ini().after_clicking_togglesymbol_map_xpath())
-            # map.send_keys(Keys.ESCAPE)
-            # time.sleep(web_driver.one_second)
-            Event_location = self.d.find_element(By.XPATH, events_Read_Ini().get_location_panel_headings())
-            if Event_location.is_displayed():
-                self.logger.info("notes-events location panel heading is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("notes-events location panel heading is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_038.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_038.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_038.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_038.png")
-            self.logger.error(f"TC_events_038 got exception as: {ex} ")
-            print(ex)
-
-    def on_Events_location_page_verify_and_click_on_plus_symbol_is_visible(self):
-        try:
-            self.logger.info("*****TC_039**** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            time.sleep(web_driver.one_second)
-            location_in_viewdropdown = self.d.find_element(By.XPATH, events_Read_Ini().location_in_view_dropdown())
-            location_in_viewdropdown.click()
-            time.sleep(web_driver.one_second)
-            a = self.d.switch_to.alert
-            a.accept()
-            time.sleep(web_driver.one_second)
-            checkbox = self.d.find_element(By.XPATH, events_Read_Ini().select_checkbox_by_xpath())
-            checkbox.click()
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            time.sleep(web_driver.one_second)
-            location_in_viewdropdown = self.d.find_element(By.XPATH, events_Read_Ini().location_in_view_dropdown())
-            location_in_viewdropdown.click()
-            time.sleep(web_driver.one_second)
-            zoom_in_or_plussymbol = self.d.find_element(By.XPATH, events_Read_Ini().get_zoom_in_on_map())
-            if zoom_in_or_plussymbol.is_displayed():
-                self.logger.info("zoom in or plus symbol is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("zoom in or plus symbol is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_039.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_039.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_039.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_039.png")
-            self.logger.error(f"TC_events_039 got exception as: {ex} ")
-
-    def on_Events_location_page_verify_and_click_on_plus_symbol_on_Notes_location_page_map_performs_zoom_in(self):
-        try:
-            self.logger.info("**********TC_040******* started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            time.sleep(web_driver.one_second)
-            location_in_viewdropdown = self.d.find_element(By.XPATH, events_Read_Ini().location_in_view_dropdown())
-            location_in_viewdropdown.click()
-            time.sleep(web_driver.one_second)
-            a = self.d.switch_to.alert
-            a.accept()
-            time.sleep(web_driver.one_second)
-            checkbox = self.d.find_element(By.XPATH, events_Read_Ini().select_checkbox_by_xpath())
-            checkbox.click()
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            time.sleep(web_driver.one_second)
-            location_in_viewdropdown = self.d.find_element(By.XPATH, events_Read_Ini().location_in_view_dropdown())
-            location_in_viewdropdown.click()
-            time.sleep(web_driver.one_second)
-            zoom_in_or_plussymbol = self.d.find_element(By.XPATH, events_Read_Ini().get_zoom_in_on_map())
-            zoom_in_or_plussymbol.click()
-            zoom_in_or_plussymbol.click()
-            Event_location = self.d.find_element(By.XPATH, events_Read_Ini().get_location_panel_headings())
-            if Event_location.is_displayed():
-                self.logger.info("events location panel heading is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("events location panel heading is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_040.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_040.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_040.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_040.png")
-            self.logger.error(f"TC_events_040 got exception as: {ex} ")
-
-    def on_Events_location_page_verify_minus_symbol_is_visible(self):
-        try:
-            self.logger.info("*******TC_041****** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            time.sleep(web_driver.one_second)
-            location_in_viewdropdown = self.d.find_element(By.XPATH, events_Read_Ini().location_in_view_dropdown())
-            location_in_viewdropdown.click()
-            time.sleep(web_driver.one_second)
-            a = self.d.switch_to.alert
-            a.accept()
-            time.sleep(web_driver.one_second)
-            checkbox = self.d.find_element(By.XPATH, events_Read_Ini().select_checkbox_by_xpath())
-            checkbox.click()
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            time.sleep(web_driver.one_second)
-            location_in_viewdropdown = self.d.find_element(By.XPATH, events_Read_Ini().location_in_view_dropdown())
-            location_in_viewdropdown.click()
-            time.sleep(web_driver.one_second)
-            zoom_out_or_minussymbol = self.d.find_element(By.XPATH, events_Read_Ini().get_zoom_out_())
-            if zoom_out_or_minussymbol.is_displayed():
-                self.logger.info("minus symol is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("minus symbol is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_041.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_041.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_041.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_041.png")
-            self.logger.error(f"TC_events_041 got exception as: {ex} ")
-
-    def on_Events_location_page_verify_and_click_on_minus_symbol_on_Notes_location_page_map_performs_zoom_out(self):
-        try:
-            self.logger.info("******TC_042**** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            time.sleep(web_driver.one_second)
-            location_in_viewdropdown = self.d.find_element(By.XPATH, events_Read_Ini().location_in_view_dropdown())
-            location_in_viewdropdown.click()
-            time.sleep(web_driver.one_second)
-            a = self.d.switch_to.alert
-            a.accept()
-            time.sleep(web_driver.one_second)
-            checkbox = self.d.find_element(By.XPATH, events_Read_Ini().select_checkbox_by_xpath())
-            checkbox.click()
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            time.sleep(web_driver.one_second)
-            location_in_viewdropdown = self.d.find_element(By.XPATH, events_Read_Ini().location_in_view_dropdown())
-            location_in_viewdropdown.click()
-            time.sleep(web_driver.one_second)
-            zoom_out_or_minussymbol = self.d.find_element(By.XPATH, events_Read_Ini().get_zoom_out_())
-            zoom_out_or_minussymbol.click()
-            zoom_out_or_minussymbol.click()
-            Event_location = self.d.find_element(By.XPATH, events_Read_Ini().get_location_panel_headings())
-            if Event_location.is_displayed():
-                self.logger.info("events location panel heading is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("events location panel heading is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_042.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_042.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_042.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_042.png")
-            self.logger.error(f"TC_events_042 got exception as: {ex} ")
-
-    def on_Events_page_click_on_select_All_checkbox_click_on_location_in_view_dropdown_verify_number_of_events_on_that_location(self):
-        try:
-            self.logger.info("*******TC_043******** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.one_second)
-            select_all_checkbox = self.d.find_element(By.XPATH, events_Read_Ini().select_all_checkbox())
-            select_all_checkbox.click()
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            time.sleep(web_driver.one_second)
-            location_in_viewdropdown = self.d.find_element(By.XPATH, events_Read_Ini().location_in_view_dropdown())
-            location_in_viewdropdown.click()
-            time.sleep(web_driver.three_second)
-            number_of_events_visible_on_map = self.d.find_element(By.XPATH, events_Read_Ini().on_map_number_of_events_visible())
-            print(number_of_events_visible_on_map.text)
-            if number_of_events_visible_on_map.is_displayed():
-                self.logger.info("number of events visible on map ")
-                self.status.append(True)
-            else:
-                self.logger.info("number events are not visible on map")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_043.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_043.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_043.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_043.png")
-            self.logger.error(f"TC_events_043 got exception as: {ex} ")
-
-    def on_Events_page_verify_in_view_dropdown_display_tags_option_is_visible(self):
-        try:
-            self.logger.info("*******TC_044******* started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.one_second)
-            view_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().view_dropdown())
-            view_dropdown.click()
-            time.sleep(web_driver.one_second)
-            display_tags = self.d.find_element(By.XPATH, events_Read_Ini().display_tags_in_eventspage())
-            if display_tags.is_displayed():
-                self.logger.info("display tags option is visible in view dropdown ")
-                self.status.append(True)
-            else:
-                self.logger.info("display tags option is not visible in view dropdown")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_044.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_044.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_044.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_044.png")
-            self.logger.error(f"TC_events_044 got exception as: {ex} ")
 
     def on_Events_page_click_on_display_tags_and_verify_Tags_are_visible_inthe_formof_horizantal_line_below_the_events(self):
         try:
@@ -2073,209 +535,6 @@ class events_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_045.png")
             self.logger.error(f"TC_events_04 got exception as: {ex} ")
 
-    def on_Events_page_click_on_search_dropdown_and_verify_Date_time_range_is_visible_and_clickable(self):
-        try:
-            self.logger.info("*******TC_046******** startes")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.one_second)
-            search_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().search_dropdown_in_events())
-            search_dropdown.click()
-            time.sleep(web_driver.one_second)
-            date_time_range = self.d.find_element(By.XPATH, events_Read_Ini().date_and_time_range_in_searchdropdown())
-            if date_time_range.is_displayed():
-                self.logger.info("date and time range text box is visible in search dropdown")
-                self.status.append(True)
-            else:
-                self.status.append("date and time text box is not visible in search dropdown")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_046.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_046.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_046.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_046.png")
-            self.logger.error(f"TC_events_046 got exception as: {ex} ")
-
-    def on_Events_page_click_on_search_dropdown_and_verify_Date_time_range_to_is_visible_and_clickable(self):
-        try:
-            self.logger.info("*******TC_047******** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.one_second)
-            search_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().search_dropdown_in_events())
-            search_dropdown.click()
-            time.sleep(web_driver.one_second)
-            date_time_to = self.d.find_element(By.XPATH, events_Read_Ini().date_and_time_range_to_in_searchdropdown())
-            if date_time_to.is_displayed():
-                self.logger.info("date and time range to text box is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("date and time to textbox is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_047.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_047.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_047.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_047.png")
-            self.logger.error(f"TC_events_047 got exception as: {ex} ")
-
-    def on_Events_page_click_on_search_dropdown_and_verify_Enrollment_group_selection_button_is_visible_and_clickable(self):
-        try:
-            self.logger.info("*********TC_048******* started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.one_second)
-            search_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().search_dropdown_in_events())
-            search_dropdown.click()
-            time.sleep(web_driver.one_second)
-            enrollment_group_selection = self.d.find_element(By.XPATH, events_Read_Ini().enrollment_group_selection())
-            if enrollment_group_selection.is_displayed():
-                self.logger.info("enrollment group selection button is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("enrollment group selection button is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_048.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_048.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_048.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_048.png")
-            self.logger.error(f"TC_events_048 got exception as: {ex} ")
-
-    def on_Events_page_click_on_search_dropdown_and_verify_org_hierarchy_selection_button_is_visible_and_clickable(self):
-        try:
-            self.logger.info("*******TC_049****** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.one_second)
-            search_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().search_dropdown_in_events())
-            search_dropdown.click()
-            time.sleep(web_driver.one_second)
-            org_hierarchy_selection = self.d.find_element(By.XPATH, events_Read_Ini().org_hierarchy_selection())
-            if org_hierarchy_selection.is_displayed():
-                self.logger.info("org_hierarchy selection is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("org_hierarchy selection is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_049.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_049.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_049.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_049.png")
-            self.logger.error(f"TC_events_049 got exception as: {ex} ")
-
-    def on_Events_page_click_on_search_dropdown_and_verify_tag_selection_button_is_visible_and_clickable(self):
-        try:
-            self.logger.info("********TC_050********* started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.one_second)
-            search_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().search_dropdown_in_events())
-            search_dropdown.click()
-            time.sleep(web_driver.one_second)
-            tag_selection_button = self.d.find_element(By.XPATH, events_Read_Ini().tag_selection())
-            if tag_selection_button.is_displayed():
-                self.logger.info("tag selection button is visible in search dropdown")
-                self.status.append(True)
-            else:
-                self.logger.info("tag selection button is not visible in search dropdown")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_050.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_050.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_050.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_050.png")
-            self.logger.error(f"TC_events_050 got exception as: {ex} ")
-
-    def on_Events_page_click_on_search_dropdown_and_verify_sort_by_dropdown_is_visible_and_clickable(self):
-        try:
-            self.logger.info("*********TC_051******* started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.one_second)
-            search_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().search_dropdown_in_events())
-            search_dropdown.click()
-            time.sleep(web_driver.one_second)
-            sort_by_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().sort_by_dropdown_in_searchdropdown())
-            if sort_by_dropdown.is_displayed():
-                self.logger.info("sort by dropdown is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("sort by dropdown is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_051.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_051.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_051.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_051.png")
-            self.logger.error(f"TC_events_051 got exception as: {ex} ")
 
     def on_Events_page_click_on_search_dropdow_and_verify_sort_by_AtoZ_radio_button_is_visible_and_clickable(self):
         try:
@@ -2345,39 +604,6 @@ class events_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_053.png")
             self.logger.error(f"TC_events_053 got exception as: {ex} ")
 
-    def on_Events_page_click_on_search_dropdown_verify_clear_button_is_visible_and_clickable(self):
-        try:
-            self.logger.info("********TC_54******** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.two_second)
-            search_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().search_dropdown_in_events())
-            search_dropdown.click()
-            time.sleep(web_driver.three_second)
-            clear_button_in_searchdropdown = self.d.find_element(By.XPATH, events_Read_Ini().clear_button_in_searchdropdown())
-            if clear_button_in_searchdropdown.is_displayed():
-                self.logger.info("clear button is visible in search dropdown")
-                self.status.append(True)
-            else:
-                self.logger.info("clear button is not visible in search dropdown")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_054.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_054.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_054.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_054.png")
-            self.logger.error(f"TC_events_054 got exception as: {ex} ")
 
     def on_Events_page_click_on_search_dropdown_andverify_location_search_button_is_visible_and_clickable(self):
         try:
@@ -2413,114 +639,6 @@ class events_pom(web_driver, web_logger):
             self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_055.png")
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_055.png")
             self.logger.error(f"TC_events_055 got exception as: {ex} ")
-
-    def verify_an_event_search_with_not_selected_any_button_in_search_dropdown_click_on_search(self):
-        try:
-            self.logger.info("********TC_056******* started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.two_second)
-            search_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().search_dropdown_in_events())
-            search_dropdown.click()
-            time.sleep(web_driver.two_second)
-            search_button_in_searchdropdown = self.d.find_element(By.XPATH, events_Read_Ini().search_button_in_searchdropdown())
-            if search_button_in_searchdropdown.is_displayed():
-                self.logger.info("search button is visible in search dropdown")
-                self.status.append(True)
-            else:
-                self.logger.info("search button is not visible in search dropdown")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_056.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_056.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_056.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_056.png")
-            self.logger.error(f"TC_events_056 got exception as: {ex} ")
-
-    def on_Events_page_click_on_Action_dropdown_and_verify_dropdown_options_are_visible(self):
-        try:
-            self.logger.info("*******TC_072******* started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            action_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_events())
-            action_dropdown.click()
-            time.sleep(web_driver.one_second)
-            action_dropdown_options = self.d.find_elements(By.XPATH, events_Read_Ini().action_dropdown_options())
-            for options in action_dropdown_options:
-                if options.is_displayed():
-                    self.logger.info(f"options are {options.text}")
-                    self.status.append(True)
-                else:
-                    self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_072.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_072.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_072.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_072.png")
-            self.logger.error(f"TC_events_072 got exception as: {ex} ")
-
-    def on_Events_page_click_on_Action_dropdown_followed_by_Edit_tags_not_selecting_an_event_verify_an_alert_is_visible(self):
-        try:
-            self.logger.info("********TC_073******** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            action_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_events())
-            action_dropdown.click()
-            time.sleep(web_driver.two_second)
-            edit_tags_option = self.d.find_element(By.XPATH, events_Read_Ini().edit_tags_in_actiondropdown())
-            edit_tags_option.click()
-            time.sleep(web_driver.one_second)
-            a = self.d.switch_to.alert
-            if a:
-                self.logger.info("alert is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("alert is not visible")
-                self.status.append(False)
-            var = a.text
-            print(var)
-            a.accept()
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_073.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_073.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_073.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_073.png")
-            self.logger.error(f"TC_events_073 got exception as: {ex} ")
 
     def on_Events_page_In_Action_dropdown_click_on_Edit_tags_option_and_verify_Events_tags_panel_is_visible_and_verify_panel_heading(self):
         try:
@@ -2896,259 +1014,9 @@ class events_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_080.png")
             self.logger.error(f"TC_events_080 got exception as: {ex} ")
 
-    def on_Events_tags_verify_Details_button_is_visible_in_each_tag(self):
-        try:
-            self.logger.info("******TC_081***** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().get_Events_in_dashboard(), self.d)
-            events.click()
-            self.logger.info("events ta is visible")
-            time.sleep(web_driver.one_second)
-            web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().get_events_panel_heading(), self.d)
-            action_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_events())
-            action_dropdown.click()
-            self.logger.info("action dropdown clicked")
-            edit_tags_option = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini()
-                                                        .edit_tags_in_actiondropdown(), self.d)
-            edit_tags_option.click()
-            self.logger.info("edit tag edit tag pop")
-            time.sleep(web_driver.one_second)
-            a = self.d.switch_to.alert
-            a.accept()
-            time.sleep(web_driver.one_second)
-            checkbox = self.d.find_element(By.XPATH, events_Read_Ini().select_checkbox_by_xpath())
-            checkbox.click()
-            self.logger.info("checkbox selected.")
-            time.sleep(web_driver.one_second)
-            action_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_events())
-            action_dropdown.click()
-            time.sleep(web_driver.two_second)
-            edit_tags_option = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini()
-                                                        .edit_tags_in_actiondropdown(), self.d)
-            edit_tags_option.click()
-            time.sleep(web_driver.two_second)
-            web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini()
-                                     .get_match_event_tags_filter_dropdown(), self.d).click()
 
-            web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini()
-                                     .get_match_event_tags_filter_unlink_tag(), self.d).click()
-            # filter_tag_name_textbox = self.d.find_element(By.XPATH, events_Read_Ini().filter_tags_name_textbox())
-            # filter_tag_name_textbox.clear()
-            # filter_tag_name_textbox.send_keys(events_Read_Ini().enter_a_text_in_filter_tagname_texbox())
-            # time.sleep(web_driver.one_second)
-            filter_tag_banner = self.d.find_element(By.XPATH, events_Read_Ini().tags_banner())
-            details_button = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().tag_details_button(), self.d)
-            if details_button.is_displayed():
-                self.logger.info("tag details button is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("tag details button is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False != [True]:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_081.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_081.png")
-                return True
-            else:
-                return False
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_081.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_081.png")
-            self.logger.error(f"TC_events_081 got exception as: {ex} ")
+    def Verify_user_is_able_to_link_the_tag_and_add_tag_to_probable_match_events_when_tag_icon_is_click(self):
 
-    def on_Events_tags_click_on_Details_button_and_verify_Tag_Details_panel_is_visible(self):
-        try:
-            self.logger.info("********TC_082******** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            # # login().login_to_localhost_if_not_done()
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.two_second)
-            action_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_events())
-            action_dropdown.click()
-            time.sleep(web_driver.two_second)
-            edit_tags_option = self.d.find_element(By.XPATH, events_Read_Ini().edit_tags_in_actiondropdown())
-            edit_tags_option.click()
-            time.sleep(web_driver.one_second)
-            a = self.d.switch_to.alert
-            a.accept()
-            time.sleep(web_driver.one_second)
-            checkbox = self.d.find_element(By.XPATH, events_Read_Ini().select_checkbox_by_xpath())
-            checkbox.click()
-            time.sleep(web_driver.one_second)
-            action_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_events())
-            action_dropdown.click()
-            time.sleep(web_driver.two_second)
-            edit_tags_option = self.d.find_element(By.XPATH, events_Read_Ini().edit_tags_in_actiondropdown())
-            edit_tags_option.click()
-            time.sleep(web_driver.two_second)
-            # filter_tag_name_textbox = self.d.find_element(By.XPATH, events_Read_Ini().filter_tags_name_textbox())
-            # filter_tag_name_textbox.clear()
-            # filter_tag_name_textbox.send_keys(events_Read_Ini().enter_a_text_in_filter_tagname_texbox())
-            # time.sleep(web_driver.one_second)
-            filter_tag_banner = self.d.find_element(By.XPATH, events_Read_Ini().tags_banner())
-            self.d.find_element(By.XPATH, events_Read_Ini().get_match_event_tags_filter_dropdown()).click()
-            time.sleep(web_driver.two_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_match_event_tags_filter_unlink_tag()).click()
-            time.sleep(web_driver.two_second)
-            details_button = self.d.find_element(By.XPATH, events_Read_Ini().tag_details_button())
-            details_button.click()
-            time.sleep(web_driver.one_second)
-            Tag_details_panel = self.d.find_element(By.XPATH, events_Read_Ini().tag_details_panel_heading())
-
-
-            # details_button = self.d.find_element(By.XPATH, events_Read_Ini().tag_details_button())
-            # details_button.click()
-            # time.sleep(web_driver.one_second)
-            # Tag_details_panel = self.d.find_element(By.XPATH, events_Read_Ini().tag_details_panel_heading())
-            if Tag_details_panel.is_displayed():
-                self.logger.info("tag details panel heading is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("tag details panel heading is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False != [True]:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_082.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_082.png")
-                return True
-            else:
-                return False
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_082.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_082.png")
-            self.logger.error(f"TC_events_082 got exception as: {ex} ")
-
-    def on_Events_tags_panel_verify_Action_dropdown_is_visible(self):
-        try:
-            self.logger.info("******TC_083********** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            # # login().login_to_localhost_if_not_done()
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.two_second)
-            action_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_events())
-            action_dropdown.click()
-            time.sleep(web_driver.two_second)
-            edit_tags_option = self.d.find_element(By.XPATH, events_Read_Ini().edit_tags_in_actiondropdown())
-            edit_tags_option.click()
-            time.sleep(web_driver.one_second)
-            a = self.d.switch_to.alert
-            a.accept()
-            time.sleep(web_driver.one_second)
-            checkbox = self.d.find_element(By.XPATH, events_Read_Ini().select_checkbox_by_xpath())
-            checkbox.click()
-            time.sleep(web_driver.one_second)
-            action_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_events())
-            action_dropdown.click()
-            time.sleep(web_driver.two_second)
-            edit_tags_option = self.d.find_element(By.XPATH, events_Read_Ini().edit_tags_in_actiondropdown())
-            edit_tags_option.click()
-            time.sleep(web_driver.two_second)
-            filter_tag_name_textbox = self.d.find_element(By.XPATH, events_Read_Ini().filter_tags_name_textbox())
-            filter_tag_name_textbox.clear()
-            filter_tag_name_textbox.send_keys(events_Read_Ini().enter_a_text_in_filter_tagname_texbox())
-            time.sleep(web_driver.one_second)
-            action_dropdown_in_event_tag_panel = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_events_tag())
-            if action_dropdown_in_event_tag_panel.is_displayed():
-                self.logger.info("action dropdown is visible in events tag panel")
-                self.status.append(True)
-            else:
-                self.logger.info("action dropdown is not visible in events tag panel")
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False != [True]:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_083.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_083.png")
-                return True
-            else:
-                return False
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_083.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_083.png")
-            self.logger.error(f"TC_events_083 got exception as: {ex} ")
-
-    def on_Events_tags_panel_click_on_Action_dropdrown_followed_by_Addtags_to_events_without_selecting_checkbox_an_alert_is_visible_verify_text_and_ok_on_alert(self):
-        try:
-            self.logger.info("********TC_084********* started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.two_second)
-            action_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_events())
-            action_dropdown.click()
-            time.sleep(web_driver.two_second)
-            edit_tags_option = self.d.find_element(By.XPATH, events_Read_Ini().edit_tags_in_actiondropdown())
-            edit_tags_option.click()
-            time.sleep(web_driver.one_second)
-            a = self.d.switch_to.alert
-            a.accept()
-            time.sleep(web_driver.one_second)
-            checkbox = self.d.find_element(By.XPATH, events_Read_Ini().first_checkbox_in_events())
-            checkbox.click()
-            time.sleep(web_driver.one_second)
-            action_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_events())
-            action_dropdown.click()
-            time.sleep(web_driver.two_second)
-            edit_tags_option = self.d.find_element(By.XPATH, events_Read_Ini().edit_tags_in_actiondropdown())
-            edit_tags_option.click()
-            time.sleep(web_driver.two_second)
-            filter_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().filter_dropdown_in_events_tag())
-            filter_dropdown.click()
-            time.sleep(web_driver.one_second)
-            unlinked_tags = self.d.find_element(By.XPATH, events_Read_Ini().unlinked_tags_by_xpath())
-            unlinked_tags.click()
-            time.sleep(web_driver.two_second)
-            action_dropdown_in_event_tag_panel = self.d.find_element(By.XPATH, 
-                                                                     events_Read_Ini().action_dropdown_in_events_tag())
-            action_dropdown_in_event_tag_panel.click()
-            time.sleep(web_driver.two_second)
-            add_tags_to_event = self.d.find_element(By.XPATH, events_Read_Ini().add_tags_to_event_option_in_event_tags())
-            add_tags_to_event.click()
-            time.sleep(web_driver.two_second)
-            a = self.d.switch_to.alert
-            var = a.text
-            print(var)
-            if a:
-                self.logger.info("alert is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("alert is not visible")
-                self.status.append(False)
-            a.accept()
-            time.sleep(web_driver.one_second)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False != [True]:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_084.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_084.png")
-                return True
-            else:
-                return False
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_084.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_084.png")
-            self.logger.error(f"TC_events_084 got exception as: {ex} ")
-
-    def on_Events_tags_panel_click_on_Action_dropdrown_followed_by_Addtags_to_events_selecting_a_checkbox_verify_tagname_is_visible_to_an_event(self):
         try:
             self.logger.info("********TC_085******* started")
             # self.load_login_page_if_not_loaded()
@@ -3158,30 +1026,27 @@ class events_pom(web_driver, web_logger):
             events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
             events.click()
             time.sleep(web_driver.three_second)
-            checkbox = self.d.find_element(By.XPATH, events_Read_Ini().first_checkbox_in_events())
-            checkbox.click()
-            time.sleep(web_driver.one_second)
-            action_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_events())
-            action_dropdown.click()
+
+            tags_symbol = self.d.find_element(By.XPATH, events_Read_Ini().tags_button_in_eventspage())
+            tags_symbol.click()
             time.sleep(web_driver.two_second)
-            edit_tags_option = self.d.find_element(By.XPATH, events_Read_Ini().edit_tags_in_actiondropdown())
-            edit_tags_option.click()
-            time.sleep(web_driver.two_second)
+
             filter_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().filter_dropdown_in_events_tag())
             filter_dropdown.click()
             time.sleep(web_driver.one_second)
-            unlinked_tags = self.d.find_element(By.XPATH, events_Read_Ini().unlinked_tags_by_xpath())
+
+            unlinked_tags = self.d.find_element(By.XPATH,events_Read_Ini().unlinked_tags_by_xpath())
             unlinked_tags.click()
-            # time.sleep(web_driver.one_second)
-            # a  = self.d.switch_to.alert
-            # a.accept()
             time.sleep(web_driver.one_second)
-            checkbox_twentyfour = self.d.find_element(By.XPATH, events_Read_Ini().checkbox_number_twentyfour())
-            checkbox_twentyfour.click()
+
+            checkbox_in_tags = self.d.find_element(By.XPATH, events_Read_Ini().checkbox_number_twentyfour())
+            checkbox_in_tags.click()
             time.sleep(web_driver.one_second)
+
             action_dropdown_in_eventstags = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_events_tag())
             action_dropdown_in_eventstags.click()
             time.sleep(web_driver.one_second)
+
             add_tags =  self.d.find_element(By.XPATH, events_Read_Ini().add_tags_to_event_option_in_event_tags())
             add_tags.click()
             time.sleep(web_driver.two_second)
@@ -3194,6 +1059,7 @@ class events_pom(web_driver, web_logger):
                     self.logger.info("tagnames are not visible")
                     self.status.append(False)
             time.sleep(web_driver.one_second)
+
             self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
             self.logger.info(f"status:{self.status}")
             if False in self.status:
@@ -3207,62 +1073,8 @@ class events_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_085.png")
             self.logger.error(f"TC_events_085 got exception as: {ex} ")
 
-    def on_Events_tags_panel_click_on_Action_dropdrown_followed_by_Remove_tags_to_events_not_selected_a_checkbox_an_alert_is_visible_verify_ok_and_text_on_an_alert(self):
-        try:
-            self.logger.info("*********TC_086******** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            checkbox = self.d.find_element(By.XPATH, events_Read_Ini().select_checkbox_by_xpath())
-            checkbox.click()
-            time.sleep(web_driver.one_second)
-            action_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_events())
-            action_dropdown.click()
-            time.sleep(web_driver.two_second)
-            edit_tags_option = self.d.find_element(By.XPATH, events_Read_Ini().edit_tags_in_actiondropdown())
-            edit_tags_option.click()
-            time.sleep(web_driver.two_second)
-            filter_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().filter_dropdown_in_events_tag())
-            filter_dropdown.click()
-            time.sleep(web_driver.one_second)
-            unlinked_tags = self.d.find_element(By.XPATH, events_Read_Ini().unlinked_tags_by_xpath())
-            unlinked_tags.click()
-            time.sleep(web_driver.one_second)
-            action_dropdown_in_events_tag = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_events_tag())
-            action_dropdown_in_events_tag.click()
-            time.sleep(web_driver.one_second)
-            remove_tags = self.d.find_element(By.XPATH, events_Read_Ini().remove_tags_to_event_in_eventstag())
-            remove_tags.click()
-            time.sleep(web_driver.one_second)
-            a = self.d.switch_to.alert
-            var = a.text
-            print(var)
-            if a:
-                self.logger.info("alert is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("alert is not visible")
-                self.status.append(False)
-            a.accept()
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_086.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_086.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_086.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_086.png")
-            self.logger.error(f"TC_events_086 got exception as: {ex} ")
 
-    def on_Events_tags_panel_click_on_Action_dropdrown_followed_by_Remove_tags_to_events_selecting_a_checkbox_an_alert_is_visible_verify_ok_and_text_on_an_alert(self):
+    def Verify_user_is_able_to_unlink_the_tag_and_remove_tag_from_probable_match_events_when_tag_icon_is_click(self):
         try:
             self.logger.info("********TC_087******* started")
             # self.load_login_page_if_not_loaded()
@@ -3271,30 +1083,23 @@ class events_pom(web_driver, web_logger):
             events = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().get_Events_in_dashboard(), self.d)
             events.click()
             web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().get_events_panel_heading(), self.d)
-            checkbox = self.d.find_element(By.XPATH, events_Read_Ini().first_checkbox_in_events())
-            checkbox.click()
-            time.sleep(web_driver.one_second)
-            action_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_events())
-            action_dropdown.click()
-            edit_tags_option = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini()
-                                                        .edit_tags_in_actiondropdown(), self.d)
-            edit_tags_option.click()
-            time.sleep(web_driver.two_second)
-            web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini()
-                                     .get_match_event_tags_filter_dropdown(), self.d).click()
 
-            web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini()
-                                     .get_match_event_tags_filter_unlink_tag(), self.d).click()
-            details_button = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().tag_details_button(), self.d)
-            # filter_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().filter_dropdown_in_events_tag())
-            # filter_dropdown.click()
-            # time.sleep(web_driver.one_second)
-            # linked_tags = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().linked_tags_by_xpath(), self.d)
-            # linked_tags.click()
+            tags_symbol = self.d.find_element(By.XPATH, events_Read_Ini().tags_button_in_eventspage())
+            tags_symbol.click()
+            time.sleep(web_driver.two_second)
+
+            filter_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().filter_dropdown_in_events_tag())
+            filter_dropdown.click()
             time.sleep(web_driver.one_second)
+
+            linked_tags = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().linked_tags_by_xpath(), self.d)
+            linked_tags.click()
+            time.sleep(web_driver.one_second)
+
             checkbox_twentyfour = self.d.find_element(By.XPATH, events_Read_Ini().checkbox_number_twentyfour())
             checkbox_twentyfour.click()
             time.sleep(web_driver.one_second)
+
             action_dropdown_in_events_tag = self.d.find_element(By.XPATH,
                                                                 events_Read_Ini().action_dropdown_in_events_tag())
             action_dropdown_in_events_tag.click()
@@ -3326,763 +1131,6 @@ class events_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_087.png")
             self.logger.error(f"TC_events_087 got exception as: {ex} ")
 
-    def on_Events_tags_panel_click_on_refresh_option_in_action_dropdown_and_verify_updated_text(self):
-        try:
-            self.logger.info("*****TC_088******* started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            checkbox = self.d.find_element(By.XPATH, events_Read_Ini().select_checkbox_by_xpath())
-            checkbox.click()
-            time.sleep(web_driver.one_second)
-            action_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_events())
-            action_dropdown.click()
-            time.sleep(web_driver.two_second)
-            edit_tags_option = self.d.find_element(By.XPATH, events_Read_Ini().edit_tags_in_actiondropdown())
-            edit_tags_option.click()
-            time.sleep(web_driver.two_second)
-            action_dropdown_in_events_tag = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_events_tag())
-            action_dropdown_in_events_tag.click()
-            time.sleep(web_driver.one_second)
-            refresh_option = self.d.find_element(By.XPATH, events_Read_Ini().refresh_option_in_eventtags())
-            refresh_option.click()
-            time.sleep(web_driver.one_second)
-            updating = self.d.find_element(By.XPATH, events_Read_Ini().updating_text())
-            if updating.is_displayed():
-                self.logger.info("updating text is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("updating text is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_088.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_088.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_088.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_088.png")
-            self.logger.error(f"TC_events_088 got exception as: {ex} ")
-
-    def In_Events_page_In_Action_dropdown_click_on_refresh_option_and_verify_page_is_refreshed_and_verify_updated_text(self):
-        try:
-            self.logger.info("*******TC_089******** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().get_Events_in_dashboard(), self.d)
-            events.click()
-            web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().get_events_panel_heading(), self.d)
-            action_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_events())
-            action_dropdown.click()
-            time.sleep(web_driver.one_second)
-            refresh_option = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini()
-                                                      .refresh_option_in_action_dropdown_on_events_page(), self.d)
-            refresh_option.click()
-            # time.sleep(web_driver.one_second)
-            updating_text = self.d.find_element(By.XPATH, events_Read_Ini().updating_text_in_event())
-            if updating_text.is_displayed():
-                self.logger.info("updating text is displayed after clicking refresh option")
-                self.status.append(True)
-            else:
-                self.logger.info("updating text is not visible after clicking refresh option")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_089.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_089.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_089.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_089.png")
-            self.logger.error(f"TC_events_089 got exception as: {ex} ")
-
-    def In_Events_page_In_Action_dropdown_click_on_change_refresh_option_and_verify_change_refresh_rate_dialouge_box_is_opened(self):
-        try:
-            self.logger.info("*********TC_090******** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            action_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_events())
-            action_dropdown.click()
-            time.sleep(web_driver.one_second)
-            change_panel_refresh = self.d.find_element(By.XPATH, events_Read_Ini().change_panel_refresh_in_action_dropdown())
-            change_panel_refresh.click()
-            time.sleep(web_driver.one_second)
-            change_panel_refresh_dialouge = self.d.find_element(By.XPATH, events_Read_Ini().change_panel_refresh_dialouge_box())
-            print(change_panel_refresh_dialouge.text)
-            if change_panel_refresh_dialouge.text == events_Read_Ini().change_panel_refresh_rate_text():
-                self.logger.info("change refresh panel dialouge box is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("change refresh panel dialouge box is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_090.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_090.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_090.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_090.png")
-            self.logger.error(f"TC_events_090 got exception as: {ex} ")
-
-    def  on_Events_page_In_change_refresh_rate_dialouge_box_verify_dropdown_options_are_visible(self):
-        try:
-            self.logger.info("********TC_091***** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            action_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_events())
-            action_dropdown.click()
-            time.sleep(web_driver.one_second)
-            change_panel_refresh = self.d.find_element(By.XPATH, 
-                                                       events_Read_Ini().change_panel_refresh_in_action_dropdown())
-            change_panel_refresh.click()
-            time.sleep(web_driver.one_second)
-            change_panel_refresh_dropdown = self.d.find_elements(By.XPATH, events_Read_Ini().change_panel_refresh_dropdown())
-            for opt in change_panel_refresh_dropdown:
-                if opt.is_displayed():
-                    print(opt.text)
-                    self.logger.info(f"dropdown options are {opt.text}")
-                    self.status.append(True)
-                else:
-                    self.logger.info("dropdown options are not visible")
-                    self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_091.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_091.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_091.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_091.png")
-            self.logger.error(f"TC_events_091 got exception as: {ex} ")
-
-    def on_Events_page_on_Inchange_refresh_rate_dialouge_box_dropdown_select_a_1_minute_dropdown_option_and_verify_in_Action_dropdown_showing_changerefresh_rate_1_minute_is_visible(self):
-        try:
-            self.logger.info("********TC_092****** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            action_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_events())
-            action_dropdown.click()
-            time.sleep(web_driver.one_second)
-            change_panel_refresh = self.d.find_element(By.XPATH, events_Read_Ini().change_panel_refresh_in_action_dropdown())
-            change_panel_refresh.click()
-            time.sleep(web_driver.one_second)
-            sel = Select(self.d.find_element(By.XPATH, events_Read_Ini().change_panel_refresh_dropdown()))
-            sel.select_by_visible_text("5 minutes")
-            time.sleep(web_driver.one_second)
-            action_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_events())
-            action_dropdown.click()
-            time.sleep(web_driver.one_second)
-            minutes_selected = self.d.find_element(By.XPATH, events_Read_Ini().minutes_selected_change_panelrate_refresh())
-            if minutes_selected.is_displayed():
-                self.status.append("no of minutes selected is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("no of minutes selected is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_092.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_092.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_092.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_092.png")
-            self.logger.error(f"TC_events_092 got exception as: {ex} ")
-
-    def on_Events_page_In_change_refresh_rate_dialouge_box_verify_cancel_button_is_visible(self):
-        try:
-            self.logger.info("*******TC_093******* started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            action_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_events())
-            action_dropdown.click()
-            time.sleep(web_driver.one_second)
-            change_panel_refresh = self.d.find_element(By.XPATH, 
-                                                       events_Read_Ini().change_panel_refresh_in_action_dropdown())
-            change_panel_refresh.click()
-            time.sleep(web_driver.one_second)
-            cancel_button = self.d.find_element(By.XPATH, events_Read_Ini().cancel_button_in_change_panel_rate())
-            if cancel_button.is_displayed():
-                self.logger.info("cancel button is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("cancel button is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_093.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_093.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_093.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_093.png")
-            self.logger.error(f"TC_events_093 got exception as: {ex} ")
-
-    def on_Events_page_click_on_cancel_button_on_change_refresh_rate_dialouge_box_dialouge_box_is_closed(self):
-        try:
-            self.logger.info("******TC_094******* started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            action_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_events())
-            action_dropdown.click()
-            time.sleep(web_driver.one_second)
-            change_panel_refresh = self.d.find_element(By.XPATH, 
-                                                       events_Read_Ini().change_panel_refresh_in_action_dropdown())
-            change_panel_refresh.click()
-            time.sleep(web_driver.one_second)
-            cancel_button = self.d.find_element(By.XPATH, events_Read_Ini().cancel_button_in_change_panel_rate())
-            cancel_button.click()
-            time.sleep(web_driver.three_second)
-            if cancel_button.is_displayed():
-                self.status.append(False)
-            else:
-                self.status.append(True)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_094.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_094.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_094.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_094.png")
-            self.logger.error(f"TC_events_094 got exception as: {ex} ")
-
-    def In_Events_page_click_on_Action_dropdown_verify_print_option_is_visible(self):
-        try:
-            self.logger.info("********TC_095**** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            action_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_events())
-            action_dropdown.click()
-            time.sleep(web_driver.one_second)
-            print_option = self.d.find_element(By.XPATH, events_Read_Ini().print_option_in_actiondropdown())
-            if print_option.is_displayed():
-                self.logger.info("print option in action dropdown is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("print option in action dropdown is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_095.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_095.png")
-                return False
-            else:
-                return True
-
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_095.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_095.png")
-            self.logger.error(f"TC_events_095 got exception as: {ex} ")
-
-    def In_Events_page_click_on_Action_dropdown_click_on_print_verify_print_and_cancel_buttons_are_visible(self):
-        try:
-            self.logger.info("*******TC_096**** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            checkbox = self.d.find_element(By.XPATH, events_Read_Ini().first_checkbox_in_events())
-            checkbox.click()
-            time.sleep(web_driver.one_second)
-            action_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_events())
-            action_dropdown.click()
-            time.sleep(web_driver.one_second)
-            print_option = self.d.find_element(By.XPATH, events_Read_Ini().print_option_in_actiondropdown())
-            print_option.click()
-            time.sleep(web_driver.one_second)
-            print_button = self.d.find_element(By.XPATH, events_Read_Ini().print_button_after_clicking_print())
-            cancel_button = self.d.find_element(By.XPATH, events_Read_Ini().cancel_button_after_clicking_print())
-            if print_button.is_displayed():
-                self.logger.info("print button is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("print button is not visible")
-                self.status.append(False)
-            if cancel_button.is_displayed():
-                self.logger.info("cancel button is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("cancel button is not visible")
-                self.status.append(False)
-            cancel_button.click()
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_096.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_096.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_096.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_096.png")
-            self.logger.error(f"TC_events_096 got exception as: {ex} ")
-
-    def on_Events_page_click_on_Events_symbol_and_verify_Event_view_and_Enrollment_view_panels_are_visible(self):
-        try:
-            self.logger.info("*******TC_05***** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            event_button = self.d.find_element(By.XPATH, events_Read_Ini().events_button())
-            event_button.click()
-            time.sleep(web_driver.three_second)
-            event_view = self.d.find_element(By.XPATH, events_Read_Ini().event_view_panel_heading())
-            enrollment_view = self.d.find_element(By.XPATH, events_Read_Ini().enrollment_view_panel_heading())
-            if event_view.is_displayed():
-                self.logger.info("event view panel is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("event view panel is not visible")
-                self.status.append(False)
-            if enrollment_view.is_displayed():
-                self.logger.info("enrollment view panel is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("enrollment view panel is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            # self.add_details_panel_cancel()
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_097.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_097.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_097.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_097.png")
-            self.logger.error(f"TC_events_097 got exception as: {ex} ")
-
-    def on_Event_view_panel_verify_Action_dropdown_is_visible(self):
-        try:
-            self.logger.info("*******TC_098******* started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            event_button = self.d.find_element(By.XPATH, events_Read_Ini().events_button())
-            event_button.click()
-            time.sleep(web_driver.two_second)
-            action_dropdown_in_event_view_panel = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_event_view())
-            if action_dropdown_in_event_view_panel.is_displayed():
-                self.logger.info("action dropdown in events view panel is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("action dropdown in event view panel is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_098.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_098.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_098.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_098.png")
-            self.logger.error(f"TC_events_098 got exception as: {ex} ")
-
-    def on_Event_view_panel_click_on_Action_dropdown_followed_by_Identify_within_enrollments_option_in_dropdown_and_verify_Identify_enroll_and_identify_results_panel_are_visible(self):
-        try:
-            self.logger.info("******TC_099***** started")
-            self.load_login_page_if_not_loaded()
-            # login().login_to_cloud_if_not_done(self.d)
-            # # login().login_to_localhost_if_not_done()
-
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            event_button = self.d.find_element(By.XPATH, events_Read_Ini().events_button())
-            event_button.click()
-            time.sleep(web_driver.two_second)
-            action_dropdown_in_event_view_panel = self.d.find_element(By.XPATH, 
-                                                                      events_Read_Ini().action_dropdown_in_event_view())
-            action_dropdown_in_event_view_panel.click()
-            time.sleep(web_driver.one_second)
-            identify_within_enrollments = self.d.find_element(By.XPATH, events_Read_Ini().identify_within_enrollments())
-            identify_within_enrollments.click()
-            time.sleep(web_driver.two_second)
-            identify_and_enroll = self.d.find_element(By.XPATH, events_Read_Ini().identify_and_enroll_panel())
-            time.sleep(web_driver.two_second)
-            identify_results = self.d.find_element(By.XPATH, events_Read_Ini().identify_results_panel())
-            if identify_and_enroll.is_displayed():
-                self.logger.info("identify and enroll panel is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("identify and enroll panel is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            # self.add_details_panel_cancel()
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_099.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_099.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_099.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_099.png")
-            self.logger.error(f"TC_events_099 got exception as: {ex} ")
-
-    def on_Event_view_panel_click_on_Action_dropdown_followed_by_Identify_within_visitor_option_in_dropdown_and_verify_visitor_search_panel_is_visible(self):
-        try:
-            self.logger.info("********TC_0100******* started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            # # login().login_to_localhost_if_not_done()
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            event_button = self.d.find_element(By.XPATH, events_Read_Ini().events_button())
-            event_button.click()
-            time.sleep(web_driver.two_second)
-            action_dropdown_in_event_view_panel = self.d.find_element(By.XPATH, 
-                                                                      events_Read_Ini().action_dropdown_in_event_view())
-            action_dropdown_in_event_view_panel.click()
-            time.sleep(web_driver.one_second)
-            identify_within_visitors = self.d.find_element(By.XPATH, events_Read_Ini().identify_within_visitors_option_in_eventview())
-            identify_within_visitors.click()
-            time.sleep(web_driver.three_second)
-            visitors_search_panel = self.d.find_element(By.XPATH, events_Read_Ini().visitor_search_panel())
-            if visitors_search_panel.is_displayed():
-                self.logger.info("visitor search panel is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("visitors search panel is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_100.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_100.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_100.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_100.png")
-            self.logger.error(f"TC_events_100 got exception as: {ex} ")
-
-    def on_Event_view_click_on_print_option_in_Action_dropdown_and_verify_print_page_is_visible_print_button_and_cancel_button_are_visible(self):
-        try:
-            self.logger.info("*******101******* started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            # # login().login_to_localhost_if_not_done()
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().get_Events_in_dashboard(), self.d)
-            events.click()
-            web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().get_events_panel_heading(), self.d)
-            event_button = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().events_button(), self.d)
-            event_button.click()
-            time.sleep(web_driver.two_second)
-            action_dropdown_in_event_view_panel = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini()
-                                                                           .action_dropdown_in_event_view(), self.d)
-            action_dropdown_in_event_view_panel.click()
-            time.sleep(web_driver.two_second)
-            print_option = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini()
-                                                    .print_option_in_eventview_actiondropdon(), self.d)
-            print_option.click()
-            time.sleep(web_driver.two_second)
-            print_button = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini()
-                                                    .print_button_after_clicking_print(), self.d)
-            time.sleep(web_driver.one_second)
-            cancel_button = self.d.find_element(By.XPATH, events_Read_Ini().cancel_button_after_clicking_print())
-            if print_button.is_displayed():
-                self.logger.info("print button is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("print button is not visible in ")
-                self.status.append(False)
-            cancel_button.click()
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_101.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_101.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_101.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_101.png")
-            self.logger.error(f"TC_events_101 got exception as: {ex} ")
-
-    def on_Event_view_panel_verify_video_button_is_visible_and_clickable(self):
-        try:
-            self.logger.info("********TC_102******* started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            event_button = self.d.find_element(By.XPATH, events_Read_Ini().events_button())
-            event_button.click()
-            time.sleep(web_driver.two_second)
-            video_button = self.d.find_element(By.XPATH, events_Read_Ini().videobutton_in_eventview())
-            if video_button.is_displayed():
-                self.logger.info("video button is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("video button is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_102.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_102.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_102.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_102.png")
-            self.logger.error(f"TC_events_102 got exception as: {ex} ")
-
-    def on_Event_view_panel_click_on_video_button_and_verify_Event_video_panel_is_visible(self):
-        try:
-            self.logger.info("*******TC_103****** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            events = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().get_Events_in_dashboard(), self.d)
-            events.click()
-            self.logger.info("events panel opened.")
-            web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().get_events_panel_heading(), self.d)
-            event_button = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().events_button(), self.d)
-            event_button.click()
-            self.logger.info("events btn is displayed.")
-            time.sleep(web_driver.two_second)
-            video_button = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini()
-                                                    .videobutton_in_eventview(), self.d)
-            video_button.click()
-            self.logger.info("video btn is clicked.")
-            video_details_panel = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini()
-                                                           .video_details_panel(), self.d)
-
-            if video_details_panel.is_displayed():
-                self.logger.info("video details panel is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("video details banner is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_103.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_103.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_103.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_103.png")
-            self.logger.error(f"TC_events_103 got exception as: {ex} ")
-
-    def on_Event_view_panel_verify_tags_button_is_visible_and_clickable(self):
-        try:
-            self.logger.info("*****TC_104******** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            event_button = self.d.find_element(By.XPATH, events_Read_Ini().events_button())
-            event_button.click()
-            time.sleep(web_driver.two_second)
-            tags_button = self.d.find_element(By.XPATH, events_Read_Ini().tagbutton_in_event_view())
-            if tags_button.is_displayed():
-                self.logger.info("tag button is visible in event view")
-                self.status.append(True)
-            else:
-                self.logger.info("tags button is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_104.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_104.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_104.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_104.png")
-            self.logger.error(f"TC_events_104 got exception as: {ex} ")
-
-    def on_Event_view_panel_click_on_tags_button_and_verify_Events_tags_panel_is_visible(self):
-        try:
-            self.logger.info("*****TC_105**** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            events = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().get_Events_in_dashboard(), self.d)
-            events.click()
-            time.sleep(web_driver.three_second)
-            web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().get_events_panel_heading(), self.d)
-            event_button = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().events_button(), self.d)
-            event_button.click()
-            time.sleep(web_driver.two_second)
-            tags_button = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini()
-                                                   .tagbutton_in_event_view(), self.d)
-            tags_button.click()
-            time.sleep(web_driver.three_second)
-            event_tags_panel = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini()
-                                                        .events_tags_panel_heading(), self.d)
-            if event_tags_panel.is_displayed():
-                self.logger.info("events tag panel is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("events tag panel is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_105.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_105.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_105.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_105.png")
-            self.logger.error(f"TC_events_105 got exception as: {ex} ")
-
-    def In_Enrollment_view_panel_verify_Action_dropdown_is_visible_and_clickable(self):
-        try:
-            self.logger.info("*****TC_106***** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            event_button = self.d.find_element(By.XPATH, events_Read_Ini().events_button())
-            event_button.click()
-            time.sleep(web_driver.two_second)
-            action_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_enrollmentview())
-            if action_dropdown.is_displayed():
-                self.logger.info("action dropdown is visible in enrollment view")
-                self.status.append(True)
-            else:
-                self.logger.info("action dropdown is not visible in enrollemnt view")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_106.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_106.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_106.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_106.png")
-            self.logger.error(f"TC_events_106 got exception as: {ex} ")
 
     def Verify_user_is_able_to_perform_identify_within_enrollments_fromEnrollment_View_panel_when_event_icon_is_click(self):
 
@@ -4234,7 +1282,7 @@ class events_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_109.png")
             self.logger.error(f"TC_events_109 got exception as: {ex} ")
 
-    def on_Enrollment_view_click_Disiable_enrollment_in_Actiondropdown_an_alert_is_visible_click_ok_an_alert_Event_is_disabled_verify_in_Events_page_goto_event_Diabled_text_is_visible_in_that_event(self):
+    def Verify_user_enroller_of_an_enrollment_is_able_to_enable_the_disable_enrolled_subject_on_Enrollment_View_modules(self):
         try:
             self.logger.info("******TC_110******* started")
             # self.load_login_page_if_not_loaded()
@@ -4264,15 +1312,7 @@ class events_pom(web_driver, web_logger):
             time.sleep(web_driver.one_second)
             a = self.d.switch_to.alert
             a.accept()
-            time.sleep(web_driver.one_second)
-            # checkbox = self.d.find_element(By.XPATH, events_Read_Ini().first_checkbox_in_events())
-            # checkbox.click()
-            # time.sleep(web_driver.one_second)
-            # action_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_enrollmentview())
-            # action_dropdown.click()
-            # time.sleep(web_driver.one_second)
-            # disabled_enrollment = self.d.find_element(By.XPATH, events_Read_Ini().disabled_enrollment_in_enrollmentview())
-            # disabled_enrollment.click()
+            time.sleep(web_driver.two_second)
             disabled_text_in_enrollmentview = self.d.find_element(By.XPATH, events_Read_Ini().disabled_text_in_enrollmentview_page())
             self.logger.info(f"disabled text visible: {disabled_text_in_enrollmentview.is_displayed()}")
             if disabled_text_in_enrollmentview.is_displayed():
@@ -4299,113 +1339,8 @@ class events_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_110.png")
             self.logger.error(f"TC_events_110 got exception as: {ex} ")
 
-    def on_Enrollment_view_click_Permanently_DELETE_Enrollment_in_Action_dropdown_verify_warning_dialouge_box_is_visible(self):
-        try:
-            self.logger.info("*********TC_111**** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            event_button = self.d.find_element(By.XPATH, events_Read_Ini().events_button())
-            event_button.click()
-            time.sleep(web_driver.two_second)
-            action_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_enrollmentview())
-            action_dropdown.click()
-            time.sleep(web_driver.one_second)
-            permenantly_delete_enrollment = self.d.find_element(By.XPATH, events_Read_Ini().permenantly_delete_enrollment_option_in_enrollment())
-            permenantly_delete_enrollment.click()
-            time.sleep(web_driver.one_second)
-            warning_dialouge_box = self.d.find_element(By.XPATH, events_Read_Ini().warning_dialouge_box())
-            if warning_dialouge_box.is_displayed():
-                self.logger.info("warning dialouge box is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("warning dialouge box is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_111.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_111.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_111.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_111.png")
-            self.logger.error(f"TC_events_111 got exception as: {ex} ")
 
-    def on_Enrollment_view_click_on_Actiondropdown_followed_by_Permanently_DELETE_Enrollment_verify_warning_dialouge_box_is_visible_click_on_Nocancel_button_and_verify_warning_dialouge_box_is_closed(self):
-        try:
-            self.logger.info("*********TC_012******** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            event_button = self.d.find_element(By.XPATH, events_Read_Ini().events_button())
-            event_button.click()
-            time.sleep(web_driver.two_second)
-            action_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_enrollmentview())
-            action_dropdown.click()
-            time.sleep(web_driver.one_second)
-            permenantly_delete_enrollment = self.d.find_element(By.XPATH, 
-                                                                events_Read_Ini().permenantly_delete_enrollment_option_in_enrollment())
-            permenantly_delete_enrollment.click()
-            time.sleep(web_driver.one_second)
-            cancel_button = self.d.find_element(By.XPATH, events_Read_Ini().cancel_button_in_warning_dialouge_box())
-            cancel_button.click()
-            time.sleep(web_driver.one_second)
-            Enrollment_view_panel = self.d.find_element(By.XPATH, events_Read_Ini().enrollment_view_panel_heading())
-            if Enrollment_view_panel.is_displayed():
-                self.logger.info("enrollment view panel is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("enrollemnt view panel is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_112.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_112.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_112.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_112.png")
-            self.logger.error(f"TC_events_112 got exception as: {ex} ")
 
-    def on_Enrollment_view_click_Permanently_DELETE_Enrollment_in_Action_dropdown_a_warning_dialouge_box_is_visible_click_on_Yes_Delete_Person_and_Their_Events_button_verify_event_is_removed(self):
-        try:
-            self.logger.info("********TC_113********* started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            event_button = self.d.find_element(By.XPATH, events_Read_Ini().events_button())
-            event_button.click()
-            time.sleep(web_driver.two_second)
-            action_dropdown = self.d.find_element(By.XPATH, events_Read_Ini().action_dropdown_in_enrollmentview())
-            action_dropdown.click()
-            time.sleep(web_driver.one_second)
-            permenantly_delete_enrollment = self.d.find_element(By.XPATH, events_Read_Ini().permenantly_delete_enrollment_option_in_enrollment())
-            permenantly_delete_enrollment.click()
-            time.sleep(web_driver.one_second)
-            yes_delete_selected_enrollment_button = self.d.find_element(By.XPATH, events_Read_Ini().yes_delecte_selected_event_and_their_events_button_on_warning_dialougebox())
-            # yes_delete_selected_enrollment_button.click()
-        except Exception as ex:
-            print(ex)
 
     def Verify_user_is_able_to_edit_the_Enrollment_details_on_Enrollment_View_panel_when_ProbableMatch_Event_icon_is_click(self):
         try:
@@ -4471,7 +1406,7 @@ class events_pom(web_driver, web_logger):
 
 
 
-    def on_Enrollment_view_panel_click_on_Faces_button_and_verify_Enrollment_Faces_panel_is_visible(self):
+    def Verify_user_is_able_to_add_face_on_Enrollment_view_panel_when_event_icon_is_click(self):
         try:
             self.logger.info("******TC_117********* started")
             # self.load_login_page_if_not_loaded()
@@ -4486,9 +1421,39 @@ class events_pom(web_driver, web_logger):
                                                     .faces_button_in_enrollmentview(), self.d)
             faces_button.click()
             time.sleep(web_driver.one_second)
-            enrollment_faces_panel = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini()
-                                                              .Enrollment_Faces_panel(), self.d)
+            upload_photo = self.explicit_wait(7, "XPATH", read_enrollment_components()
+                                              .image_box_xpath(), self.d)
+            upload_photo.click()
+            self.logger.info(f"clicked on upload image icon")
+            time.sleep(2)
+            file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset1\\vip\\00096.png"
+            pyautogui.write(file_path)
+            pyautogui.press('enter')
+            time.sleep(2)
+            pyautogui.press('enter')
+            self.logger.info(f"Image upload success")
+            time.sleep(web_driver.two_second)
 
+            skip_cropping_button = self.d.find_element(By.XPATH, read_enrollment_components().skip_cropping_button())
+            skip_cropping_button.click()
+            time.sleep(web_driver.one_second)
+            self.logger.info("clicking on skip cropping button")
+
+            select_photo_button = self.d.find_element(By.XPATH, read_enrollment_components().select_photo_button())
+            select_photo_button.click()
+            time.sleep(4)
+            self.logger.info("clicking on select photo button")
+
+            success_msg = self.d.find_element(By.XPATH, read_enrollment_components().success_photo_added_message())
+            self.logger.info(f"success message is {success_msg.text}")
+
+            if success_msg.is_displayed():
+                self.logger.info("sucess photo has been added message is displayed")
+                self.status.append(True)
+
+            else:
+                self.logger.info("success message is not displayed")
+                self.status.append(False)
 
             time.sleep(web_driver.one_second)
             self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
@@ -4504,41 +1469,9 @@ class events_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_117.png")
             self.logger.error(f"TC_events_117 got exception as: {ex} ")
 
-    def on_Enrollment_view_verify_Events_button_is_visible(self):
-        try:
-            self.logger.info("*******TC_118***** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            event_button = self.d.find_element(By.XPATH, events_Read_Ini().events_button())
-            event_button.click()
-            time.sleep(web_driver.two_second)
-            events_button_in_enrollment_view = self.d.find_element(By.XPATH, events_Read_Ini().events_button_enrollment_view())
-            if events_button_in_enrollment_view.is_displayed():
-                self.logger.info("events button is visible enrollment view panel")
-                self.status.append(True)
-            else:
-                self.logger.info("events button is not visible in enrollment view panel")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_118.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_118.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_118.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_118.png")
-            self.logger.error(f"TC_events_118 got exception as: {ex} ")
 
-    def on_Enrollment_view_click_on_Events_Events_panel_is_visible(self):
+    def Verify_user_is_able_to_see_probable_match_events_associated_to_same_person_on_Enrollment_View_panel_when_probable_match_event_icon_is_click(self):
+
         try:
             self.logger.info("*********TC_119***** started")
             # self.load_login_page_if_not_loaded()
@@ -4554,13 +1487,15 @@ class events_pom(web_driver, web_logger):
             events_button_in_enrollment_view = self.d.find_element(By.XPATH, events_Read_Ini().events_button_enrollment_view())
             events_button_in_enrollment_view.click()
             time.sleep(web_driver.one_second)
-            events_panel = self.d.find_element(By.XPATH, events_Read_Ini().events_panel_heading_after_clicking_events_button_in_enrollmentview())
-            if events_panel.is_displayed():
-                self.logger.info("events panel heading is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("events panel heading is not visible")
-                self.status.append(False)
+            # events_panel = self.d.find_element(By.XPATH, events_Read_Ini().events_panel_heading_after_clicking_events_button_in_enrollmentview())
+            list_of_probable_match_events = self.d.find_elements(By.XPATH,events_Read_Ini().list_of_events_when_clicking_on_events_button())
+            for li in list_of_probable_match_events:
+                if li.is_displayed():
+                    self.logger.info("list of events are visible")
+                    self.status.append(True)
+                else:
+                    self.logger.info("list of events are not visible")
+                    self.status.append(False)
             time.sleep(web_driver.one_second)
             self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
             self.logger.info(f"status:{self.status}")
@@ -4575,7 +1510,8 @@ class events_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_119.png")
             self.logger.error(f"TC_events_119 got exception as: {ex} ")
 
-    def verify_Enrollment_groups_button_is_visible_in_Enrollment_view_panel(self):
+    def Verify_user_able_to_link_a_enrollment_group_and_add_the_person_to_the_group(self):
+
         try:
             self.logger.info("********TC_120******* started")
             # self.load_login_page_if_not_loaded()
@@ -4585,16 +1521,64 @@ class events_pom(web_driver, web_logger):
             events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
             events.click()
             time.sleep(web_driver.three_second)
+
             event_button = self.d.find_element(By.XPATH, events_Read_Ini().events_button())
             event_button.click()
             time.sleep(web_driver.two_second)
+
             enrollment_group_button = self.d.find_element(By.XPATH, events_Read_Ini().enrollment_groups_button_in_enrollmentview())
-            if enrollment_group_button.is_displayed():
-                self.logger.info("enrollment group button is visible in enrollment view panel")
+            enrollment_group_button.click()
+            time.sleep(web_driver.one_second)
+
+            before_unlinking_eg_count = self.d.find_element(By.XPATH,events_Read_Ini().before_linking_eg_count())
+            print(before_unlinking_eg_count.text)
+            before_unlinked_eg_count = before_unlinking_eg_count.text
+            self.logger.info(f"before unlinking enrolllment group count is : {before_unlinked_eg_count}")
+
+            filter_dropdown = self.d.find_element(By.XPATH,read_enrollment_components().filter_dropdown_on_enrollment_group())
+            filter_dropdown.click()
+            time.sleep(web_driver.one_second)
+
+            eg_list = []
+            Enrollments_groups_list = self.d.find_elements(By.XPATH, read_enrollment_components().list_of_egs())
+            for group in Enrollments_groups_list:
+                eg_list.append(group.text)
+            self.logger.info(f"list of eg are :{eg_list}")
+
+            read_eg_name = read_enrollment_components().read_eg_data()
+            self.logger.info(f" eg name is :{read_eg_name}")
+
+            checkbox_xpath_1 = read_enrollment_components().checkbox_xpath_1()
+            checkbox_xpath_2 = read_enrollment_components().checkbox_xpath_2()
+            check_box_xpath = f"{checkbox_xpath_1}{read_eg_name}{checkbox_xpath_2}"
+            self.logger.info(f"custom xpath : {check_box_xpath}")
+            if read_eg_name in eg_list:
+                checkbox = self.d.find_element(By.XPATH, check_box_xpath)
+                checkbox.click()
+            else:
+                self.logger.info("check box is not clicked")
+
+            time.sleep(web_driver.two_second)
+            action_dropdown = self.d.find_element(By.XPATH,events_Read_Ini().action_dropdown_on_eg())
+            action_dropdown.click()
+            time.sleep(web_driver.one_second)
+
+            remove_group_to_enrollment_option = self.d.find_element(By.XPATH,read_enrollment_components().remove_enrollment_group_to_enrollment())
+            remove_group_to_enrollment_option.click()
+            self.logger.info("add group to enrollment option is clicked inside action dropdown")
+            time.sleep(web_driver.one_second)
+
+            after_unlinking_eg_count = self.d.find_element(By.XPATH,
+                                                           events_Read_Ini().before_linking_eg_count())
+            self.logger.info(f"after linking enrollment group count is :{after_unlinking_eg_count.text}")
+            after_unlinking_eg_count1 = after_unlinking_eg_count.text
+
+            if before_unlinking_eg_count != after_unlinking_eg_count1:
+                self.logger.info("Enrollment group is linked")
                 self.status.append(True)
             else:
-                self.logger.info("enrollmrnt group button is not visible in enrollment view panel")
-                self.status.append(False)
+                self.logger.info("Enrollment group is not linked")
+
             time.sleep(web_driver.one_second)
             self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
             self.logger.info(f"status:{self.status}")
@@ -4609,7 +1593,7 @@ class events_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_120.png")
             self.logger.error(f"TC_events_120 got exception as: {ex} ")
 
-    def on_Enrollment_view_panel_click_on_Enrollment_groups_button_and_verify_Enrollment_groups_panel_is_visible(self):
+    def Verify_user_able_to_unlink_same_enrollment_group_and_remove_the_person_from_selected_group(self):
         try:
             self.logger.info("*******TC_121****** started")
             # self.load_login_page_if_not_loaded()
@@ -4630,17 +1614,67 @@ class events_pom(web_driver, web_logger):
             enrollment_group_button = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().enrollment_groups_button_in_enrollmentview(), self.d)
 
             enrollment_group_button.click()
+
             self.logger.info("enrollment groups btn clicked.")
             time.sleep(web_driver.two_second)
-            # enrollment_group_panel = self.d.find_element(By.XPATH, events_Read_Ini().enrollment_group_panel())
-            enrollment_group_panel = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().enrollment_group_panel(), self.d)
-            self.logger.info(f"enrollments panel is visible: {enrollment_group_panel.is_displayed()}")
-            if enrollment_group_panel.is_displayed():
-                self.logger.info("enrollment group panel is visible.")
+            before_linking_eg_count = self.d.find_element(By.XPATH,
+                                                          events_Read_Ini().before_linking_eg_count())
+            print(before_linking_eg_count.text)
+            linked_eg_count = before_linking_eg_count.text
+            self.logger.info(f"before linking enrolllment group count is : {linked_eg_count}")
+
+            filter_dropdown = self.d.find_element(By.XPATH,read_enrollment_components().filter_dropdown_on_enrollment_group())
+            filter_dropdown.click()
+            time.sleep(web_driver.one_second)
+
+            unlinked_eg_option = self.d.find_element(By.XPATH, read_enrollment_components().unlinked_eg_option_xpath())
+            unlinked_eg_option.click()
+            time.sleep(web_driver.one_second)
+            eg_list = []
+            Enrollments_groups_list = self.d.find_elements(By.XPATH, read_enrollment_components().list_of_egs())
+            for group in Enrollments_groups_list:
+                eg_list.append(group.text)
+            self.logger.info(f"list of eg are :{eg_list}")
+
+            read_eg_name = read_enrollment_components().read_eg_data()
+            self.logger.info(f" eg name is :{read_eg_name}")
+
+            checkbox_xpath_1 = read_enrollment_components().checkbox_xpath_1()
+            checkbox_xpath_2 = read_enrollment_components().checkbox_xpath_2()
+            check_box_xpath = f"{checkbox_xpath_1}{read_eg_name}{checkbox_xpath_2}"
+            self.logger.info(f"custom xpath : {check_box_xpath}")
+            if read_eg_name in eg_list:
+                checkbox = self.d.find_element(By.XPATH, check_box_xpath)
+                checkbox.click()
+            else:
+                self.logger.info("check box is not clicked")
+
+            time.sleep(web_driver.two_second)
+            Action_dropdown = self.d.find_element(By.XPATH,events_Read_Ini().action_dropdown_on_eg())
+            Action_dropdown.click()
+            time.sleep(web_driver.one_second)
+
+            add_group_to_enrollment_option = self.d.find_element(By.XPATH,
+                                                                 read_enrollment_components().add_group_to_enrollment_option())
+            add_group_to_enrollment_option.click()
+            self.logger.info("add group to enrollment option is clicked inside action dropdown")
+            time.sleep(web_driver.one_second)
+
+
+
+            after_linking_eg_count = self.d.find_element(By.XPATH,
+                                                         events_Read_Ini().before_linking_eg_count())
+            self.logger.info(f"after linking enrollment group count is :{after_linking_eg_count.text}")
+            after_linking_eg_count1 = after_linking_eg_count.text
+
+            if after_linking_eg_count1 != int(linked_eg_count) + 1:
+
+                self.logger.info("Enrollment group is linked")
                 self.status.append(True)
             else:
-                self.logger.info("enrollment group panel is not visible.")
+                self.logger.info("Enrollment group is not linked")
                 self.status.append(False)
+
             time.sleep(web_driver.one_second)
             # self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
             ele = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().get_facefirst_logout_button(), self.d)
@@ -4659,39 +1693,6 @@ class events_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_121.png")
             self.logger.error(f"TC_events_121 got exception as: {ex} ")
 
-    def verify_Notes_button_is_visible_in_Enrollment_view_panel(self):
-        try:
-            self.logger.info("*********TC_122******** started")
-            # self.load_login_page_if_not_loaded()
-            login().login_to_cloud_if_not_done(self.d)
-            self.status.clear()
-            time.sleep(web_driver.one_second)
-            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
-            events.click()
-            time.sleep(web_driver.three_second)
-            event_button = self.d.find_element(By.XPATH, events_Read_Ini().events_button())
-            event_button.click()
-            time.sleep(web_driver.two_second)
-            notes_button = self.d.find_element(By.XPATH, events_Read_Ini().notes_button_in_enrollmentview())
-            if notes_button.is_displayed():
-                self.logger.info("notes button is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("visible button is not visible")
-                self.status.append(False)
-            time.sleep(web_driver.one_second)
-            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
-            self.logger.info(f"status:{self.status}")
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_122.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_122.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_122.png")
-            self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_122.png")
-            self.logger.error(f"TC_events_122 got exception as: {ex} ")
 
     def on_Enrollment_view_panel_click_on_Notes_button_and_verify_Enrollment_notes_panel_is_visible(self):
         try:
@@ -4700,26 +1701,85 @@ class events_pom(web_driver, web_logger):
             login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             time.sleep(web_driver.one_second)
-            # events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
+            
             events = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().get_Events_in_dashboard(), self.d)
             events.click()
             time.sleep(web_driver.three_second)
-            # event_button = self.d.find_element(By.XPATH, events_Read_Ini().events_button())
+            
+            
             event_button = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().events_button(), self.d)
             event_button.click()
             time.sleep(web_driver.two_second)
-            # notes_button = self.d.find_element(By.XPATH, events_Read_Ini().notes_button_in_enrollmentview())
+            
+            
             notes_button = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().notes_button_in_enrollmentview(), self.d)
             notes_button.click()
             time.sleep(web_driver.one_second)
-            # notes_panel = self.d.find_element(By.XPATH, events_Read_Ini().notes_panel())
-            notes_panel = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().notes_panel(), self.d)
-            if notes_panel.is_displayed():
-                self.logger.info("notes panel is visible ")
+
+            action_button = self.d.find_element(By.XPATH,
+                                                read_enrollment_components().action_button_in_enrollment_notes())
+            action_button.click()
+            self.logger.info("clicking action button on enrollment notes panel")
+            time.sleep(web_driver.two_second)
+
+            add_notes_to_enrollment = self.d.find_element(By.XPATH,
+                                                          read_enrollment_components().link_to_add_notes_to_an_enrollment_xpath())
+            add_notes_to_enrollment.click()
+            self.logger.info("clicking add notes to an enrollment option ")
+            time.sleep(web_driver.two_second)
+
+            upload_image_to_notes = self.d.find_element(By.XPATH, read_enrollment_components().image_box_to_add_notes())
+            upload_image_to_notes.click()
+            time.sleep(web_driver.one_second)
+            self.logger.info("upload image box xpath")
+
+            file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset1\\ab\\00076.png"
+            pyautogui.write(file_path)
+            pyautogui.press('enter')
+            time.sleep(2)
+            pyautogui.press('enter')
+            self.logger.info(f"Image upload success")
+            time.sleep(web_driver.two_second)
+
+            skip_cropping_button = self.d.find_element(By.XPATH,
+                                                       read_enrollment_components().skip_cropping_button_xpath())
+            skip_cropping_button.click()
+            self.logger.info("clicking on skip cropping button")
+            time.sleep(web_driver.two_second)
+
+            add_photo_button = self.d.find_element(By.XPATH, read_enrollment_components().add_photo_button_xpath())
+            add_photo_button.click()
+            self.logger.info("clicking on add photo button")
+            time.sleep(8)
+
+            location_input = self.d.find_element(By.XPATH,
+                                                 events_Read_Ini().notes_location_store())
+            location_input.click()
+            location_input.send_keys(read_enrollment_components().get_location_data())
+            time.sleep(web_driver.one_second)
+
+            case_subject = self.d.find_element(By.XPATH, events_Read_Ini().notes_case_subject())
+            case_subject.click()
+            case_subject.send_keys(read_enrollment_components().get_case_subject_data())
+            time.sleep(web_driver.two_second)
+
+            # date_of_incident = self.d.find_element(By.XPATH,
+            #                                        read_enrollment_components().get_date_and_incident_by_xpath())
+            # self.dateTimeAMPM(date_of_incident)
+            time.sleep(web_driver.two_second)
+
+            save_button = self.d.find_element(By.XPATH, events_Read_Ini().notes_save_button())
+            save_button.click()
+
+            time.sleep(web_driver.one_second)
+
+            notes_list = self.d.find_element(By.XPATH, read_enrollment_components().after_creating_notes_list())
+            if notes_list.is_displayed():
+                self.logger.info("notes created successfully")
                 self.status.append(True)
             else:
-                self.logger.info("notes panel is not visible")
                 self.status.append(False)
+            
             time.sleep(web_driver.one_second)
             self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
             self.logger.info(f"status:{self.status}")
@@ -4744,16 +1804,19 @@ class events_pom(web_driver, web_logger):
             events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
             events.click()
             time.sleep(web_driver.three_second)
+
             tags_symbol = self.d.find_element(By.XPATH, events_Read_Ini().tags_button_in_eventspage())
             tags_symbol.click()
             time.sleep(web_driver.two_second)
-            events_tags_panel = self.d.find_element(By.XPATH, events_Read_Ini().events_tags_panel_heading())
-            if events_tags_panel.is_displayed():
-                self.logger.info("events tags panel is visible")
-                self.status.append(True)
-            else:
-                self.logger.info("events tags panel is not visible")
-                self.status.append(False)
+
+            filter_dropdown = self.d.find_element(By.XPATH,events_Read_Ini().filter_dropdown_in_events_tag())
+            filter_dropdown.click()
+            time.sleep(web_driver.one_second)
+
+            unlinked_tags_option = self.d.find_element(By.XPATH,events_Read_Ini().unlinked_tags_by_xpath())
+
+
+
             time.sleep(web_driver.one_second)
             self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
             self.logger.info(f"status:{self.status}")
@@ -4937,3 +2000,498 @@ class events_pom(web_driver, web_logger):
             self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_128.png")
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_128.png")
             self.logger.error(f"TC_events_128 got exception as: {ex} ")
+
+    def Verify_25_events_are_generated_for_25_enrolled_subjects(self):
+        try:
+            login().login_to_cloud_if_not_done(self.d)
+            self.status.clear()
+            time.sleep(web_driver.one_second)
+
+            events = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().get_Events_in_dashboard(), self.d)
+            events.click()
+            time.sleep(web_driver.three_second)
+
+            load_more_button = self.d.find_element(By.XPATH,events_Read_Ini().loadmore_button())
+            self.d.execute_script("arguments[0].scrollIntoView();", load_more_button)
+            load_more_button.click()
+
+            time.sleep(web_driver.one_second)
+
+            displaying_total_number = self.d.find_element(By.XPATH,events_Read_Ini().total_number_of_events_happened_out_of_total_number_of_events())
+            self.logger.info(f"Total number of events are : {displaying_total_number.text}")
+            number_of_events = displaying_total_number.text
+            time.sleep(web_driver.one_second)
+
+            Total_number = events_Read_Ini().read_total_number_of_events()
+            self.logger.info(f"Total number of events are {Total_number}")
+
+            if Total_number in number_of_events:
+                self.logger.info("number of total events are 25")
+                self.status.append(True)
+
+            else:
+                self.status.append(False)
+
+            self.logger.info(f"status:{self.status}")
+            if False in self.status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_128.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_128.png")
+                return False
+            else:
+                return True
+
+        except Exception as ex:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_128.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_128.png")
+                self.logger.error(f"TC_events_128 got exception as: {ex} ")
+
+    def Verify_5_events_for_each_group_soe_abe_pte_fraude_and_vipe_using_enrollment_group_selection_in_search_dropdown(self):
+            try:
+                login().login_to_cloud_if_not_done(self.d)
+
+                x = events_Read_Ini().enrollment_group_name_list()
+                enrollment_group_list = x.split(',')
+                self.click_on_event_menu()
+                self.click_on_search_button()
+                self.enrollment_group_selection()
+                self.click_on_save_button()
+
+                self.click_on_event_filter_search_button()
+
+                self.enrollment_group_search_result_validation()
+                Total_events_count_of_each_group = self.d.find_element(By.XPATH,events_Read_Ini().Events_count_each_eg())
+                self.logger.info(f"Total number of events on each group is {Total_events_count_of_each_group.text}")
+                time.sleep(web_driver.one_second)
+                expected_events_counts = events_Read_Ini().five_events_from_each_group()
+
+                if expected_events_counts in Total_events_count_of_each_group:
+                    self.logger.info("Displaying 5 events from each group")
+                    self.status.append(True)
+
+                else:
+                    self.status.append(False)
+
+                if False in self.status:
+                    self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_128.png")
+                    self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_128.png")
+                    return False
+                else:
+                    return True
+
+
+            except Exception as ex:
+                self.d.save_screenshot(f"{self.screenshots_path}\\event_search_with_enrollmentGroup_filter_combination_"
+                                       f"failed.png")
+                self.log.info(f"event_search_with_enrollmentGroup_filter_combination failed:  {ex.args}")
+                return False
+            finally:
+                self.close_all_panel_one_by_one()
+
+    def logout_from_portal(self):
+        try:
+            logout_btn = self.explicit_wait(5, "XPATH", Read_Identify_and_Enroll_Components().logout_btn_by_xpath(),
+                                            self.d)
+            self.logger.info(f"logout btn is visible: {logout_btn.is_displayed()}")
+            if logout_btn.is_displayed():
+                logout_btn.click()
+            else:
+                self.logger.info("logout btn is not visible.")
+
+        except Exception as ex:
+            self.logger.info(f"logout_from_portal ex: {ex.args}")
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+################################################ Event_search_filter_methods ##############################################
+
+
+    def click_on_event_menu(self):
+        time.sleep(web_driver.one_second)
+        event_menu = self.d.find_element(By.XPATH,
+                                         events_Read_Ini().menu_event_button_by_xpath())
+        self.d.execute_script("arguments[0].click();", event_menu)
+        time.sleep(web_driver.one_second)
+
+    def click_on_search_button(self):
+        time.sleep(web_driver.one_second)
+        event_search_button = self.d.find_element(By.XPATH,
+                                                  events_Read_Ini().event_search_button_by_xpath())
+        event_search_button.click()
+        time.sleep(web_driver.one_second)
+
+    def click_on_start_date_checkbox(self):
+        start_date_checkbox = self.d.find_element(By.XPATH,
+                                                  events_Read_Ini().event_search_start_date_checkbox())
+        start_date_checkbox.click()
+
+    def click_on_end_date_checkbox(self):
+        end_date_checkbox = self.d.find_element(By.XPATH,
+                                                events_Read_Ini().event_search_end_date_checkbox())
+        end_date_checkbox.click()
+
+    def click_on_save_button(self):
+        click_on_save_button = self.d.find_element(By.XPATH,
+                                                   events_Read_Ini().save_button_by_xpath())
+        click_on_save_button.click()
+
+    def click_on_save_zone_button(self):
+        click_on_save_zone_button = self.d.find_element(By.XPATH,
+                                                        events_Read_Ini().save_zone_button_by_xpath())
+        time.sleep(web_driver.one_second)
+        self.d.execute_script("arguments[0].click();", click_on_save_zone_button)
+        # click_on_save_zone_button.click()
+
+    def click_on_save_tag_button(self):
+        click_on_save_tag_button = self.d.find_element(By.XPATH,
+                                                       events_Read_Ini().tags_save_button_by_xpath())
+        click_on_save_tag_button.click()
+
+    def click_on_event_filter_search_button(self):
+        time.sleep(web_driver.one_second)
+        click_on_event_filter_search_button = self.d.find_element(By.XPATH,
+                                                                  events_Read_Ini().
+                                                                  event_filter_search_button_by_xpath())
+        click_on_event_filter_search_button.click()
+        # wait_icon = self.d.find_element(By.XPATH, events_Read_Ini().wait_icon_xpath())
+
+        time.sleep(web_driver.one_second)
+        # while wait_icon.is_displayed():
+        # time.sleep(web_driver.two_second)
+
+    def enrollment_group_selection(self):
+        enrollment_group_selection = self.d.find_element(By.XPATH,
+                                                         events_Read_Ini().enrollment_group_drop_down())
+        enrollment_group_selection.click()
+
+        checkbox_list = self.d.find_elements(By.XPATH,
+                                             events_Read_Ini().enrollment_group_checkbox_list())
+        group_text_list = self.d.find_elements(By.XPATH,
+                                               events_Read_Ini().enrollment_group_name_list())
+
+        try:
+            for i in range(len(group_text_list) - 1):
+                actual_enrollment_group_text = group_text_list.__getitem__(i).text
+                self.logger.info(f"actual text: {actual_enrollment_group_text}")
+                expected_enrollment_group_text = events_Read_Ini().get_enrollment_group().upper()
+                self.logger.info(f"expected text: {expected_enrollment_group_text}")
+                if actual_enrollment_group_text == expected_enrollment_group_text:
+                    checkbox_list.__getitem__(i).click()
+                    break
+        except Exception as ex:
+            self.logger.info(ex.args)
+
+    def zone_selection(self):
+        zone_selection = self.d.find_element(By.XPATH,
+                                             events_Read_Ini().zone_selection_drop_down())
+        self.d.execute_script("arguments[0].click();", zone_selection)
+        # time.sleep(3)
+        # root_selection = self.d.find_element(By.XPATH,
+        #                                      events_Read_Ini().root_zone_validation())
+        # assert root_selection.is_displayed()
+        # self.d.execute_script("arguments[0].click();", root_selection)
+
+        checkbox_list = self.d.find_elements(By.XPATH,
+                                             events_Read_Ini().zones_checkbox_list())
+        zone_text_list = self.d.find_elements(By.XPATH,
+                                              events_Read_Ini().zones_text_list())
+        try:
+
+            for i in range(len(zone_text_list)):
+                actual_zone_text = zone_text_list.__getitem__(i).text
+                self.log.info(f"actual zone: {actual_zone_text}")
+                expected_zone_text = events_Read_Ini().get_zone()
+                self.log.info(f"expected zone: {expected_zone_text}")
+                if expected_zone_text.lower() in actual_zone_text.lower():
+                    if checkbox_list.__getitem__(i).is_selected():
+                        checkbox_list.__getitem__(i).click()
+                    else:
+                        checkbox_list.__getitem__(i).click()
+                        #checkbox_list.__getitem__(i).click()
+                    break
+                time.sleep(web_driver.one_second)
+        except Exception as ex:
+            self.log.info(ex.args)
+
+    def tags_selection(self):
+        tags_selection = self.d.find_element(By.XPATH,
+                                             events_Read_Ini().tag_selection_drop_down())
+        # self.d.execute_script("arguments[0].click();", tags_selection)
+
+        tags_selection.click()
+        time.sleep(web_driver.one_second)
+
+        checkbox_list = self.d.find_elements(By.XPATH,
+                                             events_Read_Ini().tags_checkbox_list())
+        tags_text_list = self.d.find_elements(By.XPATH,
+                                              events_Read_Ini().tags_text_list())
+        try:
+
+            for i in range(len(tags_text_list) + 1):
+                actual_tag_text = tags_text_list.__getitem__(i).text
+                expected_tag_text = events_Read_Ini().get_tags().upper()
+                if actual_tag_text == expected_tag_text:
+                    checkbox_list.__getitem__(i).click()
+        except Exception as ex:
+            self.log.info(ex.args)
+
+    # validation methods
+
+    def enrollment_group_search_result_validation(self):
+        enrollment_group_search_validation = self.d.find_element(By.XPATH,
+                                                                 events_Read_Ini().
+                                                                 enrollment_group_search_result_validation())
+        actual_text = enrollment_group_search_validation.text
+        expected_text = events_Read_Ini().get_enrollment_group()
+        time.sleep(web_driver.one_second)
+        if actual_text.lower() == expected_text.lower():
+            self.logger.info(f"actual text is {actual_text.lower()},{expected_text.lower()}")
+            self.status.append(True)
+        else:
+            self.status.append(False)
+
+    def zones_search_result_validation(self):
+        zones_search_result_validation = self.d.find_element(By.XPATH,
+                                                             events_Read_Ini().
+                                                             zone_search_result_validation())
+        actual_text = zones_search_result_validation.text.lower()
+        expected_text = events_Read_Ini().get_zone().lower()
+        time.sleep(web_driver.one_second)
+        return expected_text in actual_text
+
+    def tag_search_result_validation(self):
+        tag_search_result_validation = self.d.find_element(By.XPATH,
+                                                           events_Read_Ini().
+                                                           tags_search_result_validation())
+        actual_text = tag_search_result_validation.text
+        expected_text = events_Read_Ini().get_tags().upper()
+        time.sleep(web_driver.one_second)
+        return actual_text == expected_text.upper()
+
+    def verify_date(self, date, month, year, hour, minute, period):
+        month_to_mm = {
+            "January": "1",
+            "February": "2",
+            "March": "3",
+            "April": "4",
+            "May": "5",
+            "June": "6",
+            "July": "7",
+            "August": "8",
+            "September": "9",
+            "October": "10",
+            "November": "11",
+            "December": "12"
+        }
+        mon = month_to_mm.get(month)
+
+        exp_asser = "{mon}/{date}/{year} {hour}:{minu} {pe}"
+        exp_asser = exp_asser.format(mon=mon, date=date, year=year, hour=int(hour), minu=minute, pe=period)
+        time.sleep(3)
+
+        ac_start_date = self.d.find_element(By.XPATH, events_Read_Ini().date_search_result_validation())
+        print("Expected data = " + exp_asser)
+        print("Actual data = " + ac_start_date)
+        ac_ass_date = ac_start_date.text
+        if exp_asser in ac_ass_date:
+            return True
+        else:
+            return False
+
+    # Calender method
+
+    def handle_calender_pop_up(self, strategy, date, month, year, hour, minute, req_period):
+        # click on the form calendar popup
+        if strategy == "from":
+            start_check_bx = self.d.find_element(By.XPATH,
+                                                 events_Read_Ini().event_search_start_date_checkbox())
+            start_check_bx.click()
+            start_date_txt_bx = self.d.find_element(By.XPATH, events_Read_Ini().event_search_start_date_input())
+            start_date_txt_bx.click()
+        else:
+            # click on the to calendar pop up
+            end_check_bx = self.d.find_element(By.XPATH,
+                                               events_Read_Ini().event_search_end_date_checkbox())
+            end_check_bx.click()
+            end_date_txt_bx = self.d.find_element(By.XPATH, events_Read_Ini().event_search_end_date_input())
+            end_date_txt_bx.click()
+
+        # click on the clock icon
+        calender_clock = self.d.find_element(By.XPATH, events_Read_Ini().calender_timer_icon_by_xpath())
+        calender_clock.click()
+
+        time.sleep(web_driver.one_second)
+
+        # handle the hour and minute based on the strategy
+        if strategy == "from":
+            self.calender_handle_hour_minute_from(hour, minute)
+        else:
+            self.calender_handle_hour_minute_to(hour, minute)
+
+        # select the period am or pm
+        period = self.d.find_element(By.XPATH, events_Read_Ini().period_by_xpath())
+        if period.text == req_period:
+            print("")
+        else:
+            period.click()
+
+        # click on the tick icon
+        tick_icon = self.d.find_element(By.XPATH, events_Read_Ini().calender_tick_icon_by_xpath())
+        tick_icon.click()
+
+        if strategy == "from":
+            start_date_txt_bx = self.d.find_element(By.XPATH, events_Read_Ini().start_date_by_xpath())
+            start_date_txt_bx.click()
+        else:
+            # click on the to calendar pop up
+            start_date_txt_bx = self.d.find_element(By.XPATH, events_Read_Ini().end_date_by_xpath())
+            start_date_txt_bx.click()
+
+        req_month = month
+        req_year = year
+        month_to_num = {
+            "January": 1,
+            "February": 2,
+            "March": 3,
+            "April": 4,
+            "May": 5,
+            "June": 6,
+            "July": 7,
+            "August": 8,
+            "September": 9,
+            "October": 10,
+            "November": 11,
+            "December": 12
+        }
+        month_year = self.d.find_element(By.XPATH, events_Read_Ini().calender_month_year_by_xpath())
+        ac_month = month_year.text.split(" ")[0]
+        ac_year = int(month_year.text.split(" ")[1])
+
+        # click on the back button
+        while month_to_num.get(req_month) < month_to_num.get(ac_month) or req_year < ac_year:
+            cal_back_button = self.d.find_element(By.XPATH,
+                                                  events_Read_Ini().calender_back_button_by_xpath())
+            if cal_back_button.is_enabled():
+                cal_back_button.click()
+
+            month_year = self.d.find_element(By.XPATH,
+                                             events_Read_Ini().calender_month_year_by_xpath())
+            ac_month = month_year.text.split(" ")[0]
+            ac_year = int(month_year.text.split(" ")[1])
+
+        # click on the forward button
+        while month_to_num.get(req_month) > month_to_num.get(ac_month) or req_year > ac_year:
+            cal_back_button = self.d.find_element(By.XPATH,
+                                                  events_Read_Ini().calender_forward_button_by_xpath())
+            if cal_back_button.is_enabled():
+                cal_back_button.click()
+
+            month_year = self.d.find_element(By.XPATH,
+                                             events_Read_Ini().calender_month_year_by_xpath())
+            ac_month = month_year.text.split(" ")[0]
+            ac_year = int(month_year.text.split(" ")[1])
+
+        # click on the required date
+        try:
+            date = self.d.find_element(By.XPATH,
+                                       "(//td[@class='day' or @class='day weekend' or @class='day active'])[" + str(
+                                           date) + "]")
+            date.click()
+        except Exception as ex:
+            self.log.info(ex.args)
+
+        # click on the tick icon
+        tick_icon = self.d.find_element(By.XPATH, events_Read_Ini().calender_tick_icon_by_xpath())
+        tick_icon.click()
+
+    def calender_handle_hour_minute_to(self, hour, minute):
+        # set the hour
+        current_hour_ele = self.d.find_element(By.XPATH, events_Read_Ini().current_hour_ele_by_xpath())
+        cur_hour = int(current_hour_ele.text)
+
+        while int(cur_hour) != int(hour):
+            hour_down = self.d.find_element(By.XPATH, events_Read_Ini().hour_down_by_xpath())
+            hour_down.click()
+            current_hour_ele = self.d.find_element(By.XPATH,
+                                                   events_Read_Ini().current_hour_ele_by_xpath())
+            cur_hour = int(current_hour_ele.text)
+
+        # set the minute
+        current_min_ele = self.d.find_element(By.XPATH,
+                                              events_Read_Ini().current_minute_element_by_xpath())
+        cur_min = int(current_min_ele.text)
+        while int(cur_min) != int(minute):
+            clock_down_button = self.d.find_element(By.XPATH, events_Read_Ini()
+                                                    .clock_min_down_button_by_xpath())
+            clock_down_button.click()
+            current_min_ele = self.d.find_element(By.XPATH, events_Read_Ini()
+                                                  .current_minute_element_by_xpath())
+            cur_min = int(current_min_ele.text)
+
+    def calender_handle_hour_minute_from(self, hour, minute):
+        # set the hour
+        current_hour_ele = self.d.find_element(By.XPATH, events_Read_Ini().current_hour_ele_by_xpath())
+        cur_hour = int(current_hour_ele.text)
+
+        # decrementHours
+        while int(cur_hour) != int(hour):
+            hour_down = self.d.find_element(By.XPATH, events_Read_Ini().hour_down_by_xpath())
+            hour_down.click()
+            current_hour_ele = self.d.find_element(By.XPATH, events_Read_Ini()
+                                                   .current_hour_ele_by_xpath())
+            cur_hour = int(current_hour_ele.text)
+
+        # set the minute
+        current_min_ele = self.d.find_element(By.XPATH, events_Read_Ini()
+                                              .current_minute_element_by_xpath())
+        cur_min = int(current_min_ele.text)
+        while int(cur_min) != int(minute):
+            clock_up_button = self.d.find_element(By.XPATH, events_Read_Ini()
+                                                  .clock_min_up_button_by_xpath())
+            clock_up_button.click()
+            current_min_ele = self.d.find_element(By.XPATH, events_Read_Ini()
+                                                  .current_minute_element_by_xpath())
+            cur_min = int(current_min_ele.text)
+
+    # close tab and logout method
+
+    def close_all_panel_one_by_one(self):
+        try:
+            close_panel_list = self.d.find_elements(By.XPATH,
+                                                    events_Read_Ini().close_all_panel_one_by_one())
+            for i in close_panel_list:
+                i.click()
+                time.sleep(web_driver.one_second)
+        except Exception as ex:
+            self.log.info(ex.args)
+
+    def click_on_logout_button(self):
+        try:
+            time.sleep(web_driver.one_second)
+            logout_button = self.d.find_element(By.XPATH, events_Read_Ini().logout_btn_by_xpath())
+            logout_button.click()
+        except Exception as ex:
+            self.d.save_screenshot(f"{self.screenshots_path}\\click_on_logout_button_failed.png")
+            self.log.info(f"exception:  {ex.args}")
+            return False
+
+
+
+
+
+
+
+
+
+
+
+

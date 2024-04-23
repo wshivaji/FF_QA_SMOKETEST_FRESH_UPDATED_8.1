@@ -44,6 +44,10 @@ class LoginLogout_Read_ini:
         username = self.config.get("user_info", "username")
         return username
 
+    def get_username1(self):
+        username = self.config.get("user_info", "username1")
+        return username
+
     def get_advance_btn_by_xpath(self):
         try:
             advance_btn_by_xpath = self.common_test_data_config.get("Login_Logout_Data", "advance_btn_by_xpath")
