@@ -11,12 +11,13 @@ from All_POM_Packages.Visitor_Seach_Jobs_Module_POM.Visitor_Search_Jobs_Module_P
 from All_POM_Packages.Account_module_POM.Account_pom import account_pom
 from All_POM_Packages.Notifier_Module_POM.Notifier_POM import Notifier_pom
 from All_POM_Packages.Zones_Module_POM.Zones_Module_POM import Zones_pom
+from All_POM_Packages.User_Roles_Module_POM.User_Roles_Module_POM import user_roles_module_pom
+from All_POM_Packages._6_Notes_Module_POM.Notes_pom import notes_pom
 from All_POM_Packages.tags_module_POM.Tags_Module_POM import Tags_Module_pom
 from All_POM_Packages.Enrollment_POM.Enrollment_module_POM import enrollments_POM
 from All_POM_Packages.Insight_Dashboard_Module_POM.Insight_Dashboard_POM import insight_dashboard_pom
 from All_POM_Packages.Identify_and_Enroll_Module_POM.Identify_and_Enroll_Module_POM import Identify_And_Enroll_POM
 from All_POM_Packages.Audit_Log_Report_Module_POM.Audit_Log_Report_Module_POM import Audit_log_report_pom
-# from All_POM_Packages.Reporting_Module.Reporting_POM import Reporting_pom
 from All_POM_Packages.Reporting_Module.Reporting_Events_POM import Reporting_Events_pom
 from All_POM_Packages.SSPR_Module_POM.Sspr_POM import SSPR_pom
 
@@ -71,7 +72,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
      '''
     @pytest.mark.system
     def test_SM_TC005(self):
-        if account_pom().save_account_panel_details_before_execution():
+        if account_pom().Verify_account_panel_details_before_execution():
             assert True
         else:
             assert False
@@ -79,6 +80,19 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
     '''''
         These cases will validate default and 5 newly added user roles (persona) and its total count.
     '''
+    @pytest.mark.system
+    def test_SM_TC006(self):
+        if user_roles_module_pom().Verify_new_user_roles_operator_responder_approver_executive_and_it_admin_are_visible():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC007(self):
+        if user_roles_module_pom().Verify_total_user_roles_are_6_including_default_user_role():
+            assert True
+        else:
+            assert False
 
     # ------------------------------------------------  Users Cases  ------------------------------------------------ #
     '''''
@@ -86,7 +100,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
         users.
         '''
     @pytest.mark.system
-    def test_SM_TC009(self):
+    def test_SM_TC008(self):
         self.logger.info("Users module = test_TC_US_09 execution started..")
         if (Users_Module_pom().
                 Create_5_users_standard_operator_responder_approver_executive_and_it_admin_with_all_required_field()):
@@ -95,7 +109,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC010(self):
+    def test_SM_TC009(self):
         self.logger.info("Users module = test_TC_US_10 execution started..")
         if Users_Module_pom().Verify_for_above_5_users_region_edges_are_properly_assigned():
             assert True
@@ -103,7 +117,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC011(self):
+    def test_SM_TC010(self):
         self.logger.info("user module = test_Tc_US_11_execution started....")
         if Users_Module_pom().Verify_total_users_are_n_including_default_user():
             assert True
@@ -116,14 +130,14 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
         not.
     '''
     @pytest.mark.system
-    def test_SM_TC012(self):
+    def test_SM_TC011(self):
         if Portal_Menu_Module_pom().Verify_all_submenus_are_visible_and_clickable_on_Cloud_Menu():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC013(self):
+    def test_SM_TC012(self):
         if (Portal_Menu_Module_pom().
                 Verify_for_Operator_user_PME_Tags_IE_DF_Enrollments_EG_VS_VSJ_Notes_Loc_Zones_Reporting_IDB_Notifier_these_menus_are_visible_on_the_cloud_menu_items()):
             assert True
@@ -131,7 +145,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC014(self):
+    def test_SM_TC013(self):
         if (Portal_Menu_Module_pom().
                 Verify_for_Responder_user_PME_Tags_IE_DF_Enrollments_EG_NG_VS_VSJ_Notes_Loc_US_UR_Zones_Reporting_IDB_Notifier_ALR_these_menus_are_visible_on_the_cloud_menu_items()):
             assert True
@@ -139,7 +153,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC015(self):
+    def test_SM_TC014(self):
         if (Portal_Menu_Module_pom().
                 Verify_for_Approver_or_supervisor_user_PME_Tags_IE_DF_Enrollments_EG_NG_VS_VSJ_Notes_Loc_US_UR_Zones_Reporting_IDB_Notifier_ALR_these_menus_are_visible_on_the_cloud_menu_items()):
             assert True
@@ -147,7 +161,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC016(self):
+    def test_SM_TC015(self):
         if (Portal_Menu_Module_pom().
                 Verify_for_Executive_user_PME_Tags_IE_DF_Enrollments_EG_NG_VS_VSJ_Notes_Loc_US_UR_Zones_Account_Reporting_IDB_Notifier_ALR_these_menus_are_visible_on_the_cloud_menu_items()):
             assert True
@@ -155,7 +169,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC017(self):
+    def test_SM_TC016(self):
         if (Portal_Menu_Module_pom().
                 Verify_for_IT_Admin_user_PME_Tags_IE_DF_Enrollments_EG_NG_VS_VSJ_Notes_Loc_US_UR_Zones_Account_Reporting_IDB_Notifier_ALR_these_menus_are_visible_on_the_cloud_menu_items()):
             assert True
@@ -167,7 +181,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
         Below cases will perform, creating new alert groups and linking them to Users.
     '''
     @pytest.mark.system
-    def test_SM_TC018(self):
+    def test_SM_TC017(self):
         if (Notification_Groups_Module_pom().
                 Create_5_Notification_groups_fill_the_details_and_link_the_particular_user_to_particular_NG_based_on_naming_convention()):
             assert True
@@ -175,7 +189,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC019(self):
+    def test_SM_TC018(self):
         if Notification_Groups_Module_pom().Verify_total_count_of_NGs_is_6_including_default_NG():
             assert True
         else:
@@ -186,7 +200,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
         Below cases will perform, creating new case groups and linking them to alert groups.
     '''
     @pytest.mark.system
-    def test_SM_TC020(self):
+    def test_SM_TC019(self):
         if (Enrollments_Groups_Module_pom().
                 Create_5_Enrollment_groups_fill_the_details_and_link_the_particular_NG_to_particular_EG_based_on_naming_convention()):
             assert True
@@ -194,14 +208,14 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC021(self):
+    def test_SM_TC020(self):
         if Enrollments_Groups_Module_pom().Verify_total_count_of_EGs_is_6_including_default_EG():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC022(self):
+    def test_SM_TC021(self):
         if Enrollments_Groups_Module_pom().Verify_for_above_all_5_EG_face_and_mask_threshold_value_should_be_point_83_and_suppress_duplicate_events_value_should_be_0_minute():
             assert True
         else:
@@ -212,12 +226,10 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
         Below cases will perform, creating 3 serious and 1 non-serious tags.
     '''
 
-
     # --------------------------------------------  Identify & Enroll Cases  ----------------------------------------- #
     '''''
         Below cases will perform, enrolling 25 subjects (5 for each EG) by "operator" user and approve them by 
-        "approver" user.
-    '''
+        "approver" user.    '''
 
     @pytest.mark.system
     def test_SM_TC025(self):
@@ -259,13 +271,6 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             self.logger.info("test_TC_VS_03 execution failed..")
             assert False
 
-    @pytest.mark.system
-    def test_SM_TC030(self):
-        if Visitor_Search_Module_pom().Verify_org_hierarchy_selection_root_name_should_be_able_to_match_with_DM_core_name():
-            assert True
-        else:
-            self.logger.info("test_TC_VS_04 execution failed..")
-            assert False
 
     # --------------------------------------------  Visitor Search Jobs Cases  --------------------------------------- #
     @pytest.mark.system
@@ -278,39 +283,12 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC032(self):
-        self.logger.info("Visitor search jobs module = test_VSJ_02 execution started..")
-        if Visitor_Search_Jobs_Module_pom().Verify_visitor_search_status_banner_is_visible_visitor_search_jobs_on_VSJ_panel():
-            assert True
-        else:
-            self.logger.info("test_VSJ_02 execution failed..")
-            assert False
-
-    @pytest.mark.system
-    def test_SM_TC033(self):
-        self.logger.info("Visitor search jobs module = test_VSJ_03 execution started..")
-        if Visitor_Search_Jobs_Module_pom().verify_when_user_click_on_View_Results_button_of_VSJ_should_display_visitor_search_results_panel():
-            assert True
-        else:
-            self.logger.info("test_VSJ_03 execution failed..")
-            assert False
-
-    @pytest.mark.system
     def test_SM_TC034(self):
         self.logger.info("Visitor search jobs module = test_VSJ_04 execution started..")
         if Visitor_Search_Jobs_Module_pom().Verify_the_visitor_search_job_contains_the_selected_threshold_visitors_in_date_range_and_belongs_to_search_Org_Hierarchy_Selection_when_user_performs_a_visitor_search_with_Date_Org():
             assert True
         else:
             self.logger.info("test_VSJ_04 execution failed..")
-            assert False
-
-    @pytest.mark.system
-    def test_SM_TC035(self):
-        self.logger.info("Visitor search jobs module = test_VSJ_05 execution started..")
-        if Visitor_Search_Jobs_Module_pom().verify_user_able_to_delete_VS_jobs():
-            assert True
-        else:
-            self.logger.info("test_VSJ_05 execution failed..")
             assert False
 
     @pytest.mark.system
@@ -1050,12 +1028,6 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     # ------------------------------------------ Account cases ------------------------------------ #
-    @pytest.mark.system
-    def test_SM_TC141(self):
-        if account_pom().save_account_panel_details_after_execution():
-            assert True
-        else:
-            assert False
 
     @pytest.mark.system
     def test_SM_TC142(self):
@@ -1098,13 +1070,6 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
         '''
 
     @pytest.mark.system
-    def test_SM_TC147(self):
-        if Zones_pom().open_zones_panel_and_verify_zones_panel_displayed():
-            assert True
-        else:
-            assert False
-
-    @pytest.mark.system
     def test_SM_TC148(self):
         if Zones_pom().verify_zone_list_enlisted_and_zone_names_displayed_as_expected():
             assert True
@@ -1124,7 +1089,113 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert True
         else:
             assert False
-            
+
+    # ---------------------------------------- Portal Login User Blocking test case ---------------------------------- #
+    @pytest.mark.system
+    def test_SM_TC151(self):
+        if Portal_Login_Page_Pom(). \
+                verify_user_account_blocked_for_30_min_if_user_enter_wrong_password_for_6_times_verify_message_warning():
+            assert True
+        else:
+            assert False
+
+    # ---------------------------------------- Visitor Search test case ---------------------------------- #
+    @pytest.mark.system
+    def test_SM_TC152(self):
+        if Visitor_Search_Module_pom().Verify_org_hierarchy_selection_root_name_should_be_able_to_match_with_DM_core_name():
+            assert True
+        else:
+            self.logger.info("test_TC_VS_04 execution failed..")
+            assert False
+
+    @pytest.mark.portal
+    def test_SM_TC153(self):
+        if Visitor_Search_Module_pom().Verify_warning_message_when_user_is_dropping_the_image_which_is_clicked_on_live_or_file_image_on_events_panel_able_to_perform_image_with_meta_data_idealy_it_should_not_with_larger_image_able_to_perform():
+            assert True
+        else:
+            self.logger.info("test_TC_VS_05 execution failed..")
+            assert False
+
+    # ---------------------------------------- Visitor Search Jobs test case ---------------------------------- #
+
+    @pytest.mark.system
+    def test_SM_TC154(self):
+        if Visitor_Search_Jobs_Module_pom().Verify_visitor_search_status_banner_is_visible_visitor_search_jobs_on_VSJ_panel():
+            assert True
+        else:
+            self.logger.info("test_VSJ_02 execution failed..")
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC155(self):
+        if Visitor_Search_Jobs_Module_pom().verify_when_user_click_on_View_Results_button_of_VSJ_should_display_visitor_search_results_panel():
+            assert True
+        else:
+            self.logger.info("test_VSJ_03 execution failed..")
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC156(self):
+        if Visitor_Search_Jobs_Module_pom().verify_user_able_to_delete_VS_jobs():
+            assert True
+        else:
+            self.logger.info("test_VSJ_05 execution failed..")
+            assert False
+
+    # ------------------------------------------ Tags CERD case ------------------------------------ #
+    # ------------------------------------------ Notes cases ------------------------------------ #
+    # @pytest.mark.p1
+    # def test_SM_TC156(self):
+    #     if notes_pom().verify_user_able_create_notes_successfully():
+    #         assert True
+    #     else:
+    #         assert False
+    #
+    # @pytest.mark.p1
+    # def test_SM_TC156(self):
+    #     if notes_pom().verify_user_able_to_edit_details_by_selecting_details_icon():
+    #         assert True
+    #     else:
+    #         assert False
+    # @pytest.mark.p1
+    # def test_SM_TC156(self):
+    #     if notes_pom().verify_user_able_to_delete_notes_successfully():
+    #         assert True
+    #     else:
+    #         assert False
+    #
+    # @pytest.mark.p1
+    # def test_SM_TC156(self):
+    #     if notes_pom().verify_user_is_able_to_select_any_one_note_and_click_on_location_in_view_dropdown():
+    #         assert True
+    #     else:
+    #         assert False
+    #
+    # @pytest.mark.p2
+    # def test_SM_TC156(self):
+    #     if notes_pom().verify_user_is_able_to_select_any_one_note_and_click_on_location_icon():
+    #         assert True
+    #     else:
+    #         assert False
+    #
+    # @pytest.mark.p2
+    # def test_SM_TC156(self):
+    #     if notes_pom().verify_user_is_able_to_see_the_enrollment_associated_to_particular_note():
+    #         assert True
+    #     else:
+    #         assert False
+
+    # ------------------------------------------ Enrollment Delete case ------------------------------------ #
+
+
+    # ------------------------------------------ Account details After case ------------------------------------ #
+    @pytest.mark.system
+    def test_SM_TC171(self):
+        if account_pom().Verify_account_panel_details_after_execution():
+            assert True
+        else:
+            assert False
+
     # ------------------------------------------ SSPR cases ------------------------------------ #
 
     @pytest.mark.sspr

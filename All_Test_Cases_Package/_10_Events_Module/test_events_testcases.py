@@ -84,42 +84,42 @@ class Test_eVents_testcases(web_driver, web_logger):
     #         assert True
     #     else:
     #         assert False
-            
+
     # @pytest.mark.p1
     # def test_events_TC_003(self):
     #     if events_pom().verify_on_cloud_menu_after_login():
     #         assert True
     #     else:
     #         assert False
-            
+
     # @pytest.mark.p1
     # def test_events_TC_004(self):
     #     if events_pom().verify_Events_are_displayed_in_dashboard_items():
     #         assert True
     #     else:
     #         assert False
-            
+
     # @pytest.mark.p1
     # def test_events_TC_005(self):
     #     if events_pom().click_on_Events_and_verify_panel_heading_of_Events_is_visible():
     #         assert True
     #     else:
     #         assert False
-            
+
     # @pytest.mark.p2
     # def test_events_TC_006(self):
     #     if events_pom().verify_view_dropdown_is_visible():
     #         assert True
     #     else:
     #         assert False
-            
+
     # @pytest.mark.p2
     # def test_events_TC_007(self):
     #     if events_pom().on_Events_panel_heading_verify_cross_symbol_is_visible():
     #         assert True
     #     else:
     #         assert False
-            
+
     @pytest.mark.p1
     def test_events_TC_008(self):
         if events_pom().on_Events_page_verify_filter_search_results_textbox_is_visible_and_clickable_text_on_button_is_visible():

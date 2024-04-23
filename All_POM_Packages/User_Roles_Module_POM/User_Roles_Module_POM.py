@@ -3046,6 +3046,7 @@ class user_roles_module_pom(web_driver, web_logger):
             self.logger.error(f"TC_UR_23 got exception as: {ex.args}")
         finally:
             self.close_all_panel()
+            self.click_on_logout()
 
     def get_excel_data(self):
         try:
@@ -3203,4 +3204,418 @@ class user_roles_module_pom(web_driver, web_logger):
             self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_UR__exception.png")
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_UR__exception.png")
             self.logger.error(f"TC_UR_ got exception as: {ex.args}")
+        finally:
+            self.click_on_logout()
+
+
+    def Verify_user_able_to_create_a_new_users_role_by_filling_all_the_fields(self):
+        try:
+            status = []
+            self.logger.info("user roles tc=03 started")
+            login().login_to_cloud_if_not_done(self.d)
+            user_role_link = self.d.find_element(By.XPATH,user_roles_read_ini().user_role_link())
+            user_role_link.click()
+            actual_user_roles_menu_item_list = self.d.find_elements(By.XPATH,
+                                                                    user_roles_read_ini().get_user_role_menu_item_by_xpath())
+            if len(actual_user_roles_menu_item_list) > 0:
+                actual_user_roles_menu_item = self.d.find_element(By.XPATH,
+                                                                  user_roles_read_ini().get_user_role_menu_item_by_xpath())
+                actual_user_roles_menu_item.click()
+                time.sleep(web_driver.one_second)
+                action_drop_down = self.d.find_element(By.XPATH, user_roles_read_ini().get_action_dropdown_by_xpath())
+                self.logger.info(f"actual action dropdown text: {action_drop_down.text}")
+                action_drop_down.click()
+                time.sleep(web_driver.one_second)
+                options_inside_action_dropdown = self.d.find_elements(By.XPATH,
+                                                                      user_roles_read_ini().get_options_inside_action_dropdown_by_xpath())
+                if len(options_inside_action_dropdown) > 0:
+                    self.logger.info("action dropdown contains options...")
+                    for y in range(len(options_inside_action_dropdown)):
+                        option = options_inside_action_dropdown[y]
+                        self.logger.info(f"option: {option.text}")
+                        if option.is_displayed():
+                            status.append(True)
+                        else:
+                            status.append(False)
+                        if option.is_enabled():
+                            status.append(True)
+                        else:
+                            status.append(False)
+                        if option.text == user_roles_read_ini().get_create_user_role_option_text_inside_action_dropdown():
+                            self.logger.info(f"Option Name Selected: {option.text}")
+                            option.click()
+                            time.sleep(web_driver.one_second)
+                            user_role_panel_title_list = self.d.find_elements(By.XPATH,
+                                                                              user_roles_read_ini().get_user_role_panel_title_by_xpath())
+                            if len(user_role_panel_title_list) > 0:
+                                for x in range(len(user_role_panel_title_list)):
+                                    self.logger.info(f"Panel Heading: {user_role_panel_title_list[x].text}")
+                                    if user_role_panel_title_list[x].text == user_roles_read_ini().get_user_role_panel_title_text():
+
+                                        self.logger.info(f"Actual Panel Heading: {user_role_panel_title_list[x].text}")
+                                        status.append(True)
+                                        # ----------------------------------------
+
+                                        role_name_text_box = self.d.find_element(By.XPATH,
+                                                                                 user_roles_read_ini().get_rolename_text_box_to_enter_data_by_xpath())
+                                        description_text_box = self.d.find_element(By.XPATH,
+                                                                                   user_roles_read_ini().get_description_text_box_to_enter_data_by_xpath())
+
+                                        role_name_text_box.click()
+                                        role_name_text_box.clear()
+                                        role_name_text_box.send_keys(user_roles_read_ini().get_so_user_role())
+                                        time.sleep(web_driver.one_second)
+                                        description_text_box.click()
+                                        description_text_box.clear()
+                                        description_text_box.send_keys(
+                                            user_roles_read_ini().get_so_user_role_description())
+                                        time.sleep(web_driver.one_second)
+                                        entered_text = role_name_text_box.get_attribute('value')
+                                        entered_description = description_text_box.get_attribute('value')
+                                        self.logger.info(
+                                            f"entered role: {entered_text}, \nentered description: {entered_description}")
+                                        if entered_text == user_roles_read_ini().get_so_user_role():
+                                            status.append(True)
+                                        else:
+                                            status.append(False)
+                                        if entered_description == user_roles_read_ini().get_so_user_role_description():
+                                            status.append(True)
+                                            self.logger.info(f"verify: {True}")
+                                        else:
+                                            self.logger.info(f"verify: {False}")
+                                            status.append(False)
+                                        # -------------------------------------------
+                                        rights_check_box = self.d.find_element(By.XPATH,
+                                                                               user_roles_read_ini().get_rights_checkbox_by_xpath())
+                                        self.logger.info(f"check box status: {rights_check_box.is_selected()}")
+                                        self.status.append(rights_check_box.is_selected())
+                                        rights_check_box.click()
+                                        time.sleep(web_driver.one_second)
+                                        rights_check_box = self.d.find_element(By.XPATH,
+                                                                               user_roles_read_ini().get_rights_checkbox_by_xpath())
+                                        # self.logger.info(f"check box status: {rights_check_box.is_selected()}")
+                                        # self.status.append(rights_check_box.is_selected())
+                                        rights_check_box.click()
+                                        save_btn = self.d.find_element(By.XPATH,
+                                                                       user_roles_read_ini().get_save_btn_by_xpath())
+                                        save_btn.click()
+            self.verify_newly_created_user_role_is_available_for_user_creation_inside_user_roles_dropdown_on_create_user_panel()
+            if False in self.status:
+                return False
+            else:
+                return True
+
+        except Exception as ex:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_UR__exception.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_UR__exception.png")
+                self.logger.error(f"TC_UR_ got exception as: {ex.args}")
+        finally:
+            self.click_on_logout()
+
+
+    def verify_user_able_to_edit_user_roles_detaild_description_with_disabled_enrollment_review_permissions(self):
+        try:
+            self.logger.info("ur role module testcase started")
+            login().login_to_cloud_if_not_done(self.d)
+            time.sleep(web_driver.one_second)
+
+            user_role_link = self.d.find_element(By.XPATH,user_roles_read_ini().user_role_link())
+            user_role_link.click()
+            time.sleep(web_driver.one_second)
+
+            details_button_created_user = self.d.find_element(By.XPATH,user_roles_read_ini().details_button_of_created_userrole())
+            details_button_created_user.click()
+            time.sleep(web_driver.one_second)
+
+            action_dropdown = self.d.find_element(By.XPATH,user_roles_read_ini().action_dropdown_on_user_role())
+            action_dropdown.click()
+            time.sleep(web_driver.one_second)
+
+            edit_option = self.d.find_element(By.XPATH,user_roles_read_ini().edit_option())
+            edit_option.click()
+            time.sleep(web_driver.one_second)
+
+            enrollment_review_permission_checkbox = self.d.find_element(By.XPATH,user_roles_read_ini().edit_enrollment_review_permission())
+            enrollment_review_permission_checkbox.click()
+            time.sleep(web_driver.one_second)
+
+            save_button = self.d.find_element(By.XPATH,user_roles_read_ini().get_save_btn_by_xpath())
+            save_button.click()
+            time.sleep(web_driver.one_second)
+
+            success_msg = self.d.find_element(By.XPATH,user_roles_read_ini().after_editing_success_msg())
+            if success_msg.is_displayed():
+                self.logger.info("enrollment review permission successfully edited")
+                self.status.append(True)
+            else:
+                self.logger.info("enrollment review permission is not edited")
+                self.status.append(True)
+
+            if False in self.status:
+                return False
+            else:
+                return True
+
+        except Exception as ex:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_UR__exception.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_UR__exception.png")
+                self.logger.error(f"TC_UR_ got exception as: {ex.args}")
+        finally:
+            self.click_on_logout()
+
+    def Verify_details_and_all_permission_of_default_it_admin(self):
+        try:
+            self.logger.info("ur role module testcase started")
+            login().login_to_cloud_if_not_done(self.d)
+            time.sleep(web_driver.one_second)
+
+            user_role_link = self.d.find_element(By.XPATH, user_roles_read_ini().user_role_link())
+            user_role_link.click()
+            time.sleep(web_driver.one_second)
+
+            details_button_created_user = self.d.find_element(By.XPATH,
+                                                              user_roles_read_ini().details_button_of_it_admin())
+            details_button_created_user.click()
+            time.sleep(web_driver.two_second)
+
+            tick_mark = self.d.find_elements(By.XPATH,user_roles_read_ini().check_mark())
+
+            if len(tick_mark)>0:
+                for i in  tick_mark:
+                    if i.is_displayed():
+                        self.logger.info("all tickmarks are visible")
+                        self.status.append(True)
+                    else:
+                        self.status.append(False)
+            if False in self.status:
+                return False
+            else:
+                return True
+
+        except Exception as ex:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_UR__exception.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_UR__exception.png")
+                self.logger.error(f"TC_UR_ got exception as: {ex.args}")
+        finally:
+            self.click_on_logout()
+
+    def Verify_User_role_deletion_functionality_by_deleting_one_user_role(self):
+        try:
+            self.logger.info("********** Test_TC_UR_23 Begin  **********")
+            status = []
+            login().login_to_cloud_if_not_done(self.d)
+            time.sleep(web_driver.one_second)
+            panels_opened_list = self.d.find_elements(By.XPATH,
+                                                      user_roles_read_ini().get_number_of_panels_list_by_xpath())
+            if len(panels_opened_list) > 0:
+                self.logger.info(f"Panels are opened...")
+                for y in range(len(panels_opened_list)):
+                    user_role_panel_title_list = self.d.find_elements(By.XPATH,
+                                                                      user_roles_read_ini().get_user_role_panel_title_by_xpath())
+                    if len(user_role_panel_title_list) > 0:
+                        for x in range(len(user_role_panel_title_list)):
+                            if user_role_panel_title_list[x].text == user_roles_read_ini().get_user_role_panel_title_text():
+                                status.append(True)
+                                # ---------------------------------------
+
+                                role_name_text_box = self.d.find_element(By.XPATH,
+                                                                         user_roles_read_ini().get_rolename_text_box_to_enter_data_by_xpath())
+                                time.sleep(web_driver.one_second)
+                                description_text_box = self.d.find_element(By.XPATH,
+                                                                           user_roles_read_ini().get_description_text_box_to_enter_data_by_xpath())
+                                time.sleep(web_driver.one_second)
+                                role_name_text_box.click()
+                                role_name_text_box.clear()
+                                role_name_text_box.send_keys(user_roles_read_ini().get_user_role_for_deletion())
+                                time.sleep(web_driver.two_second)
+                                description_text_box.click()
+                                description_text_box.clear()
+                                description_text_box.send_keys(user_roles_read_ini().get_so_user_role_description())
+                                time.sleep(web_driver.two_second)
+                                entered_text = role_name_text_box.get_attribute('value')
+                                entered_description = description_text_box.get_attribute('value')
+                                self.logger.info(
+                                    f"entered role: {entered_text}, \nentered description: {entered_description}")
+                                rights_check_box = self.d.find_element(By.XPATH,
+                                                                       user_roles_read_ini().get_rights_checkbox_by_xpath())
+                                self.logger.info(f"right checkbox status: {rights_check_box.is_selected()}")
+                                rights_check_box.click()
+                                time.sleep(web_driver.two_second)
+                                if entered_text == user_roles_read_ini().get_user_role_for_deletion():
+                                    status.append(True)
+                                else:
+                                    status.append(False)
+                                if entered_description == user_roles_read_ini().get_so_user_role_description():
+                                    status.append(True)
+                                    self.logger.info(f"verify: {True}")
+                                else:
+                                    self.logger.info(f"verify: {False}")
+                                    status.append(False)
+                                if rights_check_box.is_selected():
+                                    pass
+                                else:
+                                    rights_check_box.click()
+
+                                save_btn = self.d.find_element(By.XPATH, user_roles_read_ini().get_save_btn_by_xpath())
+                                save_btn.click()
+                                time.sleep(web_driver.two_second)
+                                user_roles_profile_names = self.d.find_elements(By.XPATH,
+                                                                                user_roles_read_ini().get_user_roles_profiles_name_list_by_xpath())
+                                for name in user_roles_profile_names:
+                                    # self.logger.info(f"profile name: {name.text}")
+                                    if name.text == user_roles_read_ini().get_user_role_for_deletion():
+                                        self.logger.info("user created successfully...")
+                                        status.append(True)
+                                # -----------------------------------
+                            else:
+                                self.logger.info("Panel is not opened...")
+                                status.append(False)
+            else:
+                self.logger.info(f"panel not opened...")
+                actual_user_roles_menu_item_list = self.d.find_elements(By.XPATH,
+                                                                        user_roles_read_ini().get_user_role_menu_item_by_xpath())
+                if len(actual_user_roles_menu_item_list) > 0:
+                    actual_user_roles_menu_item = self.explicit_wait(10, "XPATH", user_roles_read_ini()
+                                                                     .get_user_role_menu_item_by_xpath(), self.d)
+                    actual_user_roles_menu_item.click()
+                    time.sleep(web_driver.one_second)
+                    action_drop_down = self.explicit_wait(10, "XPATH", user_roles_read_ini()
+                                                          .get_action_dropdown_by_xpath(), self.d)
+                    action_drop_down.click()
+                    time.sleep(web_driver.one_second)
+                    options_inside_action_dropdown = self.d.find_elements(By.XPATH,
+                                                                          user_roles_read_ini().get_options_inside_action_dropdown_by_xpath())
+                    if len(options_inside_action_dropdown) > 0:
+                        for y in range(len(options_inside_action_dropdown)):
+                            option = options_inside_action_dropdown[y]
+
+                            if option.text == user_roles_read_ini().get_create_user_role_option_text_inside_action_dropdown():
+                                option.click()
+                                time.sleep(web_driver.one_second)
+                                user_role_panel_title_list = self.d.find_elements(By.XPATH,
+                                                                                  user_roles_read_ini().get_user_role_panel_title_by_xpath())
+                                if len(user_role_panel_title_list) > 0:
+                                    for x in range(len(user_role_panel_title_list)):
+                                        if user_role_panel_title_list[x].text == user_roles_read_ini().get_user_role_panel_title_text():
+                                            status.append(True)
+                                            # ----------------------------------------
+
+                                            role_name_text_box = self.d.find_element(By.XPATH,
+                                                                                     user_roles_read_ini().get_rolename_text_box_to_enter_data_by_xpath())
+                                            time.sleep(web_driver.one_second)
+                                            description_text_box = self.d.find_element(By.XPATH,
+                                                                                       user_roles_read_ini().get_description_text_box_to_enter_data_by_xpath())
+                                            time.sleep(web_driver.one_second)
+                                            role_name_text_box.click()
+                                            role_name_text_box.clear()
+                                            role_name_text_box.send_keys(user_roles_read_ini().get_user_role_for_deletion())
+                                            time.sleep(web_driver.two_second)
+                                            description_text_box.click()
+                                            description_text_box.clear()
+                                            description_text_box.send_keys(
+                                                user_roles_read_ini().get_so_user_role_description())
+                                            time.sleep(web_driver.two_second)
+                                            entered_text = role_name_text_box.get_attribute('value')
+                                            entered_description = description_text_box.get_attribute('value')
+                                            self.logger.info(
+                                                f"entered role: {entered_text}, \nentered description: {entered_description}")
+                                            rights_check_box = self.d.find_element(By.XPATH,
+                                                                                   user_roles_read_ini().get_rights_checkbox_by_xpath())
+                                            self.logger.info(f"right checkbox status: {rights_check_box.is_selected()}")
+                                            rights_check_box.click()
+                                            time.sleep(web_driver.one_second)
+                                            if entered_text == user_roles_read_ini().get_user_role_for_deletion():
+                                                status.append(True)
+                                            else:
+                                                status.append(False)
+                                            if entered_description == user_roles_read_ini().get_so_user_role_description():
+                                                status.append(True)
+                                                self.logger.info(f"verify: {True}")
+                                            else:
+                                                self.logger.info(f"verify: {False}")
+                                                status.append(False)
+                                            if rights_check_box.is_selected():
+                                                pass
+                                            else:
+                                                rights_check_box.click()
+
+                                            save_btn = self.d.find_element(By.XPATH,
+                                                                           user_roles_read_ini().get_save_btn_by_xpath())
+                                            save_btn.click()
+                                            time.sleep(web_driver.two_second)
+                                            user_roles_profile_names = self.d.find_elements(By.XPATH,
+                                                                                            user_roles_read_ini().get_user_roles_profiles_name_list_by_xpath())
+
+                                            for name in user_roles_profile_names:
+                                                # self.logger.info(f"profile name: {name.text}")
+                                                if name.text == user_roles_read_ini().get_user_role_for_deletion():
+                                                    self.logger.info("user created successfully...")
+                                                    status.append(True)
+
+                                            # -------------------------------------------
+                                        else:
+                                            self.logger.info("Panel is not opened...")
+                                            status.append(False)
+
+            user_roles_profile_names = self.d.find_elements(By.XPATH,
+                                                            user_roles_read_ini().get_user_roles_profiles_name_list_by_xpath())
+            checkboxes = self.d.find_elements(By.XPATH, user_roles_read_ini().get_user_roles_checkboxes_by_xpath())
+            for i in range(len(user_roles_profile_names)-1):
+                if user_roles_profile_names[i].text == user_roles_read_ini().get_user_role_for_deletion():
+                    checkboxes[i].click()
+                    self.d.find_element(By.XPATH, user_roles_read_ini().get_action_dropdown_by_xpath()).click()
+                    time.sleep(web_driver.two_second)
+                    options_inside_action_dropdown = self.d.find_elements(By.XPATH,
+                                                                          user_roles_read_ini().get_options_inside_action_dropdown_by_xpath())
+                    for y in range(len(options_inside_action_dropdown)-1):
+                        option = options_inside_action_dropdown[y]
+                        if option.text == user_roles_read_ini().get_delete_user_role_option_text_inside_action_dropdown():
+                            # self.logger.info(f"Option Name Selected: {option.text}")
+                            option.click()
+                            time.sleep(web_driver.two_second)
+                            self.d.find_element(By.XPATH, user_roles_read_ini().get_yes_delete_user_role_button_by_xpath()).click()
+                            time.sleep(web_driver.two_second)
+
+                            user_roles_profile_names = self.d.find_elements(By.XPATH,
+                                                                            user_roles_read_ini().get_user_roles_profiles_name_list_by_xpath())
+                            time.sleep(web_driver.two_second)
+
+                            for j in range(len(user_roles_profile_names)-1):
+                                if user_roles_profile_names[j].text == user_roles_read_ini().get_user_role_for_deletion():
+                                    status.append(False)
+                                else:
+                                    status.append(True)
+
+            self.logger.info(f"status: {status}")
+            self.logger.info("TC_UR_23 execution completed.\n")
+            if False in status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_UR_23.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_UR_23.png")
+                return False
+            else:
+                return True
+            logout().logout_from_core(self.d)
+
+        except Exception as ex:
+            self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_UR_23_exception.png")
+            self.d.save_screenshot(f"{self.screenshots_path}\\TC_UR_23_exception.png")
+            self.logger.error(f"TC_UR_23 got exception as: {ex.args}")
+        finally:
+            self.close_all_panel()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
