@@ -581,7 +581,7 @@ class Deployment_Manager_Page_Pom(web_driver, web_logger):
             self.d.find_element("xpath", "(//div[@class='jss158'])[6]//a").click()
             time.sleep(web_driver.two_second)
             self.d.switch_to.window(self.d.window_handles[1])
-            self.d.find_element(By.ID, "login-username").send_keys(Portal_login_page_read_ini().get_portal_login_username())
+            self.d.find_element(By.ID, "login-username").send_keys(Portal_login_page_read_ini().get_valid_login_username())
             time.sleep(web_driver.two_second)
             self.d.find_element(By.ID, "login-password").send_keys(Portal_login_page_read_ini().get_portal_login_password())
             time.sleep(web_driver.two_second)
@@ -626,7 +626,7 @@ class Deployment_Manager_Page_Pom(web_driver, web_logger):
             time.sleep(web_driver.two_second)
             self.d.switch_to.window(self.d.window_handles[1])
             self.d.find_element(By.ID, "login-username").send_keys(
-                Portal_login_page_read_ini().get_portal_login_username())
+                Portal_login_page_read_ini().get_valid_login_username())
             time.sleep(web_driver.two_second)
             self.d.find_element(By.ID, "login-password").send_keys(
                 Portal_login_page_read_ini().get_portal_login_password())
@@ -663,7 +663,7 @@ class Deployment_Manager_Page_Pom(web_driver, web_logger):
             time.sleep(web_driver.two_second)
             self.d.switch_to.window(self.d.window_handles[1])
             self.d.find_element(By.ID, "login-username").send_keys(
-                Portal_login_page_read_ini().get_portal_login_username())
+                Portal_login_page_read_ini().get_valid_login_username())
             time.sleep(web_driver.two_second)
             self.d.find_element(By.ID, "login-password").send_keys(
                 Portal_login_page_read_ini().get_portal_login_password())
