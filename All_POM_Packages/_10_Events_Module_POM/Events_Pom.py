@@ -1339,9 +1339,6 @@ class events_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_110.png")
             self.logger.error(f"TC_events_110 got exception as: {ex} ")
 
-
-
-
     def Verify_user_is_able_to_edit_the_Enrollment_details_on_Enrollment_View_panel_when_ProbableMatch_Event_icon_is_click(self):
         try:
             self.logger.info("*********TC_114******* started")
@@ -1468,7 +1465,6 @@ class events_pom(web_driver, web_logger):
             self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_117.png")
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_117.png")
             self.logger.error(f"TC_events_117 got exception as: {ex} ")
-
 
     def Verify_user_is_able_to_see_probable_match_events_associated_to_same_person_on_Enrollment_View_panel_when_probable_match_event_icon_is_click(self):
 
