@@ -8,10 +8,10 @@ class read_enrollment_components:
     def __init__(self):
         self.config = configparser.RawConfigParser()
         try:
-            portal_menu_ini_file_path = f'{Path(__file__).parent.parent.parent}\\All_Test_Data\\_11_Enrollment_Module\\Data_from_INI' \
+            enrollments_ini_file_path = f'{Path(__file__).parent.parent.parent}\\All_Test_Data\\_11_Enrollment_Module\\Data_from_INI' \
                                         f'\\Enrollments.ini'
             # Base_Class.logger.info("File location: ", deployment_manager_ini_file_path)
-            self.config.read(portal_menu_ini_file_path)
+            self.config.read(enrollments_ini_file_path)
             common_test_data_ini_file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_Data\\common_test_data.ini"
             self.common_test_data_config = configparser.RawConfigParser()
             self.common_test_data_config.read(common_test_data_ini_file_path)

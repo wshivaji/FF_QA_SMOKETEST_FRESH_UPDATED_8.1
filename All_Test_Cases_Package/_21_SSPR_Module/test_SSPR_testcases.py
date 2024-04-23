@@ -11,7 +11,7 @@ class Test_Reporting_Module_Test_Cases(web_driver, web_logger):
     logger.info(" ******** SSPR_Module (Order - 21) Begin ********")
     print("******** SSPR_Module (Order - 21) Begin ********")
 
-    #@pytest.mark.portal
+    @pytest.mark.portal
     def test_TC_SSPR_001(self):
         if SSPR_pom().open_portal_login_page_enter_username_password_and_click_on_login_btn_verify_password_reset_pop_up_displayed():
             assert True

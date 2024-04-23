@@ -1,0 +1,22 @@
+23/04/2024 05:13:40 AM : root         : INFO     :  ******** Events (Order - 10) Begin ********
+23/04/2024 05:13:40 AM : root         : INFO     : Event Search Filter Combination = test_TC_ESFC_05 execution started..
+23/04/2024 05:13:46 AM : root         : INFO     : current url: https://scecore7-vm.qa.facefirst.dev/
+23/04/2024 05:13:46 AM : root         : INFO     : url is not open
+23/04/2024 05:13:46 AM : root         : INFO     : opening localhost portal login
+23/04/2024 05:13:46 AM : root         : INFO     : logging in to core
+23/04/2024 05:13:46 AM : root         : INFO     : entered explicit wait for 10
+23/04/2024 05:13:46 AM : root         : INFO     : exiting explicit wait..
+23/04/2024 05:13:48 AM : root         : INFO     : entered explicit wait for 10
+23/04/2024 05:13:49 AM : root         : INFO     : exiting explicit wait..
+23/04/2024 05:13:51 AM : root         : INFO     : login success..
+23/04/2024 05:13:53 AM : root         : INFO     : enrollment group list is :["//*[@id='enrollmentGroup-selection-menu']/li/p"]
+23/04/2024 05:13:57 AM : root         : INFO     : actual text: AB
+23/04/2024 05:13:57 AM : root         : INFO     : expected text: A
+23/04/2024 05:13:57 AM : root         : INFO     : actual text: DEFAULT ENROLLMENT GROUP
+23/04/2024 05:13:57 AM : root         : INFO     : expected text: B
+23/04/2024 05:13:57 AM : root         : INFO     : actual text: FRAUD
+23/04/2024 05:13:57 AM : root         : INFO     : expected text: ,
+23/04/2024 05:13:57 AM : root         : INFO     : actual text: PT
+23/04/2024 05:13:57 AM : root         : INFO     : expected text: S
+23/04/2024 05:13:57 AM : root         : INFO     : actual text: SO
+23/04/2024 05:13:57 AM : root         : INFO     : expected text: O

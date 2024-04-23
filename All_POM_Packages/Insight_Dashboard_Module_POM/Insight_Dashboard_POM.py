@@ -2100,3 +2100,5 @@ class insight_dashboard_pom(web_driver, web_logger):
 enrollment_groups_enlisted_name_list = ['abe', 'Default Enrollment Group', 'fraude', 'pte', 'soe']
 enrollments_linked_to_enrollment_groups_enlisted_list = ['5', '0', '5', '5', '5']
 
+enrollment_groups_enlisted_name_list = ['abe', 'Default Enrollment Group', 'fraude', 'pte', 'soe']
+enrollments_linked_to_enrollment_groups_enlisted_list = ['5', '0', '5', '5', '5']
