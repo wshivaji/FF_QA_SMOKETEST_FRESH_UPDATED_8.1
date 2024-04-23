@@ -12,6 +12,7 @@ from All_POM_Packages.Account_module_POM.Account_pom import account_pom
 from All_POM_Packages.Notifier_Module_POM.Notifier_POM import Notifier_pom
 from All_POM_Packages.Zones_Module_POM.Zones_Module_POM import Zones_pom
 from All_POM_Packages.User_Roles_Module_POM.User_Roles_Module_POM import user_roles_module_pom
+from All_POM_Packages._6_Notes_Module_POM.Notes_pom import notes_pom
 from All_POM_Packages.tags_module_POM.Tags_Module_POM import Tags_Module_pom
 from All_POM_Packages.Enrollment_POM.Enrollment_module_POM import enrollments_POM
 from All_POM_Packages.Insight_Dashboard_Module_POM.Insight_Dashboard_POM import insight_dashboard_pom
@@ -225,12 +226,10 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
         Below cases will perform, creating 3 serious and 1 non-serious tags.
     '''
 
-
     # --------------------------------------------  Identify & Enroll Cases  ----------------------------------------- #
     '''''
         Below cases will perform, enrolling 25 subjects (5 for each EG) by "operator" user and approve them by 
-        "approver" user.
-    '''
+        "approver" user.    '''
 
     @pytest.mark.system
     def test_SM_TC025(self):
@@ -272,13 +271,6 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             self.logger.info("test_TC_VS_03 execution failed..")
             assert False
 
-    @pytest.mark.system
-    def test_SM_TC030(self):
-        if Visitor_Search_Module_pom().Verify_org_hierarchy_selection_root_name_should_be_able_to_match_with_DM_core_name():
-            assert True
-        else:
-            self.logger.info("test_TC_VS_04 execution failed..")
-            assert False
 
     # --------------------------------------------  Visitor Search Jobs Cases  --------------------------------------- #
     @pytest.mark.system
@@ -291,39 +283,12 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC032(self):
-        self.logger.info("Visitor search jobs module = test_VSJ_02 execution started..")
-        if Visitor_Search_Jobs_Module_pom().Verify_visitor_search_status_banner_is_visible_visitor_search_jobs_on_VSJ_panel():
-            assert True
-        else:
-            self.logger.info("test_VSJ_02 execution failed..")
-            assert False
-
-    @pytest.mark.system
-    def test_SM_TC033(self):
-        self.logger.info("Visitor search jobs module = test_VSJ_03 execution started..")
-        if Visitor_Search_Jobs_Module_pom().verify_when_user_click_on_View_Results_button_of_VSJ_should_display_visitor_search_results_panel():
-            assert True
-        else:
-            self.logger.info("test_VSJ_03 execution failed..")
-            assert False
-
-    @pytest.mark.system
     def test_SM_TC034(self):
         self.logger.info("Visitor search jobs module = test_VSJ_04 execution started..")
         if Visitor_Search_Jobs_Module_pom().Verify_the_visitor_search_job_contains_the_selected_threshold_visitors_in_date_range_and_belongs_to_search_Org_Hierarchy_Selection_when_user_performs_a_visitor_search_with_Date_Org():
             assert True
         else:
             self.logger.info("test_VSJ_04 execution failed..")
-            assert False
-
-    @pytest.mark.system
-    def test_SM_TC035(self):
-        self.logger.info("Visitor search jobs module = test_VSJ_05 execution started..")
-        if Visitor_Search_Jobs_Module_pom().verify_user_able_to_delete_VS_jobs():
-            assert True
-        else:
-            self.logger.info("test_VSJ_05 execution failed..")
             assert False
 
     @pytest.mark.system
@@ -1063,12 +1028,6 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     # ------------------------------------------ Account cases ------------------------------------ #
-    @pytest.mark.system
-    def test_SM_TC141(self):
-        if account_pom().save_account_panel_details_after_execution():
-            assert True
-        else:
-            assert False
 
     @pytest.mark.system
     def test_SM_TC142(self):
@@ -1111,13 +1070,6 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
         '''
 
     @pytest.mark.system
-    def test_SM_TC147(self):
-        if Zones_pom().open_zones_panel_and_verify_zones_panel_displayed():
-            assert True
-        else:
-            assert False
-
-    @pytest.mark.system
     def test_SM_TC148(self):
         if Zones_pom().verify_zone_list_enlisted_and_zone_names_displayed_as_expected():
             assert True
@@ -1137,7 +1089,113 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert True
         else:
             assert False
-            
+
+    # ---------------------------------------- Portal Login User Blocking test case ---------------------------------- #
+    @pytest.mark.system
+    def test_SM_TC151(self):
+        if Portal_Login_Page_Pom(). \
+                verify_user_account_blocked_for_30_min_if_user_enter_wrong_password_for_6_times_verify_message_warning():
+            assert True
+        else:
+            assert False
+
+    # ---------------------------------------- Visitor Search test case ---------------------------------- #
+    @pytest.mark.system
+    def test_SM_TC152(self):
+        if Visitor_Search_Module_pom().Verify_org_hierarchy_selection_root_name_should_be_able_to_match_with_DM_core_name():
+            assert True
+        else:
+            self.logger.info("test_TC_VS_04 execution failed..")
+            assert False
+
+    @pytest.mark.portal
+    def test_SM_TC153(self):
+        if Visitor_Search_Module_pom().Verify_warning_message_when_user_is_dropping_the_image_which_is_clicked_on_live_or_file_image_on_events_panel_able_to_perform_image_with_meta_data_idealy_it_should_not_with_larger_image_able_to_perform():
+            assert True
+        else:
+            self.logger.info("test_TC_VS_05 execution failed..")
+            assert False
+
+    # ---------------------------------------- Visitor Search Jobs test case ---------------------------------- #
+
+    @pytest.mark.system
+    def test_SM_TC154(self):
+        if Visitor_Search_Jobs_Module_pom().Verify_visitor_search_status_banner_is_visible_visitor_search_jobs_on_VSJ_panel():
+            assert True
+        else:
+            self.logger.info("test_VSJ_02 execution failed..")
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC155(self):
+        if Visitor_Search_Jobs_Module_pom().verify_when_user_click_on_View_Results_button_of_VSJ_should_display_visitor_search_results_panel():
+            assert True
+        else:
+            self.logger.info("test_VSJ_03 execution failed..")
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC156(self):
+        if Visitor_Search_Jobs_Module_pom().verify_user_able_to_delete_VS_jobs():
+            assert True
+        else:
+            self.logger.info("test_VSJ_05 execution failed..")
+            assert False
+
+    # ------------------------------------------ Tags CERD case ------------------------------------ #
+    # ------------------------------------------ Notes cases ------------------------------------ #
+    # @pytest.mark.p1
+    # def test_SM_TC156(self):
+    #     if notes_pom().verify_user_able_create_notes_successfully():
+    #         assert True
+    #     else:
+    #         assert False
+    #
+    # @pytest.mark.p1
+    # def test_SM_TC156(self):
+    #     if notes_pom().verify_user_able_to_edit_details_by_selecting_details_icon():
+    #         assert True
+    #     else:
+    #         assert False
+    # @pytest.mark.p1
+    # def test_SM_TC156(self):
+    #     if notes_pom().verify_user_able_to_delete_notes_successfully():
+    #         assert True
+    #     else:
+    #         assert False
+    #
+    # @pytest.mark.p1
+    # def test_SM_TC156(self):
+    #     if notes_pom().verify_user_is_able_to_select_any_one_note_and_click_on_location_in_view_dropdown():
+    #         assert True
+    #     else:
+    #         assert False
+    #
+    # @pytest.mark.p2
+    # def test_SM_TC156(self):
+    #     if notes_pom().verify_user_is_able_to_select_any_one_note_and_click_on_location_icon():
+    #         assert True
+    #     else:
+    #         assert False
+    #
+    # @pytest.mark.p2
+    # def test_SM_TC156(self):
+    #     if notes_pom().verify_user_is_able_to_see_the_enrollment_associated_to_particular_note():
+    #         assert True
+    #     else:
+    #         assert False
+
+    # ------------------------------------------ Enrollment Delete case ------------------------------------ #
+
+
+    # ------------------------------------------ Account details After case ------------------------------------ #
+    @pytest.mark.system
+    def test_SM_TC171(self):
+        if account_pom().Verify_account_panel_details_after_execution():
+            assert True
+        else:
+            assert False
+
     # ------------------------------------------ SSPR cases ------------------------------------ #
 
     @pytest.mark.sspr

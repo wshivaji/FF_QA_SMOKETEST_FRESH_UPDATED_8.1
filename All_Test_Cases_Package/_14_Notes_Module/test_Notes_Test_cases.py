@@ -12,34 +12,34 @@ class Test_notes_page_testcases(web_driver, web_logger):
 
     @pytest.mark.p1
     def test_NOTES_TC_82(self):
-        if notes_pom().create_note_by_filling_all_details_on_create_note():
+        if notes_pom().verify_user_able_create_notes_successfully():
             assert True
         else:
             assert False
 
     @pytest.mark.p1
     def test_NOTES_TC_88(self):
-        if notes_pom().click_on_Edit_note_on_notes_details_panel_and_verify_notes_is_edited():
+        if notes_pom().verify_user_able_to_edit_details_by_selecting_details_icon():
             assert True
         else:
             assert False
 
     @pytest.mark.p2
     def test_NOTES_TC_99(self):
-        if notes_pom().on_notes_panel_click_on_location_symbol_map_is_visible():
+        if notes_pom().verify_user_is_able_to_select_any_one_note_and_click_on_location_icon():
             assert True
         else:
             assert False
 
     @pytest.mark.p1
     def test_NOTES_TC_107(self):
-        if notes_pom().on_notes_panel_selecting_a_checkbox_and_click_on_delete_selected_notes_a_WARNING_message_window_is_displayed_click_on_yes_button():
+        if notes_pom().verify_user_able_to_delete_notes_successfully():
             assert True
         else:
             assert False
 
     def test_NOTES_TC_04(self):
-        if notes_pom().verif_use_is_able_to_select_any_one_note_and_click_on_location_in_view_dropdown():
+        if notes_pom().verify_user_is_able_to_select_any_one_note_and_click_on_location_in_view_dropdown():
             assert True
         else:
             assert False
