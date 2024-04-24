@@ -39,18 +39,20 @@ if __name__ == "__main__":
     report_path_reporting = f"{Path(__file__).parent}\\Reports\\HTML_Reports\\Reporting_Module_test_report_{datetime.datetime.now().strftime('%d_%m_%Y_%H_%M_%S')}.html"
     report_path_notes_search_filter = f"{Path(__file__).parent}\\Reports\\HTML_Reports\\Notes_search_filter_Module_test_report_{datetime.datetime.now().strftime('%d_%m_%Y_%H_%M_%S')}.html"
 
-    system_test_report_path = f"{Path(__file__).parent}\\Reports\\HTML_Reports\\System_Test_Report_{datetime.datetime.now().strftime('%d_%m_%Y_%H_%M_%S')}.html"
+    system2_test_report_path = f"{Path(__file__).parent}\\Reports\\HTML_Reports\\System2_Test_Report_{datetime.datetime.now().strftime('%d_%m_%Y_%H_%M_%S')}.html"
+    system1_test_report_path = f"{Path(__file__).parent}\\Reports\\HTML_Reports\\System1_Test_Report_{datetime.datetime.now().strftime('%d_%m_%Y_%H_%M_%S')}.html"
     sspr_test_report_path = f"{Path(__file__).parent}\\Reports\\HTML_Reports\\SSPR_Test_Report_{datetime.datetime.now().strftime('%d_%m_%Y_%H_%M_%S')}.html"
-    dm_test_report_path = f"{Path(__file__).parent}\\Reports\\HTML_Reports\\DM_Test_Report_{datetime.datetime.now().strftime('%d_%m_%Y_%H_%M_%S')}.html"
+    dm_core_test_report_path = f"{Path(__file__).parent}\\Reports\\HTML_Reports\\DM_Core_Test_Report_{datetime.datetime.now().strftime('%d_%m_%Y_%H_%M_%S')}.html"
     dm_edge_test_report_path = f"{Path(__file__).parent}\\Reports\\HTML_Reports\\DM_Edge_Test_Report_{datetime.datetime.now().strftime('%d_%m_%Y_%H_%M_%S')}.html"
 
     # -----------------------------------------------------------------------------------------------------------
     # --------------------------------- regression and p1 - p5 Test suite path  ---------------------------------
     # ************* test suite path ******************
     # Regression_test_suite_path = f"{Path(__file__).parent}\\All_Test_Cases_Package\\"
-    system_test_suite_path = f"{Path(__file__).parent}\\All_Test_Cases_Package\\Portal Smoke Cases\\test_portal_smoke_test_cases.py"
+    system2_test_suite_path = f"{Path(__file__).parent}\\All_Test_Cases_Package\\Portal Smoke Cases\\test_portal_smoke_test_cases.py"
+    system1_test_suite_path = f"{Path(__file__).parent}\\All_Test_Cases_Package\\Portal Smoke Cases\\test_portal_smoke_test_cases.py"
     sspr_test_suite_path = f"{Path(__file__).parent}\\All_Test_Cases_Package\\Portal Smoke Cases\\test_portal_smoke_test_cases.py"
-    dm_test_suite_path = f"{Path(__file__).parent}\\All_Test_Cases_Package\\_00_Deployment_Manager\\test_deployment_manager_page_test_cases.py"
+    dm_core_test_suite_path = f"{Path(__file__).parent}\\All_Test_Cases_Package\\_00_Deployment_Manager\\test_deployment_manager_page_test_cases.py"
     dm_edge_test_suite_path = f"{Path(__file__).parent}\\All_Test_Cases_Package\\_00_Deployment_Manager\\test_deployment_manager_edge_page_test_cases.py"
 
     # -----------------------------------------------------------------------------------------------------------
@@ -80,15 +82,12 @@ if __name__ == "__main__":
     # --------------------------------- Regression and p1 - p5  Test suite run commands  ------------------------
 
     # ************************ Commands to Run Test Suite *****************************
-    # ************************** P1 Priority Test Run *********************************
-    # pytest.main(['-v', '-m', 'p1', f'{dm_test_suite_path}', '--html', f'{dm_test_report_path}'])
-    # pytest.main(['-v', '-m', 'p1', f'{dm_edge_test_suite_path}', '--html', f'{dm_edge_test_report_path}'])
-    # pytest.main(['-v', '-m', 'p1', f'{dm_test_suite_path}', '--html', f'{dm_test_report_path}'])
-    pytest.main(['-v', '-m', 'p1', f'{dm_edge_test_suite_path}', '--html', f'{dm_edge_test_report_path}'])
-
-    pytest.main(['-v', '-m', 'system', f'{system_test_suite_path}', '--html', f'{system_test_report_path}'])
+    # **************************  Priority Test Run *********************************
+    pytest.main(['-v', '-m', 'core', f'{dm_core_test_suite_path}', '--html', f'{dm_core_test_report_path}'])
+    # pytest.main(['-v', '-m', 'edge', f'{dm_edge_test_suite_path}', '--html', f'{dm_edge_test_report_path}'])
+    # pytest.main(['-v', '-m', 'system1', f'{system1_test_suite_path}', '--html', f'{system1_test_report_path}'])
+    # pytest.main(['-v', '-m', 'system', f'{system2_test_suite_path}', '--html', f'{system2_test_report_path}'])
     # pytest.main(['-v', '-m', 'sspr', f'{sspr_test_suite_path}', '--html', f'{sspr_test_report_path}'])
-
 
     # ************************** P2 Priority Test Run *********************************
     # pytest.main(['-v', '-m', 'p2', f'{Regression_test_suite_path}', '--html', f'{p2_report_path}'])

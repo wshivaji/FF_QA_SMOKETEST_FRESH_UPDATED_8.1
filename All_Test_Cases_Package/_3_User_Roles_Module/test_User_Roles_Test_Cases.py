@@ -49,7 +49,9 @@ class Test_User_Roles_Test_Cases(web_driver, web_logger):
         if user_roles_module_pom().Verify_details_and_all_permission_of_default_it_admin():
             assert True
         else:
-            assert False@pytest.mark.p1
+            assert False\
+
+    @pytest.mark.p1
     def test_TC_UR_06(self):
         self.logger.info("***************** test_TC_UR_06 *****************")
         if user_roles_module_pom().Verify_User_role_deletion_functionality_by_deleting_one_user_role():

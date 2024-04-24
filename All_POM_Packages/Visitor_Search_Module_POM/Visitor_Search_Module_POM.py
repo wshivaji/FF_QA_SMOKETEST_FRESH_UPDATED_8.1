@@ -742,9 +742,9 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
         if strategy == "from":
             self.logger.info("select in from hours and min")
             self.calender_handle_hour_minute_from(hour, minute)
-        else:
-            self.logger.info("select in to hours and min")
-            self.calender_handle_hour_minute_to(hour, minute)
+        # else:
+        #     self.logger.info("select in to hours and min")
+        #     self.calender_handle_hour_minute_to(hour, minute)
 
         # select the period am or pm
         period = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().period_by_xpath())
@@ -764,13 +764,13 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
             time.sleep(web_driver.one_second)
             web_driver.implicit_wait(self, web_driver.one_second, self.d)
 
-        else:
-            # click on the to calendar pop up
-            self.logger.info("To End Date")
-            start_date_txt_bx = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().end_date_by_xpath())
-            start_date_txt_bx.click()
-            time.sleep(web_driver.one_second)
-            web_driver.implicit_wait(self, web_driver.one_second, self.d)
+        # else:
+        #     # click on the to calendar pop up
+        #     self.logger.info("To End Date")
+        #     start_date_txt_bx = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().end_date_by_xpath())
+        #     start_date_txt_bx.click()
+        #     time.sleep(web_driver.one_second)
+        #     web_driver.implicit_wait(self, web_driver.one_second, self.d)
 
         req_month = month
         req_year = year

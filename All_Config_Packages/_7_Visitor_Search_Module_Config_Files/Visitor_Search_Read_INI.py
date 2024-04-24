@@ -465,7 +465,8 @@ class Read_Visitor_Search_Components:
             ele = self.common_test_data_config.get("common_data", "vsj_start_date")
             return ele
         except Exception as ex:
-            print("vsj_end_am_pm_period : ", ex)
+            print("vsj_start_date : ", ex)
+
     def close_all_visitor_search_panel_by_xpath(self):
         try:
             close_all_visitor_search_panel_by_xpath = self.config.get("LOCATORS",

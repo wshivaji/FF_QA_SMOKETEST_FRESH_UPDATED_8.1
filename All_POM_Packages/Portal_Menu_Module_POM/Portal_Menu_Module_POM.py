@@ -71,6 +71,20 @@ class Portal_Menu_Module_pom(web_driver, web_logger):
         except Exception as ex:
             self.logger.info(f"close all panels got an exception as: {ex}")
 
+    def close_current_tab(self):
+        try:
+            open_tabs = self.d.window_handles
+            parent = self.d.window_handles[0]
+            child = self.d.window_handles[1]
+            # i = 1
+            # for i in range(open_tabs):
+            #     child = self.d.window_handles[i]
+            self.d.switch_to.window(child)
+            self.d.close()
+            self.d.switch_to.window(parent)
+        except Exception as ex:
+            self.logger.info(f"close current tab: {ex.args}")
+
     def logout_from_cloud_menu(self):
         try:
             time.sleep(web_driver.one_second)
@@ -827,6 +841,7 @@ class Portal_Menu_Module_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{web_driver.screenshots_path}\\TC_PM_1_exception.png")
             self.logger.error(f"TC_PM_1 got exception as: {ex}")
 
+
     def Verify_for_Operator_user_PME_Tags_IE_DF_Enrollments_EG_VS_VSJ_Notes_Loc_Zones_Reporting_IDB_Notifier_these_menus_are_visible_on_the_cloud_menu_items(self):
         try:
             self.logger.info("********** TC_PM_2 started ********")
@@ -1065,17 +1080,3 @@ class Portal_Menu_Module_pom(web_driver, web_logger):
             self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_PM_6_exception.png")
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_PM_6_exception.png")
             self.logger.error(f"TC_PM_6 got exception as: {ex}")
-
-    def close_current_tab(self):
-        try:
-            open_tabs = self.d.window_handles
-            parent = self.d.window_handles[0]
-            child = self.d.window_handles[1]
-            # i = 1
-            # for i in range(open_tabs):
-            #     child = self.d.window_handles[i]
-            self.d.switch_to.window(child)
-            self.d.close()
-            self.d.switch_to.window(parent)
-        except Exception as ex:
-            self.logger.info(f"close current tab: {ex.args}")

@@ -249,7 +249,7 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
             self.click_on_visitor_search()
             self.add_image_search()
 
-            date = int(Read_Visitor_Search_Components().get_vsj_start_date())
+            date = int(Read_Visitor_Search_Components().get_start_date())
             month = str(Read_Visitor_Search_Components().get_start_month())
             year = int(Read_Visitor_Search_Components().get_start_year())
             hour = str(Read_Visitor_Search_Components().get_start_hour())
@@ -366,16 +366,16 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
             date = int(Read_Visitor_Search_Components().get_start_date())
             month = str(Read_Visitor_Search_Components().get_start_month())
             year = int(Read_Visitor_Search_Components().get_start_year())
-            hour = str(Read_Visitor_Search_Components().get_start_hour())
-            minute = Read_Visitor_Search_Components().get_start_minuet()
-            period = str(Read_Visitor_Search_Components().get_start_am_pm_period())
+            hour = str(Read_Visitor_Search_jobs_Components().meta_data_start_hour())
+            minute = Read_Visitor_Search_jobs_Components().meta_data_start_minuet()
+            period = str(Read_Visitor_Search_jobs_Components().meta_data_start_am_pm_period())
 
             e_month = str(Read_Visitor_Search_Components().get_end_month())
             e_date = int(Read_Visitor_Search_Components().get_end_date())
             e_year = int(Read_Visitor_Search_Components().get_end_year())
-            e_hour = str(Read_Visitor_Search_Components().get_end_hour())
-            e_minute = Read_Visitor_Search_Components().get_end_minuet()
-            e_period = str(Read_Visitor_Search_Components().get_end_am_pm_period())
+            e_hour = str(Read_Visitor_Search_jobs_Components().meta_data_end_hour())
+            e_minute = Read_Visitor_Search_jobs_Components().meta_data_end_minuet()
+            e_period = str(Read_Visitor_Search_jobs_Components().meta_data_end_am_pm_period())
 
             try:
                 Visitor_Search_Module_pom().handle_calender_pop_up("from", date, month, year, hour, minute, period)
@@ -504,6 +504,7 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
                 no_results_message = self.d.find_element(By.XPATH, Read_Visitor_Search_jobs_Components().there_are_no_results_message_by_xpath())
                 if no_results_message.is_displayed():
                     self.logger.info(f"{no_results_message.text}")
+                    result.append(True)
             elif no_of_jobs_before > no_of_jobs_after:
                 result.append(True)
             else:
