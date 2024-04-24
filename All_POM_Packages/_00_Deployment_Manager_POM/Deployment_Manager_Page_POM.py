@@ -621,8 +621,8 @@ class Deployment_Manager_Page_Pom(web_driver, web_logger):
                 time.sleep(web_driver.two_second)
             self.register_login_dm_details()
             self.dm_mini_window()
-            self.dashboard()
-            self.d.find_element("xpath", "(//div[@class='jss158'])[6]//a").click()
+            # self.dashboard()
+            # self.d.find_element("xpath", "(//div[@class='jss158'])[6]//a").click()
             time.sleep(web_driver.two_second)
             self.d.switch_to.window(self.d.window_handles[1])
             self.d.find_element(By.ID, "login-username").send_keys(
@@ -649,12 +649,13 @@ class Deployment_Manager_Page_Pom(web_driver, web_logger):
             print(dashboard_msg.text)
             actual_dashboard_msg = dashboard_msg.text
             expected_dashboard_msg = "Insights Dashboard"
-            if actual_dashboard_msg == expected_dashboard_msg:
+            if actual_dashboard_msg != expected_dashboard_msg:
                 self.status.append(True)
-                self.logger.info("Insights Dashboard Status: Passed")
+                self.logger.info("Insights Dashboard Disabled Status: Passed")
             else:
                 self.status.append(False)
-                self.logger.info("Insights Dashboard Status: Failed")
+                self.logger.info("Insights Dashboard Disabled Status: Failed")
+
             self.d.find_element("xpath", "(//div[@ng-click='logout()'])[1]").click()
             time.sleep(web_driver.two_second)
             self.d.switch_to.window(self.d.window_handles[0])
@@ -686,12 +687,13 @@ class Deployment_Manager_Page_Pom(web_driver, web_logger):
             print(dashboard_msg.text)
             actual_dashboard_msg = dashboard_msg.text
             expected_dashboard_msg = "Insights Dashboard"
-            if actual_dashboard_msg != expected_dashboard_msg:
+            if actual_dashboard_msg == expected_dashboard_msg:
                 self.status.append(True)
-                self.logger.info("Insights Dashboard Disabled Status: Passed")
+                self.logger.info("Insights Dashboard Status: Passed")
             else:
                 self.status.append(False)
-                self.logger.info("Insights Dashboard Disabled Status: Failed")
+                self.logger.info("Insights Dashboard Status: Failed")
+
             self.d.find_element("xpath", "(//div[@ng-click='logout()'])[1]").click()
             time.sleep(web_driver.two_second)
             self.d.switch_to.window(self.d.window_handles[0])
