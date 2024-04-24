@@ -744,10 +744,9 @@ class Portal_Menu_Module_pom(web_driver, web_logger):
             self.logger.info(f"expected title: {expected_title}")
             if actual_title == expected_title:
                 self.status.append(True)
+                self.close_current_tab()
             else:
                 self.status.append(False)
-            self.d.close()
-            self.d.switch_to.window(self.d.window_handles[0])
 
             # ******************************************************************
             self.explicit_wait(10, "XPATH", Portal_Menu_Module_read_ini().get_Notifier_menu_by_xpath(), self.d)
@@ -810,6 +809,7 @@ class Portal_Menu_Module_pom(web_driver, web_logger):
             self.logger.info(f"expected title: {expected_title}")
             if actual_title == expected_title:
                 self.status.append(True)
+                self.close_current_tab()
             else:
                 self.status.append(False)
 
@@ -826,9 +826,6 @@ class Portal_Menu_Module_pom(web_driver, web_logger):
             self.logger.error(f"screenshot file path: {web_driver.screenshots_path}\\TC_PM_1_exception.png")
             self.d.save_screenshot(f"{web_driver.screenshots_path}\\TC_PM_1_exception.png")
             self.logger.error(f"TC_PM_1 got exception as: {ex}")
-        finally:
-            self.d.close()
-            self.d.switch_to.window(self.d.window_handles[0])
 
     def Verify_for_Operator_user_PME_Tags_IE_DF_Enrollments_EG_VS_VSJ_Notes_Loc_Zones_Reporting_IDB_Notifier_these_menus_are_visible_on_the_cloud_menu_items(self):
         try:
@@ -1068,3 +1065,17 @@ class Portal_Menu_Module_pom(web_driver, web_logger):
             self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_PM_6_exception.png")
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_PM_6_exception.png")
             self.logger.error(f"TC_PM_6 got exception as: {ex}")
+
+    def close_current_tab(self):
+        try:
+            open_tabs = self.d.window_handles
+            parent = self.d.window_handles[0]
+            child = self.d.window_handles[1]
+            # i = 1
+            # for i in range(open_tabs):
+            #     child = self.d.window_handles[i]
+            self.d.switch_to.window(child)
+            self.d.close()
+            self.d.switch_to.window(parent)
+        except Exception as ex:
+            self.logger.info(f"close current tab: {ex.args}")

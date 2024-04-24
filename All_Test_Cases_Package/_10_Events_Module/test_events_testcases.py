@@ -70,6 +70,15 @@ class Test_eVents_testcases(web_driver, web_logger):
             self.logger.info("test_events_TC_006 fail")
             assert False
 
+    @pytest.mark.p1
+    def test_events_TC_007(self):
+        self.logger.info("Verify user should be able to add the tags and see that same tags are visible when user clicks on display tags option in view dropdown")
+        if events_pom().Verify_user_should_be_able_to_add_the_tags_and_see_that_same_tags_are_visible_when_user_clicks_on_display_tags_option_in_view_dropdown():
+            assert True
+        else:
+            self.d.save_screenshot(f"{self.screenshots_path}\\test_events_TC_007.png")
+            self.logger.info("test_events_TC_007 fail")
+            assert False
 
     # @pytest.mark.p1
     # def test_events_TC_001(self):
