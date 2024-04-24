@@ -2305,13 +2305,89 @@ class events_pom(web_driver, web_logger):
         except Exception as ex:
             self.logger.info(f"Verify_user_should_be_able_to_add_the_tags_and_see_that_same_tags_are_visible_when_user_clicks_on_display_tags_option_in_view_dropdown ex: {ex.args}")
 
+    def Verify_user_able_to_delete_probable_match_events(self):
+        try:
+            self.logger.info("************************ test_events_TC_008 **********************************")
+            self.status.clear()
+            login().login_to_cloud_if_not_done(self.d)
+            self.click_on_event_menu()
+            self.select_first_event_checkbox()
+            self.click_on_action_dropdown()
+            self.select_permanently_delete_selected_events_option()
+            self.click_on_delete_selected_btn_on_warning_popup()
+            self.verify_event_delete_success_message_displayed()
+            self.logger.info(f"status: {self.status}")
+            if False in self.status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_events_TC_008.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\test_events_TC_008.png")
+                self.close_all_panel_one_by_one()
+                return False
+            else:
+                self.close_all_panel_one_by_one()
+                return True
+        except Exception as ex:
+            self.logger.info(f"Verify_user_able_to_delete_probable_match_events ")
 
-
-
-
+    def Probable_Match_Event_search_with_DateTimeRange_EnrollmentGroup_Org_Hierarchy_and_Tag_filter_combination_result_should_be_DateTimeRange_EnrollmentGroup_Org_Hierarchy_and_Tagged_event(self):
+        try:
+            self.logger.info("************************ test_events_TC_009 **********************************")
+            self.status.clear()
+            login().login_to_cloud_if_not_done(self.d)
+            
+        except Exception as ex:
+            self.logger.info(f"Probable_Match_Event_search_with_DateTimeRange_EnrollmentGroup_Org_Hierarchy_and_Tag_filter_combination_result_should_be_DateTimeRange_EnrollmentGroup_Org_Hierarchy_and_Tagged_event ex: {ex.args}")
 
 
 ################################################ Event_search_filter_methods ##############################################
+
+    def verify_event_delete_success_message_displayed(self):
+        try:
+            success_msg = self.explicit_wait(5, "XPATH", events_Read_Ini().event_deleted_success_message_by_xpath(), self.d)
+            self.logger.info(f"success message is visible: {success_msg.is_displayed()}")
+            if success_msg.is_displayed():
+                self.logger.info(f"success msg: {success_msg.text}")
+                self.status.append(True)
+            else:
+                self.logger.info("success message not displayed")
+                self.status.append(False)
+
+        except Exception as ex:
+            self.logger.info(f"verify_event_delete_success_message_displayed ex: {ex.args}")
+
+    def click_on_delete_selected_btn_on_warning_popup(self):
+        try:
+            delete_Selected_btn_on_warning_popup = self.explicit_wait(5, "XPATH", events_Read_Ini().delete_Selected_btn_on_warning_popup_by_xpath(), self.d)
+            self.logger.info(f"delete_Selected_btn_on_warning_popup_by_xpath is visible: {delete_Selected_btn_on_warning_popup.is_displayed()}")
+            if delete_Selected_btn_on_warning_popup.is_displayed():
+                delete_Selected_btn_on_warning_popup.click()
+            else:
+                self.logger.info("delete_Selected_btn_on_warning_popup_by_xpath is not displayed")
+        except Exception as ex:
+            self.logger.info(f"click_on_delete_selected_btn_on_warning_popup ex: {ex.args}")
+
+    def select_permanently_delete_selected_events_option(self):
+        try:
+            permanently_delete_selected_events_option = self.explicit_wait(5, "XPATH", events_Read_Ini().permanently_delete_selected_events_option_by_xpath(), self.d)
+            self.logger.info(f"permanently_delete_selected_events_option visible: {permanently_delete_selected_events_option.is_displayed()}")
+            if permanently_delete_selected_events_option.is_displayed():
+                permanently_delete_selected_events_option.click()
+            else:
+                self.logger.info("permanently_delete_selected_events_option not displayed.")
+        except Exception as ex:
+            self.logger.info(f"select_permanently_delete_selected_events_option ex: {ex.args}")
+
+
+    def select_first_event_checkbox(self):
+        try:
+            event_checkbox = self.explicit_wait(5, "XPATH", events_Read_Ini().first_checkbox_in_events(), self.d)
+            self.logger.info(f"event checkbox visible: {event_checkbox.is_displayed()}")
+            if event_checkbox.is_displayed():
+                event_checkbox.click()
+            else:
+                self.logger.info(f"first event checkbox not displayed.")
+        except Exception as ex:
+            self.logger.info(f"select_first_event_checkbox  ex: {ex.args}")
+
 
     def select_tag_to_add_to_event_for_verification(self, tag_name):
         try:
@@ -2338,13 +2414,11 @@ class events_pom(web_driver, web_logger):
             self.click_on_create_tag_btn()
             self.verify_tag_details_panel_displayed()
             self.verify_tag_name_text_box_and_enter_tag_name(tag_name)
-            save_btn = self.explicit_wait(5, "XPATH", events_Read_Ini().save_btn_on_tag_details_panel_by_xpath(), self.d)
+            time.sleep(web_driver.one_second)
+            save_btn = self.d.find_element(By.XPATH, events_Read_Ini().save_btn_on_tag_details_panel_by_xpath())
             self.logger.info(f"save btn visible: {save_btn.is_displayed()}")
             self.d.execute_script("arguments[0].click();", save_btn)
-            if save_btn.is_displayed():
-                self.d.execute_script("arguments[0].click();", save_btn)
-            else:
-                self.logger.info(f"save btn is not displayed.")
+
             self.verify_tag_created_success_message()
         except Exception as ex:
             self.logger.info(f"create_new_tag ex: {ex.args}")
@@ -2369,6 +2443,7 @@ class events_pom(web_driver, web_logger):
                 name_test_box.send_keys(tag_name)
             else:
                 self.logger.info("name text box is not displayed.")
+            time.sleep(web_driver.one_second)
         except Exception as ex:
             self.logger.info(f"verify_tag_name_text_box_and_enter_tag_name ex:{ex.args}")
 
@@ -2389,6 +2464,7 @@ class events_pom(web_driver, web_logger):
             self.logger.info(f"create tag option visible: {create_tag_option.is_displayed()}")
             if create_tag_option.is_displayed():
                 create_tag_option.click()
+                time.sleep(web_driver.one_second)
             else:
                 self.logger.info("create tag option is not displayed.")
         except Exception as ex:

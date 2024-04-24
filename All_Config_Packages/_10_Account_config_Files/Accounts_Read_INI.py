@@ -513,6 +513,11 @@ class account_Read_Ini:
         print("start_enrollments_count", start_enrollments_count)
         return start_enrollments_count
 
+    def end_enrollments_count(self):
+        end_enrollments_count = self.common_test_data_config.get("Account_Module_Data", "end_enrollments_count")
+        print("end_enrollments_count", end_enrollments_count)
+        return end_enrollments_count
+
     def start_users_count(self):
         start_users_count = self.common_test_data_config.get("Account_Module_Data", "start_users_count")
         print("start_users_count", start_users_count)

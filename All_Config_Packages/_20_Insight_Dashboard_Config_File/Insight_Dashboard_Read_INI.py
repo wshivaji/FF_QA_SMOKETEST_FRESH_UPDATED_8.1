@@ -91,7 +91,7 @@ class insight_dashboard_read_ini:
 
     def total_probable_match_events_label_by_xpath(self):
         try:
-            total_probable_match_events_label_by_xpath = self.config.get("Insight_Dashboard_Locators", "total_facefirst_enrollments_count_by_xpath")
+            total_probable_match_events_label_by_xpath = self.config.get("Insight_Dashboard_Locators", "total_probable_match_events_label_by_xpath")
             print("overview_dashboard_label_by_xpath: ", total_probable_match_events_label_by_xpath)
             return total_probable_match_events_label_by_xpath
         except Exception as ex:
