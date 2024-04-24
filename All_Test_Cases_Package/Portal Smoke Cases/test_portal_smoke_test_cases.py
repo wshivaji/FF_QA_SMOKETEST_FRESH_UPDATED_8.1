@@ -270,7 +270,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     # --------------------------------------------  Visitor Search Cases  ----------------------------------------- #
-    @pytest.mark.system
+    @pytest.mark.system1
     def test_SM_TC027(self):
         if Visitor_Search_Module_pom().Verify_visitor_search_with_metadata_Date_and_Org_Hierarchy_Selection_should_yield_visitor_results_within_selected_search_criteria():
             assert True
@@ -278,7 +278,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             self.logger.info("test_TC_VS_01 execution failed..")
             assert False
 
-    @pytest.mark.system
+    @pytest.mark.system1
     def test_SM_TC028(self):
         if Visitor_Search_Module_pom().Verify_visitor_search_with_image_only_should_list_the_matching_visitors_with_image():
             assert True
@@ -286,7 +286,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             self.logger.info("test_TC_VS_02 execution failed..")
             assert False
 
-    @pytest.mark.system
+    @pytest.mark.system1
     def test_SM_TC029(self):
         if Visitor_Search_Module_pom().Verify_visitor_search_with_Image_and_metadata_should_list_the_matched_visitors_with_search_image_from_selected_Org_Hierarchy_Selection_within_date_range():
             assert True
@@ -295,7 +295,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     # -------------------------------------------  Visitor Search Jobs Cases  --------------------------------------- #
-    @pytest.mark.system
+    @pytest.mark.system1
     def test_SM_TC030(self):
         self.logger.info("Visitor search jobs module = test_VSJ_01 execution started..")
         if Visitor_Search_Jobs_Module_pom().verify_the_visitor_search_job_contains_user_performs_visitor_search_with_date_and_org_selection():
@@ -304,7 +304,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             self.logger.info("test_VSJ_01 execution failed..")
             assert False
 
-    @pytest.mark.system
+    @pytest.mark.system1
     def test_SM_TC031(self):
         self.logger.info("Visitor search jobs module = test_VSJ_04 execution started..")
         if Visitor_Search_Jobs_Module_pom().Verify_the_visitor_search_job_contains_the_selected_threshold_visitors_in_date_range_and_belongs_to_search_Org_Hierarchy_Selection_when_user_performs_a_visitor_search_with_Date_Org():
@@ -313,7 +313,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             self.logger.info("test_VSJ_04 execution failed..")
             assert False
 
-    @pytest.mark.system
+    @pytest.mark.system1
     def test_SM_TC032(self):
         self.logger.info("Visitor search jobs module = test_VSJ_06 execution started..")
         if Visitor_Search_Jobs_Module_pom().Verify_VSJ_filtering_with_date_range_selection_should_list_VSJ_in_the_selected_date_range_only():
