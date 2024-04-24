@@ -219,12 +219,12 @@ class account_pom(web_driver, web_logger):
             time.sleep(web_driver.two_second)
             count_of_users = self.d.find_elements(By.XPATH,
                                                           account_Read_Ini().count_of_users_by_xpath())
-            self.logger.info(f"length of users: {len(count_of_users)+6}")
+            self.logger.info(f"length of users: {len(count_of_users)+5}")
 
             e = account_Read_Ini().start_users_count().split('/')
             actual_users_count = e[0]
             self.logger.info(f"actual_users_count: {actual_users_count}")
-            if len(count_of_users)+6 == int(actual_users_count):
+            if len(count_of_users)+5 == int(actual_users_count):
                 return True
             else:
                 return False
