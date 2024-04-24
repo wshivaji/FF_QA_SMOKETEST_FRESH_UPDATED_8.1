@@ -170,7 +170,7 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
 
     def enter_start_and_end_date(self):
         try:
-            date = int(Read_Visitor_Search_Components().get_start_date())
+            date = int(Read_Visitor_Search_Components().get_vsj_start_date())
             month = str(Read_Visitor_Search_Components().get_start_month())
             year = int(Read_Visitor_Search_Components().get_start_year())
             hour = str(Read_Visitor_Search_Components().get_start_hour())
