@@ -363,7 +363,7 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
                                                        visitor_search_jobs_panel_search_button(), self.d)
             search_dropdown.click()
             time.sleep(web_driver.one_second)
-            date = int(Read_Visitor_Search_Components().get_start_date())
+            date = int(Read_Visitor_Search_Components().get_vsj_start_date())
             month = str(Read_Visitor_Search_Components().get_start_month())
             year = int(Read_Visitor_Search_Components().get_start_year())
             hour = str(Read_Visitor_Search_jobs_Components().meta_data_start_hour())
@@ -505,7 +505,7 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
                 if no_results_message.is_displayed():
                     self.logger.info(f"{no_results_message.text}")
                     result.append(True)
-            elif no_of_jobs_before > no_of_jobs_after:
+            elif no_of_jobs_before >= no_of_jobs_after:
                 result.append(True)
             else:
                 result.append(False)

@@ -84,7 +84,7 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
             x = Read_Notification_Groups_Components().get_user_name_input_data()
             user = x.split(',')
             login().login_with_persona_user(self.d, user[0])
-
+            #login().login_to_cloud_if_not_done(self.d)
             edge_name = Read_Visitor_Search_Components().zone_data_input()
 
             self.click_on_visitor_search()
@@ -185,9 +185,9 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
             e_period = str(Read_Visitor_Search_Components().get_end_am_pm_period())
 
             try:
-                Visitor_Search_Module_pom().handle_calender_pop_up("from", date, month, year, hour, minute, period)
+                Visitor_Search_Module_pom().handle_calender("from", date, month, year, hour, minute, period)
                 time.sleep(web_driver.one_second)
-                Visitor_Search_Module_pom().handle_calender_pop_up("to", e_date, e_month, e_year, e_hour, e_minute,
+                Visitor_Search_Module_pom().handle_calender("to", e_date, e_month, e_year, e_hour, e_minute,
                                                                    e_period)
                 time.sleep(web_driver.three_second)
             except Exception as ex:
@@ -202,7 +202,7 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
             x = Read_Notification_Groups_Components().get_user_name_input_data()
             user = x.split(',')
             login().login_with_persona_user(self.d, user[0])
-
+            # login().login_to_cloud_if_not_done(self.d)
             edge_name = Read_Visitor_Search_Components().zone_data_input()
 
             self.click_on_visitor_search()
@@ -828,35 +828,35 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
         tick_icon.click()
         # tick_icon.click()
 
-    def startDateSelection(self, strategy, date, month, year, hour, minute, req_period):
-        web_driver.implicit_wait(self, web_driver.one_second, self.d)
-        self.logger.info("select from date checkbox")
-        start_check_bx = self.d.find_element(By.XPATH,
-                                             Read_Visitor_Search_Components().start_date_checkbox_by_xpath())
-        start_check_bx.click()
-        time.sleep(web_driver.one_second)
+    def handle_calender(self, strategy, date, month, year, hour, minute, req_period):
+        self.logger.info(f"Strategy: {strategy}")
+        # click on the form calendar popup
+        if strategy == "from":
+            self.logger.info("select from date checkbox")
+            start_check_bx = self.d.find_element(By.XPATH,
+                                                 Read_Visitor_Search_Components().start_date_checkbox_by_xpath())
+            start_check_bx.click()
+            time.sleep(web_driver.one_second)
+            web_driver.implicit_wait(self, web_driver.one_second, self.d)
+            self.logger.info("select date time")
+            start_date_txt_bx = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().start_date_by_xpath())
+            self.d.execute_script("arguments[0].scrollIntoView();", start_date_txt_bx)
+            start_date_txt_bx.click()
 
-        self.logger.info("select date time")
-        start_date_txt_bx = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().start_date_by_xpath())
-        self.d.execute_script("arguments[0].scrollIntoView();", start_date_txt_bx)
-        start_date_txt_bx.click()
-
-        self.logger.info("datetime clicked")
-        time.sleep(web_driver.one_second)
-        web_driver.implicit_wait(self, web_driver.one_second, self.d)
-
-        end_check_bx = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().end_date_checkbox_by_xpath())
-        end_check_bx.click()
-        time.sleep(web_driver.one_second)
-        web_driver.implicit_wait(self, web_driver.one_second, self.d)
-        end_date_txt_bx = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().end_date_by_xpath())
-        self.d.execute_script("arguments[0].scrollIntoView();", end_date_txt_bx)
-        end_date_txt_bx.click()
-        time.sleep(web_driver.one_second)
-        web_driver.implicit_wait(self, web_driver.one_second, self.d)
-
-
-
+            self.logger.info("datetime clicked")
+            time.sleep(web_driver.one_second)
+            web_driver.implicit_wait(self, web_driver.one_second, self.d)
+        else:
+            # click on the to calendar pop up
+            end_check_bx = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().end_date_checkbox_by_xpath())
+            end_check_bx.click()
+            time.sleep(web_driver.one_second)
+            web_driver.implicit_wait(self, web_driver.one_second, self.d)
+            end_date_txt_bx = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().end_date_by_xpath())
+            self.d.execute_script("arguments[0].scrollIntoView();", end_date_txt_bx)
+            end_date_txt_bx.click()
+            time.sleep(web_driver.one_second)
+            web_driver.implicit_wait(self, web_driver.one_second, self.d)
 
         # click on the clock icon
         self.logger.info("selecting time")

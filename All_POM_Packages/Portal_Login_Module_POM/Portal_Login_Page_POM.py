@@ -376,7 +376,15 @@ class Portal_Login_Page_Pom(web_driver, web_logger):
             self.logger.info("********** TC_Portal_Login_05 started ********")
             self.logger.info("verify_user_account_blocked_for_30_min_if_user_enter_wrong_password_for_6_times_verify_message_warning")
             self.load_portal_login_page_if_not_loaded()
+            print("portal logged in")
+            logout_btn = self.d.find_elements(By.XPATH, Portal_login_page_read_ini().get_logout_button_on_portal_by_xpath())
             time.sleep(web_driver.one_second)
+            if len(logout_btn) > 0:
+                self.logger.info("Someone already logged in..")
+                logout_btn.click()
+            else:
+                self.logger.info("Unable to click logout")
+            time.sleep(web_driver.two_second)
             self.status.clear()
             for x in range(7):
                 self.d.find_element(By.XPATH,

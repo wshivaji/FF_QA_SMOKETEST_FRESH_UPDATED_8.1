@@ -1301,6 +1301,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert True
         else:
             assert False
+
     @pytest.mark.system
     def test_SM_TC193(self):
         if notes_pom().verify_user_able_to_delete_notes_successfully():

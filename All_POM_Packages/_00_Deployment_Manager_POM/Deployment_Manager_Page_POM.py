@@ -660,6 +660,7 @@ class Deployment_Manager_Page_Pom(web_driver, web_logger):
             time.sleep(web_driver.two_second)
             self.d.switch_to.window(self.d.window_handles[0])
             self.dashboard()
+
             self.d.find_element("xpath", "(//div[@class='jss158'])[6]//a").click()
             time.sleep(web_driver.two_second)
             self.d.switch_to.window(self.d.window_handles[1])

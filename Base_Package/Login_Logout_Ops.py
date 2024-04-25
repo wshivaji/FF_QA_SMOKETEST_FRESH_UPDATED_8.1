@@ -505,7 +505,14 @@ class login(web_driver, web_logger):
                 time.sleep(web_driver.two_second)
             else:
                 print("portal logged in")
-                self.logger.info("Portal already logged in")
+                logout_btn = web_driver.explicit_wait(self, 10, "XPATH",
+                                                      self.config.get("logout_locators", "logout_btn_by_xpath"), self.d)
+                time.sleep(web_driver.one_second)
+                if logout_btn.is_displayed():
+                    self.logger.info("Someone already logged in..")
+                    login_btn.click()
+                else:
+                    self.logger.info("Unable to click logout")
                 time.sleep(web_driver.two_second)
             return self.d
         except Exception as ex:
