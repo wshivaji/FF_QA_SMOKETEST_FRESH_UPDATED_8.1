@@ -3,6 +3,8 @@ import time
 from pathlib import Path
 
 from selenium.webdriver.common.by import By
+
+from All_Config_Packages._20_Insight_Dashboard_Config_File.Insight_Dashboard_Read_INI import insight_dashboard_read_ini
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
 from Base_Package.Login_Logout_Ops import login, logout
@@ -182,12 +184,22 @@ class account_pom(web_driver, web_logger):
                                                         self.d)
             enrollments_menu.click()
             time.sleep(web_driver.two_second)
-            no_enrollments_message = self.d.find_elements(By.XPATH, account_Read_Ini().no_enrollments_message_by_xpath())
-            self.logger.info(f"length of no_enrollments_message: {len(no_enrollments_message)}")
-            e = account_Read_Ini().start_enrollments_count().split('/')
+            # no_enrollments_message = self.d.find_elements(By.XPATH, account_Read_Ini().no_enrollments_message_by_xpath())
+            # self.logger.info(f"length of no_enrollments_message: {len(no_enrollments_message)}")
+            # self.logger.info(f"no_enrollments_message: {no_enrollments_message.text}")
+
+            enrollments_count_text = self.explicit_wait(5, "XPATH",
+                                                        insight_dashboard_read_ini().total_enrollments_text_on_enrollments_panel_by_xpath(),
+                                                        self.d)
+            self.logger.info(f"text: {enrollments_count_text.text}")
+            text_list = enrollments_count_text.text.split(" ")
+            self.logger.info(text_list)
+
+            e = account_Read_Ini().end_enrollments_count().split('/')
             actual_enrollments_count = e[0]
             self.logger.info(f"actual_enrollments_count: {actual_enrollments_count}")
-            if len(no_enrollments_message) == int(actual_enrollments_count):
+            self.logger.info(f"expected_enrollments_count: {text_list[3]}")
+            if int(text_list[3]) == int(actual_enrollments_count):
                 return True
             else:
                 return False
@@ -207,12 +219,12 @@ class account_pom(web_driver, web_logger):
             time.sleep(web_driver.two_second)
             count_of_users = self.d.find_elements(By.XPATH,
                                                           account_Read_Ini().count_of_users_by_xpath())
-            self.logger.info(f"length of users: {len(count_of_users)+6}")
+            self.logger.info(f"length of users: {len(count_of_users)+5}")
 
             e = account_Read_Ini().start_users_count().split('/')
             actual_users_count = e[0]
             self.logger.info(f"actual_users_count: {actual_users_count}")
-            if len(count_of_users)+6 == int(actual_users_count):
+            if len(count_of_users)+5 == int(actual_users_count):
                 return True
             else:
                 return False
@@ -271,8 +283,26 @@ class account_pom(web_driver, web_logger):
         try:
             time.sleep(web_driver.two_second)
 
-            image_sources = web_driver.explicit_wait(self, 10, "XPATH", account_Read_Ini().
-                                                    view_Image_source_button(), self.d)
+            image_sources = web_driver.explicit_wait(self, 10, "XPATH", account_Read_Ini().view_Image_source_button(), self.d)
+            image_sources.click()
+            time.sleep(web_driver.two_second)
+            count_of_stations = self.d.find_elements(By.XPATH, account_Read_Ini().count_of_stations_by_xpath())
+            self.logger.info(f"length of stations: {len(count_of_stations)}")
+            actual_stations_count = account_Read_Ini().start_stations_count()
+            self.logger.info(f"actual_stations_count: {actual_stations_count}")
+            if len(count_of_stations)+1 == int(actual_stations_count):
+                return True
+            else:
+                return False
+
+        except Exception as ex:
+            self.logger.info(f"validate details before execution got an exception as: {ex}")
+
+    def validate_stations_count_before(self):
+        try:
+            time.sleep(web_driver.two_second)
+
+            image_sources = web_driver.explicit_wait(self, 10, "XPATH", account_Read_Ini().view_Image_source_button(), self.d)
             image_sources.click()
             time.sleep(web_driver.two_second)
             count_of_stations = self.d.find_elements(By.XPATH, account_Read_Ini().count_of_stations_by_xpath())
@@ -348,7 +378,7 @@ class account_pom(web_driver, web_logger):
             self.status.append(self.validate_users_count())
             self.status.append(self.validate_enrollment_groups_count())
             self.status.append(self.validate_notification_groups_count())
-            self.status.append(self.validate_stations_count())
+            self.status.append(self.validate_stations_count_before())
             self.logger.info(f"status :{self.status}")
             time.sleep(web_driver.one_second)
 

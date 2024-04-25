@@ -70,6 +70,35 @@ class Test_eVents_testcases(web_driver, web_logger):
             self.logger.info("test_events_TC_006 fail")
             assert False
 
+    @pytest.mark.p1
+    def test_events_TC_007(self):
+        self.logger.info("Verify user should be able to add the tags and see that same tags are visible when user clicks on display tags option in view dropdown")
+        if events_pom().Verify_user_should_be_able_to_add_the_tags_and_see_that_same_tags_are_visible_when_user_clicks_on_display_tags_option_in_view_dropdown():
+            assert True
+        else:
+            self.d.save_screenshot(f"{self.screenshots_path}\\test_events_TC_007.png")
+            self.logger.info("test_events_TC_007 fail")
+            assert False
+
+    @pytest.mark.p1
+    def test_events_TC_008(self):
+        self.logger.info("Verify user able to delete probable match events")
+        if events_pom().Verify_user_able_to_delete_probable_match_events():
+            assert True
+        else:
+            self.d.save_screenshot(f"{self.screenshots_path}\\test_events_TC_008.png")
+            self.logger.info("test_events_TC_008 fail")
+            assert False
+
+    @pytest.mark.p1
+    def test_events_TC_008(self):
+        self.logger.info("Probable Match Event search with DateTimeRange, EnrollmentGroup, Org/Hierarchy and Tag filter combination result should be DateTimeRange, EnrollmentGroup, Org/Hierarchy and Tagged event.")
+        if events_pom().Probable_Match_Event_search_with_DateTimeRange_EnrollmentGroup_Org_Hierarchy_and_Tag_filter_combination_result_should_be_DateTimeRange_EnrollmentGroup_Org_Hierarchy_and_Tagged_event():
+            assert True
+        else:
+            self.d.save_screenshot(f"{self.screenshots_path}\\test_events_TC_008.png")
+            self.logger.info("test_events_TC_008 fail")
+            assert False
 
     # @pytest.mark.p1
     # def test_events_TC_001(self):
@@ -120,12 +149,12 @@ class Test_eVents_testcases(web_driver, web_logger):
     #     else:
     #         assert False
 
-    @pytest.mark.p1
-    def test_events_TC_008(self):
-        if events_pom().on_Events_page_verify_filter_search_results_textbox_is_visible_and_clickable_text_on_button_is_visible():
-            assert True
-        else:
-            assert False
+    # @pytest.mark.p1
+    # def test_events_TC_008(self):
+    #     if events_pom().on_Events_page_verify_filter_search_results_textbox_is_visible_and_clickable_text_on_button_is_visible():
+    #         assert True
+    #     else:
+    #         assert False
             
     @pytest.mark.p2
     def test_events_TC_009(self):

@@ -518,6 +518,14 @@ class events_Read_Ini:
             return tags_attached_list_by_xpath
         except Exception as ex:
             print(ex)
+
+    def tag_icon_list_on_events_panel_by_xpath(self):
+        try:
+            tag_icon_list_on_events_panel_by_xpath = self.config.get("events_locators", "tag_icon_list_on_events_panel_by_xpath")
+            print("tag_icon_list_on_events_panel_by_xpath ", tag_icon_list_on_events_panel_by_xpath)
+            return tag_icon_list_on_events_panel_by_xpath
+        except Exception as ex:
+            print(ex)
             
     def sort_by_atoz_radiobutton(self):
         try:
@@ -694,7 +702,23 @@ class events_Read_Ini:
             return action_dropdown
         except Exception as ex:
             print(ex)
-            
+
+    def create_Tag_option_by_xpath(self):
+        try:
+            create_Tag_option_by_xpath = self.config.get("events_locators", "create_Tag_option_by_xpath")
+            print("create_Tag_option_by_xpath ", create_Tag_option_by_xpath)
+            return create_Tag_option_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def tag_name_text_box_by_xpath(self):
+        try:
+            tag_name_text_box_by_xpath = self.config.get("events_locators", "tag_name_text_box_by_xpath")
+            print("tag_name_text_box_by_xpath ", tag_name_text_box_by_xpath)
+            return tag_name_text_box_by_xpath
+        except Exception as ex:
+            print(ex)
+
     def add_tags_to_event_option_in_event_tags(self):
         try:
             add_tags = self.config.get("events_locators", "add_tags_to_event_option")
@@ -1022,6 +1046,30 @@ class events_Read_Ini:
             return permenantly_delete_enrollment
         except Exception as ex:
             print(ex)
+
+    def permanently_delete_selected_events_option_by_xpath(self):
+        try:
+            permanently_delete_selected_events_option_by_xpath = self.config.get("events_locators", "permanently_delete_selected_events_option_by_xpath")
+            print("permanently_delete_selected_events_option_by_xpath ", permanently_delete_selected_events_option_by_xpath)
+            return permanently_delete_selected_events_option_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def delete_Selected_btn_on_warning_popup_by_xpath(self):
+        try:
+            delete_Selected_btn_on_warning_popup_by_xpath = self.config.get("events_locators", "delete_Selected_btn_on_warning_popup_by_xpath")
+            print("delete_Selected_btn_on_warning_popup_by_xpath ", delete_Selected_btn_on_warning_popup_by_xpath)
+            return delete_Selected_btn_on_warning_popup_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def event_deleted_success_message_by_xpath(self):
+        try:
+            event_deleted_success_message_by_xpath = self.config.get("events_locators", "event_deleted_success_message_by_xpath")
+            print("event_deleted_success_message_by_xpath ", event_deleted_success_message_by_xpath)
+            return event_deleted_success_message_by_xpath
+        except Exception as ex:
+            print(ex)
             
     def warning_dialouge_box(self):
         try:
@@ -1326,6 +1374,20 @@ class events_Read_Ini:
         try:
             save = self.config.get("events_locators", "notes_save_button")
             return save
+        except Exception as ex:
+            print(ex.args)
+
+    def save_btn_on_tag_details_panel_by_xpath(self):
+        try:
+            save_btn_on_tag_details_panel_by_xpath = self.config.get("events_locators", "save_btn_on_tag_details_panel_by_xpath")
+            return save_btn_on_tag_details_panel_by_xpath
+        except Exception as ex:
+            print(ex.args)
+
+    def success_message_after_tag_creation_by_xpath(self):
+        try:
+            success_message_after_tag_creation_by_xpath = self.config.get("events_locators", "success_message_after_tag_creation_by_xpath")
+            return success_message_after_tag_creation_by_xpath
         except Exception as ex:
             print(ex.args)
 

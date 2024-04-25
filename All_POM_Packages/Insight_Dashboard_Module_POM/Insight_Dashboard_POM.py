@@ -3,6 +3,9 @@ import os
 import time
 from pathlib import Path
 
+from All_Config_Packages._8_Visitor_Search_Jobs_Module_Config_Files.Visitor_Search_Jobs_Read_INI import \
+    Read_Visitor_Search_jobs_Components
+from All_Config_Packages._11_Enrollment_Module_Config_Files.Enrollment_Module_Read_INI import read_enrollment_components
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
 from selenium.webdriver.common.by import By
@@ -11,32 +14,12 @@ from selenium.webdriver.common.by import By
 # from All_Config_Packages._0_login_logout_config_file.login_logout_read_ini import LoginLogout_Read_ini
 from All_Config_Packages._2_Portal_Menu_Module_Config_Files.Portal_Menu_Module_Read_INI import \
      Portal_Menu_Module_read_ini
-# from All_Config_Packages._6_Notification_Groups_Module_Config_Files.Notification_Groups_Read_INI import \
-#     Read_Notification_Groups_Components
+from All_Config_Packages._6_Notification_Groups_Module_Config_Files.Notification_Groups_Read_INI import \
+    Read_Notification_Groups_Components
 from All_Config_Packages._20_Insight_Dashboard_Config_File.Insight_Dashboard_Read_INI import insight_dashboard_read_ini
 from Base_Package.Login_Logout_Ops import login, logout
 # from All_Other_Utility_Packages._3_User_Roles_Module.Read_Excel import Read_excel
 
-
-class insight_dashboard_count_variables:
-    current_file_path = os.path.abspath(__file__)
-    # enrollment_groups_enlisted_name_list = []
-    # enrollments_linked_to_enrollment_groups_enlisted_list = []
-
-    @classmethod
-    def update_and_write_to_file(cls, x, y):
-        enrollment_groups_enlisted_name_list.clear()
-        enrollments_linked_to_enrollment_groups_enlisted_list.clear()
-
-        enrollment_groups_enlisted_name_list.extend(x)
-        enrollments_linked_to_enrollment_groups_enlisted_list.extend(y)
-
-        print(enrollment_groups_enlisted_name_list)
-        print(enrollments_linked_to_enrollment_groups_enlisted_list)
-
-        with open(cls.current_file_path, "a") as file:
-            file.write(f"enrollment_groups_enlisted_name_list = {repr(enrollment_groups_enlisted_name_list)}\n")
-            file.write(f"enrollments_linked_to_enrollment_groups_enlisted_list = {repr(enrollments_linked_to_enrollment_groups_enlisted_list)}\n")
 
 
 class insight_dashboard_pom(web_driver, web_logger):
@@ -49,8 +32,10 @@ class insight_dashboard_pom(web_driver, web_logger):
             self):
         try:
             self.logger.info("************* test_TC_Insight_Dashboard_01 started  **************")
-
-            login().login_to_cloud_if_not_done(self.d)
+            users = Read_Notification_Groups_Components().get_user_name_input_data()
+            user = users.split(',')
+            login().login_with_persona_user(self.d, user[4])
+            # login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
             self.get_insight_dashboard_data()
 
@@ -781,7 +766,7 @@ class insight_dashboard_pom(web_driver, web_logger):
                 self.logger.info("eg names and eg enrollment count are equal.")
                 # Open the current file in write mode
                 file = open(self.current_file_path, 'a')
-                insight_dashboard_count_variables.update_and_write_to_file(eg_name_list, eg_count_list)
+
                 # Write the variables to the file
                 # file.write(f"enrollment_group_name_list = {eg_name_list}\n")
                 # file.write(f"enrollment_count_list = {eg_count_list}\n")
@@ -793,7 +778,7 @@ class insight_dashboard_pom(web_driver, web_logger):
                 #     config.write(file.open('w'))
             else:
                 self.logger.info("eg names and eg enrollment count are not equal.")
-
+            self.d.find_element(By.XPATH, Portal_Menu_Module_read_ini().get_close_panel_button_by_xpath()).click()
         except Exception as ex:
             self.logger.info(f"get_enrollment_groups_data: {ex.args}")
 
@@ -802,23 +787,52 @@ class insight_dashboard_pom(web_driver, web_logger):
             enrollments_menu = self.explicit_wait(5, "XPATH", insight_dashboard_read_ini().enrollments_menu_item_by_xpath(), self.d)
             self.logger.info(f"enrollments menu: {enrollments_menu.is_displayed()}")
             enrollments_menu.click()
+            self.click_filter_dropdown_on_enrollments_panel()
+            self.select_enabled_enrollments_from_filter_dropdown()
+            time.sleep(web_driver.two_second)
             enrollments_count_text = self.explicit_wait(5, "XPATH", insight_dashboard_read_ini().total_enrollments_text_on_enrollments_panel_by_xpath(), self.d)
             self.logger.info(f"text: {enrollments_count_text.text}")
             text_list = enrollments_count_text.text.split(" ")
             self.logger.info(text_list)
+
+            self.d.find_element(By.XPATH, Portal_Menu_Module_read_ini().get_close_panel_button_by_xpath()).click()
             return text_list[3]
         except Exception as ex:
             self.logger.info(f"get_total_enrollments ex: {ex.args}")
+
+    def select_enabled_enrollments_from_filter_dropdown(self):
+        try:
+            enabled_option = self.explicit_wait(5, "XPATH", read_enrollment_components().enabled_option_xpath(), self.d)
+            self.logger.info(f"enabled option visible: {enabled_option.is_displayed()}")
+            if enabled_option.is_displayed():
+                enabled_option.click()
+            else:
+                self.logger.info(f"enabled option not displayed.")
+        except Exception as ex:
+            self.logger.info(f"select_enabled_enrollments_from_filter_dropdown ex: {ex.args}")
+
+    def click_filter_dropdown_on_enrollments_panel(self):
+        try:
+            filter = self.explicit_wait(5, "XPATH", read_enrollment_components().filter_dropdown_by_xpath(), self.d)
+            self.logger.info(f" filter dropdown visible: {filter.is_displayed()}")
+            if filter.is_displayed():
+                filter.click()
+            else:
+                self.logger.info("filter dropdown is not displayed")
+        except Exception as ex:
+            self.logger.info(f"click_filter_dropdown_on_enrollments_panel ex: {ex.args}")
 
     def get_total_events(self):
         try:
             self.d.find_element(By.XPATH, insight_dashboard_read_ini().cloud_menu_by_xpath()).click()
             events_menu = self.explicit_wait(5, "XPATH", Portal_Menu_Module_read_ini().get_events_menu_by_xpath(), self.d)
             events_menu.click()
+            time.sleep(web_driver.two_second)
             total_events_text = self.explicit_wait(5, "XPATH", insight_dashboard_read_ini().probable_match_events_text_on_events_panel_by_xpath(), self.d)
             self.logger.info(f"total events text: {total_events_text.text}")
             total_events_text_list = total_events_text.text.split(' ')
             self.logger.info(f"text list: {total_events_text_list}")
+            self.d.find_element(By.XPATH, Portal_Menu_Module_read_ini().get_close_panel_button_by_xpath()).click()
             return total_events_text_list[3]
         except Exception as ex:
             self.logger.info(f"get_total_events ex : {ex.args}")
@@ -828,17 +842,39 @@ class insight_dashboard_pom(web_driver, web_logger):
             self.d.find_element(By.XPATH, insight_dashboard_read_ini().cloud_menu_by_xpath()).click()
             vsj_menu_item = self.explicit_wait(5, "XPATH", insight_dashboard_read_ini().visitor_search_jobs_menu_item_by_xpath(), self.d)
             vsj_menu_item.click()
+            self.click_on_search_dropdown_and_select_all_users()
+            time.sleep(web_driver.one_second)
             total_vs_text = self.explicit_wait(5, "XPATH", insight_dashboard_read_ini().visitor_search_count_text_on_vsj_panel(), self.d)
             if total_vs_text:
                 self.logger.info(f"vs text: {total_vs_text.text}")
                 total_vs_text_list = total_vs_text.text.split(' ')
                 self.logger.info(f"vs text list: {total_vs_text_list}")
+                self.d.find_element(By.XPATH, Portal_Menu_Module_read_ini().get_close_panel_button_by_xpath()).click()
                 return total_vs_text_list[3]
             else:
                 self.logger.info(f"visitor search count is not visible.")
                 return "x"
         except Exception as ex:
             self.logger.info(f"get_total_visitor_search_count ex: {ex.args}")
+
+    def click_on_search_dropdown_and_select_all_users(self):
+        try:
+            search_dropdown = web_driver.explicit_wait(self, 10, "XPATH",
+                                                       Read_Visitor_Search_jobs_Components().
+                                                       visitor_search_jobs_panel_search_button(), self.d)
+            search_dropdown.click()
+            include_jobs_from_all_users = web_driver.explicit_wait(self, 10, "XPATH",
+                                                                   Read_Visitor_Search_jobs_Components().
+                                                                   yes_btn_for_include_jobs_for_all_users_by_xpath(),
+                                                                   self.d)
+            include_jobs_from_all_users.click()
+            self.logger.info("Clicked on Include Jobs For All Users option...")
+            time.sleep(web_driver.one_second)
+            search_button = self.d.find_element(By.XPATH, Read_Visitor_Search_jobs_Components().
+                                                search_button_on_search_dialog_by_xpath())
+            search_button.click()
+        except Exception as ex:
+            self.logger.info(f"click_on_search_dropdown_and_select_all_users ex: {ex.args}")
 
     def open_insights_dashboard(self):
         try:
@@ -948,10 +984,12 @@ class insight_dashboard_pom(web_driver, web_logger):
                     x.append(True)
                 else:
                     x.append(False)
+            self.logger.info(f"total_enrollments_count from ini: {insight_dashboard_read_ini().total_enrollments_count()}")
             if total_enrollments == insight_dashboard_read_ini().total_enrollments_count():
                 x.append(True)
             else:
                 x.append(False)
+            self.logger.info(f"enrollments x: {x}")
             if False in x:
                 return False
             else:
@@ -983,6 +1021,7 @@ class insight_dashboard_pom(web_driver, web_logger):
                 x.append(True)
             else:
                 x.append(False)
+            self.logger.info(f"ff enrollments x: {x}")
             if False in x:
                 return False
             else:
@@ -998,10 +1037,7 @@ class insight_dashboard_pom(web_driver, web_logger):
             total_match_events_count = self.explicit_wait(5, "XPATH", insight_dashboard_read_ini().total_probable_match_events_count_by_xpath(), self.d)
             self.logger.info(f"total_match_events count visible: {total_match_events_count.is_displayed()}")
             self.logger.info(f"count: {total_match_events_count.text}")
-            y = total_match_events_count.text[0]
-            z = total_match_events_count.text[2:]
-            m = y+z
-            total_match_events_count_actual = m
+
             x = []
             if total_match_events_text:
                 if total_match_events_text.is_displayed():
@@ -1013,10 +1049,12 @@ class insight_dashboard_pom(web_driver, web_logger):
                     x.append(True)
                 else:
                     x.append(False)
-            if total_match_events_count_actual == insight_dashboard_read_ini().total_events_count():
+            self.logger.info(f"events from ini: {insight_dashboard_read_ini().total_events_count()}")
+            if total_match_events_count.text == insight_dashboard_read_ini().total_events_count():
                 x.append(True)
             else:
                 x.append(False)
+            self.logger.info(f"events x: {x}")
             if False in x:
                 return False
             else:
@@ -1049,6 +1087,7 @@ class insight_dashboard_pom(web_driver, web_logger):
                 x.append(True)
             else:
                 x.append(False)
+            self.logger.info(f"VS x: {x}")
             if False in x:
                 return False
             else:
@@ -2096,9 +2135,3 @@ class insight_dashboard_pom(web_driver, web_logger):
         except Exception as ex:
             self.logger.info(f"Enrollments_by_Status_counts_organisation_and_individual_groups ex:{ex.args}")
 
-
-enrollment_groups_enlisted_name_list = ['abe', 'Default Enrollment Group', 'fraude', 'pte', 'soe']
-enrollments_linked_to_enrollment_groups_enlisted_list = ['5', '0', '5', '5', '5']
-
-enrollment_groups_enlisted_name_list = ['abe', 'Default Enrollment Group', 'fraude', 'pte', 'soe']
-enrollments_linked_to_enrollment_groups_enlisted_list = ['5', '0', '5', '5', '5']
