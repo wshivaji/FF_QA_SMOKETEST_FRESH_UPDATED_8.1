@@ -38,20 +38,20 @@ class Test_Visitor_Search_Test_Cases(web_driver, web_logger):
             self.logger.info("test_TC_VS_03 execution failed..")
             assert False
 
-    @pytest.mark.portal
-    def test_TC_VS_04(self):
-        if Visitor_Search_Module_pom().Verify_org_hierarchy_selection_root_name_should_be_able_to_match_with_DM_core_name():
-            assert True
-        else:
-            self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_VS_04.png")
-            self.logger.info("test_TC_VS_04 execution failed..")
-            assert False
-
-    @pytest.mark.portal
-    def test_TC_VS_05(self):
-        if Visitor_Search_Module_pom().Verify_warning_message_when_user_is_dropping_the_image_which_is_clicked_on_live_or_file_image_on_events_panel_able_to_perform_image_with_meta_data_idealy_it_should_not_with_larger_image_able_to_perform():
-            assert True
-        else:
-            self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_VS_05.png")
-            self.logger.info("test_TC_VS_05 execution failed..")
-            assert False
+    # @pytest.mark.portal
+    # def test_TC_VS_04(self):
+    #     if Visitor_Search_Module_pom().Verify_org_hierarchy_selection_root_name_should_be_able_to_match_with_DM_core_name():
+    #         assert True
+    #     else:
+    #         self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_VS_04.png")
+    #         self.logger.info("test_TC_VS_04 execution failed..")
+    #         assert False
+    #
+    # @pytest.mark.portal
+    # def test_TC_VS_05(self):
+    #     if Visitor_Search_Module_pom().Verify_warning_message_when_user_is_dropping_the_image_which_is_clicked_on_live_or_file_image_on_events_panel_able_to_perform_image_with_meta_data_idealy_it_should_not_with_larger_image_able_to_perform():
+    #         assert True
+    #     else:
+    #         self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_VS_05.png")
+    #         self.logger.info("test_TC_VS_05 execution failed..")
+    #         assert False

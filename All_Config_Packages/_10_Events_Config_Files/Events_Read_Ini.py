@@ -1046,6 +1046,30 @@ class events_Read_Ini:
             return permenantly_delete_enrollment
         except Exception as ex:
             print(ex)
+
+    def permanently_delete_selected_events_option_by_xpath(self):
+        try:
+            permanently_delete_selected_events_option_by_xpath = self.config.get("events_locators", "permanently_delete_selected_events_option_by_xpath")
+            print("permanently_delete_selected_events_option_by_xpath ", permanently_delete_selected_events_option_by_xpath)
+            return permanently_delete_selected_events_option_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def delete_Selected_btn_on_warning_popup_by_xpath(self):
+        try:
+            delete_Selected_btn_on_warning_popup_by_xpath = self.config.get("events_locators", "delete_Selected_btn_on_warning_popup_by_xpath")
+            print("delete_Selected_btn_on_warning_popup_by_xpath ", delete_Selected_btn_on_warning_popup_by_xpath)
+            return delete_Selected_btn_on_warning_popup_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def event_deleted_success_message_by_xpath(self):
+        try:
+            event_deleted_success_message_by_xpath = self.config.get("events_locators", "event_deleted_success_message_by_xpath")
+            print("event_deleted_success_message_by_xpath ", event_deleted_success_message_by_xpath)
+            return event_deleted_success_message_by_xpath
+        except Exception as ex:
+            print(ex)
             
     def warning_dialouge_box(self):
         try:

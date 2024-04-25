@@ -4613,11 +4613,13 @@ class notes_pom(web_driver, web_logger):
             time.sleep(web_driver.two_second)
             notes = self.d.find_element(By.XPATH, notes_Read_Ini().get_notes_is_displayed())
             notes.click()
+            self.explicit_wait(5, "XPATH", notes_Read_Ini().get_heading_of_notes_page(), self.d)
             heading_notes = self.d.find_elements(By.XPATH, notes_Read_Ini().get_heading_of_notes_page())
             time.sleep(web_driver.one_second)
             location_symbol = self.d.find_element(By.XPATH, notes_Read_Ini().location_symbol())
             location_symbol.click()
             time.sleep(web_driver.two_second)
+            self.explicit_wait(5, "XPATH", notes_Read_Ini().get_heading_of_notes_location(), self.d)
             heading_notes_location = self.d.find_element(By.XPATH, notes_Read_Ini().get_heading_of_notes_location())
             if heading_notes_location.is_displayed():
                 self.logger.info("notes-location panel heading is visible")
@@ -5059,7 +5061,7 @@ class notes_pom(web_driver, web_logger):
             location_in_view_dropdown = self.d.find_element(By.XPATH, notes_Read_Ini().location_in_view_dropdown())
             location_in_view_dropdown.click()
             time.sleep(web_driver.two_second)
-
+            self.explicit_wait(5, "XPATH", notes_Read_Ini().get_heading_of_notes_location(), self.d)
             heading_notes_location = self.d.find_element(By.XPATH, notes_Read_Ini().get_heading_of_notes_location())
             if heading_notes_location.is_displayed():
                 self.logger.info("notes-location panel heading is visible")
