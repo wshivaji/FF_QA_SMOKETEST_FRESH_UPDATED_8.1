@@ -598,14 +598,17 @@ class login(web_driver, web_logger):
 class logout(web_driver, web_logger):
     def __init__(self):
         self.file_path = f"{Path(__file__).parent.parent}\\All_Test_Data\\0_Login_Logout_Data\\Data_From_INI\\login_logout.ini"
+        self.common_test_data_ini_file_path = f"{Path(__file__).parent.parent}\\All_Test_Data\\Common_Test_Data\\common_test_data.ini"
+        self.common_test_data_config = configparser.RawConfigParser()
+        self.common_test_data_config.read(self.common_test_data_ini_file_path)
         print(f"INI Data File Path: {self.file_path}")
         self.config = configparser.RawConfigParser()
         self.config.read(self.file_path)
-        self.local_url = self.config.get("login_urls", "local_login_url")
-        self.cloud_url = self.config.get("login_urls", "cloud_login_url")
-        # print(f"local url: {self.local_url}")
-        # print(f"cloud url: {self.cloud_url}")
-        self.d = web_driver.d()
+        self.cloud_url = self.common_test_data_config.get("Login_Logout_Data", "cloud_login_url")
+        print(f"cloud url: {self.cloud_url}")
+        self.register_login_url = DeploymentManager_Read_ini().get_register_login_link_from_register_url()
+        print(f"cloud url: {self.register_login_url}")
+        self.d = None
         self.logger = web_logger.logger_obj()
 
     def logout_from_core(self, d):
@@ -613,10 +616,9 @@ class logout(web_driver, web_logger):
             self.d = d
             time.sleep(web_driver.one_second)
             current_url = self.d.current_url
-            if current_url == self.config.get("login_urls", "cloud_login_url"):
+            if current_url == self.cloud_url:
                 self.logger.info(f"current url: {current_url}")
-                self.logger.info(f"actual url: {self.config.get('login_urls', 'cloud_login_url')}")
-                # cloud_menu_btn = self.d.find_element(By.XPATH, self.config.get("logout_locators", "cloud_or_local_menu_by_xpath"))
+                self.logger.info(f"actual url: {self.cloud_url}")
                 cloud_menu_btn = web_driver.explicit_wait(self, 10, "XPATH", self.config.get("logout_locators", "cloud_or_local_menu_by_xpath"), self.d)
                 cloud_menu_btn.click()
                 close_all_submenu_list = self.d.find_elements(By.XPATH, self.config.get("logout_locators", "close_all_panels_menu_by_xpath"))
@@ -626,13 +628,7 @@ class logout(web_driver, web_logger):
                 if len(close_all_submenu_list) > 0:
                     close_all_submenu_list[0].click()
                 else:
-                    # logout_btn = self.d.find_element(By.XPATH, self.config.get("logout_locators", "logout_btn_by_xpath"))
                     logout_btn = web_driver.explicit_wait(self, 10, "XPATH", self.config.get("logout_locators", "logout_btn_by_xpath"), self.d)
-                    logout_btn.click()
-                if not full_dashboard.is_displayed():
-                    time.sleep(web_driver.one_second)
-                    logout_btn = self.d.find_element(By.XPATH,
-                                                     self.config.get("logout_locators", "logout_btn_by_xpath"))
                     logout_btn.click()
             else:
                 print(f"wrong url detected: {current_url}")
@@ -642,7 +638,6 @@ class logout(web_driver, web_logger):
             self.logger.info(f"logout exception: {ex.args}")
             self.d.save_screenshot(f"{web_driver.screenshots_path}\\logout_exception.png")
             print(ex.args)
-
 
     def login_to_admin_if_not_done(self,d):
         try:

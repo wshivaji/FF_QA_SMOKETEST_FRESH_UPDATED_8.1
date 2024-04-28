@@ -879,15 +879,15 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC112(self):
-        if Users_Module_pom().verify_details_of_core_user():
+    def test_SM_TC111(self):
+        if Users_Module_pom().Verify_org_hierarchy_selection_root_name_should_be_able_to_match_with_DM_core_name():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC111(self):
-        if Users_Module_pom().Verify_org_hierarchy_selection_root_name_should_be_able_to_match_with_DM_core_name():
+    def test_SM_TC112(self):
+        if Users_Module_pom().verify_details_of_core_user():
             assert True
         else:
             assert False
@@ -1304,35 +1304,35 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.system
     def test_SM_TC193(self):
-        if notes_pom().verify_user_able_to_delete_notes_successfully():
-            assert True
-        else:
-            assert False
-
-    @pytest.mark.system
-    def test_SM_TC194(self):
         if notes_pom().verify_user_is_able_to_select_any_one_note_and_click_on_location_in_view_dropdown():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC195(self):
+    def test_SM_TC194(self):
         if notes_pom().verify_user_is_able_to_select_any_one_note_and_click_on_location_icon():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC196(self):
+    def test_SM_TC195(self):
         if notes_pom().verify_user_is_able_to_see_the_enrollment_associated_to_particular_note():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC197(self):
+    def test_SM_TC196(self):
         if notes_pom().Verify_user_is_able_to_add_photo_when_image_icon_is_clicked():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC197(self):
+        if notes_pom().verify_user_able_to_delete_notes_successfully():
             assert True
         else:
             assert False

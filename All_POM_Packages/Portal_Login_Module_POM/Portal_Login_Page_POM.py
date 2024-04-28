@@ -3,6 +3,7 @@ from selenium import webdriver
 import pyautogui
 from selenium.webdriver.common.by import By
 from All_Config_Packages._1_Portal_Login_Module_Config_Files.Portal_Login_Page_Read_INI import Portal_login_page_read_ini
+from Base_Package.Login_Logout_Ops import login
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
 
@@ -381,7 +382,7 @@ class Portal_Login_Page_Pom(web_driver, web_logger):
             time.sleep(web_driver.one_second)
             if len(logout_btn) > 0:
                 self.logger.info("Someone already logged in..")
-                logout_btn.click()
+                logout_btn[0].click()
             else:
                 self.logger.info("Unable to click logout")
             time.sleep(web_driver.two_second)
@@ -428,6 +429,7 @@ class Portal_Login_Page_Pom(web_driver, web_logger):
 
     def load_portal_login_page_if_not_loaded(self):
         try:
+            login().login_to_cloud_if_not_done(self.d)
             if self.d.title == Portal_login_page_read_ini().get_portal_title():
                 pass
             else:
