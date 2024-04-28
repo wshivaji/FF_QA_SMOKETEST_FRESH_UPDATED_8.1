@@ -2345,12 +2345,45 @@ class events_pom(web_driver, web_logger):
             self.logger.info("************************ test_events_TC_009 **********************************")
             self.status.clear()
             login().login_to_cloud_if_not_done(self.d)
-            
+            self.click_on_event_menu()
+            self.click_on_search_button()
+            self.click_on_enrollment_group()
+            eg_name = "ABE"
+            self.select_enrollment_group(eg_name)
+            self.click_on_save_button()
+            self.click_on_org_hierarchy_selection_btn()
+            self.select_region_from_org_hierarchy()
+            self.click_on_tag_selection_btn()
+            self.select_tags_to_add_to_events(eg_name)
+            self.click_on_save_tag_button()
+            self.click_on_event_filter_search_button()
+            self.verify_events_displayed_as_expected_after_filter(eg_name)
+            self.logger.info(f"status: {self.status}")
+            if False in self.status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_events_TC_009.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\test_events_TC_009.png")
+                self.close_all_panel_one_by_one()
+                return False
+            else:
+                self.close_all_panel_one_by_one()
+                return True
         except Exception as ex:
             self.logger.info(f"Probable_Match_Event_search_with_DateTimeRange_EnrollmentGroup_Org_Hierarchy_and_Tag_filter_combination_result_should_be_DateTimeRange_EnrollmentGroup_Org_Hierarchy_and_Tagged_event ex: {ex.args}")
 
 
 ################################################ Event_search_filter_methods ##############################################
+
+    def verify_events_displayed_as_expected_after_filter(self, eg_name):
+        try:
+            events_count = self.explicit_wait(5, "XPATH", events_Read_Ini().get_total_number_of_events(), self.d)
+            self.logger.info(f"events displayed count: {events_count.text}")
+            if "5" in events_count.text:
+                self.status.append(True)
+            else:
+                self.status.append(False)
+
+        except Exception as ex:
+            self.logger.info(f"verify_events_displayed_as_expected_after_filter ex: {ex.args}")
 
     def verify_event_delete_success_message_displayed(self):
         try:
@@ -2858,7 +2891,8 @@ class events_pom(web_driver, web_logger):
             self.logger.info(f"click_on_org_hierarchy_selection_btn ex: {ex.args}")
 
     def click_on_event_menu(self):
-        time.sleep(web_driver.one_second)
+        self.logger.info(f"clicking on events panel")
+        time.sleep(web_driver.two_second)
         event_menu = self.d.find_element(By.XPATH,
                                          events_Read_Ini().menu_event_button_by_xpath())
         self.d.execute_script("arguments[0].click();", event_menu)

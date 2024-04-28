@@ -1071,9 +1071,92 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
         else:
             assert False
 
-    # ------------------------------------------ PME (CERD) cases ------------------------------------ #
+    # ------------------------------------------ PME (CURD) cases ------------------------------------ #
 
-    # ------------------------------------------ Identify Enroll (CERD) cases ------------------------------------ #
+    @pytest.mark.system
+    def test_SM_TC140(self):
+        if events_pom().Verify_25_events_are_generated_for_25_enrolled_subjects():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC141(self):
+        self.logger.info(
+            "Verify_5_events_for_each_group_soe_abe_pte_fraude_and_vipe_using_enrollment_group_selection_in_search_dropdown")
+        if events_pom().Verify_5_events_for_each_group_soe_abe_pte_fraude_and_vipe_using_enrollment_group_selection_in_search_dropdown():
+            assert True
+        else:
+            self.logger.info("test_events_TC_002 fail")
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC142(self):
+        self.logger.info("Verify 25 events using Org/hierarchy selection in search dropdown")
+        if events_pom().Verify_25_events_using_Org_hierarchy_selection_in_search_dropdown():
+            assert True
+        else:
+            self.logger.info("test_events_TC_003 fail")
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC143(self):
+        self.logger.info(
+            "Verify 5 events for each group (soe, abe, pte, fraude and vipe) using enrollment group and org/hierarchy selection in search dropdown")
+        if events_pom().Verify_5_events_for_each_group_soe_abe_pte_fraude_and_vipe_using_enrollment_group_and_org_hierarchy_selection_in_search_dropdown():
+            assert True
+        else:
+            self.logger.info("test_TC_ESFC_05 fail")
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC144(self):
+        self.logger.info(
+            "Add the tags with respective enrollment groups and org/hierarchy selection (example soe: deterred and assualt, abe: deterred and threat, pte: deterred and push cart, fraude and vipe: deterred and fraud) ")
+        if events_pom().Add_the_tags_with_respective_enrollment_groups_and_org_hierarchy_selection_example_soe_deterred_and_assualt_abe_deterred_and_threat_pte_deterred_and_push_cart_fraude_and_vipe_deterred_and_fraud():
+            assert True
+        else:
+            self.logger.info("test_events_TC_005 fail")
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC145(self):
+        self.logger.info("Verify 5 events are visible by enrollment group, org/hierarchy and Tag selection")
+        if events_pom().Verify_5_events_are_visible_by_enrollment_group_org_hierarchy_and_Tag_selection():
+            assert True
+        else:
+            self.logger.info("test_events_TC_006 fail")
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC146(self):
+        self.logger.info(
+            "Verify user should be able to add the tags and see that same tags are visible when user clicks on display tags option in view dropdown")
+        if events_pom().Verify_user_should_be_able_to_add_the_tags_and_see_that_same_tags_are_visible_when_user_clicks_on_display_tags_option_in_view_dropdown():
+            assert True
+        else:
+            self.logger.info("test_events_TC_007 fail")
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC147(self):
+        self.logger.info("Verify user able to delete probable match events")
+        if events_pom().Verify_user_able_to_delete_probable_match_events():
+            assert True
+        else:
+            self.logger.info("test_events_TC_008 fail")
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC148(self):
+        self.logger.info("Probable Match Event search with DateTimeRange, EnrollmentGroup, Org/Hierarchy and Tag filter combination result should be DateTimeRange, EnrollmentGroup, Org/Hierarchy and Tagged event.")
+        if events_pom().Probable_Match_Event_search_with_DateTimeRange_EnrollmentGroup_Org_Hierarchy_and_Tag_filter_combination_result_should_be_DateTimeRange_EnrollmentGroup_Org_Hierarchy_and_Tagged_event():
+            assert True
+        else:
+            self.logger.info("test_events_TC_009 fail")
+            assert False
+    
+    # ------------------------------------------ Identify Enroll (CURD) cases ------------------------------------ #
     @pytest.mark.system
     def test_SM_TC164(self):
         if Identify_And_Enroll_POM().Verify_user_is_able_to_enroll_the_person_by_uploading_the_image_cropping_the_same_and_adding_the_required_details_for_the_same():
@@ -1123,7 +1206,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
         else:
             assert False
 
-    # ------------------------------------------ Notifier (CERD) cases ------------------------------------ #
+    # ------------------------------------------ Notifier (CURD) cases ------------------------------------ #
     @pytest.mark.system
     def test_SM_TC168(self):
         if Notifier_pom().Verify_Notifier_result_for_first_camera_of_first_region_selected_with_group_selected_as_ABE_with_Auto_Refresh_Of_events_displayed_as_2_photo_size_as_Medium_and_Sound_Option_as_OFF():
@@ -1259,7 +1342,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             self.logger.info("test_VSJ_05 execution failed..")
             assert False
 
-    # ------------------------------------------ Tags CERD case ------------------------------------ #
+    # ------------------------------------------ Tags CURD case ------------------------------------ #
     @pytest.mark.system
     def test_SM_TC186(self):
         self.logger.info("test_TC_TAG_04 execution started..")

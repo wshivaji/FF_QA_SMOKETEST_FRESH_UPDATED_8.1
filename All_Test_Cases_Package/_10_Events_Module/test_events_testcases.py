@@ -91,13 +91,13 @@ class Test_eVents_testcases(web_driver, web_logger):
             assert False
 
     @pytest.mark.p1
-    def test_events_TC_008(self):
+    def test_events_TC_009(self):
         self.logger.info("Probable Match Event search with DateTimeRange, EnrollmentGroup, Org/Hierarchy and Tag filter combination result should be DateTimeRange, EnrollmentGroup, Org/Hierarchy and Tagged event.")
         if events_pom().Probable_Match_Event_search_with_DateTimeRange_EnrollmentGroup_Org_Hierarchy_and_Tag_filter_combination_result_should_be_DateTimeRange_EnrollmentGroup_Org_Hierarchy_and_Tagged_event():
             assert True
         else:
-            self.d.save_screenshot(f"{self.screenshots_path}\\test_events_TC_008.png")
-            self.logger.info("test_events_TC_008 fail")
+            self.d.save_screenshot(f"{self.screenshots_path}\\test_events_TC_009.png")
+            self.logger.info("test_events_TC_009 fail")
             assert False
 
     # @pytest.mark.p1
@@ -157,7 +157,7 @@ class Test_eVents_testcases(web_driver, web_logger):
     #         assert False
             
     @pytest.mark.p2
-    def test_events_TC_009(self):
+    def test_events_TC_009_1(self):
         if events_pom().on_Events_page_Enter_a_text_in_search_filter_by_action_textbox_and_verify_number_of_events_displayed():
             assert True
         else:
