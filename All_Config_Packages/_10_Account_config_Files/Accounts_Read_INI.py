@@ -523,30 +523,60 @@ class account_Read_Ini:
         print("start_users_count", start_users_count)
         return start_users_count
 
+    def end_users_count(self):
+        end_users_count = self.common_test_data_config.get("Account_Module_Data", "end_users_count")
+        print("end_users_count", end_users_count)
+        return end_users_count
+
     def start_max_investigation_length_count(self):
         start_max_investigation_length_count = self.common_test_data_config.get("Account_Module_Data", "start_max_investigation_length_count")
         print("start_max_investigation_length_count", start_max_investigation_length_count)
         return start_max_investigation_length_count
+
+    def end_max_investigation_length_count(self):
+        end_max_investigation_length_count = self.common_test_data_config.get("Account_Module_Data", "end_max_investigation_length_count")
+        print("end_max_investigation_length_count", end_max_investigation_length_count)
+        return end_max_investigation_length_count
 
     def start_enrollment_groups_count(self):
         start_enrollment_groups_count = self.common_test_data_config.get("Account_Module_Data", "start_enrollment_groups_count")
         print("start_enrollment_groups_count", start_enrollment_groups_count)
         return start_enrollment_groups_count
 
+    def end_enrollment_groups_count(self):
+        end_enrollment_groups_count = self.common_test_data_config.get("Account_Module_Data", "end_enrollment_groups_count")
+        print("end_enrollment_groups_count", end_enrollment_groups_count)
+        return end_enrollment_groups_count
+
     def start_notification_groups_count(self):
         start_notification_groups_count = self.common_test_data_config.get("Account_Module_Data", "start_notification_groups_count")
         print("start_notification_groups_count", start_notification_groups_count)
         return start_notification_groups_count
+
+    def end_notification_groups_count(self):
+        end_notification_groups_count = self.common_test_data_config.get("Account_Module_Data", "end_notification_groups_count")
+        print("end_notification_groups_count", end_notification_groups_count)
+        return end_notification_groups_count
 
     def start_stations_count(self):
         start_stations_count = self.common_test_data_config.get("Account_Module_Data", "start_stations_count")
         print("start_stations_count", start_stations_count)
         return start_stations_count
 
+    def end_stations_count(self):
+        end_stations_count = self.common_test_data_config.get("Account_Module_Data", "end_stations_count")
+        print("start_stations_count", end_stations_count)
+        return end_stations_count
+
     def start_email(self):
         start_email = self.common_test_data_config.get("Account_Module_Data", "start_email")
         print("start_email", start_email)
         return start_email
+
+    def end_email(self):
+        end_email = self.common_test_data_config.get("Account_Module_Data", "end_email")
+        print("end_email", end_email)
+        return end_email
 
     def no_enrollments_message_by_xpath(self):
         no_enrollments_message_by_xpath = self.config.get("account_locators", "count_of_enrollments_by_xpath")
