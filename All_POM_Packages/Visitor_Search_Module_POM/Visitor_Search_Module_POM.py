@@ -32,6 +32,48 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
         self.custom_dates_json = \
             f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\7_Visitor_Search_Module\\Data_From_JSON\\custom_dates_json.json"
 
+    now = datetime.datetime.now()
+    DATE_IE = now.strftime('%d/%m/%Y')
+    TIME_IE = now.strftime('%H%M')
+    AM_PM_IE = now.strftime('%p')
+    tomorrow = now + datetime.timedelta(1)
+    yesterday = now - datetime.timedelta(1)
+
+    expirationDATE_IE = tomorrow.strftime('%m/%d/%Y')
+    expirationTIME_IE = now.strftime('%H%M')
+    expirationAM_PM_IE = now.strftime('%p')
+
+    def expirirationdateTimeAMPM(self, date_incident):
+        self.logger.info(f" tommorow date : {self.expirationDATE_IE}")
+        date_incident.send_keys(self.expirationDATE_IE)
+        time.sleep(web_driver.one_second)
+        date_incident.send_keys(" " + self.TIME_IE)
+        time.sleep(web_driver.one_second)
+        date_incident.send_keys(" " + self.AM_PM_IE)
+        time.sleep(web_driver.one_second)
+
+    def enter_date_time_to_calender(self, date_incident, date_time):
+        self.logger.info(f" date : {date_time.date().strftime("%d/%m/%Y")}")
+        self.logger.info(f" time : {date_time.date().strftime("%H:%M")}")
+        self.logger.info(f" time : {date_time.date().strftime("%p")}")
+        date = date_time.date().strftime("%m/%d/%Y")
+        time_1 = date_time.date().strftime("%H:%M")
+        am_pm = date_time.date().strftime("%p")
+        # date_incident.click()
+        # time.sleep(web_driver.one_second)
+        # date_incident.clear()
+        date_incident.clear()
+        time.sleep(web_driver.one_second)
+        date_incident.send_keys(date)
+        time.sleep(web_driver.one_second)
+
+        date_incident.send_keys(" " + time_1)
+        time.sleep(web_driver.one_second)
+        date_incident.send_keys(" " + am_pm)
+        time.sleep(web_driver.one_second)
+        # date_incident.send_keys(date_time)
+
+
     def click_on_visitor_search(self):
         self.logger.info("going to visitor search...")
         visitor_search_btn = web_driver.explicit_wait(self, 10, "XPATH",
@@ -170,7 +212,8 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
 
     def enter_start_and_end_date(self):
         try:
-            date = int(Read_Visitor_Search_Components().get_vsj_start_date())
+
+            date = int(Read_Visitor_Search_Components().get_start_date())
             month = str(Read_Visitor_Search_Components().get_start_month())
             year = int(Read_Visitor_Search_Components().get_start_year())
             hour = str(Read_Visitor_Search_Components().get_start_hour())
@@ -187,8 +230,7 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
             try:
                 Visitor_Search_Module_pom().handle_calender("from", date, month, year, hour, minute, period)
                 time.sleep(web_driver.one_second)
-                Visitor_Search_Module_pom().handle_calender("to", e_date, e_month, e_year, e_hour, e_minute,
-                                                                   e_period)
+                Visitor_Search_Module_pom().handle_calender("to", e_date, e_month, e_year, e_hour, e_minute, e_period)
                 time.sleep(web_driver.three_second)
             except Exception as ex:
                 print(ex)
@@ -639,38 +681,30 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
         This function is usd to upload the image and click on the search button
         :return:
         """
-        upload_photo = web_driver.explicit_wait(self, 10, "XPATH", Read_Visitor_Search_Components().
-                                                photo_upload_container_by_xpath(), self.d)
-        upload_photo.click()
-        time.sleep(web_driver.one_second)
-        print("file path =====>>>> ")
         file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset1\\fraud\\00082.png"
         print(f"filepath : {file_path}")
-
-        pyautogui.write(file_path)
-        pyautogui.press('enter')
-        time.sleep(web_driver.one_second)
-        pyautogui.press('enter')
-        time.sleep(web_driver.one_second)
+        self.upload_image(file_path)
 
     def add_image_for_image_with_metadata_search(self):
         """
         This function is usd to upload the image and click on the search button
         :return:
         """
-        upload_photo = web_driver.explicit_wait(self, 10, "XPATH", Read_Visitor_Search_Components().
-                                                photo_upload_container_by_xpath(), self.d)
-        upload_photo.click()
-        time.sleep(web_driver.one_second)
-        print("file path =====>>>> ")
         file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset1\\pt\\00087.png"
-        print(f"filepath : {file_path}")
+        self.upload_image(file_path)
 
-        pyautogui.write(file_path)
-        pyautogui.press('enter')
-        time.sleep(web_driver.one_second)
-        pyautogui.press('enter')
-        time.sleep(web_driver.one_second)
+    def upload_image(self, img_path):
+        """
+        This function is usd to upload the image and click on the search button
+        :return:
+        """
+        file_path = img_path
+        time.sleep(2)
+        self.logger.info(f"image uploaded: {file_path}")
+        # upload_image = self.explicit_wait(10, "NAME", "image", self.d)
+        upload_image_box = self.d.find_element(By.NAME, "image")
+        upload_image_box.send_keys(file_path)
+        self.logger.info("Photo Selected....")
 
     def compare_count_match(self, count_data):
         """
@@ -742,9 +776,6 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
         if strategy == "from":
             self.logger.info("select in from hours and min")
             self.calender_handle_hour_minute_from(hour, minute)
-        # else:
-        #     self.logger.info("select in to hours and min")
-        #     self.calender_handle_hour_minute_to(hour, minute)
 
         # select the period am or pm
         period = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().period_by_xpath())
@@ -959,6 +990,8 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
 
     def calender_handle_hour_minute_to(self, hour, minute):
         # set the hour
+        # period_btn = self.explicit_wait(5, "XPATH", Read_Visitor_Search_Components().period_by_xpath(), self.d)
+        # period_btn.click()
         current_hour_ele = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().current_hour_ele_by_xpath())
         cur_hour = int(current_hour_ele.text)
 
@@ -966,8 +999,7 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
             hour_down = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().hour_down_by_xpath())
 
             self.d.execute_script("arguments[0].click();", hour_down)
-            current_hour_ele = self.d.find_element(By.XPATH,
-                                                   Read_Visitor_Search_Components().current_hour_ele_by_xpath())
+            current_hour_ele = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().current_hour_ele_by_xpath())
             cur_hour = int(current_hour_ele.text)
 
         # set the minute
@@ -984,6 +1016,8 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
 
     def calender_handle_hour_minute_from(self, hour, minute):
         # set the hour
+        # period_btn = self.explicit_wait(5, "XPATH", Read_Visitor_Search_Components().period_by_xpath(), self.d)
+        # period_btn.click()
         current_hour_ele = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().current_hour_ele_by_xpath())
         cur_hour = int(current_hour_ele.text)
 
@@ -999,6 +1033,8 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
         current_min_ele = self.d.find_element(By.XPATH, Read_Visitor_Search_Components()
                                               .current_minute_element_by_xpath())
         cur_min = int(current_min_ele.text)
+
+
         while int(cur_min) != int(minute):
             clock_up_button = self.d.find_element(By.XPATH, Read_Visitor_Search_Components()
                                                   .clock_min_up_button_by_xpath())

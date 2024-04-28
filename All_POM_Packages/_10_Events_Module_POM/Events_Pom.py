@@ -10,6 +10,7 @@ from All_Config_Packages._10_Events_Config_Files.Events_Read_Ini import events_R
 from All_Config_Packages._11_Enrollment_Module_Config_Files.Enrollment_Module_Read_INI import read_enrollment_components
 from All_Config_Packages._12_Identify_and_Enroll_Config_Files.Identify_and_Enroll_Readd_INI import \
     Read_Identify_and_Enroll_Components
+from All_Config_Packages._9_tags_module_Config_Files.Tags_Read_INI import Read_Tags_Components
 from Base_Package.Login_Logout_Ops import login
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
@@ -2302,6 +2303,17 @@ class events_pom(web_driver, web_logger):
             self.select_tag_to_add_to_event_for_verification(tag_name)
             self.click_action_dropdown_on_event_tags_panel()
             self.click_on_add_tags_to_selected_events_option()
+            self.click_on_filter_dropdown_on_event_tags_panel()
+            self.click_on_linked_tags_option_inside_filter_dropdown()
+            self.verify_tag_added_to_event(tag_name)
+            self.close_all_panel_one_by_one()
+            self.logger.info(f"status: {self.status}")
+            if False in self.status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_events_TC_007.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\test_events_TC_007.png")
+                return False
+            else:
+                return True
         except Exception as ex:
             self.logger.info(f"Verify_user_should_be_able_to_add_the_tags_and_see_that_same_tags_are_visible_when_user_clicks_on_display_tags_option_in_view_dropdown ex: {ex.args}")
 
@@ -2388,17 +2400,39 @@ class events_pom(web_driver, web_logger):
         except Exception as ex:
             self.logger.info(f"select_first_event_checkbox  ex: {ex.args}")
 
-
     def select_tag_to_add_to_event_for_verification(self, tag_name):
         try:
-            self.explicit_wait(5, "XPATH", events_Read_Ini().tag_name_list_by_xpath(), self.d)
-            tag_name_list = self.d.find_elements(By.XPATH, events_Read_Ini().tag_name_list_by_xpath())
-            self.explicit_wait(5, "XPATH", events_Read_Ini().tag_name_checkbox_list(), self.d)
-            tag_name_checkbox_list = self.d.find_elements(By.XPATH, events_Read_Ini().tag_name_checkbox_list())
+            time.sleep(web_driver.three_second)
+            # self.explicit_wait(5, "XPATH", events_Read_Ini().tag_name_list_by_xpath(), self.d)
+            tag_name_list = self.d.find_elements(By.XPATH, events_Read_Ini().tag_name_list_for_add_to_event_by_xpath())
+            self.logger.info(f"length of tag names: {len(tag_name_list)}")
+            # self.explicit_wait(5, "XPATH", events_Read_Ini().tag_name_checkbox_list(), self.d)
+            tag_name_checkbox_list = self.d.find_elements(By.XPATH, events_Read_Ini().checkbox_list_for_add_tag_to_event_by_xpath())
+            self.logger.info(f"tagname: {tag_name}")
+            time.sleep(web_driver.two_second)
             for i in range(len(tag_name_list)):
-                self.logger.info(f"tag name displayed: {tag_name_list[i].text}")
-                if tag_name_list[i].text == tag_name:
+                if tag_name.upper() in tag_name_list[i].text:
+                    self.logger.info(f"tag name displayed: {tag_name_list[i].text}")
                     tag_name_checkbox_list[i].click()
+                time.sleep(web_driver.one_second)
+        except Exception as ex:
+            self.logger.info(f"select_tag_to_add_to_event_for_verification ex: {ex.args}")
+
+    def verify_tag_added_to_event(self, tag_name):
+        try:
+            time.sleep(web_driver.one_second)
+            # self.explicit_wait(5, "XPATH", events_Read_Ini().tag_name_list_by_xpath(), self.d)
+            tag_name_list = self.d.find_elements(By.XPATH, events_Read_Ini().tag_name_list_for_add_to_event_by_xpath())
+            self.logger.info(f"length of tag names: {len(tag_name_list)}")
+            # self.explicit_wait(5, "XPATH", events_Read_Ini().tag_name_checkbox_list(), self.d)
+            tag_name_checkbox_list = self.d.find_elements(By.XPATH, events_Read_Ini().checkbox_list_for_add_tag_to_event_by_xpath())
+            self.logger.info(f"tagname: {tag_name}")
+            time.sleep(web_driver.two_second)
+            for i in range(len(tag_name_list)):
+                if tag_name.upper() in tag_name_list[i].text:
+                    self.logger.info(f"tag name displayed: {tag_name_list[i].text}")
+                    self.status.append(True)
+
         except Exception as ex:
             self.logger.info(f"select_tag_to_add_to_event_for_verification ex: {ex.args}")
 
@@ -2414,12 +2448,27 @@ class events_pom(web_driver, web_logger):
             self.click_on_create_tag_btn()
             self.verify_tag_details_panel_displayed()
             self.verify_tag_name_text_box_and_enter_tag_name(tag_name)
+            time.sleep(web_driver.three_second)
+            commit = self.d.find_element(By.XPATH, Read_Tags_Components().get_commit_changes_actual_msg_by_xpath())
+            commit.is_displayed()
+            # result.append(commit.text == Read_Tags_Components().get_commit_changes_expected_msg_by_xpath())
+            serious_event_checkbox = self.d.find_element(By.XPATH,
+                                                         Read_Tags_Components().
+                                                         get_serious_event_checkbox_by_xpath())
+            serious_event_checkbox.click()
+            time.sleep(web_driver.three_second)
+            save = self.d.find_element(By.XPATH, Read_Tags_Components().get_save_btn_by_xpath())
+            save.click()
+            self.logger.info("save button is clicked")
             time.sleep(web_driver.one_second)
-            save_btn = self.d.find_element(By.XPATH, events_Read_Ini().save_btn_on_tag_details_panel_by_xpath())
-            self.logger.info(f"save btn visible: {save_btn.is_displayed()}")
-            self.d.execute_script("arguments[0].click();", save_btn)
-
-            self.verify_tag_created_success_message()
+            # save_button = self.d.find_elements(By.XPATH, Read_Tags_Components().get_save_btn_by_xpath())
+            # self.logger.info(f"save btn visible: {save_button[0].is_displayed()}")
+            # self.logger.info(f"save btn: {len(save_button)}")
+            # time.sleep(web_driver.one_second)
+            # if len(save_button) > 0:
+            #     save_button[0].click()
+            #     #self.verify_tag_created_success_message()
+            self.close_all_panel_one_by_one()
         except Exception as ex:
             self.logger.info(f"create_new_tag ex: {ex.args}")
 
@@ -2435,8 +2484,10 @@ class events_pom(web_driver, web_logger):
                 self.logger.info(f"success msg not displayed.")
         except Exception as ex:
             self.logger.info(f"verify_tag_created_success_message ex: {ex.args}")
+
     def verify_tag_name_text_box_and_enter_tag_name(self, tag_name):
         try:
+            time.sleep(web_driver.three_second)
             name_test_box = self.explicit_wait(5, "XPATH", events_Read_Ini().tag_name_text_box_by_xpath(), self.d)
             self.logger.info(f"tag name textbox visible: {name_test_box.is_displayed()}")
             if name_test_box.is_displayed():
@@ -2449,6 +2500,7 @@ class events_pom(web_driver, web_logger):
 
     def verify_tag_details_panel_displayed(self):
         try:
+            time.sleep(web_driver.two_second)
             tag_details_panel_heading = self.explicit_wait(5, "XPATH", events_Read_Ini().tag_details_panel_heading(), self.d)
             self.logger.info(f"tag details panel heading visible: {tag_details_panel_heading.is_displayed()}")
             if tag_details_panel_heading.is_displayed():
@@ -2460,6 +2512,7 @@ class events_pom(web_driver, web_logger):
 
     def click_on_create_tag_btn(self):
         try:
+            time.sleep(web_driver.three_second)
             create_tag_option = self.explicit_wait(5, "XPATH", events_Read_Ini().create_Tag_option_by_xpath(), self.d)
             self.logger.info(f"create tag option visible: {create_tag_option.is_displayed()}")
             if create_tag_option.is_displayed():
@@ -2584,7 +2637,8 @@ class events_pom(web_driver, web_logger):
 
     def click_on_add_tags_to_selected_events_option(self):
         try:
-            add_tags_option = self.explicit_wait(5, "XPATH", events_Read_Ini().add_tags_to_event_option_in_event_tags_1(), self.d)
+            time.sleep(web_driver.three_second)
+            add_tags_option = self.explicit_wait(5, "XPATH", events_Read_Ini().add_tags_to_event_option_in_event_tags(), self.d)
             self.logger.info(f"add tags to events option visible: {add_tags_option.is_displayed()}")
             if add_tags_option.is_displayed():
                 add_tags_option.click()
@@ -2696,6 +2750,17 @@ class events_pom(web_driver, web_logger):
             self.logger.info(f"unlinked tags option ex: {unlinked_tags_option.is_displayed()}")
             if unlinked_tags_option.is_displayed():
                 unlinked_tags_option.click()
+            else:
+                self.logger.info(f"unlinked tags option is not displayed.")
+        except Exception as ex:
+            self.logger.info(f"click_on_unlinked_tags_option_inside_filter_dropdown ex: {ex.args}")
+
+    def click_on_linked_tags_option_inside_filter_dropdown(self):
+        try:
+            linked_tags_option = self.explicit_wait(5, "XPATH", events_Read_Ini().linked_tags_by_xpath(), self.d)
+            self.logger.info(f"linked_tags_option: {linked_tags_option.is_displayed()}")
+            if linked_tags_option.is_displayed():
+                linked_tags_option.click()
             else:
                 self.logger.info(f"unlinked tags option is not displayed.")
         except Exception as ex:
