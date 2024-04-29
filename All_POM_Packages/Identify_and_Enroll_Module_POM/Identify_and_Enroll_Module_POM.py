@@ -1040,7 +1040,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_IE_01_Exception.png")
             return False
 
-
     def enroll_5_images(self, folder_name):
         try:
             ab_folder_list_of_images = self.get_img_file_list(folder_name)
@@ -1050,9 +1049,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                 login().login_to_cloud_if_not_done_with_user_credentials(self.d,
                                                                          Read_Identify_and_Enroll_Components().get_operator_to_login(),
                                                                          Read_Identify_and_Enroll_Components().get_password_to_login())
-
-
-                self.status.clear()
 
                 time.sleep(web_driver.two_second)
                 link = self.explicit_wait(10, "XPATH",
@@ -1153,7 +1149,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                         self.logger.info(f"region name selected: {region_names[i].text}")
                         break
 
-
                 save_btn = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().save_btn_by_xpath())
                 self.d.execute_script("arguments[0].click();", save_btn)
                 # save_btn.click()
@@ -1192,7 +1187,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
 
                 save_btn = self.d.find_element(By.XPATH,
                                                Read_Identify_and_Enroll_Components().add_details_save_btn_by_xpath1())
-                if save_btn.is_displayed()  :
+                if save_btn.is_displayed():
                     self.logger.info(f"save btn displayed: {save_btn.is_displayed()}")
                     self.status.append(True)
                 else:
@@ -1201,7 +1196,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                 self.d.execute_script("arguments[0].click();", save_btn)
                 self.logger.info("Enrollment details filled and save btn is clicked")
                 # save_btn.click()
-                time.sleep(5)
+                time.sleep(web_driver.one_second)
 
                 try:
                     success_msg = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
@@ -1222,12 +1217,11 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                     if x.text.strip().lower() == Read_Identify_and_Enroll_Components().add_details_panel_validation().lower():
                         self.status.append(False)
 
-                time.sleep(2)
+                time.sleep(web_driver.two_second)
+            self.logger.info(f"status: {self.status}")
         except Exception as ex:
             self.logger.info(f"enroll 5 images exception: {ex.args}")
 
-        finally:
-            self.logout_from_portal()
 
     def verify_user_able_approve_enrollment(self):
         try:
@@ -1241,6 +1235,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.logger.info(f"Enrollment link is clicked ")
             time.sleep(web_driver.one_second)
 
+            Filter_dropdown = self.d.find_element(By.XPATH,Read_Identify_and_Enroll_Components().get_filter_dropdown())
 
             Filter_dropdown = web_driver.explicit_wait(self,5,"XPATH",Read_Identify_and_Enroll_Components().get_filter_dropdown(),self.d)
             Filter_dropdown.click()
@@ -1251,6 +1246,12 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             pending_for_review.click()
             self.logger.info(f"pending for review link is clicked :")
             time.sleep(web_driver.two_second)
+
+            load_more_button = self.d.find_element(By.XPATH,
+                                                   Read_Identify_and_Enroll_Components().get_load_more_button_by_xpath())
+            load_more_button.click()
+            self.logger.info(f"load more button is clicked ")
+            time.sleep(web_driver.one_second)
 
             load_more_button = web_driver.explicit_wait(self,5,"XPATH", Read_Identify_and_Enroll_Components().get_load_more_button_by_xpath(),self.d)
             time.sleep(web_driver.two_second)
@@ -1275,14 +1276,15 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             time.sleep(web_driver.two_second)
             self.logger.info("clicking on approve enrollment link")
 
+            message_after_approving = web_driver.explicit_wait(self,10,"XPATH",
+                                                               Read_Identify_and_Enroll_Components().
+                                                               after_approving_message_to_user(), self.d)
             message_after_approving = web_driver.explicit_wait(self,10,"XPATH",Read_Identify_and_Enroll_Components().after_approving_message_to_user(),self.d)
             if message_after_approving.is_displayed():
                 self.logger.info(f"message to the user : {message_after_approving.text}")
                 self.status.append(True)
-
             else:
                 self.status.append(False)
-
 
             if False in self.status:
                 self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_IE_02.png")

@@ -1012,7 +1012,6 @@ class events_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_080.png")
             self.logger.error(f"TC_events_080 got exception as: {ex} ")
 
-
     def Verify_user_is_able_to_link_the_tag_and_add_tag_to_probable_match_events_when_tag_icon_is_click(self):
 
         try:
@@ -1504,7 +1503,7 @@ class events_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_10.png")
             self.logger.error(f"TC_events_10 got exception as: {ex} ")
 
-    def Verify_user_able_to_link_a_enrollment_group_and_add_the_person_to_the_group(self):
+    def Verify_user_able_to_unlink_same_enrollment_group_and_remove_the_person_from_selected_group(self):
 
         try:
             self.logger.info("********TC_11******* started")
@@ -1539,15 +1538,15 @@ class events_pom(web_driver, web_logger):
                 eg_list.append(group.text)
             self.logger.info(f"list of eg are :{eg_list}")
 
-            read_eg_name = read_enrollment_components().enrollment_group_name()
+            read_eg_name = read_enrollment_components().default_enrollment_group_details()
             eg_list_read = read_eg_name.split(',')
             self.logger.info(f" eg name is :{eg_list_read}")
 
             checkbox_xpath_1 = read_enrollment_components().checkbox_xpath_1()
             checkbox_xpath_2 = read_enrollment_components().checkbox_xpath_2()
-            check_box_xpath = f"{checkbox_xpath_1}{eg_list_read[4]}{checkbox_xpath_2}"
+            check_box_xpath = f"{checkbox_xpath_1}{eg_list_read[0]}{checkbox_xpath_2}"
             self.logger.info(f"custom xpath : {check_box_xpath}")
-            if eg_list_read[4] in eg_list:
+            if eg_list_read[0] in eg_list:
                 checkbox = self.d.find_element(By.XPATH, check_box_xpath)
                 checkbox.click()
             else:
@@ -1588,7 +1587,7 @@ class events_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_11.png")
             self.logger.error(f"TC_events_11 got exception as: {ex} ")
 
-    def Verify_user_able_to_unlink_same_enrollment_group_and_remove_the_person_from_selected_group(self):
+    def Verify_user_able_to_link_a_enrollment_group_and_add_the_person_to_the_group(self):
         try:
             self.logger.info("*******TC_12****** started")
             # self.load_login_page_if_not_loaded()
@@ -1631,14 +1630,15 @@ class events_pom(web_driver, web_logger):
                 eg_list.append(group.text)
             self.logger.info(f"list of eg are :{eg_list}")
 
-            read_eg_name = read_enrollment_components().read_eg_data()
-            self.logger.info(f" eg name is :{read_eg_name}")
+            read_eg_name = read_enrollment_components().default_enrollment_group_details()
+            read_eg_name_list = read_eg_name.split(',')
+            self.logger.info(f" eg name is :{read_eg_name_list}")
 
             checkbox_xpath_1 = read_enrollment_components().checkbox_xpath_1()
             checkbox_xpath_2 = read_enrollment_components().checkbox_xpath_2()
-            check_box_xpath = f"{checkbox_xpath_1}{read_eg_name}{checkbox_xpath_2}"
+            check_box_xpath = f"{checkbox_xpath_1}{read_eg_name_list[0]}{checkbox_xpath_2}"
             self.logger.info(f"custom xpath : {check_box_xpath}")
-            if read_eg_name in eg_list:
+            if read_eg_name_list[0] in eg_list:
                 checkbox = self.d.find_element(By.XPATH, check_box_xpath)
                 checkbox.click()
             else:
@@ -2513,6 +2513,29 @@ class events_pom(web_driver, web_logger):
         except Exception as ex:
             self.logger.info(f"on_Event_view_panel_click_on_Action_dropdown_followed_by_Identify_within_enrollments_option_in_dropdown_and_verify_Identify_enroll_and_identify_results_panel_are_visible ex: {ex.args}")
 
+    def Verify_event_should_not_generate_for_opt_out_enrollment(self):
+        try:
+            pass
+        except Exception as ex:
+            self.logger.info(f"Verify_event_should_not_generate_for_opt_out_enrollment ex: {ex.args}")
+
+    def Verify_event_should_not_generate_for_pending_review_enrollment(self):
+        try:
+            pass
+        except Exception as ex:
+            self.logger.info(f"Verify_event_should_not_generate_for_pending_review_enrollment ex: {ex.args}")
+
+    def Verify_event_should_not_generate_for_disable_enrollment(self):
+        try:
+            pass
+        except Exception as ex:
+            self.logger.info(f"Verify_event_should_not_generate_for_disable_enrollment ex: {ex.args}")
+
+    def Verify_event_should_not_generate_for_rejected_enrollment(self):
+        try:
+            pass
+        except Exception as ex:
+            self.logger.info(f"Verify_event_should_not_generate_for_rejected_enrollment ex: {ex.args}")
 
 ################################################ Event_search_filter_methods ##############################################
 

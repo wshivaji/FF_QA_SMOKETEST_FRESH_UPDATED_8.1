@@ -37,8 +37,7 @@ class Test_Users_Module(web_driver, web_logger):
     @pytest.mark.portal
     def test_TC_US_04(self):
         self.logger.info("Users module = test_TC_US_04 execution started..")
-        if Users_Module_pom() \
-                .verify_if_user_creates_a_new_users_marked_as_enabled_it_should_reflect_as_enabled():
+        if Users_Module_pom().verify_if_user_creates_a_new_users_marked_as_enabled_it_should_reflect_as_enabled():
             assert True
         else:
             assert False
@@ -46,8 +45,7 @@ class Test_Users_Module(web_driver, web_logger):
     @pytest.mark.portal
     def test_TC_US_05(self):
         self.logger.info("Users module = test_TC_US_05 execution started..")
-        if Users_Module_pom() \
-                .verify_if_user_creates_a_new_users_marked_as_disabled_it_should_reflect_as_disabled():
+        if Users_Module_pom().verify_if_user_creates_a_new_users_marked_as_disabled_it_should_reflect_as_disabled():
             assert True
         else:
             assert False
