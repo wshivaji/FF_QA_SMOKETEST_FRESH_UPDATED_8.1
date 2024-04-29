@@ -58,7 +58,7 @@ class enrollments_POM(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_Enrollment_01_Exception.png")
             print(ex.args)
         finally:
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
 
 
     def Verify_user_is_able_to_perform_enable_mask_enrollment_which_is_in_disable_state(self):
@@ -256,7 +256,7 @@ class enrollments_POM(web_driver, web_logger):
                     self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_IE_02_Exception.png")
                     return False
         finally:
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
 
     def Verify_user_is_able_to_add_single_face_for_enabled_mask_enrollment(self):
         try:
@@ -306,7 +306,7 @@ class enrollments_POM(web_driver, web_logger):
                self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_03_Exception.png")
                return False
         finally:
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
 
     def Verify_user_is_able_to_add_single_note_for_enabled_mask_enrollment(self):
         try:
@@ -404,7 +404,7 @@ class enrollments_POM(web_driver, web_logger):
                self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_04_Exception.png")
                return False
         finally:
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
 
 
     def Verify_user_is_able_to_see_5_subjects_for_pending_review_condition_using_VIP_user_enroll_5_subjects_for_pending_review(self):
@@ -415,7 +415,7 @@ class enrollments_POM(web_driver, web_logger):
         except Exception as ex:
             print(ex)
         finally:
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
 
 
     def Verify_approver_user_is_able_to_approve_pending_subjects(self):
@@ -475,7 +475,7 @@ class enrollments_POM(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_03_Exception.png")
             return False
         finally:
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
 
     def Verify_approver_user_is_able_to_reject_pending_subjects(self):
         try:
@@ -613,7 +613,7 @@ class enrollments_POM(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_08_Exception.png")
             return False
         finally:
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
 
     def Verify_user_is_able_to_enable_the_reject_subject_user_with_all_permissions(self):
         try:
@@ -671,7 +671,7 @@ class enrollments_POM(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_09_Exception.png")
             return False
         finally:
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
 
     def Verify_if_user_is_enrolled_the_person_with_expiry_date_validate_expired_date_is_visible_on_Enrollment_module_panel(self):
         try:
@@ -718,7 +718,7 @@ class enrollments_POM(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_11_Exception.png")
             return False
         finally:
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
 
     def Enrollments_search_with_filter_dropdown_option_result_should_be_dropdown_options(self):
         try:
@@ -803,7 +803,7 @@ class enrollments_POM(web_driver, web_logger):
                 self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_11_Exception.png")
                 return False
         finally:
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
 
     def verify_user_enroller_of_an_enrollment_able_to_unlink_same_enrollment_group_and_remove_the_person_from_selected_group(self):
         try:
@@ -881,7 +881,7 @@ class enrollments_POM(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_12_Exception.png")
             return False
         finally:
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
     def verify_user_able_to_add_more_faces_to_an_enrollment(self):
         try:
             self.logger.info("Enrollment module tc=13 started")
@@ -989,7 +989,7 @@ class enrollments_POM(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_14_Exception.png")
             return False
         finally:
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
 
     def verify_user_enroller_of_an_enrollment_able_to_edit_the_enrollment(self):
         try:
@@ -1047,7 +1047,7 @@ class enrollments_POM(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_16_Exception.png")
             return False
         finally:
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
 
     def verify_executive_it_admin_enroller_of_an_enrollment_able_to_delete_enrollment(self):
         try:
@@ -1084,7 +1084,7 @@ class enrollments_POM(web_driver, web_logger):
                     self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_07_Exception.png")
                     return False
         finally:
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
     def verify_user_able_to_see_disabled_status_for_masked_enrollment(self):
         try:
             self.logger.info("enrollment module testcases started")
@@ -1134,7 +1134,7 @@ class enrollments_POM(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_07_Exception.png")
             return False
         finally:
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
 
     def Verify_core_user_or_it_admin_is_able_to_delete_pending_subjects(self):
         try:
@@ -1195,7 +1195,7 @@ class enrollments_POM(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_07_Exception.png")
             return False
         finally:
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
 
     def Verify_user_is_able_to_enable_the_reject_subject_user_with_all_permissionss(self):
         try:
@@ -1245,7 +1245,7 @@ class enrollments_POM(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_07_Exception.png")
             return False
         finally:
-           Identify_And_Enroll_POM().logout_from_portal()
+           Identify_And_Enroll_POM().click_on_logout_button()
 
     def verify_user_able_to_add_notes_for_a_enrolled_person_on_enrollments_panel(self):
         try:
@@ -1339,7 +1339,7 @@ class enrollments_POM(web_driver, web_logger):
                 self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_04_Exception.png")
                 return False
         finally:
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
 
 
 
@@ -1554,6 +1554,18 @@ class enrollments_POM(web_driver, web_logger):
                 return False
         finally:
             logout().logout_from_core(self.d)
+
+    def click_on_logout(self):
+        try:
+            logout_btn = self.explicit_wait(5, "XPATH", read_enrollment_components.logout_btn_by_xpath(), self.d)
+            self.logger.info(f"logout btn is visible: {logout_btn.is_displayed()}")
+            if logout_btn.is_displayed():
+                logout_btn.click()
+            else:
+                self.logger.info("logout btn is not visible.")
+
+        except Exception as ex:
+            self.logger.info(f"logout_from_portal ex: {ex.args}")
 
 
 

@@ -1784,7 +1784,7 @@ class events_pom(web_driver, web_logger):
             self.logger.info(f"Verify_user_is_able_to_add_note_on_Enrollment_view_panel_when_Probable_Match_Event_icon_is_click ex: {ex.args}")
 
 
-    def on_Enrollment_view_panel_click_on_Notes_button_and_verify_Enrollment_notes_panel_is_visible(self):
+    def Verify_user_is_able_to_add_note_on_Enrollment_view_panel_when_Probable_Match_Event_icon_is_click(self):
         try:
             self.logger.info("*******TC_13****** started")
             # self.load_login_page_if_not_loaded()
