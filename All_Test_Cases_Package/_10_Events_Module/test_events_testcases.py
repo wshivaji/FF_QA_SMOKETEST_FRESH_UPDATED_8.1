@@ -100,6 +100,55 @@ class Test_eVents_testcases(web_driver, web_logger):
             self.logger.info("test_events_TC_009 fail")
             assert False
 
+    @pytest.mark.p3
+    def test_events_TC_010(self):
+        if events_pom().on_Event_view_panel_click_on_Action_dropdown_followed_by_Identify_within_enrollments_option_in_dropdown_and_verify_Identify_enroll_and_identify_results_panel_are_visible():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p2
+    def test_events_TC_011(self):
+        if events_pom().Verify_user_is_able_to_perform_identify_within_visitors_from_Probable_Match_Enrollment_View_panel_when_event_icon_is_click():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p2
+    def test_events_TC_012(self):
+        if events_pom().Verify_user_is_able_to_edit_the_Enrollment_details_on_Enrollment_View_panel_when_ProbableMatch_Event_icon_is_click():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p2
+    def test_events_TC_013(self):
+        if events_pom().Verify_user_is_able_to_add_face_on_Enrollment_view_panel_when_event_icon_is_click():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p1
+    def test_events_TC_014(self):
+        if events_pom().Verify_user_is_able_to_see_probable_match_events_associated_to_same_person_on_Enrollment_View_panel_when_probable_match_event_icon_is_click():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p1
+    def test_events_TC_015(self):
+        if events_pom().Verify_user_able_to_link_a_enrollment_group_and_add_the_person_to_the_group():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p1
+    def test_events_TC_016(self):
+        if events_pom().Verify_user_able_to_unlink_same_enrollment_group_and_remove_the_person_from_selected_group():
+            assert True
+        else:
+            assert False
+
     # @pytest.mark.p1
     # def test_events_TC_001(self):
     #     if events_pom().Launching_login_page():
@@ -164,49 +213,49 @@ class Test_eVents_testcases(web_driver, web_logger):
             assert False
             
     @pytest.mark.p3
-    def test_events_TC_010(self):
+    def test_events_TC_010_1(self):
         if events_pom().on_Events_page_verify_search_dropdown_is_visible_and_clickable_text_on_button_is_visible():
             assert True
         else:
             assert False
             
     @pytest.mark.p2
-    def test_events_TC_011(self):
+    def test_events_TC_011_1(self):
         if events_pom().on_Events_page_verify_Action_dropdown_is_visible_and_clickable_text_on_button_is_visible():
             assert True
         else:
             assert False
             
     @pytest.mark.p2
-    def test_events_TC_012(self):
+    def test_events_TC_012_1(self):
         if events_pom().on_Events_page_verify_SELECT_ALL_checkbox_is_visible_and_clickable_select_all_text_is_visible():
             assert True
         else:
             assert False
             
     @pytest.mark.p1
-    def test_events_TC_013(self):
+    def test_events_TC_013_1(self):
         if events_pom().on_Events_page_verify_Event_real_time_is_visible():
             assert True
         else:
             assert False
             
     @pytest.mark.p1
-    def test_events_TC_014(self):
+    def test_events_TC_014_1(self):
         if events_pom().on_Events_page_verify_location_store_along_with_case_subject_Index_score_Action_taken_region_this_event_info_is_visible():
             assert True
         else:
             assert False
             
     @pytest.mark.p1
-    def test_events_TC_015(self):
+    def test_events_TC_015_1(self):
         if events_pom().on_Events_page_verify_Live_Image_text_and_Live_Image_is_visible():
             assert True
         else:
             assert False
             
     @pytest.mark.p1
-    def test_events_TC_016(self):
+    def test_events_TC_016_1(self):
         if events_pom().on_Events_page_verify_File_Image_text_File_Image_is_visible():
             assert True
         else:
@@ -793,7 +842,7 @@ class Test_eVents_testcases(web_driver, web_logger):
 
     @pytest.mark.p1
     def test_events_TC_119(self):
-        if events_pom().Verify_user_is_able_to_see_probable_match_events_associated_to_same_person_on_Enrollment_View_panel_when_probable_match_event_icon_is_click:
+        if events_pom().Verify_user_is_able_to_see_probable_match_events_associated_to_same_person_on_Enrollment_View_panel_when_probable_match_event_icon_is_click():
             assert True
         else:
             assert False

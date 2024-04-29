@@ -1082,8 +1082,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.system
     def test_SM_TC141(self):
-        self.logger.info(
-            "Verify_5_events_for_each_group_soe_abe_pte_fraude_and_vipe_using_enrollment_group_selection_in_search_dropdown")
+        self.logger.info("Verify_5_events_for_each_group_soe_abe_pte_fraude_and_vipe_using_enrollment_group_selection_in_search_dropdown")
         if events_pom().Verify_5_events_for_each_group_soe_abe_pte_fraude_and_vipe_using_enrollment_group_selection_in_search_dropdown():
             assert True
         else:
@@ -1154,6 +1153,62 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert True
         else:
             self.logger.info("test_events_TC_009 fail")
+            assert False
+
+    @pytest.mark.p3
+    def test_events_TC_149(self):
+        if events_pom().on_Event_view_panel_click_on_Action_dropdown_followed_by_Identify_within_enrollments_option_in_dropdown_and_verify_Identify_enroll_and_identify_results_panel_are_visible():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p2
+    def test_events_TC_150(self):
+        if events_pom().Verify_user_is_able_to_perform_identify_within_visitors_from_Probable_Match_Enrollment_View_panel_when_event_icon_is_click():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p2
+    def test_events_TC_151(self):
+        if events_pom().Verify_user_is_able_to_edit_the_Enrollment_details_on_Enrollment_View_panel_when_ProbableMatch_Event_icon_is_click():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p2
+    def test_events_TC_152(self):
+        if events_pom().Verify_user_is_able_to_add_face_on_Enrollment_view_panel_when_event_icon_is_click():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p1
+    def test_events_TC_153(self):
+        if events_pom().Verify_user_is_able_to_see_probable_match_events_associated_to_same_person_on_Enrollment_View_panel_when_probable_match_event_icon_is_click():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p1
+    def test_events_TC_154(self):
+        if events_pom().Verify_user_able_to_link_a_enrollment_group_and_add_the_person_to_the_group():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p1
+    def test_events_TC_155(self):
+        if events_pom().Verify_user_able_to_unlink_same_enrollment_group_and_remove_the_person_from_selected_group():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p1
+    def test_events_TC_156(self):
+        if events_pom().Verify_user_is_able_to_add_note_on_Enrollment_view_panel_when_Probable_Match_Event_icon_is_click():
+            assert True
+        else:
             assert False
     
     # ------------------------------------------ Identify Enroll (CURD) cases ------------------------------------ #

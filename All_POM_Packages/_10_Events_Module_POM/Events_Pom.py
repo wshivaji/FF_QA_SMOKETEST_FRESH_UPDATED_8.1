@@ -16,7 +16,6 @@ from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
 
 
-
 class events_pom(web_driver, web_logger):
     d = web_driver.d()
     logger = web_logger.logger_obj()
@@ -1540,14 +1539,15 @@ class events_pom(web_driver, web_logger):
                 eg_list.append(group.text)
             self.logger.info(f"list of eg are :{eg_list}")
 
-            read_eg_name = read_enrollment_components().read_eg_data()
-            self.logger.info(f" eg name is :{read_eg_name}")
+            read_eg_name = read_enrollment_components().enrollment_group_name()
+            eg_list_read = read_eg_name.split(',')
+            self.logger.info(f" eg name is :{eg_list_read}")
 
             checkbox_xpath_1 = read_enrollment_components().checkbox_xpath_1()
             checkbox_xpath_2 = read_enrollment_components().checkbox_xpath_2()
-            check_box_xpath = f"{checkbox_xpath_1}{read_eg_name}{checkbox_xpath_2}"
+            check_box_xpath = f"{checkbox_xpath_1}{eg_list_read[4]}{checkbox_xpath_2}"
             self.logger.info(f"custom xpath : {check_box_xpath}")
-            if read_eg_name in eg_list:
+            if eg_list_read[4] in eg_list:
                 checkbox = self.d.find_element(By.XPATH, check_box_xpath)
                 checkbox.click()
             else:
@@ -1655,8 +1655,6 @@ class events_pom(web_driver, web_logger):
             self.logger.info("add group to enrollment option is clicked inside action dropdown")
             time.sleep(web_driver.one_second)
 
-
-
             after_linking_eg_count = self.d.find_element(By.XPATH,
                                                          events_Read_Ini().before_linking_eg_count())
             self.logger.info(f"after linking enrollment group count is :{after_linking_eg_count.text}")
@@ -1687,6 +1685,103 @@ class events_pom(web_driver, web_logger):
             self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_12.png")
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_12.png")
             self.logger.error(f"TC_events_12 got exception as: {ex} ")
+
+    def Verify_user_is_able_to_add_note_on_Enrollment_view_panel_when_Probable_Match_Event_icon_is_click(self):
+        try:
+            self.logger.info("*******test_events_TC_122****** started")
+            # self.load_login_page_if_not_loaded()
+            login().login_to_cloud_if_not_done(self.d)
+            self.status.clear()
+            time.sleep(web_driver.one_second)
+
+            events = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().get_Events_in_dashboard(), self.d)
+            events.click()
+            time.sleep(web_driver.three_second)
+
+            event_button = web_driver.explicit_wait(self, 10, "XPATH", events_Read_Ini().events_button(), self.d)
+            event_button.click()
+            time.sleep(web_driver.two_second)
+
+            notes_button = web_driver.explicit_wait(self, 10, "XPATH",
+                                                    events_Read_Ini().notes_button_in_enrollmentview(), self.d)
+            notes_button.click()
+            time.sleep(web_driver.one_second)
+
+            action_button = self.d.find_element(By.XPATH,
+                                                read_enrollment_components().action_button_in_enrollment_notes())
+            action_button.click()
+            self.logger.info("clicking action button on enrollment notes panel")
+            time.sleep(web_driver.two_second)
+
+            add_notes_to_enrollment = self.d.find_element(By.XPATH,
+                                                          read_enrollment_components().link_to_add_notes_to_an_enrollment_xpath())
+            add_notes_to_enrollment.click()
+            self.logger.info("clicking add notes to an enrollment option ")
+            time.sleep(web_driver.two_second)
+
+            upload_image_to_notes = self.d.find_element(By.XPATH, read_enrollment_components().image_box_to_add_notes())
+            upload_image_to_notes.click()
+            time.sleep(web_driver.one_second)
+            self.logger.info("upload image box xpath")
+
+            file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset1\\ab\\00076.png"
+            pyautogui.write(file_path)
+            pyautogui.press('enter')
+            time.sleep(2)
+            pyautogui.press('enter')
+            self.logger.info(f"Image upload success")
+            time.sleep(web_driver.two_second)
+
+            skip_cropping_button = self.d.find_element(By.XPATH,
+                                                       read_enrollment_components().skip_cropping_button_xpath())
+            skip_cropping_button.click()
+            self.logger.info("clicking on skip cropping button")
+            time.sleep(web_driver.two_second)
+
+            add_photo_button = self.d.find_element(By.XPATH, read_enrollment_components().add_photo_button_xpath())
+            add_photo_button.click()
+            self.logger.info("clicking on add photo button")
+            time.sleep(8)
+
+            location_input = self.d.find_element(By.XPATH,
+                                                 events_Read_Ini().notes_location_store())
+            location_input.click()
+            location_input.send_keys(read_enrollment_components().get_location_data())
+            time.sleep(web_driver.one_second)
+
+            case_subject = self.d.find_element(By.XPATH, events_Read_Ini().notes_case_subject())
+            case_subject.click()
+            case_subject.send_keys(read_enrollment_components().get_case_subject_data())
+            time.sleep(web_driver.two_second)
+
+            # date_of_incident = self.d.find_element(By.XPATH,
+            #                                        read_enrollment_components().get_date_and_incident_by_xpath())
+            # self.dateTimeAMPM(date_of_incident)
+            time.sleep(web_driver.two_second)
+
+            save_button = self.d.find_element(By.XPATH, events_Read_Ini().notes_save_button())
+            save_button.click()
+
+            time.sleep(web_driver.one_second)
+
+            notes_list = self.d.find_element(By.XPATH, read_enrollment_components().after_creating_notes_list())
+            if notes_list.is_displayed():
+                self.logger.info("notes created successfully")
+                self.status.append(True)
+            else:
+                self.status.append(False)
+
+            time.sleep(web_driver.one_second)
+            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
+            self.logger.info(f"status:{self.status}")
+            if False in self.status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_events_TC_122.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\test_events_TC_122.png")
+                return False
+            else:
+                return True
+        except Exception as ex:
+            self.logger.info(f"Verify_user_is_able_to_add_note_on_Enrollment_view_panel_when_Probable_Match_Event_icon_is_click ex: {ex.args}")
 
 
     def on_Enrollment_view_panel_click_on_Notes_button_and_verify_Enrollment_notes_panel_is_visible(self):
@@ -2369,6 +2464,50 @@ class events_pom(web_driver, web_logger):
                 return True
         except Exception as ex:
             self.logger.info(f"Probable_Match_Event_search_with_DateTimeRange_EnrollmentGroup_Org_Hierarchy_and_Tag_filter_combination_result_should_be_DateTimeRange_EnrollmentGroup_Org_Hierarchy_and_Tagged_event ex: {ex.args}")
+
+    def on_Event_view_panel_click_on_Action_dropdown_followed_by_Identify_within_enrollments_option_in_dropdown_and_verify_Identify_enroll_and_identify_results_panel_are_visible(self):
+        try:
+            self.logger.info("******TC_099***** started")
+            # self.load_login_page_if_not_loaded()
+            login().login_to_cloud_if_not_done(self.d)
+            # # login().login_to_localhost_if_not_done()
+
+            self.status.clear()
+            time.sleep(web_driver.one_second)
+            events = self.d.find_element(By.XPATH, events_Read_Ini().get_Events_in_dashboard())
+            events.click()
+            time.sleep(web_driver.three_second)
+            event_button = self.d.find_element(By.XPATH, events_Read_Ini().events_button())
+            event_button.click()
+            time.sleep(web_driver.two_second)
+            action_dropdown_in_event_view_panel = self.d.find_element(By.XPATH,
+                                                                      events_Read_Ini().action_dropdown_in_event_view())
+            action_dropdown_in_event_view_panel.click()
+            time.sleep(web_driver.one_second)
+            identify_within_enrollments = self.d.find_element(By.XPATH, events_Read_Ini().identify_within_enrollments())
+            identify_within_enrollments.click()
+            time.sleep(web_driver.two_second)
+            identify_and_enroll = self.d.find_element(By.XPATH, events_Read_Ini().identify_and_enroll_panel())
+            time.sleep(web_driver.two_second)
+            identify_results = self.d.find_element(By.XPATH, events_Read_Ini().identify_results_panel())
+            if identify_and_enroll.is_displayed():
+                self.logger.info("identify and enroll panel is visible")
+                self.status.append(True)
+            else:
+                self.logger.info("identify and enroll panel is not visible")
+                self.status.append(False)
+            time.sleep(web_driver.one_second)
+            # self.add_details_panel_cancel()
+            self.d.find_element(By.XPATH, events_Read_Ini().get_facefirst_logout_button()).click()
+            self.logger.info(f"status:{self.status}")
+            if False in self.status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\Tc_events_099.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\TC_events_099.png")
+                return False
+            else:
+                return True
+        except Exception as ex:
+            self.logger.info(f"on_Event_view_panel_click_on_Action_dropdown_followed_by_Identify_within_enrollments_option_in_dropdown_and_verify_Identify_enroll_and_identify_results_panel_are_visible ex: {ex.args}")
 
 
 ################################################ Event_search_filter_methods ##############################################
