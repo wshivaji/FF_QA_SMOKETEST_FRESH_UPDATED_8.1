@@ -806,7 +806,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
         else:
             assert False
 
-    # ------------------------------------------ Users Cases (CERD) cases----------------------------------------- #
+    # ------------------------------------------ Users Cases (CURD) cases----------------------------------------- #
     @pytest.mark.system
     def test_SM_TC100(self):
         if Users_Module_pom().verify_if_user_creates_a_new_users_marked_as_enabled_it_should_reflect_as_enabled():
@@ -1086,7 +1086,6 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.system
     def test_SM_TC141(self):
-        self.logger.info("Verify_5_events_for_each_group_soe_abe_pte_fraude_and_vipe_using_enrollment_group_selection_in_search_dropdown")
         if events_pom().Verify_5_events_for_each_group_soe_abe_pte_fraude_and_vipe_using_enrollment_group_selection_in_search_dropdown():
             assert True
         else:
@@ -1523,6 +1522,12 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     # ------------------------------------------ Enrollment Delete case ------------------------------------ #
+    @pytest.mark.system
+    def test_SM_TC198(self):
+        if enrollments_POM().verify_executive_it_admin_enroller_of_an_enrollment_able_to_delete_enrollment():
+            assert True
+        else:
+            assert False
 
     # ------------------------------------------ Account details After case ------------------------------------ #
     @pytest.mark.system
@@ -1533,7 +1538,6 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     # ------------------------------------------ SSPR cases ------------------------------------ #
-
     @pytest.mark.sspr
     def test_TC_SSPR_001(self):
         if SSPR_pom().open_portal_login_page_enter_username_password_and_click_on_login_btn_verify_password_reset_pop_up_displayed():

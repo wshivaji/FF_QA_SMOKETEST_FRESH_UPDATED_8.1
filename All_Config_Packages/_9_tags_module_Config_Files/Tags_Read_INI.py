@@ -502,6 +502,13 @@ class Read_Tags_Components:
         except Exception as ex:
             print(ex.args)
 
+    def read_non_serious_tags_input_data(self):
+        try:
+            read_non_serious_tags_input_data = self.common_test_data_config.get("Tags_Data","read_non_serious_tags_input_data")
+            return read_non_serious_tags_input_data
+        except Exception as ex:
+            print(ex.args)
+
     def lenght_of_tags(self):
         try:
             tags_length = self.config.get("DATA","length_of_Tags")
