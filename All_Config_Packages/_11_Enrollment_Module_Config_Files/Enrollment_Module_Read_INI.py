@@ -572,6 +572,13 @@ class read_enrollment_components:
         except Exception as ex:
             print(ex.args)
 
+    def default_enrollment_group_details(self):
+        try:
+            default_enrollment_group_details = self.common_test_data_config.get("Enrollment_Groups_Data","default_enrollment_group_details")
+            return default_enrollment_group_details
+        except Exception as ex:
+            print(ex.args)
+
     def checkbox_xpath_1(self):
         try:
             checkbox_xpath_1 = self.config.get("Locators","checkbox_xpath_1")

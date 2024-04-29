@@ -213,6 +213,13 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
     def enter_start_and_end_date(self):
         try:
 
+            # x = Read_Notification_Groups_Components().get_user_name_input_data()
+            # user = x.split(',')
+            # login().login_with_persona_user(self.d, user[0])
+            # login().login_to_cloud_if_not_done(self.d)
+            # edge_name = Read_Visitor_Search_Components().zone_data_input()
+
+            # self.click_on_visitor_search()
             date = int(Read_Visitor_Search_Components().get_start_date())
             month = str(Read_Visitor_Search_Components().get_start_month())
             year = int(Read_Visitor_Search_Components().get_start_year())
@@ -228,12 +235,24 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
             e_period = str(Read_Visitor_Search_Components().get_end_am_pm_period())
 
             try:
-                Visitor_Search_Module_pom().handle_calender("from", date, month, year, hour, minute, period)
+                Visitor_Search_Module_pom().handle_calender_pop_up("from", date, month, year, hour, minute, period)
                 time.sleep(web_driver.one_second)
-                Visitor_Search_Module_pom().handle_calender("to", e_date, e_month, e_year, e_hour, e_minute, e_period)
+                Visitor_Search_Module_pom().handle_calender_pop_up("to", e_date, e_month, e_year, e_hour, e_minute,
+                                                                   e_period)
                 time.sleep(web_driver.three_second)
             except Exception as ex:
-                print(ex)
+                self.logger.info(f"select date range got an exception as: {ex}")
+
+            # self.logger.info(f"edge name: {edge_name}")
+            # self.select_zone(edge_name)
+            #
+            # self.click_on_submit_search_button()
+            # x = self.verify_image_from_match_list()
+            # self.logger.info(f"Returned: {x}")
+            # status.append(x)
+            # self.verify_date()
+            # self.verify_region_from_match_list(edge_name)
+            # self.click_on_logout_button()
         except Exception as ex:
             self.logger.info(f"Select start and end date got an exception as: {ex}")
 
@@ -248,8 +267,9 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
             edge_name = Read_Visitor_Search_Components().zone_data_input()
 
             self.click_on_visitor_search()
-            self.add_image_for_image_with_metadata_search()
             self.enter_start_and_end_date()
+            self.add_image_for_image_with_metadata_search()
+
             self.logger.info(f"edge name: {edge_name}")
             self.select_zone(edge_name)
             self.set_thresh_hold_slider()
