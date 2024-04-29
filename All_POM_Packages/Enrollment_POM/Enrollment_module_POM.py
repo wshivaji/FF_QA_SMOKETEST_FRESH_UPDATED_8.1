@@ -918,6 +918,7 @@ class enrollments_POM(web_driver, web_logger):
             self.logger.info(f"eg name is :{read_eg_name[1]}")
             time.sleep(web_driver.two_second)
 
+
             # checkbox_xpath_1 = read_enrollment_components().checkbox_xpath_1()
             # checkbox_xpath_2 = read_enrollment_components().checkbox_xpath_2()
             # check_box_xpath = f"{checkbox_xpath_1}{read_eg_name}{checkbox_xpath_2}"
