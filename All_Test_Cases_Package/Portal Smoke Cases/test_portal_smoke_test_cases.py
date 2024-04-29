@@ -394,7 +394,8 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.system
     def test_SM_TC042(self):
-        if insight_dashboard_pom().Verify_user_is_able_to_see_counts_on_overview_dashboard_organisation_and_individual_groups():
+        if (insight_dashboard_pom().
+                Verify_user_is_able_to_see_counts_on_overview_dashboard_organisation_and_individual_groups()):
             assert True
         else:
             assert False
@@ -617,6 +618,13 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
     @pytest.mark.system
     def test_SM_TC073(self):
         if enrollments_POM().Verify_user_is_able_to_see_5_subjects_for_pending_review_condition_using_VIP_user_enroll_5_subjects_for_pending_review():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC074(self):
+        if enrollments_POM().Verify_approver_user_is_able_to_reject_pending_subjects():
             assert True
         else:
             assert False
@@ -963,7 +971,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
         else:
             assert False
 
-    # ------------------------------------------ Notification Groups (CERD) cases ------------------------------------ #
+    # ------------------------------------------ Notification Groups (CURD) cases ------------------------------------ #
     @pytest.mark.system
     def test_SM_TC123(self):
         if Notification_Groups_Module_pom().Verify_user_able_to_create_a_new_Notification_Group_by_filling_all_the_fields_and_verify_present_3_buttons_below_are_activated():

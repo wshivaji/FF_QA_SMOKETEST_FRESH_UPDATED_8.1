@@ -7,8 +7,14 @@ from pathlib import Path
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
+
+from All_Config_Packages._1_Portal_Login_Module_Config_Files.Portal_Login_Page_Read_INI import \
+    Portal_login_page_read_ini
 from All_Config_Packages._4_Users_Module_Config_Files.Users_Read_INI import Read_Users_Components
 from All_Config_Packages._4_Users_Module_Config_Files.Portal_Menu_Read_INI import Read_Portal_Menu_Components
+from All_Config_Packages._7_Visitor_Search_Module_Config_Files.Visitor_Search_Read_INI import \
+    Read_Visitor_Search_Components
+from All_POM_Packages.Visitor_Search_Module_POM.Visitor_Search_Module_POM import Visitor_Search_Module_pom
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Login_Logout_Ops import login, logout, web_logger
 driver = web_driver.d()
@@ -3113,7 +3119,7 @@ class Users_Module_pom(web_driver, web_logger):
             if region != new_region:
                 return True
             else:
-                return  False
+                return False
         except Exception as ex:
             self.d.save_screenshot(f"{self.screenshots_path}test_TC_US_10_exception.png")
             self.log.info(f"test_TC_US_10_exception: {ex}")
@@ -3167,51 +3173,83 @@ class Users_Module_pom(web_driver, web_logger):
 
     def verify_details_of_core_user(self):
         try:
+            status = []
+            users_dict = self.Read_user_from_json()
+            users_list = []
             login().login_to_cloud_if_not_done(self.d)
             time.sleep(web_driver.one_second)
             self.click_user_on_cloud_menu()
             time.sleep(web_driver.two_second)
 
-            search_box_by_xpath = self.d.find_element(By.XPATH,Read_Users_Components().search_box_by_xpath())
+            search_box_by_xpath = self.explicit_wait(10, "XPATH", Read_Users_Components().search_box_by_xpath(), self.d)
             search_box_by_xpath.send_keys(Read_Users_Components().get_core_username())
             time.sleep(web_driver.two_second)
 
-            details_icon = self.d.find_element(By.XPATH,Read_Users_Components().get_core_details_button())
+            details_icon = self.explicit_wait(10, "XPATH", Read_Users_Components().get_core_details_button(), self.d)
             details_icon.click()
 
-            username = self.d.find_element(By.XPATH,Read_Users_Components().user_details_username_by_xpath())
+            username = self.explicit_wait(10, "XPATH", Read_Users_Components().user_details_username_by_xpath(), self.d)
             self.logger.info(f"username is {username.text}")
             time.sleep(web_driver.one_second)
-            username1 = Read_Users_Components().read_core_username()
-
-            userrole = self.d.find_element(By.XPATH, Read_Users_Components().user_details_user_role_by_xpath())
-            self.logger.info(f"username is {userrole.text}")
+            username1 = Portal_login_page_read_ini().get_valid_login_username()
+            self.logger.info(f"expected username: {username1}")
+            userrole = self.explicit_wait(10, "XPATH", Read_Users_Components().user_details_user_role_by_xpath(), self.d)
+            self.logger.info(f"user role is {userrole.text}")
             time.sleep(web_driver.one_second)
-            userrole1 = Read_Users_Components().read_core_user_user_role()
-
-            region = self.d.find_element(By.XPATH, Read_Users_Components().user_details_region_by_xpath())
-            self.logger.info(f"username is {region.text}")
+            userrole1 = Read_Users_Components().read_core_user_user_role().upper()
+            self.logger.info(f"expected user role: {userrole1}")
+            region = self.explicit_wait(10, "XPATH", Read_Users_Components().user_details_region_by_xpath(), self.d)
+            self.logger.info(f"region is {region.text}")
             time.sleep(web_driver.one_second)
             region1 = Read_Users_Components().read_core_user_region()
-
-            email = self.d.find_element(By.XPATH, Read_Users_Components().user_details_email_by_xpath())
-            self.logger.info(f"username is {email.text}")
+            self.logger.info(f"expected region: {region1}")
+            email = self.explicit_wait(10, "XPATH", Read_Users_Components().user_details_email_by_xpath(), self.d)
+            self.logger.info(f"email is {email.text}")
             time.sleep(web_driver.one_second)
-            email1 = Read_Users_Components().read_core_user_email()
-
-            time_Zone = self.d.find_element(By.XPATH, Read_Users_Components().user_details_timezone_by_xpath())
-            self.logger.info(f"username is {userrole.text}")
+            email1 = users_dict["users"][0]["Email"]
+            self.logger.info(f"expected email: {email1}")
+            time_Zone = self.explicit_wait(10, "XPATH", Read_Users_Components().user_details_timezone_by_xpath(), self.d)
+            self.logger.info(f"time zone is {time_Zone.text}")
             time.sleep(web_driver.one_second)
             time_zone1 = Read_Users_Components().read_core_user_timezone()
-
-            if username==username1 and userrole==userrole1 and region==region1 and email==email1 and time_Zone==time_zone1:
-                return  True
+            self.logger.info(f"expected time zone: {time_zone1}")
+            time.sleep(web_driver.one_second)
+            if username.text == username1:
+                status.append(True)
             else:
+                status.append(False)
+            time.sleep(web_driver.one_second)
+            if userrole.text == userrole1:
+                status.append(True)
+            else:
+                status.append(False)
+            time.sleep(web_driver.one_second)
+            if region.text == region1:
+                status.append(True)
+            else:
+                status.append(False)
+            time.sleep(web_driver.one_second)
+            if email.text == email1:
+                status.append(True)
+            else:
+                status.append(False)
+            time.sleep(web_driver.one_second)
+            if time_Zone.text == time_zone1:
+                status.append(True)
+            else:
+                status.append(False)
+            self.logger.info(f"status: {status}")
+            Visitor_Search_Module_pom().click_on_logout_button()
+            if False in status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_US_112.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\test_US_112_failed.png")
                 return False
+            else:
+                return True
         except Exception as ex:
-            print(ex)
-        finally:
-            logout().logout_from_core(self.d)
+            self.logger.error(f"test_US_112 got an exception as: {ex}")
+            self.d.save_screenshot(f"{self.screenshots_path}\\test_US_112_Exception.png")
+            return False
 
     def Verify_total_users_are_n_including_default_user(self):
         try:
@@ -3225,15 +3263,14 @@ class Users_Module_pom(web_driver, web_logger):
             self.logger.info(f"Total number of users created are {total_number_of_users_displayed.text}")
             time.sleep(web_driver.one_second)
             if total_number_of_users_displayed.is_displayed():
-
                 return True
-
             else:
                 return False
         except Exception as ex:
             print(ex.args)
         finally:
             logout().logout_from_core(self.d)
+
     def Create_5_users_with_all_required_field(self):
         global i
         try:
@@ -3305,8 +3342,9 @@ class Users_Module_pom(web_driver, web_logger):
 
     def Verify_org_hierarchy_selection_root_name_should_be_able_to_match_with_DM_core_name(self):
         try:
-            status =[]
-            self.logger.info("users modue started")
+            status = []
+
+            self.logger.info("users module started")
             time.sleep(web_driver.one_second)
             login().login_to_cloud_if_not_done(self.d)
             time.sleep(web_driver.one_second)
@@ -3319,19 +3357,30 @@ class Users_Module_pom(web_driver, web_logger):
             time.sleep(web_driver.two_second)
             region_ele = web_driver.explicit_wait(self, 10, "XPATH", Read_Users_Components().region_by_xpath(), self.d)
             region_ele.click()
+            self.logger.info("clicked on Users region panel")
             time.sleep(web_driver.two_second)
-            region_text_list = self.d.find_elements(By.XPATH, Read_Users_Components().region_list_by_xpath())
-            expected_region_text = Read_Users_Components().root_region_name()
-            for i in range(len(region_text_list) + 1):
-                actual_zone_text = region_text_list.__getitem__(i).text
-                self.log.info(actual_zone_text)
-                self.log.info(expected_region_text)
-                if expected_region_text.upper() in actual_zone_text.upper():
-                    self.logger.info("root region is same as expected region")
-                    self.status.append(True)
-                else:
-                    self.logger.info("root region is not same as expected region")
-                    self.status.append(False)
+            root_name = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().root_region_name_by_xpath())
+            root_region_name_on_US = root_name.text
+            self.logger.info(f"Root region name on VS: {root_region_name_on_US}")
+            save_btn = self.explicit_wait(10, "XPATH", Read_Users_Components().
+                                          region_save_btn_by_xpath(), self.d)
+            save_btn.click()
+            self.d.switch_to.new_window()
+            login().login_to_DM_if_not_done(self.d)
+            Visitor_Search_Module_pom().get_root_region_name_on_DM()
+            root_region_name_on_DM = self.d.find_element(By.XPATH, Portal_login_page_read_ini().
+                                                         get_root_region_name_on_dm_by_xpath())
+            self.logger.info(f"Root region name on DM: {root_region_name_on_DM.text.upper()}")
+            time.sleep(web_driver.two_second)
+            if root_region_name_on_US.upper() == root_region_name_on_DM.text.upper():
+                self.logger.info(f"Root region names on US and DM are same...")
+                status.append(True)
+            else:
+                self.logger.info(f"Root region names on US and DM are not same...")
+                status.append(False)
+            Visitor_Search_Module_pom().close_current_tab()
+            Visitor_Search_Module_pom().click_on_logout_button()
+            self.logger.info(f"status: {status}")
             if False in self.status:
                 self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_IE_100.png")
                 self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_IE_100_failed.png")
@@ -3339,58 +3388,7 @@ class Users_Module_pom(web_driver, web_logger):
             else:
                 return True
         except Exception as ex:
-                    self.logger.error(f"test_TC_IE_100 got an exception as: {ex}")
-                    self.d.save_screenshot(
-                        f"{self.screenshots_path}\\test_TC_IE_100_Exception.png")
-                    return False
-        finally:
-            logout().logout_from_core(self.d)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            self.logger.error(f"test_TC_IE_100 got an exception as: {ex}")
+            self.d.save_screenshot(
+                f"{self.screenshots_path}\\test_TC_IE_100_Exception.png")
+            return False

@@ -25,7 +25,12 @@ class read_enrollment_components:
         except Exception as ex:
             print(ex.args)
 
-
+    def unlinked_eg_groups_checkbox_by_xpath(self):
+        try:
+            unlinked_eg_groups_checkbox_by_xpath = self.config.get("Locators","unlinked_eg_groups_checkbox_by_xpath")
+            return unlinked_eg_groups_checkbox_by_xpath
+        except Exception as ex:
+            print(ex.args)
 
     def Total_number_of_enrollments(self):
         try:
@@ -202,122 +207,10 @@ class read_enrollment_components:
         except Exception as ex:
             print(ex)
 
-    def accepted_enrollment_id(self):
+    def enable_enrollment_option_by_xpath(self):
         try:
-            accepted_en_id = self.config.get("Locators","accepted_enrollment_id")
-            return accepted_en_id
-        except Exception as ex:
-            print(ex.args)
-
-    def enabled_option_xpath(self):
-        try:
-            enabled_option = self.config.get("Locators","enabled_option_xpath")
-            return enabled_option
-        except Exception as ex:
-            print(ex.args)
-
-    def get_approver_id(self):
-        try:
-            approver_id = self.config.get("data","approver_enrollment_id")
-            return approver_id
-        except Exception as ex:
-            print(ex.args)
-
-    def reject_enrollment_option(self):
-        try:
-            reject = self.config.get("Locators","reject_enable_enrollment")
-            return reject
-        except Exception as ex:
-            print(ex.args)
-
-    def rejected_enrollment_option_in_filter(self):
-        try:
-            rejected = self.config.get("Locators","rejected_option_in_filter")
-            return rejected
-        except Exception as ex:
-            print(ex.args)
-
-    def get_rejected_buttton_in_dialouge_tooltip(self):
-        try:
-            rejected_button = self.config.get("Locators","reject_button_on_dialouge_tooltip")
-            return rejected_button
-        except Exception as ex:
-            print(ex.args)
-
-    def get_enrollment_rejected_id(self):
-        try:
-            rejected_id = self.config.get("Locators","enrollment_rejected_id")
-            return  rejected_id
-        except Exception as ex:
-            print(ex.args)
-
-    def rejected_enrollment_text(self):
-        try:
-           rejected_text = self.config.get("Locators","rejected_enrollment_text")
-           return  rejected_text
-        except Exception as ex:
-            print(ex.args)
-
-    def delete_option_in_action_dropdown(self):
-        try:
-            delete_option = self.config.get("Locators","deleted_option_in_Action")
-            return delete_option
-        except Exception as ex:
-            print(ex.args)
-
-    def yes_delete_button_xpath(self):
-        try:
-            delete_enrollment = self.config.get("Locators","yes_delete_button_xpath")
-            return delete_enrollment
-        except Exception as ex:
-            print(ex.args)
-
-    def delete_enrollment_successfully_message(self):
-        try:
-            message = self.config.get("Locators","enrollment_delte_message")
-            return message
-        except Exception as ex:
-            print(ex.args)
-
-    def expired_date_on_enrollment(self):
-        try:
-            expired_date_on_enrollment = self.config.get("Locators","expired_date_on_enrollment")
-            return expired_date_on_enrollment
-        except Exception as ex:
-            print(ex.args)
-
-    def filter_dropdown_by_xpath(self):
-        try:
-            filter_dropdown = self.config.get("Locators","filter_dropdown_on_enrollment")
-            return filter_dropdown
-        except Exception as ex:
-            print(ex)
-
-    def pending_for_review_option(self):
-        try:
-            pending_for_review_option = self.config.get("Locators","pending_for_review")
-            return pending_for_review_option
-        except Exception as ex:
-            print(ex.args)
-
-    def select_checkbox_of_pending_for_review(self):
-        try:
-            checkbox = self.config.get("Locators","pending_for_review_checkbox")
-            return checkbox
-        except Exception as ex:
-            print(ex)
-
-    def Action_button_on_enrollment_panel(self):
-        try:
-            Action_button = self.config.get("Locators","Action_button_on_enrollment")
-            return Action_button
-        except Exception as ex:
-            print(ex)
-
-    def Approve_enrollment_option_xpath(self):
-        try:
-            approve_enrollment = self.config.get("Locators","approve_enrollment_option_xpath")
-            return approve_enrollment
+            enable_enrollment_option_by_xpath = self.config.get("Locators","enable_enrollment_option_by_xpath")
+            return enable_enrollment_option_by_xpath
         except Exception as ex:
             print(ex)
 
@@ -405,54 +298,7 @@ class read_enrollment_components:
         except Exception as ex:
             print(ex.args)
 
-    def filter_dropdown_by_xpath(self):
-        try:
-            filter_dropdown = self.config.get("Locators","filter_dropdown_on_enrollment")
-            return filter_dropdown
-        except Exception as ex:
-            print(ex)
 
-    def pending_for_review_option(self):
-        try:
-            pending_for_review_option = self.config.get("Locators","pending_for_review")
-            return pending_for_review_option
-        except Exception as ex:
-            print(ex.args)
-
-    def select_checkbox_of_pending_for_review(self):
-        try:
-            checkbox = self.config.get("Locators","pending_for_review_checkbox")
-            return checkbox
-        except Exception as ex:
-            print(ex)
-
-    def Action_button_on_enrollment_panel(self):
-        try:
-            Action_button = self.config.get("Locators","Action_button_on_enrollment")
-            return Action_button
-        except Exception as ex:
-            print(ex)
-
-    def Approve_enrollment_option_xpath(self):
-        try:
-            approve_enrollment = self.config.get("Locators","approve_enrollment_option_xpath")
-            return approve_enrollment
-        except Exception as ex:
-            print(ex)
-
-    def accepted_enrollment_id(self):
-        try:
-            accepted_en_id = self.config.get("Locators","accepted_enrollment_id")
-            return accepted_en_id
-        except Exception as ex:
-            print(ex.args)
-
-    def enabled_option_xpath(self):
-        try:
-            enabled_option = self.config.get("Locators","enabled_option_xpath")
-            return enabled_option
-        except Exception as ex:
-            print(ex.args)
 
     def get_approver_id(self):
         try:
@@ -461,17 +307,63 @@ class read_enrollment_components:
         except Exception as ex:
             print(ex.args)
 
-    def reject_enrollment_option(self):
+
+
+    def get_rejected_buttton_in_dialouge_tooltip(self):
         try:
-            reject = self.config.get("Locators","reject_enable_enrollment")
-            return reject
+            rejected_button = self.config.get("Locators","reject_button_on_dialouge_tooltip")
+            return rejected_button
         except Exception as ex:
             print(ex.args)
 
-    def rejected_enrollment_option_in_filter(self):
+    def get_enrollment_rejected_id(self):
         try:
-            rejected = self.config.get("Locators","rejected_option_in_filter")
-            return rejected
+            rejected_id = self.config.get("Locators","enrollment_rejected_id")
+            return  rejected_id
+        except Exception as ex:
+            print(ex.args)
+
+    def rejected_enrollment_text(self):
+        try:
+           rejected_text = self.config.get("Locators","rejected_enrollment_text")
+           return  rejected_text
+        except Exception as ex:
+            print(ex.args)
+
+    def delete_option_in_action_dropdown(self):
+        try:
+            delete_option = self.config.get("Locators","deleted_option_in_Action")
+            return delete_option
+        except Exception as ex:
+            print(ex.args)
+
+    def yes_delete_button_xpath(self):
+        try:
+            delete_enrollment = self.config.get("Locators","yes_delete_button_xpath")
+            return delete_enrollment
+        except Exception as ex:
+            print(ex.args)
+
+    def delete_enrollment_successfully_message(self):
+        try:
+            message = self.config.get("Locators","enrollment_delte_message")
+            return message
+        except Exception as ex:
+            print(ex.args)
+
+    def expired_date_on_enrollment(self):
+        try:
+            expired_date_on_enrollment = self.config.get("Locators","expired_date_on_enrollment")
+            return expired_date_on_enrollment
+        except Exception as ex:
+            print(ex.args)
+
+
+
+    def get_approver_id(self):
+        try:
+            approver_id = self.config.get("data","approver_enrollment_id")
+            return approver_id
         except Exception as ex:
             print(ex.args)
 

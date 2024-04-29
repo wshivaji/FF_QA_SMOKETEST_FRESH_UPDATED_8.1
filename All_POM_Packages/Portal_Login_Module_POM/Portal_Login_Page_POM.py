@@ -429,7 +429,6 @@ class Portal_Login_Page_Pom(web_driver, web_logger):
 
     def load_portal_login_page_if_not_loaded(self):
         try:
-            login().login_to_cloud_if_not_done(self.d)
             if self.d.title == Portal_login_page_read_ini().get_portal_title():
                 pass
             else:
