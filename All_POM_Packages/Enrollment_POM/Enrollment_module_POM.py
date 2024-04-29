@@ -188,7 +188,7 @@ class enrollments_POM(web_driver, web_logger):
                     self.status.append(False)
 
             time.sleep(2)
-            logout().logout_from_core(self.d)
+            Identify_And_Enroll_POM().click_on_logout_button()
             time.sleep(web_driver.two_second)
             login().login_to_cloud_if_not_done(self.d)
             time.sleep(web_driver.two_second)
@@ -551,7 +551,7 @@ class enrollments_POM(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_07_Exception.png")
             return False
         finally:
-            logout().logout_from_core(self.d)
+            Identify_And_Enroll_POM().click_on_logout_button()
 
     def Verify_core_or_itadmin_user_is_able_to_delete_pending_subjects(self):
         try:
@@ -622,9 +622,9 @@ class enrollments_POM(web_driver, web_logger):
             time.sleep(web_driver.one_second)
             self.Verify_approver_user_is_able_to_reject_pending_subjects()
             time.sleep(web_driver.one_second)
-            logout().logout_from_core(self.d)
+            Identify_And_Enroll_POM().click_on_logout_button()
             time.sleep(web_driver.one_second)
-            login().login_to_cloud_if_not_done_with_user_credentials(self.d,Read_Identify_and_Enroll_Components().get_user_to_login(),Read_Identify_and_Enroll_Components().get_password_to_login())
+            login().login_to_cloud_if_not_done_with_user_credentials(self.d,Read_Identify_and_Enroll_Components().get_executive_to_login(),Read_Identify_and_Enroll_Components().get_password_to_login())
             time.sleep(web_driver.one_second)
             filter_dropdown1 = self.d.find_element(By.XPATH, read_enrollment_components().filter_dropdown_by_xpath())
             filter_dropdown1.click()
@@ -673,52 +673,7 @@ class enrollments_POM(web_driver, web_logger):
         finally:
             Identify_And_Enroll_POM().click_on_logout_button()
 
-    def Verify_if_user_is_enrolled_the_person_with_expiry_date_validate_expired_date_is_visible_on_Enrollment_module_panel(self):
-        try:
-            self.logger.info("Enrollment module tc=11 started")
-            login().login_to_cloud_if_not_done_with_user_credentials(self.d,Read_Identify_and_Enroll_Components().get_approver_to_login(),Read_Identify_and_Enroll_Components().get_password_to_login())
-            time.sleep(web_driver.one_second)
-            self.logger.info("login with approver user")
 
-            Identify_And_Enroll_POM().Verify_user_is_able_to_enroll_the_person_by_uploading_the_image_and_adding_the_required_details_for_the_same_along_with_expiry_date_and_time_range()
-            time.sleep(web_driver.two_second)
-            self.logger.info("enrolling a person with expiration date")
-
-            logout().logout_from_core(self.d)
-            time.sleep(web_driver.one_second)
-
-            login().login_to_cloud_if_not_done(self.d)
-            time.sleep(web_driver.two_second)
-
-            Enrollment_link = self.d.find_element(By.XPATH, read_enrollment_components().Enrollment_link())
-            Enrollment_link.click()
-            time.sleep(web_driver.two_second)
-            self.logger.info("clicking on enrollments link")
-
-            Expired_date_on_enrollment = self.d.find_element(By.XPATH,read_enrollment_components().expired_date_on_enrollment())
-            time.sleep(web_driver.one_second)
-
-            if Expired_date_on_enrollment.is_displayed():
-                self.logger.info("expired date is visible on enrollment")
-                self.status.append(True)
-
-            else:
-                self.logger.info("expired date is not visible")
-                self.status.append(False)
-            Identify_And_Enroll_POM().delete_enrollment()
-
-            if False in self.status:
-                self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_En_11`.png")
-                self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_11_failed.png")
-                return False
-            else:
-                return True
-        except Exception as ex:
-            self.logger.error(f"test_TC_En_11 got an exception as: {ex}")
-            self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_11_Exception.png")
-            return False
-        finally:
-            Identify_And_Enroll_POM().click_on_logout_button()
 
     def Enrollments_search_with_filter_dropdown_option_result_should_be_dropdown_options(self):
         try:
@@ -933,7 +888,7 @@ class enrollments_POM(web_driver, web_logger):
                 self.logger.info("success message is not displayed")
                 self.status.append(False)
 
-            logout().logout_from_core(self.d)
+
 
             if False in self.status:
                 self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_En_13`.png")
@@ -945,6 +900,8 @@ class enrollments_POM(web_driver, web_logger):
                 self.logger.error(f"test_TC_En_13 got an exception as: {ex}")
                 self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_13_Exception.png")
                 return False
+        finally:
+            Identify_And_Enroll_POM().click_on_logout_button()
 
     def verify_user_enroller_of_an_enrollment_able_to_see_events_for_a_enrolled_person_on_enrrollments_panel(self):
         try:
@@ -1052,7 +1009,7 @@ class enrollments_POM(web_driver, web_logger):
     def verify_executive_it_admin_enroller_of_an_enrollment_able_to_delete_enrollment(self):
         try:
             self.logger.info("Enrollment group module tc=17 started")
-            login().login_to_cloud_if_not_done_with_user_credentials(self.d,Read_Identify_and_Enroll_Components().get_executive_to_login(),Read_Identify_and_Enroll_Components().get_password_to_login())
+            login().login_to_cloud_if_not_done_with_user_credentials(self.d,Read_Identify_and_Enroll_Components().get_it_admin_to_login(),Read_Identify_and_Enroll_Components().get_password_to_login())
             self.status.clear()
             time.sleep(web_driver.one_second)
 
@@ -1085,7 +1042,7 @@ class enrollments_POM(web_driver, web_logger):
                     return False
         finally:
             Identify_And_Enroll_POM().click_on_logout_button()
-    def verify_user_able_to_see_disabled_status_for_masked_enrollment(self):
+    def verify_user_able_to_see_rejected_status_for_rejected_enrollment(self):
         try:
             self.logger.info("enrollment module testcases started")
             login().login_to_cloud_if_not_done_with_user_credentials(self.d,Read_Identify_and_Enroll_Components().get_operator_to_login(),Read_Identify_and_Enroll_Components().get_password_to_login())
@@ -1204,7 +1161,7 @@ class enrollments_POM(web_driver, web_logger):
             time.sleep(web_driver.one_second)
             self.Verify_approver_user_is_able_to_reject_pending_subjects()
             time.sleep(web_driver.one_second)
-            logout().logout_from_core(self.d)
+            Identify_And_Enroll_POM().click_on_logout_button()
             time.sleep(web_driver.one_second)
 
 
@@ -1431,12 +1388,6 @@ class enrollments_POM(web_driver, web_logger):
         except Exception as ex:
             print(ex.args)
 
-
-
-
-
-
-
     def close_single_panel(self):
         try:
             close_single_panel = self.d.find_element(By.XPATH,read_enrollment_components().close_single_panel())
@@ -1468,7 +1419,7 @@ class enrollments_POM(web_driver, web_logger):
             time.sleep(web_driver.two_second)
             self.logger.info("enrolling a person with expiration date")
 
-            logout().logout_from_core(self.d)
+            Identify_And_Enroll_POM().click_on_logout_button()
             time.sleep(web_driver.one_second)
 
             login().login_to_cloud_if_not_done(self.d)
@@ -1554,6 +1505,165 @@ class enrollments_POM(web_driver, web_logger):
                 return False
         finally:
             logout().logout_from_core(self.d)
+
+
+    def verify_user_able_to_see_disabled_status_for_masked_enrollment(self):
+        try:
+            self.logger.info("Enrollment_Module_tc_002 started")
+            login().login_to_cloud_if_not_done_with_user_credentials(self.d,Read_Identify_and_Enroll_Components().get_it_admin_to_login(),Read_Identify_and_Enroll_Components().get_password_to_login())
+            self.status.clear()
+            time.sleep(web_driver.two_second)
+            link = self.explicit_wait(10, "XPATH",
+                                      Read_Identify_and_Enroll_Components().identify_and_enroll_link_by_xpath(),
+                                      self.d)
+            self.d.execute_script("arguments[0].click();", link)
+            self.logger.info(f"clicked on Identify and enroll link")
+            time.sleep(web_driver.one_second)
+
+            upload_photo = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
+                                              .upload_image_by_xpath(), self.d)
+            upload_photo.click()
+            self.logger.info(f"clicked on upload image icon")
+            time.sleep(2)
+            file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset2\\disabled1.png"
+            pyautogui.write(file_path)
+            pyautogui.press('enter')
+            time.sleep(2)
+            pyautogui.press('enter')
+            self.logger.info(f"Image upload success")
+            time.sleep(web_driver.one_second)
+            self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
+                               .identify_enroll_panel_identify_enroll_btn_by_xpath(), self.d)
+            identify_enroll_btn = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
+                                                     .identify_enroll_panel_identify_enroll_btn_by_xpath(), self.d)
+            self.d.execute_script("arguments[0].click();", identify_enroll_btn)
+            self.logger.info(f"Clicked on Identify and Enroll button")
+            time.sleep(web_driver.two_second)
+            wait_icon = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components()
+                                            .identifying_photo_wait_by_xpath())
+            count = 0
+            while wait_icon.is_displayed():
+                if count > 15:
+                    break
+                time.sleep(web_driver.two_second)
+                count += 1
+                self.logger.info(f"waiting for wait icon, count: {count}")
+
+            # ***************************************Enrollment Process start here**********************
+            time.sleep(web_driver.two_second)
+            time.sleep(web_driver.two_second)
+            enrollment_basis = self.explicit_wait(10, "XPATH",
+                                                  Read_Identify_and_Enroll_Components().enrollment_basis_by_xpath(),
+                                                  self.d)
+            select = Select(enrollment_basis)
+            select.select_by_index(2)
+            time.sleep(web_driver.two_second)
+            enrollment_group = self.d.find_element(By.XPATH,
+                                                   Read_Identify_and_Enroll_Components().enrollment_group_by_xpath())
+            select = Select(enrollment_group)
+            select.select_by_index(2)
+            # self.Select_Enrollment_Group(2)
+            time.sleep(web_driver.one_second)
+            region_btn = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().region_btn_by_xpath())
+            time.sleep(web_driver.one_second)
+            region_btn.click()
+            self.logger.info("region btn clicked")
+            time.sleep(web_driver.one_second)
+            region_names = self.d.find_elements(By.XPATH, Read_Identify_and_Enroll_Components().edge_name_list())
+            edge_name = Read_Identify_and_Enroll_Components().edge_name()
+            self.logger.info(f"edge name: {edge_name}")
+            for i in range(len(region_names)):
+                if edge_name in region_names[i].text:
+                    region_names[i].click()
+                    self.logger.info(f"region name selected: {region_names[i].text}")
+                    break
+            save_btn = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().save_btn_by_xpath())
+            self.d.execute_script("arguments[0].click();", save_btn)
+            # save_btn.click()
+            self.logger.info(f"save btn : {save_btn.text}")
+            time.sleep(web_driver.two_second)
+
+            action_input = self.d.find_element(By.XPATH,
+                                               Read_Identify_and_Enroll_Components().action_input_by_xpath())
+            action_input.send_keys(Read_Identify_and_Enroll_Components().action_input_data())
+            time.sleep(web_driver.one_second)
+
+            location_store = self.d.find_element(By.XPATH,
+                                                 Read_Identify_and_Enroll_Components().location_store_inpt_bx_by_xpath())
+            location_store.send_keys(Read_Identify_and_Enroll_Components().location_store_data())
+
+            case_subject = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components()
+                                               .case_subject_inpt_bx_by_xpath())
+            case_subject.send_keys(Read_Identify_and_Enroll_Components().case_subject_data())
+
+            date_incident = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components()
+                                                .date_incident_inpt_bx_by_xpath())
+            time.sleep(web_driver.two_second)
+            self.dateTimeAMPM(date_incident)
+
+            reported_loss = self.d.find_element(By.XPATH,
+                                                Read_Identify_and_Enroll_Components().reported_loss_inpt_bx_by_xpath())
+            reported_loss.send_keys(Read_Identify_and_Enroll_Components().reported_loss_data())
+            save_btn = self.d.find_element(By.XPATH,
+                                           Read_Identify_and_Enroll_Components().add_details_save_btn_by_xpath())
+            if save_btn.is_displayed():
+                self.logger.info(f"save btn displayed: {save_btn.is_displayed()}")
+                self.status.append(True)
+            else:
+                self.logger.info(f"save btn displayed: {save_btn.is_displayed()}")
+                self.status.append(False)
+            self.d.execute_script("arguments[0].click();", save_btn)
+            self.logger.info("Enrollment details filled and save btn is clicked")
+
+            try:
+                success_msg = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
+                                                 .enrollment_success_msg_xpath(), self.d)
+                if success_msg.text.lower() == Read_Identify_and_Enroll_Components().enrollment_success_msg_validation(). \
+                        lower():
+                    self.logger.info(f"Success msg is visible : {True}")
+                    self.status.append(True)
+                else:
+                    self.logger.info(f"Success msg is visible : {False}")
+                    self.status.append(False)
+            except Exception as ex:
+                self.d.refresh()
+            title = self.d.find_elements(By.XPATH,
+                                         Read_Identify_and_Enroll_Components().add_details_panel_title_panel())
+
+            for x in title:
+                if x.text.strip().lower() == Read_Identify_and_Enroll_Components().add_details_panel_validation().lower():
+                    self.status.append(False)
+
+            time.sleep(2)
+            logout().logout_from_core(self.d)
+            time.sleep(web_driver.two_second)
+            login().login_to_cloud_if_not_done(self.d)
+            time.sleep(web_driver.two_second)
+            enrollment_link = self.d.find_element(By.XPATH, read_enrollment_components().Enrollment_link())
+            enrollment_link.click()
+            time.sleep(web_driver.one_second)
+            disabled_text = self.d.find_element(By.XPATH, read_enrollment_components().disabled_text_xpath())
+            print(disabled_text.text)
+            self.logger.info(f"actual text is {disabled_text.text}")
+            actual_text = disabled_text.text
+            get_disabled_text = read_enrollment_components().get_disabled_text()
+            expected_text = get_disabled_text
+            print(get_disabled_text)
+            self.logger.info(f"expected text is {get_disabled_text}")
+            if actual_text == expected_text:
+                self.status.append(True)
+            else:
+                self.status.append(False)
+            if False in self.status:
+                self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_En_11`.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_11_failed.png")
+                return False
+            else:
+                return True
+        except Exception as ex:
+            self.logger.error(f"test_TC_En_11 got an exception as: {ex}")
+            self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_11_Exception.png")
+            return False
 
     def click_on_logout(self):
         try:
