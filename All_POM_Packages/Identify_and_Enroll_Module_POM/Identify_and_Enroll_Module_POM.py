@@ -1203,10 +1203,10 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                                                      .enrollment_success_msg_xpath(), self.d)
                     if success_msg.text.lower() == Read_Identify_and_Enroll_Components().enrollment_success_msg_validation(). \
                             lower():
-                        self.logger.info(f"Success msg is visible : {True}")
+                        self.logger.info(f"Success msg is visible: {True}")
                         self.status.append(True)
                     else:
-                        self.logger.info(f"Success msg is visible : {False}")
+                        self.logger.info(f"Success msg is visible: {False}")
                         self.status.append(False)
                 except Exception as ex:
                     self.d.refresh()
@@ -1221,7 +1221,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.logger.info(f"status: {self.status}")
         except Exception as ex:
             self.logger.info(f"enroll 5 images exception: {ex.args}")
-
 
     def verify_user_able_approve_enrollment(self):
         try:
@@ -1239,28 +1238,24 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
 
             Filter_dropdown = web_driver.explicit_wait(self,5,"XPATH",Read_Identify_and_Enroll_Components().get_filter_dropdown(),self.d)
             Filter_dropdown.click()
-            self.logger.info(f"filter dropdown link is clicked :")
+            self.logger.info(f"filter dropdown link is clicked:")
             time.sleep(web_driver.two_second)
 
-            pending_for_review = web_driver.explicit_wait(self,5,"XPATH",Read_Identify_and_Enroll_Components().pending_for_review_option(),self.d)
+            pending_for_review = web_driver.explicit_wait(self,5,"XPATH",Read_Identify_and_Enroll_Components().
+                                                          pending_for_review_option(), self.d)
             pending_for_review.click()
-            self.logger.info(f"pending for review link is clicked :")
+            self.logger.info(f"pending for review link is clicked:")
             time.sleep(web_driver.two_second)
 
-            load_more_button = self.d.find_element(By.XPATH,
-                                                   Read_Identify_and_Enroll_Components().get_load_more_button_by_xpath())
-            load_more_button.click()
-            self.logger.info(f"load more button is clicked ")
-            time.sleep(web_driver.one_second)
-
-            load_more_button = web_driver.explicit_wait(self,5,"XPATH", Read_Identify_and_Enroll_Components().get_load_more_button_by_xpath(),self.d)
+            load_more_button = web_driver.explicit_wait(self, 5, "XPATH", Read_Identify_and_Enroll_Components().
+                                                        get_load_more_button_by_xpath(), self.d)
             time.sleep(web_driver.two_second)
             load_more_button.click()
-            self.logger.info(f"loadmore button is clicked ")
+            self.logger.info(f"load more button is clicked: ")
             time.sleep(web_driver.one_second)
 
             checkboxes = self.d.find_elements(By.XPATH, Read_Identify_and_Enroll_Components().get_checkboxes_by_xpath())
-            self.logger.info(f"checkboxes length is : {len(checkboxes)}")
+            self.logger.info(f"checkboxes length is: {len(checkboxes)}")
             check = len(checkboxes)
             print(check)
             for ch in checkboxes:
@@ -1281,11 +1276,11 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                                                                after_approving_message_to_user(), self.d)
             message_after_approving = web_driver.explicit_wait(self,10,"XPATH",Read_Identify_and_Enroll_Components().after_approving_message_to_user(),self.d)
             if message_after_approving.is_displayed():
-                self.logger.info(f"message to the user : {message_after_approving.text}")
+                self.logger.info(f"message to the user: {message_after_approving.text}")
                 self.status.append(True)
             else:
                 self.status.append(False)
-
+            self.logout_from_portal()
             if False in self.status:
                 self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_IE_02.png")
                 self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_IE_02_failed.png")
@@ -1296,8 +1291,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.logger.error(f"test_TC_IE_00 got an exception as: {ex}")
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_IE_02_Exception.png")
             return False
-        finally:
-            self.logout_from_portal()
 
     def Verify_user_is_able_to_enroll_the_person_by_uploading_the_image_cropping_the_same_and_adding_the_required_details_for_the_same(self):
         try:
