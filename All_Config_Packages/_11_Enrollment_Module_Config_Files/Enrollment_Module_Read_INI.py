@@ -25,13 +25,11 @@ class read_enrollment_components:
         except Exception as ex:
             print(ex.args)
 
-
-
     def Total_number_of_enrollments(self):
         try:
             enrollments_count = self.config.get("Locators", "count_of_Enrollments")
             return enrollments_count
-        except  Exception as ex:
+        except Exception as ex:
             print(ex.args)
 
     def disabled_text_xpath(self):
@@ -564,6 +562,13 @@ class read_enrollment_components:
         try:
             eg_name = self.config.get("data","eg_name")
             return eg_name
+        except Exception as ex:
+            print(ex.args)
+
+    def enrollment_group_name(self):
+        try:
+            enrollment_group_name = self.common_test_data_config.get("system_level_test_Data","enrollment_group_name")
+            return enrollment_group_name
         except Exception as ex:
             print(ex.args)
 

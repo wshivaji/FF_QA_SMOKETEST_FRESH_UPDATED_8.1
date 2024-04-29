@@ -879,15 +879,15 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC112(self):
-        if Users_Module_pom().verify_details_of_core_user():
+    def test_SM_TC111(self):
+        if Users_Module_pom().Verify_org_hierarchy_selection_root_name_should_be_able_to_match_with_DM_core_name():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC111(self):
-        if Users_Module_pom().Verify_org_hierarchy_selection_root_name_should_be_able_to_match_with_DM_core_name():
+    def test_SM_TC112(self):
+        if Users_Module_pom().verify_details_of_core_user():
             assert True
         else:
             assert False
@@ -1071,9 +1071,147 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
         else:
             assert False
 
-    # ------------------------------------------ PME (CERD) cases ------------------------------------ #
+    # ------------------------------------------ PME (CURD) cases ------------------------------------ #
 
-    # ------------------------------------------ Identify Enroll (CERD) cases ------------------------------------ #
+    @pytest.mark.system
+    def test_SM_TC140(self):
+        if events_pom().Verify_25_events_are_generated_for_25_enrolled_subjects():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC141(self):
+        self.logger.info("Verify_5_events_for_each_group_soe_abe_pte_fraude_and_vipe_using_enrollment_group_selection_in_search_dropdown")
+        if events_pom().Verify_5_events_for_each_group_soe_abe_pte_fraude_and_vipe_using_enrollment_group_selection_in_search_dropdown():
+            assert True
+        else:
+            self.logger.info("test_events_TC_002 fail")
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC142(self):
+        self.logger.info("Verify 25 events using Org/hierarchy selection in search dropdown")
+        if events_pom().Verify_25_events_using_Org_hierarchy_selection_in_search_dropdown():
+            assert True
+        else:
+            self.logger.info("test_events_TC_003 fail")
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC143(self):
+        self.logger.info(
+            "Verify 5 events for each group (soe, abe, pte, fraude and vipe) using enrollment group and org/hierarchy selection in search dropdown")
+        if events_pom().Verify_5_events_for_each_group_soe_abe_pte_fraude_and_vipe_using_enrollment_group_and_org_hierarchy_selection_in_search_dropdown():
+            assert True
+        else:
+            self.logger.info("test_TC_ESFC_05 fail")
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC144(self):
+        self.logger.info(
+            "Add the tags with respective enrollment groups and org/hierarchy selection (example soe: deterred and assualt, abe: deterred and threat, pte: deterred and push cart, fraude and vipe: deterred and fraud) ")
+        if events_pom().Add_the_tags_with_respective_enrollment_groups_and_org_hierarchy_selection_example_soe_deterred_and_assualt_abe_deterred_and_threat_pte_deterred_and_push_cart_fraude_and_vipe_deterred_and_fraud():
+            assert True
+        else:
+            self.logger.info("test_events_TC_005 fail")
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC145(self):
+        self.logger.info("Verify 5 events are visible by enrollment group, org/hierarchy and Tag selection")
+        if events_pom().Verify_5_events_are_visible_by_enrollment_group_org_hierarchy_and_Tag_selection():
+            assert True
+        else:
+            self.logger.info("test_events_TC_006 fail")
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC146(self):
+        self.logger.info(
+            "Verify user should be able to add the tags and see that same tags are visible when user clicks on display tags option in view dropdown")
+        if events_pom().Verify_user_should_be_able_to_add_the_tags_and_see_that_same_tags_are_visible_when_user_clicks_on_display_tags_option_in_view_dropdown():
+            assert True
+        else:
+            self.logger.info("test_events_TC_007 fail")
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC147(self):
+        self.logger.info("Verify user able to delete probable match events")
+        if events_pom().Verify_user_able_to_delete_probable_match_events():
+            assert True
+        else:
+            self.logger.info("test_events_TC_008 fail")
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC148(self):
+        self.logger.info("Probable Match Event search with DateTimeRange, EnrollmentGroup, Org/Hierarchy and Tag filter combination result should be DateTimeRange, EnrollmentGroup, Org/Hierarchy and Tagged event.")
+        if events_pom().Probable_Match_Event_search_with_DateTimeRange_EnrollmentGroup_Org_Hierarchy_and_Tag_filter_combination_result_should_be_DateTimeRange_EnrollmentGroup_Org_Hierarchy_and_Tagged_event():
+            assert True
+        else:
+            self.logger.info("test_events_TC_009 fail")
+            assert False
+
+    @pytest.mark.p3
+    def test_events_TC_149(self):
+        if events_pom().on_Event_view_panel_click_on_Action_dropdown_followed_by_Identify_within_enrollments_option_in_dropdown_and_verify_Identify_enroll_and_identify_results_panel_are_visible():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p2
+    def test_events_TC_150(self):
+        if events_pom().Verify_user_is_able_to_perform_identify_within_visitors_from_Probable_Match_Enrollment_View_panel_when_event_icon_is_click():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p2
+    def test_events_TC_151(self):
+        if events_pom().Verify_user_is_able_to_edit_the_Enrollment_details_on_Enrollment_View_panel_when_ProbableMatch_Event_icon_is_click():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p2
+    def test_events_TC_152(self):
+        if events_pom().Verify_user_is_able_to_add_face_on_Enrollment_view_panel_when_event_icon_is_click():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p1
+    def test_events_TC_153(self):
+        if events_pom().Verify_user_is_able_to_see_probable_match_events_associated_to_same_person_on_Enrollment_View_panel_when_probable_match_event_icon_is_click():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p1
+    def test_events_TC_154(self):
+        if events_pom().Verify_user_able_to_link_a_enrollment_group_and_add_the_person_to_the_group():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p1
+    def test_events_TC_155(self):
+        if events_pom().Verify_user_able_to_unlink_same_enrollment_group_and_remove_the_person_from_selected_group():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.p1
+    def test_events_TC_156(self):
+        if events_pom().Verify_user_is_able_to_add_note_on_Enrollment_view_panel_when_Probable_Match_Event_icon_is_click():
+            assert True
+        else:
+            assert False
+    
+    # ------------------------------------------ Identify Enroll (CURD) cases ------------------------------------ #
     @pytest.mark.system
     def test_SM_TC164(self):
         if Identify_And_Enroll_POM().Verify_user_is_able_to_enroll_the_person_by_uploading_the_image_cropping_the_same_and_adding_the_required_details_for_the_same():
@@ -1123,7 +1261,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
         else:
             assert False
 
-    # ------------------------------------------ Notifier (CERD) cases ------------------------------------ #
+    # ------------------------------------------ Notifier (CURD) cases ------------------------------------ #
     @pytest.mark.system
     def test_SM_TC168(self):
         if Notifier_pom().Verify_Notifier_result_for_first_camera_of_first_region_selected_with_group_selected_as_ABE_with_Auto_Refresh_Of_events_displayed_as_2_photo_size_as_Medium_and_Sound_Option_as_OFF():
@@ -1259,7 +1397,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             self.logger.info("test_VSJ_05 execution failed..")
             assert False
 
-    # ------------------------------------------ Tags CERD case ------------------------------------ #
+    # ------------------------------------------ Tags CURD case ------------------------------------ #
     @pytest.mark.system
     def test_SM_TC186(self):
         self.logger.info("test_TC_TAG_04 execution started..")
@@ -1304,35 +1442,35 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.system
     def test_SM_TC193(self):
-        if notes_pom().verify_user_able_to_delete_notes_successfully():
-            assert True
-        else:
-            assert False
-
-    @pytest.mark.system
-    def test_SM_TC194(self):
         if notes_pom().verify_user_is_able_to_select_any_one_note_and_click_on_location_in_view_dropdown():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC195(self):
+    def test_SM_TC194(self):
         if notes_pom().verify_user_is_able_to_select_any_one_note_and_click_on_location_icon():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC196(self):
+    def test_SM_TC195(self):
         if notes_pom().verify_user_is_able_to_see_the_enrollment_associated_to_particular_note():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC197(self):
+    def test_SM_TC196(self):
         if notes_pom().Verify_user_is_able_to_add_photo_when_image_icon_is_clicked():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC197(self):
+        if notes_pom().verify_user_able_to_delete_notes_successfully():
             assert True
         else:
             assert False

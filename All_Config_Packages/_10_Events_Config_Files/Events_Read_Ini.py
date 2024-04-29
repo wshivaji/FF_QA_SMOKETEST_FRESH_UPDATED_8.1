@@ -487,6 +487,23 @@ class events_Read_Ini:
         except Exception as ex:
             print(ex)
 
+    def tag_name_list_for_add_to_event_by_xpath(self):
+        try:
+            tag_name_list_for_add_to_event_by_xpath = self.config.get("events_locators", "tag_name_list_for_add_to_event_by_xpath")
+            print("tag_name_list_for_add_to_event_by_xpath ", tag_name_list_for_add_to_event_by_xpath)
+            return tag_name_list_for_add_to_event_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def checkbox_list_for_add_tag_to_event_by_xpath(self):
+        try:
+            checkbox_list_for_add_tag_to_event_by_xpath = self.config.get("events_locators",
+                                                                      "checkbox_list_for_add_tag_to_event_by_xpath")
+            print("checkbox_list_for_add_tag_to_event_by_xpath ", checkbox_list_for_add_tag_to_event_by_xpath)
+            return checkbox_list_for_add_tag_to_event_by_xpath
+        except Exception as ex:
+            print(ex)
+
     def sort_by_dropdown_in_searchdropdown(self):
         try:
             sort_by_dropdown = self.config.get("events_locators", "sort_by_dropdown_in_searchdropdown")
