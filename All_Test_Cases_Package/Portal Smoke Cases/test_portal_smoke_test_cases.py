@@ -801,32 +801,28 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
     # ------------------------------------------ Users Cases (CERD) cases----------------------------------------- #
     @pytest.mark.system
     def test_SM_TC100(self):
-        if Users_Module_pom() \
-                .verify_if_user_creates_a_new_users_marked_as_enabled_it_should_reflect_as_enabled():
+        if Users_Module_pom().verify_if_user_creates_a_new_users_marked_as_enabled_it_should_reflect_as_enabled():
             assert True
         else:
             assert False
 
     @pytest.mark.system
     def test_SM_TC101(self):
-        if Users_Module_pom() \
-                .verify_if_user_creates_a_new_users_marked_as_disabled_it_should_reflect_as_disabled():
+        if Users_Module_pom().verify_if_user_creates_a_new_users_marked_as_disabled_it_should_reflect_as_disabled():
             assert True
         else:
             assert False
 
     @pytest.mark.system
     def test_SM_TC102(self):
-        if Users_Module_pom() \
-                .verify_user_able_to_edit_the_details_for_the_newly_created_user_details():
+        if Users_Module_pom().verify_user_able_to_edit_the_details_for_the_newly_created_user_details():
             assert True
         else:
             assert False
 
     @pytest.mark.system
     def test_SM_TC103(self):
-        if Users_Module_pom() \
-                .verify_user_able_to_delete_the_newly_created_user():
+        if Users_Module_pom().verify_user_able_to_delete_the_newly_created_user():
             assert True
         else:
             assert False
@@ -1183,67 +1179,70 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
         else:
             assert False
 
-    @pytest.mark.p1
+    @pytest.mark.system
     def test_SM_TC153(self):
         if events_pom().Verify_user_is_able_to_see_probable_match_events_associated_to_same_person_on_Enrollment_View_panel_when_probable_match_event_icon_is_click():
             assert True
         else:
             assert False
 
-    @pytest.mark.p1
+    @pytest.mark.system
     def test_SM_TC154(self):
         if events_pom().Verify_user_able_to_link_a_enrollment_group_and_add_the_person_to_the_group():
             assert True
         else:
             assert False
 
-    @pytest.mark.p1
+    @pytest.mark.system
     def test_SM_TC155(self):
         if events_pom().Verify_user_able_to_unlink_same_enrollment_group_and_remove_the_person_from_selected_group():
             assert True
         else:
             assert False
 
-    @pytest.mark.p1
+    @pytest.mark.system
     def test_SM_TC156(self):
         if events_pom().Verify_user_is_able_to_add_note_on_Enrollment_view_panel_when_Probable_Match_Event_icon_is_click():
             assert True
         else:
             assert False
 
-    @pytest.mark.p1
+    @pytest.mark.system
     def test_SM_TC157(self):
         if events_pom().Verify_event_should_not_generate_for_opt_out_enrollment():
             assert True
         else:
             assert False
 
-    @pytest.mark.p1
+    @pytest.mark.system
     def test_SM_TC158(self):
         if events_pom().Verify_event_should_not_generate_for_pending_review_enrollment():
             assert True
         else:
             assert False
 
-    @pytest.mark.p1
+    @pytest.mark.system
     def test_SM_TC159(self):
         if events_pom().Verify_event_should_not_generate_for_disable_enrollment():
             assert True
         else:
             assert False
 
+    @pytest.mark.system
     def test_SM_TC160(self):
         if events_pom().Verify_event_should_not_generate_for_rejected_enrollment():
             assert True
         else:
             assert False
 
+    @pytest.mark.system
     def test_SM_TC161(self):
         if events_pom().Verify_user_is_able_to_link_the_tag_and_add_tag_to_probable_match_events_when_tag_icon_is_click():
             assert True
         else:
             assert False
 
+    @pytest.mark.system
     def test_SM_TC162(self):
         if events_pom().Verify_user_is_able_to_unlink_the_tag_and_remove_tag_from_probable_match_events_when_tag_icon_is_click():
             assert True
