@@ -1051,6 +1051,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
         else:
             assert False
 
+
     @pytest.mark.system
     def test_SM_TC136(self):
         if enrollments_POM().verify_user_enroller_of_an_enrollment_able_to_unlink_same_enrollment_group_and_remove_the_person_from_selected_group():
