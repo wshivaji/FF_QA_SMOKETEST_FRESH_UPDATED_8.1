@@ -1493,49 +1493,49 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     # ------------------------------------------ Notes cases ------------------------------------ #
     @pytest.mark.system
-    def test_SM_TC191(self):
+    def test_SM_TC192(self):
         if notes_pom().verify_user_able_create_notes_successfully():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC192(self):
+    def test_SM_TC193(self):
         if notes_pom().verify_user_able_to_edit_details_by_selecting_details_icon():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC193(self):
+    def test_SM_TC194(self):
         if notes_pom().verify_user_is_able_to_select_any_one_note_and_click_on_location_in_view_dropdown():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC194(self):
+    def test_SM_TC195(self):
         if notes_pom().verify_user_is_able_to_select_any_one_note_and_click_on_location_icon():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC195(self):
+    def test_SM_TC196(self):
         if notes_pom().verify_user_is_able_to_see_the_enrollment_associated_to_particular_note():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC196(self):
+    def test_SM_TC197(self):
         if notes_pom().Verify_user_is_able_to_add_photo_when_image_icon_is_clicked():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC197(self):
+    def test_SM_TC198(self):
         if notes_pom().verify_user_able_to_delete_notes_successfully():
             assert True
         else:
@@ -1543,7 +1543,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     # ------------------------------------------ Enrollment Delete case ------------------------------------ #
     @pytest.mark.system
-    def test_SM_TC198(self):
+    def test_SM_TC199(self):
         if enrollments_POM().verify_executive_it_admin_enroller_of_an_enrollment_able_to_delete_enrollment():
             assert True
         else:
@@ -1551,7 +1551,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     # ------------------------------------------ Account details After case ------------------------------------ #
     @pytest.mark.system
-    def test_SM_TC199(self):
+    def test_SM_TC200(self):
         if account_pom().Verify_account_panel_details_after_execution():
             assert True
         else:
