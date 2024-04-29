@@ -55,7 +55,7 @@ class Tags_Module_pom(web_driver, web_logger):
             self.log.info(f"element length: {len(element_list)}")
             return element_list[0]
 
-    def create_tags_for_serious_event(self):
+    def Create_3_serious_tags_assault_threat_and_push_cart(self):
         # rows = XLUtils.getRowCount(test_data, 'serious_event_tags_data')
         try:
             self.log.info("************* test_TC_TAG_01 ***************")
@@ -123,7 +123,7 @@ class Tags_Module_pom(web_driver, web_logger):
             self.close_all_panel_one_by_one()
             self.logout_from_portal()
 
-    def create_tags_for_non_serious_event(self):
+    def Create_2_non_serious_tags_fraud_and_vip(self):
         rows = XLUtils.getRowCount(test_data, 'non_serious_event_tags_data')
         try:
             self.log.info("************* test_TC_TAG_02 ***************")
