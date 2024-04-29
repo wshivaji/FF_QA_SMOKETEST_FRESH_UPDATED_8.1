@@ -3,6 +3,9 @@ import time
 from pathlib import Path
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
+
+from All_Config_Packages._12_Identify_and_Enroll_Config_Files.Identify_and_Enroll_Readd_INI import \
+    Read_Identify_and_Enroll_Components
 # from All_POM_Package.Portal_Menu_Module.Portal_Menu_POM import Portal_Menu_pom
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
@@ -58,11 +61,12 @@ class Tags_Module_pom(web_driver, web_logger):
         try:
             self.log.info("************* test_TC_TAG_01 ***************")
             login().login_to_cloud_if_not_done(self.d)
+            time.sleep(web_driver.one_second)
+            self.click_on_tags_menu()
             result = []
             x = Read_Tags_Components().read_tags_input_data()
             tags_list = x.split(',')
             self.logger.info(f"eg list: {tags_list}")
-            self.click_on_tags_menu()
             for tag in range(len(tags_list)):
                 time.sleep(web_driver.one_second)
                 action_button = self.explicit_wait(10, "XPATH", Read_Tags_Components().action_btn_by_xpath(), self.d)
@@ -118,7 +122,8 @@ class Tags_Module_pom(web_driver, web_logger):
             return False
         finally:
             self.close_all_panel_one_by_one()
-        #     logout().logout_from_core(self.d)
+            self.logout_from_portal()
+
 
     def create_tags_for_non_serious_event(self):
         rows = XLUtils.getRowCount(test_data, 'non_serious_event_tags_data')
@@ -181,7 +186,7 @@ class Tags_Module_pom(web_driver, web_logger):
             return False
         finally:
             self.close_all_panel_one_by_one()
-        #     logout().logout_from_core(self.d)
+            self.logout_from_portal()
 
     def filter_serious_event_tags_varify_it(self):
         # rows = XLUtils.getRowCount(test_data, 'serious_event_tags_data')
@@ -230,7 +235,7 @@ class Tags_Module_pom(web_driver, web_logger):
             return False
         finally:
             self.close_all_panel_one_by_one()
-        #     logout().logout_from_core(self.d)
+            self.logout_from_portal()
 
     def filter_non_serious_event_tags_varify_it(self):
         rows = XLUtils.getRowCount(test_data, 'non_serious_event_tags_data')
@@ -278,7 +283,7 @@ class Tags_Module_pom(web_driver, web_logger):
             return False
         finally:
             self.close_all_panel_one_by_one()
-        #     logout().logout_from_core(self.d)
+            self.logout_from_portal()
 
     def duplicate_tags_not_create_validation(self):
         rows = XLUtils.getRowCount(test_data, 'serious_event_tags_data')
@@ -352,7 +357,7 @@ class Tags_Module_pom(web_driver, web_logger):
             return False
         finally:
             self.close_all_panel_one_by_one()
-        #     logout().logout_from_core(self.d)
+            self.logout_from_portal()
 
     def edit_serious_event_tag_name(self):
         rows = XLUtils.getRowCount(test_data, 'serious_event_tags_data')
@@ -464,7 +469,7 @@ class Tags_Module_pom(web_driver, web_logger):
             return False
         finally:
             self.close_all_panel_one_by_one()
-            logout().logout_from_core(self.d)
+            self.logout_from_portal()
 
     def delete_all_tags(self):
         try:
@@ -533,7 +538,7 @@ class Tags_Module_pom(web_driver, web_logger):
             return False
         finally:
             self.close_all_panel_one_by_one()
-            logout().logout_from_core(self.d)
+            self.logout_from_portal()
 
     def verify_deterred_tag_is_present_at_first(self):
         try:
@@ -560,7 +565,7 @@ class Tags_Module_pom(web_driver, web_logger):
             return False
         finally:
             self.close_all_panel_one_by_one()
-            logout().logout_from_core(self.d)
+            self.logout_from_portal()
 
     def tags_search_functionality(self):
         try:
@@ -589,7 +594,7 @@ class Tags_Module_pom(web_driver, web_logger):
             return False
         finally:
             self.close_all_panel_one_by_one()
-        #     logout().logout_from_core(self.d)
+            self.logout_from_portal()
 
     def close_panel_and_discard_changes_verify(self):
         try:
@@ -644,7 +649,7 @@ class Tags_Module_pom(web_driver, web_logger):
             return False
         finally:
             self.close_all_panel_one_by_one()
-            logout().logout_from_core(self.d)
+            self.logout_from_portal()
 
     def create_tags_for_serious_event_without_login(self):
         rows = XLUtils.getRowCount(test_data, 'Tags_Data')
@@ -703,6 +708,7 @@ class Tags_Module_pom(web_driver, web_logger):
             return False
         finally:
             self.close_all_panel_one_by_one()
+            self.logout_from_portal()
 
     def Verify_total_tags_are_n_including_default_Deterred_tag(self):
         try:
@@ -733,6 +739,7 @@ class Tags_Module_pom(web_driver, web_logger):
             return False
         finally:
             self.close_all_panel_one_by_one()
+            self.logout_from_portal()
 
 
 
@@ -771,6 +778,19 @@ class Tags_Module_pom(web_driver, web_logger):
     def click_on_tags_menu(self):
         tags_button = self.explicit_wait(10, "XPATH", Read_Tags_Components().portal_menu_tags_btn_by_xpath(), self.d)
         tags_button.click()
+
+    def logout_from_portal(self):
+        try:
+            logout_btn = self.explicit_wait(5, "XPATH", Read_Identify_and_Enroll_Components().logout_btn_by_xpath(),
+                                            self.d)
+            self.logger.info(f"logout btn is visible: {logout_btn.is_displayed()}")
+            if logout_btn.is_displayed():
+                logout_btn.click()
+            else:
+                self.logger.info("logout btn is not visible.")
+
+        except Exception as ex:
+            self.logger.info(f"logout_from_portal ex: {ex.args}")
     '''
     def login(self):
         if self.d.title == "" or self.d.find_element(By.ID, Read_Portal_Menu_Components().get_loginButton()). \

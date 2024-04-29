@@ -783,6 +783,13 @@ class read_enrollment_components:
         except Exception as ex:
             print(ex.args)
 
+    def logout_btn_by_xpath(self):
+        try:
+            ele = self.config.get('Locators', 'logout_btn_by_xpath')
+            return ele
+        except Exception as ex:
+            print(ex)
+
 
 
 

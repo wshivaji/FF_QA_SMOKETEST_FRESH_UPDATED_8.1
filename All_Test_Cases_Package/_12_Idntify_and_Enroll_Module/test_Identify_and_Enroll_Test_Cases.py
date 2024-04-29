@@ -33,35 +33,35 @@ class Test_Identify_and_Enroll_Test_Cases(web_driver, web_logger):
         else:
             assert False
 
-    @pytest.mark.p1
+    @pytest.mark.portal
     def test_TC_IE_04(self):
         if Identify_And_Enroll_POM().Verify_user_is_able_to_enroll_the_person_by_uploading_the_image_and_adding_the_required_details_for_the_same_along_with_expiry_date_and_time_range():
             assert True
         else:
             assert False
 
-    @pytest.mark.p1
+    @pytest.mark.portal
     def test_TC_IE_05(self):
         if Identify_And_Enroll_POM().Verify_user_is_able_to_enroll_the_person_by_uploading_the_image_and_adding_the_required_details_for_the_same():
             assert True
         else:
             assert False
 
-    @pytest.mark.p1
+    @pytest.mark.portal
     def test_TC_IE_06(self):
         if Identify_And_Enroll_POM().Verify_user_is_able_to_see_the_possible_ranked_match_index_when_uploading_the_above_same_image_with_or_without_crop():
             assert True
         else:
             assert False
 
-    @pytest.mark.p1
+    @pytest.mark.portal
     def test_TC_IE_07(self):
         if Identify_And_Enroll_POM().verify_three_buttons_faces_person_view_and_purge_Replace_are_visible():
             assert True
         else:
             assert False
 
-    @pytest.mark.p1
+    @pytest.mark.portal
     def test_TC_IE_08(self):
         if Identify_And_Enroll_POM().Verify_user_is_able_enroll_the_person_which_is_delete_one_delete_and_enrolling_again_person_should_be_same():
             assert True
@@ -69,7 +69,7 @@ class Test_Identify_and_Enroll_Test_Cases(web_driver, web_logger):
             assert False
 
 
-    # @pytest.mark.p1
+    # @pytest.mark.portal
     # def test_TC_IE_09(self):
     #     if Identify_And_Enroll_POM().Verify_for_above_25_enrolled_subject_region_edges_are_properly_assigned():
     #         assert True

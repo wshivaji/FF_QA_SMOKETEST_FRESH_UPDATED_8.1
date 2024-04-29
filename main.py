@@ -86,7 +86,7 @@ if __name__ == "__main__":
     # pytest.main(['-v', '-m', 'core', f'{dm_core_test_suite_path}', '--html', f'{dm_core_test_report_path}'])
     # pytest.main(['-v', '-m', 'edge', f'{dm_edge_test_suite_path}', '--html', f'{dm_edge_test_report_path}'])
     # pytest.main(['-v', '-m', 'system1', f'{system1_test_suite_path}', '--html', f'{system1_test_report_path}'])
-    pytest.main(['-v', '-m', 'system', f'{system2_test_suite_path}', '--html', f'{system2_test_report_path}'])
+    # pytest.main(['-v', '-m', 'system', f'{system2_test_suite_path}', '--html', f'{system2_test_report_path}'])
     # pytest.main(['-v', '-m', 'sspr', f'{sspr_test_suite_path}', '--html', f'{sspr_test_report_path}'])
 
     # ************************** P2 Priority Test Run *********************************
