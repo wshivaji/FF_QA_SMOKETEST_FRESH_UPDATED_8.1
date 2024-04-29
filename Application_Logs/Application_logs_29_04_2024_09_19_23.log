@@ -1,0 +1,15 @@
+29/04/2024 09:19:26 AM : root         : INFO     :  ******** Identify & Enroll (Order - 8) Begin ********
+29/04/2024 09:19:26 AM : root         : INFO     : enrollment module testcases started
+29/04/2024 09:19:32 AM : root         : INFO     : current url: https://scecore7-vm.qa.facefirst.dev/
+29/04/2024 09:19:32 AM : root         : INFO     : url is not open
+29/04/2024 09:19:32 AM : root         : INFO     : opening localhost portal login
+29/04/2024 09:19:32 AM : root         : INFO     : logging in to core
+29/04/2024 09:19:32 AM : root         : INFO     : entered explicit wait for 10
+29/04/2024 09:19:32 AM : root         : INFO     : exiting explicit wait..
+29/04/2024 09:19:35 AM : root         : INFO     : entered explicit wait for 10
+29/04/2024 09:19:35 AM : root         : INFO     : exiting explicit wait..
+29/04/2024 09:19:37 AM : root         : INFO     : login success..
+29/04/2024 09:19:40 AM : root         : INFO     : clicking on enrollment link
+29/04/2024 09:19:41 AM : root         : INFO     : actual region name is sceedge13-vm
+29/04/2024 09:19:41 AM : root         : INFO     : actual and expected regions are same
+29/04/2024 09:19:42 AM : root         : INFO     : wrong url detected: https://scecore7-vm.qa.facefirst.dev/

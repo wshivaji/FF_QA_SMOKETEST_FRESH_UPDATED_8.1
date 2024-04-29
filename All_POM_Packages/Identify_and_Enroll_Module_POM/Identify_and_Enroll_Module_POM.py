@@ -1236,11 +1236,13 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             time.sleep(web_driver.one_second)
 
             Filter_dropdown = self.d.find_element(By.XPATH,Read_Identify_and_Enroll_Components().get_filter_dropdown())
+
+            Filter_dropdown = web_driver.explicit_wait(self,5,"XPATH",Read_Identify_and_Enroll_Components().get_filter_dropdown(),self.d)
             Filter_dropdown.click()
             self.logger.info(f"filter dropdown link is clicked :")
             time.sleep(web_driver.two_second)
 
-            pending_for_review = self.d.find_element(By.XPATH,Read_Identify_and_Enroll_Components().pending_for_review_option())
+            pending_for_review = web_driver.explicit_wait(self,5,"XPATH",Read_Identify_and_Enroll_Components().pending_for_review_option(),self.d)
             pending_for_review.click()
             self.logger.info(f"pending for review link is clicked :")
             time.sleep(web_driver.two_second)
@@ -1251,25 +1253,33 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.logger.info(f"load more button is clicked ")
             time.sleep(web_driver.one_second)
 
+            load_more_button = web_driver.explicit_wait(self,5,"XPATH", Read_Identify_and_Enroll_Components().get_load_more_button_by_xpath(),self.d)
+            time.sleep(web_driver.two_second)
+            load_more_button.click()
+            self.logger.info(f"loadmore button is clicked ")
+            time.sleep(web_driver.one_second)
+
             checkboxes = self.d.find_elements(By.XPATH, Read_Identify_and_Enroll_Components().get_checkboxes_by_xpath())
-            self.logger.info(f"checkboxes length is :")
+            self.logger.info(f"checkboxes length is : {len(checkboxes)}")
             check = len(checkboxes)
             print(check)
             for ch in checkboxes:
                 ch.click()
                 time.sleep(web_driver.one_second)
 
-            Action_button = self.d.find_element(By.XPATH,Read_Identify_and_Enroll_Components().Action_button_by_Xpath())
+            Action_button = web_driver.explicit_wait(self,10,"XPATH",Read_Identify_and_Enroll_Components().Action_button_by_Xpath(), self.d)
             Action_button.click()
             time.sleep(web_driver.two_second)
 
-            approve_enrollment_link = web_driver.explicit_wait(self,5,"XPATH",Read_Identify_and_Enroll_Components().approve_enrollment_link(),self.d)
+            approve_enrollment_link = web_driver.explicit_wait(self,10,"XPATH",Read_Identify_and_Enroll_Components().approve_enrollment_link(),self.d)
             approve_enrollment_link.click()
             time.sleep(web_driver.two_second)
+            self.logger.info("clicking on approve enrollment link")
 
             message_after_approving = web_driver.explicit_wait(self,10,"XPATH",
                                                                Read_Identify_and_Enroll_Components().
                                                                after_approving_message_to_user(), self.d)
+            message_after_approving = web_driver.explicit_wait(self,10,"XPATH",Read_Identify_and_Enroll_Components().after_approving_message_to_user(),self.d)
             if message_after_approving.is_displayed():
                 self.logger.info(f"message to the user : {message_after_approving.text}")
                 self.status.append(True)
@@ -1348,7 +1358,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.logger.info("enrollment group selection")
             time.sleep(web_driver.three_second)
             select = Select(enrollment_group)
-            select.select_by_index(2)
+            select.select_by_index(1)
 
             time.sleep(web_driver.one_second)
             region_btn = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().region_btn_by_xpath())
@@ -1585,7 +1595,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             time.sleep(2)
             # ***************************************Enrollment Process end here**********************
             # self.delete_enrollment()
-            self.close_all_panel_one_by_one()
+            # self.close_all_panel_one_by_one()
 
             self.logger.info(f"status: {self.status}")
             if False in self.status:
