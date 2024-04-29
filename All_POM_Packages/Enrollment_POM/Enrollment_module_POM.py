@@ -588,8 +588,9 @@ class enrollments_POM(web_driver, web_logger):
             else:
                 self.logger.info("rejected text is not displayed")
                 self.status.append(False)
+
             self.logger.info(f"status: {self.status}")
-            logout().logout_from_core(self.d)
+            # logout().logout_from_core(self.d)
             if False in self.status:
                 self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_En_07`.png")
                 self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_07_failed.png")
@@ -1628,7 +1629,7 @@ class enrollments_POM(web_driver, web_logger):
                 self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_11_Exception.png")
                 return False
         finally:
-            logout().logout_from_core(self.d)
+            Identify_And_Enroll_POM().click_on_logout_button()
 
 
     def verify_user_able_to_see_disabled_status_for_masked_enrollment(self):

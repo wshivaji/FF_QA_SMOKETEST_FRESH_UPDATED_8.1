@@ -116,3 +116,23 @@ class Test_Enrollments_Test_Cases(web_driver, web_logger):
         else:
             assert False
 
+    @pytest.mark.portal
+    def test_tc_en_18(self):
+        if enrollments_POM().enrollments_search_with_filter_dropdown_option_result_should_be_dropdown_options():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.portal
+    def test_tc_en_19(self):
+        if enrollments_POM().verify_user_able_to_see_disabled_status_for_masked_enrollment():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.portal
+    def test_tc_en_20(self):
+        if enrollments_POM().verify_user_able_to_see_disabled_status_for_masked_enrollment():
+            assert True
+        else:
+            assert False
