@@ -1899,11 +1899,15 @@ class events_pom(web_driver, web_logger):
             tags_symbol.click()
             time.sleep(web_driver.two_second)
 
+
             filter_dropdown = self.d.find_element(By.XPATH,events_Read_Ini().filter_dropdown_in_events_tag())
             filter_dropdown.click()
             time.sleep(web_driver.one_second)
 
             unlinked_tags_option = self.d.find_element(By.XPATH,events_Read_Ini().unlinked_tags_by_xpath())
+            unlinked_tags_option.click()
+            time.sleep(web_driver.one_second)
+
 
 
 
