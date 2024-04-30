@@ -1395,10 +1395,11 @@ class detect_faces_pom(web_driver, web_logger):
             file_image_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\detect_faces\\img2.jpg"
             time.sleep(web_driver.two_second)
             self.d.find_element(By.ID, "image").send_keys(file_image_path)
-            time.sleep(15)
+            time.sleep(20)
             select_img = self.explicit_wait(5, "XPATH",
                                             detect_Faces_Read_Ini().image_box_click_to_select_image_by_xpath(), self.d)
             select_img.click()
+            time.sleep(web_driver.three_second)
             question_mark_symbol = self.explicit_wait(10, "XPATH", detect_Faces_Read_Ini().question_mark_symbol(), self.d)
             question_mark_symbol.click()
             self.logger.info("question mark symbol is clicked")

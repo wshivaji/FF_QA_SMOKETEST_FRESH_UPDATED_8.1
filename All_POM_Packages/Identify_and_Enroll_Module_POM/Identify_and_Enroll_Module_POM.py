@@ -1746,7 +1746,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.logger.info("clicking on enrollment link")
             time.sleep(web_driver.one_second)
 
-            region_names_list = self.d.find_elements(By.XPATH,Read_Identify_and_Enroll_Components().region_names_by_xpath())
+            region_names_list = self.d.find_elements(By.XPATH, Read_Identify_and_Enroll_Components().region_names_by_xpath())
             expected_region_name = Read_Identify_and_Enroll_Components().read_region_data()
             for region in region_names_list:
                 self.logger.info(f"actual region name is {region.text}")

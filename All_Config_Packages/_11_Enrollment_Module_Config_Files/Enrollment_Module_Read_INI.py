@@ -18,9 +18,16 @@ class read_enrollment_components:
         except Exception as ex:
             print("config file got an exception", ex)
 
+    def default_enrollment_group_details(self):
+        try:
+            default_enrollment_group_details = self.common_test_data_config.get("Enrollment_Groups_Data", "default_enrollment_group_details")
+            return default_enrollment_group_details
+        except Exception as ex:
+            print(ex.args)
+
     def Enrollment_link(self):
         try:
-            enrollment_link = self.config.get("Locators" ,"Enrollment_link")
+            enrollment_link = self.config.get("Locators", "Enrollment_link")
             return enrollment_link
         except Exception as ex:
             print(ex.args)
@@ -235,12 +242,12 @@ class read_enrollment_components:
         except Exception as ex:
             print(ex.args)
 
-    def get_approver_id(self):
-        try:
-            approver_id = self.config.get("data","approver_enrollment_id")
-            return approver_id
-        except Exception as ex:
-            print(ex.args)
+    # def get_approver_id(self):
+    #     try:
+    #         approver_id = self.config.get("data","approver_enrollment_id")
+    #         return approver_id
+    #     except Exception as ex:
+    #         print(ex.args)
 
     def reject_enrollment_option(self):
         try:
@@ -367,12 +374,12 @@ class read_enrollment_components:
 
 
 
-    def get_approver_id(self):
-        try:
-            approver_id = self.config.get("data","approver_enrollment_id")
-            return approver_id
-        except Exception as ex:
-            print(ex.args)
+    # def get_approver_id(self):
+    #     try:
+    #         approver_id = self.config.get("data","approver_enrollment_id")
+    #         return approver_id
+    #     except Exception as ex:
+    #         print(ex.args)
 
     def get_rejected_buttton_in_dialouge_tooltip(self):
         try:

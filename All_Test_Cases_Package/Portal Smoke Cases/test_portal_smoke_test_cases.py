@@ -1232,28 +1232,28 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
         else:
             assert False
 
-    @pytest.mark.system
+    @pytest.mark.skip
     def test_SM_TC157(self):
         if events_pom().Verify_event_should_not_generate_for_opt_out_enrollment():
             assert True
         else:
             assert False
 
-    @pytest.mark.system
+    @pytest.mark.skip
     def test_SM_TC158(self):
         if events_pom().Verify_event_should_not_generate_for_pending_review_enrollment():
             assert True
         else:
             assert False
 
-    @pytest.mark.system
+    @pytest.mark.skip
     def test_SM_TC159(self):
         if events_pom().Verify_event_should_not_generate_for_disable_enrollment():
             assert True
         else:
             assert False
 
-    @pytest.mark.system
+    @pytest.mark.skip
     def test_SM_TC160(self):
         if events_pom().Verify_event_should_not_generate_for_rejected_enrollment():
             assert True

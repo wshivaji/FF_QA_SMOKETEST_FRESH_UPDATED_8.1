@@ -2659,7 +2659,7 @@ class Read_Identify_and_Enroll_Components:
 
     def read_region_data(self):
         try:
-            read_region_data = self.config.get("Login_Data","region_name")
+            read_region_data = self.common_test_data_config.get("Users_Data", "region_data_input")
             return read_region_data
         except Exception as ex:
             print(ex.args)

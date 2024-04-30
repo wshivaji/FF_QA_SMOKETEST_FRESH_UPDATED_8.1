@@ -561,9 +561,7 @@ class Tags_Module_pom(web_driver, web_logger):
             commit = self.explicit_wait(10, "XPATH", Read_Tags_Components().get_commit_changes_actual_msg_by_xpath(), self.d)
             commit.is_displayed()
             # result.append(commit.text == Read_Tags_Components().get_commit_changes_expected_msg_by_xpath())
-            serious_event_checkbox = self.explicit_wait(10, "XPATH",
-                                                         Read_Tags_Components().
-                                                         get_serious_event_checkbox_by_xpath(), self.d)
+            serious_event_checkbox = self.explicit_wait(10, "XPATH", Read_Tags_Components().get_serious_event_checkbox_by_xpath(), self.d)
             serious_event_checkbox.click()
             time.sleep(web_driver.three_second)
             save = self.explicit_wait(10, "XPATH", Read_Tags_Components().get_save_btn_by_xpath(), self.d)
@@ -573,8 +571,8 @@ class Tags_Module_pom(web_driver, web_logger):
             search_box = self.explicit_wait(10, "XPATH", Read_Tags_Components().filter_search_box(), self.d)
             search_box.send_keys(tag_input)
             time.sleep(web_driver.two_second)
-            tags_checkbox = self.explicit_wait(10, "XPATH",
-                                                 Read_Tags_Components().tag_select_checkbox_list_by_xpath(), self.d)
+            self.explicit_wait(10, "XPATH", Read_Tags_Components().tag_select_checkbox_list_by_xpath(), self.d)
+            tags_checkbox = self.d.find_elements(By.XPATH, Read_Tags_Components().tag_select_checkbox_list_by_xpath())
             tags_checkbox[0].click()
 
             time.sleep(web_driver.one_second)
@@ -582,12 +580,10 @@ class Tags_Module_pom(web_driver, web_logger):
             action_button.click()
             self.logger.info("action button is clicked")
             time.sleep(web_driver.one_second)
-            delete_btn = self.explicit_wait(10, "XPATH",
-                                             Read_Tags_Components().delete_btn_by_xpath(), self.d)
+            delete_btn = self.explicit_wait(10, "XPATH", Read_Tags_Components().delete_btn_by_xpath(), self.d)
             delete_btn.click()
             time.sleep(web_driver.one_second)
-            delete_yes_btn = self.explicit_wait(10, "XPATH",
-                                                 Read_Tags_Components().yes_delete_selected(), self.d)
+            delete_yes_btn = self.explicit_wait(10, "XPATH", Read_Tags_Components().yes_delete_selected(), self.d)
             delete_yes_btn.click()
             time.sleep(web_driver.two_second)
             delete_msg = self.explicit_wait(10, "XPATH", Read_Tags_Components().delete_tag_msg_by_xpath(), self.d)
@@ -595,8 +591,7 @@ class Tags_Module_pom(web_driver, web_logger):
             result.append(delete_msg.is_displayed())
             self.logger.info(f"status: {result}")
             if False in result:
-                self.d.save_screenshot(
-                    f"{self.screenshots_path}\\test_TC_TAG_08_failed.png")
+                self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_TAG_08_failed.png")
                 return False
             else:
                 return True
