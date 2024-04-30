@@ -2239,7 +2239,7 @@ class events_pom(web_driver, web_logger):
 
     def Verify_5_events_for_each_group_soe_abe_pte_fraude_and_vipe_using_enrollment_group_and_org_hierarchy_selection_in_search_dropdown(self):
         try:
-            self.logger.info("************************ test_events_TC_004 **********************************")
+            self.logger.info("************************ test_SM_TC036 **********************************")
             self.status.clear()
             login().login_to_cloud_if_not_done(self.d)
             x = events_Read_Ini().get_enrollment_group()
@@ -2739,34 +2739,41 @@ class events_pom(web_driver, web_logger):
             tags_attached_list = self.d.find_elements(By.XPATH, events_Read_Ini().tags_attached_list_by_xpath())
             self.logger.info(f"tags attached list count: {len(tags_attached_list)}")
             tags_attached_names = []
+            eg_names_input = events_Read_Ini().get_enrollment_group()
+            eg_names_input_list = eg_names_input.split(',')
+            serious_tags_input = events_Read_Ini().get_serious_tags()
+            serious_tags_input_list = serious_tags_input.split(',')
+            non_serious_tags_input = events_Read_Ini().get_non_serious_tags()
+            non_serious_tags_input_list = non_serious_tags_input.split(',')
             for i in range(len(tags_attached_list)):
                 tags_attached_names.append(tags_attached_list[i].text)
-            if "ABE" == eg_name.upper():
-                tag_name = "THREAT"
+
+            if eg_names_input_list[1].upper() == eg_name.upper():
+                tag_name = serious_tags_input_list[2].upper()
                 if tag_name in tags_attached_names:
                     self.status.append(True)
                 else:
                     self.status.append(False)
-            elif "PTE" == eg_name.upper():
-                tag_name = "PUSH_CART"
+            elif eg_names_input_list[2].upper() == eg_name.upper():
+                tag_name = serious_tags_input_list[1].upper()
                 if tag_name in tags_attached_names:
                     self.status.append(True)
                 else:
                     self.status.append(False)
-            elif "SOE" == eg_name.upper():
-                tag_name = "ASSAULT"
+            elif eg_names_input_list[0].upper() == eg_name.upper():
+                tag_name = serious_tags_input_list[0].upper()
                 if tag_name in tags_attached_names:
                     self.status.append(True)
                 else:
                     self.status.append(False)
-            elif "FRAUDE" == eg_name.upper():
-                tag_name = "FRAUD"
+            elif eg_names_input_list[3].upper() == eg_name.upper():
+                tag_name = non_serious_tags_input_list[0].upper()
                 if tag_name in tags_attached_names:
                     self.status.append(True)
                 else:
                     self.status.append(False)
-            elif "VIPE" == eg_name.upper():
-                tag_name = "FRAUD"
+            elif eg_names_input_list[4].upper() == eg_name.upper():
+                tag_name = non_serious_tags_input_list[1].upper()
                 if tag_name in tags_attached_names:
                     self.status.append(True)
                 else:
@@ -2784,32 +2791,38 @@ class events_pom(web_driver, web_logger):
             tag_name_list = self.d.find_elements(By.XPATH, events_Read_Ini().tag_name_list_by_xpath())
             self.explicit_wait(5, "XPATH", events_Read_Ini().tag_name_checkbox_list(), self.d)
             tag_name_checkbox_list = self.d.find_elements(By.XPATH, events_Read_Ini().tag_name_checkbox_list())
-            if "ABE" == eg_name.upper():
-                tag_name = "THREAT"
+            eg_names_input = events_Read_Ini().get_enrollment_group()
+            eg_names_input_list = eg_names_input.split(',')
+            serious_tags_input = events_Read_Ini().get_serious_tags()
+            serious_tags_input_list = serious_tags_input.split(',')
+            non_serious_tags_input = events_Read_Ini().get_non_serious_tags()
+            non_serious_tags_input_list = non_serious_tags_input.split(',')
+            if eg_names_input_list[1].upper() == eg_name.upper():
+                tag_name = serious_tags_input_list[2].upper()
                 for i in range(len(tag_name_list)):
                     self.logger.info(f"tag name: {tag_name_list[i].text}")
                     if tag_name_list[i].text == tag_name:
                         tag_name_checkbox_list[i].click()
-            elif "PTE" == eg_name.upper():
-                tag_name = "PUSH_CART"
+            elif eg_names_input_list[2].upper() == eg_name.upper():
+                tag_name = serious_tags_input_list[1].upper()
                 for i in range(len(tag_name_list)):
                     self.logger.info(f"tag name: {tag_name_list[i].text}")
                     if tag_name_list[i].text == tag_name:
                         tag_name_checkbox_list[i].click()
-            elif "SOE" == eg_name.upper():
-                tag_name = "ASSAULT"
+            elif eg_names_input_list[0].upper() == eg_name.upper():
+                tag_name = serious_tags_input_list[0].upper()
                 for i in range(len(tag_name_list)):
                     self.logger.info(f"tag name: {tag_name_list[i].text}")
                     if tag_name_list[i].text == tag_name:
                         tag_name_checkbox_list[i].click()
-            elif "FRAUDE" == eg_name.upper():
-                tag_name = "FRAUD"
+            elif eg_names_input_list[3].upper() == eg_name.upper():
+                tag_name = non_serious_tags_input_list[0].upper()
                 for i in range(len(tag_name_list)):
                     self.logger.info(f"tag name: {tag_name_list[i].text}")
                     if tag_name_list[i].text == tag_name:
                         tag_name_checkbox_list[i].click()
-            elif "VIPE" == eg_name.upper():
-                tag_name = "FRAUD"
+            elif eg_names_input_list[4].upper() == eg_name.upper():
+                tag_name = non_serious_tags_input_list[1].upper()
                 for i in range(len(tag_name_list)):
                     self.logger.info(f"tag name: {tag_name_list[i].text}")
                     if tag_name_list[i].text == tag_name:
@@ -2837,7 +2850,7 @@ class events_pom(web_driver, web_logger):
     def click_on_add_tags_to_selected_events_option(self):
         try:
             time.sleep(web_driver.three_second)
-            add_tags_option = self.explicit_wait(5, "XPATH", events_Read_Ini().add_tags_to_event_option_in_event_tags(), self.d)
+            add_tags_option = self.explicit_wait(5, "XPATH", events_Read_Ini().add_tags_to_event_option_in_event_tags_1(), self.d)
             self.logger.info(f"add tags to events option visible: {add_tags_option.is_displayed()}")
             if add_tags_option.is_displayed():
                 add_tags_option.click()
@@ -2861,41 +2874,55 @@ class events_pom(web_driver, web_logger):
 
     def select_tags_to_add_to_events(self, eg_name):
         try:
-            if "ABE" == eg_name.upper():
-                tag_name = "THREAT"
-            elif "PTE" == eg_name.upper():
-                tag_name = "PUSH_CART"
-            elif "SOE" == eg_name.upper():
-                tag_name = "ASSAULT"
-            elif "FRAUDE" == eg_name.upper():
-                tag_name = "FRAUD"
-            elif "VIPE" == eg_name.upper():
-                tag_name = "FRAUD"
+            get_eg_names = events_Read_Ini().get_enrollment_group()
+            get_eg_names_list = get_eg_names.split(',')
+            serious_tag_name_input_data = events_Read_Ini().get_serious_tags()
+            serious_tag_name_input_data_list = serious_tag_name_input_data.split(',')
+            non_serious_tag_input_data = events_Read_Ini().get_non_serious_tags()
+            non_serious_tag_input_data_list = non_serious_tag_input_data.split(',')
+            if get_eg_names_list[1].upper() == eg_name.upper():
+                tag_name = serious_tag_name_input_data_list[2].upper()  # ABE linked to THREAT
+            elif get_eg_names_list[2].upper() == eg_name.upper():
+                tag_name = serious_tag_name_input_data_list[1].upper()  # PTE Linked to PUSH CART
+            elif get_eg_names_list[0].upper() == eg_name.upper():
+                tag_name = serious_tag_name_input_data_list[0].upper()  # SOE Linked to ASSAULT
+            elif get_eg_names_list[3].upper() == eg_name.upper():
+                tag_name = non_serious_tag_input_data_list[0].upper()  # FRAUDE Linked to FRAUD
+            elif get_eg_names_list[4].upper() == eg_name.upper():
+                tag_name = non_serious_tag_input_data_list[1].upper()  # VIPE Linked to VIP
             else:
                 self.logger.info(f"eg_name doesn't match, eg_name: {eg_name}")
                 tag_name = None
+            self.logger.info(f"eg: {eg_name}, tag: {tag_name}")
             if tag_name is not None:
                 tag_name_list = self.d.find_elements(By.XPATH, events_Read_Ini().tags_names())
                 tag_checkbox_list = self.d.find_elements(By.XPATH, events_Read_Ini().checkbox_number_twentyfour())
-                if tag_name == "THREAT":
+
+                if tag_name == serious_tag_name_input_data_list[2].upper():
                     tag_checkbox_list[0].click()
                     for i in range(len(tag_name_list)):
                         self.logger.info(f"tag names: {tag_name_list[i].text}")
                         if tag_name_list[i].text == tag_name:
                             tag_checkbox_list[i].click()
-                elif tag_name == "PUSH_CART":
+                elif tag_name == serious_tag_name_input_data_list[1].upper():
                     tag_checkbox_list[0].click()
                     for i in range(len(tag_name_list)):
                         self.logger.info(f"tag names: {tag_name_list[i].text}")
                         if tag_name_list[i].text == tag_name:
                             tag_checkbox_list[i].click()
-                elif tag_name == "ASSAULT":
+                elif tag_name == serious_tag_name_input_data_list[0].upper():
                     tag_checkbox_list[0].click()
                     for i in range(len(tag_name_list)):
                         self.logger.info(f"tag names: {tag_name_list[i].text}")
                         if tag_name_list[i].text == tag_name:
                             tag_checkbox_list[i].click()
-                elif tag_name == "FRAUD":
+                elif tag_name == non_serious_tag_input_data_list[0].upper():
+                    tag_checkbox_list[0].click()
+                    for i in range(len(tag_name_list)):
+                        self.logger.info(f"tag names: {tag_name_list[i].text}")
+                        if tag_name_list[i].text == tag_name:
+                            tag_checkbox_list[i].click()
+                elif tag_name == non_serious_tag_input_data_list[1].upper():
                     tag_checkbox_list[0].click()
                     for i in range(len(tag_name_list)):
                         self.logger.info(f"tag names: {tag_name_list[i].text}")

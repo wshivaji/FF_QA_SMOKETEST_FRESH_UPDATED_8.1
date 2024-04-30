@@ -1582,12 +1582,11 @@ class events_Read_Ini:
         return zone_search_result_validation
 
     def tags_search_result_second_validation(self):
-        tags_search_result_second_validation = self.config.get("VALIDATION",
-                                                               "tags_search_result_second_validation")
+        tags_search_result_second_validation = self.config.get("VALIDATION", "tags_search_result_second_validation")
         return tags_search_result_second_validation
 
     def get_enrollment_group(self):
-        get_enrollment_group = self.config.get("DATA", "enrollment_group")
+        get_enrollment_group = self.common_test_data_config.get("system_level_test_Data", "enrollment_group_name")
         return get_enrollment_group
 
     def get_zone(self):
@@ -1597,6 +1596,15 @@ class events_Read_Ini:
     def get_tags(self):
         get_tags = self.config.get("DATA", "tags")
         return get_tags
+
+    def get_serious_tags(self):
+        get_tags = self.common_test_data_config.get("Tags_Data", "tags_input_data")
+        return get_tags
+
+    def get_non_serious_tags(self):
+        get_tags = self.common_test_data_config.get("Tags_Data", "read_non_serious_tags_input_data")
+        return get_tags
+
 
     def get_start_date(self):
         get_start_date = self.config.get("DATA", "start_date")

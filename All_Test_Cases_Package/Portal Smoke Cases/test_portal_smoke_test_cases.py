@@ -349,7 +349,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
         if events_pom().Verify_5_events_for_each_group_soe_abe_pte_fraude_and_vipe_using_enrollment_group_and_org_hierarchy_selection_in_search_dropdown():
             assert True
         else:
-            self.logger.info("test_TC_ESFC_05 fail")
+            self.logger.info("test_SM_TC036 fail")
             assert False
 
     @pytest.mark.system
@@ -1132,8 +1132,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.system
     def test_SM_TC144(self):
-        self.logger.info(
-            "Add the tags with respective enrollment groups and org/hierarchy selection (example soe: deterred and assualt, abe: deterred and threat, pte: deterred and push cart, fraude and vipe: deterred and fraud) ")
+        self.logger.info("Add the tags with respective enrollment groups and org/hierarchy selection (example soe: deterred and assualt, abe: deterred and threat, pte: deterred and push cart, fraude and vipe: deterred and fraud) ")
         if events_pom().Add_the_tags_with_respective_enrollment_groups_and_org_hierarchy_selection_example_soe_deterred_and_assualt_abe_deterred_and_threat_pte_deterred_and_push_cart_fraude_and_vipe_deterred_and_fraud():
             assert True
         else:
