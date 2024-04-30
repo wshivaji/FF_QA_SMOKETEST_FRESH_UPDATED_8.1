@@ -139,8 +139,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.system1
     def test_SM_TC012(self):
-        if (Portal_Menu_Module_pom().
-                Verify_for_Operator_user_PME_Tags_IE_DF_Enrollments_EG_VS_VSJ_Notes_Loc_Zones_Reporting_IDB_Notifier_these_menus_are_visible_on_the_cloud_menu_items()):
+        if Portal_Menu_Module_pom().Verify_for_Operator_user_PME_Tags_IE_DF_Enrollments_EG_VS_VSJ_Notes_Loc_Zones_Reporting_IDB_Notifier_these_menus_are_visible_on_the_cloud_menu_items():
             assert True
         else:
             assert False
@@ -236,7 +235,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.system1
     def test_SM_TC023(self):
-        if Tags_Module_pom().Create_2_non_serious_tags_fraud_and_vip():
+        if Tags_Module_pom().Create_1_non_serious_tags_fraud_and_vip():
             assert True
         else:
             self.logger.info("test_TC_TAG_02 fail")
@@ -256,8 +255,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.system1
     def test_SM_TC025(self):
-        if (Identify_And_Enroll_POM().
-                Identify_and_enroll_25_subjects_and_fill_the_required_fields_5_per_Enrollment_groups()):
+        if Identify_And_Enroll_POM().Identify_and_enroll_25_subjects_and_fill_the_required_fields_5_per_Enrollment_groups():
             assert True
         else:
             assert False

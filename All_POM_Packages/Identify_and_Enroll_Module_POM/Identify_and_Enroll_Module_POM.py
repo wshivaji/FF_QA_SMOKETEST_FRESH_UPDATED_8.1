@@ -1222,12 +1222,11 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
         except Exception as ex:
             self.logger.info(f"enroll 5 images exception: {ex.args}")
 
-
     def verify_user_able_approve_enrollment(self):
         try:
             self.logger.info("Identify_enroll_Tc_02_started")
             self.status.clear()
-            login().login_to_cloud_if_not_done_with_user_credentials(self.d,Read_Identify_and_Enroll_Components().get_approver_to_login(),Read_Identify_and_Enroll_Components().get_password_to_login())
+            login().login_to_cloud_if_not_done_with_user_credentials(self.d, Read_Identify_and_Enroll_Components().get_approver_to_login(), Read_Identify_and_Enroll_Components().get_password_to_login())
             time.sleep(web_driver.one_second)
 
             Enrollment_link = self.d.find_element(By.XPATH,Read_Identify_and_Enroll_Components().get_enrollment_link())
