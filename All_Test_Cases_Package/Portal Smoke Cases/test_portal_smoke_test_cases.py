@@ -235,7 +235,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.system1
     def test_SM_TC023(self):
-        if Tags_Module_pom().Create_1_non_serious_tags_fraud_and_vip():
+        if Tags_Module_pom().Create_2_non_serious_tags_fraud_and_vip():
             assert True
         else:
             self.logger.info("test_TC_TAG_02 fail")
