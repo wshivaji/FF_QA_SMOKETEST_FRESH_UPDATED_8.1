@@ -2,6 +2,7 @@ import configparser
 from pathlib import Path
 import datetime as dt
 
+
 class Read_Identify_and_Enroll_Components:
 
     def __init__(self):
@@ -2508,20 +2509,19 @@ class Read_Identify_and_Enroll_Components:
         except Exception as ex:
             print(ex)
 
-
     def get_username_to_login(self):
         try:
             user = self.config.get("Login_Data", "username")
             return user
         except Exception as ex:
             print(ex.args)
+
     def get_password_to_login(self):
         try:
             password = self.config.get("Login_Data","password")
             return password
         except Exception as ex:
             print(ex.args)
-
 
     def get_enrollment_link(self):
         try:
