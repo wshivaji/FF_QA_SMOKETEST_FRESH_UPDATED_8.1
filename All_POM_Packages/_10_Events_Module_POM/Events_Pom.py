@@ -2320,10 +2320,10 @@ class events_pom(web_driver, web_logger):
                     # self.verify_all_Tags_available()
                     self.select_tags_to_add_to_events(eg_name)
                     self.click_action_dropdown_on_event_tags_panel()
-                    self.click_on_add_tags_to_selected_events_option()
+                    self.click_on_add_tags_to_selected_events_option_1()
 
-                else:
-                    self.status.append(False)
+                # else:
+                #     self.status.append(False)
                 self.click_on_search_button()
                 self.click_on_enrollment_group()
                 eg_name = enrollment_group_list[i]
@@ -2846,6 +2846,20 @@ class events_pom(web_driver, web_logger):
 
         except Exception as ex:
             self.logger.info(f"click_on_tag_selection_btn ex: {ex.args}")
+
+    def click_on_add_tags_to_selected_events_option_1(self):
+        try:
+            time.sleep(web_driver.three_second)
+            add_tags_option = self.explicit_wait(5, "XPATH", events_Read_Ini().add_tags_to_event_option_in_event_tags_1(), self.d)
+            self.logger.info(f"add tags to events option visible: {add_tags_option.is_displayed()}")
+            if add_tags_option.is_displayed():
+                add_tags_option.click()
+                self.status.append(True)
+            else:
+                self.status.append(False)
+                self.logger.info(f"add tags option is not displayed.")
+        except Exception as ex:
+            self.logger.info(f"click_on_add_tags_to_selected_events_option ex: {ex.args}")
 
     def click_on_add_tags_to_selected_events_option(self):
         try:
