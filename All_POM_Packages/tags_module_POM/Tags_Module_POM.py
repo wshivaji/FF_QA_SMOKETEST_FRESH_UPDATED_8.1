@@ -123,7 +123,7 @@ class Tags_Module_pom(web_driver, web_logger):
             self.close_all_panel_one_by_one()
             self.logout_from_portal()
 
-    def Create_2_non_serious_tags_fraud_and_vip(self):
+    def Create_1_non_serious_tags_fraud_and_vip(self):
         rows = XLUtils.getRowCount(test_data, 'non_serious_event_tags_data')
         try:
             self.log.info("************* test_TC_TAG_02 ***************")

@@ -757,7 +757,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                 f"{self.screenshots_path}\\test_TC_IE_07_exception.png")
             return False
         finally:
-            self.logout_from_portal()
+            self.click_on_logout_button()
 
     def close_all_panel_one_by_one(self):
         try:
@@ -1026,7 +1026,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             # ***************************************Enrollment Process end here**********************
 
             self.close_all_panel_one_by_one()
-            # self.click_on_logout_button()
+            self.click_on_logout_button()
             self.logger.info(f"status: {self.status}")
             if False in self.status:
                 self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_IE_01.png")
@@ -1226,7 +1226,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
         try:
             self.logger.info("Identify_enroll_Tc_02_started")
             self.status.clear()
-            login().login_to_cloud_if_not_done_with_user_credentials(self.d,Read_Identify_and_Enroll_Components().get_approver_to_login(),Read_Identify_and_Enroll_Components().get_password_to_login())
+            login().login_to_cloud_if_not_done_with_user_credentials(self.d, Read_Identify_and_Enroll_Components().get_approver_to_login(), Read_Identify_and_Enroll_Components().get_password_to_login())
             time.sleep(web_driver.one_second)
 
             Enrollment_link = self.d.find_element(By.XPATH,Read_Identify_and_Enroll_Components().get_enrollment_link())
@@ -1247,8 +1247,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.logger.info(f"pending for review link is clicked:")
             time.sleep(web_driver.two_second)
 
-            load_more_button = web_driver.explicit_wait(self, 5, "XPATH", Read_Identify_and_Enroll_Components().
-                                                        get_load_more_button_by_xpath(), self.d)
+            load_more_button = web_driver.explicit_wait(self,5,"XPATH", Read_Identify_and_Enroll_Components().get_load_more_button_by_xpath(),self.d)
             time.sleep(web_driver.two_second)
             load_more_button.click()
             self.logger.info(f"load more button is clicked: ")
@@ -1271,9 +1270,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             time.sleep(web_driver.two_second)
             self.logger.info("clicking on approve enrollment link")
 
-            message_after_approving = web_driver.explicit_wait(self,10,"XPATH",
-                                                               Read_Identify_and_Enroll_Components().
-                                                               after_approving_message_to_user(), self.d)
             message_after_approving = web_driver.explicit_wait(self,10,"XPATH",Read_Identify_and_Enroll_Components().after_approving_message_to_user(),self.d)
             if message_after_approving.is_displayed():
                 self.logger.info(f"message to the user: {message_after_approving.text}")
@@ -1291,6 +1287,8 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.logger.error(f"test_TC_IE_00 got an exception as: {ex}")
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_IE_02_Exception.png")
             return False
+        finally:
+            self.click_on_logout_button()
 
     def Verify_user_is_able_to_enroll_the_person_by_uploading_the_image_cropping_the_same_and_adding_the_required_details_for_the_same(self):
         try:
@@ -1444,7 +1442,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             return False
 
         finally:
-            self.logout_from_portal()
+            self.click_on_logout_button()
 
 
     def Verify_user_is_able_to_enroll_the_person_by_uploading_the_image_and_adding_the_required_details_for_the_same_along_with_expiry_date_and_time_range(self):
@@ -1603,7 +1601,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_IE_04_Exception.png")
             return False
         finally:
-            self.logout_from_portal()
+            self.click_on_logout_button()
 
 
     def verify_user_able_delete_again_enrolling_same(self):
@@ -1960,7 +1958,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                 f"{self.screenshots_path}\\test_TC_IE_5_Exception.png")
             return False
         finally:
-            self.logout_from_portal()
+            self.click_on_logout_button()
 
     def Verify_user_is_able_to_see_the_possible_ranked_match_index_when_uploading_the_above_same_image_with_or_without_crop(self):
         try:
@@ -2031,7 +2029,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                 f"{self.screenshots_path}\\test_TC_IE_06_exception.png")
             return False
         finally:
-            self.logout_from_portal()
+            self.click_on_logout_button()
 
 
     def Verify_user_is_able_enroll_the_person_which_is_delete_one_delete_and_enrolling_again_person_should_be_same(self):
@@ -2170,7 +2168,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                 f"{self.screenshots_path}\\test_TC_IE_08_Exception.png")
             return False
         finally:
-           self.logout_from_portal()
+           self.click_on_logout_button()
 
 
     def logout_from_portal(self):
