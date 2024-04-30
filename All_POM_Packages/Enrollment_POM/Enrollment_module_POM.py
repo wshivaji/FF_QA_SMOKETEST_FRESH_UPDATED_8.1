@@ -1435,9 +1435,9 @@ class enrollments_POM(web_driver, web_logger):
                 return True
 
         except Exception as ex:
-                self.logger.error(f"test_TC_En_04 got an exception as: {ex}")
-                self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_04_Exception.png")
-                return False
+            self.logger.error(f"test_TC_En_04 got an exception as: {ex}")
+            self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_04_Exception.png")
+            return False
         finally:
             Identify_And_Enroll_POM().click_on_logout_button()
 
