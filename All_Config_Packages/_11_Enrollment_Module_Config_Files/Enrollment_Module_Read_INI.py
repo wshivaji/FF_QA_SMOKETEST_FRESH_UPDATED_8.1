@@ -80,6 +80,13 @@ class read_enrollment_components:
         except Exception as ex:
             print(ex)
 
+    def add_face_button_xpath(self):
+        try:
+            add_button = self.config.get("Locators","add_face_button")
+            return add_button
+        except Exception as ex:
+            print(ex)
+
     def success_message_of_add_photo(self):
         try:
             success = self.config.get("Locators", "success_message")

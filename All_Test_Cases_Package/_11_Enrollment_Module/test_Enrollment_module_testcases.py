@@ -132,7 +132,7 @@ class Test_Enrollments_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.portal
     def test_tc_en_20(self):
-        if enrollments_POM().verify_user_able_to_see_disabled_status_for_masked_enrollment():
+        if enrollments_POM().verify_user_able_to_add_notes_for_a_enrolled_person_on_enrollments_panel():
             assert True
         else:
             assert False
