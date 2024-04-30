@@ -60,7 +60,7 @@ class enrollments_POM(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_Enrollment_01_Exception.png")
             print(ex.args)
         finally:
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
 
     def Verify_user_is_able_to_perform_enable_mask_enrollment_which_is_in_disable_state(self):
         try:
@@ -258,7 +258,7 @@ class enrollments_POM(web_driver, web_logger):
                 self.status.append(False)
 
             self.logger.info(f"status: {self.status}")
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
             if False in self.status:
                 self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_IE_02.png")
                 self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_IE_02_failed.png")
@@ -269,6 +269,8 @@ class enrollments_POM(web_driver, web_logger):
             self.logger.error(f"test_TC_IE_02 got an exception as: {ex}")
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_IE_02_Exception.png")
             return False
+        finally:
+            Identify_And_Enroll_POM().click_on_logout_button()
 
     def Verify_user_is_able_to_add_single_face_for_enabled_mask_enrollment(self):
         try:
@@ -299,12 +301,16 @@ class enrollments_POM(web_driver, web_logger):
             pyautogui.press('enter')
             self.logger.info(f"Image upload success")
             time.sleep(web_driver.two_second)
+
+
             skip_cropping_button = self.explicit_wait(10, "XPATH", read_enrollment_components().skip_cropping_button_xpath(), self.d)
             skip_cropping_button.click()
             self.logger.info("clicked on Skip Cropping button...")
             time.sleep(web_driver.two_second)
+
+
             add_photo_button = self.explicit_wait(10, "XPATH", read_enrollment_components().
-                                                  add_photo_button_xpath(), self.d)
+                                                  add_face_button_xpath(), self.d)
             add_photo_button.click()
             self.logger.info("clicked on Add Photo button...")
             time.sleep(web_driver.two_second)
@@ -316,7 +322,7 @@ class enrollments_POM(web_driver, web_logger):
             else:
                 self.status.append(False)
             self.logger.info(f"status: {self.status}")
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
             if False in self.status:
                 self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_En_03`.png")
                 self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_03_failed.png")
@@ -328,6 +334,8 @@ class enrollments_POM(web_driver, web_logger):
             self.logger.error(f"test_TC_En_03 got an exception as: {ex}")
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_03_Exception.png")
             return False
+        finally:
+            Identify_And_Enroll_POM().click_on_logout_button()
 
 
     def Verify_user_is_able_to_add_single_note_for_enabled_mask_enrollment(self):
@@ -377,32 +385,32 @@ class enrollments_POM(web_driver, web_logger):
             time.sleep(web_driver.two_second)
 
 
-            skip_cropping_button = self.d.find_element(By.XPATH, read_enrollment_components().skip_cropping_button_xpath())
+            skip_cropping_button = web_driver.explicit_wait(self,5,"XPATH", read_enrollment_components().skip_cropping_button_xpath(),self.d)
             skip_cropping_button.click()
             self.logger.info("clicking on skip cropping button")
             time.sleep(web_driver.two_second)
 
 
-            add_photo_button = self.d.find_element(By.XPATH, read_enrollment_components().add_photo_button_xpath())
+            add_photo_button = web_driver.explicit_wait(self,5,"XPATH", read_enrollment_components().add_photo_button_xpath(),self.d)
             add_photo_button.click()
             self.logger.info("clicking on add photo button")
-            time.sleep(8)
+            # time.sleep(8)
 
-            location_input = self.d.find_element(By.XPATH,read_enrollment_components().get_location_store_input_xpath())
+            location_input = web_driver.explicit_wait(self,5,"XPATH",read_enrollment_components().get_location_store_input_xpath(),self.d)
             location_input.click()
             location_input.send_keys(read_enrollment_components().get_location_data())
             time.sleep(web_driver.one_second)
 
-            case_subject = self.d.find_element(By.XPATH,read_enrollment_components().get_case_subject_input_xpath())
+            case_subject = web_driver.explicit_wait(self,5,"XPATH",read_enrollment_components().get_case_subject_input_xpath(),self.d)
             case_subject.click()
             case_subject.send_keys(read_enrollment_components().get_case_subject_data())
             time.sleep(web_driver.two_second)
 
-            date_of_incident = self.d.find_element(By.XPATH,read_enrollment_components().get_date_and_incident_by_xpath())
+            date_of_incident = web_driver.explicit_wait(self,5,"XPATH",read_enrollment_components().get_date_and_incident_by_xpath(),self.d)
             self.dateTimeAMPM(date_of_incident)
             time.sleep(web_driver.two_second)
 
-            save_button = self.d.find_element(By.XPATH,read_enrollment_components().save_button_xpath())
+            save_button = web_driver.explicit_wait(self,5,"XPATH",read_enrollment_components().save_button_xpath(),self.d)
             save_button.click()
 
             time.sleep(web_driver.one_second)
@@ -426,14 +434,14 @@ class enrollments_POM(web_driver, web_logger):
                self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_04_Exception.png")
                return False
         finally:
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
 
     def Verify_user_is_able_to_see_5_subjects_for_pending_review_condition_using_VIP_user_enroll_5_subjects_for_pending_review(self):
         try:
             self.logger.info("Enrollment_tc_05 started")
             self.status.clear()
             Identify_And_Enroll_POM().enroll_5_images("pending")
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
             if False in self.status:
                 self.logger.error(f"screenshot file path: {self.screenshots_path}\\Enrollment_tc_05.png")
                 self.d.save_screenshot(f"{self.screenshots_path}\\Enrollment_tc_05.png")
@@ -445,6 +453,8 @@ class enrollments_POM(web_driver, web_logger):
             self.logger.error(f"Enrollment_tc_05 got an exception as: {ex}")
             self.d.save_screenshot(f"{self.screenshots_path}\\Enrollment_tc_05_Exception.png")
             return False
+        finally:
+            Identify_And_Enroll_POM().click_on_logout_button()
 
     def Verify_approver_user_is_able_to_approve_pending_subjects(self):
         try:
@@ -504,7 +514,7 @@ class enrollments_POM(web_driver, web_logger):
             else:
                 self.status.append(False)
             self.logger.info(f"status: {self.status}")
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
             if False in self.status:
                 self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_En_03`.png")
                 self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_03_failed.png")
@@ -515,6 +525,8 @@ class enrollments_POM(web_driver, web_logger):
             self.logger.error(f"test_TC_En_03 got an exception as: {ex}")
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_03_Exception.png")
             return False
+        finally:
+            Identify_And_Enroll_POM().click_on_logout_button()
 
     def Verify_approver_user_is_able_to_reject_pending_subjects(self):
         try:
@@ -662,7 +674,7 @@ class enrollments_POM(web_driver, web_logger):
                 self.status.append(False)
                 self.status.append("Enrollment is not deleted")
             self.logger.info(f"status: {self.status}")
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
             if False in self.status:
                 self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_En_08`.png")
                 self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_08_failed.png")
@@ -673,6 +685,8 @@ class enrollments_POM(web_driver, web_logger):
             self.logger.error(f"test_TC_En_07 got an exception as: {ex}")
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_08_Exception.png")
             return False
+        finally:
+            Identify_And_Enroll_POM().click_on_logout_button()
 
     def Verify_user_is_able_to_enable_the_reject_subject_user_with_all_permissions(self):
         try:
@@ -742,7 +756,7 @@ class enrollments_POM(web_driver, web_logger):
             else:
                 self.logger.info("rejected enrollment is not enabled")
             self.logger.info(f"status: {self.status}")
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
             if False in self.status:
                 self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_En_09`.png")
                 self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_09_failed.png")
@@ -782,7 +796,7 @@ class enrollments_POM(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_11_Exception.png")
             return False
         finally:
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
 
     def Enrollments_search_with_filter_dropdown_option_result_should_be_dropdown_options(self):
         try:
@@ -865,7 +879,7 @@ class enrollments_POM(web_driver, web_logger):
                 self.logger.info("Enrollment group is not linked")
                 self.status.append(False)
             self.logger.info(f"status: {self.status}")
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
             if False in self.status:
                 self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_En_11`.png")
                 self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_11_failed.png")
@@ -876,6 +890,8 @@ class enrollments_POM(web_driver, web_logger):
             self.logger.error(f"test_TC_En_11 got an exception as: {ex}")
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_11_Exception.png")
             return False
+        finally:
+            Identify_And_Enroll_POM().click_on_logout_button()
 
 
     def verify_user_enroller_of_an_enrollment_able_to_unlink_same_enrollment_group_and_remove_the_person_from_selected_group(self):
@@ -951,7 +967,7 @@ class enrollments_POM(web_driver, web_logger):
                 self.logger.info("Enrollment group is not linked")
                 self.status.append(False)
             self.logger.info(f"status: {self.status}")
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
             if False in self.status:
                 self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_En_12`.png")
                 self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_12_failed.png")
@@ -962,6 +978,8 @@ class enrollments_POM(web_driver, web_logger):
             self.logger.error(f"test_TC_En_11 got an exception as: {ex}")
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_12_Exception.png")
             return False
+        finally:
+            Identify_And_Enroll_POM().click_on_logout_button()
 
     def verify_user_able_to_add_more_faces_to_an_enrollment(self):
         try:
@@ -1071,7 +1089,7 @@ class enrollments_POM(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_14_Exception.png")
             return False
         finally:
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
 
     def verify_user_enroller_of_an_enrollment_able_to_edit_the_enrollment(self):
         try:
@@ -1129,7 +1147,7 @@ class enrollments_POM(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_16_Exception.png")
             return False
         finally:
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
 
     def verify_executive_it_admin_enroller_of_an_enrollment_able_to_delete_enrollment(self):
         try:
@@ -1216,7 +1234,7 @@ class enrollments_POM(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_07_Exception.png")
             return False
         finally:
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
 
     def Verify_core_user_or_it_admin_is_able_to_delete_pending_subjects(self):
         try:
@@ -1277,7 +1295,7 @@ class enrollments_POM(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_07_Exception.png")
             return False
         finally:
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
 
     def Verify_user_is_able_to_enable_the_reject_subject_user_with_all_permissionss(self):
         try:
@@ -1327,7 +1345,7 @@ class enrollments_POM(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_07_Exception.png")
             return False
         finally:
-           Identify_And_Enroll_POM().logout_from_portal()
+           Identify_And_Enroll_POM().click_on_logout_button()
 
     def verify_user_able_to_add_notes_for_a_enrolled_person_on_enrollments_panel(self):
         try:
@@ -1373,27 +1391,27 @@ class enrollments_POM(web_driver, web_logger):
             self.logger.info(f"Image upload success")
             time.sleep(web_driver.two_second)
 
-            skip_cropping_button = self.d.find_element(By.XPATH, read_enrollment_components().skip_cropping_button_xpath())
+            skip_cropping_button = web_driver.explicit_wait(self,5,"XPATH", read_enrollment_components().skip_cropping_button_xpath(),self.d)
             skip_cropping_button.click()
             self.logger.info("clicking on skip cropping button")
             time.sleep(web_driver.two_second)
 
-            add_photo_button = self.d.find_element(By.XPATH, read_enrollment_components().add_photo_button_xpath())
+            add_photo_button = web_driver.explicit_wait(self,10,"XPATH", read_enrollment_components().add_photo_button_xpath(),self.d)
             add_photo_button.click()
             self.logger.info("clicking on add photo button")
-            time.sleep(8)
+            time.sleep(5)
 
-            location_input = self.d.find_element(By.XPATH, read_enrollment_components().get_location_store_input_xpath())
+            location_input = web_driver.explicit_wait(self,5,"XPATH", read_enrollment_components().get_location_store_input_xpath(),self.d)
             location_input.click()
             location_input.send_keys(read_enrollment_components().get_location_data())
             time.sleep(web_driver.one_second)
 
-            case_subject = self.d.find_element(By.XPATH, read_enrollment_components().get_case_subject_input_xpath())
+            case_subject = web_driver.explicit_wait(self,5,"XPATH", read_enrollment_components().get_case_subject_input_xpath(),self.d)
             case_subject.click()
             case_subject.send_keys(read_enrollment_components().get_case_subject_data())
             time.sleep(web_driver.two_second)
 
-            date_of_incident = self.d.find_element(By.XPATH, read_enrollment_components().get_date_and_incident_by_xpath())
+            date_of_incident = web_driver.explicit_wait(self,5,"XPATH", read_enrollment_components().get_date_and_incident_by_xpath(),self.d)
             self.dateTimeAMPM(date_of_incident)
             time.sleep(web_driver.two_second)
 
@@ -1421,7 +1439,7 @@ class enrollments_POM(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_04_Exception.png")
             return False
         finally:
-            Identify_And_Enroll_POM().logout_from_portal()
+            Identify_And_Enroll_POM().click_on_logout_button()
 
 
 
@@ -1576,6 +1594,8 @@ class enrollments_POM(web_driver, web_logger):
             self.logger.error(f"test_TC_En_11 got an exception as: {ex}")
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_11_Exception.png")
             return False
+        finally:
+            Identify_And_Enroll_POM().click_on_logout_button()
 
     def enrollments_search_with_filter_dropdown_option_result_should_be_dropdown_options(self):
         try:
@@ -1789,6 +1809,8 @@ class enrollments_POM(web_driver, web_logger):
             self.logger.error(f"test_TC_En_11 got an exception as: {ex}")
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_En_11_Exception.png")
             return False
+        finally:
+            Identify_And_Enroll_POM().click_on_logout_button()
 
     def click_on_logout(self):
         try:

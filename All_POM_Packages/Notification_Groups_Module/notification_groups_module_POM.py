@@ -270,17 +270,17 @@ class Notification_Groups_Module_pom(web_driver, web_logger):
             time.sleep(web_driver.one_second)
             save_button.click()
             self.logger.info("notification details if filled and save btn is clicked")
-
+            time.sleep(web_driver.one_second)
             users_text = self.explicit_wait(10, "XPATH", Read_Notification_Groups_Components()
                                              .user_button_by_xpath(), self.d)
             status.append(users_text.is_enabled())
             self.logger.info(f"In notification details panel, users btn is activated: {users_text.is_enabled()}")
-
+            time.sleep(web_driver.one_second)
             enrollment_grp_text = self.d.find_element(By.XPATH, Read_Notification_Groups_Components().
                                                       enrollment_group_btn_by_xpath())
             status.append(enrollment_grp_text.is_enabled())
             self.logger.info(f"In Notification details, EG btn is activated : {enrollment_grp_text.is_enabled()}")
-
+            time.sleep(web_driver.one_second)
             events_text = self.d.find_element(By.XPATH, Read_Notification_Groups_Components()
                                               .event_button_by_xpath())
             status.append(events_text.is_enabled())

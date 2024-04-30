@@ -111,15 +111,39 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
             except Exception as ex:
                 print(ex)
 
-            # org_hierarchy_btn_by_xpath = web_driver.explicit_wait(self, 10, "XPATH", Read_Visitor_Search_jobs_Components().zone_by_xpath(), self.d)
-            # org_hierarchy_btn_by_xpath.click()
             zone_data = Read_Visitor_Search_jobs_Components().zone_data_input()
             self.select_zone_vsj(zone_data)
             self.click_on_submit_search_button()
+
+            matches_found = self.d.find_element(By.XPATH,
+                                                Read_Visitor_Search_jobs_Components()
+                                                .visitor_search_result_panel_matches_found())
+            max_count = matches_found.text
+            max_number = max_count.split(" ")[0]
+
             self.click_on_cloud_menu()
+            time.sleep(web_driver.two_second)
             self.click_on_visitor_search_jobs_btn()
-            result.append(self.verify_date_1(date, month, year, hour, minute, period))
+            time.sleep(web_driver.two_second)
+            view_result = web_driver.explicit_wait(self, 10, "XPATH",
+                                                   Read_Visitor_Search_jobs_Components().
+                                                   visitor_search_jobs_panel_view_results(), self.d)
+            # view_result = self.d.find_element(By.XPATH, Read_Visitor_Search_jobs_Components().
+            #                                   visitor_search_jobs_panel_view_results())
+            view_result.click()
+            self.logger.info("Clicked on view results button..")
+            max_matches = self.d.find_element(By.XPATH, Read_Visitor_Search_jobs_Components()
+                                              .visitors_search_jobs_panel_max_matches_by_xpath())
+            max_matches_text = max_matches.text
+            max_number_counted = max_matches_text.split(" ")[0]
+            if max_number_counted == max_number:
+                self.logger.info(f"Matches counts are equal...")
+                result.append(True)
+            else:
+                result.append(False)
+            # self.compare_thresh_hold_value_with_score()
             result.append(self.verify_region_from_match_list(zone_data))
+            result.append(self.verify_date_1(date, month, year, hour, minute, period))
 
             self.logger.info(f"status: {result}")
             if False in result:
@@ -305,8 +329,8 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
             view_result = web_driver.explicit_wait(self, 10, "XPATH",
                                                    Read_Visitor_Search_jobs_Components().
                                                    visitor_search_jobs_panel_view_results(), self.d)
-            view_result = self.d.find_element(By.XPATH, Read_Visitor_Search_jobs_Components().
-                                              visitor_search_jobs_panel_view_results())
+            # view_result = self.d.find_element(By.XPATH, Read_Visitor_Search_jobs_Components().
+            #                                   visitor_search_jobs_panel_view_results())
             view_result.click()
             self.logger.info("Clicked on view results button..")
             max_matches = self.d.find_element(By.XPATH, Read_Visitor_Search_jobs_Components()
@@ -363,7 +387,7 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
                                                        visitor_search_jobs_panel_search_button(), self.d)
             search_dropdown.click()
             time.sleep(web_driver.one_second)
-            date = int(Read_Visitor_Search_Components().get_vsj_start_date())
+            date = int(Read_Visitor_Search_Components().get_start_date())
             month = str(Read_Visitor_Search_Components().get_start_month())
             year = int(Read_Visitor_Search_Components().get_start_year())
             hour = str(Read_Visitor_Search_jobs_Components().meta_data_start_hour())

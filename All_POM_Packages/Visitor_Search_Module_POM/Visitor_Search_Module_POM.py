@@ -44,7 +44,7 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
     expirationAM_PM_IE = now.strftime('%p')
 
     def expirirationdateTimeAMPM(self, date_incident):
-        self.logger.info(f" tommorow date : {self.expirationDATE_IE}")
+        self.logger.info(f" tomorrow date: {self.expirationDATE_IE}")
         date_incident.send_keys(self.expirationDATE_IE)
         time.sleep(web_driver.one_second)
         date_incident.send_keys(" " + self.TIME_IE)
@@ -53,9 +53,9 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
         time.sleep(web_driver.one_second)
 
     def enter_date_time_to_calender(self, date_incident, date_time):
-        self.logger.info(f" date : {date_time.date().strftime("%d/%m/%Y")}")
-        self.logger.info(f" time : {date_time.date().strftime("%H:%M")}")
-        self.logger.info(f" time : {date_time.date().strftime("%p")}")
+        self.logger.info(f" date : {date_time.date().strftime('%d/%m/%Y')}")
+        self.logger.info(f" time : {date_time.date().strftime('%H:%M')}")
+        self.logger.info(f" time : {date_time.date().strftime('%p')}")
         date = date_time.date().strftime("%m/%d/%Y")
         time_1 = date_time.date().strftime("%H:%M")
         am_pm = date_time.date().strftime("%p")
@@ -267,8 +267,8 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
             edge_name = Read_Visitor_Search_Components().zone_data_input()
 
             self.click_on_visitor_search()
-            self.enter_start_and_end_date()
             self.add_image_for_image_with_metadata_search()
+            self.enter_start_and_end_date()
 
             self.logger.info(f"edge name: {edge_name}")
             self.select_zone(edge_name)
@@ -796,6 +796,9 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
         if strategy == "from":
             self.logger.info("select in from hours and min")
             self.calender_handle_hour_minute_from(hour, minute)
+        else:
+            self.logger.info("select in to hours and min")
+            self.calender_handle_hour_minute_from(hour, minute)
 
         # select the period am or pm
         period = self.d.find_element(By.XPATH, Read_Visitor_Search_Components().period_by_xpath())
@@ -868,9 +871,11 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
             ac_year = int(month_year.text.split(" ")[1])
 
         # click on the required date
-        date = self.d.find_element(By.XPATH,
-                                   "(//td[@class='day' or @class='day weekend' or @class='day active' "
-                                   "or @class='day active today'])[" + str(date) + "]")
+        # date = self.d.find_element(By.XPATH,
+        #                            "(//td[@class='day' or @class='day weekend' or @class='day active' "
+        #                            "or @class='day active today'])[" + str(date) + "]")
+        date = self.d.find_element(By.XPATH, f"//td[contains(@class, 'day') and text()='{date}']")
+
         date.click()
 
         # click on the tick icon

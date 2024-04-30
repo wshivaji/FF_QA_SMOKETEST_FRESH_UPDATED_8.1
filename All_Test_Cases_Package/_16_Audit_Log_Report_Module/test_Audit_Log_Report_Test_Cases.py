@@ -16,7 +16,8 @@ class Test_Audit_Log_Report_Test_Cases(web_driver, web_logger):
     @pytest.mark.portal
     def test_TC_ALR_001(self):
         self.logger.info("Audit Log Report = test_TC_ALR_001 execution started..")
-        if Audit_log_report_pom().Verify_user_is_able_to_generate_report_for_Approver_enrollments_and_download_excel_file():
+        if Audit_log_report_pom().\
+                Verify_user_is_able_to_generate_report_for_Approver_enrollments_and_download_excel_file():
             assert True
         else:
             assert False

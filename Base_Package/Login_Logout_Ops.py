@@ -510,7 +510,7 @@ class login(web_driver, web_logger):
                 time.sleep(web_driver.one_second)
                 if logout_btn.is_displayed():
                     self.logger.info("Someone already logged in..")
-                    login_btn.click()
+                    logout_btn.click()
                 else:
                     self.logger.info("Unable to click logout")
                 time.sleep(web_driver.two_second)

@@ -12,6 +12,8 @@ from selenium.webdriver.support.select import Select
 from All_Config_Packages._12_Identify_and_Enroll_Config_Files.Identify_and_Enroll_Readd_INI import \
     Read_Identify_and_Enroll_Components
 from All_Config_Packages._4_Users_Module_Config_Files.Users_Read_INI import Read_Users_Components
+from All_Config_Packages._6_Notification_Groups_Module_Config_Files.Notification_Groups_Read_INI import \
+    Read_Notification_Groups_Components
 # from All_Test_Cases_Package.conftest import web_driver
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
@@ -355,6 +357,8 @@ class Audit_log_report_pom(web_driver, web_logger):
         try:
             self.logger.info("******************************** TC_ALR_06 Started ***********************************")
             self.status.clear()
+            x = Read_Notification_Groups_Components().get_user_name_input_data()
+            users = x.split(',')
             login().login_to_cloud_if_not_done(self.d)
             # self.enroll_normal_subject_with_user_having_all_permissions()
             self.enable_masked_enrolled_subject_with_core_credentials()
@@ -366,17 +370,21 @@ class Audit_log_report_pom(web_driver, web_logger):
             self.open_user_enrollments_report_for_core_user()
             self.verify_enabled_status_of_last_enrollment()
             self.logger.info(f"status: {self.status}")
+
             self.logger.info("******************************** TC_ALR_06 End ***********************************")
             if None in self.status:
                 self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_06_failed.png")
                 self.close_current_tab()
+                self.logout_from_portal()
                 return False
             elif False in self.status:
                 self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_06_failed.png")
                 self.close_current_tab()
+                self.logout_from_portal()
                 return False
             else:
                 self.close_current_tab()
+                self.logout_from_portal()
                 return True
         except Exception as ex:
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_06_exception.png")
@@ -396,20 +404,24 @@ class Audit_log_report_pom(web_driver, web_logger):
             self.click_on_action_dropdown_on_enrollments_panel()
             self.click_on_enable_selected_enrollment_option()
             self.close_all_panel_one_by_one()
-            self.open_approver_enrollments_report_for_all_users()
+            self.open_approver_enrollments_report_for_core_users()
             self.verify_enabled_status_of_last_enrollment_on_approver_enrollments_report()
+
             self.logger.info(f"status: {self.status}")
             self.logger.info("******************************** TC_ALR_07 End ***********************************")
             if None in self.status:
                 self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_07_failed.png")
                 self.close_current_tab()
+                self.logout_from_portal()
                 return False
             elif False in self.status:
                 self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_07_failed.png")
                 self.close_current_tab()
+                self.logout_from_portal()
                 return False
             else:
                 self.close_current_tab()
+                self.logout_from_portal()
                 return True
         except Exception as ex:
             self.logger.info(f"Verify_for_above_enable_mask_subject_status_is_Enabled_in_Approver_Enrollments_too ex: {ex.args}")
@@ -418,24 +430,28 @@ class Audit_log_report_pom(web_driver, web_logger):
         try:
             self.logger.info("******************************** TC_ALR_08 Started ***********************************")
             self.status.clear()
-            img = "img4.png"
+            img = "alr_2FA_pending.png"
             self.enroll_subject_with_2fa_user(img)
             self.logout_from_portal()
             login().login_to_cloud_if_not_done(self.d)
             self.open_user_enrollments_report_for_all_users()
             self.verify_pending_status_of_last_enrollment_on_user_enrollments_report()
             self.logger.info(f"status: {self.status}")
+
             self.logger.info("******************************** TC_ALR_08 End ***********************************")
             if None in self.status:
                 self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_08_failed.png")
                 self.close_current_tab()
+                self.logout_from_portal()
                 return False
             elif False in self.status:
                 self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_08_failed.png")
                 self.close_current_tab()
+                self.logout_from_portal()
                 return False
             else:
                 self.close_current_tab()
+                self.logout_from_portal()
                 return True
         except Exception as ex:
             self.logger.info(f"Verify_user_with_2FA_enrolled_subject_should_be_able_to_see_Pending_status_for_user_enrollments ex: {ex.args}")
@@ -444,9 +460,11 @@ class Audit_log_report_pom(web_driver, web_logger):
         try:
             self.logger.info("******************************** TC_ALR_09 Started ***********************************")
             self.status.clear()
-            img = "img3.png"
+            img = "alr_2FA_accepted.png"
             self.enroll_subject_with_2fa_user(img)
             self.logout_from_portal()
+            x = Read_Notification_Groups_Components().get_user_name_input_data()
+            users = x.split(',')
             login().login_to_cloud_if_not_done(self.d)
             self.select_pending_review_enrollments_from_filter_dropdown()
             self.enable_pending_review_enrollment_with_core_user()
@@ -456,17 +474,21 @@ class Audit_log_report_pom(web_driver, web_logger):
             # self.select_core_user_from_users_dropdown()
             self.verify_accepted_status_of_last_enrollment_on_approver_enrollments_report()
             self.logger.info(f"status: {self.status}")
+
             self.logger.info("******************************** TC_ALR_09 End ***********************************")
             if None in self.status:
                 self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_09_failed.png")
                 self.close_current_tab()
+                self.logout_from_portal()
                 return False
             elif False in self.status:
                 self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_09_failed.png")
                 self.close_current_tab()
+                self.logout_from_portal()
                 return False
             else:
                 self.close_current_tab()
+                self.logout_from_portal()
                 return True
         except Exception as ex:
             self.logger.info(f"Verify_user_with_2FA_enrolled_subject_approved_by_core_admin_should_be_able_to_see_Accepted_status_and_action_by_core_for_user_enrollments ex: {ex.args}")
@@ -475,9 +497,11 @@ class Audit_log_report_pom(web_driver, web_logger):
         try:
             self.logger.info("******************************** TC_ALR_10 Started ***********************************")
             self.status.clear()
-            img = "img2.png"
+            img = "alr_2FA.png"
             self.enroll_subject_with_2fa_user(img)
             self.logout_from_portal()
+            x = Read_Notification_Groups_Components().get_user_name_input_data()
+            users = x.split(',')
             login().login_to_cloud_if_not_done(self.d)
             self.select_pending_review_enrollments_from_filter_dropdown()
             self.enable_pending_review_enrollment_with_core_user()
@@ -487,17 +511,21 @@ class Audit_log_report_pom(web_driver, web_logger):
             # self.select_core_user_from_users_dropdown()
             self.verify_accepted_status_of_last_enrollment_on_approver_enrollments_report()
             self.logger.info(f"status: {self.status}")
+
             self.logger.info("******************************** TC_ALR_10 End ***********************************")
             if None in self.status:
                 self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_10_failed.png")
                 self.close_current_tab()
+                self.logout_from_portal()
                 return False
             elif False in self.status:
                 self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_10_failed.png")
                 self.close_current_tab()
+                self.logout_from_portal()
                 return False
             else:
                 self.close_current_tab()
+                self.logout_from_portal()
                 return True
         except Exception as ex:
             self.logger.info(f"Verify_user_with_2FA_enrolled_subject_approved_by_core_admin_should_be_able_to_see_Accepted_status_for_approver_enrollments ex: {ex.args}")
@@ -506,7 +534,9 @@ class Audit_log_report_pom(web_driver, web_logger):
         try:
             self.logger.info("******************************** TC_ALR_011 Started ***********************************")
             self.status.clear()
-            login().login_to_cloud_if_not_done(self.d)
+            x = Read_Notification_Groups_Components().get_user_name_input_data()
+            users = x.split(',')
+            login().login_with_persona_user(self.d, users[2])
             self.open_enrollment_groups_panel()
             self.click_on_context_menu_on_enrollment_groups_panel()
             self.click_on_details_btn_on_enrollment_groups_panel()
@@ -518,9 +548,10 @@ class Audit_log_report_pom(web_driver, web_logger):
             self.close_all_panel_one_by_one()
             self.logger.info(f"status: {self.status}")
             # self.open_approver_enrollments_report_for_core_user()
-            self.open_threshold_changes_report_for_core_user()
+            self.open_threshold_changes_report_for_approver_user()
             self.verify_threshold_changes_report_contains_expected_change_report()
             self.logger.info(f"status: {self.status}")
+            self.logout_from_portal()
             self.logger.info("******************************** TC_ALR_11 End ***********************************")
             if None in self.status:
                 self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_11_failed.png")
@@ -540,14 +571,17 @@ class Audit_log_report_pom(web_driver, web_logger):
         try:
             self.logger.info("******************************** TC_ALR_012 Started ***********************************")
             self.status.clear()
-            login().login_to_cloud_if_not_done(self.d)
+            x = Read_Notification_Groups_Components().get_user_name_input_data()
+            users = x.split(',')
+            login().login_with_persona_user(self.d, users[4])
             time.sleep(60)
             self.logout_from_portal()
             time.sleep(2)
-            login().login_to_cloud_if_not_done(self.d)
-            self.open_login_logout_report_for_core_user()
+            login().login_with_persona_user(self.d, users[4])
+            self.open_login_logout_report_for_admin_user()
             self.verify_login_and_logout_time_on_login_logout_report()
             self.logger.info(f"status: {self.status}")
+            self.logout_from_portal()
             self.logger.info("******************************** TC_ALR_12 End ***********************************")
             if None in self.status:
                 self.d.save_screenshot(f"{self.screenshots_path}\\TC_ALR_12_failed.png")
@@ -598,7 +632,7 @@ class Audit_log_report_pom(web_driver, web_logger):
         except Exception as ex:
             self.logger.info(f"verify_login_and_logout_time_on_login_logout_report ex: {ex.args}")
 
-    def open_login_logout_report_for_core_user(self):
+    def open_login_logout_report_for_admin_user(self):
         try:
             self.logger.info(f"opening Log-in / Log-out report with all users")
             self.click_on_alr_and_option_alr_panel()
@@ -610,7 +644,7 @@ class Audit_log_report_pom(web_driver, web_logger):
             date_range = "Last 7 days"
             self.select_custom_date_range(date_range)
             self.click_on_users_select_dropdown()
-            user = "core"
+            user = "it admin"
             self.select_user_from_users_dropdown_list(user)
             self.click_on_outside_panel()
             self.click_on_submit_report()
@@ -638,7 +672,7 @@ class Audit_log_report_pom(web_driver, web_logger):
         except Exception as ex:
             self.logger.info(f"verify_threshold_changes_report_contains_expected_change_report ex: {ex.args}")
 
-    def open_threshold_changes_report_for_core_user(self):
+    def open_threshold_changes_report_for_approver_user(self):
         try:
             self.logger.info(f"opening threshold changes report with all users")
             self.click_on_alr_and_option_alr_panel()
@@ -650,7 +684,7 @@ class Audit_log_report_pom(web_driver, web_logger):
             date_range = "Last 7 days"
             self.select_custom_date_range(date_range)
             self.click_on_users_select_dropdown()
-            user = "core"
+            user = "approver"
             self.select_user_from_users_dropdown_list(user)
             self.click_on_outside_panel()
             self.click_on_submit_report()
@@ -881,7 +915,7 @@ class Audit_log_report_pom(web_driver, web_logger):
             options_list = self.d.find_elements(By.XPATH, Audit_Log_Report_Components().user_select_options_by_xpath())
             for option in options_list:
                 self.logger.info(f"users enlisted: {option.text}")
-                if option.text == user:
+                if user in option.text:
                     self.logger.info(f"selected user: {option.text}")
                     option.click()
 
@@ -951,7 +985,7 @@ class Audit_log_report_pom(web_driver, web_logger):
     def enroll_masked_subject_with_user_having_all_permissions(self):
         try:
             self.open_identify_and_enroll_panel()
-            file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset2\\disabled.png"
+            file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset2\\alr_mask_image.jpg"
             self.upload_image_not_enrolled(file_path)
             self.click_on_identify_enroll_btn_on_IE_panel()
             self.add_details_for_enrollment()
@@ -1168,7 +1202,7 @@ class Audit_log_report_pom(web_driver, web_logger):
     def enroll_normal_subject_with_user_having_all_permissions(self):
         try:
             self.open_identify_and_enroll_panel()
-            file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset2\\disabled1.png"
+            file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset2\\alr_mask.PNG"
             self.upload_image_not_enrolled(file_path)
             self.click_on_identify_enroll_btn_on_IE_panel()
             self.add_details_for_enrollment()
@@ -1269,7 +1303,7 @@ class Audit_log_report_pom(web_driver, web_logger):
         except Exception as ex:
             self.logger.info(f"click_on_enable_selected_enrollment_option ex: {ex.args}")
 
-    def open_approver_enrollments_report_for_all_users(self):
+    def open_approver_enrollments_report_for_core_users(self):
         try:
             self.logger.info(f"opening user enrollments report with all users")
             self.click_on_alr_and_option_alr_panel()
@@ -1281,7 +1315,7 @@ class Audit_log_report_pom(web_driver, web_logger):
             date_range = "Last 7 days"
             self.select_custom_date_range(date_range)
             self.click_on_users_select_dropdown()
-            user = "All Users"
+            user = "core"
             self.select_user_from_users_dropdown_list(user)
             self.click_on_outside_panel()
             self.click_on_submit_report()
@@ -1297,6 +1331,7 @@ class Audit_log_report_pom(web_driver, web_logger):
             self.logger.info(f"last page btn is visible: {last_page_btn.is_displayed()}")
             if last_page_btn.is_enabled():
                 last_page_btn.click()
+                time.sleep(web_driver.one_second)
             if last_page_btn.is_enabled():
                 last_page_btn.click()
             else:
@@ -1313,10 +1348,9 @@ class Audit_log_report_pom(web_driver, web_logger):
 
     def enroll_subject_with_2fa_user(self, img):
         try:
-            login().login_to_cloud_if_not_done_with_user_credentials(self.d,
-                                                                     Read_Identify_and_Enroll_Components().get_username_to_login(),
-                                                                     Read_Identify_and_Enroll_Components().get_password_to_login())
-
+            x = Read_Notification_Groups_Components().get_user_name_input_data()
+            users = x.split(',')
+            login().login_with_persona_user(self.d, users[0])
             self.status.clear()
 
             time.sleep(web_driver.two_second)
@@ -1369,7 +1403,7 @@ class Audit_log_report_pom(web_driver, web_logger):
             # elif Enrollment_details_dict["Enrollment_details"][5]["case_subject"] == folder_name:
             #     Enrollment_details_dict_1 = Enrollment_details_dict["Enrollment_details"][5]
 
-            self.logger.info(f"enrollment details : {Enrollment_details_dict_1}")
+            self.logger.info(f"enrollment details: {Enrollment_details_dict_1}")
 
             dictionary_length = len(Enrollment_details_dict_1)
             print("length of dictionary is", dictionary_length)
@@ -1410,7 +1444,7 @@ class Audit_log_report_pom(web_driver, web_logger):
             save_btn = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().save_btn_by_xpath())
             self.d.execute_script("arguments[0].click();", save_btn)
             # save_btn.click()
-            self.logger.info(f"save btn : {save_btn.text}")
+            self.logger.info(f"save btn: {save_btn.text}")
             time.sleep(web_driver.two_second)
 
             # action_input = self.d.find_element(By.XPATH,
@@ -1441,9 +1475,9 @@ class Audit_log_report_pom(web_driver, web_logger):
             action_input = self.d.find_element(By.XPATH,
                                                Read_Identify_and_Enroll_Components().action_inpt_bx_by_xpath())
             action_input.send_keys(Enrollment_details_dict_1["Action"])
-
+            time.sleep(web_driver.two_second)
             save_btn = self.d.find_element(By.XPATH,
-                                           Read_Identify_and_Enroll_Components().submit_review_btn_by_xpath())
+                                           Read_Identify_and_Enroll_Components().add_details_save_btn_by_xpath1())
             if save_btn.is_displayed():
                 self.logger.info(f"save btn displayed: {save_btn.is_displayed()}")
                 self.status.append(True)
@@ -1460,16 +1494,15 @@ class Audit_log_report_pom(web_driver, web_logger):
                                                  .enrollment_success_msg_xpath(), self.d)
                 if success_msg.text.lower() == Read_Identify_and_Enroll_Components().enrollment_success_msg_validation(). \
                         lower():
-                    self.logger.info(f"Success msg is visible : {True}")
+                    self.logger.info(f"Success msg is visible: {True}")
                     self.status.append(True)
                 else:
-                    self.logger.info(f"Success msg is visible : {False}")
+                    self.logger.info(f"Success msg is visible: {False}")
                     self.status.append(False)
             except Exception as ex:
                 self.d.refresh()
             title = self.d.find_elements(By.XPATH,
                                          Read_Identify_and_Enroll_Components().add_details_panel_title_panel())
-
             for x in title:
                 if x.text.strip().lower() == Read_Identify_and_Enroll_Components().add_details_panel_validation().lower():
                     self.status.append(False)
@@ -1486,7 +1519,7 @@ class Audit_log_report_pom(web_driver, web_logger):
             print(f"user dict dataframe: {Enrollment_details_pd['Enrollment_details']}")
             return Enrollment_details_pd
         except Exception as ex:
-            self.logger.info(f"reading Enrollment  from json: {ex.args}" )
+            self.logger.info(f"reading Enrollment from json: {ex.args}" )
 
     def logout_from_portal(self):
         try:
