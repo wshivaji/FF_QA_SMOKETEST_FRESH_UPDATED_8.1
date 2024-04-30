@@ -1474,6 +1474,15 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
     @pytest.mark.system
     def test_SM_TC188(self):
         self.logger.info("test_TC_TAG_08 execution started..")
+        if Tags_Module_pom().Verify_filter_dropdown():
+            assert True
+        else:
+            self.logger.info("test_TC_TAG_08 fail")
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC189(self):
+        self.logger.info("test_TC_TAG_08 execution started..")
         if Tags_Module_pom().edit_serious_event_tag_name():
             assert True
         else:
@@ -1482,6 +1491,15 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.system
     def test_SM_TC190(self):
+        self.logger.info("test_TC_TAG_08 execution started..")
+        if Tags_Module_pom().verify_user_able_to_delete_a_tag():
+            assert True
+        else:
+            self.logger.info("test_TC_TAG_08 fail")
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC191(self):
         self.logger.info("test_TC_TAG_07 execution started..")
         if Tags_Module_pom().duplicate_tags_not_create_validation():
             assert True
