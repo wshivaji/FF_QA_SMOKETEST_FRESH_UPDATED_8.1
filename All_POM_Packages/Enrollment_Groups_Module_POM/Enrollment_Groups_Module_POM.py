@@ -831,7 +831,7 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
             self.d.execute_script("arguments[0].click();", enrollment_groups_btn)
             self.logger.info("Enrollment Groups btn is clicked")
 
-            x = Read_Enrollment_Groups_Components().get_enrollment_group_name()
+            x = Read_Enrollment_Groups_Components().default_enrollment_group_details()
             enrollment_group_names_list = x.split(',')
 
             enrollment_groups = web_driver.explicit_wait(self, 5, "XPATH",
@@ -844,7 +844,7 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
                                                             Read_Enrollment_Groups_Components().linked_enrollments_count_on_icon_by_xpath())
 
             for i in range(len(linked_enrollments_count)):
-                if enrollment_groups[i].text == enrollment_group_names_list[1]:
+                if enrollment_groups[i].text == enrollment_group_names_list[0]:
                     linked_enrollments_count[i].click()
                     self.logger.info("Enrollment icon btn is clicked")
                     time.sleep(web_driver.one_second)
@@ -938,20 +938,18 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
             self.d.execute_script("arguments[0].click();", enrollment_groups_btn)
             self.logger.info("Enrollment Groups btn is clicked")
 
-            x = Read_Enrollment_Groups_Components().get_enrollment_group_name()
+            x = Read_Enrollment_Groups_Components().default_enrollment_group_details()
             enrollment_group_names_list = x.split(',')
 
             enrollment_groups = web_driver.explicit_wait(self, 5, "XPATH",
                                                          Read_Enrollment_Groups_Components().enrollment_group_list_by_xpath(),
                                                          self.d)
-            enrollment_groups = self.d.find_elements(By.XPATH,
-                                                     Read_Enrollment_Groups_Components().enrollment_group_list_by_xpath())
+            enrollment_groups = self.d.find_elements(By.XPATH, Read_Enrollment_Groups_Components().enrollment_group_list_by_xpath())
 
-            linked_enrollments_count = self.d.find_elements(By.XPATH,
-                                                            Read_Enrollment_Groups_Components().linked_enrollments_count_on_icon_by_xpath())
+            linked_enrollments_count = self.d.find_elements(By.XPATH, Read_Enrollment_Groups_Components().linked_enrollments_count_on_icon_by_xpath())
 
             for i in range(len(linked_enrollments_count)):
-                if enrollment_groups[i].text == enrollment_group_names_list[1]:
+                if enrollment_groups[i].text == enrollment_group_names_list[0]:
                     linked_enrollments_count[i].click()
                     self.logger.info("Enrollment icon btn is clicked")
                     time.sleep(web_driver.one_second)
@@ -965,8 +963,7 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
                         time.sleep(web_driver.one_second)
 
                     time.sleep(web_driver.two_second)
-                    enroll_check_box = self.d.find_element(By.XPATH,
-                                                           Read_Enrollment_Groups_Components().enroll_check_box())
+                    enroll_check_box = self.d.find_element(By.XPATH, Read_Enrollment_Groups_Components().enroll_check_box())
                     web_driver.implicit_wait(self, web_driver.two_second, self.d)
 
                     enroll_check_box.click()
@@ -985,8 +982,7 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
                     self.explicit_wait(10, "XPATH",
                                        Read_Enrollment_Groups_Components().add_enrollments_to_groups(),
                                        self.d)
-                    remove_enrollment_from_groups = self.d.find_element(By.XPATH,
-                                                                   Read_Enrollment_Groups_Components().remove_enrollments_from_group_by())
+                    remove_enrollment_from_groups = self.d.find_element(By.XPATH, Read_Enrollment_Groups_Components().remove_enrollments_from_group_by())
                     web_driver.implicit_wait(self, web_driver.two_second, self.d)
                     self.logger.info(f"remove_enrollment_from_groups visible: {remove_enrollment_from_groups.is_displayed()}")
                     if remove_enrollment_from_groups.is_displayed():
