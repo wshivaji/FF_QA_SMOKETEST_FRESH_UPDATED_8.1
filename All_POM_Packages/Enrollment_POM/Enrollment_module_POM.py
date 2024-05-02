@@ -840,19 +840,20 @@ class enrollments_POM(web_driver, web_logger):
 
             self.logger.info(f"list of eg are :{eg_list}")
             time.sleep(web_driver.two_second)
-            read_eg_name = Read_Notification_Groups_Components().get_enrollment_group_name()
+            read_eg_name = Read_Notification_Groups_Components().default_enrollment_group_details()
             read_eg_name = read_eg_name.split(',')
-            self.logger.info(f"eg name is :{read_eg_name[1]}")
+            self.logger.info(f"eg name is :{read_eg_name[0]}")
             time.sleep(web_driver.two_second)
-            # checkbox_xpath_1 = read_enrollment_components().checkbox_xpath_1()
-            # checkbox_xpath_2 = read_enrollment_components().checkbox_xpath_2()
-            # check_box_xpath = f"{checkbox_xpath_1}{read_eg_name[1]}{checkbox_xpath_2}"
-            checkbox = self.d.find_elements(By.XPATH, read_enrollment_components().unlinked_eg_groups_checkbox_by_xpath())
+            checkbox_xpath_1 = read_enrollment_components().checkbox_xpath_1()
+            checkbox_xpath_2 = read_enrollment_components().checkbox_xpath_2()
+            check_box_xpath = f"{checkbox_xpath_1}{read_eg_name[0]}{checkbox_xpath_2}"
+            self.logger.info(f"checkbox custom xpath: {check_box_xpath}")
+            checkbox = self.d.find_element(By.XPATH, check_box_xpath)
 
-            for i in range(len(Enrollments_groups_list)):
-                if str(read_eg_name[1]) == Enrollments_groups_list[i].text:
+            for i in range(len(Enrollments_groups_list)-1):
+                if read_eg_name[0] == Enrollments_groups_list[i].text:
                     time.sleep(web_driver.one_second)
-                    checkbox[i].click()
+                    checkbox.click()
                     self.logger.info("check box is clicked")
                     self.status.append(True)
                     break
@@ -922,23 +923,22 @@ class enrollments_POM(web_driver, web_logger):
 
             self.logger.info(f"list of eg are :{eg_list}")
             time.sleep(web_driver.one_second)
-            read_eg_name = Read_Notification_Groups_Components().get_enrollment_group_name()
+            read_eg_name = Read_Notification_Groups_Components().default_enrollment_group_details()
             read_eg_name = read_eg_name.split(',')
-            self.logger.info(f"eg name is :{read_eg_name[1]}")
+            self.logger.info(f"eg name is :{read_eg_name[0]}")
             time.sleep(web_driver.two_second)
 
 
-            # checkbox_xpath_1 = read_enrollment_components().checkbox_xpath_1()
-            # checkbox_xpath_2 = read_enrollment_components().checkbox_xpath_2()
-            # check_box_xpath = f"{checkbox_xpath_1}{read_eg_name}{checkbox_xpath_2}"
-            # self.logger.info(f"custom xpath : {check_box_xpath}")
-            checkbox = self.d.find_elements(By.XPATH,
-                                            read_enrollment_components().unlinked_eg_groups_checkbox_by_xpath())
+            checkbox_xpath_1 = read_enrollment_components().checkbox_xpath_1()
+            checkbox_xpath_2 = read_enrollment_components().checkbox_xpath_2()
+            check_box_xpath = f"{checkbox_xpath_1}{read_eg_name[0]}{checkbox_xpath_2}"
+            self.logger.info(f"custom xpath : {check_box_xpath}")
+            checkbox = self.d.find_element(By.XPATH, check_box_xpath)
 
             for i in range(len(Enrollments_groups_list)):
-                if str(read_eg_name[1]) == Enrollments_groups_list[i].text:
+                if read_eg_name[0] == Enrollments_groups_list[i].text:
                     time.sleep(web_driver.one_second)
-                    checkbox[i].click()
+                    checkbox.click()
                     self.logger.info("check box is clicked")
                     self.status.append(True)
                     break

@@ -915,6 +915,7 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
             self.logger.info(f"Status is : {status}")
             if False in status:
                 self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_EG_010_failed.png")
+
                 return False
             else:
                 return True
@@ -927,6 +928,7 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
     def verify_user_able_to_unlink_the_enrollments_from_enrollments_groups_panel(self):
         try:
             self.logger.info("*********************** test_TC_EG_011 *********************")
+            Enrollments_Groups_Module_pom().verify_user_able_to_link_the_enrollments_from_enrollments_groups_panel()
             status = []
             # self.d = self.load_portal_login_page_if_not_loaded()
             login().login_to_cloud_if_not_done(self.d)
@@ -1130,6 +1132,15 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_EG_013_Exception.png")
             self.logger.info(f"test_TC_EG_013 got exception as: {ex}")
             return False
+
+    def close_all_panel_one_by_one(self):
+        try:
+            close_panel_list = self.d.find_elements(By.XPATH, Read_Enrollment_Groups_Components().close_all_panel_list_in_tags())
+            for i in close_panel_list:
+                i.click()
+        except Exception as ex:
+            self.d.save_screenshot(f"{self.screenshots_path}\\close_all_panel_one_by_one_failed.png")
+            self.log.info(f"close_all_panel_one_by_one_failed:  {ex}")
 
     def delete_enrollment_group(self, group_name):
         action = ActionChains(self.d)

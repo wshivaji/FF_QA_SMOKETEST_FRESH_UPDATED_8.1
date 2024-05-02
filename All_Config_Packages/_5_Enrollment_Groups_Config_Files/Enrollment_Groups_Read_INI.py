@@ -14,6 +14,13 @@ class Read_Enrollment_Groups_Components:
         except Exception as ex:
             print("config file got an exception", ex)
 
+    def close_all_panel_list_in_tags(self):
+        try:
+            close_all_panel_list = self.config.get("LOCATORS", "close_all_panel_list_in_tags")
+            return close_all_panel_list
+        except Exception as ex:
+            print("close_all_panel_list : ", ex)
+
     def get_enrollment_group_name(self):
         try:
             enrollment_group_name = self.common_test_data_config.get("system_level_test_Data", "enrollment_group_name")

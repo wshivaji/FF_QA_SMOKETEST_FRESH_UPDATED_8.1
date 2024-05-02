@@ -95,6 +95,13 @@ class Read_Notification_Groups_Components:
         except Exception as ex:
             print(ex.args)
 
+    def default_enrollment_group_details(self):
+        try:
+            ele = self.common_test_data_config.get('Enrollment_Groups_Data', 'default_enrollment_group_details')
+            return ele
+        except Exception as ex:
+            print(ex)
+
     def get_enrollment_group_name(self):
         try:
             enrollment_group_name = self.common_test_data_config.get("system_level_test_Data", "enrollment_group_name")
