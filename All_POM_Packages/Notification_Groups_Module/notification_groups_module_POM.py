@@ -207,6 +207,8 @@ class Notification_Groups_Module_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_NG_01_exception.png")
             self.logger.error(f"TC_NG_01 got exception as: {ex.args}")
             return False
+        finally:
+            logout().logout_from_core(self.d)
 
     def Verify_total_count_of_NGs_is_6_including_default_NG(self):
         try:
@@ -240,6 +242,8 @@ class Notification_Groups_Module_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_NG_02_exception.png")
             self.logger.error(f"TC_NG_02 got exception as: {ex.args}")
             return False
+        finally:
+            logout().logout_from_core(self.d)
 
     def Verify_user_able_to_create_a_new_Notification_Group_by_filling_all_the_fields_and_verify_present_3_buttons_below_are_activated(self):
         try:

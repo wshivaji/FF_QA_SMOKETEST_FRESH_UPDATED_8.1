@@ -27,7 +27,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
     status = []
 
     now = (datetime.datetime.now())
-    DATE_IE = now.strftime('%d/%m/%Y')
+    DATE_IE = now.strftime('%m/%d/%Y')
     TIME_IE = now.strftime('%H%M')
     AM_PM_IE = now.strftime('%p')
     tomorrow = now + timedelta(2)

@@ -103,8 +103,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
     @pytest.mark.system1
     def test_SM_TC008(self):
         self.logger.info("Users module = test_TC_US_09 execution started..")
-        if (Users_Module_pom().
-                Create_5_users_standard_operator_responder_approver_executive_and_it_admin_with_all_required_field()):
+        if Users_Module_pom().Create_5_users_standard_operator_responder_approver_executive_and_it_admin_with_all_required_field():
             assert True
         else:
             assert False
@@ -146,32 +145,28 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.system1
     def test_SM_TC013(self):
-        if (Portal_Menu_Module_pom().
-                Verify_for_Responder_user_PME_Tags_IE_DF_Enrollments_EG_NG_VS_VSJ_Notes_Loc_US_UR_Zones_Reporting_IDB_Notifier_ALR_these_menus_are_visible_on_the_cloud_menu_items()):
+        if Portal_Menu_Module_pom().Verify_for_Responder_user_PME_Tags_IE_DF_Enrollments_EG_NG_VS_VSJ_Notes_Loc_US_UR_Zones_Reporting_IDB_Notifier_ALR_these_menus_are_visible_on_the_cloud_menu_items():
             assert True
         else:
             assert False
 
     @pytest.mark.system1
     def test_SM_TC014(self):
-        if (Portal_Menu_Module_pom().
-                Verify_for_Approver_or_supervisor_user_PME_Tags_IE_DF_Enrollments_EG_NG_VS_VSJ_Notes_Loc_US_UR_Zones_Reporting_IDB_Notifier_ALR_these_menus_are_visible_on_the_cloud_menu_items()):
+        if Portal_Menu_Module_pom().Verify_for_Approver_or_supervisor_user_PME_Tags_IE_DF_Enrollments_EG_NG_VS_VSJ_Notes_Loc_US_UR_Zones_Reporting_IDB_Notifier_ALR_these_menus_are_visible_on_the_cloud_menu_items():
             assert True
         else:
             assert False
 
     @pytest.mark.system1
     def test_SM_TC015(self):
-        if (Portal_Menu_Module_pom().
-                Verify_for_Executive_user_PME_Tags_IE_DF_Enrollments_EG_NG_VS_VSJ_Notes_Loc_US_UR_Zones_Account_Reporting_IDB_Notifier_ALR_these_menus_are_visible_on_the_cloud_menu_items()):
+        if Portal_Menu_Module_pom().Verify_for_Executive_user_PME_Tags_IE_DF_Enrollments_EG_NG_VS_VSJ_Notes_Loc_US_UR_Zones_Account_Reporting_IDB_Notifier_ALR_these_menus_are_visible_on_the_cloud_menu_items():
             assert True
         else:
             assert False
 
     @pytest.mark.system1
     def test_SM_TC016(self):
-        if (Portal_Menu_Module_pom().
-                Verify_for_IT_Admin_user_PME_Tags_IE_DF_Enrollments_EG_NG_VS_VSJ_Notes_Loc_US_UR_Zones_Account_Reporting_IDB_Notifier_ALR_these_menus_are_visible_on_the_cloud_menu_items()):
+        if Portal_Menu_Module_pom().Verify_for_IT_Admin_user_PME_Tags_IE_DF_Enrollments_EG_NG_VS_VSJ_Notes_Loc_US_UR_Zones_Account_Reporting_IDB_Notifier_ALR_these_menus_are_visible_on_the_cloud_menu_items():
             assert True
         else:
             assert False
@@ -182,8 +177,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
     '''
     @pytest.mark.system1
     def test_SM_TC017(self):
-        if (Notification_Groups_Module_pom().
-                Create_5_Notification_groups_fill_the_details_and_link_the_particular_user_to_particular_NG_based_on_naming_convention()):
+        if Notification_Groups_Module_pom().Create_5_Notification_groups_fill_the_details_and_link_the_particular_user_to_particular_NG_based_on_naming_convention():
             assert True
         else:
             assert False
@@ -201,8 +195,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
     '''
     @pytest.mark.system1
     def test_SM_TC019(self):
-        if (Enrollments_Groups_Module_pom().
-                Create_5_Enrollment_groups_fill_the_details_and_link_the_particular_NG_to_particular_EG_based_on_naming_convention()):
+        if Enrollments_Groups_Module_pom().Create_5_Enrollment_groups_fill_the_details_and_link_the_particular_NG_to_particular_EG_based_on_naming_convention():
             assert True
         else:
             assert False

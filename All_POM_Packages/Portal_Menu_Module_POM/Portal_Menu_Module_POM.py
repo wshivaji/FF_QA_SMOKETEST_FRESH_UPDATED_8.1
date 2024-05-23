@@ -828,19 +828,17 @@ class Portal_Menu_Module_pom(web_driver, web_logger):
                 self.status.append(False)
 
             self.logger.info(f"status: {self.status}")
-
+            logout().logout_from_core(self.d)
             if False in self.status:
                 self.logger.error(f"screenshot file path: {web_driver.screenshots_path}\\TC_PM_1.png")
                 self.d.save_screenshot(f"{web_driver.screenshots_path}\\TC_PM_1.png")
                 return False
             else:
                 return True
-            # logout().logout_from_core()
         except Exception as ex:
             self.logger.error(f"screenshot file path: {web_driver.screenshots_path}\\TC_PM_1_exception.png")
             self.d.save_screenshot(f"{web_driver.screenshots_path}\\TC_PM_1_exception.png")
             self.logger.error(f"TC_PM_1 got exception as: {ex}")
-
 
     def Verify_for_Operator_user_PME_Tags_IE_DF_Enrollments_EG_VS_VSJ_Notes_Loc_Zones_Reporting_IDB_Notifier_these_menus_are_visible_on_the_cloud_menu_items(self):
         try:
@@ -874,6 +872,8 @@ class Portal_Menu_Module_pom(web_driver, web_logger):
 
             self.logout_from_cloud_menu()
             login().login_with_persona_user(self.d, username[0])
+            time.sleep(web_driver.one_second)
+            login().accept_terms_and_conditions_for_login_for_new_user()
             self.persona_users_permissions_validation(username[0])
 
             self.logger.info(f"status: {self.status}")
@@ -888,6 +888,8 @@ class Portal_Menu_Module_pom(web_driver, web_logger):
             self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_PM_2_exception.png")
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_PM_2_exception.png")
             self.logger.error(f"TC_PM_2 got exception as: {ex}")
+        finally:
+            logout().logout_from_core(self.d)
 
     def Verify_for_Responder_user_PME_Tags_IE_DF_Enrollments_EG_NG_VS_VSJ_Notes_Loc_US_UR_Zones_Reporting_IDB_Notifier_ALR_these_menus_are_visible_on_the_cloud_menu_items(
             self):
@@ -922,6 +924,7 @@ class Portal_Menu_Module_pom(web_driver, web_logger):
 
             self.logout_from_cloud_menu()
             login().login_with_persona_user(self.d, username[1])
+            login().accept_terms_and_conditions_for_login_for_new_user()
             self.persona_users_permissions_validation(username[1])
 
             self.logger.info(f"status: {self.status}")
@@ -936,6 +939,8 @@ class Portal_Menu_Module_pom(web_driver, web_logger):
             self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_PM_3_exception.png")
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_PM_3_exception.png")
             self.logger.error(f"TC_PM_3 got exception as: {ex}")
+        finally:
+            logout().logout_from_core(self.d)
 
     def Verify_for_Approver_or_supervisor_user_PME_Tags_IE_DF_Enrollments_EG_NG_VS_VSJ_Notes_Loc_US_UR_Zones_Reporting_IDB_Notifier_ALR_these_menus_are_visible_on_the_cloud_menu_items(
             self):
@@ -984,6 +989,8 @@ class Portal_Menu_Module_pom(web_driver, web_logger):
             self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_PM_4_exception.png")
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_PM_4_exception.png")
             self.logger.error(f"TC_PM_4 got exception as: {ex}")
+        finally:
+            logout().logout_from_core(self.d)
 
     def Verify_for_Executive_user_PME_Tags_IE_DF_Enrollments_EG_NG_VS_VSJ_Notes_Loc_US_UR_Zones_Account_Reporting_IDB_Notifier_ALR_these_menus_are_visible_on_the_cloud_menu_items(
             self):
@@ -1032,6 +1039,8 @@ class Portal_Menu_Module_pom(web_driver, web_logger):
             self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_PM_5_exception.png")
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_PM_5_exception.png")
             self.logger.error(f"TC_PM_5 got exception as: {ex}")
+        finally:
+            logout().logout_from_core(self.d)
 
     def Verify_for_IT_Admin_user_PME_Tags_IE_DF_Enrollments_EG_NG_VS_VSJ_Notes_Loc_US_UR_Zones_Account_Reporting_IDB_Notifier_ALR_these_menus_are_visible_on_the_cloud_menu_items(
             self):
@@ -1080,3 +1089,5 @@ class Portal_Menu_Module_pom(web_driver, web_logger):
             self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_PM_6_exception.png")
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_PM_6_exception.png")
             self.logger.error(f"TC_PM_6 got exception as: {ex}")
+        finally:
+            logout().logout_from_core(self.d)

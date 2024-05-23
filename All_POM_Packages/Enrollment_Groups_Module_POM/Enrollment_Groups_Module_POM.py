@@ -153,6 +153,8 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_SLT_04_exception.png")
             self.logger.error(f"TC_SLT_04 got exception as: {ex.args}")
             return False
+        finally:
+            logout().logout_from_core(self.d)
 
     def Verify_total_count_of_EGs_is_6_including_default_EG(self):
         try:
@@ -192,6 +194,8 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_EG_02_exception.png")
             self.logger.error(f"TC_EG_02 got exception as: {ex.args}")
             return False
+        finally:
+            logout().logout_from_core(self.d)
 
     def Verify_for_above_all_5_EG_face_and_mask_threshold_value_should_be_point_83_and_suppress_duplicate_events_value_should_be_0_minute(self):
         try:
