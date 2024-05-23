@@ -38,16 +38,14 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
     '''
     @pytest.mark.system1
     def test_SM_TC001(self):
-        if (Portal_Login_Page_Pom().
-                open_portal_url_and_verify_expected_url_is_visible_verify_expected_page_title_is_visible_and_verify_face_first_logo_is_visible()):
+        if Portal_Login_Page_Pom().open_portal_url_and_verify_expected_url_is_visible_verify_expected_page_title_is_visible_and_verify_face_first_logo_is_visible():
             assert True
         else:
             assert False
 
     @pytest.mark.system1
     def test_SM_TC002(self):
-        if (Portal_Login_Page_Pom().
-                verify_user_login_with_valid_credentials_and_click_on_cloud_login_and_verify_it_is_navigating_to_cloud_menu_panel()):
+        if Portal_Login_Page_Pom().verify_user_login_with_valid_credentials_and_click_on_cloud_login_and_verify_it_is_navigating_to_cloud_menu_panel():
             assert True
         else:
             assert False

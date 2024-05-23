@@ -81,6 +81,7 @@ class Portal_Login_Page_Pom(web_driver, web_logger):
             self.logger.info("verify_user_login_with_valid_credentials_and_click_on_cloud_login_and_verify_it_is_navigating_to_cloud_menu_panel")
 
             self.load_portal_login_page_if_not_loaded()
+            login().accept_terms_and_conditions_for_login_for_new_user(self.d)
             time.sleep(web_driver.one_second)
             self.status.clear()
             time.sleep(web_driver.one_second)

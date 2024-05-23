@@ -872,8 +872,10 @@ class Portal_Menu_Module_pom(web_driver, web_logger):
 
             self.logout_from_cloud_menu()
             login().login_with_persona_user(self.d, username[0])
-            time.sleep(web_driver.one_second)
-            login().accept_terms_and_conditions_for_login_for_new_user()
+            # time.sleep(web_driver.two_second)
+            # accept_btn = self.d.find_element(By.XPATH,"//body/div[@id=\"login-screen\"]//div[@class=\"ng-modal\"]/div[@class=\"ng-modal-dialog\"]/div/div/div[@class=\"modal-button-container fltlft posrel clrbth\"]/button[@ng-click=\"handleAUPModalAgree()\"]")
+            # accept_btn.click()
+            login().accept_terms_and_conditions_for_login_for_new_user(self.d)
             self.persona_users_permissions_validation(username[0])
 
             self.logger.info(f"status: {self.status}")
@@ -924,7 +926,7 @@ class Portal_Menu_Module_pom(web_driver, web_logger):
 
             self.logout_from_cloud_menu()
             login().login_with_persona_user(self.d, username[1])
-            login().accept_terms_and_conditions_for_login_for_new_user()
+            login().accept_terms_and_conditions_for_login_for_new_user(self.d)
             self.persona_users_permissions_validation(username[1])
 
             self.logger.info(f"status: {self.status}")
@@ -975,6 +977,8 @@ class Portal_Menu_Module_pom(web_driver, web_logger):
 
             self.logout_from_cloud_menu()
             login().login_with_persona_user(self.d, username[2])
+
+            login().accept_terms_and_conditions_for_login_for_new_user(self.d)
             self.persona_users_permissions_validation(username[2])
 
             self.logger.info(f"status: {self.status}")
@@ -995,7 +999,7 @@ class Portal_Menu_Module_pom(web_driver, web_logger):
     def Verify_for_Executive_user_PME_Tags_IE_DF_Enrollments_EG_NG_VS_VSJ_Notes_Loc_US_UR_Zones_Account_Reporting_IDB_Notifier_ALR_these_menus_are_visible_on_the_cloud_menu_items(
             self):
         try:
-            self.logger.info("********** TC_PM_5 started ********")
+            self.logger.info("********** TC_015 started ********")
             self.status.clear()
             # self.d = self.load_portal_login_page_if_not_loaded()
             login().login_to_cloud_if_not_done(self.d)
@@ -1025,6 +1029,7 @@ class Portal_Menu_Module_pom(web_driver, web_logger):
 
             self.logout_from_cloud_menu()
             login().login_with_persona_user(self.d, username[3])
+            login().accept_terms_and_conditions_for_login_for_new_user(self.d)
             self.persona_users_permissions_validation(username[3])
 
             self.logger.info(f"status: {self.status}")
@@ -1075,6 +1080,7 @@ class Portal_Menu_Module_pom(web_driver, web_logger):
 
             self.logout_from_cloud_menu()
             login().login_with_persona_user(self.d, username[4])
+            login().accept_terms_and_conditions_for_login_for_new_user(self.d)
             self.persona_users_permissions_validation(username[4])
 
             self.logger.info(f"status: {self.status}")
