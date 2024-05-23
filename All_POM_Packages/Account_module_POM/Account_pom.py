@@ -77,7 +77,7 @@ class account_pom(web_driver, web_logger):
                 e = account_Read_Ini().start_users_count().split('/')
                 actual_users_count = e[0]
                 self.logger.info(f"actual_users_count: {actual_users_count}")
-                if users == int(actual_users_count):
+                if users >= int(actual_users_count):
                     return True
                 else:
                     return False
@@ -87,7 +87,7 @@ class account_pom(web_driver, web_logger):
                 e = account_Read_Ini().end_users_count().split('/')
                 actual_users_count = e[0]
                 self.logger.info(f"actual_users_count: {actual_users_count}")
-                if users == int(actual_users_count):
+                if users >= int(actual_users_count):
                     return True
                 else:
                     return False

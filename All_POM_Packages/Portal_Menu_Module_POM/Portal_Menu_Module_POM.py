@@ -101,7 +101,8 @@ class Portal_Menu_Module_pom(web_driver, web_logger):
         try:
             time.sleep(web_driver.one_second)
 
-            cloud_menu_list = self.d.find_elements(By.XPATH, Portal_Menu_Module_read_ini().get_actual_personas_menus_by_xpath())
+            cloud_menu_list = self.d.find_elements(By.XPATH, Portal_Menu_Module_read_ini().
+                                                   get_actual_personas_menus_by_xpath())
             self.logger.info(f"cloud menu list length: {len(cloud_menu_list)}")
 
             users = Read_Notification_Groups_Components().get_user_name_input_data()
@@ -857,24 +858,24 @@ class Portal_Menu_Module_pom(web_driver, web_logger):
             user_search_filter = self.d.find_element(By.XPATH,
                                                      Read_Notification_Groups_Components().search_box_by_xpath())
             user_search_filter.clear()
-            user_search_filter.send_keys(username[0])
+            user_search_filter.send_keys("test2")
             time.sleep(web_driver.one_second)
 
             users_list = self.d.find_elements(By.XPATH, Read_Notification_Groups_Components().users_list_by_xpath())
 
             time.sleep(web_driver.one_second)
 
-            if users_list[0].text == username[0]:
+            if users_list[0].text == "test2":
                 self.logger.info(f"{users_list[0].text} user is present...")
                 self.status.append(True)
             else:
                 self.status.append(False)
 
             self.logout_from_cloud_menu()
-            login().login_with_persona_user(self.d, username[0])
+            login().login_with_persona_user(self.d, "test2")
             time.sleep(web_driver.one_second)
             login().accept_terms_and_conditions_for_login_for_new_user()
-            self.persona_users_permissions_validation(username[0])
+            self.persona_users_permissions_validation("test2")
 
             self.logger.info(f"status: {self.status}")
             if False in self.status:
@@ -1042,7 +1043,7 @@ class Portal_Menu_Module_pom(web_driver, web_logger):
         finally:
             logout().logout_from_core(self.d)
 
-    def Verify_for_IT_Admin_user_PME_Tags_IE_DF_Enrollments_EG_NG_VS_VSJ_Notes_Loc_US_UR_Zones_Account_Reporting_IDB_Notifier_ALR_these_menus_are_visible_on_the_cloud_menu_items(
+    def Verify_for_IT_Admin_user_PME_Tags_IE_DF_Enrollments_EG_NG_VS_VSJ_Notes_Loc_US_UR_SG_Zones_Account_Reporting_IDB_Notifier_ALR_these_menus_are_visible_on_the_cloud_menu_items(
             self):
         try:
             self.logger.info("********** TC_PM_6 started ********")

@@ -121,6 +121,7 @@ class Portal_Menu_Module_read_ini:
             return it_admin_menus
         except Exception as ex:
             print(ex.args)
+
     def get_actual_personas_menus_by_xpath(self):
         try:
             actual_personas_menus_by_xpath = self.config.get("Portal Menu", "actual_personas_menus_by_xpath")

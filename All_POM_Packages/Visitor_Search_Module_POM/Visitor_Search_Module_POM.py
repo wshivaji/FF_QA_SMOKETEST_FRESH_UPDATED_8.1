@@ -73,7 +73,6 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
         time.sleep(web_driver.one_second)
         # date_incident.send_keys(date_time)
 
-
     def click_on_visitor_search(self):
         self.logger.info("going to visitor search...")
         visitor_search_btn = web_driver.explicit_wait(self, 10, "XPATH",

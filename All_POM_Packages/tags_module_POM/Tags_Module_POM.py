@@ -6,6 +6,8 @@ from selenium.webdriver.common.by import By
 
 from All_Config_Packages._12_Identify_and_Enroll_Config_Files.Identify_and_Enroll_Readd_INI import \
     Read_Identify_and_Enroll_Components
+from All_Config_Packages._6_Notification_Groups_Module_Config_Files.Notification_Groups_Read_INI import \
+    Read_Notification_Groups_Components
 # from All_POM_Package.Portal_Menu_Module.Portal_Menu_POM import Portal_Menu_pom
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
@@ -59,7 +61,9 @@ class Tags_Module_pom(web_driver, web_logger):
         # rows = XLUtils.getRowCount(test_data, 'serious_event_tags_data')
         try:
             self.log.info("************* test_TC_TAG_01 ***************")
-            login().login_to_cloud_if_not_done(self.d)
+            x = Read_Notification_Groups_Components().get_user_name_input_data()
+            username = x.split(',')
+            login().login_with_persona_user(self.d, username[4])
             time.sleep(web_driver.one_second)
             self.click_on_tags_menu()
             result = []
@@ -127,7 +131,9 @@ class Tags_Module_pom(web_driver, web_logger):
         rows = XLUtils.getRowCount(test_data, 'non_serious_event_tags_data')
         try:
             self.log.info("************* test_TC_TAG_02 ***************")
-            login().login_to_cloud_if_not_done(self.d)
+            x = Read_Notification_Groups_Components().get_user_name_input_data()
+            username = x.split(',')
+            login().login_with_persona_user(self.d, username[4])
             time.sleep(web_driver.one_second)
             self.click_on_tags_menu()
             result = []
@@ -778,7 +784,9 @@ class Tags_Module_pom(web_driver, web_logger):
         try:
             result = []
             self.logger.info("tags module test exceution started")
-            login().login_to_cloud_if_not_done(self.d)
+            x = Read_Notification_Groups_Components().get_user_name_input_data()
+            username = x.split(',')
+            login().login_with_persona_user(self.d, username[4])
             time.sleep(web_driver.one_second)
             self.click_on_tags_menu()
             time.sleep(web_driver.one_second)

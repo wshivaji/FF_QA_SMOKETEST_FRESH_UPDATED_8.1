@@ -1,5 +1,8 @@
 import time
+
+import pandas as pd
 import pyautogui
+
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
 from pathlib import Path
@@ -443,6 +446,7 @@ class login(web_driver, web_logger):
 
     def accept_terms_and_conditions_for_login_for_new_user(self):
         try:
+            time.sleep(web_driver.two_second)
             agree_and_continue_btn = self.explicit_wait(10, "XPATH", Portal_login_page_read_ini().agree_and_continue_btn_on_popup_by_xpath(), self.d)
             self.logger.info(f"agree and continue btn visible: {agree_and_continue_btn.is_displayed()}")
             if agree_and_continue_btn.is_displayed():
@@ -605,6 +609,7 @@ class login(web_driver, web_logger):
             self.logger.info(f"exception message: {ex}")
             self.d.save_screenshot(f"{web_driver.screenshots_path}\\login_exception.png")
             print(f"{ex.args}")
+
 
 class logout(web_driver, web_logger):
     def __init__(self):
