@@ -5,6 +5,7 @@ from All_Config_Packages._2_Portal_Menu_Module_Config_Files.Portal_Menu_Module_R
     Portal_Menu_Module_read_ini
 from All_Config_Packages._7_Visitor_Search_Module_Config_Files.Visitor_Search_Read_INI import \
     Read_Visitor_Search_Components
+from All_POM_Packages.Users_Module_POM.Users_Module_POM import Users_Module_pom
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
 from selenium.webdriver.common.by import By
@@ -57,7 +58,10 @@ class Store_Groups_Module_pom(web_driver, web_logger):
         try:
             self.logger.info("********** Test_EG_01 Begin  **********")
             status = []
-            login().login_with_persona_user(self.d, "super it admin")
+            users_dict = Users_Module_pom().Read_user_from_json()
+            users_list = []
+            username = users_dict["users"][4]["username"]
+            login().login_with_persona_user(self.d, username)
             time.sleep(web_driver.one_second)
 
             store_group_menu = self.explicit_wait(10, "XPATH", store_group_page_read_ini().
