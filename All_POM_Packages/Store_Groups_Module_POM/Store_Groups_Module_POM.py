@@ -63,7 +63,7 @@ class Store_Groups_Module_pom(web_driver, web_logger):
             username = users_dict["users"][4]["username"]
             login().login_with_persona_user(self.d, username)
             time.sleep(web_driver.one_second)
-
+            login().accept_terms_and_conditions_for_login_for_new_user(self.d)
             store_group_menu = self.explicit_wait(10, "XPATH", store_group_page_read_ini().
                                                   get_store_groups_menu_by_xpath(), self.d)
             if store_group_menu:
@@ -128,5 +128,5 @@ class Store_Groups_Module_pom(web_driver, web_logger):
             self.logger.error(f"TC_SLT_0 got exception as: {ex.args}")
             return False
 
-        # finally:
-        #     logout().logout_from_core(self.d)
+        finally:
+            logout().logout_from_core(self.d)

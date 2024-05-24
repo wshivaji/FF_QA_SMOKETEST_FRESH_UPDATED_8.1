@@ -437,7 +437,7 @@ class Portal_Login_Page_Pom(web_driver, web_logger):
                 self.d.get(Portal_login_page_read_ini().get_portal_url())
                 self.d.maximize_window()
                 time.sleep(web_driver.one_second)
-                for i in range(4):
+                for i in range(5):
                     pyautogui.hotkey('ctrl', '-')
                     time.sleep(0.5)
 

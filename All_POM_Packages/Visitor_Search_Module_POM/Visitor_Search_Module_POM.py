@@ -699,7 +699,7 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
         This function is usd to upload the image and click on the search button
         :return:
         """
-        file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset1\\fraud\\00082.png"
+        file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset4\\fraud\\00082.png"
         print(f"filepath : {file_path}")
         self.upload_image(file_path)
 
@@ -708,7 +708,7 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
         This function is usd to upload the image and click on the search button
         :return:
         """
-        file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset1\\pt\\00087.png"
+        file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset4\\pt\\00087.png"
         self.upload_image(file_path)
 
     def upload_image(self, img_path):
