@@ -27,7 +27,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
     status = []
 
     now = (datetime.datetime.now())
-    DATE_IE = now.strftime('%d/%m/%Y')
+    DATE_IE = now.strftime('%m/%d/%Y')
     TIME_IE = now.strftime('%H%M')
     AM_PM_IE = now.strftime('%p')
     tomorrow = now + timedelta(2)
@@ -108,9 +108,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             else:
                 login().login_to_cloud_if_not_done(self.d)
                 self.status.clear()
-                # self.d.get(Read_Portal_Menu_Components().get_url())
-                # self.d.maximize_window()
-                # time.sleep(web_driver.one_second)
         except Exception as ex:
             self.logger.error(ex)
 
@@ -125,8 +122,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             enrollment_group = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().enrollment_group_by_xpath())
             enrollment_group.click()
             select = Select(enrollment_group)
-            # select.select_by_index(1)
-            # select.select_by_value(enrollment_groups_list[i])
             self.logger.info(f"enrollment group: {enrollment_groups_list[i]}")
             enter_eg = enrollment_groups_list[i] + " (Serious Offender - None)"
             select.select_by_visible_text(enter_eg)
@@ -150,7 +145,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             # # # # self.verify_portal_login()
             login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
-
             time.sleep(web_driver.two_second)
             link = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components().identify_and_enroll_link_by_xpath(), self.d)
             self.d.execute_script("arguments[0].click();", link)
@@ -187,13 +181,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             select.select_by_index(1)
             time.sleep(web_driver.two_second)
             self.Select_Enrollment_Group(0)
-            # enrollment_group = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().enrollment_group_by_xpath())
-            # select = Select(enrollment_group)
-            # select.select_by_index(1)
-            # # select.select_by_value()
-            # enrollment_group_selected = select.first_selected_option
-            # self.logger.info(f"enrollment group selected = {enrollment_group_selected.text}")
-            # print(f"enrollment group selected: {enrollment_group_selected.text}")
             time.sleep(web_driver.one_second)
             region_btn = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().region_btn_by_xpath())
             time.sleep(web_driver.one_second)
@@ -230,13 +217,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                                                 .date_incident_inpt_bx_by_xpath())
             time.sleep(web_driver.two_second)
             self.dateTimeAMPM(date_incident)
-            # self.dateTimeAMPM(date_incident)
-            # time.sleep(web_driver.one_second)
-            # date_incident.send_keys(Read_Identify_and_Enroll_Components().date_incident_time())
-            # time.sleep(web_driver.one_second)
-            # date_incident.send_keys(Read_Identify_and_Enroll_Components().date_incident_am_pm())
-            # time.sleep(web_driver.two_second)
-
             reported_loss = self.d.find_element(By.XPATH,
                                                 Read_Identify_and_Enroll_Components().reported_loss_inpt_bx_by_xpath())
             reported_loss.send_keys(Read_Identify_and_Enroll_Components().reported_loss_data())
@@ -256,14 +236,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.logger.info("Enrollment details filled and save btn is clicked")
             # save_btn.click()
             time.sleep(5)
-            # person_being_entered_text = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().person_being_entered_text_by_xpath())
 
-            # wait_icon = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().enrollment_success_loader())
-            # count = 0
-            # while count < 10 and person_being_entered_text.is_displayed():
-            #     time.sleep(web_driver.two_second)
-            #     count += 1
-            #     self.logger.info(f"waiting for wait icon, count: {count}")
             try:
                 success_msg = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
                                               .enrollment_success_msg_xpath(), self.d)
@@ -285,9 +258,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
 
             time.sleep(2)
             # ***************************************Enrollment Process end here**********************
-            # self.delete_enrollment()
             self.close_all_panel_one_by_one()
-            # self.click_on_logout_button()
             self.logger.info(f"status: {self.status}")
             if False in self.status:
                 self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_IE_00.png")
@@ -296,7 +267,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             else:
                 return True
         except Exception as ex:
-
             self.logger.error(f"test_TC_IE_00 got an exception as: {ex}")
             self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_IE_00_Exception.png")
             return False
@@ -305,8 +275,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
         try:
             self.load_portal_login_page_if_not_loaded()
             logout_func = logout()
-            logout_button = self.d.find_element(By.XPATH,
-                                                logout_func.config.get("logout_locators", "logout_btn_by_xpath"))
+            logout_button = self.d.find_element(By.XPATH, logout_func.config.get("logout_locators", "logout_btn_by_xpath"))
 
             if logout_button.is_displayed():
                 pass
@@ -318,15 +287,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                     self.status.append(False)
                     login().login_to_cloud_if_not_done(self.d)
                     self.status.clear()
-                    # time.sleep(web_driver.two_second)
-                    # username = self.d.find_element(By.XPATH, Read_Portal_Menu_Components().get_usernameField())
-                    # username.send_keys(Read_Portal_Menu_Components().get_username())
-                    # password = self.d.find_element(By.XPATH, Read_Portal_Menu_Components().get_passwordField())
-                    # password.send_keys(Read_Portal_Menu_Components().get_password())
-                    # time.sleep(web_driver.one_second)
-                    # login_btn = self.d.find_element(By.ID, Read_Portal_Menu_Components().get_loginButton())
-                    # self.d.execute_script("arguments[0].click();", login_btn)
-                    # time.sleep(web_driver.one_second)
 
             if False in self.status:
                 return False
@@ -337,11 +297,8 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
 
     def login_before(self):
         try:
-            # login().login_to_cloud_if_not_done(self.d)
             self.status.clear()
-
             self.d.get(Read_Identify_and_Enroll_Components().get_portal_url())
-            # time.sleep(web_driver.one_second)
             self.d.maximize_window()
             username = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components().get_portal_login_username_textbox_by_xpath())
             username.send_keys(Read_Identify_and_Enroll_Components().get_username_to_login())
@@ -349,7 +306,6 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             password.send_keys(Read_Identify_and_Enroll_Components().get_password_to_login())
             time.sleep(web_driver.one_second)
             login_btn = self.d.find_element(By.ID, Read_Identify_and_Enroll_Components().get_cloud_login_button_on_portal_by_xpath())
-            # self.d.execute_script("arguments[0].click();", login_btn)
             login_btn.click()
             time.sleep(web_driver.two_second)
             self.logger.info("login")
@@ -366,24 +322,9 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
         This function is usd to upload the image and click on the search button
         :return:
         """
-        # self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components().upload_image_by_xpath(), self.d)
-        # upload_photo = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
-        #                                       .upload_image_by_xpath(), self.d)
-        # upload_photo.click()
-        # self.logger.info(f"clicked on upload image icon")
-        # self.logger.info("Clicked on 'Select photo'....")
-        # time.sleep(web_driver.one_second)
-        # file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset1\\ab\\00076.png"
-        #
-        # pyautogui.write(file_path)
-        # pyautogui.press('enter')
-        # time.sleep(web_driver.one_second)
-        # pyautogui.press('enter')
-        # time.sleep(web_driver.one_second)
         file_path = img_path
         time.sleep(2)
         self.logger.info(f"image uploaded: {file_path}")
-        # upload_image = self.explicit_wait(10, "NAME", "image", self.d)
         upload_image_box = self.d.find_element(By.NAME, "image")
         upload_image_box.send_keys(file_path)
         self.logger.info("Photo Selected....")
@@ -399,7 +340,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
         upload_photo.click()
         self.logger.info(f"clicked on upload image icon")
         time.sleep(2)
-        file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_Data\\dataset1\\vip\\00096.png"
+        file_path = f"{self.ie_file_path}\\vip\\00096.png"
         # All_Test_Data\\Common_Test_Data\\dataset1\\vip\\00096.png
         pyautogui.write(img_path)
         pyautogui.press('enter')
@@ -417,10 +358,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
         upload_photo.click()
         self.logger.info(f"clicked on upload image icon")
         time.sleep(2)
-        # file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset1\\ab\\00077.png"
         file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\img\\ENR.png"
-        # file_path = 'C:\\Users\\baps\\Pictures\\uim.png'
-        # file_path = 'D:\Chrome_Download\img1old.png'
 
         pyautogui.write(file_path)
         pyautogui.press('enter')
@@ -440,7 +378,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
         self.d.execute_script("arguments[0].click();", link)
         self.logger.info(f"clicked on Identify and enroll link")
         time.sleep(web_driver.one_second)
-        file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset1\\ab\\00076.png"
+        file_path = f"{self.ie_file_path}\\ab\\00076.png"
         self.upload_image(file_path)
 
         identify_enroll_btn = self.d.find_element(By.XPATH, Read_Identify_and_Enroll_Components()
@@ -700,7 +638,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.d.execute_script("arguments[0].click();", link)
             self.logger.info(f"clicked on Identify and enroll link")
             time.sleep(web_driver.one_second)
-            file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset1\\ab\\00076.png"
+            file_path = f"{self.ie_file_path}\\ab\\00076.png"
             self.upload_image(file_path)
 
             identify_enroll_btn = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
@@ -818,7 +756,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.d.execute_script("arguments[0].click();", link)
             self.logger.info(f"clicked on Identify and enroll link")
             time.sleep(web_driver.two_second)
-            img_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_Data\\dataset1\\vip\\00096.png"
+            img_path = f"{self.ie_file_path}\\vip\\00096.png"
             print(f"iamge_path : {img_path}")
             self.upload_image_not_enrolled(img_path)
             self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
@@ -987,7 +925,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
 
     def get_img_file_list(self, folder_name):
         try:
-            img_folder = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset1\\{folder_name}"
+            img_folder = f"{self.ie_file_path}\\{folder_name}"
             print(img_folder)
             files_list = os.listdir(img_folder)
             base_path = Path(img_folder)
@@ -1063,7 +1001,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                 # upload_photo.click()
                 # self.logger.info(f"clicked on upload image icon")
                 # time.sleep(2)
-                file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset1\\{folder_name}\\{image} "
+                file_path = f"{self.ie_file_path}\\{folder_name}\\{image}"
                 self.upload_image(file_path)
                 # pyautogui.write(file_path)
                 # pyautogui.press('enter')
@@ -1974,7 +1912,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                                       .identify_and_enroll_link_by_xpath(), self.d)
             self.d.execute_script("arguments[0].click();", link)
             self.logger.info(f"clicked on Identify and enroll link")
-            file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset1\\ab\\00076.png"
+            file_path = f"{self.ie_file_path}\\ab\\00076.png"
             self.upload_image(file_path)
 
             identify_enroll_btn = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()

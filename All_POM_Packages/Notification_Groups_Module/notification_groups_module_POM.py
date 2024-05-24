@@ -5,7 +5,6 @@ from selenium.webdriver.support.select import Select
 
 from All_Config_Packages._1_Portal_Login_Module_Config_Files.Portal_Login_Page_Read_INI import \
     Portal_login_page_read_ini
-from All_POM_Packages.Portal_Menu_Module_POM.Portal_Menu_Module_POM import Portal_Menu_Module_pom
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
 from selenium.webdriver.common.by import By
@@ -95,7 +94,10 @@ class Notification_Groups_Module_pom(web_driver, web_logger):
         try:
             self.logger.info("********** Test_NG_TC01 Begin  **********")
             status = []
-            login().login_to_cloud_if_not_done(self.d)
+
+            x = Read_Notification_Groups_Components().get_user_name_input_data()
+            username = x.split(',')
+            login().login_with_persona_user(self.d, username[4])
             time.sleep(web_driver.one_second)
 
             x = Read_Notification_Groups_Components().get_dummy_notification_group_name()
@@ -207,12 +209,16 @@ class Notification_Groups_Module_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_NG_01_exception.png")
             self.logger.error(f"TC_NG_01 got exception as: {ex.args}")
             return False
+        finally:
+            logout().logout_from_core(self.d)
 
     def Verify_total_count_of_NGs_is_6_including_default_NG(self):
         try:
             self.logger.info("********** Test_NG_TC02 Begin  **********")
             status = []
-            login().login_to_cloud_if_not_done(self.d)
+            x = Read_Notification_Groups_Components().get_user_name_input_data()
+            username = x.split(',')
+            login().login_with_persona_user(self.d, username[4])
             self.open_notification_groups_module()
 
             number_of_ngs = self.d.find_element(By.XPATH, Read_Notification_Groups_Components().get_number_of_ngs_by_xpath())
@@ -240,6 +246,8 @@ class Notification_Groups_Module_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_NG_02_exception.png")
             self.logger.error(f"TC_NG_02 got exception as: {ex.args}")
             return False
+        finally:
+            logout().logout_from_core(self.d)
 
     def Verify_user_able_to_create_a_new_Notification_Group_by_filling_all_the_fields_and_verify_present_3_buttons_below_are_activated(self):
         try:

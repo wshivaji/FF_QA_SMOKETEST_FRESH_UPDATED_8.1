@@ -48,7 +48,7 @@ class Test_Portal_Menu_Test_Cases(web_driver, web_logger):
 
     @pytest.mark.portal
     def test_TC_PM_6(self):
-        if Portal_Menu_Module_pom().Verify_for_IT_Admin_user_PME_Tags_IE_DF_Enrollments_EG_NG_VS_VSJ_Notes_Loc_US_UR_Zones_Account_Reporting_IDB_Notifier_ALR_these_menus_are_visible_on_the_cloud_menu_items():
+        if Portal_Menu_Module_pom().Verify_for_IT_Admin_user_PME_Tags_IE_DF_Enrollments_EG_NG_VS_VSJ_Notes_Loc_US_UR_SG_Zones_Account_Reporting_IDB_Notifier_ALR_these_menus_are_visible_on_the_cloud_menu_items():
             assert True
         else:
             assert False

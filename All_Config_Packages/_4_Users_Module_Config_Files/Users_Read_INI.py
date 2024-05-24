@@ -276,6 +276,21 @@ class Read_Users_Components:
         except Exception as ex:
             print(ex)
 
+    def select_group_dropdown_by_xpath(self):
+        try:
+            select_group_dropdown_by_xpath = self.config.get("LOCATORS", "select_group_dropdown_by_xpath")
+            return select_group_dropdown_by_xpath
+        except Exception as ex:
+            print(ex)
+
+    def store_groups_options_from_dropdown_by_xpath(self):
+        try:
+            store_groups_options_from_dropdown_by_xpath = \
+                self.config.get("LOCATORS", "store_groups_options_from_dropdown_by_xpath")
+            return store_groups_options_from_dropdown_by_xpath
+        except Exception as ex:
+            print(ex)
+
     def email_by_xpath(self):
         try:
             email_by_xpath = self.config.get("LOCATORS", "email_by_xpath")
@@ -574,6 +589,13 @@ class Read_Users_Components:
         try:
             user_name_input_data = self.common_test_data_config.get("Users_Data", "user_name_input_data")
             return user_name_input_data
+        except Exception as ex:
+            print(ex)
+
+    def it_admin_username(self):
+        try:
+            it_admin_username = self.common_test_data_config.get("system_level_test_Data", "it_admin_username")
+            return it_admin_username
         except Exception as ex:
             print(ex)
 

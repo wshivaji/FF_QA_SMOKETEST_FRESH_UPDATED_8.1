@@ -17,6 +17,7 @@ from All_Config_Packages._7_Visitor_Search_Module_Config_Files.Visitor_Search_Re
 from All_POM_Packages.Visitor_Search_Module_POM.Visitor_Search_Module_POM import Visitor_Search_Module_pom
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Login_Logout_Ops import login, logout, web_logger
+
 driver = web_driver.d()
 action = ActionChains(driver)
 
@@ -82,7 +83,8 @@ class Users_Module_pom(web_driver, web_logger):
     screenshots_path = f"{Path(__file__).parent.parent.parent}\\Reports\\Screenshots\\"
 
     def login(self):
-        if self.d.title == "" or self.d.find_element(By.ID, Read_Portal_Menu_Components().get_loginButton()).is_displayed():
+        if self.d.title == "" or self.d.find_element(By.ID,
+                                                     Read_Portal_Menu_Components().get_loginButton()).is_displayed():
             self.login_before()
 
     def login_before(self):
@@ -119,7 +121,7 @@ class Users_Module_pom(web_driver, web_logger):
             print(f"user dict dataframe: {user_dict_pd['users']}")
             return user_dict_pd
         except Exception as ex:
-            self.logger.info(f"readiing users  from json: {ex.args}" )
+            self.logger.info(f"readiing users  from json: {ex.args}")
 
     def verify_user_able_to_see_delete_selected_user(self):
         try:
@@ -145,6 +147,7 @@ class Users_Module_pom(web_driver, web_logger):
             return False
         finally:
             logout().logout_from_core(self.d)
+
     def verify_user_able_to_see_user_role_dropdown_is_present_and_choose_the_user_roles(self):
         try:
             result = []
@@ -183,7 +186,6 @@ class Users_Module_pom(web_driver, web_logger):
             self.log.info(f"test_TC_US_022_exception: {ex}")
             return False
 
-
     def user_fills_username_firstname_lastname_user_role_password_region_email_timezone_display_success_msg(self):
         try:
             login().login_to_cloud_if_not_done(self.d)
@@ -219,7 +221,7 @@ class Users_Module_pom(web_driver, web_logger):
             logout().logout_from_core(self.d)
             self.d.refresh()
 
-    def Create_5_users_standard_operator_responder_approver_executive_and_it_admin_with_all_required_field(self):
+    def create_it_admin_user(self):
         try:
             login().login_to_cloud_if_not_done(self.d)
             time.sleep(web_driver.one_second)
@@ -227,8 +229,68 @@ class Users_Module_pom(web_driver, web_logger):
             users_list = []
             dictionary_length = len(users_dict["users"])
             print("length of dictionary is", dictionary_length)
+
+            self.logger.info(f"{users_dict['users'][4]}")
+            self.click_user_on_cloud_menu()
+            self.click_on_action_create_user_option()
+            time.sleep(web_driver.one_second)
+            # username = Read_Users_Components().user_name_input_data() + str(generate_random_number())
+            self.enter_user_name(users_dict["users"][4]["username"])
+            self.enter_first_name(users_dict["users"][4]["firstname"])
+            self.enter_last_name(users_dict["users"][4]["lastname"])
+            self.d.find_element(By.XPATH, "//select[@name='userRoleId']").click()
+            self.select_user_role(users_dict["users"][4]["userrole"])
+            self.enter_password(users_dict["users"][4]["password"])
+            self.select_region(users_dict["users"][4]["user_orgahierarchy"])
+            self.enter_email(users_dict["users"][4]["Email"])
+            self.enter_alert_email(users_dict["users"][4]["Email"])
+            self.select_time_zone(Read_Users_Components().time_zone_input_data())
+            time.sleep(web_driver.one_second)
+            self.click_on_save_btn()
+            time.sleep(web_driver.two_second)
+
+            # i+=1
+            if self.check_if_user_is_created(users_dict["users"][4]["username"]):
+                time.sleep(web_driver.one_second)
+                self.click_on_alert_schedule_icon()
+                time.sleep(web_driver.one_second)
+                self.click_on_alert_schedule_action_option_edit()
+                time.sleep(web_driver.one_second)
+                if True in self.verify_settings_yes_or_no_button():
+                    time.sleep(web_driver.one_second)
+                    alert_save_button = self.d.find_element(By.XPATH, Read_Users_Components().
+                                                            alert_schedule_save_btn_by_xpath())
+                    alert_save_button.click()
+                    self.logger.info("user created successfully")
+                    # self.close_all_panel_one_by_one()
+                    users_list.append(True)
+            else:
+                self.d.save_screenshot(f"{self.screenshots_path}test_TC_US_1_failed.png")
+                users_list.append(False)
+            self.close_all_panel_one_by_one()
+            self.logger.info(f"user list contains {users_list}")
+            if False in users_list:
+                return False
+            else:
+                return True
+        except Exception as ex:
+            self.d.save_screenshot(f"{self.screenshots_path}test_TC_US_1_exception.png")
+            self.log.info(f"test_TC_US_1_exception: {ex}")
+            return False
+        finally:
+            self.click_on_logout_button()
+
+    def Create_5_users_standard_operator_responder_approver_executive_with_all_required_field(self):
+        try:
+            users_dict = self.Read_user_from_json()
+            users_list = []
+            username = users_dict["users"][4]["username"]
+            login().login_with_persona_user(self.d, username)
+            time.sleep(web_driver.one_second)
+            dictionary_length = len(users_dict["users"])
+            print("length of dictionary is", dictionary_length)
             i = 0
-            for i in range(dictionary_length):
+            for i in range(dictionary_length-1):
                 print(users_dict["users"][i])
                 self.click_user_on_cloud_menu()
                 self.click_on_action_create_user_option()
@@ -241,6 +303,7 @@ class Users_Module_pom(web_driver, web_logger):
                 self.select_user_role(users_dict["users"][i]["userrole"])
                 self.enter_password(users_dict["users"][i]["password"])
                 self.select_region(users_dict["users"][i]["user_orgahierarchy"])
+                self.select_store_group(users_dict["users"][i]["store_group"])
                 self.enter_email(users_dict["users"][i]["Email"])
                 self.enter_alert_email(users_dict["users"][i]["Email"])
                 self.select_time_zone(Read_Users_Components().time_zone_input_data())
@@ -248,20 +311,21 @@ class Users_Module_pom(web_driver, web_logger):
                 self.click_on_save_btn()
                 time.sleep(web_driver.two_second)
 
-                #i+=1
+                # i+=1
                 if self.check_if_user_is_created(users_dict["users"][i]["username"]):
+                    time.sleep(web_driver.one_second)
+                    self.click_on_alert_schedule_icon()
+                    time.sleep(web_driver.one_second)
+                    self.click_on_alert_schedule_action_option_edit()
+                    time.sleep(web_driver.one_second)
+                    if True in self.verify_settings_yes_or_no_button():
                         time.sleep(web_driver.one_second)
-                        self.click_on_alert_schedule_icon()
-                        time.sleep(web_driver.one_second)
-                        self.click_on_alert_schedule_action_option_edit()
-                        time.sleep(web_driver.one_second)
-                        if True in self.verify_settings_yes_or_no_button():
-                             time.sleep(web_driver.one_second)
-                             alert_save_button = self.d.find_element(By.XPATH,Read_Users_Components().alert_schedule_save_btn_by_xpath())
-                             alert_save_button.click()
-                             self.logger.info("user created successfully")
-                             # self.close_all_panel_one_by_one()
-                             users_list.append(True)
+                        alert_save_button = self.d.find_element(By.XPATH,
+                                                                Read_Users_Components().alert_schedule_save_btn_by_xpath())
+                        alert_save_button.click()
+                        self.logger.info("user created successfully")
+                        # self.close_all_panel_one_by_one()
+                        users_list.append(True)
                 else:
                     self.d.save_screenshot(f"{self.screenshots_path}test_TC_US_1_failed.png")
                     users_list.append(False)
@@ -275,9 +339,8 @@ class Users_Module_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}test_TC_US_1_exception.png")
             self.log.info(f"test_TC_US_1_exception: {ex}")
             return False
-        finally:
-            self.click_on_logout_button()
-
+        # finally:
+        #     self.click_on_logout_button()
 
     def verify_login_with_newly_created_user_and_validate_login_successful(self):
         try:
@@ -317,17 +380,20 @@ class Users_Module_pom(web_driver, web_logger):
 
             self.click_on_logout_button()
             time.sleep(web_driver.one_second)
-            Entering_username =self.d.find_element(By.XPATH, Read_Users_Components().get_portal_login_username_textbox_by_xpath())
+            Entering_username = self.d.find_element(By.XPATH,
+                                                    Read_Users_Components().get_portal_login_username_textbox_by_xpath())
             Entering_username.send_keys(Read_Users_Components().user_name_input_data())
             time.sleep(web_driver.one_second)
             time.sleep(web_driver.one_second)
-            Entering_password = self.d.find_element(By.XPATH,Read_Users_Components().get_portal_login_password_textbox_by_xpath())
+            Entering_password = self.d.find_element(By.XPATH,
+                                                    Read_Users_Components().get_portal_login_password_textbox_by_xpath())
             Entering_password.send_keys(Read_Users_Components().password_data_input())
             time.sleep(web_driver.one_second)
-            login_button = self.d.find_element(By.XPATH,Read_Users_Components().get_cloud_login_button_on_portal_by_xpath())
+            login_button = self.d.find_element(By.XPATH,
+                                               Read_Users_Components().get_cloud_login_button_on_portal_by_xpath())
             login_button.click()
             time.sleep(web_driver.one_second)
-            current_user_info = self.d.find_element(By.XPATH,Read_Users_Components().get_current_login_username())
+            current_user_info = self.d.find_element(By.XPATH, Read_Users_Components().get_current_login_username())
             if Read_Users_Components().user_name_input_data() == current_user_info.text:
                 return True
             else:
@@ -573,10 +639,10 @@ class Users_Module_pom(web_driver, web_logger):
             self.click_on_save_btn()
             time.sleep(web_driver.one_second)
             if self.check_if_user_marked_as_enabled():
-                self.log.info(f"Status : {True}")
+                self.log.info(f"Status: {True}")
                 return True
             else:
-                self.log.info(f"Status : {False}")
+                self.log.info(f"Status: {False}")
                 self.d.save_screenshot(f"{self.screenshots_path}test_TC_US_02_failed.png")
                 return False
 
@@ -752,50 +818,49 @@ class Users_Module_pom(web_driver, web_logger):
             # logout().logout_from_core(self.d)
             self.d.refresh()
 
-
     def verify_user_able_to_open_the_details_for_the_newly_created_user_under_users_panel(self):
         try:
-                login().login_to_cloud_if_not_done(self.d)
-                time.sleep(web_driver.one_second)
-                self.click_user_on_cloud_menu()
-                self.click_on_action_create_user_option()
-                time.sleep(web_driver.one_second)
+            login().login_to_cloud_if_not_done(self.d)
+            time.sleep(web_driver.one_second)
+            self.click_user_on_cloud_menu()
+            self.click_on_action_create_user_option()
+            time.sleep(web_driver.one_second)
 
-                username = Read_Users_Components().user_name_input_data() + str(generate_random_number())
-                self.enter_user_name(username)
+            username = Read_Users_Components().user_name_input_data() + str(generate_random_number())
+            self.enter_user_name(username)
 
-                first_name = Read_Users_Components().first_name_input_data()
-                self.enter_first_name(first_name)
+            first_name = Read_Users_Components().first_name_input_data()
+            self.enter_first_name(first_name)
 
-                last_name = Read_Users_Components().last_name_input_data()
-                self.enter_last_name(last_name)
+            last_name = Read_Users_Components().last_name_input_data()
+            self.enter_last_name(last_name)
 
-                user_role = Read_Users_Components().user_role_input_data()
-                self.select_user_role(user_role)
+            user_role = Read_Users_Components().user_role_input_data()
+            self.select_user_role(user_role)
 
-                password = Read_Users_Components().password_data_input()
-                self.enter_password(password)
+            password = Read_Users_Components().password_data_input()
+            self.enter_password(password)
 
-                region = Read_Users_Components().region_data_input()
-                self.select_region(region)
+            region = Read_Users_Components().region_data_input()
+            self.select_region(region)
 
-                email = Read_Users_Components().email_input_data()
-                self.enter_email(email)
+            email = Read_Users_Components().email_input_data()
+            self.enter_email(email)
 
-                time_zone = Read_Users_Components().time_zone_input_data()
-                self.select_time_zone(time_zone)
+            time_zone = Read_Users_Components().time_zone_input_data()
+            self.select_time_zone(time_zone)
 
-                time.sleep(web_driver.one_second)
-                self.click_on_save_btn()
-                time.sleep(web_driver.one_second)
+            time.sleep(web_driver.one_second)
+            self.click_on_save_btn()
+            time.sleep(web_driver.one_second)
 
-                if self.check_if_details_can_be_opened():
-                    self.log.info(f"Status : {True}")
-                    return True
-                else:
-                    self.log.info(f"Status : {False}")
-                    self.d.save_screenshot(f"{self.screenshots_path}test_TC_US_128_failed.png")
-                    return False
+            if self.check_if_details_can_be_opened():
+                self.log.info(f"Status : {True}")
+                return True
+            else:
+                self.log.info(f"Status : {False}")
+                self.d.save_screenshot(f"{self.screenshots_path}test_TC_US_128_failed.png")
+                return False
 
         except Exception as ex:
             self.d.save_screenshot(f"{self.screenshots_path}test_TC_US_128_exception.png")
@@ -858,7 +923,6 @@ class Users_Module_pom(web_driver, web_logger):
             self.delete_randomly_created_users()
             logout().logout_from_core(self.d)
             self.d.refresh()
-
 
     def verify_user_able_to_edit_the_details_for_the_newly_created_user_details(self):
         try:
@@ -1017,7 +1081,6 @@ class Users_Module_pom(web_driver, web_logger):
             logout().logout_from_core(self.d)
             self.d.refresh()
 
-
     def verify_user_able_to_link_unlink_the_newly_created_user_to_a_notification_group(self):
         try:
             login().login_to_cloud_if_not_done(self.d)
@@ -1148,7 +1211,8 @@ class Users_Module_pom(web_driver, web_logger):
         try:
             time.sleep(web_driver.one_second)
             # logout_button = self.d.find_element(By.XPATH, Read_Users_Components().logout_btn_by_xpath())
-            logout_button = web_driver.explicit_wait(self, 5, "XPATH", Read_Users_Components().logout_btn_by_xpath(), self.d)
+            logout_button = web_driver.explicit_wait(self, 5, "XPATH", Read_Users_Components().logout_btn_by_xpath(),
+                                                     self.d)
             time.sleep(web_driver.one_second)
             logout_button.click()
             time.sleep(web_driver.one_second)
@@ -1171,7 +1235,8 @@ class Users_Module_pom(web_driver, web_logger):
         clicks on action button
         """
         # action_btn = self.d.find_element(By.XPATH, Read_Users_Components().action_dropdown_by_xpath())
-        action_btn = web_driver.explicit_wait(self, 5, "XPATH", Read_Users_Components().action_dropdown_by_xpath(), self.d)
+        action_btn = web_driver.explicit_wait(self, 5, "XPATH", Read_Users_Components().action_dropdown_by_xpath(),
+                                              self.d)
         action_btn.click()
         self.logger.info("click on action dropdown")
 
@@ -1194,7 +1259,8 @@ class Users_Module_pom(web_driver, web_logger):
         self.click_on_action_btn()
         time.sleep(web_driver.one_second)
         # create_user = self.d.find_element(By.XPATH, Read_Users_Components().create_user_by_xpath())
-        create_user = web_driver.explicit_wait(self, 10, "XPATH", Read_Users_Components().create_user_by_xpath(), self.d)
+        create_user = web_driver.explicit_wait(self, 10, "XPATH", Read_Users_Components().create_user_by_xpath(),
+                                               self.d)
         create_user.click()
         self.logger.info("click on create user option")
 
@@ -1205,7 +1271,8 @@ class Users_Module_pom(web_driver, web_logger):
         self.click_on_action_btn()
         time.sleep(web_driver.one_second)
         # delete = self.d.find_element(By.XPATH, Read_Users_Components().delete_selected_user_by_xpath())
-        delete = web_driver.explicit_wait(self, 5, "XPATH", Read_Users_Components().delete_selected_user_by_xpath(), self.d)
+        delete = web_driver.explicit_wait(self, 5, "XPATH", Read_Users_Components().delete_selected_user_by_xpath(),
+                                          self.d)
         delete.click()
         time.sleep(web_driver.one_second)
         self.d.find_element(By.XPATH, Read_Users_Components().delete_confirmation_yes_by_xpath()).click()
@@ -1215,7 +1282,8 @@ class Users_Module_pom(web_driver, web_logger):
         clicks on save button
         """
         # save = self.d.find_element(By.XPATH, Read_Users_Components().user_panel_save_button_by_xpath())
-        save = web_driver.explicit_wait(self, 5, "XPATH", Read_Users_Components().user_panel_save_button_by_xpath(), self.d)
+        save = web_driver.explicit_wait(self, 5, "XPATH", Read_Users_Components().user_panel_save_button_by_xpath(),
+                                        self.d)
         # save.click()
         javascript_executor_click(save)
         self.logger.info("click on save button")
@@ -1225,7 +1293,8 @@ class Users_Module_pom(web_driver, web_logger):
         clicks on cancel button
         """
         # cancel = self.d.find_element(By.XPATH, Read_Users_Components().user_panel_cancel_button_by_xpath())
-        cancel = web_driver.explicit_wait(self, 5, "XPATH", Read_Users_Components().user_panel_cancel_button_by_xpath(), self.d)
+        cancel = web_driver.explicit_wait(self, 5, "XPATH", Read_Users_Components().user_panel_cancel_button_by_xpath(),
+                                          self.d)
         cancel.click()
 
     def select_enabled(self):
@@ -1360,7 +1429,7 @@ class Users_Module_pom(web_driver, web_logger):
             save = self.d.find_element(By.XPATH, Read_Users_Components().region_save_btn_by_xpath())
             # save.click()
             self.d.execute_script("arguments[0].click();", save)
-            self.logger.info(f"select region : {region_text}")
+            self.logger.info(f"selected region: {region_text}")
         except Exception as ex:
             str(ex)
 
@@ -1375,7 +1444,6 @@ class Users_Module_pom(web_driver, web_logger):
         self.log.info(f"AC Selected Region : {region_output.text.lower()}")
         return region_output.text.lower() in str(region_text).lower()
 
-
     def select_time_zone(self, use_value):
         """
         selects time zone using the value of the element
@@ -1383,8 +1451,26 @@ class Users_Module_pom(web_driver, web_logger):
         :return:
         """
         time_zone = self.d.find_element(By.XPATH, Read_Users_Components().time_zone_by_xpath())
+        time.sleep(web_driver.one_second)
         select_options_value(time_zone, use_value)
-        self.logger.info(f"Select time zone : {use_value}")
+        self.logger.info(f"Selected time zone: {use_value}")
+
+    def select_store_group(self, store):
+        """
+        selects store group using the value of the element
+        :param store:
+        :return:
+        """
+        self.logger.info(f"entered in store group selection method")
+        time.sleep(web_driver.two_second)
+        store_group = self.explicit_wait(10, "XPATH", Read_Users_Components().select_group_dropdown_by_xpath(), self.d)
+        # select_options_value(store_group, store)
+        time.sleep(web_driver.one_second)
+        store_group.click()
+        time.sleep(web_driver.one_second)
+        options = self.d.find_elements(By.XPATH, Read_Users_Components().store_groups_options_from_dropdown_by_xpath())
+        options[1].click()
+        self.logger.info(f"Selected store group: {store}")
 
     def enter_email(self, email):
         """
@@ -1603,7 +1689,7 @@ class Users_Module_pom(web_driver, web_logger):
         self.logger.info(f"username: {ex_user_name} = {username}")
         self.logger.info(f"first name: {ex_first_name} = {firstname}")
         self.logger.info(f"last name: {ex_last_name} = {lastname}")
-        self.logger.info(f"user role: {ex_user_role} = {user_role}" )
+        self.logger.info(f"user role: {ex_user_role} = {user_role}")
         self.logger.info(f"region: {ex_region} == {region}")
         self.logger.info(f"email: {ex_email} = {email}")
         self.logger.info(f"timezone: {ex_time_zone} = {time_zone}")
@@ -1747,7 +1833,7 @@ class Users_Module_pom(web_driver, web_logger):
         """
         checks if user marked as enabled in user panel(User details)
         """
-        enabled = self.explicit_wait(10,"XPATH", Read_Users_Components().user_details_enabled_by_xpath(), self.d)
+        enabled = self.explicit_wait(10, "XPATH", Read_Users_Components().user_details_enabled_by_xpath(), self.d)
         self.logger.info(f"enabled is clicked : {enabled.is_displayed()}")
         return enabled.is_displayed()
 
@@ -2057,7 +2143,8 @@ class Users_Module_pom(web_driver, web_logger):
         """
         time.sleep(web_driver.two_second)
         # action_bx = self.d.find_element(By.XPATH, Read_Users_Components().user_details_action_btn())
-        action_bx = web_driver.explicit_wait(self, 5, "XPATH", Read_Users_Components().user_details_action_btn(), self.d)
+        action_bx = web_driver.explicit_wait(self, 5, "XPATH", Read_Users_Components().user_details_action_btn(),
+                                             self.d)
         action_bx.click()
         self.logger.info("In Users Details panel, Action dropdown is clicked")
         self.explicit_wait(10, "XPATH", Read_Users_Components().user_details_action_edit_user(), self.d).click()
@@ -2178,7 +2265,7 @@ class Users_Module_pom(web_driver, web_logger):
             for i in close_panel_list:
                 i.click()
                 time.sleep(web_driver.one_second)
-            while self.d.find_element(By.XPATH, Read_Users_Components().user_close_panel_and_discard_Changes())\
+            while self.d.find_element(By.XPATH, Read_Users_Components().user_close_panel_and_discard_Changes()) \
                     .is_displayed():
                 ele = self.d.find_element(By.XPATH, Read_Users_Components().user_close_panel_and_discard_Changes())
                 javascript_executor_click(ele)
@@ -2197,8 +2284,10 @@ class Users_Module_pom(web_driver, web_logger):
             for i in close_panel_list:
                 javascript_executor_click(i)
             time.sleep(web_driver.one_second)
-            if self.d.find_element(By.XPATH, Read_Users_Components().close_panel_and_discard_changes_warning_by_xpath()).is_displayed():
-                self.d.find_element(By.XPATH, Read_Users_Components().close_panel_and_discard_changes_warning_by_xpath()).click()
+            if self.d.find_element(By.XPATH,
+                                   Read_Users_Components().close_panel_and_discard_changes_warning_by_xpath()).is_displayed():
+                self.d.find_element(By.XPATH,
+                                    Read_Users_Components().close_panel_and_discard_changes_warning_by_xpath()).click()
             else:
                 pass
         except Exception as ex:
@@ -2243,7 +2332,8 @@ class Users_Module_pom(web_driver, web_logger):
         notification_groups_btn.click()
         self.logger.info("notification groups btn is clicked")
         time.sleep(web_driver.one_second)
-        action_ele = self.explicit_wait(10, "XPATH", Read_Users_Components().notification_groups_action_drop_dwn(), self.d)
+        action_ele = self.explicit_wait(10, "XPATH", Read_Users_Components().notification_groups_action_drop_dwn(),
+                                        self.d)
         action_ele.click()
         self.logger.info("action dropdown is clicked")
         time.sleep(web_driver.one_second)
@@ -2269,7 +2359,8 @@ class Users_Module_pom(web_driver, web_logger):
         filter_ele.click()
         self.logger.info("filter dropdown is clicked")
         time.sleep(web_driver.two_second)
-        unlinked = self.explicit_wait(10, "XPATH", Read_Users_Components().option_unlinked_notification_groups(), self.d)
+        unlinked = self.explicit_wait(10, "XPATH", Read_Users_Components().option_unlinked_notification_groups(),
+                                      self.d)
         unlinked.click()
         self.logger.info("unlinked option is clicked")
         time.sleep(web_driver.two_second)
@@ -2278,11 +2369,12 @@ class Users_Module_pom(web_driver, web_logger):
         self.logger.info(f"Enter {name_value}, in notification groups search box")
         time.sleep(web_driver.two_second)
         check_box = self.d.find_element(By.XPATH, Read_Users_Components()
-                                       .notification_groups_select_all_checkbox())
+                                        .notification_groups_select_all_checkbox())
         check_box.click()
         self.logger.info(f"select the {name_value} notification group checkbox")
         time.sleep(web_driver.two_second)
-        action_ele = self.explicit_wait(10, "XPATH", Read_Users_Components().notification_groups_action_drop_dwn(), self.d)
+        action_ele = self.explicit_wait(10, "XPATH", Read_Users_Components().notification_groups_action_drop_dwn(),
+                                        self.d)
         action_ele.click()
         self.logger.info("click on the notification groups action box dropdown")
         time.sleep(web_driver.one_second)
@@ -2290,7 +2382,7 @@ class Users_Module_pom(web_driver, web_logger):
         add_user.click()
         self.logger.info("click on the add to user option")
         time.sleep(web_driver.two_second)
-        close_notification_groups = self.d\
+        close_notification_groups = self.d \
             .find_element(By.XPATH, Read_Users_Components().notification_groups_close_panel())
         close_notification_groups.click()
         self.logger.info("click on close notification groups")
@@ -2309,7 +2401,8 @@ class Users_Module_pom(web_driver, web_logger):
         check_box.click()
         self.logger.info("click on the select all checkbox")
         time.sleep(web_driver.one_second)
-        action_ele = self.explicit_wait(10, "XPATH", Read_Users_Components().notification_groups_action_drop_dwn(), self.d)
+        action_ele = self.explicit_wait(10, "XPATH", Read_Users_Components().notification_groups_action_drop_dwn(),
+                                        self.d)
         action_ele.click()
         self.logger.info("click on the action dropdown")
         time.sleep(web_driver.one_second)
@@ -2341,7 +2434,8 @@ class Users_Module_pom(web_driver, web_logger):
         notification_groups_btn.click()
         self.logger.info("notification groups btn is clicked")
         time.sleep(web_driver.one_second)
-        action_ele = self.explicit_wait(10, "XPATH", Read_Users_Components().notification_groups_action_drop_dwn(), self.d)
+        action_ele = self.explicit_wait(10, "XPATH", Read_Users_Components().notification_groups_action_drop_dwn(),
+                                        self.d)
         action_ele.click()
         self.logger.info("action dropdown is clicked")
         time.sleep(web_driver.one_second)
@@ -2367,7 +2461,8 @@ class Users_Module_pom(web_driver, web_logger):
         filter_ele.click()
         self.logger.info("filter dropdown is clicked")
         time.sleep(web_driver.two_second)
-        unlinked = self.explicit_wait(10, "XPATH", Read_Users_Components().option_unlinked_notification_groups(), self.d)
+        unlinked = self.explicit_wait(10, "XPATH", Read_Users_Components().option_unlinked_notification_groups(),
+                                      self.d)
         unlinked.click()
         self.logger.info("unlinked option is clicked")
         time.sleep(web_driver.two_second)
@@ -2376,11 +2471,12 @@ class Users_Module_pom(web_driver, web_logger):
         self.logger.info(f"Enter {name_value}, in notification groups search box")
         time.sleep(web_driver.two_second)
         check_box = self.d.find_element(By.XPATH, Read_Users_Components()
-                                       .notification_groups_select_all_checkbox())
+                                        .notification_groups_select_all_checkbox())
         check_box.click()
         self.logger.info(f"select the {name_value} notification group checkbox")
         time.sleep(web_driver.two_second)
-        action_ele = self.explicit_wait(10, "XPATH", Read_Users_Components().notification_groups_action_drop_dwn(), self.d)
+        action_ele = self.explicit_wait(10, "XPATH", Read_Users_Components().notification_groups_action_drop_dwn(),
+                                        self.d)
         action_ele.click()
         self.logger.info("click on the notification groups action box dropdown")
         time.sleep(web_driver.one_second)
@@ -2388,7 +2484,7 @@ class Users_Module_pom(web_driver, web_logger):
         add_user.click()
         self.logger.info("click on the add to user option")
         time.sleep(web_driver.two_second)
-        close_notification_groups = self.d\
+        close_notification_groups = self.d \
             .find_element(By.XPATH, Read_Users_Components().notification_groups_close_panel())
         close_notification_groups.click()
         self.logger.info("click on close notification groups")
@@ -2407,7 +2503,8 @@ class Users_Module_pom(web_driver, web_logger):
         check_box.click()
         self.logger.info("click on the select all checkbox")
         time.sleep(web_driver.one_second)
-        action_ele = self.explicit_wait(10, "XPATH", Read_Users_Components().notification_groups_action_drop_dwn(), self.d)
+        action_ele = self.explicit_wait(10, "XPATH", Read_Users_Components().notification_groups_action_drop_dwn(),
+                                        self.d)
         action_ele.click()
         self.logger.info("click on the action dropdown")
         time.sleep(web_driver.one_second)
@@ -2537,7 +2634,8 @@ class Users_Module_pom(web_driver, web_logger):
 
     def click_on_alert_schedule_icon(self):
         # alert_schedule = self.d.find_element(By.XPATH, Read_Users_Components().alert_schedule_icon_by_xpath())
-        alert_schedule = web_driver.explicit_wait(self, 10, "XPATH", Read_Users_Components().alert_schedule_icon_by_xpath(), self.d)
+        alert_schedule = web_driver.explicit_wait(self, 10, "XPATH",
+                                                  Read_Users_Components().alert_schedule_icon_by_xpath(), self.d)
         alert_schedule.click()
         self.logger.info("click on alert schedule icon")
 
@@ -2649,7 +2747,7 @@ class Users_Module_pom(web_driver, web_logger):
         send_sms_value = self.d.find_element(By.XPATH, Read_Users_Components().settings_send_sms_value_by_xpath())
         send_mms_value = self.d.find_element(By.XPATH, Read_Users_Components().settings_send_mms_value_by_xpath())
         send_email_value = self.d.find_element(By.XPATH, Read_Users_Components().settings_send_email_value_by_xpath())
-        send_in_app_value = self.d\
+        send_in_app_value = self.d \
             .find_element(By.XPATH, Read_Users_Components().settings_send_in_app_value_notifications_by_xpath())
         enable_alerts_value = self.d.find_element(By.XPATH, Read_Users_Components()
                                                   .settings_enable_alerts_value_by_xpath())
@@ -2672,14 +2770,13 @@ class Users_Module_pom(web_driver, web_logger):
         self.logger.info(f"send_in_app_ele is visible : {send_in_app_ele.is_displayed()}")
         self.logger.info(f"enable_alerts_ele is visible : {enable_alerts_ele.is_displayed()}")
 
-
         status.append(username_ele.text == Read_Users_Components().settings_username_validation_txt())
         status.append(timezone_ele.text == Read_Users_Components().settings_timezone_validation_txt())
         status.append(timezone_id_ele.text == Read_Users_Components().settings_timezone_id_validation_txt())
         status.append(send_sms_ele.text == Read_Users_Components().settings_send_sms_validation_txt())
         status.append(send_mms_ele.text == Read_Users_Components().settings_send_mms_validation_txt())
         status.append(send_email_ele.text == Read_Users_Components().settings_send_email_validation_txt())
-        status.\
+        status. \
             append(send_in_app_ele.text == Read_Users_Components().settings_send_in_app_notifications_validation_txt())
         status.append(enable_alerts_ele.text == Read_Users_Components().settings_enable_alerts_validation_txt())
 
@@ -2839,7 +2936,7 @@ class Users_Module_pom(web_driver, web_logger):
         send_email_yes.click()
         # send_email_no = self.d.find_element(By.XPATH, Read_Users_Components().send_email_no_btn_by_xpath())
 
-        send_in_app_notification_yes = self.d\
+        send_in_app_notification_yes = self.d \
             .find_element(By.XPATH, Read_Users_Components().send_in_app_notification_yes_btn_by_xpath())
         send_in_app_notification_yes.click()
         # send_in_app_notification_no = self.d\
@@ -2895,8 +2992,6 @@ class Users_Module_pom(web_driver, web_logger):
         self.logger.info(f"Status : {status}")
         return status
 
-
-        
     def verify_day_checkbox(self):
         """
         checks schedule day checkbox is visible and clickable
@@ -2928,7 +3023,7 @@ class Users_Module_pom(web_driver, web_logger):
         """
         status = []
         checkbox = self.d.find_elements(By.XPATH, Read_Users_Components().schedule_day_checkbox_by_xpath())
-        modified_path = Read_Users_Components().schedule_day_checkbox_by_xpath()+"/ins"
+        modified_path = Read_Users_Components().schedule_day_checkbox_by_xpath() + "/ins"
         checkbox_ins = self.d.find_elements(By.XPATH, modified_path)
         for x in range(len(checkbox)):
             if "checked" not in checkbox[x].get_attribute("class"):
@@ -2955,7 +3050,7 @@ class Users_Module_pom(web_driver, web_logger):
         """
         status = []
         checkbox = self.d.find_elements(By.XPATH, Read_Users_Components().schedule_day_checkbox_by_xpath())
-        modified_path = Read_Users_Components().schedule_day_checkbox_by_xpath()+"/ins"
+        modified_path = Read_Users_Components().schedule_day_checkbox_by_xpath() + "/ins"
         checkbox_ins = self.d.find_elements(By.XPATH, modified_path)
         for x in range(len(checkbox)):
             if "checked" in checkbox[x].get_attribute("class"):
@@ -3063,7 +3158,7 @@ class Users_Module_pom(web_driver, web_logger):
         save = self.d.find_element(By.XPATH, Read_Users_Components().alert_schedule_save_btn_by_xpath())
         save.click()
         time.sleep(web_driver.one_second)
-        send_sms_value = self.d\
+        send_sms_value = self.d \
             .find_element(By.XPATH, Read_Users_Components().settings_send_in_app_value_notifications_by_xpath())
         status.append(send_sms_value.text == "Yes")
 
@@ -3074,7 +3169,7 @@ class Users_Module_pom(web_driver, web_logger):
         save = self.d.find_element(By.XPATH, Read_Users_Components().alert_schedule_save_btn_by_xpath())
         save.click()
         time.sleep(web_driver.one_second)
-        send_sms_value = self.d\
+        send_sms_value = self.d \
             .find_element(By.XPATH, Read_Users_Components().settings_send_in_app_value_notifications_by_xpath())
 
         status.append(send_sms_value.text == "No")
@@ -3157,6 +3252,7 @@ class Users_Module_pom(web_driver, web_logger):
         #
         # except Exception as ex:
         #     print(ex)
+
     def Verify_reassigning_user_to_diferrent_region(self):
         try:
             login().login_to_cloud_if_not_done(self.d)
@@ -3193,7 +3289,7 @@ class Users_Module_pom(web_driver, web_logger):
             self.click_on_save_btn()
             time.sleep(web_driver.two_second)
 
-            details_button = self.d.find_element(By.XPATH,Read_Users_Components().details_icon_by_xpath())
+            details_button = self.d.find_element(By.XPATH, Read_Users_Components().details_icon_by_xpath())
             details_button.click()
 
             time.sleep(web_driver.two_second)
@@ -3208,7 +3304,7 @@ class Users_Module_pom(web_driver, web_logger):
 
             new_region = Read_Users_Components().new_region_data_input()
             self.select_region(new_region)
-            region_save_button = self.d.find_element(By.XPATH,Read_Users_Components().region_save_btn_by_xpath())
+            region_save_button = self.d.find_element(By.XPATH, Read_Users_Components().region_save_btn_by_xpath())
             region_save_button.click()
             time.sleep(web_driver.one_second)
             self.click_on_save_btn()
@@ -3226,7 +3322,6 @@ class Users_Module_pom(web_driver, web_logger):
             self.delete_randomly_created_users()
             logout().logout_from_core(self.d)
             self.d.refresh()
-
 
     def Verify_user_able_to_link_unlink_notification_group_from_Users_panel(self):
         try:
@@ -3291,7 +3386,8 @@ class Users_Module_pom(web_driver, web_logger):
             time.sleep(web_driver.one_second)
             username1 = Portal_login_page_read_ini().get_valid_login_username()
             self.logger.info(f"expected username: {username1}")
-            userrole = self.explicit_wait(10, "XPATH", Read_Users_Components().user_details_user_role_by_xpath(), self.d)
+            userrole = self.explicit_wait(10, "XPATH", Read_Users_Components().user_details_user_role_by_xpath(),
+                                          self.d)
             self.logger.info(f"user role is {userrole.text}")
             time.sleep(web_driver.one_second)
             userrole1 = Read_Users_Components().read_core_user_user_role().upper()
@@ -3306,7 +3402,8 @@ class Users_Module_pom(web_driver, web_logger):
             time.sleep(web_driver.one_second)
             email1 = users_dict["users"][0]["Email"]
             self.logger.info(f"expected email: {email1}")
-            time_Zone = self.explicit_wait(10, "XPATH", Read_Users_Components().user_details_timezone_by_xpath(), self.d)
+            time_Zone = self.explicit_wait(10, "XPATH", Read_Users_Components().user_details_timezone_by_xpath(),
+                                           self.d)
             self.logger.info(f"time zone is {time_Zone.text}")
             time.sleep(web_driver.one_second)
             time_zone1 = Read_Users_Components().read_core_user_timezone()
@@ -3356,7 +3453,8 @@ class Users_Module_pom(web_driver, web_logger):
             self.click_user_on_cloud_menu()
             time.sleep(web_driver.two_second)
 
-            total_number_of_users_displayed = self.d.find_element(By.XPATH,Read_Users_Components().get_Total_number_of_user_displayed())
+            total_number_of_users_displayed = self.d.find_element(By.XPATH,
+                                                                  Read_Users_Components().get_Total_number_of_user_displayed())
             print(total_number_of_users_displayed.text)
             self.logger.info(f"Total number of users created are {total_number_of_users_displayed.text}")
             time.sleep(web_driver.one_second)
@@ -3376,14 +3474,13 @@ class Users_Module_pom(web_driver, web_logger):
             time.sleep(web_driver.one_second)
             self.click_user_on_cloud_menu()
             time.sleep(web_driver.two_second)
-            x=[]
-            list_of_user = self.d.find_elements(By.XPATH,Read_Users_Components().get_list_of_users())
+            x = []
+            list_of_user = self.d.find_elements(By.XPATH, Read_Users_Components().get_list_of_users())
             time.sleep(web_driver.one_second)
             for i in list_of_user:
                 # print(i.text)
                 x = i.text
                 print(x)
-
 
             for i in list_of_user:
                 time.sleep(web_driver.one_second)
@@ -3391,7 +3488,7 @@ class Users_Module_pom(web_driver, web_logger):
                 search_box_by_xpath.clear()
                 search_box_by_xpath.send_keys(i.text)
                 time.sleep(web_driver.two_second)
-            i =i+1
+            i = i + 1
         except Exception as ex:
             print(ex.args)
 
@@ -3399,33 +3496,38 @@ class Users_Module_pom(web_driver, web_logger):
         try:
             status = []
             self.logger.info("users module started")
-            login().login_to_cloud_if_not_done(self.d)
-            time.sleep(web_driver.one_second)
             users_dict = self.Read_user_from_json()
+            users_list = []
+            username = users_dict["users"][4]["username"]
+            login().login_with_persona_user(self.d, username)
+            time.sleep(web_driver.one_second)
             self.click_user_on_cloud_menu()
-            x = Read_Users_Components().region_names_from_ini()
-            user_list = x.split(',')
-            self.logger.info(f"eg list: {user_list}")
+            dictionary_length = len(users_dict["users"])
+            print("length of dictionary is", dictionary_length)
+            # x = Read_Users_Components().region_names_from_ini()
+            # user_list = x.split(',')
+            # self.logger.info(f"eg list: {user_list}")
 
             count = 0
-            for i in range(len(user_list)):
+            for i in range(dictionary_length):
                 time.sleep(web_driver.one_second)
                 search_box_by_xpath = self.d.find_element(By.XPATH, Read_Users_Components().search_box_by_xpath())
                 search_box_by_xpath.clear()
-                search_box_by_xpath.send_keys(user_list[i])
+                search_box_by_xpath.send_keys(users_dict["users"][i]["username"])
                 time.sleep(web_driver.one_second)
-                details_button = self.d.find_element(By.XPATH,Read_Users_Components().details_icon_by_xpath())
+                details_button = self.d.find_element(By.XPATH, Read_Users_Components().details_icon_by_xpath())
                 details_button.click()
                 time.sleep(web_driver.one_second)
                 actual_region_name = self.d.find_element(By.XPATH, Read_Users_Components().region_name())
-                self.logger.info(f"actual region name is :{actual_region_name.text}")
+                self.logger.info(f"actual region name is: {actual_region_name.text}")
                 expected_region_name = users_dict["users"][i]["user_orgahierarchy"]
                 self.logger.info(f"expected username is {expected_region_name}")
                 if actual_region_name.text == expected_region_name:
-                    self.status.append(True)
+                    status.append(True)
                 else:
-                    self.status.append(False)
-            if False in self.status:
+                    status.append(False)
+            self.logger.info(f"status: {status}")
+            if False in status:
                 self.logger.error(f"screenshot file path: {self.screenshots_path}\\test_TC_IE_100.png")
                 self.d.save_screenshot(f"{self.screenshots_path}\\test_TC_IE_100_failed.png")
                 return False
@@ -3450,7 +3552,7 @@ class Users_Module_pom(web_driver, web_logger):
             time.sleep(web_driver.two_second)
             self.click_on_action_btn()
             time.sleep(web_driver.one_second)
-            create_user = self.d.find_element(By.XPATH,Read_Users_Components().create_user_by_xpath())
+            create_user = self.d.find_element(By.XPATH, Read_Users_Components().create_user_by_xpath())
             create_user.click()
             time.sleep(web_driver.two_second)
             region_ele = web_driver.explicit_wait(self, 10, "XPATH", Read_Users_Components().region_by_xpath(), self.d)

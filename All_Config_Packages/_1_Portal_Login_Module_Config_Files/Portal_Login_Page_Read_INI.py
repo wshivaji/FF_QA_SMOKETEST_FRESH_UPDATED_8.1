@@ -135,6 +135,14 @@ class Portal_login_page_read_ini:
         except Exception as ex:
             print(ex)
 
+    def agree_and_continue_btn_on_popup_by_xpath(self):
+        try:
+            agree_and_continue_btn_on_popup_by_xpath = self.config.get("Portal_Login_Page", "agree_and_continue_btn_on_popup_by_xpath")
+            print("dashboard menu: ", agree_and_continue_btn_on_popup_by_xpath)
+            return agree_and_continue_btn_on_popup_by_xpath
+        except Exception as ex:
+            print(ex)
+
     def get_portal_login_username_textbox_by_xpath(self):
         try:
             portal_login_username_texbox = self.config.get("Portal_Login_Page",

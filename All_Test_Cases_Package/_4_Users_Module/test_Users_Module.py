@@ -12,9 +12,17 @@ class Test_Users_Module(web_driver, web_logger):
     print("******** Users_Module (Order - 2) Begin ********")
 
     @pytest.mark.system
+    def test_TC_US(self):
+        self.logger.info("Users module = test_TC_US_01 execution started..")
+        if Users_Module_pom().create_it_admin_user():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.system
     def test_TC_US_1(self):
         self.logger.info("Users module = test_TC_US_110 execution started..")
-        if Users_Module_pom().Create_5_users_standard_operator_responder_approver_executive_and_it_admin_with_all_required_field():
+        if Users_Module_pom().Create_5_users_standard_operator_responder_approver_executive_with_all_required_field():
             assert True
         else:
             assert False

@@ -26,7 +26,9 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
         try:
             self.logger.info("********** Test_EG_01 Begin  **********")
             status = []
-            login().login_to_cloud_if_not_done(self.d)
+            x = Read_Notification_Groups_Components().get_user_name_input_data()
+            username = x.split(',')
+            login().login_with_persona_user(self.d, username[4])
             time.sleep(web_driver.one_second)
             x = Read_Enrollment_Groups_Components().get_enrollment_group_name()
             enrollment_group_names_list = x.split(',')
@@ -153,12 +155,16 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_SLT_04_exception.png")
             self.logger.error(f"TC_SLT_04 got exception as: {ex.args}")
             return False
+        finally:
+            logout().logout_from_core(self.d)
 
     def Verify_total_count_of_EGs_is_6_including_default_EG(self):
         try:
             self.logger.info("********** Test_EG_TC02 Begin  **********")
             status = []
-            login().login_to_cloud_if_not_done(self.d)
+            x = Read_Notification_Groups_Components().get_user_name_input_data()
+            username = x.split(',')
+            login().login_with_persona_user(self.d, username[4])
             time.sleep(web_driver.one_second)
             enrollment_groups_btn = self.d.find_element(By.XPATH, Read_Enrollment_Groups_Components().
                                                         enrollment_groups_button_by_xpath())
@@ -192,12 +198,16 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_EG_02_exception.png")
             self.logger.error(f"TC_EG_02 got exception as: {ex.args}")
             return False
+        finally:
+            logout().logout_from_core(self.d)
 
     def Verify_for_above_all_5_EG_face_and_mask_threshold_value_should_be_point_83_and_suppress_duplicate_events_value_should_be_0_minute(self):
         try:
             self.logger.info("********** Test_EG_TC03 Begin  **********")
             status = []
-            login().login_to_cloud_if_not_done(self.d)
+            x = Read_Notification_Groups_Components().get_user_name_input_data()
+            username = x.split(',')
+            login().login_with_persona_user(self.d, username[4])
             time.sleep(web_driver.one_second)
             enrollment_groups_btn = self.d.find_element(By.XPATH, Read_Enrollment_Groups_Components().
                                                         enrollment_groups_button_by_xpath())
