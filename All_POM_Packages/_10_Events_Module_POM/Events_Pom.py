@@ -2290,7 +2290,7 @@ class events_pom(web_driver, web_logger):
             login().login_to_cloud_if_not_done(self.d)
             x = events_Read_Ini().get_enrollment_group()
             enrollment_group_list = x.split(',')
-            self.logger.info(f"enrollment group list is :{enrollment_group_list}")
+            self.logger.info(f"enrollment group list is: {enrollment_group_list}")
             for i in range(len(enrollment_group_list)):
                 self.click_on_event_menu()
                 self.click_on_search_button()
