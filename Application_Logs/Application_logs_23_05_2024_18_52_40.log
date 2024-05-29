@@ -1,0 +1,6 @@
+23/05/2024 06:52:41 PM : root         : INFO     :  ******** Notification_Groups_Module (Order - 3) Begin ********
+23/05/2024 06:52:41 PM : root         : INFO     : ********** Test_NG_TC01 Begin  **********
+23/05/2024 06:52:41 PM : root         : INFO     : reading users from json: ('File C:\\Users\\Renuka\\PycharmProjects\\All_Test_Data\\4_Users_Module\\Data_From_JSON\\users_creation.json does not exist',)
+23/05/2024 06:52:41 PM : root         : ERROR    : screenshot file path: C:\Users\Renuka\PycharmProjects\FF_QA_SmokeTest_8.1\Reports\Screenshots\TC_NG_01_exception.png
+23/05/2024 06:52:41 PM : root         : ERROR    : TC_NG_01 got exception as: ("'NoneType' object is not subscriptable",)
+23/05/2024 06:52:42 PM : root         : INFO     : wrong url detected: data:,
