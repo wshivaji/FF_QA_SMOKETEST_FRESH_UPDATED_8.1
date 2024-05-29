@@ -873,7 +873,7 @@ class Portal_Menu_Module_pom(web_driver, web_logger):
             self.logout_from_cloud_menu()
             login().login_with_persona_user(self.d, username[0])
             time.sleep(web_driver.one_second)
-            login().accept_terms_and_conditions_for_login_for_new_user()
+            login().accept_terms_and_conditions_for_login_for_new_user(self.d)
             self.persona_users_permissions_validation(username[0])
 
             self.logger.info(f"status: {self.status}")
