@@ -1,0 +1,11 @@
+24/05/2024 05:37:57 AM : root         : INFO     :  ******** Portal_Smoke_Test_Cases Begin ********
+24/05/2024 05:37:57 AM : root         : INFO     : ********** TC_Portal_Login_01 started ********
+24/05/2024 05:37:57 AM : root         : INFO     : open_portal_url_and_verify_expected_url_is_visible_verify_expected_page_title_is_visible_and_verify_face_first_logo_is_visible
+24/05/2024 05:38:02 AM : root         : INFO     : actual url: https://scecore5-vm.qa.facefirst.dev/
+24/05/2024 05:38:02 AM : root         : INFO     : expected Portal url: https://scecore5-vm.qa.facefirst.dev/
+24/05/2024 05:38:02 AM : root         : INFO     : actual title: FaceFirst
+24/05/2024 05:38:02 AM : root         : INFO     : expected title: FaceFirst
+24/05/2024 05:38:03 AM : root         : INFO     : entered explicit wait for 10
+24/05/2024 05:38:03 AM : root         : INFO     : exiting explicit wait..
+24/05/2024 05:38:03 AM : root         : INFO     : logo image is visible: 
+24/05/2024 05:38:03 AM : root         : INFO     : status: [True, True, True]

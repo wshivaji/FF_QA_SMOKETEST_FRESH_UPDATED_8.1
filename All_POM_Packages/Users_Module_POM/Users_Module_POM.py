@@ -267,7 +267,7 @@ class Users_Module_pom(web_driver, web_logger):
             else:
                 self.d.save_screenshot(f"{self.screenshots_path}test_TC_US_1_failed.png")
                 users_list.append(False)
-            self.close_all_panel_one_by_one()
+            # self.close_all_panel_one_by_one()
             self.logger.info(f"user list contains {users_list}")
             if False in users_list:
                 return False
@@ -287,10 +287,10 @@ class Users_Module_pom(web_driver, web_logger):
             username = users_dict["users"][4]["username"]
             login().login_with_persona_user(self.d, username)
             time.sleep(web_driver.one_second)
-            dictionary_length = len(users_dict["users"])
+            dictionary_length = len(users_dict["users"])-1
             print("length of dictionary is", dictionary_length)
             i = 0
-            for i in range(dictionary_length-1):
+            for i in range(dictionary_length):
                 print(users_dict["users"][i])
                 self.click_user_on_cloud_menu()
                 self.click_on_action_create_user_option()

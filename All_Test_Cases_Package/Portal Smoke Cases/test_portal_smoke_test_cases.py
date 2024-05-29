@@ -331,14 +331,14 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     # ------------------------------------------  Probable Match Events Cases  --------------------------------------- #
     @pytest.mark.system
-    def test_SM_TC033(self):
+    def test_SM_TC035(self):
         if events_pom().Verify_25_events_are_generated_for_25_enrolled_subjects():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC034(self):
+    def test_SM_TC036(self):
         if events_pom().Verify_5_events_for_each_group_soe_abe_pte_fraude_and_vipe_using_enrollment_group_selection_in_search_dropdown():
             assert True
         else:
@@ -346,7 +346,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC035(self):
+    def test_SM_TC037(self):
         if events_pom().Verify_25_events_using_Org_hierarchy_selection_in_search_dropdown():
             assert True
         else:
@@ -354,7 +354,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC036(self):
+    def test_SM_TC038(self):
         if events_pom().Verify_5_events_for_each_group_soe_abe_pte_fraude_and_vipe_using_enrollment_group_and_org_hierarchy_selection_in_search_dropdown():
             assert True
         else:
@@ -362,7 +362,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC037(self):
+    def test_SM_TC039(self):
         if events_pom().Add_the_tags_with_respective_enrollment_groups_and_org_hierarchy_selection_example_soe_deterred_and_assualt_abe_deterred_and_threat_pte_deterred_and_push_cart_fraude_and_vipe_deterred_and_fraud():
             assert True
         else:
@@ -370,7 +370,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC038(self):
+    def test_SM_TC040(self):
         if events_pom().Verify_5_events_are_visible_by_enrollment_group_org_hierarchy_and_Tag_selection():
             assert True
         else:
@@ -379,28 +379,28 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     # ------------------------------------------  Insights Dashboard Cases  ----------------------------------------- #
     @pytest.mark.system
-    def test_SM_TC039(self):
+    def test_SM_TC041(self):
         if insight_dashboard_pom().Verify_user_is_able_to_see_counts_on_overview_dashboard_as_total_loss_prevented_5500_active_enrollment_25_total_match_events_25_visito_searches_0_investgation_saving_time_0_repeat_people_of_interest_0():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC040(self):
+    def test_SM_TC042(self):
         if insight_dashboard_pom().Verify_user_is_able_to_see_loss_prevented_by_enrollment_group_counts():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC041(self):
+    def test_SM_TC043(self):
         if insight_dashboard_pom().Verify_user_is_able_to_see_Possible_Match_Events_by_enrollment_action_counts():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC042(self):
+    def test_SM_TC044(self):
         if (insight_dashboard_pom().
                 Verify_user_is_able_to_see_counts_on_overview_dashboard_organisation_and_individual_groups()):
             assert True
@@ -408,154 +408,154 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC043(self):
+    def test_SM_TC045(self):
         if insight_dashboard_pom().Verify_user_is_able_to_see_loss_prevented_by_enrollment_group_counts_organisation_and_individual_groups():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC044(self):
+    def test_SM_TC046(self):
         if insight_dashboard_pom().Verify_user_is_able_to_see_Possible_Match_Events_by_enrollment_action_counts_organisation_and_individual_groups():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC045(self):
+    def test_SM_TC047(self):
         if insight_dashboard_pom().Verify_user_is_able_to_see_counts_on_Probable_Match_Events_Dashboard():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC046(self):
+    def test_SM_TC048(self):
         if insight_dashboard_pom().Verify_user_is_able_to_see_cumulative_Probable_Match_Events_by_date_todays_date_and_25_count():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC047(self):
+    def test_SM_TC049(self):
         if insight_dashboard_pom().Verify_user_is_able_to_see_tagged_vs_untagged_Probable_Match_Events_count_as_tagged_and_untagged():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC048(self):
+    def test_SM_TC050(self):
         if insight_dashboard_pom().Verify_user_is_able_to_see_Probable_Match_Events_by_enrollment_groups_counts():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC049(self):
+    def test_SM_TC051(self):
         if insight_dashboard_pom().Verify_user_is_able_to_see_tagged_Probable_Match_Events_by_tag_type():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC050(self):
+    def test_SM_TC052(self):
         if insight_dashboard_pom().Verify_user_is_able_to_see_counts_on_Probable_Match_Events_dashboard_organisation_and_individual_groups():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC051(self):
+    def test_SM_TC053(self):
         if insight_dashboard_pom().Verify_user_is_able_to_see_cumulative_Probable_Match_Events_by_date_organisation_and_individual_group():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC052(self):
+    def test_SM_TC054(self):
         if insight_dashboard_pom().Verify_user_is_able_to_see_tagged_vs_untagged_Probable_Match_Events_count_organisation_and_individual_groups():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC053(self):
+    def test_SM_TC055(self):
         if insight_dashboard_pom().Verify_user_is_able_to_see_Probable_Match_Events_by_enrollment_groups_counts_organisation_and_individual_groups():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC054(self):
+    def test_SM_TC056(self):
         if insight_dashboard_pom().Verify_user_is_able_to_see_tagged_Probable_Match_Events_by_tag_type_organisation_and_individual_groups():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC055(self):
+    def test_SM_TC057(self):
         if insight_dashboard_pom().Verify_user_is_able_to_see_on_enrollment_dashboard_as_enrollment_overview_and_cumulative_enrollments_by_date_as_mention_is_link():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC056(self):
+    def test_SM_TC058(self):
         if insight_dashboard_pom().Verify_enrollment_by_date_counts_on_enrollment_dashboard():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC057(self):
+    def test_SM_TC059(self):
         if insight_dashboard_pom().Verify_enrollments_by_enrollment_group_counts_as_mention_in_link():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC058(self):
+    def test_SM_TC060(self):
         if insight_dashboard_pom().Verify_enrollments_by_week_org_counts_as_mention_in_link():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC059(self):
+    def test_SM_TC061(self):
         if insight_dashboard_pom().Verify_Enrollments_by_status_count():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC060(self):
+    def test_SM_TC062(self):
         if insight_dashboard_pom().Verify_user_is_able_to_see_on_enrollment_dashboard_as_enrollment_overview_and_cumulative_enrollments_by_date():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC061(self):
+    def test_SM_TC063(self):
         if insight_dashboard_pom().Verify_enrollment_by_date_counts_as_mention_in_link_organisation_and_individual_group():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC062(self):
+    def test_SM_TC064(self):
         if insight_dashboard_pom().Verify_enrollments_by_enrollment_group_counts_as_mention_in_link_organisation_and_individual_group():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC063(self):
+    def test_SM_TC065(self):
         if insight_dashboard_pom().Verify_enrollments_by_week_counts_as_mention_in_link_organisation_and_individual_groups():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC064(self):
+    def test_SM_TC066(self):
         if insight_dashboard_pom().Verify_Enrollments_by_Status_counts_organisation_and_individual_groups():
             assert True
         else:
@@ -563,7 +563,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     # ------------------------------------------ Reporting cases ------------------------------------ #
     @pytest.mark.system
-    def test_SM_TC065(self):
+    def test_SM_TC067(self):
         if (Reporting_Events_pom().
                 Verify_report_for_number_of_probable_match_events_by_zone_with_default_dates_and_optional_filters()):
             assert True
@@ -571,7 +571,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC066(self):
+    def test_SM_TC068(self):
         if (Reporting_Events_pom().
                 Verify_report_for_number_of_probable_match_events_by_enrollment_with_default_dates_and_optional_filters()):
             assert True
@@ -579,7 +579,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC067(self):
+    def test_SM_TC069(self):
         if (Reporting_Events_pom().
                 Verify_report_for_number_of_enrollment_by_zones_with_default_dates_and_optional_filters()):
             assert True
@@ -587,7 +587,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC068(self):
+    def test_SM_TC070(self):
         if Reporting_Events_pom().Verify_report_for_number_of_zones_by_enrollment_with_default_dates_and_optional_filters():
             assert True
         else:
@@ -595,63 +595,63 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     # ------------------------------------------  Enrollments Cases  ----------------------------------------- #
     @pytest.mark.system
-    def test_SM_TC069(self):
+    def test_SM_TC071(self):
         if enrollments_POM().Verify_user_is_able_to_see_total_enrollment_count_as_25():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC070(self):
+    def test_SM_TC072(self):
         if enrollments_POM().Verify_user_is_able_to_perform_enable_mask_enrollment_which_is_in_disable_state():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC071(self):
+    def test_SM_TC073(self):
         if enrollments_POM().Verify_user_is_able_to_add_single_face_for_enabled_mask_enrollment():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC072(self):
+    def test_SM_TC074(self):
         if enrollments_POM().Verify_user_is_able_to_add_single_note_for_enabled_mask_enrollment():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC073(self):
+    def test_SM_TC075(self):
         if enrollments_POM().Verify_user_is_able_to_see_5_subjects_for_pending_review_condition_using_VIP_user_enroll_5_subjects_for_pending_review():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC074(self):
+    def test_SM_TC076(self):
         if enrollments_POM().Verify_approver_user_is_able_to_reject_pending_subjects():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC075(self):
+    def test_SM_TC077(self):
         if enrollments_POM().Verify_approver_user_is_able_to_approve_pending_subjects():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC076(self):
+    def test_SM_TC078(self):
         if enrollments_POM().Verify_core_or_itadmin_user_is_able_to_delete_pending_subjects():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC077(self):
+    def test_SM_TC079(self):
         if enrollments_POM().Verify_user_is_able_to_enable_the_reject_subject_user_with_all_permissions():
             assert True
         else:
@@ -660,63 +660,63 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
     # ------------------------------------------  ALR Cases  ----------------------------------------- #
 
     @pytest.mark.system
-    def test_SM_TC078(self):
+    def test_SM_TC080(self):
         if Audit_log_report_pom().Verify_user_with_all_permissions_enrolled_mask_subject_should_be_in_Disable_status_for_user_enrollments():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC079(self):
+    def test_SM_TC081(self):
         if Audit_log_report_pom().Verify_core_should_be_able_to_enable_above_mask_subject_and_verify_Enabled_status_and_action_by_core_for_user_enrollments():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC080(self):
+    def test_SM_TC082(self):
         if Audit_log_report_pom().Verify_for_above_enable_mask_subject_status_is_Enabled_in_Approver_Enrollments_too():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC081(self):
+    def test_SM_TC083(self):
         if Audit_log_report_pom().Verify_user_with_2FA_enrolled_subject_should_be_able_to_see_Pending_status_for_user_enrollments():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC082(self):
+    def test_SM_TC084(self):
         if Audit_log_report_pom().Verify_user_with_2FA_enrolled_subject_approved_by_core_admin_should_be_able_to_see_Accepted_status_and_action_by_core_for_user_enrollments():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC083(self):
+    def test_SM_TC085(self):
         if Audit_log_report_pom().Verify_user_with_2FA_enrolled_subject_approved_by_core_admin_should_be_able_to_see_Accepted_status_for_approver_enrollments():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC084(self):
+    def test_SM_TC086(self):
         if Audit_log_report_pom().Verify_Threshold_changes_report_with_user_modified_enrolment_group_details_should_be_displayed_on_the_report_with_ip_address():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC085(self):
+    def test_SM_TC087(self):
         if Audit_log_report_pom().Verify_Login_Logout_report_with_one_of_the_user_login_and_user_logout_with_minimum_delay_of_1_min():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC086(self):
+    def test_SM_TC088(self):
         self.logger.info("Audit Log Report = test_TC_ALR_001 execution started..")
         if Audit_log_report_pom().Verify_user_is_able_to_generate_report_for_Approver_enrollments_and_download_excel_file():
             assert True
@@ -724,21 +724,21 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC087(self):
+    def test_SM_TC089(self):
         if Audit_log_report_pom().Verify_user_is_able_to_generate_report_for_user_enrollments_and_download_excel_file():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC088(self):
+    def test_SM_TC090(self):
         if Audit_log_report_pom().Verify_user_is_able_to_generate_report_for_log_in_log_out_and_download_excel_file():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC089(self):
+    def test_SM_TC091(self):
         if Audit_log_report_pom().Verify_user_is_able_to_generate_report_for_Threshold_changes_and_download_excel_file():
             assert True
         else:
@@ -746,35 +746,35 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     # ------------------------------------------ Detect Faces Cases  ----------------------------------------- #
     @pytest.mark.system
-    def test_SM_TC090(self):
+    def test_SM_TC092(self):
         if detect_faces_pom().on_Detect_faces_page_upload_a_image_having_more_no_of_faces_verify_banner_showing_number_of_faces_on_a_image():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC091(self):
+    def test_SM_TC093(self):
         if detect_faces_pom().on_image_quality_page_verify_download_image_button_is_visible():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC092(self):
+    def test_SM_TC094(self):
         if detect_faces_pom().on_image_qualty_page_in_action_dropdown_click_on_identify_within_enrollments_Identify_and_enroll_page_is_visible():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC093(self):
+    def test_SM_TC095(self):
         if detect_faces_pom().on_image_quality_page_In_action_dropdown_click_on_identify_within_visitors_visitor_search_page_is_visible():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC094(self):
+    def test_SM_TC096(self):
         if detect_faces_pom().on_Detect_faces_page_upload_a_image_having_more_no_of_faces_verify_banner_showing_number_of_faces_on_a_image():
             assert True
         else:
@@ -782,7 +782,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     # ------------------------------------------ User Roles (CERD) Cases  ----------------------------------------- #
     @pytest.mark.system
-    def test_SM_TC095(self):
+    def test_SM_TC097(self):
         self.logger.info("***************** test_TC_UR_03 *****************")
         if user_roles_module_pom().Verify_user_able_to_create_a_new_users_role_by_filling_all_the_fields():
             assert True
@@ -790,7 +790,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC096(self):
+    def test_SM_TC098(self):
         self.logger.info("***************** test_TC_UR_04 *****************")
         if user_roles_module_pom().verify_user_able_to_edit_user_roles_detaild_description_with_disabled_enrollment_review_permissions():
             assert True
@@ -798,7 +798,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC097(self):
+    def test_SM_TC099(self):
         self.logger.info("***************** test_TC_UR_05 *****************")
         if user_roles_module_pom().Verify_details_and_all_permission_of_default_it_admin():
             assert True
@@ -806,7 +806,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC098(self):
+    def test_SM_TC100(self):
         self.logger.info("***************** test_TC_UR_06 *****************")
         if user_roles_module_pom().Verify_User_role_deletion_functionality_by_deleting_one_user_role():
             assert True
@@ -815,45 +815,29 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     # ------------------------------------------ Users Cases (CURD) cases----------------------------------------- #
     @pytest.mark.system
-    def test_SM_TC099(self):
+    def test_SM_TC101(self):
         if Users_Module_pom().verify_if_user_creates_a_new_users_marked_as_enabled_it_should_reflect_as_enabled():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC100(self):
+    def test_SM_TC102(self):
         if Users_Module_pom().verify_if_user_creates_a_new_users_marked_as_disabled_it_should_reflect_as_disabled():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC101(self):
+    def test_SM_TC103(self):
         if Users_Module_pom().verify_user_able_to_edit_the_details_for_the_newly_created_user_details():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC102(self):
-        if Users_Module_pom().verify_user_able_to_delete_the_newly_created_user():
-            assert True
-        else:
-            assert False
-
-    @pytest.mark.system
-    def test_SM_TC103(self):
-        if Users_Module_pom() \
-                .verify_login_with_newly_created_user_and_validate_login_successful():
-            assert True
-        else:
-            assert False
-
-    @pytest.mark.system
     def test_SM_TC104(self):
-        if Users_Module_pom() \
-                .verify_user_should_not_be_able_to_create_user_which_already_exist():
+        if Users_Module_pom().verify_user_able_to_delete_the_newly_created_user():
             assert True
         else:
             assert False
@@ -861,7 +845,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
     @pytest.mark.system
     def test_SM_TC105(self):
         if Users_Module_pom() \
-                .on_alert_schedule_edit_user_alert_schedule_and_verify_the_panel_should_be_editable():
+                .verify_login_with_newly_created_user_and_validate_login_successful():
             assert True
         else:
             assert False
@@ -869,7 +853,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
     @pytest.mark.system
     def test_SM_TC106(self):
         if Users_Module_pom() \
-                .verify_send_sms_send_mms_send_email_send_in_app_notifications_enable_disable_alerts_Yes_No_button():
+                .verify_user_should_not_be_able_to_create_user_which_already_exist():
             assert True
         else:
             assert False
@@ -877,27 +861,43 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
     @pytest.mark.system
     def test_SM_TC107(self):
         if Users_Module_pom() \
-                .Verify_reassigning_user_to_diferrent_region():
+                .on_alert_schedule_edit_user_alert_schedule_and_verify_the_panel_should_be_editable():
             assert True
         else:
             assert False
 
     @pytest.mark.system
     def test_SM_TC108(self):
-        if Users_Module_pom().verify_user_able_to_link_unlink_the_newly_created_user_to_a_notification_group():
+        if Users_Module_pom() \
+                .verify_send_sms_send_mms_send_email_send_in_app_notifications_enable_disable_alerts_Yes_No_button():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC109(self):
+        if Users_Module_pom() \
+                .Verify_reassigning_user_to_diferrent_region():
             assert True
         else:
             assert False
 
     @pytest.mark.system
     def test_SM_TC110(self):
-        if Users_Module_pom().Verify_org_hierarchy_selection_root_name_should_be_able_to_match_with_DM_core_name():
+        if Users_Module_pom().verify_user_able_to_link_unlink_the_newly_created_user_to_a_notification_group():
             assert True
         else:
             assert False
 
     @pytest.mark.system
     def test_SM_TC111(self):
+        if Users_Module_pom().Verify_org_hierarchy_selection_root_name_should_be_able_to_match_with_DM_core_name():
+            assert True
+        else:
+            assert False
+
+    @pytest.mark.system
+    def test_SM_TC112(self):
         if Users_Module_pom().verify_details_of_core_user():
             assert True
         else:
@@ -905,70 +905,70 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     # ------------------------------------------ Enrollment Groups (CERD) cases -------------------------------------- #
     @pytest.mark.system
-    def test_SM_TC112(self):
+    def test_SM_TC113(self):
         if Enrollments_Groups_Module_pom().Verify_user_able_to_create_a_new_Enrollment_Group_by_filling_all_the_fields_and_verify_present_3_buttons_below_are_activated():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC113(self):
+    def test_SM_TC114(self):
         if Enrollments_Groups_Module_pom().verify_user_able_to_edit_enrollment_group():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC114(self):
+    def test_SM_TC115(self):
         if Enrollments_Groups_Module_pom().verify_user_able_to_link_a_notification_group_from_enrollments_groups_panel():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC115(self):
+    def test_SM_TC116(self):
         if Enrollments_Groups_Module_pom().verify_user_able_to_unlink_a_notification_group_from_enrollments_groups_panel():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC116(self):
+    def test_SM_TC117(self):
         if Enrollments_Groups_Module_pom().verify_user_able_to_see_enrollments_from_associated_group():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC117(self):
+    def test_SM_TC118(self):
         if Enrollments_Groups_Module_pom().verify_user_able_to_see_possible_match_events_associated_to_enrollements_group_and_possible_match_events_associated_to_details_of_enrollment_group_for_both_event_count_should_be_match():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC118(self):
+    def test_SM_TC119(self):
         if Enrollments_Groups_Module_pom().verify_user_able_to_link_the_enrollments_from_enrollments_groups_panel():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC119(self):
+    def test_SM_TC120(self):
         if Enrollments_Groups_Module_pom().verify_user_able_to_unlink_the_enrollments_from_enrollments_groups_panel():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC120(self):
+    def test_SM_TC121(self):
         if Enrollments_Groups_Module_pom().verify_user_able_to_delete_newly_created_enrollment_group():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC121(self):
+    def test_SM_TC122(self):
         if Enrollments_Groups_Module_pom().Verify_details_of_default_enrollment_group():
             assert True
         else:
@@ -976,63 +976,63 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     # ------------------------------------------ Notification Groups (CURD) cases ------------------------------------ #
     @pytest.mark.system
-    def test_SM_TC122(self):
+    def test_SM_TC123(self):
         if Notification_Groups_Module_pom().Verify_user_able_to_create_a_new_Notification_Group_by_filling_all_the_fields_and_verify_present_3_buttons_below_are_activated():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC123(self):
+    def test_SM_TC124(self):
         if Notification_Groups_Module_pom().verify_user_able_to_edit_notification_group():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC124(self):
+    def test_SM_TC125(self):
         if Notification_Groups_Module_pom().verify_user_able_to_link_an_enrollments_groups_to_notification_groups():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC125(self):
+    def test_SM_TC126(self):
         if Notification_Groups_Module_pom().verify_user_able_to_unlink_an_enrollments_groups_from_notification_groups():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC126(self):
+    def test_SM_TC127(self):
         if Notification_Groups_Module_pom().verify_user_able_to_see_events_associated_to_Notification_group_and_events_associated_to_details_of_Notification_group_for_both_event_count_should_be_match():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC127(self):
+    def test_SM_TC128(self):
         if Notification_Groups_Module_pom().verify_user_able_to_link_a_user_to_notification_group():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC128(self):
+    def test_SM_TC129(self):
         if Notification_Groups_Module_pom().verify_user_able_to_unlink_a_user_to_notification_group():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC129(self):
+    def test_SM_TC130(self):
         if Notification_Groups_Module_pom().Verify_user_able_to_delete_the_newly_created_notification_group():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC130(self):
+    def test_SM_TC131(self):
         if Notification_Groups_Module_pom().Verify_details_of_default_notification_group():
             assert True
         else:
@@ -1041,63 +1041,63 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
     # ------------------------------------------ Enrollments (CURD) cases ------------------------------------ #
 
     @pytest.mark.system
-    def test_SM_TC131(self):
+    def test_SM_TC132(self):
         if enrollments_POM().Verify_if_user_is_enrolled_the_person_with_expiry_date_validate_expired_date_is_visible_on_Enrollment_module_panel():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC132(self):
+    def test_SM_TC133(self):
         if enrollments_POM().enrollments_search_with_filter_dropdown_option_result_should_be_dropdown_options():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC133(self):
+    def test_SM_TC134(self):
         if enrollments_POM().verify_user_enroller_of_an_enrollment_able_to_link_a_enrollment_group_and_add_the_person_to_the_group():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC134(self):
+    def test_SM_TC135(self):
         if enrollments_POM().verify_user_enroller_of_an_enrollment_able_to_unlink_same_enrollment_group_and_remove_the_person_from_selected_group():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC135(self):
+    def test_SM_TC136(self):
         if enrollments_POM().verify_user_able_to_add_more_faces_to_an_enrollment():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC136(self):
+    def test_SM_TC137(self):
         if enrollments_POM().verify_user_enroller_of_an_enrollment_able_to_see_events_for_a_enrolled_person_on_enrrollments_panel():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC137(self):
+    def test_SM_TC138(self):
         if enrollments_POM().verify_user_enroller_of_an_enrollment_able_to_edit_the_enrollment():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC138(self):
+    def test_SM_TC139(self):
         if enrollments_POM().verify_user_able_to_see_disabled_status_for_masked_enrollment():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC139(self):
+    def test_SM_TC140(self):
         if enrollments_POM().verify_user_able_to_add_notes_for_a_enrolled_person_on_enrollments_panel():
             assert True
         else:
@@ -1106,61 +1106,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
     # ------------------------------------------ PME (CURD) cases ------------------------------------ #
 
     @pytest.mark.system
-    def test_SM_TC140(self):
-        if events_pom().Verify_25_events_are_generated_for_25_enrolled_subjects():
-            assert True
-        else:
-            assert False
-
-    @pytest.mark.system
     def test_SM_TC141(self):
-        if events_pom().Verify_5_events_for_each_group_soe_abe_pte_fraude_and_vipe_using_enrollment_group_selection_in_search_dropdown():
-            assert True
-        else:
-            self.logger.info("test_events_TC_002 fail")
-            assert False
-
-    @pytest.mark.system
-    def test_SM_TC142(self):
-        self.logger.info("Verify 25 events using Org/hierarchy selection in search dropdown")
-        if events_pom().Verify_25_events_using_Org_hierarchy_selection_in_search_dropdown():
-            assert True
-        else:
-            self.logger.info("test_events_TC_003 fail")
-            assert False
-
-    @pytest.mark.system
-    def test_SM_TC143(self):
-        self.logger.info(
-            "Verify 5 events for each group (soe, abe, pte, fraude and vipe) using enrollment group and org/hierarchy selection in search dropdown")
-        if events_pom().Verify_5_events_for_each_group_soe_abe_pte_fraude_and_vipe_using_enrollment_group_and_org_hierarchy_selection_in_search_dropdown():
-            assert True
-        else:
-            self.logger.info("test_TC_ESFC_05 fail")
-            assert False
-
-    @pytest.mark.system
-    def test_SM_TC144(self):
-        self.logger.info("Add the tags with respective enrollment groups and org/hierarchy selection (example soe: deterred and assualt, abe: deterred and threat, pte: deterred and push cart, fraude and vipe: deterred and fraud) ")
-        if events_pom().Add_the_tags_with_respective_enrollment_groups_and_org_hierarchy_selection_example_soe_deterred_and_assualt_abe_deterred_and_threat_pte_deterred_and_push_cart_fraude_and_vipe_deterred_and_fraud():
-            assert True
-        else:
-            self.logger.info("test_events_TC_005 fail")
-            assert False
-
-    @pytest.mark.system
-    def test_SM_TC145(self):
-        self.logger.info("Verify 5 events are visible by enrollment group, org/hierarchy and Tag selection")
-        if events_pom().Verify_5_events_are_visible_by_enrollment_group_org_hierarchy_and_Tag_selection():
-            assert True
-        else:
-            self.logger.info("test_events_TC_006 fail")
-            assert False
-
-    @pytest.mark.system
-    def test_SM_TC146(self):
-        self.logger.info(
-            "Verify user should be able to add the tags and see that same tags are visible when user clicks on display tags option in view dropdown")
         if events_pom().Verify_user_should_be_able_to_add_the_tags_and_see_that_same_tags_are_visible_when_user_clicks_on_display_tags_option_in_view_dropdown():
             assert True
         else:
@@ -1168,8 +1114,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC147(self):
-        self.logger.info("Verify user able to delete probable match events")
+    def test_SM_TC142(self):
         if events_pom().Verify_user_able_to_delete_probable_match_events():
             assert True
         else:
@@ -1177,107 +1122,106 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC148(self):
-        self.logger.info("Probable Match Event search with DateTimeRange, EnrollmentGroup, Org/Hierarchy and Tag filter combination result should be DateTimeRange, EnrollmentGroup, Org/Hierarchy and Tagged event.")
+    def test_SM_TC143(self):
         if events_pom().Probable_Match_Event_search_with_DateTimeRange_EnrollmentGroup_Org_Hierarchy_and_Tag_filter_combination_result_should_be_DateTimeRange_EnrollmentGroup_Org_Hierarchy_and_Tagged_event():
             assert True
         else:
             self.logger.info("test_events_TC_009 fail")
             assert False
 
-    @pytest.mark.p3
-    def test_SM_TC149(self):
+    @pytest.mark.system
+    def test_SM_TC144(self):
         if events_pom().on_Event_view_panel_click_on_Action_dropdown_followed_by_Identify_within_enrollments_option_in_dropdown_and_verify_Identify_enroll_and_identify_results_panel_are_visible():
             assert True
         else:
             assert False
 
-    @pytest.mark.p2
-    def test_SM_TC150(self):
+    @pytest.mark.system
+    def test_SM_TC145(self):
         if events_pom().Verify_user_is_able_to_perform_identify_within_visitors_from_Probable_Match_Enrollment_View_panel_when_event_icon_is_click():
             assert True
         else:
             assert False
 
-    @pytest.mark.p2
-    def test_SM_TC151(self):
+    @pytest.mark.system
+    def test_SM_TC146(self):
         if events_pom().Verify_user_is_able_to_edit_the_Enrollment_details_on_Enrollment_View_panel_when_ProbableMatch_Event_icon_is_click():
             assert True
         else:
             assert False
 
-    @pytest.mark.p2
-    def test_SM_TC152(self):
+    @pytest.mark.system
+    def test_SM_TC147(self):
         if events_pom().Verify_user_is_able_to_add_face_on_Enrollment_view_panel_when_event_icon_is_click():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC153(self):
+    def test_SM_TC148(self):
         if events_pom().Verify_user_is_able_to_see_probable_match_events_associated_to_same_person_on_Enrollment_View_panel_when_probable_match_event_icon_is_click():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC154(self):
+    def test_SM_TC149(self):
         if events_pom().Verify_user_able_to_link_a_enrollment_group_and_add_the_person_to_the_group():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC155(self):
+    def test_SM_TC150(self):
         if events_pom().Verify_user_able_to_unlink_same_enrollment_group_and_remove_the_person_from_selected_group():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC156(self):
+    def test_SM_TC151(self):
         if events_pom().Verify_user_is_able_to_add_note_on_Enrollment_view_panel_when_Probable_Match_Event_icon_is_click():
             assert True
         else:
             assert False
 
     @pytest.mark.skip
-    def test_SM_TC157(self):
+    def test_SM_TC152(self):
         if events_pom().Verify_event_should_not_generate_for_opt_out_enrollment():
             assert True
         else:
             assert False
 
     @pytest.mark.skip
-    def test_SM_TC158(self):
+    def test_SM_TC153(self):
         if events_pom().Verify_event_should_not_generate_for_pending_review_enrollment():
             assert True
         else:
             assert False
 
     @pytest.mark.skip
-    def test_SM_TC159(self):
+    def test_SM_TC154(self):
         if events_pom().Verify_event_should_not_generate_for_disable_enrollment():
             assert True
         else:
             assert False
 
     @pytest.mark.skip
-    def test_SM_TC160(self):
+    def test_SM_TC155(self):
         if events_pom().Verify_event_should_not_generate_for_rejected_enrollment():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC161(self):
+    def test_SM_TC156(self):
         if events_pom().Verify_user_is_able_to_link_the_tag_and_add_tag_to_probable_match_events_when_tag_icon_is_click():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC162(self):
+    def test_SM_TC157(self):
         if events_pom().Verify_user_is_able_to_unlink_the_tag_and_remove_tag_from_probable_match_events_when_tag_icon_is_click():
             assert True
         else:
@@ -1285,49 +1229,49 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     # ------------------------------------------ Identify Enroll (CURD) cases ------------------------------------ #
     @pytest.mark.system
-    def test_SM_TC163(self):
+    def test_SM_TC158(self):
         if Identify_And_Enroll_POM().Verify_user_is_able_to_enroll_the_person_by_uploading_the_image_and_adding_the_required_details_for_the_same():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC164(self):
+    def test_SM_TC159(self):
         if Identify_And_Enroll_POM().Verify_user_is_able_to_see_the_possible_ranked_match_index_when_uploading_the_above_same_image_with_or_without_crop():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC165(self):
+    def test_SM_TC160(self):
         if Identify_And_Enroll_POM().Verify_user_is_able_to_enroll_the_person_by_uploading_the_image_and_adding_the_required_details_for_the_same_along_with_expiry_date_and_time_range():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC166(self):
+    def test_SM_TC161(self):
         if Identify_And_Enroll_POM().Verify_user_is_able_to_enroll_the_person_by_uploading_the_image_cropping_the_same_and_adding_the_required_details_for_the_same():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC167(self):
+    def test_SM_TC162(self):
         if Identify_And_Enroll_POM().verify_three_buttons_faces_person_view_and_purge_Replace_are_visible():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC168(self):
+    def test_SM_TC163(self):
         if Identify_And_Enroll_POM().Verify_user_is_able_enroll_the_person_which_is_delete_one_delete_and_enrolling_again_person_should_be_same():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC169(self):
+    def test_SM_TC164(self):
         if Identify_And_Enroll_POM().Verify_for_above_25_enrolled_subject_region_edges_are_properly_assigned():
             assert True
         else:
@@ -1335,21 +1279,21 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     # ------------------------------------------ Notifier (CURD) cases ------------------------------------ #
     @pytest.mark.system
-    def test_SM_TC170(self):
+    def test_SM_TC165(self):
         if Notifier_pom().Verify_Notifier_result_for_first_camera_of_first_region_selected_with_group_selected_as_ABE_with_Auto_Refresh_Of_events_displayed_as_2_photo_size_as_Medium_and_Sound_Option_as_OFF():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC171(self):
+    def test_SM_TC166(self):
         if Notifier_pom().Verify_events_appears_with_live_and_probable_match_image_upon_event_generation_with_sound():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC172(self):
+    def test_SM_TC167(self):
         if Notifier_pom().Verify_org_hierarchy_selection_features_collapse_all_expand_all_select_all_and_unselect_all():
             assert True
         else:
@@ -1358,35 +1302,35 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
     # ------------------------------------------ Account cases ------------------------------------ #
 
     @pytest.mark.system
-    def test_SM_TC173(self):
+    def test_SM_TC168(self):
         if account_pom().click_on_image_sources_and_check_theplanel_heading_of_Account_Image_sources_is_displayed():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC174(self):
+    def test_SM_TC169(self):
         if account_pom().click_on_location_on_View_dropdown_map_is_visible():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC175(self):
+    def test_SM_TC170(self):
         if account_pom().click_on_regions_button_verify_panel_heading():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC176(self):
+    def test_SM_TC171(self):
         if account_pom().click_on_detailsbutton_verify_imagesource_panel_heading_is_visible():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC177(self):
+    def test_SM_TC172(self):
         if account_pom().click_on_viewlocation_button_on_imagesource_verify_location():
             assert True
         else:
@@ -1397,21 +1341,21 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             This test case will verify zone names and their cameras
         '''
     @pytest.mark.system
-    def test_SM_TC178(self):
+    def test_SM_TC173(self):
         if Zones_pom().verify_zone_list_enlisted_and_zone_names_displayed_as_expected():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC179(self):
+    def test_SM_TC174(self):
         if Zones_pom().verify_zone_list_enlisted_and_zone_details_btn_displayed_as_expected():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC180(self):
+    def test_SM_TC175(self):
         if Zones_pom().verify_zone_list_enlisted_and_zone_select_checkbox_displayed_as_expected():
             assert True
         else:
@@ -1419,7 +1363,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     # ---------------------------------------- Portal Login User Blocking test case ---------------------------------- #
     @pytest.mark.system
-    def test_SM_TC181(self):
+    def test_SM_TC176(self):
         if Portal_Login_Page_Pom(). \
                 verify_user_account_blocked_for_30_min_if_user_enter_wrong_password_for_6_times_verify_message_warning():
             assert True
@@ -1428,7 +1372,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     # ---------------------------------------- Visitor Search test case ---------------------------------- #
     @pytest.mark.system
-    def test_SM_TC182(self):
+    def test_SM_TC177(self):
         if Visitor_Search_Module_pom().Verify_org_hierarchy_selection_root_name_should_be_able_to_match_with_DM_core_name():
             assert True
         else:
@@ -1436,7 +1380,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC183(self):
+    def test_SM_TC178(self):
         if Visitor_Search_Module_pom().Verify_warning_message_when_user_is_dropping_the_image_which_is_clicked_on_live_or_file_image_on_events_panel_able_to_perform_image_with_meta_data_idealy_it_should_not_with_larger_image_able_to_perform():
             assert True
         else:
@@ -1446,7 +1390,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
     # ---------------------------------------- Visitor Search Jobs test case ---------------------------------- #
 
     @pytest.mark.system
-    def test_SM_TC184(self):
+    def test_SM_TC179(self):
         if Visitor_Search_Jobs_Module_pom().Verify_visitor_search_status_banner_is_visible_visitor_search_jobs_on_VSJ_panel():
             assert True
         else:
@@ -1454,7 +1398,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC185(self):
+    def test_SM_TC180(self):
         if Visitor_Search_Jobs_Module_pom().verify_when_user_click_on_View_Results_button_of_VSJ_should_display_visitor_search_results_panel():
             assert True
         else:
@@ -1462,7 +1406,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC186(self):
+    def test_SM_TC181(self):
         if Visitor_Search_Jobs_Module_pom().verify_user_able_to_delete_VS_jobs():
             assert True
         else:
@@ -1471,7 +1415,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     # ------------------------------------------ Tags CURD case ------------------------------------ #
     @pytest.mark.system
-    def test_SM_TC187(self):
+    def test_SM_TC182(self):
         self.logger.info("test_TC_TAG_04 execution started..")
         if Tags_Module_pom().tags_search_functionality():
             assert True
@@ -1480,7 +1424,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC188(self):
+    def test_SM_TC183(self):
         self.logger.info("test_TC_TAG_08 execution started..")
         if Tags_Module_pom().Verify_filter_dropdown():
             assert True
@@ -1489,7 +1433,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC189(self):
+    def test_SM_TC184(self):
         self.logger.info("test_TC_TAG_08 execution started..")
         if Tags_Module_pom().edit_serious_event_tag_name():
             assert True
@@ -1498,7 +1442,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC190(self):
+    def test_SM_TC185(self):
         self.logger.info("test_TC_TAG_08 execution started..")
         if Tags_Module_pom().verify_user_able_to_delete_a_tag():
             assert True
@@ -1507,7 +1451,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
             assert False
 
     @pytest.mark.system
-    def test_SM_TC191(self):
+    def test_SM_TC186(self):
         self.logger.info("test_TC_TAG_07 execution started..")
         if Tags_Module_pom().duplicate_tags_not_create_validation():
             assert True
@@ -1517,49 +1461,49 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     # ------------------------------------------ Notes cases ------------------------------------ #
     @pytest.mark.system
-    def test_SM_TC192(self):
+    def test_SM_TC187(self):
         if notes_pom().verify_user_able_create_notes_successfully():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC193(self):
+    def test_SM_TC188(self):
         if notes_pom().verify_user_able_to_edit_details_by_selecting_details_icon():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC194(self):
+    def test_SM_TC189(self):
         if notes_pom().verify_user_is_able_to_select_any_one_note_and_click_on_location_in_view_dropdown():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC195(self):
+    def test_SM_TC190(self):
         if notes_pom().verify_user_is_able_to_select_any_one_note_and_click_on_location_icon():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC196(self):
+    def test_SM_TC191(self):
         if notes_pom().verify_user_is_able_to_see_the_enrollment_associated_to_particular_note():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC197(self):
+    def test_SM_TC192(self):
         if notes_pom().Verify_user_is_able_to_add_photo_when_image_icon_is_clicked():
             assert True
         else:
             assert False
 
     @pytest.mark.system
-    def test_SM_TC198(self):
+    def test_SM_TC193(self):
         if notes_pom().verify_user_able_to_delete_notes_successfully():
             assert True
         else:
@@ -1567,7 +1511,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     # ------------------------------------------ Enrollment Delete case ------------------------------------ #
     @pytest.mark.system
-    def test_SM_TC199(self):
+    def test_SM_TC194(self):
         if enrollments_POM().verify_executive_it_admin_enroller_of_an_enrollment_able_to_delete_enrollment():
             assert True
         else:
@@ -1575,7 +1519,7 @@ class Test_Portal_Smoke_Test_Cases(web_driver, web_logger):
 
     # ------------------------------------------ Account details After case ------------------------------------ #
     @pytest.mark.system
-    def test_SM_TC200(self):
+    def test_SM_TC195(self):
         if account_pom().Verify_account_panel_details_after_execution():
             assert True
         else:
