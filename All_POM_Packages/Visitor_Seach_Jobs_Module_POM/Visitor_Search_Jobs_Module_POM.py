@@ -857,7 +857,7 @@ class Visitor_Search_Jobs_Module_pom(web_driver, web_logger):
         upload_photo = web_driver.explicit_wait(self, 20, "XPATH", Read_Visitor_Search_jobs_Components().photo_upload_container_by_xpath(), self.d)
         upload_photo.click()
         time.sleep(web_driver.two_second)
-        file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset4\\ab\\00076.png"
+        file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset3\\ab\\1824_20220526-124520.png"
 
         time.sleep(web_driver.two_second)
         pyautogui.write(file_path)

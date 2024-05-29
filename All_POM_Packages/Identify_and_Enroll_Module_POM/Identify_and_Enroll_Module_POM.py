@@ -996,17 +996,9 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                 self.logger.info(f"clicked on Identify and enroll link")
                 time.sleep(web_driver.one_second)
 
-                # upload_photo = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
-                #                                   .upload_image_by_xpath(), self.d)
-                # upload_photo.click()
-                # self.logger.info(f"clicked on upload image icon")
-                # time.sleep(2)
                 file_path = f"{self.ie_file_path}\\{folder_name}\\{image}"
                 self.upload_image(file_path)
-                # pyautogui.write(file_path)
-                # pyautogui.press('enter')
-                # time.sleep(2)
-                # pyautogui.press('enter')
+
                 self.logger.info(f"Image upload success")
                 time.sleep(web_driver.one_second)
                 self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
