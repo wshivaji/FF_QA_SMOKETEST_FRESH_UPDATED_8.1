@@ -392,6 +392,7 @@ class Users_Module_pom(web_driver, web_logger):
             login_button = self.d.find_element(By.XPATH,
                                                Read_Users_Components().get_cloud_login_button_on_portal_by_xpath())
             login_button.click()
+            login().accept_terms_and_conditions_for_login_for_new_user(self.d)
             time.sleep(web_driver.one_second)
             current_user_info = self.d.find_element(By.XPATH, Read_Users_Components().get_current_login_username())
             if Read_Users_Components().user_name_input_data() == current_user_info.text:

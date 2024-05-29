@@ -3144,9 +3144,9 @@ class events_pom(web_driver, web_logger):
 
     def click_on_event_filter_search_button(self):
         time.sleep(web_driver.one_second)
+        self.explicit_wait(10, "XPATH", events_Read_Ini().event_filter_search_button_by_xpath(), self.d)
         click_on_event_filter_search_button = self.d.find_element(By.XPATH,
-                                                                  events_Read_Ini().
-                                                                  event_filter_search_button_by_xpath())
+                                                                  events_Read_Ini().event_filter_search_button_by_xpath())
         click_on_event_filter_search_button.click()
         # wait_icon = self.d.find_element(By.XPATH, events_Read_Ini().wait_icon_xpath())
 

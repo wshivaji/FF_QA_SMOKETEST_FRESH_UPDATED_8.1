@@ -132,15 +132,15 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
             date = int(Read_Visitor_Search_Components().get_start_date())
             month = str(Read_Visitor_Search_Components().get_start_month())
             year = int(Read_Visitor_Search_Components().get_start_year())
-            hour = str(Read_Visitor_Search_Components().get_start_hour())
-            minute = Read_Visitor_Search_Components().get_start_minuet()
+            hour = int(Read_Visitor_Search_Components().get_start_hour())
+            minute = int(Read_Visitor_Search_Components().get_start_minuet())
             period = str(Read_Visitor_Search_Components().get_start_am_pm_period())
 
             e_month = str(Read_Visitor_Search_Components().get_end_month())
             e_date = int(Read_Visitor_Search_Components().get_end_date())
             e_year = int(Read_Visitor_Search_Components().get_end_year())
-            e_hour = str(Read_Visitor_Search_Components().get_end_hour())
-            e_minute = Read_Visitor_Search_Components().get_end_minuet()
+            e_hour = int(Read_Visitor_Search_Components().get_end_hour())
+            e_minute = int(Read_Visitor_Search_Components().get_end_minuet())
             e_period = str(Read_Visitor_Search_Components().get_end_am_pm_period())
 
             try:

@@ -638,7 +638,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.d.execute_script("arguments[0].click();", link)
             self.logger.info(f"clicked on Identify and enroll link")
             time.sleep(web_driver.one_second)
-            file_path = f"{self.ie_file_path}\\ab\\00076.png"
+            file_path = f"{self.ie_file_path}\\ab\\1821_20220526-124517.png"
             self.upload_image(file_path)
 
             identify_enroll_btn = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
@@ -1904,7 +1904,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                                       .identify_and_enroll_link_by_xpath(), self.d)
             self.d.execute_script("arguments[0].click();", link)
             self.logger.info(f"clicked on Identify and enroll link")
-            file_path = f"{self.ie_file_path}\\ab\\00076.png"
+            file_path = f"{self.ie_file_path}\\ab\\1821_20220526-124517.png"
             self.upload_image(file_path)
 
             identify_enroll_btn = self.explicit_wait(10, "XPATH", Read_Identify_and_Enroll_Components()
