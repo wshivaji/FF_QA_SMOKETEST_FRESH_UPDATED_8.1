@@ -69,10 +69,9 @@ class account_pom(web_driver, web_logger):
                                                         self.d)
             users_menu.click()
             time.sleep(web_driver.two_second)
-            count_of_users = self.d.find_elements(By.XPATH,
-                                                          account_Read_Ini().count_of_users_by_xpath())
+            count_of_users = self.d.find_elements(By.XPATH,account_Read_Ini().count_of_users_by_xpath())
             if strategy == "before":
-                users = len(count_of_users) + 5
+                users = len(count_of_users) + int(account_Read_Ini().user_accounts_number())
                 self.logger.info(f"length of users: {users}")
                 e = account_Read_Ini().start_users_count().split('/')
                 actual_users_count = e[0]
@@ -82,7 +81,7 @@ class account_pom(web_driver, web_logger):
                 else:
                     return False
             else:
-                users = len(count_of_users) + 6
+                users = len(count_of_users) + int(account_Read_Ini().user_accounts_number())
                 self.logger.info(f"length of users: {users}")
                 e = account_Read_Ini().end_users_count().split('/')
                 actual_users_count = e[0]
@@ -645,7 +644,7 @@ class account_pom(web_driver, web_logger):
             self.logger.info(f"account length: {len(account)}")
             i = 0
             for x in range(len(account) - 1):
-                self.logger.info(f"{account[x].text}")
+                self.logger.info(f"{account[x].text}, {account[x + 1].text}")
                 if i < (len(account) - 1):
                     self.store_data_to_common_ini_file_after_execution(account[x].text, account[x + 1].text)
                     self.status.append(True)
@@ -660,6 +659,7 @@ class account_pom(web_driver, web_logger):
             file = Path(common_test_data_ini_file_path)
             config = configparser.ConfigParser()
             config.read(file)
+            self.logger.info(f"Storing: {x}, {y}")
             if x == account_Read_Ini().enabled_status_text():
                 config.set("Account_Module_Data", "end_enabled_status", y)
                 config.write(file.open('w'))

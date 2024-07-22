@@ -47,13 +47,13 @@ class web_driver:
 
     def explicit_wait(self, seconds, locator_type, locator, driver):
         try:
-            self.logger.info(f"entered explicit wait for {seconds}")
+            # self.logger.info(f"entered explicit wait..")
             element = None
             if locator_type == "ID":
                 element = WebDriverWait(driver, seconds).until(EC.visibility_of_element_located((By.ID, locator)))
             if locator_type == "XPATH":
                 element = WebDriverWait(driver, seconds).until(EC.visibility_of_element_located((By.XPATH, locator)))
-            self.logger.info(f"exiting explicit wait..")
+            # self.logger.info(f"exiting explicit wait..")
             return element
         except Exception as ex:
             print(f"element not found: {locator}")
