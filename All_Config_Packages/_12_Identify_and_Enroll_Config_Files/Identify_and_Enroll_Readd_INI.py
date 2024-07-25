@@ -2727,6 +2727,32 @@ class Read_Identify_and_Enroll_Components:
         except Exception as ex:
             print(ex.args)
 
+    def reselect_btn_by_xpath(self):
+        try:
+            reselect_btn_by_xpath = self.config.get("LOCATORS", "reselect_btn_by_xpath")
+            return reselect_btn_by_xpath
+        except Exception as ex:
+            print(ex.args)
 
+    def error_message_box_by_xpath(self):
+        try:
+            error_message_box_by_xpath = self.config.get("LOCATORS", "error_message_box_by_xpath")
+            return error_message_box_by_xpath
+        except Exception as ex:
+            print(ex.args)
 
+    def error_msg_by_xpath(self):
+        try:
+            error_msg_by_xpath = self.config.get("LOCATORS", "error_msg_by_xpath")
+            return error_msg_by_xpath
+        except Exception as ex:
+            print(ex.args)
+
+    def ie_file_path(self):
+        try:
+            ie_file_path = self.common_test_data_config.get("common_data", "ie_file_path")
+            print(ie_file_path)
+            return ie_file_path
+        except Exception as ex:
+            print(ex.args)
 

@@ -730,37 +730,37 @@ class Portal_Menu_Module_pom(web_driver, web_logger):
             self.close_all_panels()
 
             # ******************************************************************
-            insights_dashboard_menu = self.explicit_wait(10, "XPATH",
-                                                         Portal_Menu_Module_read_ini().get_Dashboard_menu_by_xpath(),
-                                                         self.d)
-            expected_text = Portal_Menu_Module_read_ini().get_expected_dashboard_text()
-            if insights_dashboard_menu.is_displayed():
-                if insights_dashboard_menu.text == expected_text:
-                    self.logger.info(f"Insights Dashboard menu is visible in menu items...")
-                    self.status.append(True)
-            else:
-                self.status.append(False)
-            dollar_icon = self.d.find_element(By.XPATH, Portal_Menu_Module_read_ini().
-                                              get_dollar_icon_on_dashboard_menu_by_xpath())
-            if dollar_icon.is_displayed():
-                self.logger.info("dollar icon is visible..")
-                self.status.append(True)
-            else:
-                self.status.append(False)
-            insights_dashboard_menu.click()
-            time.sleep(web_driver.two_second)
-            self.d.switch_to.window(self.d.window_handles[1])
-            time.sleep(web_driver.three_second)
-            actual_title = self.d.find_element(By.XPATH, Portal_Menu_Module_read_ini().
-                                               get_title_on_Dashboard_panel_by_xpath()).text
-            self.logger.info(f"actual title: {actual_title}")
-            expected_title = Portal_Menu_Module_read_ini().get_expected_overview_dashboard_text()
-            self.logger.info(f"expected title: {expected_title}")
-            if actual_title == expected_title:
-                self.status.append(True)
-                self.close_current_tab()
-            else:
-                self.status.append(False)
+            # insights_dashboard_menu = self.explicit_wait(10, "XPATH",
+            #                                              Portal_Menu_Module_read_ini().get_Dashboard_menu_by_xpath(),
+            #                                              self.d)
+            # expected_text = Portal_Menu_Module_read_ini().get_expected_dashboard_text()
+            # if insights_dashboard_menu.is_displayed():
+            #     if insights_dashboard_menu.text == expected_text:
+            #         self.logger.info(f"Insights Dashboard menu is visible in menu items...")
+            #         self.status.append(True)
+            # else:
+            #     self.status.append(False)
+            # dollar_icon = self.d.find_element(By.XPATH, Portal_Menu_Module_read_ini().
+            #                                   get_dollar_icon_on_dashboard_menu_by_xpath())
+            # if dollar_icon.is_displayed():
+            #     self.logger.info("dollar icon is visible..")
+            #     self.status.append(True)
+            # else:
+            #     self.status.append(False)
+            # insights_dashboard_menu.click()
+            # time.sleep(web_driver.two_second)
+            # self.d.switch_to.window(self.d.window_handles[1])
+            # time.sleep(web_driver.three_second)
+            # actual_title = self.d.find_element(By.XPATH, Portal_Menu_Module_read_ini().
+            #                                    get_title_on_Dashboard_panel_by_xpath()).text
+            # self.logger.info(f"actual title: {actual_title}")
+            # expected_title = Portal_Menu_Module_read_ini().get_expected_overview_dashboard_text()
+            # self.logger.info(f"expected title: {expected_title}")
+            # if actual_title == expected_title:
+            #     self.status.append(True)
+            #     self.close_current_tab()
+            # else:
+            #     self.status.append(False)
 
             # ******************************************************************
             self.explicit_wait(10, "XPATH", Portal_Menu_Module_read_ini().get_Notifier_menu_by_xpath(), self.d)

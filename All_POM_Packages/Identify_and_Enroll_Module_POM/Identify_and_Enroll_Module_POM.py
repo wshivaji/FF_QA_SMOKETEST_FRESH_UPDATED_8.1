@@ -925,7 +925,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
 
     def get_img_file_list(self, folder_name):
         try:
-            img_folder = f"{self.ie_file_path}\\{folder_name}"
+            img_folder = f"{Path(__file__).parent.parent.parent}{Read_Identify_and_Enroll_Components().ie_file_path()}\\{folder_name}"
             print(img_folder)
             files_list = os.listdir(img_folder)
             base_path = Path(img_folder)
@@ -996,7 +996,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                 self.logger.info(f"clicked on Identify and enroll link")
                 time.sleep(web_driver.one_second)
 
-                file_path = f"{self.ie_file_path}\\{folder_name}\\{image}"
+                file_path = f"{Path(__file__).parent.parent.parent}{Read_Identify_and_Enroll_Components().ie_file_path()}\\{folder_name}\\{image}"
                 self.upload_image(file_path)
 
                 self.logger.info(f"Image upload success")
@@ -1019,6 +1019,10 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                     self.logger.info(f"waiting for wait icon, count: {count}")
 
                 # ***************************************Enrollment Process start here**********************
+                # ******* Verify error msg ******
+                self.verify_identify_enroll_error_msg()
+                # *******************************
+
                 time.sleep(web_driver.two_second)
                 Enrollment_details_dict = self.Read_user_from_json()
                 Enrollment_details_dict_1 = []
@@ -1151,6 +1155,26 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
             self.logger.info(f"status: {self.status}")
         except Exception as ex:
             self.logger.info(f"enroll 5 images exception: {ex.args}")
+
+    def verify_identify_enroll_error_msg(self):
+        try:
+            error_message_box_by_xpath = self.explicit_wait(5, "XPATH", Read_Identify_and_Enroll_Components().error_message_box_by_xpath(), self.d)
+            if error_message_box_by_xpath.is_displayed():
+                self.logger.info("Reselect btn is displayed, please check error message displayed...")
+                self.status.append(False)
+                error_msg = self.explicit_wait(5, "XPATH", Read_Identify_and_Enroll_Components().error_msg_by_xpath(), self.d)
+                if error_msg.is_displayed():
+                    self.logger.info(f"error_msg: {error_msg.text}")
+
+                else:
+                    self.logger.info("error msg not displayed.")
+            else:
+                self.logger.info("no reselect btn is visible")
+
+
+        except Exception as ex:
+            self.logger.info("verify_identify_enroll_error_msg exception")
+            self.logger.info(f"{ex.args}")
 
     def verify_user_able_approve_enrollment(self):
         try:
