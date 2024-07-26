@@ -607,6 +607,8 @@ class Deployment_Manager_Page_Pom(web_driver, web_logger):
             time.sleep(web_driver.two_second)
             self.d.find_element("id", "login-password").send_keys(Keys.ENTER)
             time.sleep(5)
+            login().accept_terms_and_conditions_for_login_for_new_user(self.d)
+            time.sleep(2)
             cloud_msg = self.d.find_element("xpath", "(//div[@id='start-logo-container'])[1]//div//p")
             print(cloud_msg.text)
             actual_cloud_msg = cloud_msg.text
@@ -952,7 +954,7 @@ class Deployment_Manager_Page_Pom(web_driver, web_logger):
             self.d.find_element("xpath", "(//button[normalize-space()='Close'])[1]").click()
             time.sleep(web_driver.two_second)
             # try it out
-            self.d.find_element("xpath", "(//div[@class='opblock-summary opblock-summary-post'])[53]").click()
+            self.d.find_element("xpath", "//span[@data-path=\"/api/Regions/import\"]/parent::div/parent::button").click()
             time.sleep(web_driver.two_second)
             # choose file
             self.d.find_element("xpath", "(//button[normalize-space()='Try it out'])[1]").click()
@@ -1006,16 +1008,20 @@ class Deployment_Manager_Page_Pom(web_driver, web_logger):
             # system search
             self.d.find_element("xpath", "(//img[@class='btn'])[2]").click()
             time.sleep(web_driver.two_second)
+            time.sleep(web_driver.two_second)
             edge_msg = self.d.find_element("xpath", "(//a[@role='button'])[1]//div//ul//li[1]")
             print(edge_msg.text)
             actual_edge = edge_msg.text
             expected_edge = DeploymentManager_Read_ini().get_search_filter_text_box_method()
+            self.logger.info(f"actual: {actual_edge}")
+            self.logger.info(f"expected: {expected_edge}")
             if actual_edge == expected_edge:
                 self.status.append(True)
             else:
                 self.status.append(False)
             self.dm_log_out()
             self.logger.info("Enter one of edge name in search filter textbox and verify that edge name is filtering below it Status: Passed")
+            self.logger.info(f"status: {self.status}")
             if False in self.status:
                 return False
             else:
@@ -1042,6 +1048,8 @@ class Deployment_Manager_Page_Pom(web_driver, web_logger):
             # system search
             self.d.find_element("xpath", "(//img[@class='btn'])[2]").click()
             time.sleep(web_driver.two_second)
+            time.sleep(web_driver.two_second)
+            time.sleep(web_driver.two_second)
             edge_msg = self.d.find_element("xpath", "(//a[@role='button'])[1]//div//ul//li[1]")
             print(edge_msg.text)
             # select the first edge
@@ -1059,6 +1067,7 @@ class Deployment_Manager_Page_Pom(web_driver, web_logger):
                                 "/html[1]/body[1]/div[1]/div[1]/main[1]/div[2]/div[3]/div[1]/button[1]/span[1]").click()
             time.sleep(web_driver.two_second)
             # select system for edge
+            self.explicit_wait(5, "XPATH", "(//input[@type='checkbox'])[1]", self.d)
             self.d.find_element("xpath", "(//input[@type='checkbox'])[1]").click()
             time.sleep(web_driver.two_second)
             # next
@@ -1094,8 +1103,8 @@ class Deployment_Manager_Page_Pom(web_driver, web_logger):
                                 "/html[1]/body[1]/div[1]/div[1]/main[1]/div[2]/div[3]/div[1]/button[1]/span[1]").click()
             time.sleep(web_driver.two_second)
             # deploy
-            self.d.find_element("xpath",
-                                "/html[1]/body[1]/div[1]/div[1]/main[1]/div[2]/div[3]/div[1]/button[1]/span[1]").click()
+            time.sleep(web_driver.two_second)
+            self.d.find_element("xpath", "//button[@type=\"button\"]/span[contains(text(), 'Deploy')]").click()
             time.sleep(web_driver.two_second)
             self.explicit_wait(250, "XPATH", "(//h6[normalize-space()='Operational'])[1]", self.d)
             self.logger.info("Deployment Wizard For Single Edge Status: Passed")
@@ -1104,7 +1113,7 @@ class Deployment_Manager_Page_Pom(web_driver, web_logger):
                                 "/html[1]/body[1]/div[1]/div[1]/main[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[2]/button[1]").click()
             # add manually
             time.sleep(web_driver.two_second)
-            self.d.find_element("xpath", "//div[@id='simple-menu']/div[2]/ul/li[{0}]".format(int(2))).click()
+            self.d.find_element("xpath", "//div[@id='simple-menu']/div[2]/ul/li[{0}]".format(int(1))).click()
             # rtsp stream
             time.sleep(web_driver.two_second)
             self.d.find_element("xpath",
@@ -1151,9 +1160,12 @@ class Deployment_Manager_Page_Pom(web_driver, web_logger):
             time.sleep(web_driver.two_second)
             self.clear_main("description")
             self.d.find_element("id", "description").send_keys(DeploymentManager_Read_ini().get_single_edge_rtsp_port_method())
+            self.logger.info(f"Description: {DeploymentManager_Read_ini().get_single_edge_rtsp_port_method()}")
             # enable camera
             time.sleep(web_driver.two_second)
-            self.d.find_element("xpath", "//input[@value='checkedA']").click()
+            time.sleep(web_driver.two_second)
+            self.d.find_element("xpath", "//input[@value='checkedA']/parent::span/parent::span").click()
+            self.logger.info("clicked enable toggle btn")
             # save
             time.sleep(web_driver.two_second)
             self.d.find_element("xpath",
