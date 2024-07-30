@@ -2756,3 +2756,18 @@ class Read_Identify_and_Enroll_Components:
         except Exception as ex:
             print(ex.args)
 
+    def tc_159_img_path(self):
+        try:
+            tc_159_img_path = self.common_test_data_config.get("common_data", "tc_159_img_path")
+            print(tc_159_img_path)
+            return tc_159_img_path
+        except Exception as ex:
+            print(ex.args)
+
+    def tc_162_img_path(self):
+        try:
+            tc_162_img_path = self.common_test_data_config.get("common_data", "tc_162_img_path")
+            print(tc_162_img_path)
+            return tc_162_img_path
+        except Exception as ex:
+            print(ex.args)
