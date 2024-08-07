@@ -17,7 +17,7 @@ class web_driver:
     two_second = 2
     three_second = 3
     screenshots_path = f"{Path(__file__).parent.parent}\\Reports\\Screenshots"
-    ie_file_path = f"{Path(__file__).parent.parent}\\All_Test_Data\\Common_Test_data\\dataset1"
+    ie_file_path = f"{Path(__file__).parent.parent}\\All_Test_Data\\Common_Test_data\\migration_dataset1"
 
     @classmethod
     def d(cls):

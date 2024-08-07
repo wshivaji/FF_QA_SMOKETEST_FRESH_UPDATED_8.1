@@ -221,6 +221,8 @@ class login(web_driver, web_logger):
                     pyautogui.hotkey('ctrl', '-')
                     time.sleep(0.5)
 
+            login_btn = self.explicit_wait(5, "XPATH", self.config.get("login_page_locators", "login_link_by_xpath"), self.d)
+
             login_btn = self.d.find_elements(By.XPATH, self.config.get("login_page_locators", "login_link_by_xpath"))
             current_url = self.d.current_url
             self.logger.info(f"current url: {current_url}")

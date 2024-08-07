@@ -954,7 +954,10 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
     def Identify_and_enroll_25_subjects_and_fill_the_required_fields_5_per_Enrollment_groups(self):
         try:
             self.logger.info("************* test_TC_IE_01 started  **************")
-            
+            login().login_to_cloud_if_not_done_with_user_credentials(self.d,
+                                                                     Read_Identify_and_Enroll_Components().get_operator_to_login(),
+                                                                     Read_Identify_and_Enroll_Components().get_password_to_login())
+
             self.enroll_5_images("ab")
             self.enroll_5_images("fraud")
             self.enroll_5_images("pt")
@@ -992,6 +995,10 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
                 link = self.explicit_wait(10, "XPATH",
                                           Read_Identify_and_Enroll_Components().identify_and_enroll_link_by_xpath(),
                                           self.d)
+                if link:
+                    self.logger.info(f"identify enroll link displayed: {link.is_displayed()}")
+                else:
+                    self.logger.info(f"identify enroll link displayed: {link.is_displayed()}")
                 self.d.execute_script("arguments[0].click();", link)
                 self.logger.info(f"clicked on Identify and enroll link")
                 time.sleep(web_driver.one_second)
@@ -1164,6 +1171,7 @@ class Identify_And_Enroll_POM(web_driver, web_logger):
         try:
             self.logger.info("Identify_enroll_Tc_02_started")
             self.status.clear()
+
             login().login_to_cloud_if_not_done_with_user_credentials(self.d, Read_Identify_and_Enroll_Components().get_approver_to_login(), Read_Identify_and_Enroll_Components().get_password_to_login())
             time.sleep(web_driver.one_second)
 
