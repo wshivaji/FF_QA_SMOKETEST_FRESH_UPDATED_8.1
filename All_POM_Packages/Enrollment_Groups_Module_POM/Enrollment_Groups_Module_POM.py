@@ -26,7 +26,9 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
         try:
             self.logger.info("********** Test_EG_01 Begin  **********")
             status = []
-            login().login_to_cloud_if_not_done(self.d)
+            x = Read_Notification_Groups_Components().get_user_name_input_data()
+            username = x.split(',')
+            login().login_with_persona_user(self.d, username[4])
             time.sleep(web_driver.one_second)
             x = Read_Enrollment_Groups_Components().get_enrollment_group_name()
             enrollment_group_names_list = x.split(',')
@@ -160,7 +162,9 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
         try:
             self.logger.info("********** Test_EG_TC02 Begin  **********")
             status = []
-            login().login_to_cloud_if_not_done(self.d)
+            x = Read_Notification_Groups_Components().get_user_name_input_data()
+            username = x.split(',')
+            login().login_with_persona_user(self.d, username[4])
             time.sleep(web_driver.one_second)
             enrollment_groups_btn = self.d.find_element(By.XPATH, Read_Enrollment_Groups_Components().
                                                         enrollment_groups_button_by_xpath())
@@ -201,7 +205,9 @@ class Enrollments_Groups_Module_pom(web_driver, web_logger):
         try:
             self.logger.info("********** Test_EG_TC03 Begin  **********")
             status = []
-            login().login_to_cloud_if_not_done(self.d)
+            x = Read_Notification_Groups_Components().get_user_name_input_data()
+            username = x.split(',')
+            login().login_with_persona_user(self.d, username[4])
             time.sleep(web_driver.one_second)
             enrollment_groups_btn = self.d.find_element(By.XPATH, Read_Enrollment_Groups_Components().
                                                         enrollment_groups_button_by_xpath())

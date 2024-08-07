@@ -8,7 +8,7 @@
         "Location_store": "Bangalore",
         "case_subject": "ab",
         "reported_loss": "300",
-        "Action": "call cops"
+        "Action": "Expensive Wine"
       },
       {
         "Enrollment_basis": "Written Consent",
@@ -17,7 +17,7 @@
         "Location_store": "Hyderabad",
         "case_subject": "fraud",
         "reported_loss": "50",
-        "Action": "alert"
+        "Action": "Gift Fraud"
       },
       {
         "Enrollment_basis": "Authorized Law Enforcement Request",
@@ -26,7 +26,7 @@
         "Location_store": "chennai",
         "case_subject": "pt",
         "reported_loss": "150",
-        "Action": "warning"
+        "Action": "Alcohol Theft"
       },
      {
        "Enrollment_basis": "Written Consent",
@@ -35,7 +35,7 @@
        "Location_store": "delhi",
        "case_subject": "so",
        "reported_loss": "500",
-       "Action": "inform to police"
+       "Action": "Shoplifting"
      },
      {
        "Enrollment_basis": "Documented Probable Cause",
@@ -44,7 +44,7 @@
        "Location_store": "mumbai",
        "case_subject": "vip",
        "reported_loss": "0",
-       "Action": "vip"
+       "Action": "Gold"
      },
     {
       "Enrollment_basis": "Documented Probable Cause",
@@ -53,7 +53,7 @@
        "Location_store": "mumbai",
        "case_subject": "pending",
        "reported_loss": "0",
-       "Action": "pending"
+       "Action": "Gold"
 
     }
  ]

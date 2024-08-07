@@ -1137,4 +1137,9 @@ class Read_Visitor_Search_jobs_Components:
         except Exception as ex:
             print("end_date_calender_box_by_xpath : ", ex)
 
-
+    def tc_33_img_path(self):
+        try:
+            tc_33_img_path = self.common_test_data_config.get("common_data", "tc_33_img_path")
+            return tc_33_img_path
+        except Exception as ex:
+            print("gender_data_input : ", ex)

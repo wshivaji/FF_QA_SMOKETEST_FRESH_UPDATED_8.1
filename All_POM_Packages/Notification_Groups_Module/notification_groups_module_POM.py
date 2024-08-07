@@ -5,7 +5,6 @@ from selenium.webdriver.support.select import Select
 
 from All_Config_Packages._1_Portal_Login_Module_Config_Files.Portal_Login_Page_Read_INI import \
     Portal_login_page_read_ini
-from All_POM_Packages.Portal_Menu_Module_POM.Portal_Menu_Module_POM import Portal_Menu_Module_pom
 from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
 from selenium.webdriver.common.by import By
@@ -95,7 +94,10 @@ class Notification_Groups_Module_pom(web_driver, web_logger):
         try:
             self.logger.info("********** Test_NG_TC01 Begin  **********")
             status = []
-            login().login_to_cloud_if_not_done(self.d)
+
+            x = Read_Notification_Groups_Components().get_user_name_input_data()
+            username = x.split(',')
+            login().login_with_persona_user(self.d, username[4])
             time.sleep(web_driver.one_second)
 
             x = Read_Notification_Groups_Components().get_dummy_notification_group_name()
@@ -214,7 +216,9 @@ class Notification_Groups_Module_pom(web_driver, web_logger):
         try:
             self.logger.info("********** Test_NG_TC02 Begin  **********")
             status = []
-            login().login_to_cloud_if_not_done(self.d)
+            x = Read_Notification_Groups_Components().get_user_name_input_data()
+            username = x.split(',')
+            login().login_with_persona_user(self.d, username[4])
             self.open_notification_groups_module()
 
             number_of_ngs = self.d.find_element(By.XPATH, Read_Notification_Groups_Components().get_number_of_ngs_by_xpath())

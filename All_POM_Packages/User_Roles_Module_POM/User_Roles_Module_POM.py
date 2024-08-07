@@ -166,6 +166,8 @@ class user_roles_module_pom(web_driver, web_logger):
             self.logger.info("********** Test_TC_UR_02 Begin  **********")
             status = []
             login().login_to_cloud_if_not_done(self.d)
+            # self.load_portal_login_page_if_not_loaded()
+            login().accept_terms_and_conditions_for_login_for_new_user(self.d)
 
             actual_user_roles_menu_item = self.explicit_wait(10, "XPATH", user_roles_read_ini()
                                                              .get_user_role_menu_item_by_xpath(), self.d)

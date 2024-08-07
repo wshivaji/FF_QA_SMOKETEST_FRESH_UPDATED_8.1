@@ -73,7 +73,6 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
         time.sleep(web_driver.one_second)
         # date_incident.send_keys(date_time)
 
-
     def click_on_visitor_search(self):
         self.logger.info("going to visitor search...")
         visitor_search_btn = web_driver.explicit_wait(self, 10, "XPATH",
@@ -133,15 +132,15 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
             date = int(Read_Visitor_Search_Components().get_start_date())
             month = str(Read_Visitor_Search_Components().get_start_month())
             year = int(Read_Visitor_Search_Components().get_start_year())
-            hour = str(Read_Visitor_Search_Components().get_start_hour())
-            minute = Read_Visitor_Search_Components().get_start_minuet()
+            hour = int(Read_Visitor_Search_Components().get_start_hour())
+            minute = int(Read_Visitor_Search_Components().get_start_minuet())
             period = str(Read_Visitor_Search_Components().get_start_am_pm_period())
 
             e_month = str(Read_Visitor_Search_Components().get_end_month())
             e_date = int(Read_Visitor_Search_Components().get_end_date())
             e_year = int(Read_Visitor_Search_Components().get_end_year())
-            e_hour = str(Read_Visitor_Search_Components().get_end_hour())
-            e_minute = Read_Visitor_Search_Components().get_end_minuet()
+            e_hour = int(Read_Visitor_Search_Components().get_end_hour())
+            e_minute = int(Read_Visitor_Search_Components().get_end_minuet())
             e_period = str(Read_Visitor_Search_Components().get_end_am_pm_period())
 
             try:
@@ -463,27 +462,26 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
 
     def verify_image_from_match_list(self):
         try:
-            try:
-                time.sleep(web_driver.two_second)
-                self.logger.info("Verifying matches")
-                self.wait_for_visitor_search_result_to_display()
-                no_matches_found = web_driver.explicit_wait(self, 5, "XPATH",
-                                                            Read_Visitor_Search_Components().no_matches_found(), self.d)
-                if no_matches_found.is_displayed():
-                    self.logger.info(f"no match text displayed: {no_matches_found.is_displayed()}")
-                    self.logger.info(f"ele2: {no_matches_found.text}")
-                    return True
-            except Exception as ex:
-                time.sleep(web_driver.three_second)
-                ele = web_driver.explicit_wait(self, 15, "XPATH",
-                                               Read_Visitor_Search_Components().image_match_list_by_xpath(), self.d)
-                matches = self.d.find_elements(By.XPATH, Read_Visitor_Search_Components().image_match_list_by_xpath())
-                self.logger.info(f"count of matches: {len(matches)}")
-                if ele.is_displayed():
-                    self.logger.info(f"images displayed: {ele.is_displayed()}")
-                    return True
-                else:
-                    return False
+            time.sleep(web_driver.two_second)
+            self.logger.info("Verifying matches")
+            self.wait_for_visitor_search_result_to_display()
+            # no_matches_found = web_driver.explicit_wait(self, 5, "XPATH",
+            #                                             Read_Visitor_Search_Components().no_matches_found(), self.d)
+            # if no_matches_found.is_displayed():
+            #     self.logger.info(f"no match text displayed: {no_matches_found.is_displayed()}")
+            #     self.logger.info(f"ele2: {no_matches_found.text}")
+            #     return True
+
+            time.sleep(web_driver.three_second)
+            ele = web_driver.explicit_wait(self, 15, "XPATH",
+                                           Read_Visitor_Search_Components().image_match_list_by_xpath(), self.d)
+            matches = self.d.find_elements(By.XPATH, Read_Visitor_Search_Components().image_match_list_by_xpath())
+            self.logger.info(f"count of matches: {len(matches)}")
+            if ele.is_displayed():
+                self.logger.info(f"images displayed: {ele.is_displayed()}")
+                return True
+            else:
+                return False
 
         except Exception as ex:
             print(ex.args)
@@ -701,7 +699,7 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
         This function is usd to upload the image and click on the search button
         :return:
         """
-        file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset1\\fraud\\00082.png"
+        file_path = f"{Path(__file__).parent.parent.parent}{Read_Visitor_Search_Components().tc_30_img_path()}"
         print(f"filepath : {file_path}")
         self.upload_image(file_path)
 
@@ -710,7 +708,7 @@ class Visitor_Search_Module_pom(web_driver, web_logger):
         This function is usd to upload the image and click on the search button
         :return:
         """
-        file_path = f"{Path(__file__).parent.parent.parent}\\All_Test_Data\\Common_Test_data\\dataset1\\pt\\00087.png"
+        file_path = f"{Path(__file__).parent.parent.parent}{Read_Visitor_Search_Components().tc_31_img_path()}"
         self.upload_image(file_path)
 
     def upload_image(self, img_path):
