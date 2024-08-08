@@ -9,7 +9,7 @@
       "password": "Right_1r1s",
       "user_orgahierarchy": "Kroger Los Angeles",
       "store_group": "store1",
-      "Email":"shivaji.wankhede@facefirst.com"
+      "Email":"operator@facefirst.com"
 
     },
     {
@@ -21,7 +21,7 @@
       "password": "Right_1r1s",
       "user_orgahierarchy": "Kroger Los Angeles",
       "store_group": "store1",
-      "Email":"shivaji.wankhede@facefirst.com"
+      "Email":"responder@facefirst.com"
     },
     {
       "id": "2",
@@ -32,7 +32,7 @@
       "password": "Right_1r1s",
       "user_orgahierarchy": "Kroger CA",
       "store_group": "store1",
-      "Email":"shivaji.wankhede@facefirst.com"
+      "Email":"approver@facefirst.com"
     },
     {
       "id": "3",
@@ -43,7 +43,7 @@
       "password": "Right_1r1s",
       "user_orgahierarchy": "Kroger USA",
       "store_group": "store1",
-      "Email":"shivaji.wankhede@facefirst.com"
+      "Email":"executive@facefirst.com"
     },
     {
       "id": "4",
@@ -53,7 +53,7 @@
       "userrole": "5. it system admin",
       "password": "Right_1r1s",
       "user_orgahierarchy": "Kroger International",
-      "Email":"shivaji.wankhede@facefirst.com"
+      "Email":"it_admin@facefirst.com"
     }
   ]
 }

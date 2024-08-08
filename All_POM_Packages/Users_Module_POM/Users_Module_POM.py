@@ -368,7 +368,7 @@ class Users_Module_pom(web_driver, web_logger):
             region = Read_Users_Components().region_data_input()
             self.select_region(region)
 
-            email = Read_Users_Components().email_input_data()
+            email = f'{username}{Read_Users_Components().email_input_data()}'
             self.enter_email(email)
 
             time_zone = Read_Users_Components().time_zone_input_data()
@@ -951,7 +951,7 @@ class Users_Module_pom(web_driver, web_logger):
             region = Read_Users_Components().region_data_input()
             self.select_region(region)
 
-            email = Read_Users_Components().email_input_data()
+            email = f'{username}{Read_Users_Components().email_input_data()}'
             self.enter_email(email)
 
             time_zone = Read_Users_Components().time_zone_input_data()
@@ -1004,7 +1004,7 @@ class Users_Module_pom(web_driver, web_logger):
             region = Read_Users_Components().region_data_input()
             self.select_region(region)
 
-            email = Read_Users_Components().email_input_data()
+            email = f'{username}{Read_Users_Components().email_input_data()}'
             self.enter_email(email)
 
             time_zone = Read_Users_Components().time_zone_input_data()
@@ -1055,7 +1055,7 @@ class Users_Module_pom(web_driver, web_logger):
             region = Read_Users_Components().region_data_input()
             self.select_region(region)
 
-            email = Read_Users_Components().email_input_data()
+            email = f'{username}{Read_Users_Components().email_input_data()}'
             self.enter_email(email)
 
             time_zone = Read_Users_Components().time_zone_input_data()
@@ -1108,7 +1108,7 @@ class Users_Module_pom(web_driver, web_logger):
             region = Read_Users_Components().region_data_input()
             self.select_region(region)
 
-            email = Read_Users_Components().email_input_data()
+            email = f'{username}{Read_Users_Components().email_input_data()}'
             self.enter_email(email)
 
             time_zone = Read_Users_Components().time_zone_input_data()
@@ -3280,7 +3280,7 @@ class Users_Module_pom(web_driver, web_logger):
             region = Read_Users_Components().region_data_input()
             self.select_region(region)
 
-            email = Read_Users_Components().email_input_data()
+            email = f'{username}{Read_Users_Components().email_input_data()}'
             self.enter_email(email)
 
             time_zone = Read_Users_Components().time_zone_input_data()
