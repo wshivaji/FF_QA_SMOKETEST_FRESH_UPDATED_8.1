@@ -2015,6 +2015,13 @@ class Read_Users_Components:
         except Exception as ex:
             print(ex.args)
 
+    def read_core_user_email_from_common_data(self):
+        try:
+            core_email = self.common_test_data_config.get("Login_Logout_Data","email")
+            return core_email
+        except Exception as ex:
+            print(ex.args)
+
     def read_core_user_timezone(self):
         try:
             time_zone = self.config.get("DATA","core_user_time_zone")
