@@ -353,7 +353,7 @@ class Deployment_Manager_Page_Pom(web_driver, web_logger):
         ## visitors
         try:
             time.sleep(web_driver.two_second)
-            self.d.find_element("xpath", "(//button[@aria-label='Edit'])[14]").click()
+            self.d.find_element("xpath", "(//button[@aria-label='Edit'])[15]").click()
             time.sleep(web_driver.two_second)
             self.d.find_element("xpath", "//input[@value='']").click()
             time.sleep(web_driver.two_second)
@@ -786,7 +786,7 @@ class Deployment_Manager_Page_Pom(web_driver, web_logger):
             self.register_login_dm_details()
             self.dm_mini_window()
             self.visitor_log_retention()
-            retention_msg = self.d.find_element("xpath", "(//div[@class='jss158'])[21]//p")
+            retention_msg = self.d.find_element("xpath", "(//div[@class='jss158'])[22]//p")
             print(retention_msg.text)
             self.logger.info(f"actual: {retention_msg.text}")
             self.logger.info("expected: clustering at 0.8 every 5 minute(s), keep visitors for 13 weeks")
@@ -856,7 +856,7 @@ class Deployment_Manager_Page_Pom(web_driver, web_logger):
                 time.sleep(web_driver.two_second)
             self.register_login_dm_details()
             self.dm_mini_window()
-            self.d.find_element("xpath", "(//button[@aria-label='Edit'])[12]").click()
+            self.d.find_element("xpath", "(//button[@aria-label='Edit'])[13]").click()
             time.sleep(web_driver.two_second)
             self.d.find_element("xpath", "(//div[@id='select-inactivityTimeoutSelect'])[1]").click()
             time.sleep(web_driver.two_second)
