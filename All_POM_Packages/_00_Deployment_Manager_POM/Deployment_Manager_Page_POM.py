@@ -1179,3 +1179,86 @@ class Deployment_Manager_Page_Pom(web_driver, web_logger):
             self.logger.error(f"screenshot file path: {self.screenshots_path}\\TC_DM_04_deployment_wizard_for_single_edge_failed.png")
             self.d.save_screenshot(f"{self.screenshots_path}\\TC_DM_04_deployment_wizard_for_single_edge_failed.png")
             self.logger.error(f"TC_DM_04_deployment_wizard_for_single_edge_failed got an exception as: {e}")
+
+    def verify_user_able_click_on_manage_user_menu_add_user_screen_should_appears(self):
+        try:
+            self.logger.info("********** TC_DM_12 started ********")
+            self.logger.info("verify_session_time_is_set_to_maximum_value_under_platform_settings")
+            self.status.clear()
+            if not DeploymentManager_Read_ini().get_register_login_link_from_register_url() == self.d.current_url:
+                self.d.get(DeploymentManager_Read_ini().get_register_login_link_from_register_url())
+                time.sleep(web_driver.two_second)
+            self.register_login_dm_details()
+            self.dm_mini_window()
+            user_btn = self.explicit_wait(5, "XPATH", "//div[@title='Manage Users']/parent::div/parent::a", self.d)
+
+            if user_btn.is_displayed():
+                self.logger.info(f"users btn on dm visible: {user_btn.is_displayed()}")
+                user_btn.click()
+                time.sleep(web_driver.two_second)
+                add_user_btn = self.explicit_wait(5, "XPATH", "//span[contains(text(), 'Add User')]/parent::button/parent::a", self.d)
+                if add_user_btn.is_displayed():
+                    self.logger.info(f"add user btn is visible: {add_user_btn.is_displayed()}")
+                    self.status.append(True)
+                else:
+                    self.status.append(False)
+                    self.logger.info(f"add user btn is visible: {add_user_btn.is_displayed()}")
+            else:
+                self.status.append(False)
+                self.logger.info(f"users btn on dm visible: {user_btn.is_displayed()}")
+            self.logger.info(f"status: {self.status}")
+            self.dm_log_out()
+            if False in self.status:
+                return False
+            else:
+                return True
+
+        except Exception as ex:
+            self.d.save_screenshot(f"{self.screenshots_path}\\tc_dm_13.png")
+            self.logger.error(f"TC_DM_13_verify_user_able_click_on_manage_user_menu_add_user_screen_should_appears got an exception as: {ex}")
+
+    def on_add_user_screen_verify_add_user_button_is_visible_verify_text_on_the_button(self):
+        try:
+            self.logger.info("********** TC_DM_12 started ********")
+            self.logger.info("verify_session_time_is_set_to_maximum_value_under_platform_settings")
+            self.status.clear()
+            if not DeploymentManager_Read_ini().get_register_login_link_from_register_url() == self.d.current_url:
+                self.d.get(DeploymentManager_Read_ini().get_register_login_link_from_register_url())
+                time.sleep(web_driver.two_second)
+            self.register_login_dm_details()
+            self.dm_mini_window()
+            user_btn = self.explicit_wait(5, "XPATH", "//div[@title='Manage Users']/parent::div/parent::a", self.d)
+
+            if user_btn.is_displayed():
+                self.logger.info(f"users btn on dm visible: {user_btn.is_displayed()}")
+                user_btn.click()
+                time.sleep(web_driver.two_second)
+                add_user_btn = self.explicit_wait(5, "XPATH", "//span[contains(text(), 'Add User')]/parent::button/parent::a", self.d)
+                if add_user_btn.is_displayed():
+                    self.logger.info(f"add user btn is visible: {add_user_btn.is_displayed()}")
+                    self.status.append(True)
+                    self.logger.info(f"add user btn text: {add_user_btn.text}")
+                    if add_user_btn.text == 'ADD USER':
+                        self.status.append(True)
+                    else:
+                        self.status.append(False)
+                else:
+                    self.status.append(False)
+                    self.logger.info(f"add user btn is visible: {add_user_btn.is_displayed()}")
+            else:
+                self.status.append(False)
+                self.logger.info(f"users btn on dm visible: {user_btn.is_displayed()}")
+            self.logger.info(f"status: {self.status}")
+            self.dm_log_out()
+            if False in self.status:
+                return False
+            else:
+                return True
+
+        except Exception as ex:
+            self.d.save_screenshot(f"{self.screenshots_path}\\tc_dm_13.png")
+            self.logger.error(f"TC_DM_13_verify_user_able_click_on_manage_user_menu_add_user_screen_should_appears got an exception as: {ex}")
+
+
+
+

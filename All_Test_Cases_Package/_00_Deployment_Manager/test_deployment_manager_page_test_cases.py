@@ -92,3 +92,16 @@ class Test_Deployment_Manager_Page_Test_Cases(web_driver, web_logger):
             assert True
         else:
             assert False
+
+    def test_dm_tc_13(self):
+        if Deployment_Manager_Page_Pom().verify_user_able_click_on_manage_user_menu_add_user_screen_should_appears():
+            assert True
+        else:
+            assert False
+
+    def test_dm_tc_14(self):
+        if Deployment_Manager_Page_Pom().on_add_user_screen_verify_add_user_button_is_visible_verify_text_on_the_button():
+            assert True
+        else:
+            assert False
+
