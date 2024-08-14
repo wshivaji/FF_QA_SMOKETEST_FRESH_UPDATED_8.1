@@ -105,3 +105,21 @@ class Test_Deployment_Manager_Page_Test_Cases(web_driver, web_logger):
         else:
             assert False
 
+    def test_dm_tc_15(self):
+        if Deployment_Manager_Page_Pom().create_a_user_by_filling_all_fields():
+            assert True
+        else:
+            assert False
+
+    def test_dm_tc_16(self):
+        if Deployment_Manager_Page_Pom().verify_created_user_should_be_visible_on_add_user_screen():
+            assert True
+        else:
+            assert False
+
+    def test_dm_tc_17(self):
+        if Deployment_Manager_Page_Pom().verify_after_filling_all_valid_inputs_create_user_button_is_enabled():
+            assert True
+        else:
+            assert False
+

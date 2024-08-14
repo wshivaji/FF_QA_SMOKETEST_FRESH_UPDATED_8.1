@@ -8,6 +8,7 @@ from Base_Package.Web_Driver import web_driver
 from Base_Package.Web_Logger import web_logger
 from selenium.webdriver.common.keys import Keys
 from Base_Package.Login_Logout_Ops import login
+import random
 
 class Deployment_Manager_Page_Pom(web_driver, web_logger):
     d = web_driver.d()
@@ -1182,8 +1183,8 @@ class Deployment_Manager_Page_Pom(web_driver, web_logger):
 
     def verify_user_able_click_on_manage_user_menu_add_user_screen_should_appears(self):
         try:
-            self.logger.info("********** TC_DM_12 started ********")
-            self.logger.info("verify_session_time_is_set_to_maximum_value_under_platform_settings")
+            self.logger.info("********** TC_DM_13 started ********")
+            self.logger.info("verify_user_able_click_on_manage_user_menu_add_user_screen_should_appears")
             self.status.clear()
             if not DeploymentManager_Read_ini().get_register_login_link_from_register_url() == self.d.current_url:
                 self.d.get(DeploymentManager_Read_ini().get_register_login_link_from_register_url())
@@ -1215,12 +1216,12 @@ class Deployment_Manager_Page_Pom(web_driver, web_logger):
 
         except Exception as ex:
             self.d.save_screenshot(f"{self.screenshots_path}\\tc_dm_13.png")
-            self.logger.error(f"TC_DM_13_verify_user_able_click_on_manage_user_menu_add_user_screen_should_appears got an exception as: {ex}")
+            self.logger.error(f"tc_dm_13_verify_user_able_click_on_manage_user_menu_add_user_screen_should_appears got an exception as: {ex}")
 
     def on_add_user_screen_verify_add_user_button_is_visible_verify_text_on_the_button(self):
         try:
-            self.logger.info("********** TC_DM_12 started ********")
-            self.logger.info("verify_session_time_is_set_to_maximum_value_under_platform_settings")
+            self.logger.info("********** TC_DM_14 started ********")
+            self.logger.info("on_add_user_screen_verify_add_user_button_is_visible_verify_text_on_the_button")
             self.status.clear()
             if not DeploymentManager_Read_ini().get_register_login_link_from_register_url() == self.d.current_url:
                 self.d.get(DeploymentManager_Read_ini().get_register_login_link_from_register_url())
@@ -1256,9 +1257,239 @@ class Deployment_Manager_Page_Pom(web_driver, web_logger):
                 return True
 
         except Exception as ex:
-            self.d.save_screenshot(f"{self.screenshots_path}\\tc_dm_13.png")
-            self.logger.error(f"TC_DM_13_verify_user_able_click_on_manage_user_menu_add_user_screen_should_appears got an exception as: {ex}")
+            self.d.save_screenshot(f"{self.screenshots_path}\\tc_dm_14.png")
+            self.logger.error(f"TC_DM_14_on_add_user_screen_verify_add_user_button_is_visible_verify_text_on_the_button got an exception as: {ex}")
 
+    def create_a_user_by_filling_all_fields(self):
+        try:
+            self.logger.info("********** TC_DM_15 started ********")
+            self.logger.info("create_a_user_by_filling_all_fields")
+            self.status.clear()
+            if not DeploymentManager_Read_ini().get_register_login_link_from_register_url() == self.d.current_url:
+                self.d.get(DeploymentManager_Read_ini().get_register_login_link_from_register_url())
+                time.sleep(web_driver.two_second)
+            self.register_login_dm_details()
+            self.dm_mini_window()
+            user_btn = self.explicit_wait(5, "XPATH", "//div[@title='Manage Users']/parent::div/parent::a", self.d)
+            username = f"user{random.randint(1, 100)}"
+            if user_btn.is_displayed():
+                self.logger.info(f"users btn on dm visible: {user_btn.is_displayed()}")
+                user_btn.click()
+                time.sleep(web_driver.two_second)
+                add_user_btn = self.explicit_wait(5, "XPATH", "//span[contains(text(), 'Add User')]/parent::button/parent::a", self.d)
+                if add_user_btn.is_displayed():
+                    self.logger.info(f"add user btn is visible: {add_user_btn.is_displayed()}")
+                    self.status.append(True)
+                    self.logger.info(f"add user btn text: {add_user_btn.text}")
+                    add_user_btn.click()
+                    time.sleep(web_driver.two_second)
+                    new_user_details_panel = self.explicit_wait(5, "XPATH", "//h6[contains(text(), 'Fill out the form below to create a new user')]", self.d)
+                    if new_user_details_panel.is_displayed():
+                        self.status.append(True)
+                        self.logger.info(f"new user details panel heading: {new_user_details_panel.is_displayed()}")
+                        name = self.explicit_wait(5, "XPATH", "//input[@id='name']", self.d)
+                        email = self.explicit_wait(5, "XPATH", "//input[@id='email']", self.d)
+                        password = self.explicit_wait(5, "XPATH", "//input[@id='newPassword']", self.d)
+                        confirm_pass = self.explicit_wait(5, "XPATH", "//input[@id='passwordConfirmation']", self.d)
+                        name.send_keys(f'{username}')
+                        email.send_keys(f'{username}@gmail.com')
+                        password.send_keys('Right_1r1s')
+                        confirm_pass.send_keys('Right_1r1s')
+                        time.sleep(web_driver.two_second)
+                        create_user_btn = self.explicit_wait(5, "XPATH", "//span[contains(text(), 'Create User')]/parent::button", self.d)
+                        if create_user_btn.is_displayed():
+                            self.logger.info(f"create user btn visible: {create_user_btn.is_displayed()}")
+                            self.status.append(True)
+                            create_user_btn.click()
+                            time.sleep(web_driver.two_second)
+                            list_of_users = self.d.find_elements(By.XPATH, "//tr/th")
+                            if len(list_of_users) > 0:
+                                self.logger.info(f"user list count: {len(list_of_users)}")
+                                for x in list_of_users:
+                                    self.logger.info(f"user name: {x.text}")
+                                    if x.text == username:
+                                        self.status.append(True)
 
+                            else:
+                                self.status.append(False)
+                                self.logger.info(f"user list count: {len(list_of_users)}")
+                        else:
+                            self.status.append(False)
+                            self.logger.info(f"create user btn visible: {create_user_btn.is_displayed()}")
+                    else:
+                        self.status.append(False)
+                        self.logger.info(f"new user details panel heading: {new_user_details_panel.is_displayed()}")
+
+                else:
+                    self.status.append(False)
+                    self.logger.info(f"add user btn is visible: {add_user_btn.is_displayed()}")
+            else:
+                self.status.append(False)
+                self.logger.info(f"users btn on dm visible: {user_btn.is_displayed()}")
+            self.logger.info(f"status: {self.status}")
+            self.dm_log_out()
+            if False in self.status:
+                return False
+            else:
+                return True
+
+        except Exception as ex:
+            self.d.save_screenshot(f"{self.screenshots_path}\\tc_dm_15.png")
+            self.logger.error(f"TC_DM_15_create_a_user_by_filling_all_fields got an exception as: {ex}")
+
+    def verify_created_user_should_be_visible_on_add_user_screen(self):
+        try:
+            self.logger.info("********** TC_DM_16 started ********")
+            self.logger.info("verify_created_user_should_be_visible_on_add_user_screen")
+            self.status.clear()
+            if not DeploymentManager_Read_ini().get_register_login_link_from_register_url() == self.d.current_url:
+                self.d.get(DeploymentManager_Read_ini().get_register_login_link_from_register_url())
+                time.sleep(web_driver.two_second)
+            self.register_login_dm_details()
+            self.dm_mini_window()
+            user_btn = self.explicit_wait(5, "XPATH", "//div[@title='Manage Users']/parent::div/parent::a", self.d)
+            username = f"user{random.randint(1, 100)}"
+            if user_btn.is_displayed():
+                self.logger.info(f"users btn on dm visible: {user_btn.is_displayed()}")
+                user_btn.click()
+                time.sleep(web_driver.two_second)
+                add_user_btn = self.explicit_wait(5, "XPATH", "//span[contains(text(), 'Add User')]/parent::button/parent::a", self.d)
+                if add_user_btn.is_displayed():
+                    self.logger.info(f"add user btn is visible: {add_user_btn.is_displayed()}")
+                    self.status.append(True)
+                    self.logger.info(f"add user btn text: {add_user_btn.text}")
+                    add_user_btn.click()
+                    time.sleep(web_driver.two_second)
+                    new_user_details_panel = self.explicit_wait(5, "XPATH", "//h6[contains(text(), 'Fill out the form below to create a new user')]", self.d)
+                    if new_user_details_panel.is_displayed():
+                        self.status.append(True)
+                        self.logger.info(f"new user details panel heading: {new_user_details_panel.is_displayed()}")
+                        name = self.explicit_wait(5, "XPATH", "//input[@id='name']", self.d)
+                        email = self.explicit_wait(5, "XPATH", "//input[@id='email']", self.d)
+                        password = self.explicit_wait(5, "XPATH", "//input[@id='newPassword']", self.d)
+                        confirm_pass = self.explicit_wait(5, "XPATH", "//input[@id='passwordConfirmation']", self.d)
+                        name.send_keys(f'{username}')
+                        email.send_keys(f'{username}@gmail.com')
+                        password.send_keys('Right_1r1s')
+                        confirm_pass.send_keys('Right_1r1s')
+                        time.sleep(web_driver.two_second)
+                        create_user_btn = self.explicit_wait(5, "XPATH", "//span[contains(text(), 'Create User')]/parent::button", self.d)
+                        if create_user_btn.is_displayed():
+                            self.logger.info(f"create user btn visible: {create_user_btn.is_displayed()}")
+                            self.status.append(True)
+                            create_user_btn.click()
+                            time.sleep(web_driver.two_second)
+                            list_of_users = self.d.find_elements(By.XPATH, "//tr/th")
+                            if len(list_of_users) > 0:
+                                self.logger.info(f"user list count: {len(list_of_users)}")
+                                for x in list_of_users:
+                                    self.logger.info(f"user name: {x.text}")
+                                    if x.text == username:
+                                        self.status.append(True)
+
+                            else:
+                                self.status.append(False)
+                                self.logger.info(f"user list count: {len(list_of_users)}")
+                        else:
+                            self.status.append(False)
+                            self.logger.info(f"create user btn visible: {create_user_btn.is_displayed()}")
+                    else:
+                        self.status.append(False)
+                        self.logger.info(f"new user details panel heading: {new_user_details_panel.is_displayed()}")
+
+                else:
+                    self.status.append(False)
+                    self.logger.info(f"add user btn is visible: {add_user_btn.is_displayed()}")
+            else:
+                self.status.append(False)
+                self.logger.info(f"users btn on dm visible: {user_btn.is_displayed()}")
+            self.logger.info(f"status: {self.status}")
+            self.dm_log_out()
+            if False in self.status:
+                return False
+            else:
+                return True
+
+        except Exception as ex:
+            self.d.save_screenshot(f"{self.screenshots_path}\\tc_dm_16.png")
+            self.logger.error(f"TC_DM_16_verify_created_user_should_be_visible_on_add_user_screen got an exception as: {ex}")
+
+    def verify_after_filling_all_valid_inputs_create_user_button_is_enabled(self):
+        try:
+            self.logger.info("********** TC_DM_17 started ********")
+            self.logger.info("verify_after_filling_all_valid_inputs_create_user_button_is_enabled")
+            self.status.clear()
+            if not DeploymentManager_Read_ini().get_register_login_link_from_register_url() == self.d.current_url:
+                self.d.get(DeploymentManager_Read_ini().get_register_login_link_from_register_url())
+                time.sleep(web_driver.two_second)
+            self.register_login_dm_details()
+            self.dm_mini_window()
+            user_btn = self.explicit_wait(5, "XPATH", "//div[@title='Manage Users']/parent::div/parent::a", self.d)
+            username = f"user{random.randint(1, 100)}"
+            if user_btn.is_displayed():
+                self.logger.info(f"users btn on dm visible: {user_btn.is_displayed()}")
+                user_btn.click()
+                time.sleep(web_driver.two_second)
+                add_user_btn = self.explicit_wait(5, "XPATH", "//span[contains(text(), 'Add User')]/parent::button/parent::a", self.d)
+                if add_user_btn.is_displayed():
+                    self.logger.info(f"add user btn is visible: {add_user_btn.is_displayed()}")
+                    self.status.append(True)
+                    self.logger.info(f"add user btn text: {add_user_btn.text}")
+                    add_user_btn.click()
+                    time.sleep(web_driver.two_second)
+                    new_user_details_panel = self.explicit_wait(5, "XPATH", "//h6[contains(text(), 'Fill out the form below to create a new user')]", self.d)
+                    if new_user_details_panel.is_displayed():
+                        self.status.append(True)
+                        self.logger.info(f"new user details panel heading: {new_user_details_panel.is_displayed()}")
+                        name = self.explicit_wait(5, "XPATH", "//input[@id='name']", self.d)
+                        email = self.explicit_wait(5, "XPATH", "//input[@id='email']", self.d)
+                        password = self.explicit_wait(5, "XPATH", "//input[@id='newPassword']", self.d)
+                        confirm_pass = self.explicit_wait(5, "XPATH", "//input[@id='passwordConfirmation']", self.d)
+                        name.send_keys(f'{username}')
+                        email.send_keys(f'{username}@gmail.com')
+                        password.send_keys('Right_1r1s')
+                        confirm_pass.send_keys('Right_1r1s')
+                        time.sleep(web_driver.two_second)
+                        create_user_btn = self.explicit_wait(5, "XPATH", "//span[contains(text(), 'Create User')]/parent::button", self.d)
+                        if create_user_btn.is_enabled():
+                            self.logger.info(f"create user btn enabled: {create_user_btn.is_enabled()}")
+
+                            self.status.append(True)
+                            # # create_user_btn.click()
+                            # # time.sleep(web_driver.two_second)
+                            # # list_of_users = self.d.find_elements(By.XPATH, "//tr/th")
+                            # # if len(list_of_users) > 0:
+                            # #     self.logger.info(f"user list count: {len(list_of_users)}")
+                            # #     for x in list_of_users:
+                            # #         self.logger.info(f"user name: {x.text}")
+                            # #         if x.text == username:
+                            # #             self.status.append(True)
+                            #
+                            # else:
+                            #     self.status.append(False)
+                            #     self.logger.info(f"user list count: {len(list_of_users)}")
+                        else:
+                            self.status.append(False)
+                            self.logger.info(f"create user btn enabled: {create_user_btn.is_enabled()}")
+                    else:
+                        self.status.append(False)
+                        self.logger.info(f"new user details panel heading: {new_user_details_panel.is_displayed()}")
+
+                else:
+                    self.status.append(False)
+                    self.logger.info(f"add user btn is visible: {add_user_btn.is_displayed()}")
+            else:
+                self.status.append(False)
+                self.logger.info(f"users btn on dm visible: {user_btn.is_displayed()}")
+            self.logger.info(f"status: {self.status}")
+            self.dm_log_out()
+            if False in self.status:
+                return False
+            else:
+                return True
+
+        except Exception as ex:
+            self.d.save_screenshot(f"{self.screenshots_path}\\tc_dm_17.png")
+            self.logger.error(f"TC_DM_17_verify_after_filling_all_valid_inputs_create_user_button_is_enabled got an exception as: {ex}")
 
 
