@@ -1492,4 +1492,268 @@ class Deployment_Manager_Page_Pom(web_driver, web_logger):
             self.d.save_screenshot(f"{self.screenshots_path}\\tc_dm_17.png")
             self.logger.error(f"TC_DM_17_verify_after_filling_all_valid_inputs_create_user_button_is_enabled got an exception as: {ex}")
 
+    def verify_login_to_deployment_maanger_using_newely_created_dm_users(self):
+        try:
+            self.logger.info("********** TC_DM_16 started ********")
+            self.logger.info("verify_created_user_should_be_visible_on_add_user_screen")
+            self.status.clear()
+            if not DeploymentManager_Read_ini().get_register_login_link_from_register_url() == self.d.current_url:
+                self.d.get(DeploymentManager_Read_ini().get_register_login_link_from_register_url())
+                time.sleep(web_driver.two_second)
+            self.register_login_dm_details()
+            self.dm_mini_window()
+            user_btn = self.explicit_wait(5, "XPATH", "//div[@title='Manage Users']/parent::div/parent::a", self.d)
+            username = f"user{random.randint(1, 100)}"
+            if user_btn.is_displayed():
+                self.logger.info(f"users btn on dm visible: {user_btn.is_displayed()}")
+                user_btn.click()
+                time.sleep(web_driver.two_second)
+                add_user_btn = self.explicit_wait(5, "XPATH", "//span[contains(text(), 'Add User')]/parent::button/parent::a", self.d)
+                if add_user_btn.is_displayed():
+                    self.logger.info(f"add user btn is visible: {add_user_btn.is_displayed()}")
+                    self.status.append(True)
+                    self.logger.info(f"add user btn text: {add_user_btn.text}")
+                    add_user_btn.click()
+                    time.sleep(web_driver.two_second)
+                    new_user_details_panel = self.explicit_wait(5, "XPATH", "//h6[contains(text(), 'Fill out the form below to create a new user')]", self.d)
+                    if new_user_details_panel.is_displayed():
+                        self.status.append(True)
+                        self.logger.info(f"new user details panel heading: {new_user_details_panel.is_displayed()}")
+                        name = self.explicit_wait(5, "XPATH", "//input[@id='name']", self.d)
+                        email = self.explicit_wait(5, "XPATH", "//input[@id='email']", self.d)
+                        password = self.explicit_wait(5, "XPATH", "//input[@id='newPassword']", self.d)
+                        confirm_pass = self.explicit_wait(5, "XPATH", "//input[@id='passwordConfirmation']", self.d)
+                        name.send_keys(f'{username}')
+                        email.send_keys(f'{username}@gmail.com')
+                        password.send_keys('Right_1r1s')
+                        confirm_pass.send_keys('Right_1r1s')
+                        time.sleep(web_driver.two_second)
+                        create_user_btn = self.explicit_wait(5, "XPATH", "//span[contains(text(), 'Create User')]/parent::button", self.d)
+                        if create_user_btn.is_displayed():
+                            self.logger.info(f"create user btn visible: {create_user_btn.is_displayed()}")
+                            self.status.append(True)
+                            create_user_btn.click()
+                            time.sleep(web_driver.two_second)
+                            list_of_users = self.d.find_elements(By.XPATH, "//tr/th")
+                            if len(list_of_users) > 0:
+                                self.logger.info(f"user list count: {len(list_of_users)}")
+                                for x in list_of_users:
+                                    self.logger.info(f"user name: {x.text}")
+                                    if x.text == username:
+                                        self.status.append(True)
+
+                            else:
+                                self.status.append(False)
+                                self.logger.info(f"user list count: {len(list_of_users)}")
+                        else:
+                            self.status.append(False)
+                            self.logger.info(f"create user btn visible: {create_user_btn.is_displayed()}")
+                    else:
+                        self.status.append(False)
+                        self.logger.info(f"new user details panel heading: {new_user_details_panel.is_displayed()}")
+
+                else:
+                    self.status.append(False)
+                    self.logger.info(f"add user btn is visible: {add_user_btn.is_displayed()}")
+            else:
+                self.status.append(False)
+                self.logger.info(f"users btn on dm visible: {user_btn.is_displayed()}")
+            self.logger.info(f"status: {self.status}")
+            self.dm_log_out()
+            self.verify_new_user_login_successful(f'{username}@gmail.com', 'Right_1r1s')
+            self.verify_dm_home_page()
+            self.dm_log_out()
+            if False in self.status:
+                return False
+            else:
+                return True
+
+        except Exception as ex:
+            self.d.save_screenshot(f"{self.screenshots_path}\\tc_dm_16.png")
+            self.logger.error(f"TC_DM_16_verify_created_user_should_be_visible_on_add_user_screen got an exception as: {ex}")
+
+    def verify_new_user_login_successful(self, email_username, password):
+        try:
+            self.d.find_element("id", "username").send_keys(email_username)
+            time.sleep(web_driver.two_second)
+            self.d.find_element("id", "password").send_keys(password)
+            time.sleep(web_driver.two_second)
+            self.d.find_element("id", "password").send_keys(Keys.ENTER)
+            time.sleep(web_driver.two_second)
+            self.d.get(DeploymentManager_Read_ini().get_reg_login_link_url())
+            self.d.refresh()
+            time.sleep(3)
+        except Exception as ex:
+            print(ex.args)
+
+    def verify_dm_home_page(self):
+        try:
+            time.sleep(web_driver.two_second)
+            home_page_title = self.explicit_wait(5, "XPATH", "//h6[@id='appBarTitle']", self.d)
+            if home_page_title.is_displayed():
+                self.logger.info(f"home page title visible: {home_page_title.is_displayed()}")
+                self.status.append(True)
+            else:
+                self.logger.info(f"home page title visible: {home_page_title.is_displayed()}")
+                self.status.append(False)
+        except Exception as ex:
+            print(ex.args)
+
+    def verify_user_able_to_receive_account_login_id_password_setting_link_credentials_to_registed_email_to_sign_in_on_ispring_portal(self):
+        try:
+            self.d.switch_to.new_window()
+            self.d.get(DeploymentManager_Read_ini().ispring_login_url())
+            time.sleep(web_driver.one_second)
+            username_text_box = self.explicit_wait(5, "XPATH", "//input[@id='loginField']", self.d)
+            if username_text_box.is_displayed():
+                self.logger.info(f"uername textbox is visible: {username_text_box.is_displayed()}")
+                username_text_box.send_keys(DeploymentManager_Read_ini().get_mail())
+            else:
+                self.logger.info(f"uername textbox is visible: {username_text_box.is_displayed()}")
+            password_text_box = self.explicit_wait(5, "XPATH", "//input[@id='passwordField']", self.d)
+            if password_text_box.is_displayed():
+                self.logger.info(f"password textbox is visible: {password_text_box.is_displayed()}")
+                password_text_box.send_keys("Right_1r1s")
+            else:
+                self.logger.info(f"password textbox is visible: {password_text_box.is_displayed()}")
+            login_btn = self.explicit_wait(5, "XPATH", "//input[@type='submit']", self.d)
+            if login_btn.is_displayed():
+                self.logger.info(f"login btn visible: {login_btn.is_displayed()}")
+                login_btn.click()
+            else:
+                self.logger.info(f"login btn visible: {login_btn.is_displayed()}")
+            time.sleep(web_driver.two_second)
+            time.sleep(web_driver.two_second)
+            got_it_btn = self.explicit_wait(5, "XPATH", "//button[@class='_jwZrnS _puUSrc _o8aqb0 _irpium _ONKU2Z _n_Vogz _wsTb6U _DdKph6']", self.d)
+            if got_it_btn.is_displayed():
+                self.logger.log(f"got it btn visible: {got_it_btn.is_displayed()}")
+                got_it_btn.click()
+            else:
+                self.logger.log(f"got it btn visible: {got_it_btn.is_displayed()}")
+        except Exception as ex:
+            print(ex.args)
+
+    def verify_on_deployment_manger_under_platform_settings_a_new_setting_training_system_settings_is_visible(self):
+        try:
+            self.logger.info("********** TC_DM_training_01 started ********")
+            self.logger.info("verify_on_deployment_manger_under_platform_settings_a_new_setting_training_system_settings_is_visible")
+            self.status.clear()
+            if not DeploymentManager_Read_ini().get_register_login_link_from_register_url() == self.d.current_url:
+                self.d.get(DeploymentManager_Read_ini().get_register_login_link_from_register_url())
+                time.sleep(web_driver.two_second)
+            self.register_login_dm_details()
+            self.dm_mini_window()
+        except Exception as ex:
+            print(ex.args)
+
+    def verify_beside_training_system_settings_pencil_icon_is_visible_and_clickable(self):
+        try:
+            self.logger.info("********** TC_DM_training_02 started ********")
+            self.logger.info("verify_beside_training_system_settings_pencil_icon_is_visible_and_clickable")
+            self.status.clear()
+            if not DeploymentManager_Read_ini().get_register_login_link_from_register_url() == self.d.current_url:
+                self.d.get(DeploymentManager_Read_ini().get_register_login_link_from_register_url())
+                time.sleep(web_driver.two_second)
+            self.register_login_dm_details()
+            self.dm_mini_window()
+        except Exception as ex:
+            print(ex.args)
+
+    def click_on_pencil_icon_annual_training_system_access_window_should_appear(self):
+        try:
+            self.logger.info("********** TC_DM_training_03 started ********")
+            self.logger.info("click_on_pencil_icon_annual_training_system_access_window_should_appear")
+            self.status.clear()
+            if not DeploymentManager_Read_ini().get_register_login_link_from_register_url() == self.d.current_url:
+                self.d.get(DeploymentManager_Read_ini().get_register_login_link_from_register_url())
+                time.sleep(web_driver.two_second)
+            self.register_login_dm_details()
+            self.dm_mini_window()
+        except Exception as ex:
+            print(ex.args)
+
+    def verify_training_acknowledgement_required_label_and_its_toggle_button_is_visible_and_clickable(self):
+        try:
+            self.logger.info("********** TC_DM_training_04 started ********")
+            self.logger.info("verify_training_acknowledgement_required_label_and_its_toggle_button_is_visible_and_clickable")
+            self.status.clear()
+            if not DeploymentManager_Read_ini().get_register_login_link_from_register_url() == self.d.current_url:
+                self.d.get(DeploymentManager_Read_ini().get_register_login_link_from_register_url())
+                time.sleep(web_driver.two_second)
+            self.register_login_dm_details()
+            self.dm_mini_window()
+        except Exception as ex:
+            print(ex.args)
+
+    def login_to_facefirst_ispring_portal_with_valid_credentials(self):
+        try:
+            self.logger.info("********** TC_DM_training_02 started ********")
+            self.logger.info("login_to_facefirst_ispring_portal_with_valid_credentials")
+            self.d.switch_to.new_window()
+            self.d.get(DeploymentManager_Read_ini().ispring_login_url())
+            time.sleep(web_driver.one_second)
+            username_text_box = self.explicit_wait(5, "XPATH", "//input[@id='loginField']", self.d)
+            if username_text_box.is_displayed():
+                self.logger.info(f"uername textbox is visible: {username_text_box.is_displayed()}")
+                username_text_box.send_keys(DeploymentManager_Read_ini().get_mail())
+            else:
+                self.logger.info(f"uername textbox is visible: {username_text_box.is_displayed()}")
+            password_text_box = self.explicit_wait(5, "XPATH", "//input[@id='passwordField']", self.d)
+            if password_text_box.is_displayed():
+                self.logger.info(f"password textbox is visible: {password_text_box.is_displayed()}")
+                password_text_box.send_keys("Right_1r1s")
+            else:
+                self.logger.info(f"password textbox is visible: {password_text_box.is_displayed()}")
+            login_btn = self.explicit_wait(5, "XPATH", "//input[@type='submit']", self.d)
+            if login_btn.is_displayed():
+                self.logger.info(f"login btn visible: {login_btn.is_displayed()}")
+                login_btn.click()
+            else:
+                self.logger.info(f"login btn visible: {login_btn.is_displayed()}")
+            time.sleep(web_driver.two_second)
+            time.sleep(web_driver.two_second)
+            got_it_btn = self.explicit_wait(5, "XPATH", "//button[@class='_jwZrnS _puUSrc _o8aqb0 _irpium _ONKU2Z _n_Vogz _wsTb6U _DdKph6']", self.d)
+            if got_it_btn.is_displayed():
+                self.logger.log(f"got it btn visible: {got_it_btn.is_displayed()}")
+                got_it_btn.click()
+            else:
+                self.logger.log(f"got it btn visible: {got_it_btn.is_displayed()}")
+        except Exception as ex:
+            print(ex.args)
+
+    def verify_and_complete_the_courses_are_enlisted_on_facefirst_ispring_portal(self):
+        try:
+            self.logger.info("********** TC_DM_training_02 started ********")
+            self.logger.info("login_to_facefirst_ispring_portal_with_valid_credentials")
+            self.d.switch_to.new_window()
+            self.d.get(DeploymentManager_Read_ini().ispring_login_url())
+            time.sleep(web_driver.one_second)
+            username_text_box = self.explicit_wait(5, "XPATH", "//input[@id='loginField']", self.d)
+            if username_text_box.is_displayed():
+                self.logger.info(f"uername textbox is visible: {username_text_box.is_displayed()}")
+                username_text_box.send_keys(DeploymentManager_Read_ini().get_mail())
+            else:
+                self.logger.info(f"uername textbox is visible: {username_text_box.is_displayed()}")
+            password_text_box = self.explicit_wait(5, "XPATH", "//input[@id='passwordField']", self.d)
+            if password_text_box.is_displayed():
+                self.logger.info(f"password textbox is visible: {password_text_box.is_displayed()}")
+                password_text_box.send_keys("Right_1r1s")
+            else:
+                self.logger.info(f"password textbox is visible: {password_text_box.is_displayed()}")
+            login_btn = self.explicit_wait(5, "XPATH", "//input[@type='submit']", self.d)
+            if login_btn.is_displayed():
+                self.logger.info(f"login btn visible: {login_btn.is_displayed()}")
+                login_btn.click()
+            else:
+                self.logger.info(f"login btn visible: {login_btn.is_displayed()}")
+            time.sleep(web_driver.two_second)
+            time.sleep(web_driver.two_second)
+            got_it_btn = self.explicit_wait(5, "XPATH", "//button[@class='_jwZrnS _puUSrc _o8aqb0 _irpium _ONKU2Z _n_Vogz _wsTb6U _DdKph6']", self.d)
+            if got_it_btn.is_displayed():
+                self.logger.log(f"got it btn visible: {got_it_btn.is_displayed()}")
+                got_it_btn.click()
+            else:
+                self.logger.log(f"got it btn visible: {got_it_btn.is_displayed()}")
+        except Exception as ex:
+            print(ex.args)
 

@@ -244,3 +244,20 @@ class DeploymentManager_Read_ini:
             return single_edge_camera_location_method
         except Exception as ex:
             print(ex)
+
+    def ispring_login_url(self):
+        try:
+            ispring_login_url = self.common_test_data_config.get("Login_Logout_Data", "ispring_login_url")
+            print("Single Edge Camera Location Method: ", ispring_login_url)
+            return ispring_login_url
+        except Exception as ex:
+            print(ex)
+
+    def ispring_login_username_text_Box_by_xpath(self):
+        try:
+            ispring_login_username_text_Box_by_xpath = self.config.get("Login_Logout_Data", "ispring_login_username_text_Box_by_xpath")
+            print("Single Edge Camera Location Method: ", ispring_login_username_text_Box_by_xpath)
+            return ispring_login_username_text_Box_by_xpath
+        except Exception as ex:
+            print(ex)
+

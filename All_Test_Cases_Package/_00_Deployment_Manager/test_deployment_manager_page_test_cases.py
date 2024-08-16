@@ -123,3 +123,50 @@ class Test_Deployment_Manager_Page_Test_Cases(web_driver, web_logger):
         else:
             assert False
 
+    def test_dm_tc_18(self):
+        if Deployment_Manager_Page_Pom().verify_login_to_deployment_maanger_using_newely_created_dm_users():
+            assert True
+        else:
+            assert False
+
+    def test_dm_training_01(self):
+        if Deployment_Manager_Page_Pom().verify_on_deployment_manger_under_platform_settings_a_new_setting_training_system_settings_is_visible():
+            assert True
+        else:
+            assert False
+
+    def test_dm_training_02(self):
+        if Deployment_Manager_Page_Pom().verify_beside_training_system_settings_pencil_icon_is_visible_and_clickable():
+            assert True
+        else:
+            assert False
+
+    def test_dm_training_03(self):
+        if Deployment_Manager_Page_Pom().click_on_pencil_icon_annual_training_system_access_window_should_appear():
+            assert True
+        else:
+            assert False
+
+    def test_dm_training_04(self):
+        if Deployment_Manager_Page_Pom().verify_training_acknowledgement_required_label_and_its_toggle_button_is_visible_and_clickable():
+            assert True
+        else:
+            assert False
+
+    def test_dm_ispring_tc_01(self):
+        if Deployment_Manager_Page_Pom().verify_user_able_to_receive_account_login_id_password_setting_link_credentials_to_registed_email_to_sign_in_on_ispring_portal():
+            assert True
+        else:
+            assert False
+
+    def test_dm_ispring_tc_04(self):
+        if Deployment_Manager_Page_Pom().login_to_facefirst_ispring_portal_with_valid_credentials():
+            assert True
+        else:
+            assert False
+
+    def test_dm_ispring_tc_05(self):
+        if Deployment_Manager_Page_Pom().verify_and_complete_the_courses_are_enlisted_on_facefirst_ispring_portal():
+            assert True
+        else:
+            assert False
